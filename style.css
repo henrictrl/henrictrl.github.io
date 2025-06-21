@@ -1,0 +1,872 @@
+/* =================================================================== */
+/* === DEFINIÇÃO DAS VARIÁVEIS DE COR (TEMA) === */
+/* =================================================================== */
+
+:root {
+    /* Cor de Destaque (Controlada pelo Color Picker) */
+    --cor-destaque: #ff4948;
+
+    /* Cores do Tema Diurno (Padrão) */
+    --color-background: #F8F8F8;
+    --color-text-primary: #0b1215;
+    --color-text-secondary: #888888;
+    --color-text-tertiary: #888888;
+    --color-border: #e0e0e0;
+    --color-surface-1: #ffffff;
+    --color-surface-2: #f0f0f0;
+    --color-shadow-weak: rgba(11, 18, 21, 0.1);
+    --color-shadow-strong: rgba(11, 18, 21, 0.2);
+    --backdrop-bg: rgba(248, 248, 248, 0.7);
+    --modal-bg: #EFEFEF;
+
+    /* Cores do botão de tema */
+    --theme-toggle-slider-bg: var(--cor-destaque);
+    --theme-icon-active: var(--color-background);
+    --theme-icon-inactive: var(--color-text-secondary);
+}
+
+body.night-mode {
+    /* Cores do Tema Noturno */
+    --color-background: #0b1215;
+    --color-text-primary: #F8F8F8;
+    --color-text-secondary: #666666;
+    --color-text-tertiary: #666666;
+    --color-border: #2a2a2a;
+    --color-surface-1: #1a1a1a;
+    --color-surface-2: #2a2a2a;
+    --color-shadow-weak: rgba(0, 0, 0, 0.15);
+    --color-shadow-strong: rgba(0, 0, 0, 0.3);
+    --backdrop-bg: rgba(35, 35, 35, 0.7);
+    --modal-bg: #111;
+}
+
+/* =================================================================== */
+/* === ESTILOS GERAIS E RESET BÁSICO (DESKTOP) === */
+/* =================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* =================================================================== */
+/* === BOTÃO DE TEMA E SIDEBAR INTEGRADOS === */
+/* =================================================================== */
+.sidebar-nav {
+    position: fixed;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    z-index: 1001;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+    background-color: var(--backdrop-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--color-border);
+    
+    padding: 15px 10px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px var(--color-shadow-strong);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.theme-toggle-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70px;
+    height: 32px;
+    border-radius: 32px;
+    background-color: var(--color-surface-2);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+}
+
+.theme-toggle-button .slider-bg {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--theme-toggle-slider-bg);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.4s ease;
+}
+
+body.night-mode .theme-toggle-button .slider-bg {
+    transform: translateX(38px);
+}
+
+.theme-toggle-button .material-symbols-outlined {
+    font-size: 20px;
+    z-index: 2;
+    transition: color 0.4s ease;
+}
+
+.theme-toggle-button .icon-sun {
+    color: var(--theme-icon-active);
+}
+.theme-toggle-button .icon-moon {
+    color: var(--theme-icon-inactive);
+}
+body.night-mode .theme-toggle-button .icon-sun {
+    color: var(--theme-icon-inactive);
+}
+body.night-mode .theme-toggle-button .icon-moon {
+    color: var(--theme-icon-active);
+}
+
+
+.sidebar-nav ul {
+    list-style: none;
+    padding-top: 5px;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    color: var(--color-text-primary);
+}
+
+.sidebar-nav a.active {
+    color: var(--cor-destaque);
+    background-color: rgba(0,0,0,0.2);
+}
+
+.language-switcher {
+    display: flex;
+    gap: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border);
+    align-items: center;
+}
+
+.lang-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    padding: 2px;
+    line-height: 0;
+    border-radius: 5px;
+}
+
+.lang-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.lang-button.active {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--cor-destaque) 50%, transparent);
+}
+
+.lang-button img {
+    display: block;
+    width: 22px;
+    height: auto;
+    border-radius: 3px;
+    border: 1px solid var(--color-border);
+}
+
+
+/* =================================================================== */
+/* === CABEÇALHO E SEÇÃO HERO (DESKTOP) === */
+/* =================================================================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+.logo h1 { font-size: 52px; font-weight: 900; letter-spacing: -2px; }
+
+.logo-highlight {
+    color: var(--cor-destaque);
+    transition: color 0.3s ease;
+}
+
+.top-nav ul { list-style: none; display: flex; gap: 40px; }
+.top-nav a { 
+    color: var(--cor-destaque); 
+    text-decoration: none; 
+    font-size: 16px; 
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 30px;
+    gap: 100px;
+}
+.hero-text { flex: 1; max-width: 400px; }
+.hero-text p { font-size: 24px; line-height: 1.6; font-weight: 400; }
+
+.hero-image {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    min-height: 500px;
+}
+#cascadeContainer .image-with-banner-container {
+    position: absolute;
+    max-width: 70%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--color-shadow-strong);
+}
+#cascadeContainer .bottom-image { top: 20px; left: 20px; z-index: 1; }
+#cascadeContainer .top-image { top: 50px; left: 50px; z-index: 2; }
+
+#image1 {
+    position: relative; 
+    background-color: var(--cor-destaque);
+}
+
+#cascadeContainer .main-cascade-image { width: 100%; display: flex; }
+
+.scrolling-banner { position: absolute; bottom: 0; left: 0; width: 100%; white-space: nowrap; overflow: hidden; background: transparent; }
+.scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
+.scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* =================================================================== */
+/* === SELETOR DE CORES (IRO.JS) === */
+/* =================================================================== */
+
+#image1 .color-picker-container {
+    position: absolute;
+    left: 5%;
+    bottom: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    gap: 10px; 
+}
+
+.hex-input {
+    width: 100%;
+    max-width: 150px;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background-color: var(--color-surface-2);
+    border: 1px solid transparent;
+    border-radius: 18px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hex-input::placeholder {
+    color: var(--color-text-secondary);
+    font-weight: 200;
+}
+
+.hex-input:focus {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
+}
+
+
+#image1 .IroSlider {
+    width: 90%;
+    max-width: 150px; 
+}
+
+/* =================================================================== */
+/* === BOTÃO DE DOWNLOAD === */
+/* =================================================================== */
+
+.download-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 15;
+    background-color: var(--backdrop-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    color: var(--color-text-primary);
+    padding: 8px 16px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: var(--cor-destaque);
+    color: #0b1215;
+    border-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* =================================================================== */
+/* === SEÇÃO DE EXPERIÊNCIA (DESKTOP) === */
+/* =================================================================== */
+
+.experience-section-v2 {
+    display: flex;
+    gap: 50px;
+    padding: 100px 0 0;
+    margin-top: 100px;
+    border-top: 1px solid var(--color-border);
+    transition: border-color 0.4s ease;
+}
+.experience-title-column { flex-basis: 400px; flex-shrink: 0; }
+.section-title { font-family: 'Helvetica', sans-serif; font-weight: normal; font-size: 16px; color: var(--color-text-tertiary); }
+.experience-list-column { flex-grow: 1; }
+.experience-list-v2 { list-style: none; width: 100%; }
+.experience-item-v2 { padding: 20px 0; border-bottom: 1px solid var(--color-border); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; transition: border-color 0.4s ease; }
+.experience-item-v2:last-child { border-bottom: none; }
+.experience-item-v2 h3 { font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 900; color: var(--color-text-primary); margin-bottom: 5px; transition: color 0.3s ease; }
+.job-dates-v2 { font-family: 'Helvetica', sans-serif; font-size: 14px; color: var(--color-text-tertiary); transition: color 0.3s ease; text-align: right; }
+.experience-item-v2.highlighted h3 { color: var(--cor-destaque); }
+.experience-item-v2.highlighted .job-dates-v2 { color: var(--color-text-primary); }
+
+/* =================================================================== */
+/* === SEÇÃO DE PORTFÓLIO EM GRADE (DESKTOP) === */
+/* =================================================================== */
+
+.portfolio-section-v2 {
+    border-top: 1px solid var(--color-border);
+    margin-top: 50px;
+    padding-top: 50px;
+    transition: border-color 0.4s ease;
+}
+.section-header { 
+    margin-bottom: 60px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 80px 40px;
+}
+.portfolio-item { position: relative; cursor: pointer; }
+.portfolio-cascade { position: relative; width: 100%; aspect-ratio: 1 / 1; transition: transform 0.3s ease-in-out; }
+.portfolio-item:hover .portfolio-cascade { transform: scale(1.05) rotate(3deg); }
+
+.portfolio-cascade::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-destaque);
+    border-radius: 10px;
+    transform: rotate(-8deg);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-cascade img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 5px 20px var(--color-shadow-strong); }
+
+.cascade-img-back { transform: rotate(-8deg); z-index: 2; }
+.cascade-img-front { transform: rotate(4deg); z-index: 3; }
+.portfolio-item.opening .cascade-img-back { transform: translate(-50%, 10%) rotate(-20deg) scale(0.8); }
+.portfolio-item.opening .cascade-img-front { transform: translate(50%, -10%) rotate(20deg) scale(0.8); }
+.portfolio-item-title { margin-top: 25px; text-align: right; }
+.portfolio-item-title h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 900; color: var(--color-text-primary); margin-bottom: 2px; }
+.portfolio-item-title p { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: var(--color-text-tertiary); }
+
+/* =================================================================== */
+/* === JANELA MODAL (Pop-up dos projetos) === */
+/* =================================================================== */
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 18, 21, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.modal-overlay.visible { opacity: 1; pointer-events: auto; }
+.modal-content { background-color: var(--modal-bg); padding: 40px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; transform: scale(0.8); transition: transform 0.4s ease, background-color 0.4s ease; color: var(--color-text-primary); }
+.modal-overlay.visible .modal-content { transform: scale(1); }
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--color-text-primary); font-size: 36px; cursor: pointer; }
+
+/* =================================================================== */
+/* === ESTILOS E ANIMAÇÃO DO EASTER EGG (MÃO) === */
+/* =================================================================== */
+
+.contact-header {
+    position: relative;
+}
+
+#hand-easter-egg-container {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.5);
+    width: 150px; 
+    height: 225px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease-out;
+    z-index: 1100;
+}
+
+#hand-easter-egg-container.animate {
+    animation: make-visible 0.1s forwards, 
+                 zoom-and-fade 0.8s 1.5s forwards;
+}
+
+#hand-easter-egg-container.animate .hand-svg g {
+    animation: draw-line 1.5s ease-out forwards;
+}
+
+.hand-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.hand-svg g {
+    fill: none;
+    stroke: var(--cor-destaque);
+    stroke-width: 1;
+    stroke-dasharray: 50000;
+    stroke-dashoffset: 50000;
+}
+
+@keyframes make-visible {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+@keyframes zoom-and-fade {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) scale(1.4);
+    }
+}
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+a[href="https://br.linkedin.com/in/henrique-marinhos"] {
+  color: var(--cor-destaque);
+}
+
+.at-symbol {
+  color: var(--cor-destaque);
+}
+
+/* =================================================================== */
+/* === SEÇÃO DE CONTATO === */
+/* =================================================================== */
+
+.contact-section {
+    border-top: 1px solid var(--color-border);
+    margin-top: 100px;
+    padding-top: 100px;
+    padding-bottom: 80px;
+    transition: border-color 0.4s ease;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Estilo para o título principal da seção de contato */
+.contact-header .section-title {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+    position: relative; /* Necessário para o pseudo-elemento */
+}
+
+/* Pseudo-elemento que guarda o texto "Talk to Me" */
+.contact-header .section-title::before {
+    content: "Talk to Me";
+    color: var(--cor-destaque);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Começa invisível */
+}
+
+/* Classe que ativa a animação de piscar */
+.contact-header .section-title.blinking-title {
+    animation: blink-translate 1.2s ease-in-out;
+}
+
+@keyframes blink-translate {
+    0%, 100% {
+        color: var(--color-text-primary); /* Texto original visível */
+    }
+    30%, 70% {
+        color: transparent; /* Texto original some ficando transparente */
+    }
+}
+
+.contact-header .section-title.blinking-title::before {
+    animation: blink-translate-before 1.2s ease-in-out;
+}
+
+@keyframes blink-translate-before {
+    0%, 30%, 70%, 100% {
+        opacity: 0; /* "Talk to Me" invisível */
+    }
+    40%, 60% {
+        opacity: 1; /* "Talk to Me" aparece */
+    }
+}
+
+
+.contact-intro-text {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-content {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    justify-content: center; 
+}
+
+.contact-form {
+    flex: 2;
+    max-width: 600px; 
+    background-color: var(--color-surface-1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--color-shadow-strong);
+    transition: background-color 0.4s ease;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    color: var(--color-text-primary);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--cor-destaque);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--cor-destaque);
+    color: var(--color-background);
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.form-status {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-status.success {
+    color: #4CAF50;
+}
+
+.form-status.error {
+    color: #F44336;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 250px; 
+    max-width: 400px;
+    padding: 20px 0;
+}
+
+.contact-info h3 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+.contact-info p {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.contact-info a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.social-links a:hover {
+    border-color: var(--cor-destaque);
+}
+
+/* =================================================================== */
+/* === ESTILOS BASE PARA FORMULÁRIO DE CONTATO (VALIDAÇÃO) === */
+/* =================================================================== */
+
+.error-message {
+    color: var(--cor-destaque); 
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block; 
+    min-height: 1em;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.error-message:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+input.invalid, textarea.invalid {
+    border-color: var(--cor-destaque) !important; 
+    box-shadow: 0 0 5px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
+}
+
+/* =================================================================== */
+/* === RESPONSIVIDADE === */
+/* =================================================================== */
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0 20px;
+    }
+    .experience-section-v2 {
+        flex-direction: column;
+        gap: 0;
+    }
+    .experience-title-column {
+        flex-basis: auto;
+        margin-bottom: 40px;
+    }
+    .contact-content {
+        flex-direction: column;
+        gap: 60px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .contact-form,
+    .contact-info {
+        flex: auto;
+        width: 100%;
+        max-width: 500px;
+    }
+    .contact-form {
+        padding: 30px;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .contact-header .section-title {
+        font-size: 42px;
+    }
+    
+    .sidebar-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-nav {
+        display: none;
+    }
+
+    header {
+        position: relative;
+        justify-content: center;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 0;
+        margin-left: 0;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    
+    .hero-image {
+        min-height: 400px;
+        width: 150%;
+        margin-top: 50px;
+    }
+    #cascadeContainer .image-with-banner-container {
+        max-width: 85%;
+        left: 50%;
+        top: 0;
+    }
+    #cascadeContainer .top-image {
+        transform: translateX(-50%) rotate(3deg);
+    }
+    #cascadeContainer .bottom-image {
+        transform: translateX(-50%) rotate(-3deg);
+    }
+    
+    .logo h1 {
+        font-size: 42px;
+    }
+    .experience-item-v2 h3 {
+        font-size: 32px;
+    }
+    .experience-item-v2 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .job-dates-v2 {
+        text-align: left;
+    }
+
+   .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
