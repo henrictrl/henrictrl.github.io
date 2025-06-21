@@ -22,11 +22,22 @@
             <span class="material-symbols-outlined icon-moon">dark_mode</span>
         </button>
         <ul>
-            <li><a href="#inicio" class="active">Início</a></li>
-            <li><a href="#experiencia">Experiência</a></li>
-            <li><a href="#portfolio">Portfólio</a></li>
-            <li><a href="#contato">Contato</a></li>
+            <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
+            <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
+            <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+            <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
         </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português">
+                <img src="images/brazil.png" alt="Bandeira do Brasil">
+            </button>
+            <button class="lang-button" data-lang="en" title="English">
+                <img src="images/usa.png" alt="United States Flag">
+            </button>
+            <button class="lang-button" data-lang="es" title="Español">
+                <img src="images/spain.png" alt="Bandera de España">
+            </button>
+        </div>
     </nav>
     
     <div class="container">
@@ -36,15 +47,15 @@
             </div>
             <nav class="top-nav">
                 <ul>
-                    <li><a href="#">São Paulo, Brasil</a></li>
-                    <li><a href="#">Artigos</a></li>
+                    <li><a href="#" data-translate-key="navLocation">São Paulo, Brasil</a></li>
+                    <li><a href="#" data-translate-key="navArticles">Artigos</a></li>
                 </ul>
             </nav>
         </header>
         <main>
             <div class="hero-section" id="inicio">
                 <div class="hero-text">
-                    <p>
+                    <p data-translate-key="heroText">
                         Algum texto aqui sobre 
                         eu ser relações públicas, 
                         comunicólogo entre outras coisas. 
@@ -55,7 +66,7 @@
                     <div class="image-with-banner-container top-image" id="image1">
                         <img src="images/CARICATUA 008909.png" alt="Foto de perfil de Henrique" class="main-cascade-image">
                         
-                        <button id="downloadButton" class="download-button" title="Baixar Caricatura com o fundo atual">
+                        <button id="downloadButton" class="download-button" title="Baixar Caricatura com o fundo atual" data-translate-key="downloadButton">
                             Baixar
                         </button>
                         
@@ -68,13 +79,11 @@
                         <img src="images/profile2.png" alt="Exemplo de trabalho" class="main-cascade-image">
                         <div class="scrolling-banner">
                             <div class="scrolling-text">
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span><span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span><span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span><span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span>apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
+                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
+                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
+                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
+                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
+                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +92,7 @@
     
             <section class="experience-section-v2" id="experiencia">
                 <div class="experience-title-column">
-                    <h2 class="section-title">Experiência</h2>
+                    <h2 class="section-title" data-translate-key="experienceTitle">Experiência</h2>
                     <div class="experience-subtitle"></div>
                     <br>
                     <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -92,22 +101,22 @@
                 <div class="experience-list-column">
                     <ul class="experience-list-v2">
                         <li class="experience-item-v2">
-                            <h3>Freelancer <br> <span class="at-symbol">@</span> t.pr agency <span class="at-symbol">@</span> Sollaris</h3>
+                            <h3 data-translate-key="jobFreelancer">Freelancer <br> <span class="at-symbol">@</span> t.pr agency <span class="at-symbol">@</span> Sollaris</h3>
                             <p class="job-dates-v2">2024</p>
                         </li>
                         
                         <li class="experience-item-v2">
-                            <h3>Estagiário de Comunicação <br> <span class="at-symbol">@</span> Rd Cultural</h3>
+                            <h3 data-translate-key="jobInternCom">Estagiário de Comunicação <br> <span class="at-symbol">@</span> Rd Cultural</h3>
                             <p class="job-dates-v2">2023</p>
                         </li>
 
                         <li class="experience-item-v2">
-                            <h3>Estagiário de Relações Públicas <br><span class="at-symbol">@</span> Unesp </h3>
+                            <h3 data-translate-key="jobInternPr">Estagiário de Relações Públicas <br><span class="at-symbol">@</span> Unesp </h3>
                             <p class="job-dates-v2">2021/2025</p>
                         </li>
 
                         <li class="experience-item-v2">
-                            <h3>Assistente de Compras <br> <span class="at-symbol">@</span> Servimed</h3>
+                            <h3 data-translate-key="jobAssistant">Assistente de Compras <br> <span class="at-symbol">@</span> Servimed</h3>
                             <p class="job-dates-v2">2020/2022</p>
                         </li>
                     </ul>
@@ -116,25 +125,25 @@
 
             <section class="portfolio-section-v2" id="portfolio">
                 <div class="section-header">
-                    <h2 class="section-title">(Projetos)</h2>
+                    <h2 class="section-title" data-translate-key="portfolioTitle">(Projetos)</h2>
                 </div>
 
                 <div class="grid-container">
                     <div class="portfolio-item" data-project-id="1">
                         <div class="portfolio-cascade"><img src="images/CARICATUA 008909.png" alt="Capa do Projeto" class="cascade-img-back"><img src="images/profile2.png" alt="Capa do Projeto" class="cascade-img-front"></div>
-                        <div class="portfolio-item-title"><h3>Nome do Projeto 1</h3><p>Branding</p></div>
+                        <div class="portfolio-item-title"><h3 data-translate-key="project1Name">Nome do Projeto 1</h3><p data-translate-key="project1Cat">Branding</p></div>
                     </div>
                     <div class="portfolio-item" data-project-id="2">
                         <div class="portfolio-cascade"><img src="images/CARICATUA 008909.png" alt="Capa do Projeto" class="cascade-img-back"><img src="images/profile2.png" alt="Capa do Projeto" class="cascade-img-front"></div>
-                        <div class="portfolio-item-title"><h3>Nome do Projeto 2</h3><p>Website</p></div>
+                        <div class="portfolio-item-title"><h3 data-translate-key="project2Name">Nome do Projeto 2</h3><p data-translate-key="project2Cat">Website</p></div>
                     </div>
                     <div class="portfolio-item" data-project-id="3">
                         <div class="portfolio-cascade"><img src="images/CARICATUA 008909.png" alt="Capa do Projeto" class="cascade-img-back"><img src="images/profile2.png" alt="Capa do Projeto" class="cascade-img-front"></div>
-                        <div class="portfolio-item-title"><h3>Nome do Projeto 3</h3><p>Identidade Visual</p></div>
+                        <div class="portfolio-item-title"><h3 data-translate-key="project3Name">Nome do Projeto 3</h3><p data-translate-key="project3Cat">Identidade Visual</p></div>
                     </div>
                     <div class="portfolio-item" data-project-id="4">
                         <div class="portfolio-cascade"><img src="images/CARICATUA 008909.png" alt="Capa do Projeto" class="cascade-img-back"><img src="images/profile2.png" alt="Capa do Projeto" class="cascade-img-front"></div>
-                        <div class="portfolio-item-title"><h3>Nome do Projeto 4</h3><p>Campanha</p></div>
+                        <div class="portfolio-item-title"><h3 data-translate-key="project4Name">Nome do Projeto 4</h3><p data-translate-key="project4Cat">Campanha</p></div>
                     </div>
                 </div>
             </section>
@@ -142,8 +151,8 @@
             <div class="modal-overlay" id="projectModal">
                 <div class="modal-content">
                     <button class="modal-close" id="modalCloseButton">&times;</button>
-                    <h2>Nome do Projeto</h2>
-                    <p>Aqui vai a descrição detalhada do projeto, com mais imagens, vídeos e texto.</p>
+                    <h2 data-translate-key="modalProjectName">Nome do Projeto</h2>
+                    <p data-translate-key="modalProjectDesc">Aqui vai a descrição detalhada do projeto, com mais imagens, vídeos e texto.</p>
                 </div>
             </div>
         </main>
@@ -151,40 +160,40 @@
 
     <section class="contact-section" id="contato">
         <div class="contact-header">
-            <h2 class="section-title">Fale Comigo</h2>
-            <p class="contact-intro-text">
+            <h2 class="section-title" data-translate-key="contactTitle">Fale Comigo</h2>
+            <p class="contact-intro-text" data-translate-key="contactIntro">
                 Tem um projeto em mente, precisa de um orçamento ou quer apenas tomar um café e conversar? Me mande uma mensagem!
             </p>
         </div>
         <div class="contact-content">
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
-                    <label for="name">Seu Nome:</label>
-                    <input type="text" id="name" name="name" required placeholder="Nome Completo">
+                    <label for="name" data-translate-key="formName">Seu Nome:</label>
+                    <input type="text" id="name" name="name" required data-translate-key-placeholder="formNamePlaceholder">
                     <span id="nameError" class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="email">Seu E-mail:</label>
-                    <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com">
+                    <label for="email" data-translate-key="formEmail">Seu E-mail:</label>
+                    <input type="email" id="email" name="email" required data-translate-key-placeholder="formEmailPlaceholder">
                     <span id="emailError" class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="subject">Assunto:</label>
-                    <input type="text" id="subject" name="subject" placeholder="Orçamento, Dúvida, Parceria...">
+                    <label for="subject" data-translate-key="formSubject">Assunto:</label>
+                    <input type="text" id="subject" name="subject" data-translate-key-placeholder="formSubjectPlaceholder">
                     <span id="subjectError" class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="message">Sua Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Descreva seu projeto ou sua dúvida aqui..."></textarea>
+                    <label for="message" data-translate-key="formMessage">Sua Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required data-translate-key-placeholder="formMessagePlaceholder"></textarea>
                     <span id="messageError" class="error-message"></span>
                 </div>
-                <button type="submit" class="submit-button">Enviar Mensagem</button>
+                <button type="submit" class="submit-button" data-translate-key="formSubmit">Enviar Mensagem</button>
                 <div class="form-status" id="formStatus"></div>
             </form>
             <div class="contact-info">
-                <h3>Outras Formas de Contato</h3>
+                <h3 data-translate-key="contactOtherTitle">Outras Formas de Contato</h3>
                 <p>E-mail: <a href="mailto:henriquemarinhos@icloud.com">henriquemarinhos@icloud.com</a></p>
-                <p>Telefone: <a href="tel:+5511987654321">+55 14 99139-4590</a></p>
+                <p><span data-translate-key="contactPhone">Telefone:</span> <a href="tel:+5511987654321">+55 14 99139-4590</a></p>
                 <div class="social-links">
                     <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                     <a href="https://instagram.com/henrictrl" target="_blank" rel="noopener noreferrer">Instagram</a>

@@ -1,12 +1,173 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
+    // === LÓGICA DE TRADUÇÃO ===
+    // =====================================================================
+    const translations = {
+        pt: {
+            navHome: "Início",
+            navExperience: "Experiência",
+            navPortfolio: "Portfólio",
+            navContact: "Contato",
+            navLocation: "São Paulo, Brasil",
+            navArticles: "Artigos",
+            heroText: "Algum texto aqui sobre eu ser relações públicas, comunicólogo entre outras coisas. além de que também sou um cara legal e tal",
+            downloadButton: "Baixar",
+            scrollingBanner: "apoie artistas independentes",
+            experienceTitle: "Experiência",
+            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
+            jobInternCom: "Estagiário de Comunicação <br> <span class='at-symbol'>@</span> Rd Cultural",
+            jobInternPr: "Estagiário de Relações Públicas <br><span class='at-symbol'>@</span> Unesp",
+            jobAssistant: "Assistente de Compras <br> <span class='at-symbol'>@</span> Servimed",
+            portfolioTitle: "(Projetos)",
+            project1Name: "Nome do Projeto 1",
+            project1Cat: "Branding",
+            project2Name: "Nome do Projeto 2",
+            project2Cat: "Website",
+            project3Name: "Nome do Projeto 3",
+            project3Cat: "Identidade Visual",
+            project4Name: "Nome do Projeto 4",
+            project4Cat: "Campanha",
+            modalProjectName: "Nome do Projeto",
+            modalProjectDesc: "Aqui vai a descrição detalhada do projeto, com mais imagens, vídeos e texto.",
+            contactTitle: "Fale Comigo",
+            contactIntro: "Tem um projeto em mente, precisa de um orçamento ou quer apenas tomar um café e conversar? Me mande uma mensagem!",
+            formName: "Seu Nome:",
+            formNamePlaceholder: "Nome Completo",
+            formEmail: "Seu E-mail:",
+            formEmailPlaceholder: "exemplo@dominio.com",
+            formSubject: "Assunto:",
+            formSubjectPlaceholder: "Orçamento, Dúvida, Parceria...",
+            formMessage: "Sua Mensagem:",
+            formMessagePlaceholder: "Descreva seu projeto ou sua dúvida aqui...",
+            formSubmit: "Enviar Mensagem",
+            contactOtherTitle: "Outras Formas de Contato",
+            contactPhone: "Telefone:",
+        },
+        en: {
+            navHome: "Home",
+            navExperience: "Experience",
+            navPortfolio: "Portfolio",
+            navContact: "Contact",
+            navLocation: "São Paulo, Brazil",
+            navArticles: "Articles",
+            heroText: "Some text here about me being a public relations professional, a communicologist, among other things. Besides, I'm also a nice guy and all.",
+            downloadButton: "Download",
+            scrollingBanner: "support independent artists",
+            experienceTitle: "Experience",
+            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
+            jobInternCom: "Communication Intern <br> <span class='at-symbol'>@</span> Rd Cultural",
+            jobInternPr: "Public Relations Intern <br><span class='at-symbol'>@</span> Unesp",
+            jobAssistant: "Purchasing Assistant <br> <span class='at-symbol'>@</span> Servimed",
+            portfolioTitle: "(Projects)",
+            project1Name: "Project Name 1",
+            project1Cat: "Branding",
+            project2Name: "Project Name 2",
+            project2Cat: "Website",
+            project3Name: "Project Name 3",
+            project3Cat: "Visual Identity",
+            project4Name: "Project Name 4",
+            project4Cat: "Campaign",
+            modalProjectName: "Project Name",
+            modalProjectDesc: "Here goes the detailed description of the project, with more images, videos, and text.",
+            contactTitle: "Talk to Me",
+            contactIntro: "Have a project in mind, need a quote, or just want to have a coffee and chat? Send me a message!",
+            formName: "Your Name:",
+            formNamePlaceholder: "Full Name",
+            formEmail: "Your E-mail:",
+            formEmailPlaceholder: "example@domain.com",
+            formSubject: "Subject:",
+            formSubjectPlaceholder: "Quote, Question, Partnership...",
+            formMessage: "Your Message:",
+            formMessagePlaceholder: "Describe your project or question here...",
+            formSubmit: "Send Message",
+            contactOtherTitle: "Other Ways to Contact",
+            contactPhone: "Phone:",
+        },
+        es: {
+            navHome: "Inicio",
+            navExperience: "Experiencia",
+            navPortfolio: "Portafolio",
+            navContact: "Contacto",
+            navLocation: "São Paulo, Brasil",
+            navArticles: "Artículos",
+            heroText: "Un texto aquí sobre mí siendo relaciones públicas, comunicólogo entre otras cosas. Además, también soy un buen tipo y tal.",
+            downloadButton: "Descargar",
+            scrollingBanner: "apoya a los artistas independientes",
+            experienceTitle: "Experiencia",
+            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
+            jobInternCom: "Becario de Comunicación <br> <span class='at-symbol'>@</span> Rd Cultural",
+            jobInternPr: "Becario de Relaciones Públicas <br><span class='at-symbol'>@</span> Unesp",
+            jobAssistant: "Asistente de Compras <br> <span class='at-symbol'>@</span> Servimed",
+            portfolioTitle: "(Proyectos)",
+            project1Name: "Nombre del Proyecto 1",
+            project1Cat: "Branding",
+            project2Name: "Nombre del Proyecto 2",
+            project2Cat: "Sitio Web",
+            project3Name: "Nombre del Proyecto 3",
+            project3Cat: "Identidad Visual",
+            project4Name: "Nombre del Proyecto 4",
+            project4Cat: "Campaña",
+            modalProjectName: "Nombre del Proyecto",
+            modalProjectDesc: "Aquí va la descripción detallada del proyecto, con más imágenes, videos y texto.",
+            contactTitle: "Hable Conmigo",
+            contactIntro: "¿Tienes un proyecto en mente, necesitas un presupuesto o simplemente quieres tomar un café y charlar? ¡Envíame un mensaje!",
+            formName: "Tu Nombre:",
+            formNamePlaceholder: "Nombre Completo",
+            formEmail: "Tu E-mail:",
+            formEmailPlaceholder: "ejemplo@dominio.com",
+            formSubject: "Asunto:",
+            formSubjectPlaceholder: "Presupuesto, Duda, Colaboración...",
+            formMessage: "Tu Mensaje:",
+            formMessagePlaceholder: "Describe tu proyecto o duda aquí...",
+            formSubmit: "Enviar Mensaje",
+            contactOtherTitle: "Otras Formas de Contacto",
+            contactPhone: "Teléfono:",
+        }
+    };
+
+    const langButtons = document.querySelectorAll('.lang-button');
+    const translatableElements = document.querySelectorAll('[data-translate-key]');
+    const translatablePlaceholders = document.querySelectorAll('[data-translate-key-placeholder]');
+
+    const setLanguage = (lang) => {
+        // Traduz textos normais
+        translatableElements.forEach(el => {
+            const key = el.dataset.translateKey;
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+        // Traduz placeholders
+        translatablePlaceholders.forEach(el => {
+            const key = el.dataset.translateKeyPlaceholder;
+            if (translations[lang] && translations[lang][key]) {
+                el.placeholder = translations[lang][key];
+            }
+        });
+        
+        // Atualiza o botão ativo
+        langButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Salva a preferência
+        localStorage.setItem('language', lang);
+    };
+
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedLang = button.dataset.lang;
+            setLanguage(selectedLang);
+        });
+    });
+
+    // =====================================================================
     // === LÓGICA DE ALTERNÂNCIA E PERSISTÊNCIA DE TEMA (DIURNO/NOTURNO) ===
     // =====================================================================
     const themeToggleButton = document.getElementById('theme-toggle');
     const body = document.body;
 
-    // Função para aplicar o tema (o visual é controlado 100% pelo CSS)
     const applyTheme = (theme) => {
         if (theme === 'night') {
             body.classList.add('night-mode');
@@ -15,14 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Verifica se há um tema salvo no localStorage ao carregar a página
-    const savedTheme = localStorage.getItem('theme') || 'day'; // 'day' é o padrão
+    const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
 
-    // Adiciona o evento de clique ao botão
     themeToggleButton.addEventListener('click', () => {
         const isNightMode = body.classList.contains('night-mode');
-        // Se estiver no modo noturno, muda para o diurno. Caso contrário, muda para o noturno.
         if (isNightMode) {
             localStorage.setItem('theme', 'day');
             applyTheme('day');
@@ -57,19 +215,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         colorPicker.on('color:change', (color) => {
             
-            // --- LÓGICA DE RESTRIÇÃO DE COR PARA LEGIBILIDADE ---
-            const MIN_BRIGHTNESS = 25;  // Evita cores muito escuras (ilegível no tema escuro)
-            const MAX_BRIGHTNESS = 90;  // Evita cores muito claras (ilegível no tema claro)
-            const MIN_SATURATION = 30;  // Evita cores "cinzentas"/desbotadas
+            const MIN_BRIGHTNESS = 25;
+            const MAX_BRIGHTNESS = 90;
+            const MIN_SATURATION = 30;
 
-            let { h, s, v } = color.hsv; // Pega os valores de Matiz, Saturação e Brilho
+            let { h, s, v } = color.hsv;
 
-            // Aplica as restrições
             if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
             if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
             if (s < MIN_SATURATION) { s = MIN_SATURATION; }
             
-            // Atualiza a cor no seletor com os valores restringidos
             color.hsv = { h, s, v };
             
             const novaCorHex = color.hexString;
@@ -80,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hexInput.addEventListener('input', () => {
             const valor = hexInput.value;
             if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
-                // A atualização via input também passará pela restrição do 'color:change'
                 colorPicker.color.hexString = valor;
             }
         });
@@ -95,30 +249,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (downloadButton && caricatureImageElement) {
         downloadButton.addEventListener('click', () => {
             try {
-                // 1. Cria um elemento canvas temporário
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 
-                // 2. Define o tamanho do canvas com base na imagem que já está na tela
                 canvas.width = caricatureImageElement.naturalWidth;
                 canvas.height = caricatureImageElement.naturalHeight;
 
-                // 3. Pega a cor de destaque atual da variável CSS
                 const backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
 
-                // 4. Pinta o fundo do canvas com a cor de destaque
                 ctx.fillStyle = backgroundColor;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // 5. Desenha a imagem JÁ CARREGADA na tela sobre o fundo colorido
                 ctx.drawImage(caricatureImageElement, 0, 0);
 
-                // 6. Cria um link de download temporário
                 const link = document.createElement('a');
                 link.download = 'caricatura-henrique-marinhos.jpg'; 
                 link.href = canvas.toDataURL('image/jpeg', 0.95); 
 
-                // 7. Simula um clique no link para iniciar o download e depois o remove
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -140,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cascadeContainer) { 
         cascadeContainer.addEventListener('click', (event) => {
-            // Verifica se o clique não foi dentro do seletor de cores, do input ou do botão de download
             if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target) && hexInput && !hexInput.contains(event.target)) {
                 image1.classList.toggle('top-image');
                 image1.classList.toggle('bottom-image');
@@ -251,16 +396,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
                 
-                // Simulação de envio
                 setTimeout(() => {
                     formStatus.textContent = 'Mensagem enviada com sucesso!';
                     formStatus.className = 'form-status success visible';
                     contactForm.reset();
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Enviar Mensagem';
+                    // Retorna o texto do botão para o idioma correto
+                    const currentLang = localStorage.getItem('language') || 'pt';
+                    submitButton.textContent = translations[currentLang].formSubmit;
                     formInputs.forEach(input => input.classList.remove('invalid'));
 
-                    // Esconde a mensagem de status após alguns segundos
                     setTimeout(() => {
                         formStatus.classList.remove('visible');
                     }, 4000);
@@ -275,7 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
         formInputs.forEach(input => {
             input.addEventListener('blur', () => validateField(input));
             input.addEventListener('input', () => {
-                // Remove a mensagem de erro geral ao começar a corrigir
                 if (formStatus.classList.contains('error')) {
                     formStatus.classList.remove('visible');
                 }
@@ -306,6 +450,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', onScroll);
-    onScroll(); // Executa uma vez no carregamento para definir o estado inicial
+    
+    // =====================================================================
+    // === INICIALIZAÇÃO DA PÁGINA ===
+    // =====================================================================
+    const savedLanguage = localStorage.getItem('language') || 'pt';
+    setLanguage(savedLanguage);
+    onScroll();
 
 });
