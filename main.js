@@ -2,6 +2,62 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
+    // === LÓGICA PARA O BOTÃO DE DOWNLOAD DA CARICATURA ===
+    // =====================================================================
+    const downloadButton = document.getElementById('downloadButton');
+    const caricatureImageElement = document.querySelector('#image1 .main-cascade-image');
+
+    if (downloadButton && caricatureImageElement) {
+        downloadButton.addEventListener('click', () => {
+            // Cria um elemento de imagem em memória para garantir que a imagem esteja carregada
+            const img = new Image();
+            img.crossOrigin = 'Anonymous'; // Necessário se a imagem viesse de outro domínio
+
+            // Função que será executada após a imagem ser carregada
+            img.onload = () => {
+                // 1. Cria um elemento canvas temporário
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // 2. Define o tamanho do canvas para ser igual ao da imagem original
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+
+                // 3. Pega a cor de destaque atual da variável CSS
+                const backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+
+                // 4. Pinta o fundo do canvas com a cor de destaque
+                ctx.fillStyle = backgroundColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // 5. Desenha a imagem da caricatura por cima do fundo colorido
+                ctx.drawImage(img, 0, 0);
+
+                // 6. Cria um link de download temporário
+                const link = document.createElement('a');
+                link.download = 'caricatura-henrique-marinhos.png'; // Nome do arquivo
+                link.href = canvas.toDataURL('image/png'); // Converte o canvas para um link de imagem
+
+                // 7. Simula um clique no link para iniciar o download e depois o remove
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+
+            // Define o `src` da imagem em memória para o mesmo `src` da imagem na página
+            // Isso inicia o carregamento da imagem
+            img.src = caricatureImageElement.src;
+        });
+    }
+
+
+    // ... (restante do seu código JavaScript)
+
+});
+    
+    
+    
+    // =====================================================================
     // === LÓGICA DO SELETOR DE CORES COM IRO.JS ===
     // =====================================================================
     
@@ -220,5 +276,3 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', onScroll);
-
-});
