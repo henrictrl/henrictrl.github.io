@@ -172,6 +172,40 @@ header {
     max-width: 150px; 
 }
 
+/* =================================================================== */
+/* === ESTILO DO BOTÃO DE DOWNLOAD DA CARICATURA (SEMPRE VISÍVEL) === */
+/* =================================================================== */
+
+.download-button {
+    position: absolute;
+    top: 15px;
+    right: 15px; /* ALTERADO DE 'left' PARA 'right' */
+    z-index: 15;
+    
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    
+    /* A transição agora se aplica apenas às cores, pois o botão está sempre visível */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: var(--cor-destaque);
+    color: #000; /* Cor do texto alterada para preto para melhor contraste */
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
 
 /* =================================================================== */
 /* === SEÇÃO DE EXPERIÊNCIA (DESKTOP) === */
@@ -579,47 +613,4 @@ input.invalid, textarea.invalid {
    .grid-container {
         grid-template-columns: 1fr;
     }
-
-    /* =================================================================== */
-/* === ESTILO DO BOTÃO DE DOWNLOAD DA CARICATURA === */
-/* =================================================================== */
-
-.download-button {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 15;
-    
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Mostra o botão quando o mouse está sobre a imagem */
-#image1:hover .download-button {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.download-button:hover {
-    background-color: var(--cor-destaque);
-    color: #000;
-    border-color: rgba(0, 0, 0, 0.2);
-}
 }
