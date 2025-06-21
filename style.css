@@ -177,12 +177,13 @@ body.night-mode .theme-toggle-button .icon-moon {
     background-color: rgba(0,0,0,0.2);
 }
 
-/* === SELETOR DE IDIOMAS COM IMAGENS === */
+/* === SELETOR DE IDIOMAS (TAMANHO CORRIGIDO) === */
 .language-switcher {
     display: flex;
-    gap: 8px;
+    gap: 12px; /* Aumenta o espaçamento entre as bandeiras */
     padding-top: 10px;
     border-top: 1px solid var(--color-border);
+    align-items: center;
 }
 
 .lang-button {
@@ -191,8 +192,9 @@ body.night-mode .theme-toggle-button .icon-moon {
     cursor: pointer;
     opacity: 0.5;
     transition: all 0.3s ease;
-    padding: 0;
-    line-height: 0; /* Ajuda a alinhar a imagem dentro do botão */
+    padding: 2px; /* Pequeno preenchimento para o efeito de sombra no modo ativo */
+    line-height: 0;
+    border-radius: 5px; /* Arredonda o contorno da sombra */
 }
 
 .lang-button:hover {
@@ -204,12 +206,11 @@ body.night-mode .theme-toggle-button .icon-moon {
     opacity: 1;
     transform: scale(1.15);
     box-shadow: 0 0 8px color-mix(in srgb, var(--cor-destaque) 50%, transparent);
-    border-radius: 4px;
 }
 
 .lang-button img {
     display: block;
-    width: 28px; /* Tamanho ajustado para as imagens */
+    width: 24px; /* TAMANHO REDUZIDO */
     height: auto;
     border-radius: 3px;
     border: 1px solid var(--color-border);
