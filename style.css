@@ -1,0 +1,582 @@
+/* =================================================================== */
+/* === DEFINIÇÃO DA VARIÁVEL DE COR === */
+/* =================================================================== */
+
+:root {
+    --cor-destaque: #ff4948;
+}
+
+/* =================================================================== */
+/* === ESTILOS GERAIS E RESET BÁSICO (DESKTOP) === */
+/* =================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* =================================================================== */
+/* === SIDEBAR FLUTUANTE === */
+/* =================================================================== */
+.sidebar-nav {
+    position: fixed;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    
+    background-color: rgba(35, 35, 35, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ccc;
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.sidebar-nav a.active {
+    color: var(--cor-destaque);
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+/* =================================================================== */
+/* === CABEÇALHO E SEÇÃO HERO (DESKTOP) === */
+/* =================================================================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+.logo h1 { font-size: 52px; font-weight: 900; letter-spacing: -2px; }
+
+.logo-highlight {
+    color: var(--cor-destaque);
+    transition: color 0.3s ease;
+}
+
+.top-nav ul { list-style: none; display: flex; gap: 40px; }
+/* ALTERADO para seguir a cor de destaque */
+.top-nav a { 
+    color: var(--cor-destaque); 
+    text-decoration: none; 
+    font-size: 16px; 
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 30px;
+    gap: 100px;
+}
+.hero-text { flex: 1; max-width: 400px; }
+.hero-text p { font-size: 24px; line-height: 1.6; font-weight: 400; }
+
+.hero-image {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    min-height: 500px;
+}
+#cascadeContainer .image-with-banner-container {
+    position: absolute;
+    max-width: 70%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+#cascadeContainer .bottom-image { top: 20px; left: 20px; z-index: 1; }
+/* ALTERADO para mover a imagem para cima e para a esquerda */
+#cascadeContainer .top-image { top: 50px; left: 50px; z-index: 2; }
+
+#image1 {
+    position: relative; 
+    background-color: var(--cor-destaque);
+}
+
+#cascadeContainer .main-cascade-image { width: 100%; display: flex; }
+
+.scrolling-banner { position: absolute; bottom: 0; left: 0; width: 100%; white-space: nowrap; overflow: hidden; }
+.scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
+.scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; }
+@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* =================================================================== */
+/* === ESTILO DO CONTAINER DO SELETOR DE CORES (IRO.JS) === */
+/* =================================================================== */
+
+#image1 .color-picker-container {
+    position: absolute;
+    left: 5%;
+    bottom: 20px;
+    z-index: 10;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    gap: 10px; 
+}
+
+#image1 .IroSlider {
+    width: 90%;
+    max-width: 150px; 
+}
+
+
+/* =================================================================== */
+/* === SEÇÃO DE EXPERIÊNCIA (DESKTOP) === */
+/* =================================================================== */
+
+.experience-section-v2 {
+    display: flex;
+    gap: 50px;
+    padding: 100px 0 0;
+    margin-top: 100px;
+    border-top: 1px solid #222;
+}
+.experience-title-column { flex-basis: 400px; flex-shrink: 0; }
+.section-title { font-family: 'Helvetica', sans-serif; font-weight: normal; font-size: 16px; color: #888; }
+.experience-list-column { flex-grow: 1; }
+.experience-list-v2 { list-style: none; width: 100%; }
+.experience-item-v2 { padding: 20px 0; border-bottom: 1px solid #222; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; }
+.experience-item-v2:last-child { border-bottom: none; }
+.experience-item-v2 h3 { font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 900; color: #FFF; margin-bottom: 5px; transition: color 0.3s ease; }
+.job-description-v2 { font-family: 'Helvetica', sans-serif; color: #999; font-size: 16px; margin-bottom: 10px; max-width: 450px; transition: color 0.3s ease; }
+.job-dates-v2 { font-family: 'Helvetica', sans-serif; font-size: 14px; color: #666; transition: color 0.3s ease; text-align: right; }
+.experience-item-v2.highlighted h3 { color: var(--cor-destaque); }
+.experience-item-v2.highlighted .job-description-v2,
+.experience-item-v2.highlighted .job-dates-v2 { color: #FFF; }
+
+/* =================================================================== */
+/* === SEÇÃO DE PORTFÓLIO EM GRADE (DESKTOP) === */
+/* =================================================================== */
+
+.portfolio-section-v2 {
+    border-top: 1px solid #222;
+    margin-top: 50px;
+    padding-top: 50px;
+}
+.section-header { margin-bottom: 60px; }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 80px 40px;
+}
+.portfolio-item { position: relative; cursor: pointer; }
+.portfolio-cascade { position: relative; width: 100%; aspect-ratio: 1 / 1; transition: transform 0.3s ease-in-out; }
+.portfolio-item:hover .portfolio-cascade { transform: scale(1.05) rotate(3deg); }
+
+/* REGRA ADICIONADA: Cria o fundo colorido para a imagem de trás */
+.portfolio-cascade::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-destaque);
+    border-radius: 10px;
+    transform: rotate(-8deg);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-cascade img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+
+/* Z-INDEX ADICIONADO */
+.cascade-img-back { 
+    transform: rotate(-8deg);
+    z-index: 2;
+}
+.cascade-img-front { 
+    transform: rotate(4deg);
+    z-index: 3;
+}
+.portfolio-item.opening .cascade-img-back { transform: translate(-50%, 10%) rotate(-20deg) scale(0.8); }
+.portfolio-item.opening .cascade-img-front { transform: translate(50%, -10%) rotate(20deg) scale(0.8); }
+.portfolio-item-title { margin-top: 25px; text-align: right; }
+.portfolio-item-title h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 2px; }
+.portfolio-item-title p { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: #888; }
+
+/* =================================================================== */
+/* === JANELA MODAL (Pop-up dos projetos) === */
+/* =================================================================== */
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.modal-overlay.visible { opacity: 1; pointer-events: auto; }
+.modal-content { background-color: #111; padding: 40px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; transform: scale(0.8); transition: transform 0.4s ease; }
+.modal-overlay.visible .modal-content { transform: scale(1); }
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 36px; cursor: pointer; }
+
+a[href="https://br.linkedin.com/in/henrique-marinhos"] {
+  color: var(--cor-destaque);
+}
+
+.at-symbol {
+  color: var(--cor-destaque);
+}
+
+/* =================================================================== */
+/* === SEÇÃO DE CONTATO === */
+/* =================================================================== */
+
+.contact-section {
+    border-top: 1px solid #222;
+    margin-top: 100px;
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact-header .section-title {
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+.contact-intro-text {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #bbb;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-content {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    justify-content: center; 
+}
+
+.contact-form {
+    flex: 2;
+    max-width: 600px; 
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--cor-destaque);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 73, 72, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--cor-destaque);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+    background-color: #e03f3e;
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.form-status {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #fdd835;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-status.success {
+    color: #4CAF50;
+}
+
+.form-status.error {
+    color: #F44336;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 250px; 
+    max-width: 400px;
+    padding: 20px 0;
+}
+
+.contact-info h3 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+.contact-info p {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.contact-info a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.social-links a:hover {
+    border-color: var(--cor-destaque);
+}
+
+.contact-cta-footer {
+    margin-top: 40px;
+    font-size: 16px;
+    font-style: italic;
+    color: #888;
+}
+
+/* =================================================================== */
+/* === ESTILOS BASE PARA FORMULÁRIO DE CONTATO (ADICIONADOS) === */
+/* =================================================================== */
+
+.error-message {
+    color: var(--cor-destaque); 
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block; 
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.error-message:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+input.invalid, textarea.invalid {
+    border-color: var(--cor-destaque); 
+    box-shadow: 0 0 5px rgba(255, 73, 72, 0.3);
+}
+
+/* =================================================================== */
+/* === RESPONSIVIDADE === */
+/* =================================================================== */
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0 20px;
+    }
+    .experience-section-v2 {
+        flex-direction: column;
+        gap: 0;
+    }
+    .experience-title-column {
+        flex-basis: auto;
+        margin-bottom: 40px;
+    }
+    .contact-content {
+        flex-direction: column;
+        gap: 60px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .contact-form,
+    .contact-info {
+        flex: auto;
+        width: 100%;
+        max-width: 500px;
+    }
+    .contact-form {
+        padding: 30px;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+    .contact-header .section-title {
+        font-size: 42px;
+    }
+    
+    .sidebar-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-nav {
+        display: none;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 0;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    
+    .hero-image {
+        min-height: 400px;
+        width: 150%;
+        margin-top: 50px;
+    }
+    #cascadeContainer .image-with-banner-container {
+        max-width: 85%;
+        left: 50%;
+        top: 0;
+    }
+    #cascadeContainer .top-image {
+        transform: translateX(-50%) rotate(3deg);
+    }
+    #cascadeContainer .bottom-image {
+        transform: translateX(-50%) rotate(-3deg);
+    }
+    
+    .logo h1 {
+        font-size: 42px;
+    }
+    .experience-item-v2 h3 {
+        font-size: 32px;
+    }
+    .experience-item-v2 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .job-dates-v2 {
+        text-align: left;
+    }
+
+   .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
