@@ -1,9 +1,43 @@
 /* =================================================================== */
-/* === DEFINIÇÃO DA VARIÁVEL DE COR === */
+/* === DEFINIÇÃO DAS VARIÁVEIS DE COR (TEMA) === */
 /* =================================================================== */
 
 :root {
+    /* Cor de Destaque (Controlada pelo Color Picker) */
     --cor-destaque: #ff4948;
+
+    /* Cores do Tema Diurno (Padrão) */
+    --color-background: #F8F8F8;
+    --color-text-primary: #0b1215;
+    --color-text-secondary: #888888; /* Cor para o ícone inativo */
+    --color-text-tertiary: #888888;
+    --color-border: #e0e0e0;
+    --color-surface-1: #ffffff;
+    --color-surface-2: #f0f0f0;
+    --color-shadow-weak: rgba(11, 18, 21, 0.1);
+    --color-shadow-strong: rgba(11, 18, 21, 0.2);
+    --backdrop-bg: rgba(248, 248, 248, 0.7);
+    --modal-bg: #EFEFEF;
+
+    /* Cores do botão de tema */
+    --theme-toggle-slider-bg: var(--cor-destaque); /* Usa a cor de destaque principal */
+    --theme-icon-active: var(--color-background); /* Cor do ícone ativo (efeito recorte) */
+    --theme-icon-inactive: var(--color-text-secondary); /* Cor do ícone inativo */
+}
+
+body.night-mode {
+    /* Cores do Tema Noturno */
+    --color-background: #0b1215;
+    --color-text-primary: #F8F8F8;
+    --color-text-secondary: #666666; /* Cor para o ícone inativo no modo escuro */
+    --color-text-tertiary: #666666;
+    --color-border: #2a2a2a;
+    --color-surface-1: #1a1a1a;
+    --color-surface-2: #2a2a2a;
+    --color-shadow-weak: rgba(0, 0, 0, 0.15);
+    --color-shadow-strong: rgba(0, 0, 0, 0.3);
+    --backdrop-bg: rgba(35, 35, 35, 0.7);
+    --modal-bg: #111;
 }
 
 /* =================================================================== */
@@ -21,10 +55,11 @@ html {
 }
 
 body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body.modal-open {
@@ -38,44 +73,103 @@ body.modal-open {
 }
 
 /* =================================================================== */
-/* === SIDEBAR FLUTUANTE === */
+/* === BOTÃO DE TEMA E SIDEBAR INTEGRADOS === */
 /* =================================================================== */
 .sidebar-nav {
     position: fixed;
     top: 50%;
     right: 40px;
     transform: translateY(-50%);
+    z-index: 1001;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     
-    background-color: rgba(35, 35, 35, 0.7);
+    background-color: var(--backdrop-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-border);
     
-    padding: 10px;
+    padding: 15px 10px;
     border-radius: 12px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-    z-index: 1000;
+    box-shadow: 0 5px 25px var(--color-shadow-strong);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
+
+.theme-toggle-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+    width: 70px;
+    height: 32px;
+    border-radius: 32px;
+    
+    background-color: var(--color-surface-2);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+}
+
+.theme-toggle-button .slider-bg {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--theme-toggle-slider-bg);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.4s ease;
+}
+
+body.night-mode .theme-toggle-button .slider-bg {
+    transform: translateX(38px);
+}
+
+.theme-toggle-button .material-symbols-outlined {
+    font-size: 20px;
+    z-index: 2;
+    transition: color 0.4s ease;
+}
+
+.theme-toggle-button .icon-sun {
+    color: var(--theme-icon-active);
+}
+.theme-toggle-button .icon-moon {
+    color: var(--theme-icon-inactive);
+}
+body.night-mode .theme-toggle-button .icon-sun {
+    color: var(--theme-icon-inactive);
+}
+body.night-mode .theme-toggle-button .icon-moon {
+    color: var(--theme-icon-active);
+}
+
 
 .sidebar-nav ul {
     list-style: none;
+    padding-top: 5px;
+    border-top: 1px solid var(--color-border);
 }
 
 .sidebar-nav a {
     display: block;
-    padding: 12px 20px;
+    padding: 10px 18px;
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    color: #ccc;
+    color: var(--color-text-secondary);
     transition: all 0.2s ease-in-out;
     border-radius: 8px;
     white-space: nowrap;
 }
 
 .sidebar-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #fff;
+    background-color: rgba(128, 128, 128, 0.1);
+    color: var(--color-text-primary);
 }
 
 .sidebar-nav a.active {
@@ -101,8 +195,8 @@ header {
     transition: color 0.3s ease;
 }
 
+/* REMOVIDO POSICIONAMENTO ABSOLUTO */
 .top-nav ul { list-style: none; display: flex; gap: 40px; }
-/* ALTERADO para seguir a cor de destaque */
 .top-nav a { 
     color: var(--cor-destaque); 
     text-decoration: none; 
@@ -134,9 +228,9 @@ header {
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
+    box-shadow: 0 10px 30px var(--color-shadow-strong);
 }
 #cascadeContainer .bottom-image { top: 20px; left: 20px; z-index: 1; }
-/* ALTERADO para mover a imagem para cima e para a esquerda */
 #cascadeContainer .top-image { top: 50px; left: 50px; z-index: 2; }
 
 #image1 {
@@ -146,9 +240,10 @@ header {
 
 #cascadeContainer .main-cascade-image { width: 100%; display: flex; }
 
-.scrolling-banner { position: absolute; bottom: 0; left: 0; width: 100%; white-space: nowrap; overflow: hidden; }
+/* FUNDO DO LETREIRO REMOVIDO */
+.scrolling-banner { position: absolute; bottom: 0; left: 0; width: 100%; white-space: nowrap; overflow: hidden; background: transparent; }
 .scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
-.scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; }
+.scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* =================================================================== */
@@ -176,10 +271,10 @@ header {
     max-width: 150px;
     padding: 8px 12px;
     margin-bottom: 5px; /* Adiciona um espaço antes dos sliders */
-    background-color: rgba(42, 42, 42, 0.8);
-    border: 1px solid #c0c0c000;
+    background-color: var(--color-surface-2);
+    border: 1px solid transparent;
     border-radius: 18px;
-    color: #fff;
+    color: var(--color-text-primary);
     font-size: 14px;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -189,13 +284,13 @@ header {
 }
 
 .hex-input::placeholder {
-    color: #ffffff;
+    color: var(--color-text-secondary);
     font-weight: 200;
 }
 
 .hex-input:focus {
     border-color: var(--cor-destaque);
-    box-shadow: 0 0 0 3px rgba(255, 73, 72, 0.2);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
 }
 
 
@@ -211,14 +306,14 @@ header {
 .download-button {
     position: absolute;
     top: 15px;
-    right: 15px; /* ALTERADO DE 'left' PARA 'right' */
+    right: 15px;
     z-index: 15;
     
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: var(--backdrop-bg);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
+    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    color: var(--color-text-primary);
     
     padding: 8px 16px;
     border-radius: 18px;
@@ -228,13 +323,12 @@ header {
     font-size: 14px;
     font-weight: 600;
     
-    /* A transição agora se aplica apenas às cores, pois o botão está sempre visível */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .download-button:hover {
     background-color: var(--cor-destaque);
-    color: #000; /* Cor do texto alterada para preto para melhor contraste */
+    color: #0b1215; /* Cor do texto sempre escura para melhor contraste */
     border-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -248,29 +342,29 @@ header {
     gap: 50px;
     padding: 100px 0 0;
     margin-top: 100px;
-    border-top: 1px solid #222;
+    border-top: 1px solid var(--color-border);
+    transition: border-color 0.4s ease;
 }
 .experience-title-column { flex-basis: 400px; flex-shrink: 0; }
-.section-title { font-family: 'Helvetica', sans-serif; font-weight: normal; font-size: 16px; color: #888; }
+.section-title { font-family: 'Helvetica', sans-serif; font-weight: normal; font-size: 16px; color: var(--color-text-tertiary); }
 .experience-list-column { flex-grow: 1; }
 .experience-list-v2 { list-style: none; width: 100%; }
-.experience-item-v2 { padding: 20px 0; border-bottom: 1px solid #222; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; }
+.experience-item-v2 { padding: 20px 0; border-bottom: 1px solid var(--color-border); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; transition: border-color 0.4s ease; }
 .experience-item-v2:last-child { border-bottom: none; }
-.experience-item-v2 h3 { font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 900; color: #FFF; margin-bottom: 5px; transition: color 0.3s ease; }
-.job-description-v2 { font-family: 'Helvetica', sans-serif; color: #999; font-size: 16px; margin-bottom: 10px; max-width: 450px; transition: color 0.3s ease; }
-.job-dates-v2 { font-family: 'Helvetica', sans-serif; font-size: 14px; color: #666; transition: color 0.3s ease; text-align: right; }
+.experience-item-v2 h3 { font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 900; color: var(--color-text-primary); margin-bottom: 5px; transition: color 0.3s ease; }
+.job-dates-v2 { font-family: 'Helvetica', sans-serif; font-size: 14px; color: var(--color-text-tertiary); transition: color 0.3s ease; text-align: right; }
 .experience-item-v2.highlighted h3 { color: var(--cor-destaque); }
-.experience-item-v2.highlighted .job-description-v2,
-.experience-item-v2.highlighted .job-dates-v2 { color: #FFF; }
+.experience-item-v2.highlighted .job-dates-v2 { color: var(--color-text-primary); }
 
 /* =================================================================== */
 /* === SEÇÃO DE PORTFÓLIO EM GRADE (DESKTOP) === */
 /* =================================================================== */
 
 .portfolio-section-v2 {
-    border-top: 1px solid #222;
+    border-top: 1px solid var(--color-border);
     margin-top: 50px;
     padding-top: 50px;
+    transition: border-color 0.4s ease;
 }
 .section-header { margin-bottom: 60px; }
 
@@ -283,7 +377,6 @@ header {
 .portfolio-cascade { position: relative; width: 100%; aspect-ratio: 1 / 1; transition: transform 0.3s ease-in-out; }
 .portfolio-item:hover .portfolio-cascade { transform: scale(1.05) rotate(3deg); }
 
-/* REGRA ADICIONADA: Cria o fundo colorido para a imagem de trás */
 .portfolio-cascade::before {
     content: '';
     display: block;
@@ -299,9 +392,8 @@ header {
     transition: background-color 0.3s ease;
 }
 
-.portfolio-cascade img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+.portfolio-cascade img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 5px 20px var(--color-shadow-strong); }
 
-/* Z-INDEX ADICIONADO */
 .cascade-img-back { 
     transform: rotate(-8deg);
     z-index: 2;
@@ -313,18 +405,18 @@ header {
 .portfolio-item.opening .cascade-img-back { transform: translate(-50%, 10%) rotate(-20deg) scale(0.8); }
 .portfolio-item.opening .cascade-img-front { transform: translate(50%, -10%) rotate(20deg) scale(0.8); }
 .portfolio-item-title { margin-top: 25px; text-align: right; }
-.portfolio-item-title h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 2px; }
-.portfolio-item-title p { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: #888; }
+.portfolio-item-title h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 900; color: var(--color-text-primary); margin-bottom: 2px; }
+.portfolio-item-title p { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: var(--color-text-tertiary); }
 
 /* =================================================================== */
 /* === JANELA MODAL (Pop-up dos projetos) === */
 /* =================================================================== */
 
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 18, 21, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
 .modal-overlay.visible { opacity: 1; pointer-events: auto; }
-.modal-content { background-color: #111; padding: 40px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; transform: scale(0.8); transition: transform 0.4s ease; }
+.modal-content { background-color: var(--modal-bg); padding: 40px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; transform: scale(0.8); transition: transform 0.4s ease, background-color 0.4s ease; color: var(--color-text-primary); }
 .modal-overlay.visible .modal-content { transform: scale(1); }
-.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 36px; cursor: pointer; }
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--color-text-primary); font-size: 36px; cursor: pointer; }
 
 a[href="https://br.linkedin.com/in/henrique-marinhos"] {
   color: var(--cor-destaque);
@@ -339,10 +431,11 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 /* =================================================================== */
 
 .contact-section {
-    border-top: 1px solid #222;
+    border-top: 1px solid var(--color-border);
     margin-top: 100px;
     padding-top: 100px;
     padding-bottom: 80px;
+    transition: border-color 0.4s ease;
 }
 
 .contact-header {
@@ -353,7 +446,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-header .section-title {
     font-size: 52px;
     font-weight: 900;
-    color: #fff;
+    color: var(--color-text-primary);
     margin-bottom: 20px;
     letter-spacing: -2px;
 }
@@ -361,7 +454,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-intro-text {
     font-size: 20px;
     line-height: 1.6;
-    color: #bbb;
+    color: var(--color-text-secondary);
     max-width: 700px;
     margin: 0 auto;
 }
@@ -376,10 +469,11 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-form {
     flex: 2;
     max-width: 600px; 
-    background-color: #1a1a1a;
+    background-color: var(--color-surface-1);
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px var(--color-shadow-strong);
+    transition: background-color 0.4s ease;
 }
 
 .form-group {
@@ -389,7 +483,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group label {
     display: block;
     font-size: 14px;
-    color: #ccc;
+    color: var(--color-text-secondary);
     margin-bottom: 8px;
     font-weight: 600;
 }
@@ -399,12 +493,12 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group textarea {
     width: 100%;
     padding: 15px;
-    background-color: #2a2a2a;
-    border: 1px solid #444;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    color: #fff;
+    color: var(--color-text-primary);
     font-size: 16px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .form-group input[type="text"]:focus,
@@ -412,7 +506,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group textarea:focus {
     border-color: var(--cor-destaque);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 73, 72, 0.3);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
 }
 
 .form-group textarea {
@@ -425,18 +519,18 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     width: 100%;
     padding: 15px 25px;
     background-color: var(--cor-destaque);
-    color: #fff;
+    color: var(--color-background);
     border: none;
     border-radius: 5px;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     letter-spacing: 0.5px;
 }
 
 .submit-button:hover {
-    background-color: #e03f3e;
+    filter: brightness(1.1);
     transform: translateY(-2px);
 }
 
@@ -448,7 +542,6 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     margin-top: 20px;
     text-align: center;
     font-size: 16px;
-    color: #fdd835;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -477,14 +570,14 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-info h3 {
     font-size: 28px;
     font-weight: 900;
-    color: #fff;
+    color: var(--color-text-primary);
     margin-bottom: 25px;
     letter-spacing: -1px;
 }
 
 .contact-info p {
     font-size: 18px;
-    color: #ccc;
+    color: var(--color-text-secondary);
     margin-bottom: 15px;
     line-height: 1.5;
 }
@@ -496,7 +589,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 .contact-info a:hover {
-    color: #fff;
+    color: var(--color-text-primary);
     text-decoration: underline;
 }
 
@@ -519,15 +612,8 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     border-color: var(--cor-destaque);
 }
 
-.contact-cta-footer {
-    margin-top: 40px;
-    font-size: 16px;
-    font-style: italic;
-    color: #888;
-}
-
 /* =================================================================== */
-/* === ESTILOS BASE PARA FORMULÁRIO DE CONTATO (ADICIONADOS) === */
+/* === ESTILOS BASE PARA FORMULÁRIO DE CONTATO (VALIDAÇÃO) === */
 /* =================================================================== */
 
 .error-message {
@@ -535,6 +621,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     font-size: 0.85em;
     margin-top: 5px;
     display: block; 
+    min-height: 1em; /* Evita que o layout pule */
     opacity: 0;
     transform: translateY(-5px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -546,8 +633,8 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 input.invalid, textarea.invalid {
-    border-color: var(--cor-destaque); 
-    box-shadow: 0 0 5px rgba(255, 73, 72, 0.3);
+    border-color: var(--cor-destaque) !important; 
+    box-shadow: 0 0 5px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
 }
 
 /* =================================================================== */
@@ -601,10 +688,16 @@ input.invalid, textarea.invalid {
         display: none;
     }
 
+    header {
+        position: relative;
+        justify-content: center;
+    }
+
     .hero-section {
         flex-direction: column;
         text-align: center;
         gap: 0;
+        margin-left: 0;
     }
     .hero-text {
         max-width: 100%;

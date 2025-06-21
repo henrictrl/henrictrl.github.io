@@ -1,70 +1,86 @@
-// Ouve o evento que indica que todo o HTML foi carregado e está pronto.
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
-    // === LÓGICA DO SELETOR DE CORES COM IRO.JS E INPUT HEX ===
+    // === LÓGICA DE ALTERNÂNCIA E PERSISTÊNCIA DE TEMA (DIURNO/NOTURNO) ===
+    // =====================================================================
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Função para aplicar o tema (o visual é controlado 100% pelo CSS)
+    const applyTheme = (theme) => {
+        if (theme === 'night') {
+            body.classList.add('night-mode');
+        } else {
+            body.classList.remove('night-mode');
+        }
+    };
+
+    // Verifica se há um tema salvo no localStorage ao carregar a página
+    const savedTheme = localStorage.getItem('theme') || 'day'; // 'day' é o padrão
+    applyTheme(savedTheme);
+
+    // Adiciona o evento de clique ao botão
+    themeToggleButton.addEventListener('click', () => {
+        const isNightMode = body.classList.contains('night-mode');
+        // Se estiver no modo noturno, muda para o diurno. Caso contrário, muda para o noturno.
+        if (isNightMode) {
+            localStorage.setItem('theme', 'day');
+            applyTheme('day');
+        } else {
+            localStorage.setItem('theme', 'night');
+            applyTheme('night');
+        }
+    });
+
+
+    // =====================================================================
+    // === LÓGICA DO SELETOR DE CORES COM RESTRIÇÕES DE LEGIBILIDADE ===
     // =====================================================================
     
-    // Procura os elementos no HTML
     const pickerContainer = document.querySelector('.color-picker-container');
-    const hexInput = document.getElementById('hexInput'); // Pega o novo campo de input
+    const hexInput = document.getElementById('hexInput');
 
-    // Se os elementos existirem, inicializa a lógica
     if (pickerContainer && hexInput) {
         
-        // Cria uma nova instância do seletor de cor iro.js
         const colorPicker = new iro.ColorPicker(pickerContainer, {
             width: 150,
             color: "#ff4948",
             borderWidth: 0,
             borderColor: "#ffffff",
             layout: [ 
-                {
-                    component: iro.ui.Slider,
-                    options: {
-                        sliderType: 'hue'
-                    }
-                },
-                {
-                    component: iro.ui.Slider, 
-                    options: {
-                        sliderType: 'value'
-                    }
-                }
+                { component: iro.ui.Slider, options: { sliderType: 'hue' } },
+                { component: iro.ui.Slider, options: { sliderType: 'value' } }
             ]
         });
 
-        // Define o valor inicial do input com a cor padrão
         hexInput.value = colorPicker.color.hexString;
 
-        // Adiciona um "ouvinte" para o evento de mudança de cor no seletor iro.js
         colorPicker.on('color:change', (color) => {
             
-            // --- Lógica da limitação de brilho ---
-            const LARGURA_MINIMA_BRILHO = 25;
-            if (color.hsv.v < LARGURA_MINIMA_BRILHO) {
-                color.hsv = { h: color.hsv.h, s: color.hsv.s, v: LARGURA_MINIMA_BRILHO };
-            }
-            
-            // Pega o valor da cor em formato hexadecimal
-            const novaCorHex = color.hexString;
-            
-            // Atualiza a variável CSS no documento para mudar a cor do site
-            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
+            // --- LÓGICA DE RESTRIÇÃO DE COR PARA LEGIBILIDADE ---
+            const MIN_BRIGHTNESS = 25;  // Evita cores muito escuras (ilegível no tema escuro)
+            const MAX_BRIGHTNESS = 90;  // Evita cores muito claras (ilegível no tema claro)
+            const MIN_SATURATION = 30;  // Evita cores "cinzentas"/desbotadas
 
-            // ATUALIZA o valor do campo de input para refletir a mudança no seletor
+            let { h, s, v } = color.hsv; // Pega os valores de Matiz, Saturação e Brilho
+
+            // Aplica as restrições
+            if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
+            if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
+            if (s < MIN_SATURATION) { s = MIN_SATURATION; }
+            
+            // Atualiza a cor no seletor com os valores restringidos
+            color.hsv = { h, s, v };
+            
+            const novaCorHex = color.hexString;
+            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
             hexInput.value = novaCorHex;
         });
 
-        // Adiciona um "ouvinte" para o evento de digitação no campo de input
         hexInput.addEventListener('input', () => {
             const valor = hexInput.value;
-            
-            // Verifica se o valor digitado é um código hexadecimal completo (# + 6 dígitos)
             if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
-                // Se for válido, ATUALIZA a cor do seletor iro.js
-                // Isso automaticamente dispara o evento 'color:change' acima,
-                // aplicando a limitação de brilho e atualizando o site.
+                // A atualização via input também passará pela restrição do 'color:change'
                 colorPicker.color.hexString = valor;
             }
         });
@@ -125,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cascadeContainer) { 
         cascadeContainer.addEventListener('click', (event) => {
             // Verifica se o clique não foi dentro do seletor de cores, do input ou do botão de download
-            if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target)) {
+            if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target) && hexInput && !hexInput.contains(event.target)) {
                 image1.classList.toggle('top-image');
                 image1.classList.toggle('bottom-image');
                 image2.classList.toggle('top-image');
@@ -235,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
                 
+                // Simulação de envio
                 setTimeout(() => {
                     formStatus.textContent = 'Mensagem enviada com sucesso!';
                     formStatus.className = 'form-status success visible';
@@ -242,6 +259,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitButton.disabled = false;
                     submitButton.textContent = 'Enviar Mensagem';
                     formInputs.forEach(input => input.classList.remove('invalid'));
+
+                    // Esconde a mensagem de status após alguns segundos
+                    setTimeout(() => {
+                        formStatus.classList.remove('visible');
+                    }, 4000);
+
                 }, 2000);
             } else {
                 formStatus.textContent = 'Por favor, corrija os erros.';
@@ -251,6 +274,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         formInputs.forEach(input => {
             input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                // Remove a mensagem de erro geral ao começar a corrigir
+                if (formStatus.classList.contains('error')) {
+                    formStatus.classList.remove('visible');
+                }
+            });
         });
     }
 
@@ -264,10 +293,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollPosition = window.scrollY + (window.innerHeight / 2);
 
         sections.forEach(section => {
-            if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+            if (section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
+                const currentId = section.getAttribute('id');
                 scrollSpyLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (section.getAttribute('id') === link.getAttribute('href').substring(1)) {
+                    if (link.getAttribute('href').substring(1) === currentId) {
                         link.classList.add('active');
                     }
                 });
@@ -276,5 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', onScroll);
+    onScroll(); // Executa uma vez no carregamento para definir o estado inicial
 
 });
