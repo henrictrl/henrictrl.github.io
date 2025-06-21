@@ -167,6 +167,38 @@ header {
     gap: 10px; 
 }
 
+/* =================================================================== */
+/* === ESTILO DO INPUT HEXADECIMAL === */
+/* =================================================================== */
+
+.hex-input {
+    width: 100%;
+    max-width: 150px;
+    padding: 8px 12px;
+    margin-bottom: 5px; /* Adiciona um espaço antes dos sliders */
+    background-color: rgba(42, 42, 42, 0.8);
+    border: 1px solid #c0c0c000;
+    border-radius: 18px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hex-input::placeholder {
+    color: #ffffff;
+    font-weight: 200;
+}
+
+.hex-input:focus {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(255, 73, 72, 0.2);
+}
+
+
 #image1 .IroSlider {
     width: 90%;
     max-width: 150px; 
@@ -189,7 +221,7 @@ header {
     color: #fff;
     
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 18px;
     cursor: pointer;
     
     font-family: 'Inter', sans-serif;
@@ -203,7 +235,7 @@ header {
 .download-button:hover {
     background-color: var(--cor-destaque);
     color: #000; /* Cor do texto alterada para preto para melhor contraste */
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.5);
 }
 
 

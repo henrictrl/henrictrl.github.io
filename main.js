@@ -2,16 +2,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
-    // === LÓGICA DO SELETOR DE CORES COM IRO.JS ===
+    // === LÓGICA DO SELETOR DE CORES COM IRO.JS E INPUT HEX ===
     // =====================================================================
     
-    // Procura o container que definimos no HTML
+    // Procura os elementos no HTML
     const pickerContainer = document.querySelector('.color-picker-container');
+    const hexInput = document.getElementById('hexInput'); // Pega o novo campo de input
 
-    // Se o container existir, inicializa a biblioteca iro.js
-    if (pickerContainer) {
+    // Se os elementos existirem, inicializa a lógica
+    if (pickerContainer && hexInput) {
         
-        // Cria uma nova instância do seletor de cor
+        // Cria uma nova instância do seletor de cor iro.js
         const colorPicker = new iro.ColorPicker(pickerContainer, {
             width: 150,
             color: "#ff4948",
@@ -33,28 +34,39 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         });
 
-        // Adiciona um "ouvinte" para o evento de mudança de cor
+        // Define o valor inicial do input com a cor padrão
+        hexInput.value = colorPicker.color.hexString;
+
+        // Adiciona um "ouvinte" para o evento de mudança de cor no seletor iro.js
         colorPicker.on('color:change', (color) => {
             
-            // ======================================================
-            // === NOVO LIMITE DE BRILHO ADICIONADO AQUI ===
-            // ======================================================
-            // Define o brilho mínimo (0-100). 25 é um bom valor para legibilidade.
+            // --- Lógica da limitação de brilho ---
             const LARGURA_MINIMA_BRILHO = 25;
-
-            // Verifica se o brilho (value) da cor selecionada está abaixo do mínimo.
             if (color.hsv.v < LARGURA_MINIMA_BRILHO) {
-                // Se estiver, força o brilho para o valor mínimo,
-                // mantendo a cor (hue) e a saturação que o usuário escolheu.
                 color.hsv = { h: color.hsv.h, s: color.hsv.s, v: LARGURA_MINIMA_BRILHO };
             }
-            // ======================================================
             
-            // Pega o valor da cor em formato hexadecimal (agora com o brilho corrigido)
+            // Pega o valor da cor em formato hexadecimal
             const novaCorHex = color.hexString;
             
-            // Atualiza a variável CSS no documento, exatamente como antes
+            // Atualiza a variável CSS no documento para mudar a cor do site
             document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
+
+            // ATUALIZA o valor do campo de input para refletir a mudança no seletor
+            hexInput.value = novaCorHex;
+        });
+
+        // Adiciona um "ouvinte" para o evento de digitação no campo de input
+        hexInput.addEventListener('input', () => {
+            const valor = hexInput.value;
+            
+            // Verifica se o valor digitado é um código hexadecimal completo (# + 6 dígitos)
+            if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
+                // Se for válido, ATUALIZA a cor do seletor iro.js
+                // Isso automaticamente dispara o evento 'color:change' acima,
+                // aplicando a limitação de brilho e atualizando o site.
+                colorPicker.color.hexString = valor;
+            }
         });
     }
 
@@ -83,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 // 5. Desenha a imagem JÁ CARREGADA na tela sobre o fundo colorido
-                //    Esta é a mudança principal que evita o erro de segurança local
                 ctx.drawImage(caricatureImageElement, 0, 0);
 
                 // 6. Cria um link de download temporário
@@ -113,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cascadeContainer) { 
         cascadeContainer.addEventListener('click', (event) => {
-            // Verifica se o clique não foi dentro do seletor de cores ou do botão de download
+            // Verifica se o clique não foi dentro do seletor de cores, do input ou do botão de download
             if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target)) {
                 image1.classList.toggle('top-image');
                 image1.classList.toggle('bottom-image');
