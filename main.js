@@ -1,6 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
+    // === LÓGICA DO EASTER EGG (MÃO E TÍTULO) ===
+    // =====================================================================
+    const contactNavLink = document.querySelector('.sidebar-nav a[href="#contato"]');
+    const handContainer = document.getElementById('hand-easter-egg-container');
+    const contactTitle = document.querySelector('#contato .section-title');
+
+    if (contactNavLink && handContainer && contactTitle) {
+        contactNavLink.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            document.getElementById('contato').scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            if (!handContainer.classList.contains('animate')) {
+                handContainer.classList.add('animate');
+                contactTitle.classList.add('blinking-title');
+
+                setTimeout(() => {
+                    handContainer.classList.remove('animate');
+                    contactTitle.classList.remove('blinking-title');
+                }, 2300);
+            }
+        });
+    }
+
+    // =====================================================================
     // === LÓGICA DE TRADUÇÃO ===
     // =====================================================================
     const translations = {
@@ -131,14 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const translatablePlaceholders = document.querySelectorAll('[data-translate-key-placeholder]');
 
     const setLanguage = (lang) => {
-        // Traduz textos normais
         translatableElements.forEach(el => {
             const key = el.dataset.translateKey;
             if (translations[lang] && translations[lang][key]) {
                 el.innerHTML = translations[lang][key];
             }
         });
-        // Traduz placeholders
         translatablePlaceholders.forEach(el => {
             const key = el.dataset.translateKeyPlaceholder;
             if (translations[lang] && translations[lang][key]) {
@@ -146,12 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Atualiza o botão ativo
         langButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
 
-        // Salva a preferência
         localStorage.setItem('language', lang);
     };
 
@@ -163,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =====================================================================
-    // === LÓGICA DE ALTERNÂNCIA E PERSISTÊNCIA DE TEMA (DIURNO/NOTURNO) ===
+    // === LÓGICA DE TEMA (DIURNO/NOTURNO) ===
     // =====================================================================
     const themeToggleButton = document.getElementById('theme-toggle');
     const body = document.body;
@@ -190,9 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     // =====================================================================
-    // === LÓGICA DO SELETOR DE CORES COM RESTRIÇÕES DE LEGIBILIDADE ===
+    // === SELETOR DE CORES (IRO.JS) ===
     // =====================================================================
     
     const pickerContainer = document.querySelector('.color-picker-container');
@@ -241,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================================================
-    // === LÓGICA PARA O BOTÃO DE DOWNLOAD DA CARICATURA (CORRIGIDO) ===
+    // === BOTÃO DE DOWNLOAD ===
     // =====================================================================
     const downloadButton = document.getElementById('downloadButton');
     const caricatureImageElement = document.querySelector('#image1 .main-cascade-image');
@@ -276,9 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // =====================================================================
-    // === LÓGICA DA CASCATA DE IMAGENS NO HERO ===
+    // === CASCATA DE IMAGENS HERO ===
     // =====================================================================
     const cascadeContainer = document.getElementById('cascadeContainer');
     const image1 = document.getElementById('image1');
@@ -296,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =====================================================================
-    // === INTERAÇÃO PARA A LISTA DE EXPERIÊNCIA (EFEITO HOVER) ===
+    // === HOVER LISTA DE EXPERIÊNCIA ===
     // =====================================================================
     const experienceItemsV2 = document.querySelectorAll('.experience-item-v2');
 
@@ -311,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =====================================================================
-    // === LÓGICA PARA A GRADE DE PORTFÓLIO E JANELA MODAL ===
+    // === JANELA MODAL PORTFÓLIO ===
     // =====================================================================
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     const modalOverlay = document.getElementById('projectModal');
@@ -350,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =====================================================================
-    // === LÓGICA PARA O FORMULÁRIO DE CONTATO ===
+    // === FORMULÁRIO DE CONTATO ===
     // =====================================================================
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
@@ -401,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formStatus.className = 'form-status success visible';
                     contactForm.reset();
                     submitButton.disabled = false;
-                    // Retorna o texto do botão para o idioma correto
                     const currentLang = localStorage.getItem('language') || 'pt';
                     submitButton.textContent = translations[currentLang].formSubmit;
                     formInputs.forEach(input => input.classList.remove('invalid'));
@@ -428,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================================================
-    // === LÓGICA DA BARRA LATERAL (SCROLLSPY) ===
+    // === SCROLLSPY DA BARRA LATERAL ===
     // =====================================================================
     const scrollSpyLinks = document.querySelectorAll('.sidebar-nav a');
     const sections = document.querySelectorAll('section[id], div.hero-section[id]');

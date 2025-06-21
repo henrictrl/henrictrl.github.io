@@ -9,7 +9,7 @@
     /* Cores do Tema Diurno (Padrão) */
     --color-background: #F8F8F8;
     --color-text-primary: #0b1215;
-    --color-text-secondary: #888888; /* Cor para o ícone inativo */
+    --color-text-secondary: #888888;
     --color-text-tertiary: #888888;
     --color-border: #e0e0e0;
     --color-surface-1: #ffffff;
@@ -20,16 +20,16 @@
     --modal-bg: #EFEFEF;
 
     /* Cores do botão de tema */
-    --theme-toggle-slider-bg: var(--cor-destaque); /* Usa a cor de destaque principal */
-    --theme-icon-active: var(--color-background); /* Cor do ícone ativo (efeito recorte) */
-    --theme-icon-inactive: var(--color-text-secondary); /* Cor do ícone inativo */
+    --theme-toggle-slider-bg: var(--cor-destaque);
+    --theme-icon-active: var(--color-background);
+    --theme-icon-inactive: var(--color-text-secondary);
 }
 
 body.night-mode {
     /* Cores do Tema Noturno */
     --color-background: #0b1215;
     --color-text-primary: #F8F8F8;
-    --color-text-secondary: #666666; /* Cor para o ícone inativo no modo escuro */
+    --color-text-secondary: #666666;
     --color-text-tertiary: #666666;
     --color-border: #2a2a2a;
     --color-surface-1: #1a1a1a;
@@ -81,10 +81,7 @@ body.modal-open {
     right: 40px;
     transform: translateY(-50%);
     z-index: 1001;
-
-    /* CORREÇÃO CRÍTICA: Garante que o menu não se estique pela tela */
-    width: auto; 
-
+    width: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,11 +103,9 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
     width: 70px;
     height: 32px;
     border-radius: 32px;
-    
     background-color: var(--color-surface-2);
     border: none;
     cursor: pointer;
@@ -181,7 +176,6 @@ body.night-mode .theme-toggle-button .icon-moon {
     background-color: rgba(0,0,0,0.2);
 }
 
-/* === SELETOR DE IDIOMAS (TAMANHO CORRIGIDO) === */
 .language-switcher {
     display: flex;
     gap: 12px;
@@ -214,7 +208,6 @@ body.night-mode .theme-toggle-button .icon-moon {
 
 .lang-button img {
     display: block;
-    /* TAMANHO CORRIGIDO */
     width: 22px;
     height: auto;
     border-radius: 3px;
@@ -239,7 +232,6 @@ header {
     transition: color 0.3s ease;
 }
 
-/* REMOVIDO POSICIONAMENTO ABSOLUTO */
 .top-nav ul { list-style: none; display: flex; gap: 40px; }
 .top-nav a { 
     color: var(--cor-destaque); 
@@ -284,14 +276,13 @@ header {
 
 #cascadeContainer .main-cascade-image { width: 100%; display: flex; }
 
-/* FUNDO DO LETREIRO REMOVIDO */
 .scrolling-banner { position: absolute; bottom: 0; left: 0; width: 100%; white-space: nowrap; overflow: hidden; background: transparent; }
 .scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
 .scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* =================================================================== */
-/* === ESTILO DO CONTAINER DO SELETOR DE CORES (IRO.JS) === */
+/* === SELETOR DE CORES (IRO.JS) === */
 /* =================================================================== */
 
 #image1 .color-picker-container {
@@ -299,22 +290,17 @@ header {
     left: 5%;
     bottom: 20px;
     z-index: 10;
-    
     display: flex;
     flex-direction: column;
     align-items: left; 
     gap: 10px; 
 }
 
-/* =================================================================== */
-/* === ESTILO DO INPUT HEXADECIMAL === */
-/* =================================================================== */
-
 .hex-input {
     width: 100%;
     max-width: 150px;
     padding: 8px 12px;
-    margin-bottom: 5px; /* Adiciona um espaço antes dos sliders */
+    margin-bottom: 5px;
     background-color: var(--color-surface-2);
     border: 1px solid transparent;
     border-radius: 18px;
@@ -344,7 +330,7 @@ header {
 }
 
 /* =================================================================== */
-/* === ESTILO DO BOTÃO DE DOWNLOAD DA CARICATURA (SEMPRE VISÍVEL) === */
+/* === BOTÃO DE DOWNLOAD === */
 /* =================================================================== */
 
 .download-button {
@@ -352,27 +338,23 @@ header {
     top: 15px;
     right: 15px;
     z-index: 15;
-    
     background-color: var(--backdrop-bg);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
     color: var(--color-text-primary);
-    
     padding: 8px 16px;
     border-radius: 18px;
     cursor: pointer;
-    
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .download-button:hover {
     background-color: var(--cor-destaque);
-    color: #0b1215; /* Cor do texto sempre escura para melhor contraste */
+    color: #0b1215;
     border-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -410,7 +392,9 @@ header {
     padding-top: 50px;
     transition: border-color 0.4s ease;
 }
-.section-header { margin-bottom: 60px; }
+.section-header { 
+    margin-bottom: 60px;
+}
 
 .grid-container {
     display: grid;
@@ -438,14 +422,8 @@ header {
 
 .portfolio-cascade img { position: absolute; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 5px 20px var(--color-shadow-strong); }
 
-.cascade-img-back { 
-    transform: rotate(-8deg);
-    z-index: 2;
-}
-.cascade-img-front { 
-    transform: rotate(4deg);
-    z-index: 3;
-}
+.cascade-img-back { transform: rotate(-8deg); z-index: 2; }
+.cascade-img-front { transform: rotate(4deg); z-index: 3; }
 .portfolio-item.opening .cascade-img-back { transform: translate(-50%, 10%) rotate(-20deg) scale(0.8); }
 .portfolio-item.opening .cascade-img-front { transform: translate(50%, -10%) rotate(20deg) scale(0.8); }
 .portfolio-item-title { margin-top: 25px; text-align: right; }
@@ -461,6 +439,73 @@ header {
 .modal-content { background-color: var(--modal-bg); padding: 40px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; transform: scale(0.8); transition: transform 0.4s ease, background-color 0.4s ease; color: var(--color-text-primary); }
 .modal-overlay.visible .modal-content { transform: scale(1); }
 .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--color-text-primary); font-size: 36px; cursor: pointer; }
+
+/* =================================================================== */
+/* === ESTILOS E ANIMAÇÃO DO EASTER EGG (MÃO) === */
+/* =================================================================== */
+
+.contact-header {
+    position: relative;
+}
+
+#hand-easter-egg-container {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.5);
+    width: 150px; 
+    height: 225px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease-out;
+    z-index: 1100;
+}
+
+#hand-easter-egg-container.animate {
+    animation: make-visible 0.1s forwards, 
+                 zoom-and-fade 0.8s 1.5s forwards;
+}
+
+#hand-easter-egg-container.animate .hand-svg g {
+    animation: draw-line 1.5s ease-out forwards;
+}
+
+.hand-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.hand-svg g {
+    fill: none;
+    stroke: var(--cor-destaque);
+    stroke-width: 1;
+    stroke-dasharray: 50000;
+    stroke-dashoffset: 50000;
+}
+
+@keyframes make-visible {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+@keyframes zoom-and-fade {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) scale(1.4);
+    }
+}
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 
 a[href="https://br.linkedin.com/in/henrique-marinhos"] {
   color: var(--cor-destaque);
@@ -487,13 +532,55 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     margin-bottom: 60px;
 }
 
+/* Estilo para o título principal da seção de contato */
 .contact-header .section-title {
     font-size: 52px;
     font-weight: 900;
     color: var(--color-text-primary);
     margin-bottom: 20px;
     letter-spacing: -2px;
+    position: relative; /* Necessário para o pseudo-elemento */
 }
+
+/* Pseudo-elemento que guarda o texto "Talk to Me" */
+.contact-header .section-title::before {
+    content: "Talk to Me";
+    color: var(--cor-destaque);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Começa invisível */
+}
+
+/* Classe que ativa a animação de piscar */
+.contact-header .section-title.blinking-title {
+    animation: blink-translate 1.2s ease-in-out;
+}
+
+@keyframes blink-translate {
+    0%, 100% {
+        color: var(--color-text-primary); /* Texto original visível */
+    }
+    30%, 70% {
+        color: transparent; /* Texto original some ficando transparente */
+    }
+}
+
+.contact-header .section-title.blinking-title::before {
+    animation: blink-translate-before 1.2s ease-in-out;
+}
+
+@keyframes blink-translate-before {
+    0%, 30%, 70%, 100% {
+        opacity: 0; /* "Talk to Me" invisível */
+    }
+    40%, 60% {
+        opacity: 1; /* "Talk to Me" aparece */
+    }
+}
+
 
 .contact-intro-text {
     font-size: 20px;
@@ -665,7 +752,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     font-size: 0.85em;
     margin-top: 5px;
     display: block; 
-    min-height: 1em; /* Evita que o layout pule */
+    min-height: 1em;
     opacity: 0;
     transform: translateY(-5px);
     transition: opacity 0.3s ease, transform 0.3s ease;
