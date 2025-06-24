@@ -1,6 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
+    // === FUNÇÃO PARA COR DE DESTAQUE ALEATÓRIA ===
+    // =====================================================================
+    const setRandomHighlightColor = () => {
+        if (typeof iro === 'undefined') {
+            console.warn("iro.js não foi carregado, usando cor padrão.");
+            return;
+        }
+
+        const MIN_BRIGHTNESS = 25;
+        const MAX_BRIGHTNESS = 90;
+        const MIN_SATURATION = 30;
+
+        const randomHue = Math.floor(Math.random() * 361);
+        const randomSaturation = Math.floor(MIN_SATURATION + (Math.random() * (100 - MIN_SATURATION)));
+        const randomValue = Math.floor(MIN_BRIGHTNESS + (Math.random() * (MAX_BRIGHTNESS - MIN_BRIGHTNESS)));
+
+        const tempColor = new iro.Color({ h: randomHue, s: randomSaturation, v: randomValue });
+        
+        document.documentElement.style.setProperty('--cor-destaque', tempColor.hexString);
+    };
+
+    // =====================================================================
     // === LÓGICA DO EASTER EGG (MÃO E TÍTULO) ===
     // =====================================================================
     const contactNavLink = document.querySelector('.sidebar-nav a[href="#contato"]');
@@ -40,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navArticles: "Artigos",
             heroText: "Algum texto aqui sobre eu ser relações públicas, comunicólogo entre outras coisas. além de que também sou um cara legal e tal",
             downloadButton: "Baixar",
-            scrollingBanner: "apoie artistas independentes",
+            scrollingBanner: "apoie artistas independentes &nbsp;&nbsp;&nbsp;",
             experienceTitle: "Experiência",
             jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
             jobInternCom: "Estagiário de Comunicação <br> <span class='at-symbol'>@</span> Rd Cultural",
@@ -80,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navArticles: "Articles",
             heroText: "Some text here about me being a public relations professional, a communicologist, among other things. Besides, I'm also a nice guy and all.",
             downloadButton: "Download",
-            scrollingBanner: "support independent artists",
+            scrollingBanner: "support independent artists &nbsp;&nbsp;&nbsp;",
             experienceTitle: "Experience",
             jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
             jobInternCom: "Communication Intern <br> <span class='at-symbol'>@</span> Rd Cultural",
@@ -120,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navArticles: "Artículos",
             heroText: "Un texto aquí sobre mí siendo relaciones públicas, comunicólogo entre otras cosas. Además, también soy un buen tipo y tal.",
             downloadButton: "Descargar",
-            scrollingBanner: "apoya a los artistas independientes",
+            scrollingBanner: "apoya a los artistas independientes &nbsp;&nbsp;&nbsp;",
             experienceTitle: "Experiencia",
             jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
             jobInternCom: "Becario de Comunicación <br> <span class='at-symbol'>@</span> Rd Cultural",
@@ -213,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Define a cor de destaque aleatória ANTES de inicializar o seletor de cores
+    setRandomHighlightColor();
+
     // =====================================================================
     // === SELETOR DE CORES (IRO.JS) ===
     // =====================================================================
@@ -222,9 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (pickerContainer && hexInput) {
         
+        const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+
         const colorPicker = new iro.ColorPicker(pickerContainer, {
             width: 150,
-            color: "#ff4948",
+            color: initialColor,
             borderWidth: 0,
             borderColor: "#ffffff",
             layout: [ 
