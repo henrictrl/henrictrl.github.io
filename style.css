@@ -646,14 +646,14 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 .submit-button {
-    display: block;
-    width: 100%;
-    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
     background-color: var(--cor-destaque);
     color: var(--color-background);
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
+    border: 1px solid transparent;
+    border-radius: 25px; /* Deixa o botão arredondado como os filtros */
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -868,5 +868,333 @@ input.invalid, textarea.invalid {
 
    .grid-container {
         grid-template-columns: 1fr;
+    }
+}
+
+/* =================================================================== */
+/* === PÁGINA DE ARTIGOS V2 (Minimalista / Mosaico) === */
+/* =================================================================== */
+
+.articles-page {
+    background-color: var(--color-background);
+}
+
+/* --- Cabeçalho V2 --- */
+.articles-header-v2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.articles-header-v2 .logo-link {
+    text-decoration: none;
+}
+
+.articles-header-v2 .logo h1 {
+    font-size: 28px;
+    letter-spacing: -1px;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.articles-header-v2 .close-articles {
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.articles-header-v2 .close-articles:hover {
+    color: var(--cor-destaque);
+    transform: rotate(90deg);
+}
+
+/* --- Conteúdo Principal V2 --- */
+.articles-main-v2 {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px 40px 50px 40px;
+    /* Linha adicionada para aplicar a animação */
+    animation: fadeInBlur 0.8s ease-out forwards;
+}
+
+/* --- Barra de Ferramentas (Filtros + Busca) --- */
+/* --- Barra de Ferramentas (Filtros + Busca) --- */
+.toolbar {
+    display: flex;
+    flex-direction: column; /* Coloca os filtros acima da busca */
+    align-items: center;    /* Centraliza tudo */
+    margin-bottom: 40px;
+    gap: 25px;              /* Espaçamento entre filtros e busca */
+}
+
+.filter-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center; /* Garante que os botões fiquem centrados se quebrarem a linha */
+}
+
+.filter-btn {
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+}
+
+.filter-btn.active {
+    background-color: var(--cor-destaque);
+    color: var(--color-background); /* Usando a cor de fundo para o texto, para contraste */
+    border-color: var(--cor-destaque);
+}
+
+.search-wrapper {
+    position: relative;
+    min-width: 280px;
+}
+#searchInput {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 45px 0 20px;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-size: 15px;
+}
+#searchInput:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+}
+.search-wrapper .material-symbols-outlined {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+}
+
+/* --- Grade Mosaico --- */
+/* --- Grade Mosaico (Mais Densa) --- */
+.mosaic-grid {
+    display: grid;
+    /* 6 colunas no desktop para uma grade mais densa */
+    grid-template-columns: repeat(6, 1fr); 
+    /* Altura de linha base menor */
+    grid-auto-rows: 160px;
+    gap: 20px;
+}
+
+.post-card-v2 {
+    border: 1px solid var(--color-border); /* Linha fina adicionada */
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px var(--color-shadow-weak);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
+}
+
+.post-card-v2 a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.post-card-v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--color-shadow-strong);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.post-card-v2:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    z-index: 2;
+}
+
+.card-tag {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: var(--color-background);
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #fff;
+    margin: 0;
+}
+.card-excerpt {
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0.8;
+    color: #fff;
+}
+
+/* --- Tamanhos do Mosaico --- */
+.post-card-v2.size-small {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+.post-card-v2.size-medium {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.post-card-v2.size-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+/* Exemplo de mais um tamanho, se precisar */
+.post-card-v2.size-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+/* Ajustes para tamanhos diferentes */
+.size-large .card-title { font-size: 28px; }
+.size-medium .card-title { font-size: 22px; }
+.size-small .card-title { font-size: 16px; }
+.size-small .card-tag { font-size: 10px; padding: 3px 8px; }
+.size-small .card-excerpt { display: none; }
+
+
+/* --- Responsividade V2 --- */
+@media (max-width: 992px) {
+    .mosaic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 250px;
+    }
+    .post-card-v2.size-large,
+    .post-card-v2.size-medium,
+    .post-card-v2.size-small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .post-card-v2.size-large {
+       grid-row: span 2; /* Mantém um card maior para destaque */
+    }
+}
+
+@media (max-width: 767px) {
+    .articles-main-v2 { padding: 20px; }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .mosaic-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 300px;
+    }
+    .post-card-v2.size-large,
+    .post-card-v2.size-medium,
+    .post-card-v2.size-small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+     .size-large .card-title,
+     .size-medium .card-title,
+     .size-small .card-title {
+        font-size: 18px;
+    }
+}
+
+/* --- Estilo para o link de Artigos separado na barra flutuante --- */
+.articles-link-wrapper {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid var(--color-border);
+}
+
+.articles-link-wrapper a {
+    /* Aplica exatamente o mesmo estilo dos outros links da barra */
+    display: block;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.articles-link-wrapper a:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    color: var(--color-text-primary);
+}
+.articles-nav-link:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* --- Ajustes de Layout para a Página de Artigos V2 --- */
+.articles-main-v2 {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px 40px 50px 40px;
+}
+
+.logo-articles-page {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-articles-page h1 {
+    font-size: 36px;
+    letter-spacing: -1.5px;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+@keyframes fadeInBlur {
+    from {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
     }
 }

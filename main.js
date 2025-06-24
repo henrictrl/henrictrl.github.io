@@ -104,8 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
             formMessage: "Sua Mensagem:",
             formMessagePlaceholder: "Descreva seu projeto ou sua dúvida aqui...",
             formSubmit: "Enviar Mensagem",
-            contactOtherTitle: "Outras Formas de Contato",
+            contactOtherTitle: "Otras Formas de Contato",
             contactPhone: "Telefone:",
+            formSending: "Enviando...",
+            formSuccess: "Mensagem enviada com sucesso!",
+            formError: "Ocorreu um erro. Tente novamente.",
+            formInvalid: "Por favor, corrija os erros."
         },
         en: {
             navHome: "Home",
@@ -146,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
             formSubmit: "Send Message",
             contactOtherTitle: "Other Ways to Contact",
             contactPhone: "Phone:",
+            formSending: "Sending...",
+            formSuccess: "Message sent successfully!",
+            formError: "An error occurred. Please try again.",
+            formInvalid: "Please correct the errors."
         },
         es: {
             navHome: "Inicio",
@@ -186,6 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
             formSubmit: "Enviar Mensaje",
             contactOtherTitle: "Otras Formas de Contacto",
             contactPhone: "Teléfono:",
+            formSending: "Enviando...",
+            formSuccess: "¡Mensaje enviado con éxito!",
+            formError: "Ocurrió un error. Inténtalo de nuevo.",
+            formInvalid: "Por favor, corrija los errores."
         }
     };
 
@@ -412,12 +424,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =====================================================================
-    // === FORMULÁRIO DE CONTATO ===
+    // === FORMULÁRIO DE CONTATO (MODIFICADO PARA USAR GOOGLE APPS SCRIPT) ===
     // =====================================================================
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
 
-    if (contactForm) { 
+    if (contactForm) {
+        // ####################################################################
+        // ### SUA URL DO GOOGLE SCRIPT ESTÁ INSERIDA AQUI ▼ ###
+        // ####################################################################
+        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyGeCv27IzkZXXL23PgcLPo-nccHMf0vWONfwaQljIzlNPzo-CaSl2A0tqSPMNIfZM-lw/exec';
+
         const formInputs = contactForm.querySelectorAll('input, textarea');
         const submitButton = contactForm.querySelector('.submit-button');
         
@@ -455,25 +472,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (isFormValid) {
+                const currentLang = localStorage.getItem('language') || 'pt';
                 submitButton.disabled = true;
-                submitButton.textContent = 'Enviando...';
+                submitButton.textContent = translations[currentLang].formSending;
+                formStatus.className = 'form-status';
+                formStatus.classList.remove('visible');
                 
-                setTimeout(() => {
-                    formStatus.textContent = 'Mensagem enviada com sucesso!';
-                    formStatus.className = 'form-status success visible';
-                    contactForm.reset();
-                    submitButton.disabled = false;
+                fetch(googleScriptURL, {
+                    method: 'POST',
+                    body: new FormData(contactForm)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        formStatus.textContent = translations[currentLang].formSuccess;
+                        formStatus.className = 'form-status success visible';
+                        contactForm.reset();
+                        formInputs.forEach(input => input.classList.remove('invalid'));
+                    } else {
+                        console.error('Erro retornado pelo Google Script:', data.error);
+                        formStatus.textContent = translations[currentLang].formError;
+                        formStatus.className = 'form-status error visible';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar o formulário:', error);
                     const currentLang = localStorage.getItem('language') || 'pt';
+                    formStatus.textContent = translations[currentLang].formError;
+                    formStatus.className = 'form-status error visible';
+                })
+                .finally(() => {
+                    const currentLang = localStorage.getItem('language') || 'pt';
+                    submitButton.disabled = false;
                     submitButton.textContent = translations[currentLang].formSubmit;
-                    formInputs.forEach(input => input.classList.remove('invalid'));
-
                     setTimeout(() => {
                         formStatus.classList.remove('visible');
-                    }, 4000);
+                    }, 5000);
+                });
 
-                }, 2000);
             } else {
-                formStatus.textContent = 'Por favor, corrija os erros.';
+                const currentLang = localStorage.getItem('language') || 'pt';
+                formStatus.textContent = translations[currentLang].formInvalid;
                 formStatus.className = 'form-status error visible';
             }
         });
@@ -487,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
 
     // =====================================================================
     // === SCROLLSPY DA BARRA LATERAL ===
