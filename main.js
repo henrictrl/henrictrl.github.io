@@ -23,6 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // =====================================================================
+    // === CORREÇÃO DO SCROLL PARA O TOPO (LINK INÍCIO) ===
+    // =====================================================================
+    const homeLink = document.querySelector('.sidebar-nav a[href="#inicio"]');
+    if (homeLink) {
+        homeLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Previne o comportamento padrão do link
+            window.scrollTo({
+                top: 0, // Rola para o topo absoluto da página
+                behavior: 'smooth' // Mantém a rolagem suave
+            });
+        });
+    }
+
+    // =====================================================================
     // === LÓGICA DO EASTER EGG (MÃO E TÍTULO) ===
     // =====================================================================
     const contactNavLink = document.querySelector('.sidebar-nav a[href="#contato"]');
@@ -488,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentId = section.getAttribute('id');
                 scrollSpyLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === currentId) {
+                    if (link.getAttribute('href') && link.getAttribute('href').substring(1) === currentId) {
                         link.classList.add('active');
                     }
                 });

@@ -521,25 +521,24 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-section {
     border-top: 1px solid var(--color-border);
-    margin-top: 100px;
-    padding-top: 100px;
-    padding-bottom: 80px;
+    margin-top: 60px; /* MODIFICAÇÃO */
+    padding: 60px 0; /* MODIFICAÇÃO */
     transition: border-color 0.4s ease;
 }
 
 .contact-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px; /* MODIFICAÇÃO */
 }
 
 /* Estilo para o título principal da seção de contato */
 .contact-header .section-title {
-    font-size: 52px;
+    font-size: 40px;
     font-weight: 900;
     color: var(--color-text-primary);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     letter-spacing: -2px;
-    position: relative; /* Necessário para o pseudo-elemento */
+    position: relative; 
 }
 
 /* Pseudo-elemento que guarda o texto "Talk to Me" */
@@ -551,7 +550,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Começa invisível */
+    opacity: 0; 
 }
 
 /* Classe que ativa a animação de piscar */
@@ -561,10 +560,10 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 @keyframes blink-translate {
     0%, 100% {
-        color: var(--color-text-primary); /* Texto original visível */
+        color: var(--color-text-primary); 
     }
     30%, 70% {
-        color: transparent; /* Texto original some ficando transparente */
+        color: transparent; 
     }
 }
 
@@ -574,41 +573,42 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 @keyframes blink-translate-before {
     0%, 30%, 70%, 100% {
-        opacity: 0; /* "Talk to Me" invisível */
+        opacity: 0; 
     }
     40%, 60% {
-        opacity: 1; /* "Talk to Me" aparece */
+        opacity: 1; 
     }
 }
 
 
 .contact-intro-text {
-    font-size: 20px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.3;
     color: var(--color-text-secondary);
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .contact-content {
     display: flex;
-    gap: 80px;
+    gap: 35px; /* MODIFICAÇÃO */
     align-items: flex-start;
     justify-content: center; 
 }
 
 .contact-form {
     flex: 2;
-    max-width: 600px; 
+    max-width: 500px;
+    max-height: 500px; /* MODIFICAÇÃO */
     background-color: var(--color-surface-1);
-    padding: 40px;
+    padding: 30px; /* MODIFICAÇÃO */
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--color-shadow-strong);
     transition: background-color 0.4s ease;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 10px; /* MODIFICAÇÃO */
 }
 
 .form-group label {
@@ -623,7 +623,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group input[type="email"],
 .form-group textarea {
     width: 100%;
-    padding: 15px;
+    padding: 10px; /* MODIFICAÇÃO */
     background-color: var(--color-surface-2);
     border: 1px solid var(--color-border);
     border-radius: 5px;
@@ -641,8 +641,8 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
+    max-height: 65px;
+    max-width: 4500px;
 }
 
 .submit-button {
@@ -695,7 +695,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     flex: 1;
     min-width: 250px; 
     max-width: 400px;
-    padding: 20px 0;
+    padding: 0; /* MODIFICAÇÃO */
 }
 
 .contact-info h3 {
@@ -786,7 +786,7 @@ input.invalid, textarea.invalid {
     }
     .contact-content {
         flex-direction: column;
-        gap: 60px;
+        gap: 40px;
         justify-content: flex-start;
         align-items: center;
     }
