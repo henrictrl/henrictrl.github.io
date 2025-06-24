@@ -646,18 +646,55 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 .submit-button {
-    display: flex;
-    align-items: center;
-    padding: 12px 25px;
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
     background-color: var(--cor-destaque);
     color: var(--color-background);
-    border: 1px solid transparent;
-    border-radius: 25px; /* Deixa o botão arredondado como os filtros */
-    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* A transição existente vai suavizar a mudança de cor */
     letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* MODIFICAÇÃO: Nova classe para o estado de SUCESSO */
+.submit-button.success {
+    background-color: #28a745; /* Verde sucesso */
+    cursor: default;
+    transform: translateY(0);
+    filter: brightness(1);
+}
+
+/* MODIFICAÇÃO: Nova classe para o estado de ERRO */
+.submit-button.error {
+    background-color: #dc3545; /* Vermelho erro */
+    cursor: default;
+    transform: translateY(0);
+    filter: brightness(1);
+}
+
+.submit-button.success:hover,
+.submit-button.error:hover {
+    filter: brightness(1); /* Impede o efeito de hover nos estados de status */
+    transform: translateY(0);
+}
+
+
+/* Removendo o estilo do antigo .form-status, já que foi deletado */
+.form-status {
+   display: none;
 }
 
 .submit-button:hover {

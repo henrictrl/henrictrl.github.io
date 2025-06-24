@@ -424,108 +424,115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =====================================================================
-    // === FORMULÁRIO DE CONTATO (MODIFICADO PARA USAR GOOGLE APPS SCRIPT) ===
-    // =====================================================================
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
+// === FORMULÁRIO DE CONTATO (LÓGICA DE FEEDBACK NO BOTÃO) ===
+// =====================================================================
+const contactForm = document.getElementById('contactForm');
 
-    if (contactForm) {
-        // ####################################################################
-        // ### SUA URL DO GOOGLE SCRIPT ESTÁ INSERIDA AQUI ▼ ###
-        // ####################################################################
-        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyGeCv27IzkZXXL23PgcLPo-nccHMf0vWONfwaQljIzlNPzo-CaSl2A0tqSPMNIfZM-lw/exec';
+if (contactForm) {
+    const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyGeCv27IzkZXXL23PgcLPo-nccHMf0vWONfwaQljIzlNPzo-CaSl2A0tqSPMNIfZM-lw/exec';
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    const submitButton = contactForm.querySelector('.submit-button');
+    
+    // MODIFICAÇÃO: Adicionamos novas traduções para o botão
+    translations.pt.formSuccessButton = "Enviado!";
+    translations.pt.formErrorButton = "Erro! Tente Novamente";
+    translations.en.formSuccessButton = "Sent!";
+    translations.en.formErrorButton = "Error! Try Again";
+    translations.es.formSuccessButton = "¡Enviado!";
+    translations.es.formErrorButton = "¡Error! Inténtalo de nuevo";
 
-        const formInputs = contactForm.querySelectorAll('input, textarea');
-        const submitButton = contactForm.querySelector('.submit-button');
+    const validateField = (input) => {
+        // ... (a função de validação continua a mesma)
+        const errorSpan = document.getElementById(`${input.id}Error`);
+        const value = input.value.trim();
+        let errorMessage = '';
+
+        if (input.hasAttribute('required') && value === '') {
+            errorMessage = 'Este campo é obrigatório.';
+        } else if (input.type === 'email' && value !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            errorMessage = 'Por favor, insira um e-mail válido.';
+        }
+
+        if (errorSpan) {
+            errorSpan.textContent = errorMessage;
+        }
         
-        const validateField = (input) => {
-            const errorSpan = document.getElementById(`${input.id}Error`);
-            const value = input.value.trim();
-            let errorMessage = '';
+        if (errorMessage) {
+            input.classList.add('invalid');
+            return false;
+        } else {
+            input.classList.remove('invalid');
+            return true;
+        }
+    };
 
-            if (input.hasAttribute('required') && value === '') {
-                errorMessage = 'Este campo é obrigatório.';
-            } else if (input.type === 'email' && value !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                errorMessage = 'Por favor, insira um e-mail válido.';
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let isFormValid = true;
+        formInputs.forEach(input => {
+            if (!validateField(input)) {
+                isFormValid = false;
             }
+        });
 
-            if (errorSpan) {
-                errorSpan.textContent = errorMessage;
-            }
-            
-            if (errorMessage) {
-                input.classList.add('invalid');
-                return false;
-            } else {
-                input.classList.remove('invalid');
-                return true;
-            }
+        const currentLang = localStorage.getItem('language') || 'pt';
+        const originalButtonText = translations[currentLang].formSubmit;
+
+        const resetButton = (delay) => {
+            setTimeout(() => {
+                submitButton.classList.remove('success', 'error');
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }, delay);
         };
 
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            let isFormValid = true;
-            formInputs.forEach(input => {
-                if (!validateField(input)) {
-                    isFormValid = false;
+        if (isFormValid) {
+            submitButton.disabled = true;
+            submitButton.textContent = translations[currentLang].formSending;
+            
+            fetch(googleScriptURL, {
+                method: 'POST',
+                body: new FormData(contactForm)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    contactForm.reset();
+                    formInputs.forEach(input => input.classList.remove('invalid'));
+                    submitButton.classList.add('success');
+                    submitButton.textContent = translations[currentLang].formSuccessButton;
+                    resetButton(4000); // Reverte o botão após 4 segundos
+                } else {
+                    console.error('Erro retornado pelo Google Script:', data.error);
+                    submitButton.classList.add('error');
+                    submitButton.textContent = translations[currentLang].formErrorButton;
+                    resetButton(5000); // Reverte o botão após 5 segundos
                 }
+            })
+            .catch(error => {
+                console.error('Erro ao enviar o formulário:', error);
+                submitButton.classList.add('error');
+                submitButton.textContent = translations[currentLang].formErrorButton;
+                resetButton(5000);
             });
 
-            if (isFormValid) {
-                const currentLang = localStorage.getItem('language') || 'pt';
-                submitButton.disabled = true;
-                submitButton.textContent = translations[currentLang].formSending;
-                formStatus.className = 'form-status';
-                formStatus.classList.remove('visible');
-                
-                fetch(googleScriptURL, {
-                    method: 'POST',
-                    body: new FormData(contactForm)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'success') {
-                        formStatus.textContent = translations[currentLang].formSuccess;
-                        formStatus.className = 'form-status success visible';
-                        contactForm.reset();
-                        formInputs.forEach(input => input.classList.remove('invalid'));
-                    } else {
-                        console.error('Erro retornado pelo Google Script:', data.error);
-                        formStatus.textContent = translations[currentLang].formError;
-                        formStatus.className = 'form-status error visible';
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao enviar o formulário:', error);
-                    const currentLang = localStorage.getItem('language') || 'pt';
-                    formStatus.textContent = translations[currentLang].formError;
-                    formStatus.className = 'form-status error visible';
-                })
-                .finally(() => {
-                    const currentLang = localStorage.getItem('language') || 'pt';
-                    submitButton.disabled = false;
-                    submitButton.textContent = translations[currentLang].formSubmit;
-                    setTimeout(() => {
-                        formStatus.classList.remove('visible');
-                    }, 5000);
-                });
+        } else {
+            // A validação já mostra os erros nos campos, não precisamos fazer mais nada aqui.
+        }
+    });
 
-            } else {
+    formInputs.forEach(input => {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => {
+             // Limpa o estado de erro do botão se o usuário começar a corrigir
+            if(submitButton.classList.contains('error')) {
+                submitButton.classList.remove('error');
                 const currentLang = localStorage.getItem('language') || 'pt';
-                formStatus.textContent = translations[currentLang].formInvalid;
-                formStatus.className = 'form-status error visible';
+                submitButton.textContent = translations[currentLang].formSubmit;
             }
         });
-
-        formInputs.forEach(input => {
-            input.addEventListener('blur', () => validateField(input));
-            input.addEventListener('input', () => {
-                if (formStatus.classList.contains('error')) {
-                    formStatus.classList.remove('visible');
-                }
-            });
-        });
-    }
+    });
+}
 
 
     // =====================================================================
