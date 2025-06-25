@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija os erros.",
             formSuccessButton: "Enviado!",
             formErrorButton: "Erro! Tente Novamente",
-            embedGithubTitle: "Linguagens Mais Usadas", // pt
         },
         en: {
             navHome: "Home",
@@ -180,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Please correct the errors.",
             formSuccessButton: "Sent!",
             formErrorButton: "Error! Try Again",
-            embedGithubTitle: "Most Used Languages",   // en
         },
         es: {
             navHome: "Inicio",
@@ -228,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija los errores.",
             formSuccessButton: "¡Enviado!",
             formErrorButton: "¡Error! Inténtalo de nuevo",
-            embedGithubTitle: "Lenguajes Más Usados",  // es
         }
     };
 
@@ -267,8 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
     // === LÓGICA DE TEMA (DIURNO/NOTURNO) ===
     // =====================================================================
-    // CORREÇÃO: O ID do botão no HTML é 'theme-toggle'
-    const themeToggleButton = document.getElementById('theme-toggle'); 
+    const themeToggleButton = document.getElementById('theme-toggle');
     const body = document.body;
 
     const applyTheme = (theme) => {
@@ -282,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
 
-    if (themeToggleButton) { // Adicionado para segurança
+    if (themeToggleButton) {
         themeToggleButton.addEventListener('click', () => {
             const isNightMode = body.classList.contains('night-mode');
             if (isNightMode) {
@@ -302,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pickerContainer = document.querySelector('.color-picker-container');
     const hexInput = document.getElementById('hexInput');
 
-    if (pickerContainer && hexInput) {
+    if (pickerContainer && hexInput && typeof iro !== 'undefined') {
         
         const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
 
@@ -595,135 +591,3 @@ document.addEventListener('DOMContentLoaded', () => {
     onScroll();
 
 });
-
-// =====================================================================
-    // === LAST.FM RECENT TRACKS EMBED ===
-    // =====================================================================
-    const lastfmContainer = document.getElementById('lastfm-embed');
-    if (lastfmContainer) {
-        const apiKey = '5dd32af6ec9f387d57f560bb9b95aef8';
-        const username = 'ctrlworld';
-        const limit = 5; // Número de músicas a serem exibidas
-        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=${limit}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.recenttracks && data.recenttracks.track) {
-                    const tracks = data.recenttracks.track;
-                    let htmlContent = `
-                        <h2>O que estou ouvindo</h2>
-                        <ul class="lastfm-track-list">
-                    `;
-
-                    tracks.forEach(track => {
-                        const artist = track.artist['#text'];
-                        const name = track.name;
-                        const trackUrl = track.url;
-                        const image = track.image[2]['#text']; // Pega uma imagem de tamanho médio
-
-                        htmlContent += `
-                            <li class="lastfm-track">
-                                <a href="${trackUrl}" target="_blank" rel="noopener noreferrer">
-                                    <img src="${image}" alt="${artist} - ${name}" class="lastfm-track-image">
-                                    <div class="lastfm-track-info">
-                                        <span class="lastfm-track-name">${name}</span>
-                                        <span class="lastfm-track-artist">${artist}</span>
-                                    </div>
-                                </a>
-                            </li>
-                        `;
-                    });
-
-                    htmlContent += `</ul>`;
-                    lastfmContainer.innerHTML = htmlContent;
-                } else {
-                    lastfmContainer.innerHTML = '<p class="error-message">Não foi possível carregar as músicas recentes do Last.fm.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados do Last.fm:', error);
-                lastfmContainer.innerHTML = '<p class="error-message">Ocorreu um erro ao conectar ao Last.fm.</p>';
-            });
-    }
-
-
-
-    // --- LÓGICA PARA O EMBED DO LETTERBOXD (COM O LINK CORRETO) ---
-function loadLetterboxdEmbed() {
-    // SEU LINK DA API JÁ ESTÁ INSERIDO AQUI:
-    const apiUrl = "https://letterboxd-embed-ltkg1g6zu-henriques-projects-f29becc2.vercel.app/api/get-data"; 
-
-    const favoritesContainer = document.getElementById('letterboxd-favorites-container');
-    const recentContainer = document.getElementById('letterboxd-recent-container');
-
-    if (!favoritesContainer || !recentContainer) {
-        // Se os elementos não existirem na página, não faz nada.
-        return;
-    }
-    
-    // Mensagem de "Carregando..."
-    favoritesContainer.innerHTML = '<p class="api-message">Carregando...</p>';
-    recentContainer.innerHTML = '<p class="api-message">Carregando...</p>';
-
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Limpa as mensagens de carregamento
-            favoritesContainer.innerHTML = '';
-            recentContainer.innerHTML = '';
-
-            // Popula a seção de favoritos
-            if (data.favorites && data.favorites.length > 0) {
-                data.favorites.forEach(film => {
-                    const filmElement = `
-                        <div class="letterboxd-film-item">
-                            <a href="${film.link}" target="_blank" title="${film.title}">
-                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
-                            </a>
-                        </div>
-                    `;
-                    favoritesContainer.innerHTML += filmElement;
-                });
-            } else {
-                favoritesContainer.innerHTML = '<p class="api-message">Nenhum favorito encontrado.</p>';
-            }
-
-            // Popula a seção de reviews recentes
-            if (data.recentReviews && data.recentReviews.length > 0) {
-                data.recentReviews.forEach(film => {
-                    // Converte a nota para estrelas (ex: 3.5 -> ★★★½)
-                    const ratingValue = parseFloat(film.rating);
-                    const fullStars = '★'.repeat(Math.floor(ratingValue));
-                    const halfStar = (ratingValue % 1 !== 0) ? '½' : '';
-                    const ratingStars = fullStars + halfStar;
-                    
-                    const filmElement = `
-                        <div class="letterboxd-film-item">
-                            <a href="${film.link}" target="_blank" title="${film.title} - Nota: ${film.rating}">
-                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
-                                <div class="film-rating">${ratingStars}</div>
-                            </a>
-                        </div>
-                    `;
-                    recentContainer.innerHTML += filmElement;
-                });
-            } else {
-                 recentContainer.innerHTML = '<p class="api-message">Nenhuma atividade recente.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados do Letterboxd:', error);
-            favoritesContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
-            recentContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
-        });
-}
-
-// Garante que o script rode depois que a página carregar
-document.addEventListener('DOMContentLoaded', loadLetterboxdEmbed);
