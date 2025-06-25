@@ -644,40 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // =====================================================================
-    // === GITHUB CARD THEME SWITCHER ===
-    // =====================================================================
-    const updateGitHubCardTheme = () => {
-        const githubImg = document.getElementById('github-lang-img');
-        if (!githubImg) {
-            return; // Sai da função se o elemento não existir na página
-        }
 
-        // Verifica se o modo noturno está ativo
-        const isNightMode = document.body.classList.contains('night-mode');
-        const username = 'henrictrl';
-
-        // Define as cores do texto baseadas no tema
-        const textColor = isNightMode ? 'F8F8F8' : '0b1215'; // Branco no escuro, preto no claro
-        const titleColor = isNightMode ? '888888' : '0b1215'; // Cinza no escuro, preto no claro
-
-        // Monta a URL da imagem com as cores dinâmicas
-        const imageUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&hide_border=true&bg_color=00000000&title_color=${titleColor}&text_color=${textColor}`;
-
-        githubImg.src = imageUrl;
-    };
-
-    // Encontre a função 'applyTheme' que já existe no seu código
-    const applyTheme = (theme) => {
-        if (theme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
-        }
-    };
-    
-    // É importante chamar a função uma vez no início para carregar a imagem com o tema correto
-    updateGitHubCardTheme();
 
     // --- LÓGICA PARA O EMBED DO LETTERBOXD (COM O LINK CORRETO) ---
 function loadLetterboxdEmbed() {
