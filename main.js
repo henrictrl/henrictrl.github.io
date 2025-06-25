@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija os erros.",
             formSuccessButton: "Enviado!",
             formErrorButton: "Erro! Tente Novamente",
-            embedGithubTitle: "Linguagens Mais Usadas", // pt
         },
         en: {
             navHome: "Home",
@@ -180,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Please correct the errors.",
             formSuccessButton: "Sent!",
             formErrorButton: "Error! Try Again",
-            embedGithubTitle: "Most Used Languages",   // en
         },
         es: {
             navHome: "Inicio",
@@ -228,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija los errores.",
             formSuccessButton: "¡Enviado!",
             formErrorButton: "¡Error! Inténtalo de nuevo",
-            embedGithubTitle: "Lenguajes Más Usados",  // es
         }
     };
 
@@ -646,81 +643,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // --- LÓGICA PARA O EMBED DO LETTERBOXD (COM O LINK CORRETO) ---
-function loadLetterboxdEmbed() {
-    // SEU LINK DA API JÁ ESTÁ INSERIDO AQUI:
-    const apiUrl = "https://letterboxd-embed-ltkg1g6zu-henriques-projects-f29becc2.vercel.app/api/get-data"; 
-
-    const favoritesContainer = document.getElementById('letterboxd-favorites-container');
-    const recentContainer = document.getElementById('letterboxd-recent-container');
-
-    if (!favoritesContainer || !recentContainer) {
-        // Se os elementos não existirem na página, não faz nada.
-        return;
-    }
-    
-    // Mensagem de "Carregando..."
-    favoritesContainer.innerHTML = '<p class="api-message">Carregando...</p>';
-    recentContainer.innerHTML = '<p class="api-message">Carregando...</p>';
-
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Limpa as mensagens de carregamento
-            favoritesContainer.innerHTML = '';
-            recentContainer.innerHTML = '';
-
-            // Popula a seção de favoritos
-            if (data.favorites && data.favorites.length > 0) {
-                data.favorites.forEach(film => {
-                    const filmElement = `
-                        <div class="letterboxd-film-item">
-                            <a href="${film.link}" target="_blank" title="${film.title}">
-                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
-                            </a>
-                        </div>
-                    `;
-                    favoritesContainer.innerHTML += filmElement;
-                });
-            } else {
-                favoritesContainer.innerHTML = '<p class="api-message">Nenhum favorito encontrado.</p>';
-            }
-
-            // Popula a seção de reviews recentes
-            if (data.recentReviews && data.recentReviews.length > 0) {
-                data.recentReviews.forEach(film => {
-                    // Converte a nota para estrelas (ex: 3.5 -> ★★★½)
-                    const ratingValue = parseFloat(film.rating);
-                    const fullStars = '★'.repeat(Math.floor(ratingValue));
-                    const halfStar = (ratingValue % 1 !== 0) ? '½' : '';
-                    const ratingStars = fullStars + halfStar;
-                    
-                    const filmElement = `
-                        <div class="letterboxd-film-item">
-                            <a href="${film.link}" target="_blank" title="${film.title} - Nota: ${film.rating}">
-                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
-                                <div class="film-rating">${ratingStars}</div>
-                            </a>
-                        </div>
-                    `;
-                    recentContainer.innerHTML += filmElement;
-                });
-            } else {
-                 recentContainer.innerHTML = '<p class="api-message">Nenhuma atividade recente.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados do Letterboxd:', error);
-            favoritesContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
-            recentContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
-        });
-}
-
-// Garante que o script rode depois que a página carregar
-document.addEventListener('DOMContentLoaded', loadLetterboxdEmbed);

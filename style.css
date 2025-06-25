@@ -1347,3 +1347,174 @@ body.night-mode .light-mode-img {
     grid-column: 1 / -1; /* Ocupa a grade inteira */
     text-align: center;
 }
+
+/* =================================================================== */
+/* === ESTILOS PARA O CARREGAMENTO DO INSTAGRAM === */
+/* =================================================================== */
+
+#instagram-embed {
+    /* Centraliza o conteúdo (loader e o embed) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-indicator {
+    border: 5px solid var(--color-surface-2); /* Cor de fundo do círculo */
+    border-top: 5px solid var(--cor-destaque); /* Cor da animação */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
+    display: none; /* Começa escondido */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Esconde o blockquote do Instagram por padrão */
+#instagram-embed .instagram-media {
+    display: none;
+}
+
+/* === CARD CUSTOMIZADO DO LETTERBOXD (COM TEMA) === */
+
+#letterboxd-embed {
+    padding: 0;
+    overflow: hidden;
+    /* Transição suave para a mudança de cor */
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+#letterboxd-card {
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: color 0.4s ease;
+}
+
+a.lb-main-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.lb-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.lb-profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid; /* A cor será definida pelo tema */
+    transition: border-color 0.4s ease;
+}
+
+.lb-profile-info {
+    flex: 1;
+}
+
+.lb-username {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.lb-bio {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+.lb-location {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lb-favorites {
+    margin-top: 16px; /* Aumentado um pouco para compensar a falta da nav */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lb-fav-title {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.lb-fav-posters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.lb-fav-posters img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid; /* A cor será definida pelo tema */
+    transition: border-color 0.4s ease;
+}
+
+
+/* --- TEMA DIURNO (Light Mode) --- */
+body:not(.night-mode) #letterboxd-embed {
+    background-color: var(--color-surface-1);
+    border-color: var(--color-border);
+}
+body:not(.night-mode) .lb-profile-pic {
+    border-color: var(--color-border);
+}
+body:not(.night-mode) .lb-username {
+    color: var(--color-text-primary);
+}
+body:not(.night-mode) .lb-bio,
+body:not(.night-mode) .lb-location {
+    color: var(--color-text-secondary);
+}
+body:not(.night-mode) .lb-fav-title {
+    color: var(--color-text-tertiary);
+}
+body:not(.night-mode) .lb-fav-posters img {
+    border-color: var(--color-border);
+}
+
+
+/* --- TEMA NOTURNO (Night Mode) --- */
+body.night-mode #letterboxd-embed {
+    background-color: #14181c; 
+    border-color: #2c3440;
+}
+body.night-mode .lb-profile-pic {
+    border-color: #2c3440;
+}
+body.night-mode .lb-username {
+    color: #ffffff;
+}
+body.night-mode .lb-bio,
+body.night-mode .lb-location {
+    color: #9ab;
+}
+body.night-mode .lb-fav-title {
+    color: #678;
+}
+body.night-mode .lb-fav-posters img {
+    border-color: #2c3440;
+}
