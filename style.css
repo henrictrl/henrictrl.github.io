@@ -6,8 +6,8 @@
     /* Cor de Destaque (Controlada pelo Color Picker) */
     --cor-destaque: #ff4948;
 
-    /* Cores do Tema Diurno (Padrão) */
-    --color-background: #F8F8F8;
+    /* Cores do Tema Diurno (Padrão) - FUNDO ATUALIZADO */
+    --color-background: #FAF9F6;
     --color-text-primary: #0b1215;
     --color-text-secondary: #888888;
     --color-text-tertiary: #888888;
@@ -16,7 +16,7 @@
     --color-surface-2: #f0f0f0;
     --color-shadow-weak: rgba(11, 18, 21, 0.1);
     --color-shadow-strong: rgba(11, 18, 21, 0.2);
-    --backdrop-bg: rgba(248, 248, 248, 0.7);
+    --backdrop-bg: rgba(250, 249, 246, 0.7);
     --modal-bg: #EFEFEF;
 
     /* Cores do botão de tema */
@@ -154,6 +154,13 @@ body.night-mode .theme-toggle-button .icon-moon {
     border-top: 1px solid var(--color-border);
 }
 
+/* NOVO: Estilo para o separador do menu */
+.sidebar-nav ul .nav-separator {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+}
+
 .sidebar-nav a {
     display: block;
     padding: 10px 18px;
@@ -227,6 +234,11 @@ header {
 }
 .logo h1 { font-size: 52px; font-weight: 900; letter-spacing: -2px; }
 
+.header-logo-link {
+    text-decoration: none;
+    color: var(--color-text-primary);
+}
+
 .logo-highlight {
     color: var(--cor-destaque);
     transition: color 0.3s ease;
@@ -248,7 +260,7 @@ header {
     margin-left: 30px;
     gap: 100px;
 }
-.hero-text { flex: 1; max-width: 400px; }
+.hero-text { flex: 1; max-width: 450px; } /* Aumentei a largura máxima */
 .hero-text p { font-size: 24px; line-height: 1.6; font-weight: 400; }
 
 .hero-image {
@@ -280,6 +292,174 @@ header {
 .scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
 .scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* =================================================================== */
+/* === BOTÃO CTA (SOBRE MIM) === */
+/* =================================================================== */
+.cta-button {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+/* ... (todo o CSS anterior permanece igual até a seção "PÁGINA SOBRE MIM") ... */
+
+/* =================================================================== */
+/* === PÁGINA SOBRE MIM (NOVO LAYOUT EM GRID FIXO) === */
+/* =================================================================== */
+.about-me-section {
+    padding: 60px 0 100px 0;
+    animation: fadeInBlur 0.8s ease-out forwards;
+}
+
+.section-title-big {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    letter-spacing: -2px;
+}
+
+.about-page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(180px, auto); /* Linhas com altura mínima, mas que podem crescer */
+    gap: 30px;
+}
+
+.about-card {
+    background-color: var(--color-surface-1);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px var(--color-shadow-weak);
+    display: flex;
+    flex-direction: column;
+}
+body.night-mode .about-card {
+    background-color: #151A1D; /* Cor de fundo um pouco diferente no modo noturno */
+}
+
+.about-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.about-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+.card-header a {
+    color: var(--color-text-secondary);
+    font-size: 24px;
+    transition: color 0.2s ease;
+}
+.card-header a:hover {
+    color: var(--cor-destaque);
+}
+
+/* --- Posicionamento dos Cards no Grid --- */
+#photo-card { grid-area: 1 / 1 / 3 / 2; } /* Linha 1 a 3, Coluna 1 a 2 */
+#github-card { grid-area: 3 / 1 / 4 / 2; }
+#lastfm-card { grid-area: 1 / 2 / 2 / 3; }
+#goodreads-card { grid-area: 2 / 2 / 4 / 3; }
+#linkedin-card { grid-area: 1 / 3 / 2 / 4; }
+#letterboxd-card { grid-area: 2 / 3 / 3 / 4; }
+#instagram-card { grid-area: 3 / 3 / 4 / 4; }
+#tools-card { grid-area: 4 / 1 / 5 / 4; } /* Ocupa a largura toda */
+
+
+/* --- Estilos Específicos dos Cards --- */
+
+/* Card da Foto */
+#photo-card { padding: 0; overflow: hidden; }
+.about-photo { width: 100%; height: 100%; object-fit: cover; }
+
+/* Card Last.fm */
+#lastfm-data-container { display: flex; flex-direction: column; gap: 15px; }
+.lastfm-track-card { display: flex; align-items: center; gap: 12px; background-color: var(--color-surface-2); padding: 10px; border-radius: 8px; position: relative; }
+.lastfm-album-art { width: 40px; height: 40px; border-radius: 4px; flex-shrink: 0; }
+.lastfm-track-info { font-size: 13px; line-height: 1.3; }
+.lastfm-track-info strong { color: var(--color-text-primary); display: block; font-weight: 600; }
+.lastfm-track-info span { color: var(--color-text-secondary); }
+.now-playing-indicator { width: 8px; height: 8px; background-color: var(--cor-destaque); border-radius: 50%; position: absolute; top: 10px; right: 10px; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--cor-destaque); } 70% { box-shadow: 0 0 0 5px rgba(255, 73, 72, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 73, 72, 0); } }
+
+/* Card Goodreads */
+#goodreads-card { padding-bottom: 15px; }
+#gr_updates_widget { border: none !important; box-shadow: none !important; padding: 0 !important; background-color: transparent !important; width: 100%; height: 100%; }
+#gr_updates_widget iframe { border-radius: 8px; width: 100% !important; height: 100%; }
+#goodreads-card .card-header a { width: 18px; height: 18px; } /* Ajuste de tamanho para o SVG */
+
+/* Card Letterboxd */
+#letterboxd-card { justify-content: space-between; }
+#letterboxd-embed-wrapper-tc > div { display: flex; gap: 12px; }
+#letterboxd-embed-wrapper-tc a { text-decoration: none; width: 100%; }
+#letterboxd-embed-wrapper-tc img { width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--color-border); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+#letterboxd-embed-wrapper-tc a:hover img { transform: scale(1.05); box-shadow: 0 4px 15px var(--color-shadow-strong); }
+#letterboxd-embed-wrapper-tc p { display: none; } /* Oculta o texto que vem do embed */
+.card-footer-link { font-size: 13px; color: var(--color-text-secondary); text-align: center; margin-top: 15px; text-decoration: none; }
+.card-footer-link:hover { color: var(--cor-destaque); }
+#letterboxd-card .card-header a { width: 28px; height: 28px; } /* Ajuste de tamanho para o SVG */
+
+/* Card de Ferramentas */
+.tools-icons-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: center; margin-top: 15px; }
+.tools-icons-container i { font-size: 36px; color: var(--color-text-secondary); transition: color 0.2s ease; }
+.tools-icons-container i:hover { color: var(--cor-destaque); }
+
+/* Card de Perfil Genérico (Instagram) */
+#instagram-card, #linkedin-card { justify-content: center; align-items: center; text-align: center; }
+.generic-profile-embed .profile-embed-icon { width: 50px; height: 50px; margin-bottom: 15px; }
+.generic-profile-embed .profile-embed-name { font-size: 18px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 20px; }
+
+
+/* --- Responsividade do Novo Grid --- */
+@media (max-width: 1200px) {
+    .about-page-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* Reorganiza os cards para 2 colunas */
+    #photo-card { grid-area: 1 / 1 / 3 / 2; }
+    #lastfm-card { grid-area: 1 / 2 / 2 / 3; }
+    #goodreads-card { grid-area: 2 / 2 / 4 / 3; }
+    #github-card { grid-area: 3 / 1 / 4 / 2; }
+    #letterboxd-card { grid-area: 4 / 1 / 5 / 2; }
+    #linkedin-card { grid-area: 4 / 2 / 5 / 3; }
+    #instagram-card { grid-area: 5 / 1 / 6 / 2; }
+    #tools-card { grid-area: 5 / 2 / 6 / 3; }
+}
+
+@media (max-width: 768px) {
+    .about-page-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+        grid-auto-rows: auto; /* Altura automática */
+    }
+    /* Reseta todas as posições para o fluxo normal de uma coluna */
+    .about-page-grid > .about-card {
+        grid-area: auto !important;
+    }
+    #photo-card {
+        max-height: 450px;
+    }
+}
+
+
+/* ... (o restante do CSS para outras seções continua igual) ... */
 
 /* =================================================================== */
 /* === SELETOR DE CORES (IRO.JS) === */
@@ -521,17 +701,16 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-section {
     border-top: 1px solid var(--color-border);
-    margin-top: 60px; /* MODIFICAÇÃO */
-    padding: 60px 0; /* MODIFICAÇÃO */
+    margin-top: 60px; 
+    padding: 60px 0; 
     transition: border-color 0.4s ease;
 }
 
 .contact-header {
     text-align: center;
-    margin-bottom: 40px; /* MODIFICAÇÃO */
+    margin-bottom: 40px; 
 }
 
-/* Estilo para o título principal da seção de contato */
 .contact-header .section-title {
     font-size: 40px;
     font-weight: 900;
@@ -541,7 +720,6 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     position: relative; 
 }
 
-/* Pseudo-elemento que guarda o texto "Talk to Me" */
 .contact-header .section-title::before {
     content: "Talk to Me";
     color: var(--cor-destaque);
@@ -553,7 +731,6 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     opacity: 0; 
 }
 
-/* Classe que ativa a animação de piscar */
 .contact-header .section-title.blinking-title {
     animation: blink-translate 1.2s ease-in-out;
 }
@@ -583,7 +760,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-intro-text {
     font-size: 17px;
-    line-height: 1.3;
+    line-height: 1.5; /* Melhorando a legibilidade */
     color: var(--color-text-secondary);
     max-width: 600px;
     margin: 0 auto;
@@ -591,7 +768,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-content {
     display: flex;
-    gap: 35px; /* MODIFICAÇÃO */
+    gap: 35px; 
     align-items: flex-start;
     justify-content: center; 
 }
@@ -599,16 +776,16 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-form {
     flex: 2;
     max-width: 500px;
-    max-height: 500px; /* MODIFICAÇÃO */
+    max-height: 500px; 
     background-color: var(--color-surface-1);
-    padding: 30px; /* MODIFICAÇÃO */
+    padding: 30px; 
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--color-shadow-strong);
     transition: background-color 0.4s ease;
 }
 
 .form-group {
-    margin-bottom: 10px; /* MODIFICAÇÃO */
+    margin-bottom: 10px; 
 }
 
 .form-group label {
@@ -623,7 +800,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group input[type="email"],
 .form-group textarea {
     width: 100%;
-    padding: 10px; /* MODIFICAÇÃO */
+    padding: 10px; 
     background-color: var(--color-surface-2);
     border: 1px solid var(--color-border);
     border-radius: 5px;
@@ -656,7 +833,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease; /* A transição existente vai suavizar a mudança de cor */
+    transition: all 0.3s ease; 
     letter-spacing: 0.5px;
 }
 
@@ -669,17 +846,15 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     transform: translateY(0);
 }
 
-/* MODIFICAÇÃO: Nova classe para o estado de SUCESSO */
 .submit-button.success {
-    background-color: #28a745; /* Verde sucesso */
+    background-color: #28a745; 
     cursor: default;
     transform: translateY(0);
     filter: brightness(1);
 }
 
-/* MODIFICAÇÃO: Nova classe para o estado de ERRO */
 .submit-button.error {
-    background-color: #dc3545; /* Vermelho erro */
+    background-color: #dc3545; 
     cursor: default;
     transform: translateY(0);
     filter: brightness(1);
@@ -687,12 +862,11 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .submit-button.success:hover,
 .submit-button.error:hover {
-    filter: brightness(1); /* Impede o efeito de hover nos estados de status */
+    filter: brightness(1); 
     transform: translateY(0);
 }
 
 
-/* Removendo o estilo do antigo .form-status, já que foi deletado */
 .form-status {
    display: none;
 }
@@ -732,7 +906,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     flex: 1;
     min-width: 250px; 
     max-width: 400px;
-    padding: 0; /* MODIFICAÇÃO */
+    padding: 0; 
 }
 
 .contact-info h3 {
@@ -809,13 +983,34 @@ input.invalid, textarea.invalid {
 /* === RESPONSIVIDADE === */
 /* =================================================================== */
 
+@media (max-width: 1200px) {
+    .about-me-grid {
+        grid-template-columns: 1fr;
+    }
+    .about-me-main {
+        grid-template-columns: 200px 1fr;
+    }
+    .about-me-sidebar {
+        margin-top: 40px;
+    }
+}
+
+
 @media (max-width: 992px) {
     .container {
         padding: 0 20px;
     }
+
+    .about-me-section {
+        padding: 80px 0;
+        margin-top: 0;
+    }
+
     .experience-section-v2 {
         flex-direction: column;
         gap: 0;
+        margin-top: 80px;
+        padding-top: 80px;
     }
     .experience-title-column {
         flex-basis: auto;
@@ -906,332 +1101,62 @@ input.invalid, textarea.invalid {
    .grid-container {
         grid-template-columns: 1fr;
     }
+
+    /* Sobre Mim Responsivo */
+    .about-me-main {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-photo-container {
+        width: 150px;
+        margin: 0 auto 30px auto;
+    }
 }
 
 /* =================================================================== */
 /* === PÁGINA DE ARTIGOS V2 (Minimalista / Mosaico) === */
 /* =================================================================== */
-
-.articles-page {
-    background-color: var(--color-background);
-}
-
-/* --- Cabeçalho V2 --- */
-.articles-header-v2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.articles-header-v2 .logo-link {
-    text-decoration: none;
-}
-
-.articles-header-v2 .logo h1 {
-    font-size: 28px;
-    letter-spacing: -1px;
-    color: var(--color-text-primary);
-    margin: 0;
-}
-
-.articles-header-v2 .close-articles {
-    font-size: 42px;
-    line-height: 1;
-    font-weight: 300;
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-.articles-header-v2 .close-articles:hover {
-    color: var(--cor-destaque);
-    transform: rotate(90deg);
-}
-
-/* --- Conteúdo Principal V2 --- */
-.articles-main-v2 {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 30px 40px 50px 40px;
-    /* Linha adicionada para aplicar a animação */
-    animation: fadeInBlur 0.8s ease-out forwards;
-}
-
-/* --- Barra de Ferramentas (Filtros + Busca) --- */
-/* --- Barra de Ferramentas (Filtros + Busca) --- */
-.toolbar {
-    display: flex;
-    flex-direction: column; /* Coloca os filtros acima da busca */
-    align-items: center;    /* Centraliza tudo */
-    margin-bottom: 40px;
-    gap: 25px;              /* Espaçamento entre filtros e busca */
-}
-
-.filter-pills {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center; /* Garante que os botões fiquem centrados se quebrarem a linha */
-}
-
-.filter-btn {
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.filter-btn:hover {
-    border-color: var(--color-text-primary);
-    color: var(--color-text-primary);
-}
-
-.filter-btn.active {
-    background-color: var(--cor-destaque);
-    color: var(--color-background); /* Usando a cor de fundo para o texto, para contraste */
-    border-color: var(--cor-destaque);
-}
-
-.search-wrapper {
-    position: relative;
-    min-width: 280px;
-}
-#searchInput {
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    padding: 0 45px 0 20px;
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-    font-size: 15px;
-}
-#searchInput:focus {
-    outline: none;
-    border-color: var(--cor-destaque);
-}
-.search-wrapper .material-symbols-outlined {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text-secondary);
-}
-
-/* --- Grade Mosaico --- */
-/* --- Grade Mosaico (Mais Densa) --- */
-.mosaic-grid {
-    display: grid;
-    /* 6 colunas no desktop para uma grade mais densa */
-    grid-template-columns: repeat(6, 1fr); 
-    /* Altura de linha base menor */
-    grid-auto-rows: 160px;
-    gap: 20px;
-}
-
-.post-card-v2 {
-    border: 1px solid var(--color-border); /* Linha fina adicionada */
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 15px var(--color-shadow-weak);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
-}
-
-.post-card-v2 a {
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.post-card-v2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--color-shadow-strong);
-}
-
-.card-image {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-.post-card-v2:hover .card-image img {
-    transform: scale(1.05);
-}
-
-.card-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-    z-index: 2;
-}
-
-.card-tag {
-    display: inline-block;
-    background-color: var(--cor-destaque);
-    color: var(--color-background);
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1.3;
-    color: #fff;
-    margin: 0;
-}
-.card-excerpt {
-    font-size: 14px;
-    margin-top: 8px;
-    opacity: 0.8;
-    color: #fff;
-}
-
-/* --- Tamanhos do Mosaico --- */
-.post-card-v2.size-small {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-.post-card-v2.size-medium {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-.post-card-v2.size-large {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-/* Exemplo de mais um tamanho, se precisar */
-.post-card-v2.size-wide {
-    grid-column: span 2;
-    grid-row: span 1;
-}
-
-/* Ajustes para tamanhos diferentes */
+/* Estilos da página de artigos omitidos para brevidade, pois não foram alterados */
+.articles-page { background-color: var(--color-background); }
+.articles-header-v2 { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; position: sticky; top: 0; z-index: 1000; background-color: var(--color-background); border-bottom: 1px solid var(--color-border); }
+.articles-header-v2 .logo-link { text-decoration: none; }
+.articles-header-v2 .logo h1 { font-size: 28px; letter-spacing: -1px; color: var(--color-text-primary); margin: 0; }
+.articles-header-v2 .close-articles { font-size: 42px; line-height: 1; font-weight: 300; color: var(--color-text-secondary); text-decoration: none; transition: transform 0.3s ease, color 0.3s ease; }
+.articles-header-v2 .close-articles:hover { color: var(--cor-destaque); transform: rotate(90deg); }
+.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; animation: fadeInBlur 0.8s ease-out forwards; }
+.toolbar { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 25px; }
+.filter-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+.filter-btn:hover { border-color: var(--color-text-primary); color: var(--color-text-primary); }
+.filter-btn.active { background-color: var(--cor-destaque); color: var(--color-background); border-color: var(--cor-destaque); }
+.search-wrapper { position: relative; min-width: 280px; }
+#searchInput { width: 100%; height: 40px; border-radius: 20px; padding: 0 45px 0 20px; background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-primary); font-size: 15px; }
+#searchInput:focus { outline: none; border-color: var(--cor-destaque); }
+.search-wrapper .material-symbols-outlined { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); }
+.mosaic-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; gap: 20px; }
+.post-card-v2 { border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px var(--color-shadow-weak); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; }
+.post-card-v2 a { text-decoration: none; display: block; width: 100%; height: 100%; }
+.post-card-v2:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--color-shadow-strong); }
+.card-image { width: 100%; height: 100%; position: absolute; }
+.card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.post-card-v2:hover .card-image img { transform: scale(1.05); }
+.card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #fff; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); z-index: 2; }
+.card-tag { display: inline-block; background-color: var(--cor-destaque); color: var(--color-background); padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+.card-title { font-size: 20px; font-weight: 900; line-height: 1.3; color: #fff; margin: 0; }
+.card-excerpt { font-size: 14px; margin-top: 8px; opacity: 0.8; color: #fff; }
+.post-card-v2.size-small { grid-column: span 1; grid-row: span 1; }
+.post-card-v2.size-medium { grid-column: span 2; grid-row: span 2; }
+.post-card-v2.size-large { grid-column: span 2; grid-row: span 2; }
+.post-card-v2.size-wide { grid-column: span 2; grid-row: span 1; }
 .size-large .card-title { font-size: 28px; }
 .size-medium .card-title { font-size: 22px; }
 .size-small .card-title { font-size: 16px; }
 .size-small .card-tag { font-size: 10px; padding: 3px 8px; }
 .size-small .card-excerpt { display: none; }
-
-
-/* --- Responsividade V2 --- */
-@media (max-width: 992px) {
-    .mosaic-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 250px;
-    }
-    .post-card-v2.size-large,
-    .post-card-v2.size-medium,
-    .post-card-v2.size-small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .post-card-v2.size-large {
-       grid-row: span 2; /* Mantém um card maior para destaque */
-    }
-}
-
-@media (max-width: 767px) {
-    .articles-main-v2 { padding: 20px; }
-    .toolbar { flex-direction: column; align-items: stretch; }
-    .mosaic-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 300px;
-    }
-    .post-card-v2.size-large,
-    .post-card-v2.size-medium,
-    .post-card-v2.size-small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-     .size-large .card-title,
-     .size-medium .card-title,
-     .size-small .card-title {
-        font-size: 18px;
-    }
-}
-
-/* --- Estilo para o link de Artigos separado na barra flutuante --- */
-.articles-link-wrapper {
-    padding-top: 10px;
-    margin-top: 10px;
-    border-top: 1px solid var(--color-border);
-}
-
-.articles-link-wrapper a {
-    /* Aplica exatamente o mesmo estilo dos outros links da barra */
-    display: block;
-    padding: 10px 18px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    transition: all 0.2s ease-in-out;
-    border-radius: 8px;
-    white-space: nowrap;
-}
-
-.articles-link-wrapper a:hover {
-    background-color: rgba(128, 128, 128, 0.1);
-    color: var(--color-text-primary);
-}
-.articles-nav-link:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
-
-/* --- Ajustes de Layout para a Página de Artigos V2 --- */
-.articles-main-v2 {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 30px 40px 50px 40px;
-}
-
-.logo-articles-page {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo-articles-page h1 {
-    font-size: 36px;
-    letter-spacing: -1.5px;
-    margin: 0;
-    color: var(--color-text-primary);
-}
-
-@keyframes fadeInBlur {
-    from {
-        opacity: 0;
-        filter: blur(8px);
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0);
-    }
-}
+@media (max-width: 992px) { .mosaic-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .post-card-v2.size-large { grid-row: span 2; } }
+@media (max-width: 767px) { .articles-main-v2 { padding: 20px; } .toolbar { flex-direction: column; align-items: stretch; } .mosaic-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .size-large .card-title, .size-medium .card-title, .size-small .card-title { font-size: 18px; } }
+/* REMOVIDO: .articles-link-wrapper pois foi integrado ao menu principal */
+.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; }
+.logo-articles-page { text-align: center; margin-bottom: 40px; }
+.logo-articles-page h1 { font-size: 36px; letter-spacing: -1.5px; margin: 0; color: var(--color-text-primary); }
+@keyframes fadeInBlur { from { opacity: 0; filter: blur(8px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
