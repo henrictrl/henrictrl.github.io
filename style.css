@@ -1637,3 +1637,45 @@ body.night-mode .lb-fav-posters img {
     line-height: 1.4;
     margin: 0;
 }
+
+/* =================================================================== */
+/* === CARD DO LAST.FM (VERSÃO ROBUSTA) === */
+/* =================================================================== */
+#lastfm-embed .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#lastfm-embed h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.lastfm-profile-link .lastfm-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text-secondary);
+    transition: fill 0.3s ease;
+}
+
+.lastfm-profile-link:hover .lastfm-icon {
+    fill: var(--cor-destaque);
+}
+
+.lastfm-loading, .lastfm-error {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.lastfm-error a {
+    color: var(--cor-destaque);
+    font-weight: 600;
+}

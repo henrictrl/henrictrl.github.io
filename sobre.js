@@ -111,3 +111,81 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(savedLanguage);
 
 });
+
+// Localize e substitua este bloco de código no seu sobre.js
+
+// --- Last.fm Recent Tracks Embed ---
+const lastfmContainer = document.getElementById('lastfm-embed');
+if (lastfmContainer) {
+    const apiKey = '5dd32af6ec9f387d57f560bb9b95aef8';
+    const username = 'ctrlworld';
+    const limit = 5;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=${limit}`;
+    const profileUrl = `https://www.last.fm/user/${username}`;
+
+    // Adiciona um estado inicial de "Carregando..."
+    lastfmContainer.innerHTML = `
+        <div class="card-header">
+            <h3>O que estou ouvindo</h3>
+            <a href="${profileUrl}" target="_blank" class="lastfm-profile-link" title="Ver perfil no Last.fm">
+                <svg viewBox="0 0 24 24" class="lastfm-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5h5v-2h-5v2zm0-3h5v-2h-5v2zm0-3h5v-2h-5v2z"></path></svg>
+            </a>
+        </div>
+        <p class="lastfm-loading">Carregando músicas...</p>
+    `;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro de rede: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Limpa o container, mantendo o header
+            lastfmContainer.querySelector('.lastfm-loading').remove();
+
+            if (data.error || !data.recenttracks || !data.recenttracks.track || data.recenttracks.track.length === 0) {
+                 throw new Error('Nenhuma música recente encontrada ou erro na API.');
+            }
+            
+            const tracks = data.recenttracks.track;
+            let list = document.createElement('ul');
+            list.className = 'lastfm-track-list';
+
+            tracks.forEach(track => {
+                const artist = track.artist['#text'];
+                const name = track.name;
+                const trackUrl = track.url;
+                // Pega a imagem grande (índice 3) ou a maior disponível
+                const image = track.image[3]['#text'] || track.image[2]['#text'] || 'images/placeholder.txt'; // Fallback
+                
+                let trackElement = document.createElement('li');
+                trackElement.className = 'lastfm-track';
+                trackElement.innerHTML = `
+                    <a href="${trackUrl}" target="_blank" rel="noopener noreferrer">
+                        <img src="${image}" alt="${artist} - ${name}" class="lastfm-track-image">
+                        <div class="lastfm-track-info">
+                            <span class="lastfm-track-name">${name}</span>
+                            <span class="lastfm-track-artist">${artist}</span>
+                        </div>
+                    </a>
+                `;
+                list.appendChild(trackElement);
+            });
+            lastfmContainer.appendChild(list);
+            
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do Last.fm:', error);
+            const errorElement = lastfmContainer.querySelector('.lastfm-loading') || document.createElement('p');
+            errorElement.className = 'lastfm-error';
+            errorElement.innerHTML = `Não foi possível carregar as músicas. <a href="${profileUrl}" target="_blank">Visite o perfil</a>.`;
+            
+            // Garante que o container esteja limpo antes de adicionar a mensagem de erro
+            if(!lastfmContainer.querySelector('.lastfm-error')) {
+                 if(lastfmContainer.querySelector('.lastfm-loading')) lastfmContainer.querySelector('.lastfm-loading').remove();
+                 lastfmContainer.appendChild(errorElement);
+            }
+        });
+}
