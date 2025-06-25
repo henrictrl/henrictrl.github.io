@@ -45,11 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Lógica de Tradução (para manter a consistência do menu) ---
+        // --- Lógica de Tradução ---
     const translations = {
-        pt: { navHome: "Início", navExperience: "Experiência", navPortfolio: "Portfólio", navContact: "Contato", navAbout: "Sobre Mim", navArticles: "Artigos" },
-        en: { navHome: "Home", navExperience: "Experience", navPortfolio: "Portfolio", navContact: "Contact", navAbout: "About Me", navArticles: "Articles" },
-        es: { navHome: "Inicio", navExperience: "Experiencia", navPortfolio: "Portafolio", navContact: "Contacto", navAbout: "Sobre Mí", navArticles: "Artículos" }
+        pt: { 
+            navHome: "Início", 
+            navExperience: "Experiência", 
+            navPortfolio: "Portfólio", 
+            navContact: "Contato", 
+            navAbout: "Sobre Mim", 
+            navArticles: "Artigos",
+            aboutTitle: "Sobre Mim" // Chave adicionada
+        },
+        en: { 
+            navHome: "Home", 
+            navExperience: "Experience", 
+            navPortfolio: "Portfolio", 
+            navContact: "Contact", 
+            navAbout: "About Me", 
+            navArticles: "Articles",
+            aboutTitle: "About Me" // Chave adicionada
+        },
+        es: { 
+            navHome: "Inicio", 
+            navExperience: "Experiencia", 
+            navPortfolio: "Portafolio", 
+            navContact: "Contacto", 
+            navAbout: "Sobre Mí", 
+            navArticles: "Artículos",
+            aboutTitle: "Sobre Mí" // Chave adicionada
+        }
     };
     const langButtons = document.querySelectorAll('.lang-button');
     const translatableElements = document.querySelectorAll('[data-translate-key]');
