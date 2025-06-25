@@ -1205,3 +1205,145 @@ input.invalid, textarea.invalid {
     text-align: center;
     margin: auto;
 }
+
+/* --- GITHUB CARD (Solução com Duas Imagens) --- */
+#github-embed {
+    padding: 20px;
+}
+
+#github-embed .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#github-embed h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+#github-embed .card-header i {
+    font-size: 28px;
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+}
+
+#github-embed .card-header a:hover i {
+    color: var(--cor-destaque);
+}
+
+#github-embed img.github-stats-img {
+    max-width: 100%;
+}
+
+/* Regra para esconder a imagem errada de acordo com o tema */
+/* Esconde a imagem do modo escuro por padrão (no modo claro) */
+body:not(.night-mode) .dark-mode-img {
+    display: none;
+}
+
+/* Esconde a imagem do modo claro quando o modo noturno está ativo */
+body.night-mode .light-mode-img {
+    display: none;
+}
+
+/* =================================================================== */
+/* === EMBED DO LETTERBOXD === */
+/* =================================================================== */
+
+#letterboxd-embed {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre o header e o conteúdo */
+}
+
+.letterboxd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.letterboxd-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.letterboxd-icon {
+    width: 28px;
+    height: 28px;
+    fill: var(--color-text-secondary); /* Cor do ícone */
+    transition: fill 0.3s ease;
+}
+
+.letterboxd-header a:hover .letterboxd-icon {
+    fill: var(--cor-destaque); /* Cor do ícone no hover */
+}
+
+.letterboxd-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.letterboxd-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.letterboxd-film-grid {
+    display: grid;
+    /* Ajuste o minmax para o tamanho desejado dos posters */
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 10px;
+}
+
+.letterboxd-film-item {
+    position: relative;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.letterboxd-film-item:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+
+.letterboxd-film-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+}
+
+.film-rating {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Mensagem de erro ou carregamento */
+.letterboxd-film-grid .api-message {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    grid-column: 1 / -1; /* Ocupa a grade inteira */
+    text-align: center;
+}

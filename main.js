@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija os erros.",
             formSuccessButton: "Enviado!",
             formErrorButton: "Erro! Tente Novamente",
+            embedGithubTitle: "Linguagens Mais Usadas", // pt
         },
         en: {
             navHome: "Home",
@@ -179,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Please correct the errors.",
             formSuccessButton: "Sent!",
             formErrorButton: "Error! Try Again",
+            embedGithubTitle: "Most Used Languages",   // en
         },
         es: {
             navHome: "Inicio",
@@ -226,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formInvalid: "Por favor, corrija los errores.",
             formSuccessButton: "¡Enviado!",
             formErrorButton: "¡Error! Inténtalo de nuevo",
+            embedGithubTitle: "Lenguajes Más Usados",  // es
         }
     };
 
@@ -640,3 +643,117 @@ document.addEventListener('DOMContentLoaded', () => {
                 lastfmContainer.innerHTML = '<p class="error-message">Ocorreu um erro ao conectar ao Last.fm.</p>';
             });
     }
+
+    // =====================================================================
+    // === GITHUB CARD THEME SWITCHER ===
+    // =====================================================================
+    const updateGitHubCardTheme = () => {
+        const githubImg = document.getElementById('github-lang-img');
+        if (!githubImg) {
+            return; // Sai da função se o elemento não existir na página
+        }
+
+        // Verifica se o modo noturno está ativo
+        const isNightMode = document.body.classList.contains('night-mode');
+        const username = 'henrictrl';
+
+        // Define as cores do texto baseadas no tema
+        const textColor = isNightMode ? 'F8F8F8' : '0b1215'; // Branco no escuro, preto no claro
+        const titleColor = isNightMode ? '888888' : '0b1215'; // Cinza no escuro, preto no claro
+
+        // Monta a URL da imagem com as cores dinâmicas
+        const imageUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&hide_border=true&bg_color=00000000&title_color=${titleColor}&text_color=${textColor}`;
+
+        githubImg.src = imageUrl;
+    };
+
+    // Encontre a função 'applyTheme' que já existe no seu código
+    const applyTheme = (theme) => {
+        if (theme === 'night') {
+            body.classList.add('night-mode');
+        } else {
+            body.classList.remove('night-mode');
+        }
+    };
+    
+    // É importante chamar a função uma vez no início para carregar a imagem com o tema correto
+    updateGitHubCardTheme();
+
+    // --- LÓGICA PARA O EMBED DO LETTERBOXD (COM O LINK CORRETO) ---
+function loadLetterboxdEmbed() {
+    // SEU LINK DA API JÁ ESTÁ INSERIDO AQUI:
+    const apiUrl = "https://letterboxd-embed-ltkg1g6zu-henriques-projects-f29becc2.vercel.app/api/get-data"; 
+
+    const favoritesContainer = document.getElementById('letterboxd-favorites-container');
+    const recentContainer = document.getElementById('letterboxd-recent-container');
+
+    if (!favoritesContainer || !recentContainer) {
+        // Se os elementos não existirem na página, não faz nada.
+        return;
+    }
+    
+    // Mensagem de "Carregando..."
+    favoritesContainer.innerHTML = '<p class="api-message">Carregando...</p>';
+    recentContainer.innerHTML = '<p class="api-message">Carregando...</p>';
+
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Limpa as mensagens de carregamento
+            favoritesContainer.innerHTML = '';
+            recentContainer.innerHTML = '';
+
+            // Popula a seção de favoritos
+            if (data.favorites && data.favorites.length > 0) {
+                data.favorites.forEach(film => {
+                    const filmElement = `
+                        <div class="letterboxd-film-item">
+                            <a href="${film.link}" target="_blank" title="${film.title}">
+                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
+                            </a>
+                        </div>
+                    `;
+                    favoritesContainer.innerHTML += filmElement;
+                });
+            } else {
+                favoritesContainer.innerHTML = '<p class="api-message">Nenhum favorito encontrado.</p>';
+            }
+
+            // Popula a seção de reviews recentes
+            if (data.recentReviews && data.recentReviews.length > 0) {
+                data.recentReviews.forEach(film => {
+                    // Converte a nota para estrelas (ex: 3.5 -> ★★★½)
+                    const ratingValue = parseFloat(film.rating);
+                    const fullStars = '★'.repeat(Math.floor(ratingValue));
+                    const halfStar = (ratingValue % 1 !== 0) ? '½' : '';
+                    const ratingStars = fullStars + halfStar;
+                    
+                    const filmElement = `
+                        <div class="letterboxd-film-item">
+                            <a href="${film.link}" target="_blank" title="${film.title} - Nota: ${film.rating}">
+                                <img src="${film.poster}" alt="${film.title}" loading="lazy">
+                                <div class="film-rating">${ratingStars}</div>
+                            </a>
+                        </div>
+                    `;
+                    recentContainer.innerHTML += filmElement;
+                });
+            } else {
+                 recentContainer.innerHTML = '<p class="api-message">Nenhuma atividade recente.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do Letterboxd:', error);
+            favoritesContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
+            recentContainer.innerHTML = '<p class="api-message">Falha ao carregar.</p>';
+        });
+}
+
+// Garante que o script rode depois que a página carregar
+document.addEventListener('DOMContentLoaded', loadLetterboxdEmbed);
