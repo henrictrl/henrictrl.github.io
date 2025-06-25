@@ -1574,3 +1574,66 @@ body.night-mode .lb-fav-posters img {
     width: 32px; 
     height: 32px;
 }
+
+/* =================================================================== */
+/* === CARD DE LÍNGUAS (VERSÃO VISUAL) === */
+/* =================================================================== */
+
+#languages-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#languages-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#languages-card .card-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.languages-list-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Aumenta o espaço entre os idiomas */
+    flex-grow: 1;
+    justify-content: center; /* Centraliza verticalmente se houver espaço */
+}
+
+.language-item-visual {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-flag {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Deixa a bandeira redonda */
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    border: 2px solid var(--color-border);
+    box-shadow: 0 2px 4px var(--color-shadow-weak);
+}
+
+.language-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 4px 0; /* Ajusta a margem */
+}
+
+.language-info p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
