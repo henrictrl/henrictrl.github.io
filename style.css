@@ -1012,3 +1012,122 @@ input.invalid, textarea.invalid {
 .logo-articles-page { text-align: center; margin-bottom: 40px; }
 .logo-articles-page h1 { font-size: 36px; letter-spacing: -1.5px; margin: 0; color: var(--color-text-primary); }
 @keyframes fadeInBlur { from { opacity: 0; filter: blur(8px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
+
+/* =================================================================== */
+/* === PÁGINA SOBRE MIM === */
+/* =================================================================== */
+
+.about-page .about-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px;
+    /* Garante que o conteúdo não invada o menu lateral flutuante */
+    padding-right: 180px; 
+}
+
+.about-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.about-header h1 {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--color-text-primary);
+}
+
+.about-grid {
+    display: flex;
+    gap: 30px;
+}
+
+.about-grid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+}
+
+.grid-item {
+    background-color: var(--color-surface-1);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    min-height: 250px;
+    box-shadow: 0 5px 15px var(--color-shadow-weak);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.grid-item.large-item {
+    min-height: 400px;
+}
+
+/* Estilo Placeholder (Temporário) */
+.placeholder-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 210px;
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    border: 2px dashed var(--color-border);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.grid-item.large-item .placeholder-content {
+    min-height: 360px;
+}
+
+
+/* Responsividade para a página Sobre Mim */
+@media (max-width: 1200px) {
+    .about-page .about-container {
+        /* Reduz o padding para telas menores mas ainda evita o menu */
+        padding-right: 160px;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-grid {
+        flex-direction: column;
+    }
+    .about-page .about-container {
+        /* Remove o padding direito pois o menu some */
+        padding-right: 40px; 
+    }
+}
+
+@media (max-width: 768px) {
+     .about-page .about-container {
+        padding: 20px;
+    }
+    .about-header h1 {
+        font-size: 42px;
+    }
+}
+
+/* =================================================================== */
+/* === EMBED DO INSTAGRAM (Abordagem segura) === */
+/* =================================================================== */
+
+#instagram-embed {
+    /* Remove o fundo do nosso contêiner .grid-item */
+    background-color: transparent !important; 
+    border: none !important;
+    box-shadow: none !important;
+    
+    /* Centraliza o widget que será gerado pelo script */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* Opcional: Garante que o widget em si tenha um fundo transparente, se possível */
+#instagram-embed .inst-widget {
+    background: transparent !important;
+}

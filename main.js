@@ -315,9 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         colorPicker.on('color:change', (color) => {
             
-            const MIN_BRIGHTNESS = 25;
+            const MIN_BRIGHTNESS = 40;
             const MAX_BRIGHTNESS = 90;
-            const MIN_SATURATION = 30;
+            const MIN_SATURATION = 50;
 
             let { h, s, v } = color.hsv;
 
