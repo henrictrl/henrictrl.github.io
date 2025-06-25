@@ -6,8 +6,8 @@
     /* Cor de Destaque (Controlada pelo Color Picker) */
     --cor-destaque: #ff4948;
 
-    /* Cores do Tema Diurno (Padrão) */
-    --color-background: #F8F8F8;
+    /* Cores do Tema Diurno (Padrão) - FUNDO ATUALIZADO */
+    --color-background: #FAF9F6;
     --color-text-primary: #0b1215;
     --color-text-secondary: #888888;
     --color-text-tertiary: #888888;
@@ -16,7 +16,7 @@
     --color-surface-2: #f0f0f0;
     --color-shadow-weak: rgba(11, 18, 21, 0.1);
     --color-shadow-strong: rgba(11, 18, 21, 0.2);
-    --backdrop-bg: rgba(248, 248, 248, 0.7);
+    --backdrop-bg: rgba(250, 249, 246, 0.7);
     --modal-bg: #EFEFEF;
 
     /* Cores do botão de tema */
@@ -154,6 +154,13 @@ body.night-mode .theme-toggle-button .icon-moon {
     border-top: 1px solid var(--color-border);
 }
 
+/* NOVO: Estilo para o separador do menu */
+.sidebar-nav ul .nav-separator {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+}
+
 .sidebar-nav a {
     display: block;
     padding: 10px 18px;
@@ -227,6 +234,11 @@ header {
 }
 .logo h1 { font-size: 52px; font-weight: 900; letter-spacing: -2px; }
 
+.header-logo-link {
+    text-decoration: none;
+    color: var(--color-text-primary);
+}
+
 .logo-highlight {
     color: var(--cor-destaque);
     transition: color 0.3s ease;
@@ -248,7 +260,7 @@ header {
     margin-left: 30px;
     gap: 100px;
 }
-.hero-text { flex: 1; max-width: 400px; }
+.hero-text { flex: 1; max-width: 450px; } /* Aumentei a largura máxima */
 .hero-text p { font-size: 24px; line-height: 1.6; font-weight: 400; }
 
 .hero-image {
@@ -280,6 +292,26 @@ header {
 .scrolling-text { display: flex; animation: scroll-left 5s linear infinite; }
 .scrolling-text span { padding: 10px 0; color: var(--cor-destaque); font-family: 'Just Me Again Down Here', cursive; font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* =================================================================== */
+/* === BOTÃO CTA (SOBRE MIM) === */
+/* =================================================================== */
+.cta-button {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
 
 /* =================================================================== */
 /* === SELETOR DE CORES (IRO.JS) === */
@@ -521,17 +553,16 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-section {
     border-top: 1px solid var(--color-border);
-    margin-top: 60px; /* MODIFICAÇÃO */
-    padding: 60px 0; /* MODIFICAÇÃO */
+    margin-top: 60px; 
+    padding: 60px 0; 
     transition: border-color 0.4s ease;
 }
 
 .contact-header {
     text-align: center;
-    margin-bottom: 40px; /* MODIFICAÇÃO */
+    margin-bottom: 40px; 
 }
 
-/* Estilo para o título principal da seção de contato */
 .contact-header .section-title {
     font-size: 40px;
     font-weight: 900;
@@ -541,7 +572,6 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     position: relative; 
 }
 
-/* Pseudo-elemento que guarda o texto "Talk to Me" */
 .contact-header .section-title::before {
     content: "Talk to Me";
     color: var(--cor-destaque);
@@ -553,7 +583,6 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     opacity: 0; 
 }
 
-/* Classe que ativa a animação de piscar */
 .contact-header .section-title.blinking-title {
     animation: blink-translate 1.2s ease-in-out;
 }
@@ -583,7 +612,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-intro-text {
     font-size: 17px;
-    line-height: 1.3;
+    line-height: 1.5; /* Melhorando a legibilidade */
     color: var(--color-text-secondary);
     max-width: 600px;
     margin: 0 auto;
@@ -591,7 +620,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .contact-content {
     display: flex;
-    gap: 35px; /* MODIFICAÇÃO */
+    gap: 35px; 
     align-items: flex-start;
     justify-content: center; 
 }
@@ -599,16 +628,16 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .contact-form {
     flex: 2;
     max-width: 500px;
-    max-height: 500px; /* MODIFICAÇÃO */
+    max-height: 500px; 
     background-color: var(--color-surface-1);
-    padding: 30px; /* MODIFICAÇÃO */
+    padding: 30px; 
     border-radius: 10px;
     box-shadow: 0 5px 15px var(--color-shadow-strong);
     transition: background-color 0.4s ease;
 }
 
 .form-group {
-    margin-bottom: 10px; /* MODIFICAÇÃO */
+    margin-bottom: 10px; 
 }
 
 .form-group label {
@@ -623,7 +652,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 .form-group input[type="email"],
 .form-group textarea {
     width: 100%;
-    padding: 10px; /* MODIFICAÇÃO */
+    padding: 10px; 
     background-color: var(--color-surface-2);
     border: 1px solid var(--color-border);
     border-radius: 5px;
@@ -656,7 +685,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease; /* A transição existente vai suavizar a mudança de cor */
+    transition: all 0.3s ease; 
     letter-spacing: 0.5px;
 }
 
@@ -669,17 +698,15 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     transform: translateY(0);
 }
 
-/* MODIFICAÇÃO: Nova classe para o estado de SUCESSO */
 .submit-button.success {
-    background-color: #28a745; /* Verde sucesso */
+    background-color: #28a745; 
     cursor: default;
     transform: translateY(0);
     filter: brightness(1);
 }
 
-/* MODIFICAÇÃO: Nova classe para o estado de ERRO */
 .submit-button.error {
-    background-color: #dc3545; /* Vermelho erro */
+    background-color: #dc3545; 
     cursor: default;
     transform: translateY(0);
     filter: brightness(1);
@@ -687,12 +714,11 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 
 .submit-button.success:hover,
 .submit-button.error:hover {
-    filter: brightness(1); /* Impede o efeito de hover nos estados de status */
+    filter: brightness(1); 
     transform: translateY(0);
 }
 
 
-/* Removendo o estilo do antigo .form-status, já que foi deletado */
 .form-status {
    display: none;
 }
@@ -732,7 +758,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     flex: 1;
     min-width: 250px; 
     max-width: 400px;
-    padding: 0; /* MODIFICAÇÃO */
+    padding: 0; 
 }
 
 .contact-info h3 {
@@ -809,13 +835,34 @@ input.invalid, textarea.invalid {
 /* === RESPONSIVIDADE === */
 /* =================================================================== */
 
+@media (max-width: 1200px) {
+    .about-me-grid {
+        grid-template-columns: 1fr;
+    }
+    .about-me-main {
+        grid-template-columns: 200px 1fr;
+    }
+    .about-me-sidebar {
+        margin-top: 40px;
+    }
+}
+
+
 @media (max-width: 992px) {
     .container {
         padding: 0 20px;
     }
+
+    .about-me-section {
+        padding: 80px 0;
+        margin-top: 0;
+    }
+
     .experience-section-v2 {
         flex-direction: column;
         gap: 0;
+        margin-top: 80px;
+        padding-top: 80px;
     }
     .experience-title-column {
         flex-basis: auto;
@@ -906,332 +953,729 @@ input.invalid, textarea.invalid {
    .grid-container {
         grid-template-columns: 1fr;
     }
+
+    /* Sobre Mim Responsivo */
+    .about-me-main {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-photo-container {
+        width: 150px;
+        margin: 0 auto 30px auto;
+    }
 }
 
 /* =================================================================== */
 /* === PÁGINA DE ARTIGOS V2 (Minimalista / Mosaico) === */
 /* =================================================================== */
-
-.articles-page {
-    background-color: var(--color-background);
-}
-
-/* --- Cabeçalho V2 --- */
-.articles-header-v2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.articles-header-v2 .logo-link {
-    text-decoration: none;
-}
-
-.articles-header-v2 .logo h1 {
-    font-size: 28px;
-    letter-spacing: -1px;
-    color: var(--color-text-primary);
-    margin: 0;
-}
-
-.articles-header-v2 .close-articles {
-    font-size: 42px;
-    line-height: 1;
-    font-weight: 300;
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-.articles-header-v2 .close-articles:hover {
-    color: var(--cor-destaque);
-    transform: rotate(90deg);
-}
-
-/* --- Conteúdo Principal V2 --- */
-.articles-main-v2 {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 30px 40px 50px 40px;
-    /* Linha adicionada para aplicar a animação */
-    animation: fadeInBlur 0.8s ease-out forwards;
-}
-
-/* --- Barra de Ferramentas (Filtros + Busca) --- */
-/* --- Barra de Ferramentas (Filtros + Busca) --- */
-.toolbar {
-    display: flex;
-    flex-direction: column; /* Coloca os filtros acima da busca */
-    align-items: center;    /* Centraliza tudo */
-    margin-bottom: 40px;
-    gap: 25px;              /* Espaçamento entre filtros e busca */
-}
-
-.filter-pills {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center; /* Garante que os botões fiquem centrados se quebrarem a linha */
-}
-
-.filter-btn {
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.filter-btn:hover {
-    border-color: var(--color-text-primary);
-    color: var(--color-text-primary);
-}
-
-.filter-btn.active {
-    background-color: var(--cor-destaque);
-    color: var(--color-background); /* Usando a cor de fundo para o texto, para contraste */
-    border-color: var(--cor-destaque);
-}
-
-.search-wrapper {
-    position: relative;
-    min-width: 280px;
-}
-#searchInput {
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    padding: 0 45px 0 20px;
-    background-color: var(--color-surface-2);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-    font-size: 15px;
-}
-#searchInput:focus {
-    outline: none;
-    border-color: var(--cor-destaque);
-}
-.search-wrapper .material-symbols-outlined {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text-secondary);
-}
-
-/* --- Grade Mosaico --- */
-/* --- Grade Mosaico (Mais Densa) --- */
-.mosaic-grid {
-    display: grid;
-    /* 6 colunas no desktop para uma grade mais densa */
-    grid-template-columns: repeat(6, 1fr); 
-    /* Altura de linha base menor */
-    grid-auto-rows: 160px;
-    gap: 20px;
-}
-
-.post-card-v2 {
-    border: 1px solid var(--color-border); /* Linha fina adicionada */
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 15px var(--color-shadow-weak);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
-}
-
-.post-card-v2 a {
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.post-card-v2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--color-shadow-strong);
-}
-
-.card-image {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-.post-card-v2:hover .card-image img {
-    transform: scale(1.05);
-}
-
-.card-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-    z-index: 2;
-}
-
-.card-tag {
-    display: inline-block;
-    background-color: var(--cor-destaque);
-    color: var(--color-background);
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1.3;
-    color: #fff;
-    margin: 0;
-}
-.card-excerpt {
-    font-size: 14px;
-    margin-top: 8px;
-    opacity: 0.8;
-    color: #fff;
-}
-
-/* --- Tamanhos do Mosaico --- */
-.post-card-v2.size-small {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-.post-card-v2.size-medium {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-.post-card-v2.size-large {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-/* Exemplo de mais um tamanho, se precisar */
-.post-card-v2.size-wide {
-    grid-column: span 2;
-    grid-row: span 1;
-}
-
-/* Ajustes para tamanhos diferentes */
+/* Estilos da página de artigos omitidos para brevidade, pois não foram alterados */
+.articles-page { background-color: var(--color-background); }
+.articles-header-v2 { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; position: sticky; top: 0; z-index: 1000; background-color: var(--color-background); border-bottom: 1px solid var(--color-border); }
+.articles-header-v2 .logo-link { text-decoration: none; }
+.articles-header-v2 .logo h1 { font-size: 28px; letter-spacing: -1px; color: var(--color-text-primary); margin: 0; }
+.articles-header-v2 .close-articles { font-size: 42px; line-height: 1; font-weight: 300; color: var(--color-text-secondary); text-decoration: none; transition: transform 0.3s ease, color 0.3s ease; }
+.articles-header-v2 .close-articles:hover { color: var(--cor-destaque); transform: rotate(90deg); }
+.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; animation: fadeInBlur 0.8s ease-out forwards; }
+.toolbar { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 25px; }
+.filter-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+.filter-btn:hover { border-color: var(--color-text-primary); color: var(--color-text-primary); }
+.filter-btn.active { background-color: var(--cor-destaque); color: var(--color-background); border-color: var(--cor-destaque); }
+.search-wrapper { position: relative; min-width: 280px; }
+#searchInput { width: 100%; height: 40px; border-radius: 20px; padding: 0 45px 0 20px; background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-primary); font-size: 15px; }
+#searchInput:focus { outline: none; border-color: var(--cor-destaque); }
+.search-wrapper .material-symbols-outlined { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); }
+.mosaic-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; gap: 20px; }
+.post-card-v2 { border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px var(--color-shadow-weak); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; }
+.post-card-v2 a { text-decoration: none; display: block; width: 100%; height: 100%; }
+.post-card-v2:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--color-shadow-strong); }
+.card-image { width: 100%; height: 100%; position: absolute; }
+.card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.post-card-v2:hover .card-image img { transform: scale(1.05); }
+.card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #fff; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); z-index: 2; }
+.card-tag { display: inline-block; background-color: var(--cor-destaque); color: var(--color-background); padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+.card-title { font-size: 20px; font-weight: 900; line-height: 1.3; color: #fff; margin: 0; }
+.card-excerpt { font-size: 14px; margin-top: 8px; opacity: 0.8; color: #fff; }
+.post-card-v2.size-small { grid-column: span 1; grid-row: span 1; }
+.post-card-v2.size-medium { grid-column: span 2; grid-row: span 2; }
+.post-card-v2.size-large { grid-column: span 2; grid-row: span 2; }
+.post-card-v2.size-wide { grid-column: span 2; grid-row: span 1; }
 .size-large .card-title { font-size: 28px; }
 .size-medium .card-title { font-size: 22px; }
 .size-small .card-title { font-size: 16px; }
 .size-small .card-tag { font-size: 10px; padding: 3px 8px; }
 .size-small .card-excerpt { display: none; }
+@media (max-width: 992px) { .mosaic-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .post-card-v2.size-large { grid-row: span 2; } }
+@media (max-width: 767px) { .articles-main-v2 { padding: 20px; } .toolbar { flex-direction: column; align-items: stretch; } .mosaic-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .size-large .card-title, .size-medium .card-title, .size-small .card-title { font-size: 18px; } }
+/* REMOVIDO: .articles-link-wrapper pois foi integrado ao menu principal */
+.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; }
+.logo-articles-page { text-align: center; margin-bottom: 40px; }
+.logo-articles-page h1 { font-size: 36px; letter-spacing: -1.5px; margin: 0; color: var(--color-text-primary); }
+@keyframes fadeInBlur { from { opacity: 0; filter: blur(8px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
 
+/* =================================================================== */
+/* === PÁGINA SOBRE MIM === */
+/* =================================================================== */
 
-/* --- Responsividade V2 --- */
-@media (max-width: 992px) {
-    .mosaic-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 250px;
-    }
-    .post-card-v2.size-large,
-    .post-card-v2.size-medium,
-    .post-card-v2.size-small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-    .post-card-v2.size-large {
-       grid-row: span 2; /* Mantém um card maior para destaque */
-    }
+.about-page .about-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px;
+    /* Garante que o conteúdo não invada o menu lateral flutuante */
+    padding-right: 180px; 
 }
 
-@media (max-width: 767px) {
-    .articles-main-v2 { padding: 20px; }
-    .toolbar { flex-direction: column; align-items: stretch; }
-    .mosaic-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 300px;
-    }
-    .post-card-v2.size-large,
-    .post-card-v2.size-medium,
-    .post-card-v2.size-small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-     .size-large .card-title,
-     .size-medium .card-title,
-     .size-small .card-title {
-        font-size: 18px;
-    }
+.about-header {
+    margin-bottom: 40px;
+    text-align: left;
 }
 
-/* --- Estilo para o link de Artigos separado na barra flutuante --- */
-.articles-link-wrapper {
-    padding-top: 10px;
-    margin-top: 10px;
-    border-top: 1px solid var(--color-border);
-}
-
-.articles-link-wrapper a {
-    /* Aplica exatamente o mesmo estilo dos outros links da barra */
-    display: block;
-    padding: 10px 18px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    transition: all 0.2s ease-in-out;
-    border-radius: 8px;
-    white-space: nowrap;
-}
-
-.articles-link-wrapper a:hover {
-    background-color: rgba(128, 128, 128, 0.1);
+.about-header h1 {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -2px;
     color: var(--color-text-primary);
 }
-.articles-nav-link:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+
+.about-grid {
+    display: flex;
+    gap: 30px;
 }
 
-/* --- Ajustes de Layout para a Página de Artigos V2 --- */
-.articles-main-v2 {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 30px 40px 50px 40px;
+.about-grid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
 }
 
-.logo-articles-page {
+.grid-item {
+    background-color: var(--color-surface-1);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    min-height: 250px;
+    box-shadow: 0 5px 15px var(--color-shadow-weak);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.grid-item.large-item {
+    min-height: 400px;
+}
+
+/* Estilo Placeholder (Temporário) */
+.placeholder-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 210px;
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    border: 2px dashed var(--color-border);
+    border-radius: 8px;
     text-align: center;
-    margin-bottom: 40px;
 }
 
-.logo-articles-page h1 {
-    font-size: 36px;
-    letter-spacing: -1.5px;
+.grid-item.large-item .placeholder-content {
+    min-height: 360px;
+}
+
+
+/* Responsividade para a página Sobre Mim */
+@media (max-width: 1200px) {
+    .about-page .about-container {
+        /* Reduz o padding para telas menores mas ainda evita o menu */
+        padding-right: 160px;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-grid {
+        flex-direction: column;
+    }
+    .about-page .about-container {
+        /* Remove o padding direito pois o menu some */
+        padding-right: 40px; 
+    }
+}
+
+@media (max-width: 768px) {
+     .about-page .about-container {
+        padding: 20px;
+    }
+    .about-header h1 {
+        font-size: 42px;
+    }
+}
+
+/* =================================================================== */
+/* === EMBED DO INSTAGRAM (Abordagem segura) === */
+/* =================================================================== */
+
+#instagram-embed {
+    /* Remove o fundo do nosso contêiner .grid-item */
+    background-color: transparent !important; 
+    border: none !important;
+    box-shadow: none !important;
+    
+    /* Centraliza o widget que será gerado pelo script */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* Opcional: Garante que o widget em si tenha um fundo transparente, se possível */
+#instagram-embed .inst-widget {
+    background: transparent !important;
+}
+
+/* =================================================================== */
+/* === EMBED DO LAST.FM === */
+/* =================================================================== */
+
+#lastfm-embed {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#lastfm-embed h2 {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 10px;
+}
+
+.lastfm-track-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lastfm-track a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 15px;
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.lastfm-track a:hover {
+    background-color: var(--color-surface-2);
+}
+
+.lastfm-track-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.lastfm-track-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.lastfm-track-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.lastfm-track-artist {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+#lastfm-embed .error-message {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: auto;
+}
+
+/* --- GITHUB CARD (Solução com Duas Imagens) --- */
+#github-embed {
+    padding: 20px;
+}
+
+#github-embed .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#github-embed h3 {
+    font-size: 18px;
+    font-weight: 900;
     margin: 0;
     color: var(--color-text-primary);
 }
 
-@keyframes fadeInBlur {
-    from {
-        opacity: 0;
-        filter: blur(8px);
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0);
-    }
+#github-embed .card-header i {
+    font-size: 28px;
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+}
+
+#github-embed .card-header a:hover i {
+    color: var(--cor-destaque);
+}
+
+#github-embed img.github-stats-img {
+    max-width: 100%;
+}
+
+/* Regra para esconder a imagem errada de acordo com o tema */
+/* Esconde a imagem do modo escuro por padrão (no modo claro) */
+body:not(.night-mode) .dark-mode-img {
+    display: none;
+}
+
+/* Esconde a imagem do modo claro quando o modo noturno está ativo */
+body.night-mode .light-mode-img {
+    display: none;
+}
+
+/* =================================================================== */
+/* === EMBED DO LETTERBOXD === */
+/* =================================================================== */
+
+#letterboxd-embed {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre o header e o conteúdo */
+}
+
+.letterboxd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.letterboxd-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.letterboxd-icon {
+    width: 28px;
+    height: 28px;
+    fill: var(--color-text-secondary); /* Cor do ícone */
+    transition: fill 0.3s ease;
+}
+
+.letterboxd-header a:hover .letterboxd-icon {
+    fill: var(--cor-destaque); /* Cor do ícone no hover */
+}
+
+.letterboxd-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.letterboxd-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.letterboxd-film-grid {
+    display: grid;
+    /* Ajuste o minmax para o tamanho desejado dos posters */
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 10px;
+}
+
+.letterboxd-film-item {
+    position: relative;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.letterboxd-film-item:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+
+.letterboxd-film-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+}
+
+.film-rating {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Mensagem de erro ou carregamento */
+.letterboxd-film-grid .api-message {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    grid-column: 1 / -1; /* Ocupa a grade inteira */
+    text-align: center;
+}
+
+/* =================================================================== */
+/* === ESTILOS PARA O CARREGAMENTO DO INSTAGRAM === */
+/* =================================================================== */
+
+#instagram-embed {
+    /* Centraliza o conteúdo (loader e o embed) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-indicator {
+    border: 5px solid var(--color-surface-2); /* Cor de fundo do círculo */
+    border-top: 5px solid var(--cor-destaque); /* Cor da animação */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
+    display: none; /* Começa escondido */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Esconde o blockquote do Instagram por padrão */
+#instagram-embed .instagram-media {
+    display: none;
+}
+
+/* === CARD CUSTOMIZADO DO LETTERBOXD (COM TEMA) === */
+
+#letterboxd-embed {
+    padding: 0;
+    overflow: hidden;
+    /* Transição suave para a mudança de cor */
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+#letterboxd-card {
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: color 0.4s ease;
+}
+
+a.lb-main-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.lb-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.lb-profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid; /* A cor será definida pelo tema */
+    transition: border-color 0.4s ease;
+}
+
+.lb-profile-info {
+    flex: 1;
+}
+
+.lb-username {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.lb-bio {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+.lb-location {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lb-favorites {
+    margin-top: 16px; /* Aumentado um pouco para compensar a falta da nav */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lb-fav-title {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.lb-fav-posters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.lb-fav-posters img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid; /* A cor será definida pelo tema */
+    transition: border-color 0.4s ease;
+}
+
+
+/* --- TEMA DIURNO (Light Mode) --- */
+body:not(.night-mode) #letterboxd-embed {
+    background-color: var(--color-surface-1);
+    border-color: var(--color-border);
+}
+body:not(.night-mode) .lb-profile-pic {
+    border-color: var(--color-border);
+}
+body:not(.night-mode) .lb-username {
+    color: var(--color-text-primary);
+}
+body:not(.night-mode) .lb-bio,
+body:not(.night-mode) .lb-location {
+    color: var(--color-text-secondary);
+}
+body:not(.night-mode) .lb-fav-title {
+    color: var(--color-text-tertiary);
+}
+body:not(.night-mode) .lb-fav-posters img {
+    border-color: var(--color-border);
+}
+
+
+/* --- TEMA NOTURNO (Night Mode) --- */
+body.night-mode #letterboxd-embed {
+    background-color: #14181c; 
+    border-color: #2c3440;
+}
+body.night-mode .lb-profile-pic {
+    border-color: #2c3440;
+}
+body.night-mode .lb-username {
+    color: #ffffff;
+}
+body.night-mode .lb-bio,
+body.night-mode .lb-location {
+    color: #9ab;
+}
+body.night-mode .lb-fav-title {
+    color: #678;
+}
+body.night-mode .lb-fav-posters img {
+    border-color: #2c3440;
+}
+
+/* =================================================================== */
+/* === CARD DE FERRAMENTAS (Grid Unificado) === */
+/* =================================================================== */
+
+#tools-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#tools-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#tools-card .card-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+/* Transformado em um grid para preencher o espaço */
+.tools-grid-grouped {
+    display: grid;
+    /* Cria colunas de no mínimo 50px que se ajustam para preencher o espaço */
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 15px;
+}
+
+/* Removido: A regra .tool-group não é mais necessária para o layout */
+
+.tool-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* A largura agora é controlada pelo grid, não precisa ser fixa */
+    aspect-ratio: 1 / 1; /* Mantém os itens quadrados */
+    border-radius: 8px;
+    background-color: var(--color-surface-2);
+    transition: transform 0.2s ease, background-color 0.4s ease;
+}
+
+.tool-item:hover {
+    transform: translateY(-3px);
+}
+
+.tool-item img {
+    width: 32px; 
+    height: 32px;
+}
+
+/* =================================================================== */
+/* === CARD DE LÍNGUAS (VERSÃO VISUAL) === */
+/* =================================================================== */
+
+#languages-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#languages-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#languages-card .card-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.languages-list-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Aumenta o espaço entre os idiomas */
+    flex-grow: 1;
+    justify-content: center; /* Centraliza verticalmente se houver espaço */
+}
+
+.language-item-visual {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-flag {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Deixa a bandeira redonda */
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    border: 2px solid var(--color-border);
+    box-shadow: 0 2px 4px var(--color-shadow-weak);
+}
+
+.language-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 4px 0; /* Ajusta a margem */
+}
+
+.language-info p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* =================================================================== */
+/* === CARD DO LAST.FM (VERSÃO ROBUSTA) === */
+/* =================================================================== */
+#lastfm-embed .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#lastfm-embed h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.lastfm-profile-link .lastfm-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text-secondary);
+    transition: fill 0.3s ease;
+}
+
+.lastfm-profile-link:hover .lastfm-icon {
+    fill: var(--cor-destaque);
+}
+
+.lastfm-loading, .lastfm-error {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.lastfm-error a {
+    color: var(--cor-destaque);
+    font-weight: 600;
 }
