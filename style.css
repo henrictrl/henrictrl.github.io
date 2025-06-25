@@ -1518,3 +1518,59 @@ body.night-mode .lb-fav-title {
 body.night-mode .lb-fav-posters img {
     border-color: #2c3440;
 }
+
+/* =================================================================== */
+/* === CARD DE FERRAMENTAS (Grid Unificado) === */
+/* =================================================================== */
+
+#tools-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#tools-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#tools-card .card-header h3 {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+/* Transformado em um grid para preencher o espaço */
+.tools-grid-grouped {
+    display: grid;
+    /* Cria colunas de no mínimo 50px que se ajustam para preencher o espaço */
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 15px;
+}
+
+/* Removido: A regra .tool-group não é mais necessária para o layout */
+
+.tool-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* A largura agora é controlada pelo grid, não precisa ser fixa */
+    aspect-ratio: 1 / 1; /* Mantém os itens quadrados */
+    border-radius: 8px;
+    background-color: var(--color-surface-2);
+    transition: transform 0.2s ease, background-color 0.4s ease;
+}
+
+.tool-item:hover {
+    transform: translateY(-3px);
+}
+
+.tool-item img {
+    width: 32px; 
+    height: 32px;
+}
