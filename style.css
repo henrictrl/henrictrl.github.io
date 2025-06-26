@@ -968,50 +968,226 @@ input.invalid, textarea.invalid {
 /* =================================================================== */
 /* === PÁGINA DE ARTIGOS V2 (Minimalista / Mosaico) === */
 /* =================================================================== */
-/* Estilos da página de artigos omitidos para brevidade, pois não foram alterados */
-.articles-page { background-color: var(--color-background); }
-.articles-header-v2 { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; position: sticky; top: 0; z-index: 1000; background-color: var(--color-background); border-bottom: 1px solid var(--color-border); }
-.articles-header-v2 .logo-link { text-decoration: none; }
-.articles-header-v2 .logo h1 { font-size: 28px; letter-spacing: -1px; color: var(--color-text-primary); margin: 0; }
-.articles-header-v2 .close-articles { font-size: 42px; line-height: 1; font-weight: 300; color: var(--color-text-secondary); text-decoration: none; transition: transform 0.3s ease, color 0.3s ease; }
-.articles-header-v2 .close-articles:hover { color: var(--cor-destaque); transform: rotate(90deg); }
-.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; animation: fadeInBlur 0.8s ease-out forwards; }
-.toolbar { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; gap: 25px; }
-.filter-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.filter-btn { background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-secondary); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-.filter-btn:hover { border-color: var(--color-text-primary); color: var(--color-text-primary); }
-.filter-btn.active { background-color: var(--cor-destaque); color: var(--color-background); border-color: var(--cor-destaque); }
-.search-wrapper { position: relative; min-width: 280px; }
-#searchInput { width: 100%; height: 40px; border-radius: 20px; padding: 0 45px 0 20px; background-color: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text-primary); font-size: 15px; }
-#searchInput:focus { outline: none; border-color: var(--cor-destaque); }
-.search-wrapper .material-symbols-outlined { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); }
-.mosaic-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 160px; gap: 20px; }
-.post-card-v2 { border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 4px 15px var(--color-shadow-weak); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; }
-.post-card-v2 a { text-decoration: none; display: block; width: 100%; height: 100%; }
-.post-card-v2:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--color-shadow-strong); }
-.card-image { width: 100%; height: 100%; position: absolute; }
-.card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.post-card-v2:hover .card-image img { transform: scale(1.05); }
-.card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #fff; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); z-index: 2; }
-.card-tag { display: inline-block; background-color: var(--cor-destaque); color: var(--color-background); padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
-.card-title { font-size: 20px; font-weight: 900; line-height: 1.3; color: #fff; margin: 0; }
-.card-excerpt { font-size: 14px; margin-top: 8px; opacity: 0.8; color: #fff; }
+
+.articles-page {
+    background-color: var(--color-background);
+}
+
+.articles-main-v2 {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 30px 40px 50px 40px;
+    padding-right: 180px; /* Espaço para a barra lateral */
+    animation: fadeInBlur 0.8s ease-out forwards;
+}
+
+/* Novo Toolbar - Layout de linha única */
+.toolbar-v2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px; /* Espaço entre os filtros e a busca */
+    margin-bottom: 60px;
+}
+
+.filter-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha se necessário */
+}
+
+/* Estilo dos Botões de Filtro */
+.filter-btn {
+    background-color: var(--color-surface-2);
+    border: 1px solid transparent;
+    color: var(--color-text-secondary);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-text-secondary);
+    color: var(--color-text-primary);
+}
+
+.filter-btn.active {
+    background-color: var(--cor-destaque);
+    color: #fff;
+    border-color: var(--cor-destaque);
+}
+
+/* Barra de Pesquisa */
+.search-wrapper {
+    position: relative;
+    min-width: 280px;
+    flex-shrink: 0; /* Impede que a barra de busca encolha */
+}
+
+#searchInput {
+    width: 100%;
+    height: 44px; /* Um pouco mais alto */
+    border-radius: 22px;
+    padding: 0 45px 0 20px;
+    background-color: var(--color-surface-2);
+    border: 1px solid transparent;
+    color: var(--color-text-primary);
+    font-size: 15px;
+}
+
+.search-wrapper .material-symbols-outlined {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+}
+
+/* Grid Mosaico */
+.mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 160px;
+    gap: 20px;
+}
+
+.post-card-v2 {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px var(--color-shadow-weak);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
+}
+
+.post-card-v2 a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.post-card-v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--color-shadow-strong);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.post-card-v2:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    z-index: 2;
+}
+
+.card-tag {
+    display: inline-block;
+    background-color: var(--cor-destaque);
+    color: var(--color-background);
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #fff;
+    margin: 0;
+}
+
+/* Tamanhos dos Cards no Mosaico */
 .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; }
 .post-card-v2.size-medium { grid-column: span 2; grid-row: span 2; }
 .post-card-v2.size-large { grid-column: span 2; grid-row: span 2; }
 .post-card-v2.size-wide { grid-column: span 2; grid-row: span 1; }
+
 .size-large .card-title { font-size: 28px; }
 .size-medium .card-title { font-size: 22px; }
 .size-small .card-title { font-size: 16px; }
 .size-small .card-tag { font-size: 10px; padding: 3px 8px; }
 .size-small .card-excerpt { display: none; }
-@media (max-width: 992px) { .mosaic-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .post-card-v2.size-large { grid-row: span 2; } }
-@media (max-width: 767px) { .articles-main-v2 { padding: 20px; } .toolbar { flex-direction: column; align-items: stretch; } .mosaic-grid { grid-template-columns: 1fr; grid-auto-rows: 300px; } .post-card-v2.size-large, .post-card-v2.size-medium, .post-card-v2.size-small { grid-column: span 1; grid-row: span 1; } .size-large .card-title, .size-medium .card-title, .size-small .card-title { font-size: 18px; } }
-/* REMOVIDO: .articles-link-wrapper pois foi integrado ao menu principal */
-.articles-main-v2 { max-width: 1600px; margin: 0 auto; padding: 30px 40px 50px 40px; }
-.logo-articles-page { text-align: center; margin-bottom: 40px; }
-.logo-articles-page h1 { font-size: 36px; letter-spacing: -1.5px; margin: 0; color: var(--color-text-primary); }
-@keyframes fadeInBlur { from { opacity: 0; filter: blur(8px); transform: translateY(10px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
+
+/* Responsividade da Página de Artigos */
+@media (max-width: 992px) {
+    .articles-main-v2 {
+        padding-right: 40px; /* Ajusta o padding quando a sidebar some */
+    }
+    .mosaic-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 200px;
+    }
+    .post-card-v2.size-large,
+    .post-card-v2.size-medium,
+    .post-card-v2.size-small {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    .post-card-v2.size-large {
+        grid-column: span 4;
+        grid-row: span 2;
+    }
+}
+
+@media (max-width: 767px) {
+    .articles-main-v2 {
+        padding: 20px;
+    }
+    .toolbar-v2 {
+        flex-direction: column;
+        align-items: stretch; /* Alinha itens para ocupar a largura */
+        gap: 25px;
+    }
+    .toolbar-v2 .filter-pills {
+        justify-content: center;
+        order: 2; /* Coloca os filtros depois da busca em telas pequenas */
+    }
+    .toolbar-v2 .search-wrapper {
+        order: 1;
+    }
+    .mosaic-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px;
+    }
+    .post-card-v2.size-large,
+    .post-card-v2.size-medium,
+    .post-card-v2.size-small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .size-large .card-title,
+    .size-medium .card-title,
+    .size-small .card-title {
+        font-size: 18px;
+    }
+}
 
 /* =================================================================== */
 /* === PÁGINA SOBRE MIM === */

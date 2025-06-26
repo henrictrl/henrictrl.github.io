@@ -582,6 +582,31 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll);
     
     // =====================================================================
+    // === LÓGICA DE TRANSIÇÃO DE PÁGINA ===
+    // =====================================================================
+    const mainContainer = document.querySelector('.container.fade-in-on-load');
+    const allLinks = document.querySelectorAll('a');
+
+    allLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Verifica se é um link para outra página .html e não um link interno (#) ou externo
+            if (href && href.endsWith('.html') && !href.startsWith('http') && !href.startsWith('#')) {
+                e.preventDefault(); 
+
+                if (mainContainer) {
+                    mainContainer.classList.add('fade-out-on-exit');
+                }
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // Deve corresponder à duração da animação fadeOutOnExit
+            }
+        });
+    });
+    
+    // =====================================================================
     // === INICIALIZAÇÃO DA PÁGINA ===
     // =====================================================================
     applySavedHighlightColor(); 
