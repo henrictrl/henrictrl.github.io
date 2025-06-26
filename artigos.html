@@ -41,25 +41,28 @@
         </div>
     </nav>
 
-    <main class="articles-main-v2">
-        <div class="logo-articles-page">
-             <h1><span class="logo-highlight">Henrique</span> Marinhos</h1>
-        </div>
+    <main class="articles-main-v2 fade-in-on-load">
+    <header class="about-header">
+        <h1>Artigos</h1>
+    </header>
+
+    <div class="toolbar-v2">
+    <div class="filter-pills">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="artigos">Artigos</button>
+        <button class="filter-btn" data-filter="cabines">Cabines</button>
+        <button class="filter-btn" data-filter="cinema">Cinema</button>
+        <button class="filter-btn" data-filter="literatura">Literatura</button>
+        <button class="filter-btn" data-filter="musica">Música</button>
+    </div>
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
+        <span class="material-symbols-outlined">search</span>
+    </div>
+</div>
         
-        <div class="toolbar">
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
-                <span class="material-symbols-outlined">search</span>
-            </div>
-            <div class="filter-pills">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="artigos">Artigos</button>
-                <button class="filter-btn" data-filter="cabines">Cabines</button>
-                <button class="filter-btn" data-filter="cinema">Cinema</button>
-                <button class="filter-btn" data-filter="literatura">Literatura</button>
-                <button class="filter-btn" data-filter="musica">Música</button>
-            </div>
-        </div>
+        <div class="toolbar-section"></div>
+    </div>
 
         <div class="mosaic-grid">
             <article class="post-card-v2 size-large" data-category="musica"><a href="#"><div class="card-image"><img src="https://placehold.co/800x800/ff4948/f8f8f8?text=Música" alt=""></div><div class="card-content"><span class="card-tag">Música</span><h3 class="card-title">A Análise Profunda do Álbum do Ano</h3></div></a></article>

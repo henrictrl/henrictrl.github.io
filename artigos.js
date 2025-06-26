@@ -88,6 +88,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================================================
+    // === LÓGICA DE TRANSIÇÃO DE PÁGINA ===
+    // =====================================================================
+    const mainContainer = document.querySelector('.articles-main-v2.fade-in-on-load');
+    const allLinks = document.querySelectorAll('a');
+
+    allLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Verifica se é um link para outra página .html e não um link de âncora ou externo
+            if (href && href.endsWith('.html') && !href.startsWith('http') && !href.startsWith('#')) {
+                e.preventDefault(); 
+                if (mainContainer) {
+                    mainContainer.classList.add('fade-out-on-exit');
+                }
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); 
+            }
+        });
+    });
+
+    // =====================================================================
     // === INICIALIZAÇÃO E EVENT LISTENERS GLOBAIS ===
     // =====================================================================
 
