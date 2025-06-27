@@ -10,26 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Aplica a cor de destaque guardada no localStorage.
-     * Esta função é chamada quando a página carrega.
+     * Aplica a cor de destaque guardada do localStorage na página principal de artigos.
      */
     const applySavedHighlightColor = () => {
-        const savedColor = localStorage.getItem('highlightColor');
-        if (savedColor) {
-            document.documentElement.style.setProperty('--cor-destaque', savedColor);
+        // Verifica se estamos na página de artigos principal (que tem a barra de filtros)
+        if (document.querySelector('.toolbar-v2')) {
+            const savedColor = localStorage.getItem('highlightColor');
+            if (savedColor) {
+                document.documentElement.style.setProperty('--cor-destaque', savedColor);
+            }
         }
     };
 
     /**
-     * Procura por artigos com uma cor de destaque definida e pinta a sua tag.
+     * Procura por artigos de música com uma cor de destaque definida e pinta a sua tag.
      */
-    const applyHighlightColorToTags = () => {
-        const articlesWithColor = document.querySelectorAll('[data-highlight-color]');
-        articlesWithColor.forEach(article => {
+    const applyHighlightColorToMusicTags = () => {
+        // Seleciona apenas os artigos com a categoria "musica" e que tenham o atributo de cor
+        const musicArticlesWithColor = document.querySelectorAll('article[data-category="musica"][data-highlight-color]');
+        
+        musicArticlesWithColor.forEach(article => {
             const color = article.dataset.highlightColor;
             const tag = article.querySelector('.card-tag');
             if (tag && color) {
                 tag.style.backgroundColor = color;
+                // Opcional: Mudar a cor do texto da tag para garantir a legibilidade
+                tag.style.color = '#fff'; 
             }
         });
     };
@@ -52,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
             const matchesFilter = (activeFilter === 'all') || (cardCategory === activeFilter);
             const matchesSearch = cardTitle.includes(searchTerm);
-            card.style.display = (matchesFilter && matchesSearch) ? 'block' : 'none';
+            card.style.display = (matchesFilter && matchesSearch) ? 'flex' : 'none'; // Usar flex para consistência
         });
     };
 
@@ -93,12 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
     const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
-
-    // CORREÇÃO: Aplica a cor guardada APENAS se estiver na página principal de artigos
-    // (verificando pela presença da barra de filtros).
-    if (document.querySelector('.toolbar-v2')) {
-        applySavedHighlightColor();
-    }
-    
-    applyHighlightColorToTags();
+    applySavedHighlightColor();
+    applyHighlightColorToMusicTags();
 });
