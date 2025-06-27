@@ -1987,19 +1987,17 @@ body.night-mode .lb-fav-posters img {
 /* =================================================================== */
 /* === ESTILO DO COLOR PICKER MOVIDO (MOBILE) === */
 /* =================================================================== */
-
 @media (max-width: 768px) {
     /*
-     * Quando o color-picker-container é movido para ser um filho
-     * direto do .hero-section, estes estilos são aplicados.
+     * Quando o color-picker-container é movido para DEPOIS da hero-section
+     * em telas pequenas, estes estilos são aplicados.
     */
-    .hero-section > .color-picker-container {
-        margin-top: 30px;
-        align-items: center; /* Centraliza o input e os sliders */
-    }
-
-    .hero-section > .color-picker-container .hex-input {
-        max-width: 150px; /* <--- CORREÇÃO APLICADA */
+    .hero-section + .color-picker-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin: 40px auto; /* Adiciona espaçamento vertical e centraliza horizontalmente */
     }
 }
 

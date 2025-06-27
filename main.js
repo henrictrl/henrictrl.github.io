@@ -292,11 +292,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =====================================================================
-    // === SELETOR DE CORES (IRO.JS) ===
+    // === SELETOR DE CORES (IRO.JS) E LÓGICA RESPONSIVA ===
     // =====================================================================
     
     const pickerContainer = document.querySelector('.color-picker-container');
     const hexInput = document.getElementById('hexInput');
+    const heroSection = document.querySelector('.hero-section');
+    const image1Container = document.getElementById('image1');
 
     if (pickerContainer && hexInput && typeof iro !== 'undefined') {
         
@@ -344,24 +346,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA CORRIGIDA PARA POSICIONAMENTO DO COLOR PICKER ---
     const handleColorPickerLayout = () => {
-        if (!heroSection || !image1Container || !pickerContainer) return;
+        if (!heroSection || !image1Container || !pickerContainer) {
+            return;
+        }
 
         if (window.innerWidth <= 768) {
-            // Se a tela for pequena, move o picker para o hero-section se ainda não estiver lá
-            if (pickerContainer.parentElement !== heroSection) {
-                heroSection.appendChild(pickerContainer);
+            // Mobile: Se o elemento seguinte ao hero-section não for o picker, mova-o para lá.
+            if (heroSection.nextElementSibling !== pickerContainer) {
+                heroSection.after(pickerContainer);
             }
         } else {
-            // Se a tela for grande, move o picker de volta para a imagem se ainda não estiver lá
+            // Desktop: Se o pai do picker não for o container da imagem, mova-o de volta.
             if (pickerContainer.parentElement !== image1Container) {
                 image1Container.appendChild(pickerContainer);
             }
         }
     };
 
+    // Executa no carregamento e no redimensionamento da tela
     handleColorPickerLayout();
     window.addEventListener('resize', handleColorPickerLayout);
+
 
     // =====================================================================
     // === BOTÃO DE DOWNLOAD ===
@@ -408,6 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cascadeContainer) { 
         cascadeContainer.addEventListener('click', (event) => {
+            // A verificação `!pickerContainer.contains(event.target)` agora é ainda mais importante
             if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target) && hexInput && !hexInput.contains(event.target)) {
                 image1.classList.toggle('top-image');
                 image1.classList.toggle('bottom-image');
