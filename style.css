@@ -2012,3 +2012,19 @@ body.night-mode .lb-fav-posters img {
     align-self: center; /* Centraliza o botão no eixo transversal (horizontal) */
     margin-bottom: 50px; /* Cria um espaço entre o botão e a lista de links */
 }
+
+@media (min-width: 993px) {
+    .experience-section-v2,
+    .portfolio-section-v2 {
+        padding-right: 140px; /* Adiciona um respiro para o menu lateral */
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px; /* Garante um espaço acima do rodapé */
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
