@@ -56,52 +56,56 @@
     </nav>
 
     <main class="articles-main-v2 fade-in-on-load">
-    <header class="about-header">
-        <h1>Artigos</h1>
-    </header>
+        <header class="about-header">
+            <h1>Artigos</h1>
+        </header>
 
-    <div class="toolbar-v2">
-        <div class="filter-pills">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="artigos">Artigos</button>
-            <button class="filter-btn" data-filter="cabines">Cabines</button>
-            <button class="filter-btn" data-filter="cinema">Cinema</button>
-            <button class="filter-btn" data-filter="literatura">Literatura</button>
-            <button class="filter-btn" data-filter="musica">Música</button>
+        <div class="toolbar-v2">
+            <div class="filter-pills">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="artigos">Artigos</button>
+                <button class="filter-btn" data-filter="cabines">Cabines</button>
+                <button class="filter-btn" data-filter="cinema">Cinema</button>
+                <button class="filter-btn" data-filter="literatura">Literatura</button>
+                <button class="filter-btn" data-filter="musica">Música</button>
+            </div>
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
+                <span class="material-symbols-outlined">search</span>
+            </div>
         </div>
-        <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
-            <span class="material-symbols-outlined">search</span>
-        </div>
-    </div>
         
-<div class="mosaic-grid">
-    <article class="post-card-v2" data-category="cinema" data-highlight-color="#3c4cae" data-date="2023-02-28">
-        <a href="artigo-avatar.html" class="card-link-wrapper">
-            <div class="card-image-container">
-                <img src="images/artigos-imagens/avatar-familia-na-agua.png" alt="Família Na'vi na água em Pandora">
-            </div>
-            <div class="card-text-content">
-                <span class="card-tag">Cinema</span>
-                <h3 class="card-title">Avatar: O Caminho da Água oferece um banquete aos olhos, mas não ao coração</h3>
-                <p class="card-date">28/02/2023</p>
-            </div>
-        </a>
-    </article>
+        <div class="mosaic-grid">
+            
+            <article class="post-card-v2" data-category="cinema" data-date="2023-02-28">
+                <a href="artigo-avatar.html" class="card-link-wrapper">
+                    <div class="card-image-container">
+                       <div class="card-gradient"></div>
+                        <img src="images/artigos-imagens/avatar-familia-na-agua.png" alt="Família Na'vi na água em Pandora">
+                    </div>
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">28/02/2023</p>
+                        <h3 class="card-title">Avatar: O Caminho da Água oferece um banquete aos olhos, mas não ao coração</h3>
+                    </div>
+                </a>
+            </article>
 
-    <article class="post-card-v2" data-category="musica" data-highlight-color="#27562a" data-date="2023-02-02">
-        <a href="artigo-sza-ctrl.html" class="card-link-wrapper">
-            <div class="card-image-container">
-                <img src="images/artigos-imagens/sza-capa-computadores.jpg" alt="SZA sentada em meio a uma pilha de monitores de computador antigos">
+            <article class="post-card-v2" data-category="musica" data-date="2023-02-02">
+                <a href="artigo-sza-ctrl.html" class="card-link-wrapper">
+                    <div class="card-image-container">
+                        <img src="images/artigos-imagens/sza-capa-computadores.jpg" alt="SZA sentada em meio a uma pilha de monitores de computador antigos">
+                    <div class="card-gradient"></div>
+                    </div>
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">02/02/2023</p>
+                        <h3 class="card-title">Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar</h3>
+                    </div>
+                </a>
+            </article>
+
             </div>
-            <div class="card-text-content">
-                <span class="card-tag">Música</span>
-                <h3 class="card-title">Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar</h3>
-                <p class="card-date">02/02/2023</p>
-            </div>
-        </a>
-    </article>
-</div>
     </main>
 
     <script src="artigos.js" defer></script>

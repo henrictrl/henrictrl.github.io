@@ -24,13 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Procura por artigos com uma cor de destaque definida e pinta a sua tag.
      */
-    const applyHighlightColorToTags = () => {
-        const articlesWithColor = document.querySelectorAll('[data-highlight-color]');
+     const applyHighlightColorToCards = () => {
+        const articlesWithColor = document.querySelectorAll('.post-card-v2[data-highlight-color]');
         articlesWithColor.forEach(article => {
             const color = article.dataset.highlightColor;
-            const tag = article.querySelector('.card-tag');
-            if (tag && color) {
-                tag.style.backgroundColor = color;
+            if (color) {
+                // Define a cor de destaque em uma variável CSS local para o card
+                article.style.setProperty('--highlight-color', color);
+
+                // Muda a cor da tag para a cor de destaque para manter a consistência
+                const tag = article.querySelector('.card-tag');
+                if(tag) {
+                    tag.style.backgroundColor = color;
+                    // Você pode adicionar uma lógica para decidir a cor do texto da tag
+                    // com base no brilho da cor de destaque para melhor legibilidade.
+                    // Por agora, manterá a cor padrão.
+                }
             }
         });
     };
@@ -118,6 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
     applySavedHighlightColor();
-    applyHighlightColorToTags();
+    applyHighlightColorToCards();
     sortArticlesByDate(); // Chama a nova função para ordenar os artigos
 });
