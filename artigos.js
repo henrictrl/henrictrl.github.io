@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
      * Aplica a cor de destaque guardada do localStorage na página principal de artigos.
      */
     const applySavedHighlightColor = () => {
-        // Verifica se estamos na página de artigos principal (que tem a barra de filtros)
         if (document.querySelector('.toolbar-v2')) {
             const savedColor = localStorage.getItem('highlightColor');
             if (savedColor) {
@@ -23,21 +22,40 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Procura por artigos de música com uma cor de destaque definida e pinta a sua tag.
+     * Procura por artigos com uma cor de destaque definida e pinta a sua tag.
      */
-    const applyHighlightColorToMusicTags = () => {
-        // Seleciona apenas os artigos com a categoria "musica" e que tenham o atributo de cor
-        const musicArticlesWithColor = document.querySelectorAll('article[data-category="musica"][data-highlight-color]');
-        
-        musicArticlesWithColor.forEach(article => {
+    const applyHighlightColorToTags = () => {
+        const articlesWithColor = document.querySelectorAll('[data-highlight-color]');
+        articlesWithColor.forEach(article => {
             const color = article.dataset.highlightColor;
             const tag = article.querySelector('.card-tag');
             if (tag && color) {
                 tag.style.backgroundColor = color;
-                // Opcional: Mudar a cor do texto da tag para garantir a legibilidade
-                tag.style.color = '#fff'; 
             }
         });
+    };
+
+    /**
+     * [NOVO] Ordena os cards no grid pela data, do mais recente para o mais antigo.
+     */
+    const sortArticlesByDate = () => {
+        const grid = document.querySelector('.mosaic-grid');
+        if (!grid) return;
+
+        // Converte os cards (NodeList) para um Array para poder usar o sort()
+        const articles = Array.from(grid.children);
+
+        articles.sort((a, b) => {
+            // Pega as datas do atributo data-date
+            const dateA = new Date(a.dataset.date);
+            const dateB = new Date(b.dataset.date);
+            
+            // Ordena em ordem decrescente (mais recente primeiro)
+            return dateB - dateA;
+        });
+
+        // Limpa o grid e adiciona os artigos na nova ordem
+        articles.forEach(article => grid.appendChild(article));
     };
     
     // =====================================================================
@@ -58,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
             const matchesFilter = (activeFilter === 'all') || (cardCategory === activeFilter);
             const matchesSearch = cardTitle.includes(searchTerm);
-            card.style.display = (matchesFilter && matchesSearch) ? 'flex' : 'none'; // Usar flex para consistência
+            card.style.display = (matchesFilter && matchesSearch) ? 'flex' : 'none';
         });
     };
 
@@ -100,5 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
     applySavedHighlightColor();
-    applyHighlightColorToMusicTags();
+    applyHighlightColorToTags();
+    sortArticlesByDate(); // Chama a nova função para ordenar os artigos
 });
