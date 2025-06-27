@@ -344,6 +344,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const handleColorPickerLayout = () => {
+        if (!heroSection || !image1Container || !pickerContainer) return;
+
+        if (window.innerWidth <= 768) {
+            // Se a tela for pequena, move o picker para o hero-section se ainda não estiver lá
+            if (pickerContainer.parentElement !== heroSection) {
+                heroSection.appendChild(pickerContainer);
+            }
+        } else {
+            // Se a tela for grande, move o picker de volta para a imagem se ainda não estiver lá
+            if (pickerContainer.parentElement !== image1Container) {
+                image1Container.appendChild(pickerContainer);
+            }
+        }
+    };
+
+    handleColorPickerLayout();
+    window.addEventListener('resize', handleColorPickerLayout);
+
     // =====================================================================
     // === BOTÃO DE DOWNLOAD ===
     // =====================================================================
