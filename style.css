@@ -658,6 +658,7 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
     border-radius: 5px;
     color: var(--color-text-primary);
     font-size: 16px;
+    font-family: inherit; /* <-- Adicione esta linha */
     transition: all 0.3s ease;
 }
 
@@ -877,7 +878,7 @@ input.invalid, textarea.invalid {
     .contact-form,
     .contact-info {
         flex: auto;
-        width: 100%;
+        width: 90%;
         max-width: 500px;
     }
     .contact-form {
@@ -917,11 +918,15 @@ input.invalid, textarea.invalid {
     .hero-text {
         max-width: 100%;
     }
+
+    .cta-button {
+    margin-bottom: 25px; 
+}
     
     .hero-image {
         min-height: 400px;
         width: 150%;
-        margin-top: 50px;
+        margin-top: 25px;
     }
     #cascadeContainer .image-with-banner-container {
         max-width: 85%;
@@ -951,8 +956,10 @@ input.invalid, textarea.invalid {
     }
 
    .grid-container {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns: 1fr;
+    padding: 0 50px; /* Adiciona margens laterais para diminuir os itens */
+    gap: 100px;      /* Aumenta o espaço vertical entre os projetos */
+}
 
     /* Sobre Mim Responsivo */
     .about-me-main {
@@ -1997,7 +2004,7 @@ body.night-mode .lb-fav-posters img {
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        margin: 40px auto; /* Adiciona espaçamento vertical e centraliza horizontalmente */
+        margin: 25px auto 40px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
     }
 }
 
