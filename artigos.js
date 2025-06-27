@@ -143,3 +143,27 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(savedLanguage);
 
 });
+
+/* =================================================================== */
+/* === LÓGICA DO MENU HAMBÚRGUER (MOBILE) === */
+/* =================================================================== */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+if (hamburgerBtn && mobileNav && mobileMenuOverlay) {
+    const toggleMenu = () => {
+        const isMenuOpen = hamburgerBtn.classList.contains('active');
+
+        hamburgerBtn.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        mobileMenuOverlay.classList.toggle('visible');
+        document.body.classList.toggle('modal-open'); // Reutiliza a classe que trava o scroll
+
+        // Atualiza o atributo aria-expanded para acessibilidade
+        hamburgerBtn.setAttribute('aria-expanded', !isMenuOpen);
+    };
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    mobileMenuOverlay.addEventListener('click', toggleMenu);
+}

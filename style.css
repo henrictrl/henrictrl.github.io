@@ -1855,3 +1855,155 @@ body.night-mode .lb-fav-posters img {
     color: var(--cor-destaque);
     font-weight: 600;
 }
+
+/* =================================================================== */
+/* === MENU HAMBÚRGUER E NAVEGAÇÃO MOBILE === */
+/* =================================================================== */
+
+.hamburger-btn {
+    display: none; /* Escondido por padrão em telas grandes */
+    position: fixed;
+    top: 45px;
+    right: 30px;
+    z-index: 1005; /* Mais alto que o conteúdo, mas abaixo do menu mobile */
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-surface-1);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    margin: 4px auto;
+    transition: all 0.4s ease;
+}
+
+/* Animação para o 'X' */
+.hamburger-btn.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--backdrop-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 1002;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.mobile-menu-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-surface-1);
+    z-index: 1003;
+    padding: 80px 30px 30px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--color-border);
+}
+
+.mobile-nav.open {
+    transform: translateX(0);
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 15px 10px;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav a:hover {
+    background-color: var(--color-surface-2);
+    color: var(--cor-destaque);
+}
+
+.mobile-nav .nav-separator {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--color-border);
+}
+
+.mobile-nav .language-switcher {
+    margin-top: auto; /* Empurra para o final */
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    justify-content: center;
+}
+
+/* =================================================================== */
+/* === ATUALIZAÇÃO DE REGRAS DE RESPONSIVIDADE === */
+/* =================================================================== */
+
+/* Em telas com 992px de largura ou menos... */
+@media (max-width: 992px) {
+    .sidebar-nav {
+        display: none; /* Esconde a barra lateral original */
+    }
+    .hamburger-btn {
+        display: block; /* Mostra o botão de hambúrguer */
+    }
+}
+
+/* =================================================================== */
+/* === ESTILO DO COLOR PICKER MOVIDO (MOBILE) === */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+    /*
+     * Quando o color-picker-container é movido para ser um filho
+     * direto do .hero-section, estes estilos são aplicados.
+    */
+    .hero-section > .color-picker-container {
+        margin-top: 30px;
+        align-items: center; /* Centraliza o input e os sliders */
+    }
+
+    .hero-section > .color-picker-container .hex-input {
+        max-width: 150px; /* <--- CORREÇÃO APLICADA */
+    }
+}
+
+.mobile-nav .theme-toggle-button {
+    align-self: center; /* Centraliza o botão no eixo transversal (horizontal) */
+    margin-bottom: 50px; /* Cria um espaço entre o botão e a lista de links */
+}
