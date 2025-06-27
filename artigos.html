@@ -12,71 +12,46 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="icon" href="images/profile.ico" type="image/x-icon">
 
-<button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
-
 </head>
 <body class="articles-page">
 
-    <body class="about-page">
-
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
         <ul>
-
-<button id="theme-toggle" class="theme-toggle-button" title="Alternar tema">
-    <div class="slider-bg"></div>
-    <span class="material-symbols-outlined icon-sun">light_mode</span>
-    <span class="material-symbols-outlined icon-moon">dark_mode</span>
-</button>
-
-            <li><a href="./index.html#inicio" data-translate-key="navHome">Início</a></li>
-            <li><a href="./index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="./index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="./index.html#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="./sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="./artigos.html" data-translate-key="navArticles">Artigos</a></li>
-        </ul>
-         <div class="language-switcher">
-            <button class="lang-button" data-lang="pt" title="Português">
-                 <img src="./images/brazil.png" alt="Bandeira do Brasil">
-            </button>
-            <button class="lang-button" data-lang="en" title="English">
-                 <img src="./images/usa.png" alt="United States Flag">
-            </button>
-            <button class="lang-button" data-lang="es" title="Español">
-                 <img src="./images/spain.png" alt="Bandera de España">
-            </button>
-        </div>
-    </nav>
-
-    <nav class="sidebar-nav">
-        <button id="theme-toggle" class="theme-toggle-button" title="Alternar tema">
-            <div class="slider-bg"></div>
-            <span class="material-symbols-outlined icon-sun">light_mode</span>
-            <span class="material-symbols-outlined icon-moon">dark_mode</span>
-        </button>
-        <ul>
-            <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
-            <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="artigos.html" class="active" data-translate-key="navArticles">Artigos</a></li>
+            <button class="theme-toggle-button" title="Alternar tema"><div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span class="material-symbols-outlined icon-moon">dark_mode</span></button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html" class="active">Artigos</a></li>
         </ul>
         <div class="language-switcher">
-            <button class="lang-button" data-lang="pt" title="Português">
-                <img src="images/brazil.png" alt="Bandeira do Brasil">
-            </button>
-            <button class="lang-button" data-lang="en" title="English">
-                <img src="images/usa.png" alt="United States Flag">
-            </button>
-            <button class="lang-button" data-lang="es" title="Español">
-                <img src="images/spain.png" alt="Bandera de España">
-            </button>
+             <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png" alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png" alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png" alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema"><div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span class="material-symbols-outlined icon-moon">dark_mode</span></button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="images/brazil.png" alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="images/usa.png" alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="images/spain.png" alt="Bandera de España"></button>
         </div>
     </nav>
 
@@ -86,32 +61,35 @@
     </header>
 
     <div class="toolbar-v2">
-    <div class="filter-pills">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="artigos">Artigos</button>
-        <button class="filter-btn" data-filter="cabines">Cabines</button>
-        <button class="filter-btn" data-filter="cinema">Cinema</button>
-        <button class="filter-btn" data-filter="literatura">Literatura</button>
-        <button class="filter-btn" data-filter="musica">Música</button>
-    </div>
-    <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
-        <span class="material-symbols-outlined">search</span>
-    </div>
-</div>
-        
-        <div class="toolbar-section"></div>
-    </div>
-
-        <div class="mosaic-grid">
-            <article class="post-card-v2 size-large" data-category="musica"><a href="#"><div class="card-image"><img src="https://placehold.co/800x800/ff4948/f8f8f8?text=Música" alt=""></div><div class="card-content"><span class="card-tag">Música</span><h3 class="card-title">A Análise Profunda do Álbum do Ano</h3></div></a></article>
-            <article class="post-card-v2 size-small" data-category="cinema"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/0b1215/f8f8f8?text=Cinema" alt=""></div><div class="card-content"><span class="card-tag">Cinema</span><h3 class="card-title">Curta-metragem premiado</h3></div></a></article>
-            <article class="post-card-v2 size-small" data-category="literatura"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/2a2a2a/f8f8f8?text=Literatura" alt=""></div><div class="card-content"><span class="card-tag">Literatura</span><h3 class="card-title">Reflexões sobre o agora</h3></div></a></article>
-            <article class="post-card-v2 size-medium" data-category="cinema"><a href="#"><div class="card-image"><img src="https://placehold.co/800x400/888888/f8f8f8?text=Cinema" alt=""></div><div class="card-content"><span class="card-tag">Cinema</span><h3 class="card-title">O impacto dos clássicos de ficção científica na cultura pop</h3></div></a></article>
-            <article class="post-card-v2 size-small" data-category="artigos"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/f0f0f0/0b1215?text=Artigos" alt=""></div><div class="card-content"><span class="card-tag">Artigos</span><h3 class="card-title">Um artigo genérico</h3></div></a></article>
-            <article class="post-card-v2 size-small" data-category="cabines"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/e0e0e0/0b1215?text=Cabines" alt=""></div><div class="card-content"><span class="card-tag">Cabines</span><h3 class="card-title">Cabine de Imprensa</h3></div></a></article>
-            <article class="post-card-v2 size-small" data-category="cinema"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/d0d0d0/0b1215?text=Cinema" alt=""></div><div class="card-content"><span class="card-tag">Cinema</span><h3 class="card-title">Animações adultas</h3></div></a></article>
+        <div class="filter-pills">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="artigos">Artigos</button>
+            <button class="filter-btn" data-filter="cabines">Cabines</button>
+            <button class="filter-btn" data-filter="cinema">Cinema</button>
+            <button class="filter-btn" data-filter="literatura">Literatura</button>
+            <button class="filter-btn" data-filter="musica">Música</button>
         </div>
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
+            <span class="material-symbols-outlined">search</span>
+        </div>
+    </div>
+        
+    <div class="mosaic-grid">
+        <article class="post-card-v2 size-large" data-category="musica" data-highlight-color="#27562a">
+            <a href="artigo-sza-ctrl.html">
+                <div class="card-image"><img src="images/artigos imagens/sza-capa-computadores.jpg" alt="SZA sentada em meio a uma pilha de monitores de computador antigos"></div>
+                <div class="card-content">
+                    <span class="card-tag">Música</span>
+                    <h3 class="card-title">Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar</h3>
+                </div>
+            </a>
+        </article>
+        
+        <article class="post-card-v2 size-small" data-category="cinema"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/0b1215/f8f8f8?text=Cinema" alt=""></div><div class="card-content"><span class="card-tag">Cinema</span><h3 class="card-title">Curta-metragem premiado</h3></div></a></article>
+        <article class="post-card-v2 size-small" data-category="musica" data-highlight-color="#bf3b3b"><a href="#"><div class="card-image"><img src="https://placehold.co/400x400/bf3b3b/fff?text=Outra+Música" alt=""></div><div class="card-content"><span class="card-tag">Música</span><h3 class="card-title">Outro Artigo de Música</h3></div></a></article>
+        <article class="post-card-v2 size-medium" data-category="cinema"><a href="#"><div class="card-image"><img src="https://placehold.co/800x400/888888/f8f8f8?text=Cinema" alt=""></div><div class="card-content"><span class="card-tag">Cinema</span><h3 class="card-title">O impacto dos clássicos de ficção científica na cultura pop</h3></div></a></article>
+    </div>
     </main>
 
     <script src="artigos.js" defer></script>

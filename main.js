@@ -264,32 +264,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
     // === LÓGICA DE TEMA (DIURNO/NOTURNO) ===
     // =====================================================================
-    const themeToggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
+const body = document.body;
 
-    const applyTheme = (theme) => {
-        if (theme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
-        }
-    };
-
-    const savedTheme = localStorage.getItem('theme') || 'day';
-    applyTheme(savedTheme);
-
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            const isNightMode = body.classList.contains('night-mode');
-            if (isNightMode) {
-                localStorage.setItem('theme', 'day');
-                applyTheme('day');
-            } else {
-                localStorage.setItem('theme', 'night');
-                applyTheme('night');
-            }
-        });
+const applyTheme = (theme) => {
+    if (theme === 'night') {
+        body.classList.add('night-mode');
+    } else {
+        body.classList.remove('night-mode');
     }
+};
+
+themeToggleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const isNightMode = body.classList.contains('night-mode');
+        const newTheme = isNightMode ? 'day' : 'night';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+    });
+});
 
     // =====================================================================
     // === SELETOR DE CORES (IRO.JS) E LÓGICA RESPONSIVA ===
