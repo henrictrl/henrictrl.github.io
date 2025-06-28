@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #5d9c3d;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">02 de Fevereiro, 2023</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/sza-capa-computadores.jpg"
+            alt="Capa do álbum CTRL (Deluxe) da SZA">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            No meio de 2022, antes de lançar o então recente <i><a
+                    href="https://portalpopline.com.br/sos-sza-billboard-200-quinta-semana/">SOS</a></i>, Solána Rowe
+            comemorou os <a href="https://personaunesp.com.br/ctrl-5-anos/">5 anos de <i>Ctrl</i></a>, seu potente
+            trabalho de estreia. Em meio às festividades, SZA impressionou novamente ao lançar, em 9 de junho, a versão
+            <i>deluxe</i> do CD, provando que mesmo em obras aclamadas ainda há como melhorar. Relembrando um dos <a
+                href="https://personaunesp.com.br/os-melhores-albuns-de-2017/">melhores álbuns de 2017</a>, sua nova
+            versão é composta por mais sete faixas até então inéditas, trazendo uma completude ao álbum como se sempre
+            estivessem ali, prolongando a melancólica experiência de <i>R&B</i> que deu tão certo meia década atrás.
+        </p>
+        <p>
+            Antes de liberar <i>Ctrl</i>, seu mais íntimo e primeiro disco, após o lançamento do <i>EP Z</i> (2014), SZA
+            se distanciou das produções autorais para focar em seu trabalho como compositora, sendo co-escritora de
+            <i><a href="https://www.youtube.com/watch?v=0Kg9xRooTVk">Feeling Myself</a></i>, parceria entre Beyoncé e
+            Nicki Minaj, além de <i><a href="https://www.youtube.com/watch?v=Ksr3fWBT7is">Consideration</a></i>, escrita
+            para Rihanna em 2016. No ano seguinte ao seu <i>debut</i>, o álbum conquistou cinco indicações ao <a
+                href="https://www.grammy.com/artists/sza/188686"><i>Grammy</i></a>, incluindo Melhor Álbum Urbano
+            Contemporâneo e Melhor Artista Revelação. Pela faixa intitulada <i><a
+                    href="https://www.youtube.com/watch?v=cMD63TwzB1o">The Weekend</a></i>, recebeu a indicação de
+            Melhor Performance de <i>R&B</i>, e por <i>Love Galore</i>, canção com Travis Scott, a indicação de Melhor
+            Performance de <i>Rap/Sung</i>. <i>Supermodel</i>, faixa de abertura de <i>Ctrl</i>, rendeu a indicação de
+            Melhor Canção de <i>R&B</i>.
+        </p>
+        <blockquote>“Este é só um presente para o ‘camp’ Ctrl. Nada mais nada menos. Se você é da família você entende.
+            5 anos é muito tempo. Obrigado por mudar minha vida. Amo vocês. Feliz aniversário 🤍”</blockquote>
+        <div class="image-container">
+            <img src="images/artigos-imagens/sza-cabelo-amarelo.png" alt="SZA com cabelo amarelo cantando em um palco.">
+            <figcaption>Em 2018, SZA ganhou um prêmio na Billboard Music Awards como Melhor Artista Feminina R&B (Foto:
+                Kevin Mazur)</figcaption>
+        </div>
+        <p>
+            É de um consenso absurdo a intimidade que <i>Ctrl</i> traz, das canções mais longas aos interlúdios. SZA
+            realizou um trabalho completo, como se abrisse seu diário e seu coração a nós. Trazendo <i>R&B</i>,
+            <i>soul</i>, Música Eletrônica, <i>indie</i> e <i>hip-hop</i>, seu <i>debut</i> não surpreende ao ter sido
+            indicado a tantos prêmios, além de justificar plenamente sua permanência por <a
+                href="https://www.billboard.com/artist/sza/chart-history/hsi/">270 semanas na <i>Billboard 200</i></a>.
+            Em <a href="https://music.apple.com/us/station/essential-album-ctrl/ra.1626424822">entrevista à <i>Apple
+                    Music</i></a>, ela relatou que realizou um sonho de infância ao escrever <i><a
+                    href="https://www.youtube.com/watch?v=Tiixq9rT_J0">Supermodel</a></i> junto a Pharrell Williams, e
+            celebrou sua finalização. A faixa é uma carta direta a alguém que ela precisa, revelando toda sua
+            necessidade e apego em versos que dizem: “<i>Por que não consigo ficar sozinha comigo mesma?/Queria estar
+                confortável só comigo/Mas preciso de você</i>”.
+        </p>
+        <p>
+            Já a segunda canção do disco, intitulada <i><a href="https://www.youtube.com/watch?v=hHXfCOjb3fk">Love
+                    Galore</a></i>, foi feita em parceria com Travis Scott, artista que SZA colaborou também em <i><a
+                    href="https://www.youtube.com/watch?v=IfCuarZqJzM">Power is Power</a></i>, canção que integra o
+            álbum <i>For The Throne (Music Inspired by the HBO Series Game of Thrones)</i>. Na faixa de 2017, ela
+            questiona seu amor sobre os motivos que o fazem recorrer a ela, já que possui outra mulher. Mas, além disso,
+            suas letras conversam com a calma melodia e batidas clássicas do <i>R&B</i> sobre a importância de amar
+            tanto quanto conseguimos: “<i>Love long as we got”.</i> Ao término, SZA finaliza com uma das várias
+            interações que realiza com a mãe ao telefone, a alertando para falar por si mesma e não permitindo que a
+            tomem como idiota.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/embed/eTkxsPBTrnk?feature=oembed"
+                title="SZA, The Weeknd, Travis Scott - “Power Is Power” Lyric Video| Game Of Thrones (HBO)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            Em <a
+                href="https://www.theguardian.com/music/2017/jul/29/sza-record-company-took-my-hard-drive-beyonce-kendrick-lamar">entrevista
+                ao <i>The Guardian</i></a>, a artista revelou que, devido a intimidade exposta nas letras de
+            <i>Ctrl</i>, sua mãe provavelmente se sente mortificada, mas ainda assim a ama demais. Em comparação com o
+            seu disco, ela completa com uma fala de sua mãe, referindo-se ao trabalho de Beyoncé: “<i>Sinto-me nua ao
+                ouvir o seu álbum. Sinto que há coisas que não se devem dizer ao mundo</i>“<i>.</i> Trata-se de um
+            provável sentimento compartilhado com milhares de pessoas, e que, talvez, não expresse suas opiniões sobre o
+            álbum da filha.
+        </p>
+        <p>
+            Na produção, SZA demonstra uma aberta e dolorosa experiência na qual revela que <a
+                href="https://valkirias.com.br/descontrole-de-sza-em-ctrl/">nunca esteve no controle</a> e que precisa
+            disso de maneira geral. Seu trabalho não é específico, mas sim uma carta aberta a todas as suas relações
+            interpessoais. A cantora relaciona, em muitos momentos, a rigidez de seus pais e o controle que tiveram
+            sobre si, além de crescer em uma família estritamente religiosa. Solana acrescenta que os progenitores eram
+            rigorosos, mas que ela simplesmente não se importava pois “<i>era descolada</i>”, se distanciando de seu pai
+            e de suas origens muçulmanas ainda na adolescência.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/sza-performance-luzes.png"
+                alt="SZA performando no palco com luzes ao fundo.">
+            <figcaption>SZA é um acrônimo formado a partir das palavras Savior (salvador), Zigue-Zague (do conhecimento
+                à sabedoria) e Alá, a partir do alfabeto supremo [Foto: SZA]</figcaption>
+        </div>
+        <p>
+            Na canção <i><a href="https://www.youtube.com/watch?v=dp45V_M4Akw">Drew Barrymore</a></i>, a qual SZA
+            revelou em <a
+                href="https://www.usatoday.com/story/life/music/2017/08/25/sza-summer-breakout-star-ctrl-love-galore/596928001/">entrevista
+                ao <i>USA Today</i></a> que se tratava de uma referência a protagonista de <i>Santa Clarita Diet</i>
+            (2017), há o escracho e a sensação de estar em uma festa desagradável na sua casa, repleta de pessoas que a
+            deixam insegura. Como os papéis de Barrymore, a cantora vislumbra nessa garota mal interpretada e gentil que
+            só quer ser amada. <i>“Por que é tão difícil aceitar que a festa acabou?”</i>, canta SZA na letra.
+        </p>
+        <p>
+            Seguindo em <i><a href="https://www.youtube.com/watch?v=Zg165-mZ7x8">Doves In the Wind</a></i>, colaboração
+            com Kendrick Lamar lançada horas antes do álbum ser disponibilizado, a combinação dos artistas prova seu
+            peso e relevância. O sucesso se repetiu um ano depois, em 2018, com a faixa <i><a
+                    href="https://www.youtube.com/watch?v=JQbjS0_ZfJ0">All the Stars</a></i>, que integrou a trilha
+            sonora de <i><a href="https://personaunesp.com.br/pantera-negra-critica/">Pantera Negra</a></i> e alcançou
+            dois certificados de platina nos Estados Unidos. Nesse terceiro <i>single</i>, a cantora rebate versos
+            românticos com <a href="https://personaunesp.com.br/damn-kendrick-lamar/">Kendrick</a> e a produção de seu
+            clipe oficial, por Cam O’bi, a faz flutuar no surrealismo de lutas ao estilo <i>Mortal Kombat</i>,
+            potencializando as relações conturbadas que ela mostra ao longo do projeto.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/embed/Zg165-mZ7x8?feature=oembed"
+                title="SZA - Doves In The Wind (Official Video) ft. Kendrick Lamar" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            <i><a href="https://www.youtube.com/watch?v=CAgzfcWAlTo">Prom</a></i> e <i><a
+                    href="https://www.youtube.com/watch?v=cMD63TwzB1o">The Weekend</a></i>, por sua vez, mostram a
+            cantora ainda dedicada ao amor, suplicando paciência e prometendo melhorar, tentando entender suas dores e
+            atitudes, e calorosamente aceitando as condições impostas a ela. Nos populares versos da 6ª canção do disco,
+            cinco vezes certificada como platina nos Estados Unidos, SZA entoa: “<i>Meu homem é meu homem/É seu
+                homem/Ouvi dizer que é o homem dela também/Terça e Quarta, Quinta e Sexta/Eu apenas o mantenho
+                satisfeito durante o fim de semana</i>”<i>.</i>
+        </p>
+        <p>
+            <i>Ctrl</i> segue com a faixa <i><a href="https://www.youtube.com/watch?v=DpSWgZVIfi8">Go Gina</a></i>, se
+            distanciando da premissa do resto do álbum – dessa vez por expor desejos e ambições que não necessariamente
+            são verdadeiros. Admitindo culpa em <i><a href="https://www.youtube.com/watch?v=pcJo0tIWybY">Garden (Say It
+                    Like That)</a></i>, seu quinto e último <i>single</i> que, novamente, inclui um diálogo ao fim. Em
+            <i><a href="https://www.youtube.com/watch?v=zVc-K1kKkVk">Broken Clocks</a></i>, SZA leva um dia de cada vez.
+            “<i>Que hoje seja melhor que ontem</i>”, canta<i>.</i>
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/sza-ginasta-computadores.png"
+                alt="SZA fazendo uma pose de ginasta em meio a computadores antigos.">
+            <figcaption>No colegial, SZA era ginasta e não tinha planos de se tornar cantora (Foto: RCA Records)
+            </figcaption>
+        </div>
+        <p>
+            Voltando a ter si mesma como foco e pensando se talvez em outra dimensão as coisas fossem diferentes, <i><a
+                    href="https://www.youtube.com/watch?v=xuo1J0rlNaU">Anything</a></i> traz uma lição, cantada no verso
+            “<i>Você sabe ao menos se eu estou viva?</i>”. <i>Wavy (Interlude) [feat. James Fauntleroy]</i>, o único
+            interlúdio do álbum, mantém uma melodia animada, que contrasta com a brutal honestidade das letras: “<i>Dê
+                aquilo que você recebe/Perdoe tanto quanto você odeia/Ou dê o fora/Eu estive em um abrigo/Procurando uma
+                saída</i>”<i>.</i>
+        </p>
+        <p>
+            Na sequência, SZA sonha em ser o tipo de garota que apresentariam aos pais e amigos: uma <i><a
+                    href="https://www.youtube.com/watch?v=K7i83Pl8_M0">garota normal</a></i>. Finalizando a primeira
+            versão de seu álbum com calmas melodias, <i><a href="https://www.youtube.com/watch?v=5sc1YvgxlSg">Pretty
+                    Little Birds</a> (feat. Isaiah Rashad)</i> e <i><a
+                    href="https://www.youtube.com/watch?v=VnZcB5oA4U4">20 Something</a></i> se envolvem em versos sobre
+            sua atual fase: uma mulher apaixonada, que como um “<i>lindo passarinho</i>” acerta a janela em algumas
+            tentativas e deseja voar ao céu. Na canção, na verdade, SZA apresenta sua vulnerabilidade em uma das faixas
+            mais sentimentais como compositora, considerando o falecimento de sua avó pouco tempo depois de seu
+            lançamento. Novamente, finaliza com uma ligação entre ela e sua mãe.
+        </p>
+        <p>
+            Ao fim de sua primeira versão e com dificuldade de escolher entre 150 e 200 músicas, a artista só lançou
+            <i>Ctrl</i> porque sua gravadora tirou seu HD, já que era tão criteriosa: <i>“Eu faço </i>freestyle<i> em
+                tudo, em todo processo. E eu escuto e penso, que merda é essa? E se algo estiver muito ruim eu não posso
+                colocar meu dedo nisso, e eu penso, uau, isso é uma droga, então eu fico muito frustrada, e geralmente
+                descarto a música</i>”, disse a cantora em <a
+                href="https://genius.com/a/sza-reveals-that-she-only-finished-ctrl-because-her-label-took-her-hard-drive-away">entrevista
+                à <i>Genius</i></a>.
+        </p>
+        <blockquote>“Músicas inéditas de 2017 para celebrar 5… eu acho”</blockquote>
+        <p>
+            A versão <i>Deluxe</i> do álbum tem como primeira faixa adicional uma versão alternativa da faixa <i>Love
+                Galore</i>, intitulada <i><a href="https://www.youtube.com/watch?v=5YOEzmyM-Zs">Love Galore (Alt
+                    Version)</a></i>. Basicamente, a cantora substitui os <a
+                href="https://genius.com/Sza-love-galore-lyrics">versos de Travis</a> na canção original por outros
+            versos autorais, mas ainda mantém sua voz em algumas partes da faixa. A substituição das linhas principais é
+            abrupta, principalmente aos acostumados com a faixa original, mas de maneira alguma escapam da música em si,
+            tanto em melodia quanto em sua letra. Vez que a visão que Travis encenava mostravam a partir de seu ponto de
+            vista sexual sobre sua relação, enquanto os <a
+                href="https://genius.com/Sza-love-galore-alt-version-lyrics">versos de SZA</a> admitem que ela realmente
+            o induziu e por isso o deixou seu ego inflar o deixando sair com os amigos. “<i>Mas você fica excitado e eu
+                amo isso/Então eu deixo você segurar um pouco/Saia com seus amigos, eleve seu ego</i>’’.
+        </p>
+        <p>
+            Em seguida com <i><a href="https://www.youtube.com/watch?v=9njAvx-2y4c">2AM</a></i>, a cantora atribui
+            totalmente o significado de sentimentos de madrugada aos versos e a desesperadora calma da melodia,
+            explicitando a falta que seu parceiro faz na cama, toda a complexidade e pensamentos avulsos que facilmente
+            se transformam em mensagens apagadas pela manhã. Confissões que logo deixarão de fazer sentido, mas que às 2
+            da manhã nos dominam completamente: “<i>por que você nunca vem me ver?</i>”. A faixa também conta com uma
+            segunda parte em outro ritmo, que a exonera da culpa de precisar dele e seguem em uma animada melodia de
+            <i>R&B</i> que o questiona se ele a vê e precisa dela da mesma forma.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/sza-certificado-platina.webp"
+                alt="SZA agachada ao lado de seu quadro de certificado de platina.">
+            <figcaption>Ctrl, além de uma tecla, significa controle, e é o que SZA admite não ter em seu álbum (Foto:
+                SZA/RCA Records)</figcaption>
+        </div>
+        <p>
+            Ainda que não tenham <i>“Interlude</i>” no nome, como em <i>Wavy (Interlude) [feat. James Fauntleroy]</i>,
+            as faixas seguintes são as mais curtas entre as novas adicionadas. Em <i><a
+                    href="https://www.youtube.com/watch?v=n4AlxTiXzcY">Miles</a></i>, de 1:09 minutos, a cantora reflete
+            novamente a decorrência do tempo sem sua vida, como fez em <a
+                href="https://genius.com/Sza-broken-clocks-lyrics"><i>Broken Clocks</i></a>, mas, dessa vez, associa sua
+            maturidade ao passar do tempo. Ele não para, mas ela ainda tem medo de seguir em frente e continuar como
+            ele, e gostaria de ser mais madura em relação a isso. A faixa é calma e introduz a próxima canção de maneira
+            majestosa e paciente.
+        </p>
+        <p>
+            Em <i><a
+                    href="https://www.youtube.com/watch?v=aR5J2FYvoJ8&list=OLAK5uy_lTHqDo9OkbFL4bK4mT7zl8KMgHETl-0VI&index=18">Percolator</a></i>,
+            outra faixa de curta duração, as coisas são diferentes de <i>Miles</i>. Com um tom parecido com <i>Wavy</i>,
+            a canção segue ritmos mais agitados com os desejos de aproveitar o tempo com seu parceiro, com SZA ainda
+            expressando que quer manter seu emocional seguro, não levando as coisas rápido demais mas mantendo a
+            esperança. É notável que as letras do álbum começam a focar mais nas perspectivas, desejos e reflexões da
+            artista, em vez de suas agonias e problemas. Com o tempo (ao decorrer do CD), sua sutil maturidade se
+            desenvolve gradualmente, e, como também na vida real, pode regredir em algum momento.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/embed/phBBCzWhPFM?feature=oembed" title="SZA - wavy (in bloom live)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            Tratando da regressão, <i><a href="https://www.youtube.com/watch?v=6XS1O6PW0EA">Tread Carefully</a></i>
+            começa com suas novas decisões e atitudes, aceitando novamente que as coisas estão fora de seu controle
+            enquanto progridem. Com novas urgências e prioridades, SZA aponta os estranhamentos de seu parceiro quanto
+            ao cenário que tinham se acostumado, e, mantendo o ritmo, logo volta ao que era anteriormente. Antes que
+            possamos perceber, seus <a
+                href="https://genius.com/22033803/Sza-tread-carefully/Im-makin-bad-decisions-how-im-livin-and-i-like-it">versos</a>
+            seguem de “<i>Tenho diferentes urgências agora/Com medo de ver minha vida ir pelo ralo/Não posso deixar que
+                esteja você no meu caminho, então eu ando com cuidado</i> […]”, para “<i>estou vivendo e eu gosto
+                disso/Estamos presos no sentimento/Nunca tendo ninguém</i>”.
+        </p>
+        <p>
+            SZA admite que mesmo que as coisas mudem, tudo bem que haja recaídas; de certa forma, são inevitáveis,
+            atestando novamente que <a
+                href="https://monkeybuzz.com.br/resenhas/albuns/sza-ctrl/#:~:text=O%20controle%2C%20por%20fim%2C%20do%20t%C3%ADtulo%20do%20disco%2C%20vem%20das%20pr%C3%B3prias%20inseguran%C3%A7as%20da%20cantora%2C%20e%20seus%20versos%20funcionam%20como%20um%20basta%20para%20situa%C3%A7%C3%B5es%20repetitivas%20e%20comuns%3A%20ter%20autocontrole%20para%20n%C3%A3o%20se%20prender%20aos%20erros%20do%20passados.">a
+                busca por controle é interminável</a>. Mas, ao amadurecer, ainda que os problemas estejam fora de suas
+            mãos, as mudanças que carregamos nos permitem lidar melhor, e, ao fim, aproveitar mais a vida.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/embed/n1s4gZ9rrSM?feature=oembed"
+                title="SZA Enlists RZA To Announce 'CTRL' Album" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            Nela, tudo aquilo que se complica, que passa de uma amizade e, em algum momento, simplesmente fica estranho
+            e desconfortável, é retratado. Seus versos dizem o que queremos dizer, mas que talvez não tenhamos coragem:
+            “<i>Vamos deixar estranho/Acho que estamos prontos pra isso/Sei que eu estou pronta/Ainda podemos nos
+                amar?</i>”. Tudo que SZA expressou emplaca naquilo que é o não dito. O desconfortável. É isso que torna
+            <a href="https://www.okayplayer.com/music/sza-ctrl-album-breakdown.html">o disco</a> uma das obras mais
+            pessoais e aclamadas do <i>R&B</i>. Assim como sua mãe, nos sentimos incomodados com tudo que é falado, mas,
+            ainda assim, há uma sensação boa. A sinceridade de <i>Ctrl (Deluxe)</i> é libertadora.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/sza-met-gala.jpg" alt="SZA sorrindo no tapete vermelho do Met Gala.">
+            <figcaption>Após mais de 5 anos de espera, seus fãs criaram várias versões não oficiais do próximo trabalho
+                da cantora (Foto: Dia Dipasupil)</figcaption>
+        </div>
+        <p>
+            Por fim, <i><a href="https://www.youtube.com/watch?v=pxosvQJXyho">Jodie</a></i> encerra o álbum reafirmando
+            a passagem de tempo que é a vida, com uma analogia à queima de um cigarro que um dia chega ao fim. “<i>Dias
+                ao vento/Árvores ao vento/Queime e passe</i>”<i>.</i> Injusta, a vida a faz questionar: “<i>Por que
+                eu?</i>”. Sentimentos que talvez todos já tenhamos sentido, além da sensação de preferir estar presa do
+            que começar mais uma semana, quando, na verdade, já estaria realmente presa em alguma rotina. Ao término,
+            SZA também fala sobre não precisar de um namorado e ser bonita demais para isso. Ainda que se refira a outra
+            pessoa, a mensagem se dirige à própria cantora e aos pensamentos racionais que tem. Mas, nem sempre consegue
+            – ou conseguimos – segui-los.
+        </p>
+        <p>
+            <i>Ctrl (Deluxe)</i> representa uma das fases que SZA passou – agora marcada por seu segundo álbum,
+            <i>SOS</i> -, e que todos passamos ao longo da vida. É sobre amadurecimento, reconhecimento do controle que
+            não temos e aceitação, com regressões, aprendizados, lições e desejos. Representando uma trajetória que não
+            podemos nos livrar: a síntese da própria vida.
+        </p>
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>

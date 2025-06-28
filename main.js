@@ -264,39 +264,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================================
     // === LÓGICA DE TEMA (DIURNO/NOTURNO) ===
     // =====================================================================
-    const themeToggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
+const body = document.body;
 
-    const applyTheme = (theme) => {
-        if (theme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
-        }
-    };
-
-    const savedTheme = localStorage.getItem('theme') || 'day';
-    applyTheme(savedTheme);
-
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            const isNightMode = body.classList.contains('night-mode');
-            if (isNightMode) {
-                localStorage.setItem('theme', 'day');
-                applyTheme('day');
-            } else {
-                localStorage.setItem('theme', 'night');
-                applyTheme('night');
-            }
-        });
+const applyTheme = (theme) => {
+    if (theme === 'night') {
+        body.classList.add('night-mode');
+    } else {
+        body.classList.remove('night-mode');
     }
+};
+
+themeToggleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const isNightMode = body.classList.contains('night-mode');
+        const newTheme = isNightMode ? 'day' : 'night';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+    });
+});
 
     // =====================================================================
-    // === SELETOR DE CORES (IRO.JS) ===
+    // === SELETOR DE CORES (IRO.JS) E LÓGICA RESPONSIVA ===
     // =====================================================================
     
     const pickerContainer = document.querySelector('.color-picker-container');
     const hexInput = document.getElementById('hexInput');
+    const heroSection = document.querySelector('.hero-section');
+    const image1Container = document.getElementById('image1');
 
     if (pickerContainer && hexInput && typeof iro !== 'undefined') {
         
@@ -344,6 +339,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA CORRIGIDA PARA POSICIONAMENTO DO COLOR PICKER ---
+    const handleColorPickerLayout = () => {
+        if (!heroSection || !image1Container || !pickerContainer) {
+            return;
+        }
+
+        if (window.innerWidth <= 768) {
+            // Mobile: Se o elemento seguinte ao hero-section não for o picker, mova-o para lá.
+            if (heroSection.nextElementSibling !== pickerContainer) {
+                heroSection.after(pickerContainer);
+            }
+        } else {
+            // Desktop: Se o pai do picker não for o container da imagem, mova-o de volta.
+            if (pickerContainer.parentElement !== image1Container) {
+                image1Container.appendChild(pickerContainer);
+            }
+        }
+    };
+
+    // Executa no carregamento e no redimensionamento da tela
+    handleColorPickerLayout();
+    window.addEventListener('resize', handleColorPickerLayout);
+
+
     // =====================================================================
     // === BOTÃO DE DOWNLOAD ===
     // =====================================================================
@@ -389,6 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cascadeContainer) { 
         cascadeContainer.addEventListener('click', (event) => {
+            // A verificação `!pickerContainer.contains(event.target)` agora é ainda mais importante
             if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target) && hexInput && !hexInput.contains(event.target)) {
                 image1.classList.toggle('top-image');
                 image1.classList.toggle('bottom-image');
@@ -616,3 +636,27 @@ document.addEventListener('DOMContentLoaded', () => {
     onScroll();
 
 });
+
+/* =================================================================== */
+/* === LÓGICA DO MENU HAMBÚRGUER (MOBILE) === */
+/* =================================================================== */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+if (hamburgerBtn && mobileNav && mobileMenuOverlay) {
+    const toggleMenu = () => {
+        const isMenuOpen = hamburgerBtn.classList.contains('active');
+
+        hamburgerBtn.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        mobileMenuOverlay.classList.toggle('visible');
+        document.body.classList.toggle('modal-open'); // Reutiliza a classe que trava o scroll
+
+        // Atualiza o atributo aria-expanded para acessibilidade
+        hamburgerBtn.setAttribute('aria-expanded', !isMenuOpen);
+    };
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    mobileMenuOverlay.addEventListener('click', toggleMenu);
+}
