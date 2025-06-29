@@ -1148,6 +1148,7 @@ input.invalid, textarea.invalid {
 
 /* Responsividade da Página de Artigos */
 @media (max-width: 992px) {
+    @media (max-width: 992px) {
     .articles-main-v2 {
         padding-right: 40px; /* Ajusta o padding quando a sidebar some */
     }
@@ -1156,21 +1157,11 @@ input.invalid, textarea.invalid {
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
 }
-    .post-card-v2.size-large,
-    .post-card-v2.size-medium,
-    .post-card-v2.size-small {
-        grid-column: span 2;
-        grid-row: span 1;
-    }
-    .post-card-v2.size-large {
-        grid-column: span 4;
-        grid-row: span 2;
-    }
+}
 
 
 @media (max-width: 767px) {
-    @media (max-width: 767px) {
-    .articles-main-v2 {
+     .articles-main-v2 {
         padding: 20px;
     }
     .toolbar-v2 {
@@ -1194,8 +1185,6 @@ input.invalid, textarea.invalid {
     .size-small .card-title {
         font-size: 18px;
     }
-}
-
 }
 
 
@@ -2065,11 +2054,11 @@ footer {
 /* =================================================================== */
 /* === ESTILO FINAL E DEFINITIVO (À PROVA DE CONFLITOS) === */
 /* =================================================================== */
-
 .mosaic-grid {
     display: grid;
+    /* Padrão para telas grandes: colunas de no mínimo 420px */
     grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-    gap: 30px;
+    gap: 60px; /* Aumentado para dar mais espaço vertical e horizontal */
 }
 
 .post-card-v2 {
