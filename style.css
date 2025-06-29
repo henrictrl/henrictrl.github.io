@@ -1169,7 +1169,6 @@ input.invalid, textarea.invalid {
 
 
 @media (max-width: 767px) {
-    @media (max-width: 767px) {
     .articles-main-v2 {
         padding: 20px;
     }
@@ -1195,9 +1194,6 @@ input.invalid, textarea.invalid {
         font-size: 18px;
     }
 }
-
-}
-
 
 /* =================================================================== */
 /* === PÁGINA SOBRE MIM === */
