@@ -2295,23 +2295,26 @@ footer {
     margin-top: 40px; /* Aumenta a distância do logo (aumentei o valor anterior) */
   }
 
-    .hero-image {
-    min-height: 450px; /* Garante espaço para as imagens maiores */
+  @media (max-width: 768px) {
+  .hero-image {
+    position: relative; /* Essencial para o posicionamento dos filhos */
+    min-height: 450px;
   }
 
   #cascadeContainer .image-with-banner-container {
-    max-width: 70%; /* Aumenta o tamanho das imagens */
-    /* Remove o posicionamento centralizado antigo para recriar o do desktop */
-    transform: none; 
-    left: auto; 
+    position: absolute; /* Posicionamento absoluto dentro do hero-image */
+    max-width: 80%;
+    top: 0;
+    left: 50%; /* Alinha o início do elemento no centro da tela */
   }
 
   #cascadeContainer .bottom-image {
-    top: 20px;
-    left: 10px; /* Posição inicial da imagem de baixo */
+    /* Centraliza e aplica um leve desvio para baixo e para a esquerda */
+    transform: translateX(-55%) translateY(20px); 
   }
 
   #cascadeContainer .top-image {
-    top: 60px;
-    left: 50px; /* Posição inicial da imagem de cima */
+    /* Centraliza e aplica um desvio maior para baixo e para a direita */
+    transform: translateX(-45%) translateY(60px);
   }
+}
