@@ -854,6 +854,14 @@ input.invalid, textarea.invalid {
         padding: 0 20px;
     }
 
+    .hero-image {
+    min-height: 480px; /* Ajustado para dar espaço para a imagem ampliada */
+    transform: scale(1.3);
+    width: 100%;
+    margin-top: 45px;  /* Aumentamos a margem para compensar o scale */
+
+}
+
     .about-me-section {
         padding: 80px 0;
         margin-top: 0;
@@ -925,9 +933,10 @@ input.invalid, textarea.invalid {
     
 .hero-image {
     min-height: 480px; /* Ajustado para dar espaço para a imagem ampliada */
+    transform: scale(1.3);
     width: 100%;
     margin-top: 45px;  /* Aumentamos a margem para compensar o scale */
-    transform: scale(1.6); /* Aumenta o tamanho visual do elemento em 15% */
+
 }
 
     #cascadeContainer .image-with-banner-container {
