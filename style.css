@@ -2279,6 +2279,6 @@ footer {
 
 @media (max-width: 768px) {
   .logo h1 {
-    line-height: 0.9; /* Ajusta a altura da linha, aproximando o texto */
+    line-height: 1; /* Ajusta a altura da linha, aproximando o texto */
   }
 }
