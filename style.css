@@ -2089,9 +2089,14 @@ footer {
 /* =================================================================== */
 
 .mosaic-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 40px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .post-card-v2 {
@@ -2222,5 +2227,21 @@ footer {
   .post-card-v2 {
     aspect-ratio: 16/10;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-card-v2 .card-date {
+    font-size: 12px;
+  }
+
+  .post-card-v2 .card-tag {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .post-card-v2 .card-title {
+    font-size: 15px;
+    line-height: 1.3;
   }
 }
