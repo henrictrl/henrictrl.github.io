@@ -2054,12 +2054,7 @@ footer {
 /* =================================================================== */
 /* === ESTILO FINAL E DEFINITIVO (À PROVA DE CONFLITOS) === */
 /* =================================================================== */
-.mosaic-grid {
-    display: grid;
-    /* Padrão para telas grandes: colunas de no mínimo 420px */
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-    gap: 60px; /* Aumentado para dar mais espaço vertical e horizontal */
-}
+
 
 .post-card-v2 {
     position: relative;
