@@ -340,78 +340,27 @@ themeToggleButtons.forEach(button => {
     }
 
     // --- LÓGICA CORRIGIDA PARA POSICIONAMENTO DO COLOR PICKER ---
-   if (pickerContainer && hexInput && typeof iro !== 'undefined') {
-    let colorPicker;
-    const initialColor = localStorage.getItem('highlightColor') || getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
-
-    function setupColorPicker() {
-        // Destrói o seletor antigo se existir, para evitar duplicados
-        if (colorPicker) {
-            colorPicker.destroy();
+    const handleColorPickerLayout = () => {
+        if (!heroSection || !image1Container || !pickerContainer) {
+            return;
         }
 
-        // Verifica se estamos em modo mobile
-        if (window.matchMedia("(max-width: 768px)").matches) {
-            // --- INICIALIZAÇÃO PARA MOBILE ---
-            document.getElementById('desktop-picker-wrapper').style.display = 'none';
-            document.getElementById('mobile-color-picker').style.display = 'block';
-
-            colorPicker = new iro.ColorPicker('#mobile-color-picker', {
-                width: 250, // Tamanho do seletor circular
-                color: initialColor,
-                borderWidth: 1,
-                borderColor: '#fff',
-                layout: [
-                    { component: iro.ui.Wheel },
-                    { component: iro.ui.Slider, options: { sliderType: 'value' } } // Slider de brilho
-                ]
-            });
-
+        if (window.innerWidth <= 768) {
+            // Mobile: Se o elemento seguinte ao hero-section não for o picker, mova-o para lá.
+            if (heroSection.nextElementSibling !== pickerContainer) {
+                heroSection.after(pickerContainer);
+            }
         } else {
-            // --- INICIALIZAÇÃO PARA DESKTOP (COMO ANTES) ---
-            document.getElementById('desktop-picker-wrapper').style.display = 'block';
-            document.getElementById('mobile-color-picker').style.display = 'none';
-
-            colorPicker = new iro.ColorPicker(pickerContainer, {
-                width: 150,
-                color: initialColor,
-                borderWidth: 0,
-                borderColor: "#ffffff",
-                layout: [
-                    { component: iro.ui.Slider, options: { sliderType: 'hue' } },
-                    { component: iro.ui.Slider, options: { sliderType: 'value' } }
-                ]
-            });
-        }
-
-        // Função de atualização da cor (funciona para ambos os layouts)
-        colorPicker.on('color:change', (color) => {
-            const novaCorHex = color.hexString;
-            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
-            localStorage.setItem('highlightColor', novaCorHex);
-            if (hexInput) {
-                hexInput.value = novaCorHex;
+            // Desktop: Se o pai do picker não for o container da imagem, mova-o de volta.
+            if (pickerContainer.parentElement !== image1Container) {
+                image1Container.appendChild(pickerContainer);
             }
-        });
-
-        if (hexInput) {
-            hexInput.value = colorPicker.color.hexString;
         }
-    }
+    };
 
-    // Configura o seletor quando a página carrega
-    setupColorPicker();
-    // E reconfigura sempre que a janela é redimensionada
-    window.addEventListener('resize', setupColorPicker);
-
-    if (hexInput) {
-        hexInput.addEventListener('input', () => {
-            if (colorPicker && /^#[0-9a-fA-F]{6}$/.test(hexInput.value)) {
-                colorPicker.color.hexString = hexInput.value;
-            }
-        });
-    }
-}
+    // Executa no carregamento e no redimensionamento da tela
+    handleColorPickerLayout();
+    window.addEventListener('resize', handleColorPickerLayout);
 
 
     // =====================================================================

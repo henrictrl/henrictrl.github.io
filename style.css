@@ -2340,35 +2340,3 @@ footer {
     width: 100% !important;
   }
 }
-
-/* --- CORREÇÃO FINAL DO SELETOR DE CORES E ESPAÇAMENTO (MOBILE) --- */
-@media (max-width: 768px) {
-  
-  /* 1. Aproxima o seletor da imagem de forma agressiva */
-  .hero-section {
-    margin-bottom: -40px !important; 
-    /* Usamos margem negativa para "puxar" o conteúdo de baixo para cima */
-  }
-
-  /* 2. Remove o seletor antigo do fluxo da página */
-  .hero-section + .color-picker-container {
-    margin-top: 0 !important;
-  }
-  
-  /* 3. Estiliza o novo seletor circular */
-  #mobile-color-picker {
-    margin: 0 auto; /* Centraliza o seletor */
-  }
-
-  /* 4. Esconde o input de texto no mobile, já que o seletor circular não precisa dele */
-  #desktop-picker-wrapper {
-    display: none;
-  }
-}
-
-/* Garante que o seletor circular só aparece no mobile */
-@media (min-width: 769px) {
-  #mobile-color-picker {
-    display: none !important;
-  }
-}
