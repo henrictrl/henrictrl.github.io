@@ -1185,7 +1185,7 @@ input.invalid, textarea.invalid {
         order: 1;
     }
     /* Para telas de celular, os cards viram uma coluna única */
-    .mosaic-grid {
+.mosaic-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
@@ -1193,6 +1193,27 @@ input.invalid, textarea.invalid {
   padding: 0 16px;
   box-sizing: border-box;
 }
+
+@media (max-width: 480px) {
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+  }
+
+  .post-card-v2 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* =================================================================== */
