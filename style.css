@@ -1169,7 +1169,6 @@ input.invalid, textarea.invalid {
 
 
 @media (max-width: 767px) {
-    @media (max-width: 767px) {
     .articles-main-v2 {
         padding: 20px;
     }
@@ -1186,18 +1185,40 @@ input.invalid, textarea.invalid {
         order: 1;
     }
     /* Para telas de celular, os cards viram uma coluna única */
-    .mosaic-grid {
-        grid-template-columns: 1fr;
-    }
-    .size-large .card-title,
-    .size-medium .card-title,
-    .size-small .card-title {
-        font-size: 18px;
-    }
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
+@media (max-width: 480px) {
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+  .post-card-v2 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
 }
 
+
+body {
+  overflow-x: hidden;
+}
 
 /* =================================================================== */
 /* === PÁGINA SOBRE MIM === */
@@ -2068,7 +2089,7 @@ footer {
 
 .mosaic-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -2189,4 +2210,16 @@ footer {
     font-size: 24px !important;
     font-weight: 900 !important;
     line-height: 1.3 !important;
+}
+
+@media (max-width: 400px) {
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .post-card-v2 {
+    aspect-ratio: 16/10;
+    width: 100%;
+  }
 }
