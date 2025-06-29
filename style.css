@@ -2319,7 +2319,21 @@ footer {
   }
 }
 
+  /* Força a subida do seletor de cores, diminuindo a margem da seção acima */
+  .hero-section {
+    margin-bottom: 25px; 
+  }
+
+  /* Remove o posicionamento antigo do seletor e o alinha */
   .hero-section + .color-picker-container {
-    width: 90%;      
-    margin-top: 15px; 
+    width: 90%;      /* Mesma largura de 90% da imagem */
+    margin-top: 0;   /* Remove completamente o espaço de cima */
+    align-items: center; 
+  }
+
+  /* === A PARTE MAIS IMPORTANTE DA CORREÇÃO === */
+  /* Remove o limite de largura dos elementos internos do seletor */
+  .color-picker-container .hex-input,
+  .color-picker-container .IroSlider {
+    max-width: 100%; /* Permite que eles ocupem todo o espaço do contêiner */
   }
