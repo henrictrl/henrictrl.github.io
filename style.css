@@ -920,16 +920,16 @@ input.invalid, textarea.invalid {
     }
 
     .cta-button {
-    margin-bottom: 25px; 
+    margin-bottom: 20px; 
 }
     
     .hero-image {
         min-height: 400px;
-        width: 100%;
+        width: 130%;
         margin-top: 25px;
     }
     #cascadeContainer .image-with-banner-container {
-        max-width: 85%;
+        max-width: 150%;
         left: 50%;
         top: 0;
     }
@@ -1154,8 +1154,9 @@ input.invalid, textarea.invalid {
     }
     /* Para telas de tablet, os cards podem ser um pouco menores */
     .mosaic-grid {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    }
+    grid-template-columns: 1fr;
+    gap: 40px; /* Adicionado para criar espaço vertical entre os cards */
+}
 }
 }
 
@@ -1996,7 +1997,7 @@ body.night-mode .lb-fav-posters img {
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        margin: 0px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
+        margin: -80px auto 10px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
     }
 }
 
