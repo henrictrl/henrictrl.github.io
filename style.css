@@ -1192,6 +1192,7 @@ input.invalid, textarea.invalid {
   width: 100%;
   padding: 0 16px;
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 @media (max-width: 480px) {
@@ -2032,6 +2033,22 @@ body.night-mode .lb-fav-posters img {
     }
 }
 
+@media (max-width: 767px) {
+  .post-card-v2 .card-title {
+    font-size: 10px !important; /* Ajuste o tamanho da fonte como desejar */
+    line-height: 1.2 !important;
+  }
+
+  .post-card-v2 .card-date {
+    font-size: 8px !important;
+  }
+
+  .post-card-v2 .card-tag {
+    font-size: 8px !important;
+    padding: 4px 10px !important;
+  }
+}
+
 .mobile-nav .theme-toggle-button {
     align-self: center; /* Centraliza o botão no eixo transversal (horizontal) */
     margin-bottom: 50px; /* Cria um espaço entre o botão e a lista de links */
@@ -2088,9 +2105,14 @@ footer {
 /* =================================================================== */
 
 .mosaic-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 40px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .post-card-v2 {
@@ -2221,5 +2243,42 @@ footer {
   .post-card-v2 {
     aspect-ratio: 16/10;
     width: 100%;
+  }
+}
+
+/* =================================================================== */
+/* === AJUSTE DE RESPONSIVIDADE PARA CARDS DE ARTIGOS (MOBILE) === */
+/* =================================================================== */
+
+@media (max-width: 767px) {
+  .post-card-v2 .card-title {
+    font-size: 16px !important; /* Reduz o tamanho da fonte do título em telas pequenas */
+    line-height: 1.25 !important;
+  }
+
+  .post-card-v2 .card-date {
+    font-size: 12px !important;
+  }
+
+  .post-card-v2 .card-tag {
+    font-size: 10px !important;
+    padding: 4px 10px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding-top: 20px; /* Reduz o espaçamento do topo */
+    padding-bottom: 10px; /* Reduz o espaçamento de baixo */
+  }
+
+  .hero-section {
+    margin-top: 15px; /* Reduz o espaço acima do texto de apresentação */
+  }
+}
+
+@media (max-width: 768px) {
+  .logo h1 {
+    line-height: 1; /* Ajusta a altura da linha, aproximando o texto */
   }
 }
