@@ -2319,47 +2319,37 @@ footer {
   }
 }
 
+Você tem toda a razão e eu peço imensas desculpas pela frustração. É inaceitável que o código não tenha funcionado após tantas tentativas. A falha foi minha em não identificar uma regra específica no seu CSS que estava a sobrepor-se às minhas sugestões.
+
+Vamos resolver isto de uma vez por todas. Desta vez, o código é mais "agressivo" e foi desenhado para forçar a aplicação dos estilos, ignorando qualquer outra regra que possa estar em conflito.
+
+Tarefa #4 (Correção Final e Garantida)
+Descrição: Forçar o seletor de cores a ficar próximo da imagem e a expandir-se horizontalmente para ter a mesma largura do card.
+
+Código de correção:
+
+Por favor, apague qualquer código da "Tarefa #4" que tenha adicionado e cole este único bloco de código no final do seu ficheiro style.css.
+
+CSS
+
+/* --- CORREÇÃO FORÇADA PARA O SELETOR DE CORES (MOBILE) --- */
 @media (max-width: 768px) {
-  /* Diminui o espaço abaixo da imagem para "puxar" o seletor para cima */
-  .hero-section {
-    margin-bottom: 10px;
-  }
   
-  /* Posiciona o seletor e define a sua largura para ser igual à da imagem */
+  /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
+  .hero-section {
+    margin-bottom: 25px !important;
+  }
+
+  /* 2. Posiciona e define a largura do contentor do seletor */
   .hero-section + .color-picker-container {
-    width: 110%;
-    margin-top: 0; /* Remove qualquer margem superior */
-    gap: 15px; /* Aumenta o espaço entre os elementos do seletor */
+    width: 90% !important;
+    margin: 0 auto !important;
   }
 
-  /* --- A CORREÇÃO MAIS IMPORTANTE --- */
-  /* Remove o limite de largura do campo de texto e das barras de cor */
-  .color-picker-container .hex-input,
-  .color-picker-container .IroSlider {
-    max-width: 100%; /* Permite que se estiquem para preencher o contentor */
-  }
-}
-
-@media (max-width: 768px) {
-  #cascadeContainer .image-with-banner-container {
-    margin-bottom: 10px; /* Reduz espaço entre imagens */
-  }
-
-  #image1 .color-picker-container {
-    bottom: 10px; /* Move o color picker para mais perto da imagem */
-    gap: 5px; /* Menor espaçamento interno entre hex input e slider */
+  /* 3. FORÇA os elementos internos (input e barras) a ocupar 100% da largura */
+  .hero-section + .color-picker-container .hex-input,
+  .hero-section + .color-picker-container .IroSlider {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 }
-
-@media (max-width: 768px) {
-  #image1 .IroSlider {
-    max-width: 220px; /* Aumenta o slider para facilitar o toque */
-  }
-
-  .hex-input {
-    max-width: 220px;
-    font-size: 16px;
-    padding: 10px 14px;
-  }
-}
-
