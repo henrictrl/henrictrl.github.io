@@ -2318,3 +2318,15 @@ footer {
     transform: translateX(-45%) translateY(60px);
   }
 }
+
+  .hero-section + .color-picker-container {
+    width: 80%;      /* Define a largura para 80%, igual à da imagem */
+    margin-top: 20px; /* Reduz o espaço acima do seletor de cores */
+    margin-bottom: 20px;
+    align-items: center; /* Garante que os itens internos fiquem centralizados */
+  }
+
+  /* Ajusta o campo de input e o slider dentro do contêiner */
+  #image1 .color-picker-container {
+    position: static; /* Remove o posicionamento absoluto que era do desktop */
+  }
