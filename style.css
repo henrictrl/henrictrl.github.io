@@ -923,11 +923,13 @@ input.invalid, textarea.invalid {
     margin-bottom: 20px; 
 }
     
-    .hero-image {
-        min-height: 400px;
-        width: 130%;
-        margin-top: 25px;
-    }
+.hero-image {
+    min-height: 480px; /* Ajustado para dar espaço para a imagem ampliada */
+    width: 100%;
+    margin-top: 45px;  /* Aumentamos a margem para compensar o scale */
+    transform: scale(1.15); /* Aumenta o tamanho visual do elemento em 15% */
+}
+
     #cascadeContainer .image-with-banner-container {
         max-width: 150%;
         left: 50%;
@@ -1153,9 +1155,9 @@ input.invalid, textarea.invalid {
         padding-right: 40px; /* Ajusta o padding quando a sidebar some */
     }
     /* Para telas de tablet, os cards podem ser um pouco menores */
-    .mosaic-grid {
+.mosaic-grid {
     grid-template-columns: 1fr;
-    gap: 40px; /* Adicionado para criar espaço vertical entre os cards */
+    gap: 80px; /* Adicionado para criar espaço vertical entre os cards */
 }
 }
 }
@@ -1178,13 +1180,14 @@ input.invalid, textarea.invalid {
         order: 1;
     }
     /* Para telas de celular, os cards viram uma coluna única */
-    .mosaic-grid {
-        grid-template-columns: 1fr;
-    }
+.mosaic-grid {
+    grid-template-columns: 1fr;
+    gap: 40px; /* Adicionado para criar espaço vertical entre os cards */
+}
     .size-large .card-title,
     .size-medium .card-title,
     .size-small .card-title {
-        font-size: 18px;
+        font-size: 15px;
     }
 }
 
