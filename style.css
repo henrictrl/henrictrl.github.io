@@ -1186,13 +1186,13 @@ input.invalid, textarea.invalid {
     }
     /* Para telas de celular, os cards viram uma coluna única */
     .mosaic-grid {
-        grid-template-columns: 1fr;
-    }
-    .size-large .card-title,
-    .size-medium .card-title,
-    .size-small .card-title {
-        font-size: 18px;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
 }
 
 /* =================================================================== */
