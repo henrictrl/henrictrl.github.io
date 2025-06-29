@@ -2322,12 +2322,12 @@ footer {
 @media (max-width: 768px) {
   /* Diminui o espaço abaixo da imagem para "puxar" o seletor para cima */
   .hero-section {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   /* Posiciona o seletor e define a sua largura para ser igual à da imagem */
   .hero-section + .color-picker-container {
-    width: 90%;
+    width: 110%;
     margin-top: 0; /* Remove qualquer margem superior */
     gap: 15px; /* Aumenta o espaço entre os elementos do seletor */
   }
