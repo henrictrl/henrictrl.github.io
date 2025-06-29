@@ -2339,3 +2339,27 @@ footer {
     max-width: 100%; /* Permite que se estiquem para preencher o contentor */
   }
 }
+
+@media (max-width: 768px) {
+  #cascadeContainer .image-with-banner-container {
+    margin-bottom: 10px; /* Reduz espaço entre imagens */
+  }
+
+  #image1 .color-picker-container {
+    bottom: 10px; /* Move o color picker para mais perto da imagem */
+    gap: 5px; /* Menor espaçamento interno entre hex input e slider */
+  }
+}
+
+@media (max-width: 768px) {
+  #image1 .IroSlider {
+    max-width: 220px; /* Aumenta o slider para facilitar o toque */
+  }
+
+  .hex-input {
+    max-width: 220px;
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+}
+
