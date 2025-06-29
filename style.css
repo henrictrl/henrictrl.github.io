@@ -2276,3 +2276,9 @@ footer {
     margin-top: 15px; /* Reduz o espaço acima do texto de apresentação */
   }
 }
+
+@media (max-width: 768px) {
+  .logo h1 {
+    line-height: 0.9; /* Ajusta a altura da linha, aproximando o texto */
+  }
+}
