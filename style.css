@@ -1996,7 +1996,7 @@ body.night-mode .lb-fav-posters img {
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        margin: 25px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
+        margin: 0px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
     }
 }
 
