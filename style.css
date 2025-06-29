@@ -920,18 +920,18 @@ input.invalid, textarea.invalid {
     }
 
     .cta-button {
-    margin-bottom: 20px; 
+    margin-bottom: 40px; 
 }
     
 .hero-image {
     min-height: 480px; /* Ajustado para dar espaço para a imagem ampliada */
     width: 100%;
     margin-top: 45px;  /* Aumentamos a margem para compensar o scale */
-    transform: scale(1.15); /* Aumenta o tamanho visual do elemento em 15% */
+    transform: scale(1.6); /* Aumenta o tamanho visual do elemento em 15% */
 }
 
     #cascadeContainer .image-with-banner-container {
-        max-width: 150%;
+        max-width: 100%;
         left: 50%;
         top: 0;
     }
