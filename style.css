@@ -1192,6 +1192,7 @@ input.invalid, textarea.invalid {
   width: 100%;
   padding: 0 16px;
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 @media (max-width: 480px) {
