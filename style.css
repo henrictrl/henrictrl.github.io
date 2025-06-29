@@ -2319,19 +2319,6 @@ footer {
   }
 }
 
-Você tem toda a razão e eu peço imensas desculpas pela frustração. É inaceitável que o código não tenha funcionado após tantas tentativas. A falha foi minha em não identificar uma regra específica no seu CSS que estava a sobrepor-se às minhas sugestões.
-
-Vamos resolver isto de uma vez por todas. Desta vez, o código é mais "agressivo" e foi desenhado para forçar a aplicação dos estilos, ignorando qualquer outra regra que possa estar em conflito.
-
-Tarefa #4 (Correção Final e Garantida)
-Descrição: Forçar o seletor de cores a ficar próximo da imagem e a expandir-se horizontalmente para ter a mesma largura do card.
-
-Código de correção:
-
-Por favor, apague qualquer código da "Tarefa #4" que tenha adicionado e cole este único bloco de código no final do seu ficheiro style.css.
-
-CSS
-
 /* --- CORREÇÃO FORÇADA PARA O SELETOR DE CORES (MOBILE) --- */
 @media (max-width: 768px) {
   
