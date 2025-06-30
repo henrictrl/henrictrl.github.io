@@ -2324,19 +2324,11 @@ footer {
   
   /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
   .hero-section {
-    margin-bottom: 25px !important;
-  }
-
-  /* 2. Posiciona e define a largura do contentor do seletor */
-  .hero-section + .color-picker-container {
-    width: 90% !important;
-    margin: 0 auto !important;
-  }
-
-  /* 3. FORÇA os elementos internos (input e barras) a ocupar 100% da largura */
-  .hero-section + .color-picker-container .hex-input,
-  .hero-section + .color-picker-container .IroSlider {
-    max-width: 100% !important;
-    width: 100% !important;
+    margin-bottom: 15px !important; /* <-- Altere esta linha */
   }
 }
+
+  /* 1. Remove a margem inferior da seção principal para evitar espaçamento duplo. */
+  .hero-section {
+    margin-bottom: 0 !important;
+  }
