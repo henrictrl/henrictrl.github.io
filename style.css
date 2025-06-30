@@ -2322,23 +2322,18 @@ footer {
 /* --- CORREÇÃO FORÇADA PARA O SELETOR DE CORES (MOBILE) --- */
 @media (max-width: 768px) {
   
-  /* Remove o espaço extra abaixo da seção da imagem */
+  /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
   .hero-section {
-    margin-bottom: 0 !important;
+    margin-bottom: 15px !important; /* <-- Altere esta linha */
   }
 
-  /* Posiciona e define a largura do seletor de cores */
+  /* 2. Posiciona e define a largura do contentor do seletor */
   .hero-section + .color-picker-container {
     width: 90% !important;
-    /* Define uma margem superior de 15px e centraliza horizontalmente */
-    margin: 15px auto 20px !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    margin: 0 auto !important;
   }
 
-  /* Força os elementos internos (input e barras) a ocupar 100% da largura */
+  /* 3. FORÇA os elementos internos (input e barras) a ocupar 100% da largura */
   .hero-section + .color-picker-container .hex-input,
   .hero-section + .color-picker-container .IroSlider {
     max-width: 100% !important;
