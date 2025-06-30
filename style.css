@@ -2327,3 +2327,8 @@ footer {
     margin-bottom: 15px !important; /* <-- Altere esta linha */
   }
 }
+
+  /* 1. Remove a margem inferior da seção principal para evitar espaçamento duplo. */
+  .hero-section {
+    margin-bottom: 0 !important;
+  }
