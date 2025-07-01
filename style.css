@@ -2326,7 +2326,7 @@ footer {
   
   /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
   .hero-section {
-    margin-bottom: 5px !important; /* <-- Altere esta linha */
+    margin-bottom: 15px !important; /* <-- Altere esta linha */
   }
 }
 
@@ -2356,3 +2356,4 @@ footer {
     margin-bottom: 5px;
     display: block;
 }
+
