@@ -2031,7 +2031,7 @@ body.night-mode .lb-fav-posters img {
         align-items: center;
         margin: 25px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
         margin-top: 0 !important;    /* Remove o espaço acima */
-        margin-bottom: 16px !important;
+        margin-bottom: 3px !important;
         gap: 6px !important;         /* Diminui o espaço interno entre elementos do color picker */
     }
 }
