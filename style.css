@@ -637,14 +637,14 @@ a[href="https://br.linkedin.com/in/henrique-marinhos"] {
 }
 
 .form-group {
-    margin-bottom: 10px; 
+    margin-bottom: 5px; 
 }
 
 .form-group label {
     display: block;
     font-size: 14px;
     color: var(--color-text-secondary);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-weight: 600;
 }
 
@@ -879,10 +879,11 @@ input.invalid, textarea.invalid {
     .contact-info {
         flex: auto;
         width: 90%;
-        max-width: 500px;
+        justify-content: flex-ends;
+        max-width: 400px;
     }
     .contact-form {
-        padding: 30px;
+        padding: 20px;
     }
     .contact-info {
         text-align: center;
@@ -2063,9 +2064,10 @@ body.night-mode .lb-fav-posters img {
 
 footer {
     text-align: center;
-    padding: 40px 20px;
-    margin-top: 60px; /* Garante um espaço acima do rodapé */
-    border-top: 1px solid var(--color-border);
+    margin-top: 1px;
+    margin-bottom: 8px;
+    padding-top: 1px;
+    padding-bottom: 8px;
     color: var(--color-text-secondary);
     font-size: 14px;
 }
@@ -2319,16 +2321,52 @@ footer {
   }
 }
 
-/* --- CORREÇÃO FORÇADA PARA O SELETOR DE CORES (MOBILE) --- */
-@media (max-width: 768px) {
-  
-  /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
-  .hero-section {
-    margin-bottom: 15px !important; /* <-- Altere esta linha */
+
+@media (max-width: 767px) {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .container,
+  .mosaic-grid,
+  .about-page .about-container,
+  .articles-main-v2 {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box;
   }
 }
 
-  /* 1. Remove a margem inferior da seção principal para evitar espaçamento duplo. */
-  .hero-section {
-    margin-bottom: 0 !important;
+/* Aproxima o color picker da foto no index (mobile) */
+@media (max-width: 768px) {
+  .hero-section + .color-picker-container {
+    margin-top: 8px !important;   /* Aproxima do bloco acima */
+    margin-bottom: 20px !important;
   }
+}
+
+/* Aumenta as margens do texto de apresentação no mobile */
+@media (max-width: 768px) {
+  .hero-text {
+    margin: 0 0 32px 0 !important; /* Espaço abaixo do texto de apresentação */
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* No menu expansivo mobile, coloca os botões de linguagem logo após as opções */
+@media (max-width: 992px) {
+  .mobile-nav .language-switcher {
+    margin-top: 24px;
+    padding-top: 0;
+    border-top: none;
+    justify-content: flex-start;
+    order: 2; /* Garante que venha logo após os links */
+  }
+  .mobile-nav ul {
+    margin-bottom: 0;
