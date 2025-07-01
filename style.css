@@ -2342,11 +2342,11 @@ footer {
   }
 }
 
-/* Aproxima o color picker da foto no index (mobile) */
 @media (max-width: 767px) {
   .hero-section + .color-picker-container {
-    margin-top: 8px !important;   /* Aproxima do bloco acima */
-    margin-bottom: 20px !important;
+    margin-top: 0 !important;    /* Remove o espaço acima */
+    margin-bottom: 16px !important;
+    gap: 6px !important;         /* Diminui o espaço interno entre elementos do color picker */
   }
 }
 
