@@ -2409,16 +2409,27 @@ footer {
 .sidebar-color-picker .IroSlider,
 .sidebar-color-picker .IroSlider--hue,
 .sidebar-color-picker .IroSlider--kelvin {
-  width: 90%;
-  max-width: 120px;
-  margin: 0 auto 6px auto;
-  display: block;
+  width: 90% !important;
+  max-width: 120px !important;
+  margin: 0 auto 6px auto !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: 24px !important;
+}
+
+/* Garante que o container do color picker não fique colapsado */
+.sidebar-color-picker > div[id^="colorPicker"] {
+  width: 100% !important;
+  min-height: 48px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Color picker na barra expansiva lateral (mobile) */
 @media (max-width: 992px) {
   .sidebar-color-picker {
-    /* Oculta na sidebar desktop, mostra na mobile-nav */
     display: none !important;
   }
   .mobile-nav .sidebar-color-picker {
@@ -2431,9 +2442,26 @@ footer {
   .mobile-nav .sidebar-color-picker .IroSlider,
   .mobile-nav .sidebar-color-picker .IroSlider--hue,
   .mobile-nav .sidebar-color-picker .IroSlider--kelvin {
-    width: 95%;
-    max-width: 160px;
-    margin: 0 auto 8px auto;
-    display: block;
+    width: 95% !important;
+    max-width: 160px !important;
+    margin: 0 auto 8px auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: 24px !important;
   }
+  .mobile-nav .sidebar-color-picker > div[id^="colorPicker"] {
+    width: 100% !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Corrige possíveis conflitos de display:none do Iro.js */
+.sidebar-color-picker .IroSlider[style*="display: none"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
