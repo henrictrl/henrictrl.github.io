@@ -2020,14 +2020,14 @@ body.night-mode .lb-fav-posters img {
 /* =================================================================== */
 /* === ESTILO DO COLOR PICKER MOVIDO (MOBILE) === */
 /* =================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-section {
-    margin-bottom: 8px !important; /* ou 0 se quiser colar mesmo */
+    margin-bottom: 2px !important; /* ou 0 se quiser colar mesmo */
     gap: 0 !important;
   }
   .hero-section + .color-picker-container {
     margin-top: 0 !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 1px !important;
   }
 }
 
