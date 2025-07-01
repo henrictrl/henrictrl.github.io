@@ -402,76 +402,97 @@ themeToggleButtons.forEach(button => {
     // =====================================================================
     // === COLOR PICKER NA SIDEBAR E MOBILE NAV (IRO.JS) ===
     // =====================================================================
-    function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerSelector) {
-        const container = document.querySelector(containerSelector);
-        const hexInput = container ? container.querySelector(inputSelector) : null;
-        const iroDiv = container ? container.querySelector(iroContainerSelector) : null;
+function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerSelector) {
+    const container = document.querySelector(containerSelector);
+    const hexInput = container ? container.querySelector(inputSelector) : null;
+    const iroDiv = container ? container.querySelector(iroContainerSelector) : null;
 
-        if (container && hexInput && iroDiv && typeof iro !== 'undefined') {
-            // Remove any previous pickers
-            iroDiv.innerHTML = '';
-            const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+    if (container && hexInput && iroDiv && typeof iro !== 'undefined') {
+        iroDiv.innerHTML = '';
+        const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
 
-            // Garante que o container do iro.js tenha altura mínima para exibir os sliders
-            iroDiv.style.minHeight = '60px';
-            iroDiv.style.display = 'flex';
-            iroDiv.style.flexDirection = 'column';
-            iroDiv.style.alignItems = 'center';
-            iroDiv.style.justifyContent = 'center';
+        // Reduz altura e remove padding extra do container
+        iroDiv.style.minHeight = '28px';
+        iroDiv.style.display = 'flex';
+        iroDiv.style.flexDirection = 'column';
+        iroDiv.style.alignItems = 'center';
+        iroDiv.style.justifyContent = 'center';
+        iroDiv.style.padding = '0';
+        iroDiv.style.margin = '0';
 
-            const colorPicker = new iro.ColorPicker(iroDiv, {
-                width: 120,
-                color: initialColor,
-                borderWidth: 0,
-                borderColor: "#ffffff",
-                layout: [
-                    { component: iro.ui.Slider, options: { sliderType: 'hue', sliderHeight: 16, sliderHandleHeight: 22 } },
-                    { component: iro.ui.Slider, options: { sliderType: 'value', sliderHeight: 16, sliderHandleHeight: 22 } }
-                ]
+        const colorPicker = new iro.ColorPicker(iroDiv, {
+            width: 100,
+            color: initialColor,
+            borderWidth: 0,
+            borderColor: "#ffffff",
+            layout: [
+                { component: iro.ui.Slider, options: { sliderType: 'hue', sliderHeight: 14, sliderHandleHeight: 13 } },
+                { component: iro.ui.Slider, options: { sliderType: 'value', sliderHeight: 14, sliderHandleHeight: 13 } }
+            ]
+        });
+
+        // Ajusta sliders e handles para ficarem dentro do card e não ultrapassarem
+        setTimeout(() => {
+            const sliders = iroDiv.querySelectorAll('.IroSlider');
+            sliders.forEach(slider => {
+                slider.style.margin = '3px auto 0 auto';
+                slider.style.width = '100%';
+                slider.style.maxWidth = '100px';
+                slider.style.minWidth = '60px';
+                slider.style.height = '14px';
+                slider.style.borderRadius = '7px';
+                slider.style.overflow = 'hidden';
+                slider.style.padding = '0';
+                slider.style.position = 'relative';
             });
-
-            // Ajusta os sliders para garantir visibilidade e espaçamento
-            setTimeout(() => {
-                const sliders = iroDiv.querySelectorAll('.IroSlider');
-                sliders.forEach(slider => {
-                    slider.style.margin = '8px 0';
-                    slider.style.width = '100%';
-                    slider.style.maxWidth = '140px';
-                    slider.style.minWidth = '80px';
-                    slider.style.display = 'block';
-                });
-            }, 100);
-
-            hexInput.value = colorPicker.color.hexString;
-
-            colorPicker.on('color:change', (color) => {
-                const MIN_BRIGHTNESS = 40;
-                const MAX_BRIGHTNESS = 90;
-                const MIN_SATURATION = 50;
-                let { h, s, v } = color.hsv;
-                if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
-                if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
-                if (s < MIN_SATURATION) { s = MIN_SATURATION; }
-                color.hsv = { h, s, v };
-                const novaCorHex = color.hexString;
-                document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
-                hexInput.value = novaCorHex;
-                localStorage.setItem('highlightColor', novaCorHex);
+            const handles = iroDiv.querySelectorAll('.IroSliderHandle');
+            handles.forEach(handle => {
+                handle.style.width = '13px';
+                handle.style.height = '13px';
+                handle.style.minWidth = '0';
+                handle.style.minHeight = '0';
+                handle.style.maxWidth = '13px';
+                handle.style.maxHeight = '13px';
+                handle.style.top = '50%';
+                handle.style.transform = 'translateY(-50%)';
+                handle.style.left = '0';
+                handle.style.right = '0';
+                handle.style.position = 'absolute';
+                handle.style.boxShadow = '0 0 0 1.5px #fff, 0 0 0 2.5px var(--color-border)';
+                handle.style.border = '1.5px solid var(--color-border)';
             });
+        }, 100);
 
-            hexInput.addEventListener('input', () => {
-                const valor = hexInput.value;
-                if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
-                    colorPicker.color.hexString = valor;
-                }
-            });
-        }
+        hexInput.value = colorPicker.color.hexString;
+
+        colorPicker.on('color:change', (color) => {
+            const MIN_BRIGHTNESS = 40;
+            const MAX_BRIGHTNESS = 90;
+            const MIN_SATURATION = 50;
+            let { h, s, v } = color.hsv;
+            if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
+            if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
+            if (s < MIN_SATURATION) { s = MIN_SATURATION; }
+            color.hsv = { h, s, v };
+            const novaCorHex = color.hexString;
+            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
+            hexInput.value = novaCorHex;
+            localStorage.setItem('highlightColor', novaCorHex);
+        });
+
+        hexInput.addEventListener('input', () => {
+            const valor = hexInput.value;
+            if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
+                colorPicker.color.hexString = valor;
+            }
+        });
     }
+}
 
-    // Inicializa o color picker na sidebar (desktop)
-    setupSidebarColorPicker('.sidebar-nav .sidebar-color-picker', '.hex-input', '#colorPickerSidebar');
-    // Inicializa o color picker na mobile-nav (mobile)
-    setupSidebarColorPicker('.mobile-nav .sidebar-color-picker', '.hex-input', '#colorPickerMobile');
+// Inicializa o color picker na sidebar (desktop)
+setupSidebarColorPicker('.sidebar-nav .sidebar-color-picker', '.hex-input', '#colorPickerSidebar');
+// Inicializa o color picker na mobile-nav (mobile)
+setupSidebarColorPicker('.mobile-nav .sidebar-color-picker', '.hex-input', '#colorPickerMobile');
 
     // =====================================================================
     // === CASCATA DE IMAGENS HERO (ALTERNÂNCIA DE FOTOS) ===

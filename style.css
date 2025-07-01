@@ -2369,27 +2369,28 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 10px 0 10px 0;
+  gap: 6px;
+  padding: 8px 0 8px 0;
   background: var(--color-surface-2, #fff);
   border-radius: 10px;
-  margin: 8px 0 14px 0;
+  margin: 6px 0 10px 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   width: 100%;
-  max-width: 170px;
-  min-width: 120px;
+  max-width: 150px;
+  min-width: 100px;
   box-sizing: border-box;
+  border: 1px solid var(--color-border);
 }
 
 .sidebar-color-picker .hex-input {
-  width: 90%;
-  max-width: 120px;
-  min-width: 80px;
+  width: 92%;
+  max-width: 110px;
+  min-width: 70px;
   margin: 0 auto 2px auto;
-  padding: 7px 10px;
+  padding: 6px 8px;
   background-color: var(--color-surface-2);
   border: 1px solid transparent;
-  border-radius: 16px;
+  border-radius: 14px;
   color: var(--color-text-primary);
   font-size: 14px;
   font-family: 'Inter', sans-serif;
@@ -2414,32 +2415,54 @@ footer {
 .sidebar-color-picker .IroSlider,
 .sidebar-color-picker .IroSlider--hue,
 .sidebar-color-picker .IroSlider--kelvin {
-  width: 90% !important;
+  width: 100% !important;
   max-width: 120px !important;
-  min-width: 80px !important;
-  margin: 6px auto 0 auto !important;
+  min-width: 70px !important;
+  margin: 4px auto 0 auto !important;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  height: 20px !important;
+  height: 16px !important;
   background: transparent !important;
   border-radius: 8px !important;
   box-shadow: none !important;
   box-sizing: border-box !important;
+  /* Remove overflow para garantir que o handle não ultrapasse */
+  overflow: hidden !important;
+  /* Remove padding extra */
+  padding: 0 !important;
+}
+
+/* Ajusta o handle do Iro.js para não ultrapassar o slider */
+.sidebar-color-picker .IroSlider .IroSliderHandle {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--color-border);
+  border: 2px solid var(--color-border);
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  /* Garante que o handle fique dentro do slider */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
 /* Garante que o container do color picker não fique colapsado */
 .sidebar-color-picker > div[id^="colorPicker"] {
   width: 100% !important;
-  min-height: 38px !important;
+  min-height: 32px !important;
   display: flex !important;
-  flex-direction: column !important;
+   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 0 !important;
   background: transparent !important;
   box-sizing: border-box !important;
   overflow: visible !important;
+  padding: 0 !important;
 }
 
 /* Color picker na barra expansiva lateral (mobile) */
@@ -2450,42 +2473,59 @@ footer {
   .mobile-nav .sidebar-color-picker {
     display: flex !important;
     align-self: stretch;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
     width: 100%;
-    max-width: 220px;
-    min-width: 120px;
+    max-width: 170px;
+    min-width: 100px;
     box-sizing: border-box;
     border-radius: 10px;
-    padding: 10px 0 10px 0;
+    padding: 8px 0 8px 0;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid var(--color-border);
   }
   .mobile-nav .sidebar-color-picker .hex-input {
-    width: 90%;
-    max-width: 140px;
-    min-width: 80px;
+    width: 92%;
+    max-width: 110px;
+    min-width: 70px;
     margin: 0 auto 2px auto;
-    padding: 7px 10px;
+    padding: 6px 8px;
   }
   .mobile-nav .sidebar-color-picker .IroSlider,
   .mobile-nav .sidebar-color-picker .IroSlider--hue,
   .mobile-nav .sidebar-color-picker .IroSlider--kelvin {
-    width: 90% !important;
-    max-width: 140px !important;
-    min-width: 80px !important;
-    margin: 6px auto 0 auto !important;
+    width: 100% !important;
+    max-width: 120px !important;
+    min-width: 70px !important;
+    margin: 4px auto 0 auto !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    height: 20px !important;
+    height: 16px !important;
     background: transparent !important;
     border-radius: 8px !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+  .mobile-nav .sidebar-color-picker .IroSlider .IroSliderHandle {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--color-border);
+    border: 2px solid var(--color-border);
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: 0 !important;
+    right: 0 !important;
   }
   .mobile-nav .sidebar-color-picker > div[id^="colorPicker"] {
     width: 100% !important;
-    min-height: 38px !important;
+    min-height: 32px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -2494,6 +2534,7 @@ footer {
     background: transparent !important;
     box-sizing: border-box !important;
     overflow: visible !important;
+    padding: 0 !important;
   }
 }
 
