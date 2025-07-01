@@ -2405,9 +2405,14 @@ footer {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
 }
 
-.sidebar-color-picker .IroSlider {
+/* Sliders do Iro.js dentro da sidebar-color-picker */
+.sidebar-color-picker .IroSlider,
+.sidebar-color-picker .IroSlider--hue,
+.sidebar-color-picker .IroSlider--kelvin {
   width: 90%;
   max-width: 120px;
+  margin: 0 auto 6px auto;
+  display: block;
 }
 
 /* Color picker na barra expansiva lateral (mobile) */
@@ -2422,5 +2427,13 @@ footer {
     margin-bottom: 30px;
     width: 100%;
     max-width: 180px;
+  }
+  .mobile-nav .sidebar-color-picker .IroSlider,
+  .mobile-nav .sidebar-color-picker .IroSlider--hue,
+  .mobile-nav .sidebar-color-picker .IroSlider--kelvin {
+    width: 95%;
+    max-width: 160px;
+    margin: 0 auto 8px auto;
+    display: block;
   }
 }
