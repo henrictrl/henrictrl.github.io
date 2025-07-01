@@ -320,7 +320,7 @@ header {
 #image1 .color-picker-container {
     position: absolute;
     left: 5%;
-    bottom: 20px;
+    bottom: 10px;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -366,28 +366,7 @@ header {
 /* =================================================================== */
 
 .download-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 15;
-    background-color: var(--backdrop-bg);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
-    color: var(--color-text-primary);
-    padding: 8px 16px;
-    border-radius: 18px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.download-button:hover {
-    background-color: var(--cor-destaque);
-    color: #0b1215;
-    border-color: rgba(0, 0, 0, 0.5);
+  display: none !important;
 }
 
 
@@ -2021,18 +2000,16 @@ body.night-mode .lb-fav-posters img {
 /* === ESTILO DO COLOR PICKER MOVIDO (MOBILE) === */
 /* =================================================================== */
 @media (max-width: 768px) {
-    /*
-     * Quando o color-picker-container é movido para DEPOIS da hero-section
-     * em telas pequenas, estes estilos são aplicados.
-    */
-    .hero-section + .color-picker-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin: 25px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
-    }
+  .hero-section {
+    margin-bottom: 8px !important; /* ou 0 se quiser colar mesmo */
+    gap: 0 !important;
+  }
+  .hero-section + .color-picker-container {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+  }
 }
+
 
 @media (max-width: 767px) {
   .post-card-v2 .card-title {
@@ -2342,25 +2319,17 @@ footer {
   }
 }
 
-/* Aproxima o color picker da foto no index (mobile) */
-@media (max-width: 768px) {
-  .hero-section + .color-picker-container {
-    margin-top: 8px !important;   /* Aproxima do bloco acima */
-    margin-bottom: 20px !important;
-  }
-}
-
 /* Aumenta as margens do texto de apresentação no mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-text {
-    margin: 0 0 32px 0 !important; /* Espaço abaixo do texto de apresentação */
+    margin: 0 0 10px 0 !important; /* Espaço abaixo do texto de apresentação */
     padding-left: 12px;
     padding-right: 12px;
   }
 }
 
 /* No menu expansivo mobile, coloca os botões de linguagem logo após as opções */
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   .mobile-nav .language-switcher {
     margin-top: 24px;
     padding-top: 0;
@@ -2370,3 +2339,88 @@ footer {
   }
   .mobile-nav ul {
     margin-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .color-picker-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(250,249,246,0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  body.color-picker-active main,
+  body.color-picker-active .hero-section,
+  body.color-picker-active header,
+  body.color-picker-active footer {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+/* Color picker fixo na sidebar lateral (desktop) */
+.sidebar-color-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  background: var(--color-surface-2, #fff);
+  border-radius: 12px;
+  margin: 10px 0 18px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  width: 100%;
+  max-width: 160px;
+}
+
+.sidebar-color-picker .hex-input {
+  width: 100%;
+  max-width: 120px;
+  padding: 8px 12px;
+  background-color: var(--color-surface-2);
+  border: 1px solid transparent;
+  border-radius: 18px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-color-picker .hex-input::placeholder {
+  color: var(--color-text-secondary);
+  font-weight: 200;
+}
+
+.sidebar-color-picker .hex-input:focus {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
+}
+
+.sidebar-color-picker .IroSlider {
+  width: 90%;
+  max-width: 120px;
+}
+
+/* Color picker na barra expansiva lateral (mobile) */
+@media (max-width: 992px) {
+  .sidebar-color-picker {
+    /* Oculta na sidebar desktop, mostra na mobile-nav */
+    display: none !important;
+  }
+  .mobile-nav .sidebar-color-picker {
+    display: flex !important;
+    align-self: center;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 180px;
+  }
+}
