@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formSubjectPlaceholder: "Presupuesto, Colaboración, Café...",
             formMessage: "Tu Mensaje:",
             formMessagePlaceholder: "Cuéntame un poco sobre tu idea...",
-            formSubmit: "Enviar Mensaje",
+            formSubmit: "Enviar Mensagem",
             contactOtherTitle: "Otras Formas de Contacto",
             contactPhone: "Teléfono:",
             formSending: "Enviando...",
@@ -412,16 +412,35 @@ themeToggleButtons.forEach(button => {
             iroDiv.innerHTML = '';
             const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
 
+            // Garante que o container do iro.js tenha altura mínima para exibir os sliders
+            iroDiv.style.minHeight = '60px';
+            iroDiv.style.display = 'flex';
+            iroDiv.style.flexDirection = 'column';
+            iroDiv.style.alignItems = 'center';
+            iroDiv.style.justifyContent = 'center';
+
             const colorPicker = new iro.ColorPicker(iroDiv, {
                 width: 120,
                 color: initialColor,
                 borderWidth: 0,
                 borderColor: "#ffffff",
                 layout: [
-                    { component: iro.ui.Slider, options: { sliderType: 'hue' } },
-                    { component: iro.ui.Slider, options: { sliderType: 'value' } }
+                    { component: iro.ui.Slider, options: { sliderType: 'hue', sliderHeight: 16, sliderHandleHeight: 22 } },
+                    { component: iro.ui.Slider, options: { sliderType: 'value', sliderHeight: 16, sliderHandleHeight: 22 } }
                 ]
             });
+
+            // Ajusta os sliders para garantir visibilidade e espaçamento
+            setTimeout(() => {
+                const sliders = iroDiv.querySelectorAll('.IroSlider');
+                sliders.forEach(slider => {
+                    slider.style.margin = '8px 0';
+                    slider.style.width = '100%';
+                    slider.style.maxWidth = '140px';
+                    slider.style.minWidth = '80px';
+                    slider.style.display = 'block';
+                });
+            }, 100);
 
             hexInput.value = colorPicker.color.hexString;
 
