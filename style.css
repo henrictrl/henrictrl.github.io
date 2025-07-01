@@ -2019,20 +2019,7 @@ body.night-mode .lb-fav-posters img {
 
 /* =================================================================== */
 /* === ESTILO DO COLOR PICKER MOVIDO (MOBILE) === */
-/* =================================================================== */
-@media (max-width: 768px) {
-    /*
-     * Quando o color-picker-container é movido para DEPOIS da hero-section
-     * em telas pequenas, estes estilos são aplicados.
-    */
-    .hero-section + .color-picker-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin: 25px auto 20px; /* Adiciona espaçamento vertical e centraliza horizontalmente */
-    }
-}
+/* =================================================================== */}
 
 @media (max-width: 767px) {
   .post-card-v2 .card-title {
