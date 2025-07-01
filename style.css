@@ -2348,20 +2348,17 @@ footer {
     padding-left: 16px !important;
     padding-right: 16px !important;
     box-sizing: border-box;
-  }
-}
-
-.contact-form .submit-button {
-    margin-top: 2px;
-    margin-bottom: 5px;
-    display: block;
-}
-
-@media (max-width: 768px) {
-  .hero-section {
+      .hero-section {
     margin-bottom: 2px !important; /* Reduz ainda mais o espaço abaixo das fotos */
   }
   .hero-section + .color-picker-container {
     margin-top: 2px !important;    /* Aproxima o color picker das fotos */
   }
+}
+  }
+
+.contact-form .submit-button {
+    margin-top: 2px;
+    margin-bottom: 5px;
+    display: block;
 }
