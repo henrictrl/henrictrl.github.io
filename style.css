@@ -2343,7 +2343,7 @@ footer {
 }
 
 /* Aproxima o color picker da foto no index (mobile) */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-section + .color-picker-container {
     margin-top: 8px !important;   /* Aproxima do bloco acima */
     margin-bottom: 20px !important;
@@ -2351,7 +2351,7 @@ footer {
 }
 
 /* Aumenta as margens do texto de apresentação no mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-text {
     margin: 0 0 32px 0 !important; /* Espaço abaixo do texto de apresentação */
     padding-left: 12px;
@@ -2360,7 +2360,7 @@ footer {
 }
 
 /* No menu expansivo mobile, coloca os botões de linguagem logo após as opções */
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   .mobile-nav .language-switcher {
     margin-top: 24px;
     padding-top: 0;
