@@ -2321,20 +2321,6 @@ footer {
   }
 }
 
-/* --- CORREÇÃO FORÇADA PARA O SELETOR DE CORES (MOBILE) --- */
-@media (max-width: 768px) {
-  
-  /* 1. Reduz o espaço abaixo da imagem para aproximar o seletor */
-  .hero-section {
-    margin-bottom: 15px !important; /* <-- Altere esta linha */
-  }
-}
-
-  /* 1. Remove a margem inferior da seção principal para evitar espaçamento duplo. */
-  .hero-section {
-    margin-bottom: 0 !important;
-  }
-
   /* Garante largura máxima e sem rolagem lateral em dispositivos móveis */
 @media (max-width: 767px) {
   .container,
@@ -2349,11 +2335,5 @@ footer {
     padding-right: 16px !important;
     box-sizing: border-box;
   }
-}
-
-.contact-form .submit-button {
-    margin-top: 2px;
-    margin-bottom: 5px;
-    display: block;
 }
 
