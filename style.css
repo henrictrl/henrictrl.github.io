@@ -2369,23 +2369,27 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 12px 0;
+  gap: 8px;
+  padding: 10px 0 10px 0;
   background: var(--color-surface-2, #fff);
-  border-radius: 12px;
-  margin: 10px 0 18px 0;
+  border-radius: 10px;
+  margin: 8px 0 14px 0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   width: 100%;
-  max-width: 160px;
+  max-width: 170px;
+  min-width: 120px;
+  box-sizing: border-box;
 }
 
 .sidebar-color-picker .hex-input {
-  width: 100%;
+  width: 90%;
   max-width: 120px;
-  padding: 8px 12px;
+  min-width: 80px;
+  margin: 0 auto 2px auto;
+  padding: 7px 10px;
   background-color: var(--color-surface-2);
   border: 1px solid transparent;
-  border-radius: 18px;
+  border-radius: 16px;
   color: var(--color-text-primary);
   font-size: 14px;
   font-family: 'Inter', sans-serif;
@@ -2393,6 +2397,7 @@ footer {
   text-align: center;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
 .sidebar-color-picker .hex-input::placeholder {
@@ -2409,29 +2414,32 @@ footer {
 .sidebar-color-picker .IroSlider,
 .sidebar-color-picker .IroSlider--hue,
 .sidebar-color-picker .IroSlider--kelvin {
-  width: 100% !important;
-  max-width: 140px !important;
+  width: 90% !important;
+  max-width: 120px !important;
   min-width: 80px !important;
-  margin: 8px 0 !important;
+  margin: 6px auto 0 auto !important;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  height: 22px !important;
+  height: 20px !important;
   background: transparent !important;
   border-radius: 8px !important;
   box-shadow: none !important;
+  box-sizing: border-box !important;
 }
 
 /* Garante que o container do color picker não fique colapsado */
 .sidebar-color-picker > div[id^="colorPicker"] {
   width: 100% !important;
-  min-height: 48px !important;
+  min-height: 38px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 0 !important;
   background: transparent !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
 /* Color picker na barra expansiva lateral (mobile) */
@@ -2441,35 +2449,51 @@ footer {
   }
   .mobile-nav .sidebar-color-picker {
     display: flex !important;
-    align-self: center;
-    margin-bottom: 30px;
+    align-self: stretch;
+    margin-bottom: 22px;
     width: 100%;
-    max-width: 180px;
+    max-width: 220px;
+    min-width: 120px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mobile-nav .sidebar-color-picker .hex-input {
+    width: 90%;
+    max-width: 140px;
+    min-width: 80px;
+    margin: 0 auto 2px auto;
+    padding: 7px 10px;
   }
   .mobile-nav .sidebar-color-picker .IroSlider,
   .mobile-nav .sidebar-color-picker .IroSlider--hue,
   .mobile-nav .sidebar-color-picker .IroSlider--kelvin {
-    width: 100% !important;
-    max-width: 160px !important;
+    width: 90% !important;
+    max-width: 140px !important;
     min-width: 80px !important;
-    margin: 8px 0 !important;
+    margin: 6px auto 0 auto !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    height: 22px !important;
+    height: 20px !important;
     background: transparent !important;
     border-radius: 8px !important;
     box-shadow: none !important;
+    box-sizing: border-box !important;
   }
   .mobile-nav .sidebar-color-picker > div[id^="colorPicker"] {
     width: 100% !important;
-    min-height: 48px !important;
+    min-height: 38px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
     background: transparent !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 }
 
