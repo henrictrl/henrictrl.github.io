@@ -2341,3 +2341,32 @@ footer {
     box-sizing: border-box;
   }
 }
+
+/* Aproxima o color picker da foto no index (mobile) */
+@media (max-width: 768px) {
+  .hero-section + .color-picker-container {
+    margin-top: 8px !important;   /* Aproxima do bloco acima */
+    margin-bottom: 20px !important;
+  }
+}
+
+/* Aumenta as margens do texto de apresentação no mobile */
+@media (max-width: 768px) {
+  .hero-text {
+    margin: 0 0 32px 0 !important; /* Espaço abaixo do texto de apresentação */
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* No menu expansivo mobile, coloca os botões de linguagem logo após as opções */
+@media (max-width: 992px) {
+  .mobile-nav .language-switcher {
+    margin-top: 24px;
+    padding-top: 0;
+    border-top: none;
+    justify-content: flex-start;
+    order: 2; /* Garante que venha logo após os links */
+  }
+  .mobile-nav ul {
+    margin-bottom: 0;
