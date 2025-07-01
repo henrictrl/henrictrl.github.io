@@ -2363,3 +2363,64 @@ footer {
     user-select: none;
   }
 }
+
+/* Color picker fixo na sidebar lateral (desktop) */
+.sidebar-color-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  background: var(--color-surface-2, #fff);
+  border-radius: 12px;
+  margin: 10px 0 18px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  width: 100%;
+  max-width: 160px;
+}
+
+.sidebar-color-picker .hex-input {
+  width: 100%;
+  max-width: 120px;
+  padding: 8px 12px;
+  background-color: var(--color-surface-2);
+  border: 1px solid transparent;
+  border-radius: 18px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-color-picker .hex-input::placeholder {
+  color: var(--color-text-secondary);
+  font-weight: 200;
+}
+
+.sidebar-color-picker .hex-input:focus {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-destaque) 30%, transparent);
+}
+
+.sidebar-color-picker .IroSlider {
+  width: 90%;
+  max-width: 120px;
+}
+
+/* Color picker na barra expansiva lateral (mobile) */
+@media (max-width: 992px) {
+  .sidebar-color-picker {
+    /* Oculta na sidebar desktop, mostra na mobile-nav */
+    display: none !important;
+  }
+  .mobile-nav .sidebar-color-picker {
+    display: flex !important;
+    align-self: center;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 180px;
+  }
+}
