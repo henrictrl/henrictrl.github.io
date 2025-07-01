@@ -2321,6 +2321,7 @@ footer {
   }
 }
 
+
   /* Garante largura máxima e sem rolagem lateral em dispositivos móveis */
 @media (max-width: 767px) {
   .container,
