@@ -420,6 +420,7 @@ function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerS
         iroDiv.style.padding = '0';
         iroDiv.style.margin = '0';
 
+        // Apenas dois sliders: hue e value (brilho). Remove qualquer campo extra.
         const colorPicker = new iro.ColorPicker(iroDiv, {
             width: 100,
             color: initialColor,
@@ -437,26 +438,26 @@ function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerS
             sliders.forEach(slider => {
                 slider.style.margin = '3px auto 0 auto';
                 slider.style.width = '100%';
-                slider.style.maxWidth = '100px';
-                slider.style.minWidth = '60px';
-                slider.style.height = '14px';
-                slider.style.borderRadius = '7px';
+                slider.style.maxWidth = window.innerWidth <= 768 ? '110px' : '100px';
+                slider.style.minWidth = window.innerWidth <= 768 ? '80px' : '60px';
+                slider.style.height = window.innerWidth <= 768 ? '18px' : '14px';
+                slider.style.borderRadius = window.innerWidth <= 768 ? '9px' : '7px';
                 slider.style.overflow = 'hidden';
                 slider.style.padding = '0';
                 slider.style.position = 'relative';
             });
             const handles = iroDiv.querySelectorAll('.IroSliderHandle');
             handles.forEach(handle => {
-                handle.style.width = '13px';
-                handle.style.height = '13px';
+                handle.style.width = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.height = window.innerWidth <= 768 ? '17px' : '13px';
                 handle.style.minWidth = '0';
                 handle.style.minHeight = '0';
-                handle.style.maxWidth = '13px';
-                handle.style.maxHeight = '13px';
+                handle.style.maxWidth = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.maxHeight = window.innerWidth <= 768 ? '17px' : '13px';
                 handle.style.top = '50%';
-                handle.style.transform = 'translateY(-50%)';
-                handle.style.left = '0';
-                handle.style.right = '0';
+                handle.style.left = '50%';
+                handle.style.transform = 'translate(-50%, -50%)';
+                handle.style.right = 'auto';
                 handle.style.position = 'absolute';
                 handle.style.boxShadow = '0 0 0 1.5px #fff, 0 0 0 2.5px var(--color-border)';
                 handle.style.border = '1.5px solid var(--color-border)';

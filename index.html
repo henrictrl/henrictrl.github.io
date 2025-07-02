@@ -35,26 +35,23 @@
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
-        <ul>
-
-<button id="theme-toggle" class="theme-toggle-button" title="Alternar tema">
-    <div class="slider-bg"></div>
-    <span class="material-symbols-outlined icon-sun">light_mode</span>
-    <span class="material-symbols-outlined icon-moon">dark_mode</span>
-</button>
-
-            <li><a href="./index.html#inicio" data-translate-key="navHome">Início</a></li>
-            <li><a href="./index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="./index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="./index.html#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="./sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="./artigos.html" data-translate-key="navArticles">Artigos</a></li>
-        </ul>
-        <!-- Color picker na barra expansiva mobile -->
-        <div class="sidebar-color-picker">
-            <input type="text" id="hexInputMobile" class="hex-input" placeholder="#RRGGBB" maxlength="7">
-            <div id="colorPickerMobile"></div>
-            <div class="IroSlider" id="colorSliderMobile"></div>
+        <div class="mobile-nav-group">
+            <button id="theme-toggle" class="theme-toggle-button" title="Alternar tema" style="margin-bottom: 20px;">
+                <div class="slider-bg"></div>
+                <span class="material-symbols-outlined icon-sun">light_mode</span>
+                <span class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <!-- Color picker na barra expansiva mobile (agora logo abaixo do modo noturno) -->
+            <div class="sidebar-color-picker" style="margin-bottom: 20px;">
+                <input type="text" id="hexInputMobile" class="hex-input" placeholder="#RRGGBB" maxlength="7">
+                <div id="colorPickerMobile"></div>
+            </div>
+            <a href="./index.html#inicio" data-translate-key="navHome" style="margin-bottom: 20px;">Início</a>
+            <a href="./index.html#experiencia" data-translate-key="navExperience" style="margin-bottom: 20px;">Experiência</a>
+            <a href="./index.html#portfolio" data-translate-key="navPortfolio" style="margin-bottom: 20px;">Portfólio</a>
+            <a href="./index.html#contato" data-translate-key="navContact" style="margin-bottom: 20px;">Contato</a>
+            <span class="nav-separator" style="margin-bottom: 20px;"><a href="./sobre.html" data-translate-key="navAbout">Sobre Mim</a></span>
+            <a href="./artigos.html" data-translate-key="navArticles">Artigos</a>
         </div>
         <div class="language-switcher">
             <button class="lang-button" data-lang="pt" title="Português">
@@ -66,8 +63,6 @@
             <button class="lang-button" data-lang="es" title="Español">
                  <img src="./images/spain.png" alt="Bandera de España">
             </button>
-
-
         </div>
     </nav>
 
@@ -81,7 +76,6 @@
         <div class="sidebar-color-picker">
             <input type="text" id="hexInputSidebar" class="hex-input" placeholder="#RRGGBB" maxlength="7">
             <div id="colorPickerSidebar"></div>
-            <div class="IroSlider" id="colorSliderSidebar"></div>
         </div>
         <ul>
             <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
