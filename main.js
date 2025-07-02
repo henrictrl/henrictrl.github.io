@@ -197,16 +197,16 @@ document.addEventListener('DOMContentLoaded', () => {
             jobInternPr: "Becario de Relaciones Públicas <br><span class='at-symbol'>@</span> Unesp",
             jobAssistant: "Asistente de Compras <br> <span class='at-symbol'>@</span> Servimed",
             portfolioTitle: "(Proyectos)",
-            project1Name: "Nombre del Proyecto 1",
+            project1Name: "Nome do Projeto 1",
             project1Cat: "Branding",
-            project2Name: "Nombre del Proyecto 2",
+            project2Name: "Nome do Projeto 2",
             project2Cat: "Sitio Web",
-            project3Name: "Nombre del Proyecto 3",
-            project3Cat: "Identidad Visual",
-            project4Name: "Nombre del Proyecto 4",
-            project4Cat: "Campaña",
-            modalProjectName: "Nombre del Proyecto",
-            modalProjectDesc: "Aquí va la descripción detallada del proyecto, con más imágenes, videos y texto.",
+            project3Name: "Nome do Projeto 3",
+            project3Cat: "Identidade Visual",
+            project4Name: "Nome do Projeto 4",
+            project4Cat: "Campanha",
+            modalProjectName: "Nome do Projeto",
+            modalProjectDesc: "Aqui va la descripción detallada del proyecto, con más imágenes, videos y texto.",
             contactTitle: "Hable Conmigo", // Revertido
             contactIntro: "¿Tienes un proyecto en mente o una pregunta? ¿Quieres colaborar o simplemente tomar un café para intercambiar ideas? Envía un mensaje y hablemos.", // Revertido y refinado
             formName: "Tu Nombre:",
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formSubjectPlaceholder: "Presupuesto, Colaboración, Café...",
             formMessage: "Tu Mensaje:",
             formMessagePlaceholder: "Cuéntame un poco sobre tu idea...",
-            formSubmit: "Enviar Mensaje",
+            formSubmit: "Enviar Mensagem",
             contactOtherTitle: "Otras Formas de Contacto",
             contactPhone: "Teléfono:",
             formSending: "Enviando...",
@@ -400,21 +400,117 @@ themeToggleButtons.forEach(button => {
     }
 
     // =====================================================================
-    // === CASCATA DE IMAGENS HERO ===
+    // === COLOR PICKER NA SIDEBAR E MOBILE NAV (IRO.JS) ===
+    // =====================================================================
+function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerSelector) {
+    const container = document.querySelector(containerSelector);
+    const hexInput = container ? container.querySelector(inputSelector) : null;
+    const iroDiv = container ? container.querySelector(iroContainerSelector) : null;
+
+    if (container && hexInput && iroDiv && typeof iro !== 'undefined') {
+        iroDiv.innerHTML = '';
+        const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+
+        // Reduz altura e remove padding extra do container
+        iroDiv.style.minHeight = '28px';
+        iroDiv.style.display = 'flex';
+        iroDiv.style.flexDirection = 'column';
+        iroDiv.style.alignItems = 'center';
+        iroDiv.style.justifyContent = 'center';
+        iroDiv.style.padding = '0';
+        iroDiv.style.margin = '0';
+
+        // Apenas dois sliders: hue e value (brilho). Remove qualquer campo extra.
+        const colorPicker = new iro.ColorPicker(iroDiv, {
+            width: 100,
+            color: initialColor,
+            borderWidth: 0,
+            borderColor: "#ffffff",
+            layout: [
+                { component: iro.ui.Slider, options: { sliderType: 'hue', sliderHeight: 14, sliderHandleHeight: 13 } },
+                { component: iro.ui.Slider, options: { sliderType: 'value', sliderHeight: 14, sliderHandleHeight: 13 } }
+            ]
+        });
+
+        // Ajusta sliders e handles para ficarem dentro do card e não ultrapassarem
+        setTimeout(() => {
+            const sliders = iroDiv.querySelectorAll('.IroSlider');
+            sliders.forEach(slider => {
+                slider.style.margin = '3px auto 0 auto';
+                slider.style.width = '100%';
+                slider.style.maxWidth = window.innerWidth <= 768 ? '110px' : '100px';
+                slider.style.minWidth = window.innerWidth <= 768 ? '80px' : '60px';
+                slider.style.height = window.innerWidth <= 768 ? '18px' : '14px';
+                slider.style.borderRadius = window.innerWidth <= 768 ? '9px' : '7px';
+                slider.style.overflow = 'hidden';
+                slider.style.padding = '0';
+                slider.style.position = 'relative';
+            });
+            const handles = iroDiv.querySelectorAll('.IroSliderHandle');
+            handles.forEach(handle => {
+                handle.style.width = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.height = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.minWidth = '0';
+                handle.style.minHeight = '0';
+                handle.style.maxWidth = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.maxHeight = window.innerWidth <= 768 ? '17px' : '13px';
+                handle.style.top = '50%';
+                handle.style.left = '50%';
+                handle.style.transform = 'translate(-50%, -50%)';
+                handle.style.right = 'auto';
+                handle.style.position = 'absolute';
+                handle.style.boxShadow = '0 0 0 1.5px #fff, 0 0 0 2.5px var(--color-border)';
+                handle.style.border = '1.5px solid var(--color-border)';
+            });
+        }, 100);
+
+        hexInput.value = colorPicker.color.hexString;
+
+        colorPicker.on('color:change', (color) => {
+            const MIN_BRIGHTNESS = 40;
+            const MAX_BRIGHTNESS = 90;
+            const MIN_SATURATION = 50;
+            let { h, s, v } = color.hsv;
+            if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
+            if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
+            if (s < MIN_SATURATION) { s = MIN_SATURATION; }
+            color.hsv = { h, s, v };
+            const novaCorHex = color.hexString;
+            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
+            hexInput.value = novaCorHex;
+            localStorage.setItem('highlightColor', novaCorHex);
+        });
+
+        hexInput.addEventListener('input', () => {
+            const valor = hexInput.value;
+            if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
+                colorPicker.color.hexString = valor;
+            }
+        });
+    }
+}
+
+// Inicializa o color picker na sidebar (desktop)
+setupSidebarColorPicker('.sidebar-nav .sidebar-color-picker', '.hex-input', '#colorPickerSidebar');
+// Inicializa o color picker na mobile-nav (mobile)
+setupSidebarColorPicker('.mobile-nav .sidebar-color-picker', '.hex-input', '#colorPickerMobile');
+
+    // =====================================================================
+    // === CASCATA DE IMAGENS HERO (ALTERNÂNCIA DE FOTOS) ===
     // =====================================================================
     const cascadeContainer = document.getElementById('cascadeContainer');
     const image1 = document.getElementById('image1');
     const image2 = document.getElementById('image2');
 
-    if (cascadeContainer) { 
+    if (cascadeContainer && image1 && image2) {
         cascadeContainer.addEventListener('click', (event) => {
-            // A verificação `!pickerContainer.contains(event.target)` agora é ainda mais importante
-            if (pickerContainer && !pickerContainer.contains(event.target) && downloadButton && !downloadButton.contains(event.target) && hexInput && !hexInput.contains(event.target)) {
-                image1.classList.toggle('top-image');
-                image1.classList.toggle('bottom-image');
-                image2.classList.toggle('top-image');
-                image2.classList.toggle('bottom-image');
-            }
+            // Não alterna se clicar em um color picker ou input dentro da sidebar/mobile-nav
+            const isColorPicker = event.target.closest('.sidebar-color-picker');
+            if (isColorPicker) return;
+            image1.classList.toggle('top-image');
+            image1.classList.toggle('bottom-image');
+            image2.classList.toggle('top-image');
+            image2.classList.toggle('bottom-image');
         });
     }
     

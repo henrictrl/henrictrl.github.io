@@ -129,4 +129,39 @@ document.addEventListener('DOMContentLoaded', () => {
     applySavedHighlightColor();
     applyHighlightColorToCards();
     sortArticlesByDate(); // Chama a nova função para ordenar os artigos
+
+    // ================= CHROMA CARD EFFECT =====================
+    // Aplica efeito de spotlight nos cards de artigo no desktop
+    function setupChromaCardEffect() {
+        const cards = document.querySelectorAll('.post-card-v2');
+        cards.forEach(card => {
+            card.classList.add('chroma-card');
+            // Remove overlays antigos para evitar duplicatas
+            card.querySelectorAll('.chroma-overlay, .chroma-fade').forEach(el => el.remove());
+            // Cria overlay para efeito de luz
+            const overlay = document.createElement('div');
+            overlay.className = 'chroma-overlay';
+            card.appendChild(overlay);
+            // Cria fade para efeito de saída
+            const fade = document.createElement('div');
+            fade.className = 'chroma-fade';
+            card.appendChild(fade);
+            // Eventos de mouse
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+                overlay.style.opacity = 1;
+                fade.style.opacity = 0;
+            });
+            card.addEventListener('mouseleave', () => {
+                overlay.style.opacity = 0;
+                fade.style.opacity = 1;
+            });
+        });
+    }
+    setupChromaCardEffect();
+    window.addEventListener('resize', setupChromaCardEffect);
 });
