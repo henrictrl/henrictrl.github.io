@@ -18,8 +18,15 @@
     content: none !important;
     display: none !important;
   }
-  .mobile-nav ul li:not(:last-child) {
+  .mobile-nav ul li {
     margin-bottom: 18px !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .mobile-nav ul .nav-separator {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
   .mobile-nav .theme-toggle-button {
     margin-bottom: 18px !important;
