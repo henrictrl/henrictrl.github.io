@@ -2534,7 +2534,6 @@ footer {
   min-height: 420px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #333;
   transition: border-color 0.3s ease;
   background: var(--card-gradient, var(--color-surface-1));
   --mouse-x: 50%;
