@@ -18,8 +18,15 @@
     content: none !important;
     display: none !important;
   }
-  .mobile-nav ul li:not(:last-child) {
+  .mobile-nav ul li {
     margin-bottom: 18px !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .mobile-nav ul .nav-separator {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
   .mobile-nav .theme-toggle-button {
     margin-bottom: 18px !important;
@@ -2534,7 +2541,6 @@ footer {
   min-height: 420px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid #333;
   transition: border-color 0.3s ease;
   background: var(--card-gradient, var(--color-surface-1));
   --mouse-x: 50%;
