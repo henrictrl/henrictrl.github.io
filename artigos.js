@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     const body = document.body;
+
+    // ================== TROCA DE TEMA (NIGHT/DAY) ===================
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
+    themeToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    });
 
     /**
      * Aplica o tema (claro/escuro) ao corpo do documento.
@@ -98,14 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
-    themeToggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
-        });
-    });
+
 
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');

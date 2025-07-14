@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corações Jovens não sabe nomear o amor, mas sabe senti-lo - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #8FBC8F; /* Cor ajustada para um verde suave do filme */
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">Corações Jovens não sabe nomear o amor, mas sabe senti-lo</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">14 de Novembro, 2024</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/coracoes-jovens-capa.jpg"
+            alt="Dois meninos brincando em um lago.">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            Dirigido por Anthony Schatteman e presente na seção Novos Diretores, <i>Corações Jovens</i> (<i>Young Hearts</i>, no original) foi exibido na 1ª Mostrinha da 48ª Mostra de Cinema Internacional de São Paulo. Em meio à calmaria das paisagens rurais belgas, o filme é uma viagem ao que há de mais doce e confuso na vida: a primeira vez que nos apaixonamos. Elias (Lou Goossens), um menino de treze anos, enfrenta as primeiras grandes emoções em um mundo que começa a se revelar mais amplo e, ao mesmo tempo, mais incerto. Atravessamos campos verdes e vemos o mundo pelos olhos dele, assim, sentimos suas descobertas - desde sua primeira desilusão até seu primeiro amor.
+        </p>
+        <p>
+            Nesse cenário de sonhos e de luz suaves, a linguagem do amor é algo ainda sem forma. Elias não sabe o que é amar, mas sente em si algo que transborda. A chegada de Alexander (Marius De Saeger), seu novo vizinho e colega de classe, desperta nele um sentimento inédito e intenso, algo que faz seu coração bater diferente. Essa paixão nasce da simplicidade de estar ao lado do outro e da admiração que cresce em cada gesto ou olhar que os dois compartilham. O toque leve das mãos, os risos abafados, as pedaladas em uma tarde ensolarada; tudo é amor, mesmo que ele não saiba nomeá-lo assim.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/coracoes-jovens-piano.jpg" alt="Dois meninos sentados em frente a um piano.">
+            <figcaption>Corações Jovens se inspira na experiência pessoal do diretor Anthony Schatteman (Foto: Polar Bear)</figcaption>
+        </div>
+        <p>
+            Não há muitos momentos surpreendentes ao longo da produção. Poderíamos esperar alguma tragédia devastadora; o verdadeiro clichê contemporâneo de filmes do gênero. No entanto, a verdadeira surpresa aqui é a previsibilidade. <i>Young Hearts</i> é um Comfort movie em sua essência mais genuína. Sem desníveis, névoa e curvas sinuosas. Vemos todo caminho a frente e seguimos pedalando vagarosamente até o final, enquanto aproveitamos a vista.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/coracoes-jovens-mae.jpg" alt="Uma mulher loira segurando o rosto de um menino.">
+            <figcaption>A trilha sonora do filme foi composta por Ruben De Gheselle, que também trabalhou em Close (2022) (Foto: Polar Bear]</figcaption>
+        </div>
+        <p>
+            A Fotografia do filme, por Pieter Van Campe, dá vida à emoção de <i>Corações Jovens</i>. A luz natural dos campos e o uso das sombras criam uma sensação de nostalgia e fragilidade. Cada cena é enquadrada de modo a parecer memórias da nossa infância, borradas, sentimentais, inventivas e com total foco nas pessoas, suas falas e acontecimentos. O cenário é um mero coadjuvante, como acontece na própria mente ao guardarmos só o mais importante.
+        </p>
+        <p>
+            Com sensibilidade, a narrativa atravessa a jornada da primeira paixão em seus altos e baixos. Para muitos de nós, LGBTQIA+, descobrir o amor pela primeira vez não é só sobre o calor dos sentimentos e a alegria do novo; é também sobre confrontar o medo e a vergonha que a sociedade ainda nos impõe. E, se há algo que possa aquecer nossos corações e nos representar com dignidade, porque não fazê-lo? Clichês são o que são porque funcionam.
+        </p>
+        <p>
+            <i>Corações Jovens</i> é uma história sobre descobertas - sobre o amor em suas formas mais genuínas e conflitantes, a vergonha que nos prende, a coragem que nos liberta e o desejo de pertencimento que pulsa em quem está crescendo. O longa nos lembra que essa paixão adolescente, tão única e, ao mesmo tempo, tão compartilhada, é o que molda nossas primeiras escolhas e, por consequência, quem somos e quem queremos ser para nós ou alguém especial.
+        </p>
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>

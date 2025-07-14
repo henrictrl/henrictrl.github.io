@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>48ª Mostra Internacional de Cinema em São Paulo: entre telas, trânsito e tesouros - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #D9534F; /* Cor ajustada para o tema do artigo */
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">48ª Mostra Internacional de Cinema em São Paulo: entre telas, trânsito e tesouros</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">19 de Novembro, 2024</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/mostra-sp-capa.jpg"
+            alt="Pôster da 48ª Mostra Internacional de Cinema em São Paulo.">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            [cite_start]A Mostra Internacional de Cinema em São Paulo, dirigida por Renata Almeida, é um dos maiores e mais prestigiados eventos do calendário cinematográfico nacional. [cite: 18] [cite_start]Neste ano, a 48ª edição do festival aconteceu de 17 a 30 de outubro, e celebrou a Sétima Arte em toda a sua diversidade. [cite: 19] [cite_start]Desde a 44ª Mostra, o Persona tem o privilégio de acompanhar e cobrir essa jornada. [cite: 20]
+        </p>
+        <p>
+            [cite_start]Com mais de 400 títulos de 82 países na programação, cada sessão parecia uma escolha calculada que trazia uma conexão implícita com aqueles que buscavam assistir aos mesmos filmes que você. [cite: 21] [cite_start]Ao longo dos dias, o festival enriquece a cidade de São Paulo como um epicentro de cultura, discussão e inovação cinematográfica entre as poltronas e intervalos das sessões. [cite: 22]
+        </p>
+        <p>
+            [cite_start]No entanto, assistir a três filmes em três locais diferentes em um único dia pelos cinemas de uma megalópole não é tarefa simples (contagem ilustrativa considerando o humanamente possível). [cite: 23] [cite_start]A logística entre duração dos longas, trailers, tempo de deslocamento, trânsito e o dilema entre metrô ou carro fez da experiência quase um fluxograma muito semelhante a atravessar os palcos de um festival de música em busca da grade dos melhores shows. [cite: 24]
+        </p>
+        <p>
+            [cite_start]Essa complexidade não diminui o prazer de estar ali, pelo contrário, cada sacrifício é recompensado ao sentar-se em frente à tela e vivenciar histórias em que apostamos tanto. [cite: 25]
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/mostra-sp-palco.jpg" alt="Montagem de fotos de participantes e um palco durante a Mostra SP.">
+            [cite_start]<figcaption>A Mostra Internacional de Cinema em São Paulo teve sua origem em 1977, idealizada pelo crítico Leon Cakoff, responsável pelo departamento de Cinema do MASP (Foto: Mario Miranda Filho) [cite: 33]</figcaption>
+        </div>
+        <p>
+            [cite_start]Para um evento que já está em sua 48ª edição, poderíamos ter sido poupados de algumas frustrações, como sessões extremamente disputadas que não tiveram um esquema de venda claro e, em algumas ocasiões, sem aviso prévio ou com regras instáveis. [cite: 34] [cite_start]Considerando que, a essa altura, esse tipo de situação poderia ter sido prevista e prevenida, em contrapartida à remediação que tiveram de adotar. [cite: 35]
+        </p>
+        <p>
+            [cite_start]Ainda assim, a Mostra é única em oferecer um espaço para filmes novos, muitos dos quais não terão distribuição comercial ampla. [cite: 36] [cite_start]A oportunidade de assistir a essas produções, ao lado dos próprios realizadores, faz da experiência inestimável. [cite: 37] [cite_start]A presença de atores, diretores, produtores e membros da equipe de produção só enriquece nossa relação com as obras, trazendo um novo nível de profundidade ao ato de ir ao cinema. [cite: 38]
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/mostra-sp-plateia.jpg" alt="Público sentado em cadeiras de praia assistindo a uma sessão de cinema.">
+            [cite_start]<figcaption>Em suas primeiras sete edições, os filmes selecionados pela Mostra SP precisavam ser submetidos à aprovação prévia dos censores durante a Ditadura Militar (Foto: Mario Miranda Filho) [cite: 43]</figcaption>
+        </div>
+        <p>
+            [cite_start]O encerramento do evento, comandado com familiaridade por Serginho Groisman e Renata Almeida, foi repleto de momentos de afeto e celebração. [cite: 44] [cite_start]Walter Salles e a equipe de Ainda Estou Aqui, um dos grandes favoritos ao Oscar, receberam seus prêmios em uma cerimônia que reconheceu o talento e o esforço de seus participantes. [cite: 45] Em seu discurso, o diretor destacou:
+        </p>
+        [cite_start]<blockquote>"O filme nunca está pronto, ele se completa no olhar do outro, no olhar de vocês". [cite: 46]</blockquote>
+        <p>
+            [cite_start]Apesar de apressada em alguns momentos, tentando justa e rigorosamente cumprir horários, a cerimônia conseguiu oferecer uma boa dose de emoção. [cite: 47] [cite_start]Não só presencial como remotamente, com mensagens em vídeo de diretores internacionais que não puderam comparecer. [cite: 48] [cite_start]Com poucos lugares marcados na plateia geral, com exceção dos lados do palco, o público pôde acompanhar a premiação nas primeiras fileiras, na frente até mesmo de alguns premiados. [cite: 49]
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/mostra-sp-equipe.jpg" alt="Quatro pessoas posando para uma foto em um evento.">
+            [cite_start]<figcaption>A nova seção do festival é a Mostrinha, dedicada exclusivamente ao público infantil com 22 obras (Foto: Edu Tarran) [cite: 54]</figcaption>
+        </div>
+        <p>
+            [cite_start]Os longa-metragens da seção Competição Novos Diretores mais votados pelo público foram submetidos ao Júri. [cite: 55] [cite_start]Formado pela atriz brasileira Camila Pitanga (que infelizmente não pôde comparecer), pelo ator e cineasta português Gonçalo Waddington, pela curadora e produtora Hebe Tabachnik, pelo produtor Kyle Stroud, pelo diretor e escritor iraniano Mohsen Makhmalbaf e pelo crítico de cinema francês Thierry Meranger. [cite: 56]
+        </p>
+        <p>
+            [cite_start]O público da 48ª Mostra também desempenhou um papel fundamental na seleção dos filmes premiados. [cite: 57] [cite_start]Após cada sessão, os espectadores recebiam uma cédula para avaliar o filme assistido numa escala de um a cinco. [cite: 58] [cite_start]As notas atribuídas foram compiladas para determinar seus favoritos, tanto entre os longas internacionais quanto entre as produções brasileiras. [cite: 59]
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/mostra-sp-brada.jpg" alt="Mulher discursando em um púlpito.">
+            [cite_start]<figcaption>O BRADA, que tem prêmio dedicado no evento, é um coletivo de Diretoras de Arte do Brasil que pretende unir mulheres, pessoas trans, não bináries e quaisquer outras formas de expressão de gênero minoritárias (Foto: Mario Miranda Filho) [cite: 64]</figcaption>
+        </div>
+        <p>
+            [cite_start]Além do júri oficial e da votação popular, a imprensa especializada presente no evento contribuiu para o reconhecimento das obras em destaque. [cite: 65] [cite_start]Críticos de Cinema avaliaram os filmes exibidos e concederam o Prêmio da Crítica às produções que mais impressionaram. [cite: 66] [cite_start]A Abraccine - Associação Brasileira de Críticos de Cinema - também participou desse processo, elegendo o melhor filme nacional. [cite: 67]
+        </p>
+        <p>
+            [cite_start]Outras iniciativas foram o Prêmio Paradiso, que ofereceu apoio à distribuição nos cinemas para o filme da seção Mostra Brasil que recebeu a maior votação do público, garantindo sua estreia nas telas nacionais. [cite: 68] [cite_start]Já o Prêmio Brada reconhece o trabalho de direção de Arte que se destacou, visibilizando esse ofício na criação da atmosfera e estética. [cite: 69] [cite_start]Pela segunda vez, a Netflix entregou um prêmio no festival, concedido a um filme brasileiro participante que ainda não tinha contrato com serviços de streaming. [cite: 70]
+        </p>
+        <p>
+            [cite_start]Esses e outros vencedores ficaram marcados para sempre na história da Mostra Internacional de Cinema em São Paulo. [cite: 71]
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/mostra-sp-coppola.jpg" alt="Francis Ford Coppola em um evento.">
+            [cite_start]<figcaption>Coppola é tio do Nicolas Cage (Foto: Mario Miranda Filho) [cite: 76]</figcaption>
+        </div>
+        <p>
+            [cite_start]Logo após a premiação, um dos momentos mais esperados da noite foi a exibição de Megalopolis, apresentada - pessoalmente - por Francis Ford Coppola. [cite: 77] Antes do play, Coppola brincou: 
+        </p>
+        [cite_start]<blockquote>"Antes de me premiar, vocês deveriam ter assistido ao filme". [cite: 78]</blockquote>
+        <p>
+            [cite_start]O diretor recebeu o prêmio Leon Cakoff, pelo seu "papel visionário, sua arte da desmesura e a fé no Cinema que ultrapassa o tempo". [cite: 79] O festival terminou de maneira simples, mas significativa. [cite_start]Os créditos subindo, as luzes se acendendo e o público sendo convidado para um coquetel na Cinemateca Brasileira. [cite: 80] [cite_start]O Persona, mais uma vez, marcou presença com uma cobertura dedicada, produzindo 35 críticas distribuídas nas diferentes seções: Uma crítica na Retrospectiva, uma na seção Apresentação Especial, 12 críticas nas seções Perspectiva Internacional e Mostra Brasil, e 8 críticas na seção Competição Novos Diretores. [cite: 81]
+        </p>
+        <p>
+            [cite_start]Os autores que participaram dessa cobertura, tanto online quanto presencialmente, foram: [cite: 82] [cite_start]Davi Marcelgo (<i>Onda Nova - Gayvotas Futebol Clube; Eu Vi o Brilho da TV; Maria Callas; No Céu da Pátria Nesse Instante; Oeste Outra Vez; Anora; Persona Entrevista: Davi Pretto, Olívia Torres e Paola Wink; Enterre Seus Mortos; Baby</i>); [cite: 83] [cite_start]Guilherme Moraes (<i>Ubu; O Senhor dos Mortos; Não Sou Eu; Através do Fluxo; O Brutalista; Os Enforcados; Tudo Que Imaginamos Como Luz</i>); [cite: 84] [cite_start]Henrique Marinhos (<i>Todo Mundo (Ainda) Tem Problemas Sexuais; La Pampa; Lispectorante; Uma Terra Deixada para Trás; O Pardal na Chaminé; Corações Jovens</i>); [cite: 85, 90] Nathalia Tetzner (<i>Bangarang; Bicho Monstro; Sob O Céu Cinzento</i>); [cite_start]Vitória Borges (<i>Precisamos Falar; Continente; Zafari</i>); [cite: 91] Guilherme Veiga (<i>Um Homem Diferente; O Planeta Silencioso</i>); [cite_start]Jamily Rigonatto (<i>Sem Vergonha; O Palhaço de Cara Limpa; A Procura de Martina</i>); [cite: 92] [cite_start]e Guilherme Machado Leal (<i>Os Maus Patriotas; Ainda Estou Aqui</i>). [cite: 93]
+        </p>
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>
+
+//ajsutar o artigos.js para carregar o artigo corretamente, e o botão light mode e criar o card dos artigos

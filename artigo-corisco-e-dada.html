@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corisco e Dadá: o Terror à luz do dia revive em alta definição - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #D2691E; /* Cor ajustada para um tom terroso/sertão */
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">Corisco e Dadá: o Terror à luz do dia revive em alta definição</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">28 de Outubro, 2024</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/corisco-e-dada-capa.jpg"
+            alt="Chico Diaz como Corisco no filme Corisco e Dadá.">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            A chegada da versão restaurada em 4K de <i>Corisco e Dadá</i> às salas de cinema é uma oportunidade rara de revisitar uma obra que, 28 anos após seu lançamento, continua brutal e relevante. Dirigido por Rosemberg Cariry e estrelado por Chico Diaz e Dira Paes, o filme oferece mais do que uma simples narrativa sobre os últimos suspiros do cangaço: ele é uma meditação sobre violência, fé e resistência.
+        </p>
+        <p>
+            A remasterização, meticulosamente conduzida, redescobre a visão original de Cariry, que sempre tratou o sertão não como mero cenário, mas como um personagem repleto de beleza e Terror, iluminado pela luz crua e implacável do cerrado e pelas cicatrizes deixadas pela aridez da terra ressecada.
+        </p>
+        <p>
+            O processo de restauração foi liderado por Petrus Cariry, responsável pelo color grading, garantindo fidelidade às nuances visuais captadas por Ronaldo Nunes. A digitalização, realizada com scanner 4K operado por Aarão Martins, trouxe de volta as texturas mais sutis do filme. Enquanto isso, a sonoridade original também foi revitalizada por Érico Paiva, que coordenou a restauração e mixagem em som 5.1, recuperando a trilha sonora de Toinho Alves. Cada ruído - seja o vento cortando a paisagem ou o pisar dos personagens - carrega o peso de um diálogo. Já a produção executiva ficou a cargo de Bárbara Cariry, com retoques digitais de Magno Guimarães, colocando cada detalhe no lugar certo como a obra merece.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/corisco-e-dada-reais.jpg" alt="Foto em preto e branco do casal de cangaceiros Corisco e Dadá.">
+            <figcaption>Entre as rainhas do Cangaço existia uma rixa: "Bacana que só ela, só quer ser mais" disse Dadá sobre Maria Bonita em entrevista (Foto: Benjamin Abrahão Botto)</figcaption>
+        </div>
+        <p>
+            <i>Corisco e Dadá</i> é um retrato cru dos últimos dias do cangaço. O movimento dos cangaceiros, liderado por figuras lendárias como Lampião e Maria Bonita, surgiu como um ato de resistência no sertão nordestino no final do século XIX e início do XX. Esses bandos eram, ao mesmo tempo, ícones de insurreição contra o sistema opressor e protagonistas de uma violência incessante, que os colocava em confronto com as forças legais e com a população local.
+        </p>
+        <p>
+            Corisco, um dos cangaceiros mais temidos e conhecido como Diabo Louro, era a representação da ambiguidade moral do cangaço: um homem cuja brutalidade era tão notória quanto sua devoção à amada Dadá, com quem compartilhou a vida errante e trágica nas caatingas.
+        </p>
+        <p>
+            O longa mergulha nas tensões entre a violência e a redenção, explorando como a fé é manipulada e subvertida. A oração invertida, em que Corisco desafia Deus em um ritual de renúncia, é um dos momentos mais poderosos e perturbadores, um verdadeiro colapso espiritual e moral que atravessa a história. Essa subversão do cristianismo não é gratuita, mas um reflexo do papel da fé como ferramenta de controle e resistência. As imagens desses momentos, banhadas pela luz clara do dia, desafiam a tradição do Terror cinematográfico, criando uma atmosfera onde o horror é inescapável, justamente por estar exposto à plena luz do sol.
+        </p>
+        <blockquote>
+            "Corisco foi pensado como um semideus em tragédia grega, um homem com um pacto para lavar os pecados do mundo com sangue. Quando perde seu terceiro filho, ele rompe com Deus e reza o pai-nosso ao contrário. Passando a ser apenas um homem, já transformado pelos pequenos afetos despertados por Dadá."
+        </blockquote>
+        <p>
+            Em 25 de Maio de 1940, Corisco foi morto durante uma emboscada policial em Barra do Mendes, Bahia. Atingido por tiros e incapaz de reagir, ele foi executado no local e sua cabeça foi enviada para o Museu Nina Rodrigues, em Salvador, onde ficou exposta publicamente como prova do fim do cangaço. Na mesma emboscada, Dadá foi ferida e precisou amputar uma perna.
+        </p>
+        <p>
+            Após sua captura, a ex-cangaceira recebeu anistia do governo e, em 1969, deu início a um processo judicial para conseguir retirar a cabeça de seu marido do museu e enterrá-la. O processo foi longo e burocrático, mas ela obteve sucesso e garantiu um enterro. Dadá viveu até 1994, dois anos antes do lançamento do longa-metragem, mantendo viva a memória dos tempos do cangaço, e faleceu em Salvador, onde passou seus últimos anos.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/corisco-e-dada-ritual.jpg" alt="Cena de um ritual no filme, com personagens em trajes religiosos e de cangaço.">
+            <figcaption>Na vida real, os filhos do casal de cangaceiros foram entregues a famílias adotivas para que pudessem sobreviver (Foto: Sereia Filmes)</figcaption>
+        </div>
+        <p>
+            A montagem do filme, assinada por Severino Dadá, encontra nova profundidade com a restauração, revelando uma dança entre caos e o lirismo. As transições, muitas vezes abruptas, nos arrancam de um estado e logo nos lançam em outro, como se estivéssemos presos dentro das memórias fragmentadas dos protagonistas, distorcidas pela violência e pela perda. Essa construção serpenteia como as curvas do sertão, onde a calma nunca dura e a tragédia espreita cada instante de silêncio. No mundo deles, nada pode ser antecipado ou controlado.
+        </p>
+        <p>
+            Entre essas transições, o filme encontra momentos de beleza frustrantes ao deixar a câmera repousar na paisagem do cerrado, como se a natureza fizesse uma pausa breve para testemunhar o que está por vir. A fauna e a flora são filmadas com uma delicadeza que contrasta com a brutalidade humana. Pássaros atravessam o céu claro, árvores de galhos secos se enroscam como corpos exaustos e pequenos animais caminham entre a poeira, alheios ao desespero dos personagens. Isso nos lembra, silenciosamente, da indiferença da natureza, que segue seu ciclo enquanto a violência se esvai.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/corisco-e-dada-alceu.jpg" alt="Ator caracterizado como cangaceiro em cena do filme.">
+            <figcaption>Alceu Valença quase interpretou Corisco e chegou a fazer um show vestido de cangaceiro após os ensaios (Foto: Sereia Filmes)</figcaption>
+        </div>
+        <p>
+            Diaz entrega um Corisco à beira do delírio, oscilando entre a ternura e a selvageria, transformando-o em alguém que é, ao mesmo tempo, uma ameaça e um homem quebrado. Nessa performance, recebeu o Kikito de Ouro de Melhor Ator em Gramado. Paes, por sua vez, cria uma Dadá complexa que não se deixa definir apenas como vítima. Ela aprende a se afirmar em meio ao caos, transformando a violência em uma forma de sobrevivência, resistindo a um mundo que insiste em apagá-la. Em Brasília, conquistou o Troféu Candango de Melhor Atriz.
+        </p>
+        <p>
+            Desde seu lançamento em 1996, o filme também foi além das fronteiras, passando por festivais como o Toronto International Film Festival (TIFF) e o Festival de Havana, onde levou o Grand Coral. Como disse Petrus Cariry, lançar essa versão no centenário do Cinema cearense é mais do que uma celebração; é um lembrete da força do Nordeste na Arte e da capacidade do audiovisual brasileiro de continuar relevante.
+        </p>
+        <p>
+            <i>Corisco e Dadá</i> não perdeu seu impacto. Ele ainda provoca, incomoda e segue resistindo ao tempo, assim como o sertão, seus personagens e o próprio Cinema nacional - sempre vivos e à beira da luta.
+        </p>
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>
