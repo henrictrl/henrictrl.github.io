@@ -29,17 +29,32 @@ a.article-link:hover, .article-body a:hover {
     opacity: 0.85;
     line-height: 1.5;
 }
+.article-body,
+.article-body p,
+.article-body a,
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6,
+.article-body blockquote {
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary, transparent);
+    transition: color 0.3s, background 0.3s;
+}
+
 .article-body p {
     font-size: 1.13rem;
     line-height: 1.75;
     margin: 1.5em 0;
     font-family: 'Lora', serif;
-    color: var(--color-text-main, #222);
-    transition: color 0.3s;
 }
-
-body.night-mode .article-body p {
-    color: var(--color-text-primary, #fff);
+:root {
+    --color-bg-primary: #fff;
+}
+body.night-mode {
+    --color-bg-primary: #181818;
 }
 .article-body em {
     font-style: italic;
