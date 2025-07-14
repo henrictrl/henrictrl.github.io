@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croma Kid sintoniza a expressividade dos anos 90 em uma tela analógica - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #00b140; /* Cor ajustada para o verde "chroma key" */
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">Croma Kid sintoniza a expressividade dos anos 1990 em uma tela fantástica e analógica</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">13 de Novembro, 2023</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/croma-kid-capa.jpg"
+            alt="Close-up de olhos olhando através de buracos em um tecido verde.">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            Marcado pelo domínio da tecnologia analógica no cenário audiovisual, <i>Croma Kid</i> é uma viagem estonteante aos anos 1990. Dirigido por Pablo Chea e presente na seção Competição Novos Diretores da 47ª Mostra de Cinema Internacional em São Paulo, a ficção nos leva a acompanhar o encantador pré-adolescente Emi (Bosco Cárdenas), em todas as suas rebeldias e pensamentos inquietantes sobre sua família, que o envergonha por sua veia artística e televisiva.
+        </p>
+        <p>
+            De fato, nem todos herdamos vocações familiares e talentos natos, mas como um ponto fora da curva, o sangue da família Chea tem mostrado predisposição para a Sétima Arte. A estreia do filho de Claudio Chea, também cineasta e diretor de fotografia, soa como uma ficção biográfica impressionantemente construída para um primeiro trabalho.
+        </p>
+        <p>
+            Mesmo em seu início de carreira, a temática fantástica, a ambientação de época e a metalinguagem não pareceram um desafio para Chea como diretor e também roteirista, junto a Israel Cárdenas. Nos sentimos realmente dentro de seu universo nostálgico, distantes de amadorismos e furos de roteiro ou cenografia, como acontece até em grandes produções, como <i>Game of Thrones</i>.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/watch?v=Tiixq9rT_J03"
+                title="Solo Fernández - MAGIA (Video Oficial)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            Para além de um espaço fantástico e saturado da época, a interpretação do elenco é, sem dúvida, um ponto alto do longa. Bosco Cárdenas transmite as emoções e os conflitos do protagonista em meio à transição da infância para a adolescência de uma forma muito singular. Sem exageros ou muitos esforços, o que podemos quase chamar de performance contida é, na verdade, muito natural para um jovem ator. E sua família - que facilmente acreditaríamos ser sua realmente - é um catalisador de empenho e expressividade precisos.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/croma-kid-quarto.jpg" alt="Menino em um quarto com temática dos anos 90, falando em um telefone.">
+            <figcaption>A primeira produção de Pablo Chea, na verdade, foi um curta chamado Cumplebomba que fez com 11 anos com a câmera que seus pais o deram de aniversário (Foto: Aurora Dominicana)</figcaption>
+        </div>
+        <p>
+            Jaime Pina, que interpreta o avô Lito, parceiro e mentor de Emi em suas aventuras atrás das câmeras, nos deixa à vontade e quase alheios ao mundo adulto e conflituoso em que seus pais foram designados para representar. Enquanto isso, responsável por se preocupar e colocar os pés de todos no chão, Nashla Bogaert, que interpreta Daniela, mãe coerente, rígida, amorosa e ao mesmo tempo tão sonhadora quanto todos, equilibra a narrativa familiar latina e maravilhosa que move a trama.
+        </p>
+        <p>
+            Aqui, o ditado que diz ser melhor pecar pelo excesso que pela falta nunca fez tanto sentido. Em seus 92 minutos, toda magia do clímax e conclusão do longa estão presentes em um segundo ato. Já com a pipoca no fim, nos acostumamos com a rotina conturbada da família sem apelar para um emprego infeliz e desmotivador à Arte. Até que nos deparamos com o pior dos cenários: um clichê muito bem-vindo, com o plot adolescente de <i>16 Desejos</i>, <i>De Repente 30</i> e todos os outros filmes que mostram que não vale a pena pular etapas da vida.
+        </p>
+        <p>
+            Porém, dessa vez, de uma maneira menos cômica, caricata e infantil. Em que podemos, de fato, nos imaginar como o personagem principal. Essa representação pode estar atribuída principalmente às origens dos produtores e sua autenticidade em reproduzir a realidade de países latinos. Longe de comprometimentos imperialistas aos sucessos da Academia, a obra também se encaixaria muito bem na seção Perspectiva Internacional da Mostra Internacional de Cinema em São Paulo.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/croma-kid-familia.jpg" alt="Família se abraçando na frente de uma tela de chroma key verde.">
+            <figcaption>Segundo o diretor, Croma Kid celebra memórias como o laço de uma macrocultura que nos unem em comunidade e como famílias (Foto: Aurora Dominicana)</figcaption>
+        </div>
+        <p>
+            A habilidade em criar cenas cotidianas como se realmente tivessem sido gravadas antes da virada do século é notável, considerando ainda a incorporação muito bem feita de efeitos visuais semelhantes aos de <i>De Volta Para o Futuro</i> e outras produções do cinema noventista. O chroma key, stop motion e glich art - na TV dentro da TV - enriquecem ainda mais a experiência do telespectador como um show a parte.
+        </p>
+        <p>
+            Sobretudo, os responsáveis pelo som sublinham a importância do áudio na construção da experiência de imersão. Sem mencionar todos os outros pontos positivos do longa, o cenário meticuloso com fitas VHS, walkmans, pagers, discos de vinil e brinquedos mergulham o público na nostalgia e na cultura da época, até para quem não esteve lá.
+        </p>
+        <blockquote>
+            Cada instante tem infinitas possibilidades<br>
+            Acredite ou não em magia<br>
+            Você tem o poder de mudar sua realidade
+        </blockquote>
+        <p>
+            A atenção aos detalhes, assim como a autenticidade dos cenários naturais e urbanos, abraçam os desafios e profundidade daquele período. Muito além de um entretenimento nostálgico, <i>Croma Kid</i> celebra a memória afetiva e a imaginação infantil. Nos fazendo lembrar a capacidade do Cinema de transformar o cotidiano em algo mágico, transportando-nos para universos que ecoam a visão positiva das crianças e pequenas centelhas que fazem nossos dias valerem a pena.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/watch?v=Tiixq9rT_J04"
+                title="Croma Kid - trailer | IFFR 2023"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>

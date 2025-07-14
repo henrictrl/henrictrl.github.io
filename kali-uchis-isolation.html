@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Ai, mami! Há 5 anos, Kali Uchis mostrou que un album como Isolation no lo encuentras en Europa - Henrique Marinhos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --cor-destaque: #293a80; /* Cor ajustada para o azul do artigo */
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeInBlur 0.8s ease-out forwards;
+        }
+
+        .article-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        .article-header .author {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-top: 0;
+        }
+
+        .cover-image-container {
+            margin-bottom: 40px;
+        }
+
+        #cover-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--color-shadow-strong);
+            display: block;
+        }
+
+        .article-body {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--color-text-primary);
+        }
+
+        .article-body p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-body a {
+            color: var(--cor-destaque);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--cor-destaque);
+            filter: brightness(1.2);
+        }
+
+        .article-body i {
+            font-style: italic;
+        }
+
+        .article-body .image-container {
+            margin: 2em 0;
+        }
+
+        .article-body .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .article-body .image-container figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+        }
+
+        .article-body blockquote {
+            margin: 2em 0;
+            padding: 1.5em 2em;
+            border-left: 5px solid var(--cor-destaque);
+            background-color: var(--color-surface-2);
+            font-style: italic;
+            font-size: 1.3rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .article-body blockquote::before {
+            content: '“';
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 2em 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-weak);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .author-signature {
+            margin-top: 4em;
+            padding-top: 2em;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .author-signature p {
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.5rem;
+            color: var(--cor-destaque);
+            margin: 0;
+        }
+
+        .author-signature span {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .recommended-articles {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="articles-page">
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                    class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+            <li><a href="./index.html#inicio">Início</a></li>
+            <li><a href="./index.html#experiencia">Experiência</a></li>
+            <li><a href="./index.html#portfolio">Portfólio</a></li>
+            <li><a href="./index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
+            <li><a href="./artigos.html">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span
+                class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#experiencia">Experiência</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+            <li><a href="artigos.html" class="active">Artigos</a></li>
+        </ul>
+        <div class="language-switcher">
+            <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png"
+                    alt="Bandeira do Brasil"></button>
+            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png"
+                    alt="United States Flag"></button>
+            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png"
+                    alt="Bandera de España"></button>
+        </div>
+    </nav>
+    <div class="article-container">
+    <header class="article-header">
+        <h1 id="article-title">¡Ai, mami! Há 5 anos, Kali Uchis mostrou que un album como Isolation no lo encuentras en Europa</h1>
+        <p class="author">Escrito por Henrique Marinhos</p>
+        <p class="article-date">14 de Dezembro, 2023</p>
+    </header>
+
+    <div class="cover-image-container">
+        <img id="cover-image" src="images/artigos-imagens/kali-uchis-capa.jpg"
+            alt="Kali Uchis em lingerie vermelha deitada sobre um lençol de cetim azul.">
+    </div>
+    <p class="source-attribution">Texto publicado originalmente no site personaunesp.com.br</p>
+
+    <article class="article-body">
+        <p>
+            Em seu álbum de estreia, <i>Isolation</i>, lançado em 2018 pela Universal Music, a talentosa Kali Uchis se consolidou como uma das vozes mais interessantes e inovadoras do pop alternativo. Apesar da colaboração com artistas renomados, como Thundercat, Damon Albarn, Kevin Parker, Steve Lacy e Badbadnotgood, Uchis manteve sua identidade e brilho em destaque, recebendo elogios da crítica e do público. Não por menos, o trabalho foi indicado ao Grammy de Melhor Álbum de Música Alternativa em 2019 e certificado como ouro pela Recording Industry Association of America em 2020.
+        </p>
+        <p>
+            A ascendência de Uchis é uma das características mais marcantes em suas músicas. Ela nasceu nos Estados Unidos, mas é filha de imigrantes colombianos. Crescendo entre os dois países, suas inspirações se baseiam majoritariamente nas raízes latinas. Alternando entre o inglês e o espanhol, a cantora explora diferentes ritmos e influências musicais como o reggaetón, a cumbia e a salsa e, através de latinidades sensuais e apaixonadas, cria em <i>Isolation</i> um universo próprio onde pode viver seu amor sem interferências ou julgamentos.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/kali-uchis-rosa.jpg" alt="Kali Uchis em uma roupa rosa com um chapéu de auréola branco.">
+            <figcaption>Uchis já é Grammy winner pela música 10%, composição conjunta com Kaytranada (Foto: Playboy)</figcaption>
+        </div>
+        <p>
+            Celebrando seus cinco anos de existência, a obra apresenta uma estética que mistura o vintage com o moderno e evoca a nostalgia e o romantismo de artistas à la Lana Del Rey e Amy Winehouse. A cantora também aborda questões sociais e políticas nas letras, como a exploração dos imigrantes e a luta pela igualdade e justiça. Em <i>Isolation</i>, Kali Uchis demonstra sua versatilidade e habilidade para transitar entre diferentes gêneros musicais, criando um som coeso e envolvente desde <i>Body Language (Intro)</i>, que abre o álbum com uma atmosfera sensual e misteriosa, até <i>Killer</i>, que o encerra com um gosto de quero mais.
+        </p>
+        <p>
+            A faixa de abertura foi produzida por Thundercat e tem influências de funk e jazz. Ela serve magistralmente como uma introdução para o universo sonoro e temático do disco, explorando as diferentes formas de comunicação entre as pessoas através da linguagem corporal, verbal ou telepática - seu próximo álbum, <i>Sin Miedo (del Amor y Otros Demonios) ∞</i>, que o diga. O debut é constituído por letras inteligentes e reflexivas ao abordar questões pessoais e universais, mas, sobretudo, sua visão de mundo como uma mulher latina no país mais explorador e racista da América do Norte.
+        </p>
+        <div class="image-container">
+            <img src="images/artigos-imagens/kali-uchis-mercado.jpg" alt="Kali Uchis em um mercado, em cena de um de seus clipes.">
+            <figcaption>A colaboração com Tyler The Creator é um sucesso recíproco para Uchis, com After The Storm (de Isolation) e See You Again (de Flower Boy) (Foto: Universal Music)</figcaption>
+        </div>
+        <p>
+            De modo geral, a artista aborda temas muito íntimos: a vida de imigrantes e o amor como forma de dominação e submissão, em colaboração com BIA e Jorja Smith, respectivamente nas faixas <i>Miami</i> e <i>Tyrant</i>. A primeira é uma de suas composições mais famosas, na qual recebemos uma crítica à sociedade estadunidense que valoriza o dinheiro e o status acima de tudo, marginalizando e explorando os imigrantes. A música também é um retrato dessas mulheres em busca por uma vida melhor nos Estados Unidos, em contrapartida à violência, ao preconceito e à solidão.
+        </p>
+        <p>
+            Sem esforço, a musicalidade de Uchis é uma expressão de sua personalidade e experiências de vida, com sua voz sendo um instrumento de contar histórias e transmitir emoções de maneira orgânica. A artista incorpora a paixão e a expressividade do espanhol com maestria, o que consequentemente resulta em uma obra que é ao mesmo tempo pessoal e universal, sabendo se conectar com seu público e criando uma experiência única.
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/watch?v=Tiixq9rT_J00" 
+                title="Kali Uchis - After The Storm ft. Tyler, The Creator, Bootsy Collins" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            Em <i>Just a Stranger</i>, com Steve Lacy, encontramos um relacionamento superficial com um homem que só quer usá-la, em uma sátira ao estilo de vida materialista e vazio dos ricos e famosos, que se aproveitam das pessoas mais pobres e vulneráveis. A faixa também é uma forma de Kali Uchis afirmar sua independência e autoestima, dizendo que ela não precisa do dinheiro ou da atenção desse homem, pois ela sabe o seu valor.
+        </p>
+        <p>
+            Seu desejo de fugir com seu amante para um lugar paradisíaco é contagiante. A cantora expressa uma fantasia romântica ao escapar da realidade cruel e encontrar a felicidade. A faixa <i>Flight 22</i> é, principalmente, sobre se envolver em um relacionamento e não se importar onde isso vai acabar, se permitir fazer isso sendo quem é. O final sombrio, em alusão ao Boeing 727, para os passageiros do voo 22 é usado como uma metáfora para o destino do romance, sobre o qual ela insinua ao final: "Pelo menos eu estou indo para baixo com você / Nossa bagagem pode estar muito cheia no voo 22".
+        </p>
+        <div class="youtube-embed">
+            <iframe src="https://www.youtube.com/watch?v=Tiixq9rT_J01" 
+                title="Kali Uchis - Nuestro Planeta ft. Reykon" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+        </div>
+        <p>
+            É impressionante o que a cantora realizou em seu álbum de estreia: a qualidade e originalidade se juntam às reivindicações pelo direito de ser dona de sua própria arte, e ela é vitoriosa em não se submeter aos interesses alheios ou precisar de eras para fazê-lo. Sem medo de expor suas vulnerabilidades e conflitos, há 5 anos Kali Uchis falou sobre amor, mas não de uma forma clichê ou romântica.
+        </p>
+        <p>
+            Em <i>Isolation</i>, ela explorou as diferentes facetas e as consequências do sentimento, dualista entre a liberdade ou opressão, doce ou amargo, sonhador ou realista, fiel ou traiçoeiro. Mas, sobretudo, pontua o amor-próprio, essencial para se sentir bem consigo mesmo e com os outros.
+        </p>
+        <p>
+            Ouvir o disco é um convite ao seu mundo, isolado e conectado, triste e alegre, simples e complexo.
+        </p>
+
+    </article>
+
+    <div class="author-signature">
+        <p>Henrique Marinhos</p>
+        <span>Autor do Artigo</span>
+    </div>
+
+    <section class="recommended-articles">
+    </section>
+
+    </div>
+    </div>
+
+    <script src="artigos.js" defer></script>
+</body>
+
+</html>

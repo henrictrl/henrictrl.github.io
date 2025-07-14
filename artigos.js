@@ -1,6 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     const body = document.body;
+
+    // ================== TROCA DE TEXTOS DO ARTIGO HUNTERS POR TEMA ===================
+    const huntersContainer = document.getElementById('hunters-article-container');
+    if (huntersContainer) {
+        const articleParagraphs = huntersContainer.querySelectorAll('.article-body p');
+        // Exemplo: textos para os 5 primeiros parágrafos (adicione mais conforme necessário)
+        const textos = {
+            light: [
+                'Há três anos estreava a dualista primeira temporada de Hunters. Aos que conseguiram terminá-la, hoje podem apreciar o segundo - e maior - ato do enredo, desenvolvido por David Weil, Mark Bianculli, Nikki Toscano e David Rosen, que divide opiniões.',
+                'Com um exímio elenco, a série traz Al Pacino de volta às telas, já que seu último papel em uma produção para televisão foi em 2003, em <i>Angels in America</i>. Agora, o ator interpreta Meyer Offerman, um líder de caçadores nazistas à procura de fechar as feridas deixadas pela Segunda Guerra Mundial.',
+                'Longa, lenta e detalhada, a obra constrói personalidades profundas cheias de motivações, histórias e nuances. Porém, apenas na segunda temporada a conexão entre essa profundidade e a narrativa deslumbra seu público.',
+                'Como acontece em um filme de origem, a morte da avó de Jonah Heidelbaum (Logan Lerman) é o ponto de ignição que incentiva o jovem da primeira geração pós-guerra a procurar o assassino que tirou a única família conhecida por ele.',
+                'Infelizmente, o desenrolar do roteiro apresenta uma transição gradativa e confusa para relacionar as motivações pessoais à causa maior, mas, aos quarenta e cinco do segundo tempo, as lacunas se complementam esplendorosamente.'
+            ],
+            dark: [
+                'Há três anos estreava a dualista primeira temporada de Hunters. Aos que conseguiram terminá-la, hoje podem apreciar o segundo - e maior - ato do enredo, desenvolvido por David Weil, Mark Bianculli, Nikki Toscano e David Rosen, que divide opiniões.',
+                'Com um exímio elenco, a série traz Al Pacino de volta às telas, já que seu último papel em uma produção para televisão foi em 2003, em <i>Angels in America</i>. Agora, o ator interpreta Meyer Offerman, um líder de caçadores nazistas à procura de fechar as feridas deixadas pela Segunda Guerra Mundial.',
+                'Longa, lenta e detalhada, a obra constrói personalidades profundas cheias de motivações, histórias e nuances. Porém, apenas na segunda temporada a conexão entre essa profundidade e a narrativa deslumbra seu público.',
+                'Como acontece em um filme de origem, a morte da avó de Jonah Heidelbaum (Logan Lerman) é o ponto de ignição que incentiva o jovem da primeira geração pós-guerra a procurar o assassino que tirou a única família conhecida por ele.',
+                'Infelizmente, o desenrolar do roteiro apresenta uma transição gradativa e confusa para relacionar as motivações pessoais à causa maior, mas, aos quarenta e cinco do segundo tempo, as lacunas se complementam esplendorosamente.'
+            ]
+        };
+
+        function setTexts(theme) {
+            articleParagraphs.forEach((p, i) => {
+                if (textos[theme] && textos[theme][i]) {
+                    p.innerHTML = textos[theme][i];
+                }
+            });
+        }
+
+        function getCurrentTheme() {
+            return body.classList.contains('night-mode') ? 'dark' : 'light';
+        }
+
+        // Troca os textos ao alternar o tema
+        const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
+        themeToggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+                setTimeout(() => {
+                    setTexts(getCurrentTheme());
+                }, 10);
+            });
+        });
+
+        // Inicializa com o tema atual
+        setTexts(getCurrentTheme());
+    }
 
     /**
      * Aplica o tema (claro/escuro) ao corpo do documento.
@@ -98,14 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
-    themeToggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
-        });
-    });
+
 
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');

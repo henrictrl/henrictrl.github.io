@@ -1,3 +1,55 @@
+/* === ESTILO DE ARTIGO HUNTERS === */
+a.article-link, .article-body a {
+    color: #FFD600;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s;
+    word-break: break-word;
+}
+
+a.article-link:hover, .article-body a:hover {
+    color: #bfa100;
+    text-decoration: underline;
+}
+
+.article-body figure {
+    margin: 2.2em 0 2.2em 0;
+    text-align: center;
+}
+.article-body figure img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+}
+.article-body figcaption {
+    font-family: 'Lora', serif;
+    font-size: 0.98rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.7em;
+    opacity: 0.85;
+    line-height: 1.5;
+}
+.article-body p {
+    font-size: 1.13rem;
+    line-height: 1.75;
+    margin: 1.5em 0;
+    font-family: 'Lora', serif;
+    color: var(--color-text-main, #222);
+    transition: color 0.3s;
+}
+
+body.night-mode .article-body p {
+    color: var(--color-text-primary, #fff);
+}
+.article-body em {
+    font-style: italic;
+    font-family: 'Lora', serif;
+}
+.article-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+}
 @media (max-width: 768px) {
   /* Esconde o campo hex-input do color picker mobile */
   .mobile-nav .sidebar-color-picker .hex-input {
@@ -2584,4 +2636,197 @@ footer {
   .chroma-card {
     min-height: 320px;
   }
+}
+
+/* =============================================== */
+/* ESTILOS PARA PÁGINAS DE ARTIGO                  */
+/* Cole este bloco no final do seu style.css principal */
+/* =============================================== */
+
+:root {
+    --cor-destaque: #5265e2;
+}
+
+.article-container { 
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    animation: fadeInBlur 0.8s ease-out forwards;
+}
+
+.article-header { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.article-header h1 { 
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    overflow-wrap: break-word;
+}
+
+.article-header .author, .article-header .article-date { 
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    margin-top: 0;
+}
+
+.cover-image-container { 
+    margin-bottom: 20px;
+}
+
+#cover-image { 
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--color-shadow-strong);
+    display: block;
+}
+
+.source-attribution {
+    font-family: 'Lora', serif;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+
+.article-body {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: var(--color-text-primary, #222);
+    transition: color 0.3s;
+}
+
+.article-body p {
+    margin-bottom: 1.5em;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+
+.article-body a {
+    color: var(--cor-destaque, #FFD600);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s, border-bottom-color 0.2s, filter 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.article-body a:hover {
+    border-bottom-color: var(--cor-destaque, #FFD600);
+    filter: brightness(1.2);
+}
+
+.article-body i, .article-body em { 
+    font-style: italic;
+}
+
+.article-body strong, .article-body b { 
+    font-weight: bold;
+}
+
+.article-body .image-container { 
+    margin: 2em 0;
+}
+
+.article-body .image-container img { 
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.article-body .image-container figcaption { 
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-top: 10px;
+}
+
+.article-body blockquote {
+    margin: 2em 0;
+    padding: 1.5em 2em;
+    border-left: 5px solid var(--cor-destaque, #FFD600);
+    background-color: var(--color-surface-2, #f0f0f0);
+    font-style: italic;
+    font-size: 1.3rem;
+    border-radius: 0 8px 8px 0;
+    position: relative;
+    color: var(--color-text-primary, #222);
+    transition: color 0.3s, background-color 0.3s, border-left-color 0.3s;
+}
+body.night-mode .article-body,
+body.night-mode .article-body p,
+body.night-mode .article-body blockquote {
+    color: var(--color-text-primary, #fff);
+}
+body.night-mode .article-body a {
+    color: var(--cor-destaque, #7FFF00);
+    border-bottom-color: var(--cor-destaque, #7FFF00);
+}
+body.night-mode .article-body blockquote {
+    background-color: var(--color-surface-2, #222);
+    border-left-color: var(--cor-destaque, #7FFF00);
+}
+
+.article-body blockquote::before { 
+    content: '“';
+    font-family: 'Inter', sans-serif;
+    font-size: 4rem;
+    color: var(--cor-destaque);
+    position: absolute;
+    left: -15px;
+    top: -10px;
+    opacity: 0.2;
+}
+
+.youtube-embed { 
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin: 2em 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px var(--color-shadow-weak);
+}
+
+.youtube-embed iframe { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.author-signature { 
+    margin-top: 4em;
+    padding-top: 2em;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.author-signature p { 
+    font-family: 'Just Me Again Down Here', cursive;
+    font-size: 2.5rem;
+    color: var(--cor-destaque);
+    margin: 0;
+}
+
+.author-signature span { 
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
 }
