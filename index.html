@@ -127,15 +127,6 @@
                     </div>
                     <div class="image-with-banner-container bottom-image" id="image2">
                         <img src="images/profile2.png" alt="Exemplo de trabalho" class="main-cascade-image">
-                        <div class="scrolling-banner">
-                            <div class="scrolling-text">
-                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                                <span data-translate-key="scrollingBanner">apoie artistas independentes &nbsp;&nbsp;&nbsp;</span>
-                            </div>  
-                        </div>
                     </div>
                 </div>
             </div>
@@ -150,27 +141,33 @@
 
                 <div class="experience-list-column">
                     <ul class="experience-list-v2">
-                        <li class="experience-item-v2">
+                        <li class="experience-item-v2" data-exp="freelancer">
                             <h3 data-translate-key="jobFreelancer">Freelancer <br> <span class="at-symbol">@</span> t.pr agency <span class="at-symbol">@</span> Sollaris</h3>
                             <p class="job-dates-v2">2024</p>
                         </li>
-                        
-                        <li class="experience-item-v2">
+                        <li class="experience-item-v2" data-exp="interncom">
                             <h3 data-translate-key="jobInternCom">Estagiário de Comunicação <br> <span class="at-symbol">@</span> Rd Cultural</h3>
                             <p class="job-dates-v2">2023</p>
                         </li>
-
-                        <li class="experience-item-v2">
+                        <li class="experience-item-v2" data-exp="internpr">
                             <h3 data-translate-key="jobInternPr">Estagiário de Relações Públicas <br><span class="at-symbol">@</span> Unesp </h3>
                             <p class="job-dates-v2">2021/2025</p>
                         </li>
-
-                        <li class="experience-item-v2">
+                        <li class="experience-item-v2" data-exp="assistant">
                             <h3 data-translate-key="jobAssistant">Assistente de Compras <br> <span class="at-symbol">@</span> Servimed</h3>
                             <p class="job-dates-v2">2020/2022</p>
                         </li>
                     </ul>
                 </div>
+    <!-- Modal de Experiência Profissional -->
+    <div class="modal-overlay" id="expModal" style="display:none;">
+        <div class="modal-content">
+            <button class="modal-close" id="expModalClose">&times;</button>
+            <div id="expModalBody">
+                <!-- Conteúdo dinâmico da experiência será inserido aqui -->
+            </div>
+        </div>
+    </div>
             </section>
 
             <section class="portfolio-section-v2" id="portfolio">
@@ -287,6 +284,67 @@
         </div>
     </section>
     
+    <script>
+    // Conteúdo customizável para cada experiência
+    const expContent = {
+        freelancer: {
+            title: 'Freelancer @ t.pr agency / Sollaris',
+            html: `<img src="images/exp-freelancer.jpg" alt="Freelancer t.pr agency e Sollaris" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                   <p>Descreva aqui as atividades, projetos e resultados do trabalho freelancer. Você pode incluir imagens, listas, links, etc.</p>`
+        },
+        interncom: {
+            title: 'Estagiário de Comunicação @ Rd Cultural',
+            html: `<img src="images/exp-interncom.jpg" alt="Estágio Comunicação Rd Cultural" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                   <p>Descreva aqui as atividades, projetos e aprendizados do estágio em comunicação.</p>`
+        },
+        internpr: {
+            title: 'Estagiário de Relações Públicas @ Unesp',
+            html: `<img src="images/exp-internpr.jpg" alt="Estágio Relações Públicas Unesp" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                   <p>Descreva aqui as atividades, eventos e experiências do estágio em RP na Unesp.</p>`
+        },
+        assistant: {
+            title: 'Assistente de Compras @ Servimed',
+            html: `<img src="images/exp-assistant.jpg" alt="Assistente de Compras Servimed" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                   <p>Descreva aqui as funções, rotinas e conquistas como assistente de compras.</p>`
+        }
+    };
+
+    // Abrir modal ao clicar em experiência
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.experience-item-v2').forEach(item => {
+            item.addEventListener('click', function() {
+                const key = item.getAttribute('data-exp');
+                if (expContent[key]) {
+                    document.getElementById('expModalBody').innerHTML = `<h2>${expContent[key].title}</h2>${expContent[key].html}`;
+                    document.getElementById('expModal').style.display = 'flex';
+                }
+            });
+        });
+        document.getElementById('expModalClose').addEventListener('click', function() {
+            document.getElementById('expModal').style.display = 'none';
+        });
+        document.getElementById('expModal').addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
+        });
+    });
+    // Aplica o tema salvo no localStorage ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme') || 'day';
+        if(savedTheme === 'night') {
+            body.classList.add('night-mode');
+        } else {
+            body.classList.remove('night-mode');
+        }
+        // Botão de alternância de tema
+        document.querySelectorAll('.theme-toggle-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const isNight = body.classList.toggle('night-mode');
+                localStorage.setItem('theme', isNight ? 'night' : 'day');
+            });
+        });
+    });
+    </script>
     <script src="main.js"></script>
     </section>
 
