@@ -309,8 +309,24 @@
         }
     };
 
-    // Abrir modal ao clicar em experiência
+    // Unifica inicialização dos scripts para evitar conflitos
     document.addEventListener('DOMContentLoaded', function() {
+        // Tema diurno/noturno persistente
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme') || 'day';
+        if(savedTheme === 'night') {
+            body.classList.add('night-mode');
+        } else {
+            body.classList.remove('night-mode');
+        }
+        document.querySelectorAll('.theme-toggle-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const isNight = body.classList.toggle('night-mode');
+                localStorage.setItem('theme', isNight ? 'night' : 'day');
+            });
+        });
+
+        // Modal de experiência profissional
         document.querySelectorAll('.experience-item-v2').forEach(item => {
             item.addEventListener('click', function() {
                 const key = item.getAttribute('data-exp');
@@ -320,29 +336,18 @@
                 }
             });
         });
-        document.getElementById('expModalClose').addEventListener('click', function() {
-            document.getElementById('expModal').style.display = 'none';
-        });
-        document.getElementById('expModal').addEventListener('click', function(e) {
-            if (e.target === this) this.style.display = 'none';
-        });
-    });
-    // Aplica o tema salvo no localStorage ao carregar a página
-    document.addEventListener('DOMContentLoaded', function() {
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'day';
-        if(savedTheme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
-        }
-        // Botão de alternância de tema
-        document.querySelectorAll('.theme-toggle-button').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const isNight = body.classList.toggle('night-mode');
-                localStorage.setItem('theme', isNight ? 'night' : 'day');
+        const expModalClose = document.getElementById('expModalClose');
+        if (expModalClose) {
+            expModalClose.addEventListener('click', function() {
+                document.getElementById('expModal').style.display = 'none';
             });
-        });
+        }
+        const expModal = document.getElementById('expModal');
+        if (expModal) {
+            expModal.addEventListener('click', function(e) {
+                if (e.target === this) this.style.display = 'none';
+            });
+        }
     });
     </script>
     <script src="main.js"></script>
