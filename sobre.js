@@ -14,13 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    /**
-     * Aplica o tema (claro/escuro) ao corpo do documento.
-     * @param {string} theme - O tema a ser aplicado ('day' ou 'night').
-     */
-    const applyTheme = (theme) => {
+
+    // Aplica o tema salvo no localStorage
+    const applyTheme = () => {
         const body = document.body;
-        if (theme === 'night') {
+        const savedTheme = localStorage.getItem('theme') || 'day';
+        if (savedTheme === 'night') {
             body.classList.add('night-mode');
         } else {
             body.classList.remove('night-mode');
@@ -38,10 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             const isNightMode = body.classList.contains('night-mode');
             const newTheme = isNightMode ? 'day' : 'night';
-            
-            // Salva a nova preferência e aplica o tema
             localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
+            applyTheme();
         });
     }
 
@@ -124,9 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Aplica a cor de destaque que foi salva na página inicial.
     applySavedHighlightColor();
 
-    // 2. Verifica qual tema foi salvo e o aplica.
-    const savedTheme = localStorage.getItem('theme') || 'day';
-    applyTheme(savedTheme);
+    // 2. Aplica o tema salvo
+    applyTheme();
 
     // 3. Verifica qual idioma foi salvo e o aplica.
     const savedLanguage = localStorage.getItem('language') || 'pt';
