@@ -282,25 +282,95 @@
     const expContent = {
         freelancer: {
             title: 'Freelancer @ t.pr agency / Sollaris',
-            html: `<img src="images/exp-freelancer.jpg" alt="Freelancer t.pr agency e Sollaris" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
-                   <p>Descreva aqui as atividades, projetos e resultados do trabalho freelancer. Você pode incluir imagens, listas, links, etc.</p>`
+            html: `
+                <div class="exp-popup-page">
+                    <img src="images/exp-freelancer.jpg" alt="Freelancer t.pr agency e Sollaris" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                    <h3>Projetos realizados</h3>
+                    <div class="exp-projects-list">
+                        <!-- Adicione seus projetos aqui -->
+                        <div class="exp-project-card">
+                            <img src="images/projeto-exemplo1.jpg" alt="Projeto Exemplo 1" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+                            <div>
+                                <strong>Projeto Exemplo 1</strong>
+                                <p>Descrição do projeto realizado como freelancer.</p>
+                            </div>
+                        </div>
+                        <!-- Repita .exp-project-card para outros projetos -->
+                    </div>
+                    <p style="margin-top:20px;">Descreva aqui as atividades, projetos e resultados do trabalho freelancer. Você pode incluir imagens, listas, links, etc.</p>
+                </div>`
         },
         interncom: {
             title: 'Estagiário de Comunicação @ Rd Cultural',
-            html: `<img src="images/exp-interncom.jpg" alt="Estágio Comunicação Rd Cultural" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
-                   <p>Descreva aqui as atividades, projetos e aprendizados do estágio em comunicação.</p>`
+            html: `
+                <div class="exp-popup-page">
+                    <img src="images/exp-interncom.jpg" alt="Estágio Comunicação Rd Cultural" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                    <h3>Projetos realizados</h3>
+                    <div class="exp-projects-list">
+                        <!-- Adicione seus projetos aqui -->
+                        <div class="exp-project-card">
+                            <img src="images/projeto-exemplo2.jpg" alt="Projeto Exemplo 2" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+                            <div>
+                                <strong>Projeto Exemplo 2</strong>
+                                <p>Descrição do projeto realizado no estágio de comunicação.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top:20px;">Descreva aqui as atividades, projetos e aprendizados do estágio em comunicação.</p>
+                </div>`
         },
         internpr: {
             title: 'Estagiário de Relações Públicas @ Unesp',
-            html: `<img src="images/exp-internpr.jpg" alt="Estágio Relações Públicas Unesp" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
-                   <p>Descreva aqui as atividades, eventos e experiências do estágio em RP na Unesp.</p>`
+            html: `
+                <div class="exp-popup-page">
+                    <img src="images/exp-internpr.jpg" alt="Estágio Relações Públicas Unesp" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                    <h3>Projetos realizados</h3>
+                    <div class="exp-projects-list">
+                        <!-- Adicione seus projetos aqui -->
+                        <div class="exp-project-card">
+                            <img src="images/projeto-exemplo3.jpg" alt="Projeto Exemplo 3" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+                            <div>
+                                <strong>Projeto Exemplo 3</strong>
+                                <p>Descrição do projeto realizado no estágio de RP.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top:20px;">Descreva aqui as atividades, eventos e experiências do estágio em RP na Unesp.</p>
+                </div>`
         },
         assistant: {
             title: 'Assistente de Compras @ Servimed',
-            html: `<img src="images/exp-assistant.jpg" alt="Assistente de Compras Servimed" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
-                   <p>Descreva aqui as funções, rotinas e conquistas como assistente de compras.</p>`
+            html: `
+                <div class="exp-popup-page">
+                    <img src="images/exp-assistant.jpg" alt="Assistente de Compras Servimed" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
+                    <h3>Projetos realizados</h3>
+                    <div class="exp-projects-list">
+                        <!-- Adicione seus projetos aqui -->
+                        <div class="exp-project-card">
+                            <img src="images/projeto-exemplo4.jpg" alt="Projeto Exemplo 4" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+                            <div>
+                                <strong>Projeto Exemplo 4</strong>
+                                <p>Descrição do projeto realizado como assistente de compras.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top:20px;">Descreva aqui as funções, rotinas e conquistas como assistente de compras.</p>
+                </div>`
         }
     };
+    // CSS básico para layout dos projetos no popup (inline para facilitar)
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .exp-popup-page { padding: 8px 0; }
+        .exp-projects-list { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+        .exp-project-card { display: flex; align-items: center; gap: 12px; background: var(--background-secondary, #f5f5f5); border-radius: 8px; padding: 8px 12px; min-width: 220px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .exp-project-card img { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        @media (max-width: 600px) {
+            .exp-projects-list { flex-direction: column; gap: 10px; }
+            .exp-project-card { min-width: 0; width: 100%; }
+        }
+    `;
+    document.head.appendChild(style);
 
     // Modal de experiência profissional (deve ser inicializado após DOM e não conflitar com tema)
     document.addEventListener('DOMContentLoaded', function() {
