@@ -22,16 +22,9 @@
     <link rel="icon" href="images/profile.ico" type="image/x-icon">
     
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-
-    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
 </head>
-<body>
 
-    <body class="about-page">
+<body class="about-page">
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
@@ -309,24 +302,8 @@
         }
     };
 
-    // Unifica inicialização dos scripts para evitar conflitos
+    // Modal de experiência profissional (deve ser inicializado após DOM e não conflitar com tema)
     document.addEventListener('DOMContentLoaded', function() {
-        // Tema diurno/noturno persistente
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'day';
-        if(savedTheme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
-        }
-        document.querySelectorAll('.theme-toggle-button').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const isNight = body.classList.toggle('night-mode');
-                localStorage.setItem('theme', isNight ? 'night' : 'day');
-            });
-        });
-
-        // Modal de experiência profissional
         document.querySelectorAll('.experience-item-v2').forEach(item => {
             item.addEventListener('click', function() {
                 const key = item.getAttribute('data-exp');
