@@ -26,6 +26,10 @@
 
 <body class="about-page">
 
+    <!-- Botão do menu hambúrguer para mobile -->
+    <button id="hamburgerButton" class="hamburger-menu" title="Abrir menu" aria-label="Abrir menu" style="position:fixed;top:18px;left:18px;z-index:10001;background:none;border:none;padding:0;display:flex;align-items:center;justify-content:center;width:48px;height:48px;cursor:pointer;">
+        <span class="material-symbols-outlined" style="font-size:2.2rem;">menu</span>
+    </button>
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
         <div class="mobile-nav-group">
@@ -152,15 +156,7 @@
                         </li>
                     </ul>
                 </div>
-    <!-- Modal de Experiência Profissional -->
-    <div class="modal-overlay" id="expModal" style="display:none;">
-        <div class="modal-content">
-            <button class="modal-close" id="expModalClose">&times;</button>
-            <div id="expModalBody">
-                <!-- Conteúdo dinâmico da experiência será inserido aqui -->
-            </div>
-        </div>
-    </div>
+    <!-- Modal de Experiência Profissional será criado dinamicamente pelo JS -->
             </section>
 
             <section class="portfolio-section-v2" id="portfolio">
@@ -287,7 +283,6 @@
                     <img src="images/exp-freelancer.jpg" alt="Freelancer t.pr agency e Sollaris" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
                     <h3>Projetos realizados</h3>
                     <div class="exp-projects-list">
-                        <!-- Adicione seus projetos aqui -->
                         <div class="exp-project-card">
                             <img src="images/projeto-exemplo1.jpg" alt="Projeto Exemplo 1" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
                             <div>
@@ -295,7 +290,6 @@
                                 <p>Descrição do projeto realizado como freelancer.</p>
                             </div>
                         </div>
-                        <!-- Repita .exp-project-card para outros projetos -->
                     </div>
                     <p style="margin-top:20px;">Descreva aqui as atividades, projetos e resultados do trabalho freelancer. Você pode incluir imagens, listas, links, etc.</p>
                 </div>`
@@ -307,7 +301,6 @@
                     <img src="images/exp-interncom.jpg" alt="Estágio Comunicação Rd Cultural" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
                     <h3>Projetos realizados</h3>
                     <div class="exp-projects-list">
-                        <!-- Adicione seus projetos aqui -->
                         <div class="exp-project-card">
                             <img src="images/projeto-exemplo2.jpg" alt="Projeto Exemplo 2" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
                             <div>
@@ -326,7 +319,6 @@
                     <img src="images/exp-internpr.jpg" alt="Estágio Relações Públicas Unesp" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
                     <h3>Projetos realizados</h3>
                     <div class="exp-projects-list">
-                        <!-- Adicione seus projetos aqui -->
                         <div class="exp-project-card">
                             <img src="images/projeto-exemplo3.jpg" alt="Projeto Exemplo 3" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
                             <div>
@@ -345,7 +337,6 @@
                     <img src="images/exp-assistant.jpg" alt="Assistente de Compras Servimed" style="max-width:100%;border-radius:8px;margin-bottom:16px;">
                     <h3>Projetos realizados</h3>
                     <div class="exp-projects-list">
-                        <!-- Adicione seus projetos aqui -->
                         <div class="exp-project-card">
                             <img src="images/projeto-exemplo4.jpg" alt="Projeto Exemplo 4" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
                             <div>
@@ -369,29 +360,121 @@
             .exp-projects-list { flex-direction: column; gap: 10px; }
             .exp-project-card { min-width: 0; width: 100%; }
         }
+        .project-modal-overlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); display:none; align-items:center; justify-content:center; z-index:9999; }
+        .project-modal-content { background: var(--background, #fff); border-radius: 12px; padding: 32px 24px; max-width: 480px; width: 90vw; box-shadow: 0 2px 16px rgba(0,0,0,0.12); position: relative; }
+        .project-modal-close { position: absolute; top: 12px; right: 16px; font-size: 2rem; background: none; border: none; cursor: pointer; color: var(--text, #222); }
     `;
     document.head.appendChild(style);
 
-    // Modal de experiência profissional (deve ser inicializado após DOM e não conflitar com tema)
+    // Conteúdo customizável para cada projeto do portfólio
+    const projectContent = {
+        1: {
+            title: 'Nome do Projeto 1',
+            category: 'Branding',
+            html: `
+                <img src="images/CARICATUA 008909.png" alt="Capa do Projeto 1" style="width:100%;border-radius:8px;margin-bottom:16px;">
+                <h3>Branding</h3>
+                <p>Descrição detalhada do Projeto 1, incluindo imagens, resultados e aprendizados.</p>
+            `
+        },
+        2: {
+            title: 'Nome do Projeto 2',
+            category: 'Website',
+            html: `
+                <img src="images/profile2.png" alt="Capa do Projeto 2" style="width:100%;border-radius:8px;margin-bottom:16px;">
+                <h3>Website</h3>
+                <p>Descrição detalhada do Projeto 2, incluindo tecnologias usadas e resultados.</p>
+            `
+        },
+        3: {
+            title: 'Nome do Projeto 3',
+            category: 'Identidade Visual',
+            html: `
+                <img src="images/profile2.png" alt="Capa do Projeto 3" style="width:100%;border-radius:8px;margin-bottom:16px;">
+                <h3>Identidade Visual</h3>
+                <p>Descrição detalhada do Projeto 3, incluindo processo criativo e entregáveis.</p>
+            `
+        },
+        4: {
+            title: 'Nome do Projeto 4',
+            category: 'Campanha',
+            html: `
+                <img src="images/profile2.png" alt="Capa do Projeto 4" style="width:100%;border-radius:8px;margin-bottom:16px;">
+                <h3>Campanha</h3>
+                <p>Descrição detalhada do Projeto 4, incluindo objetivos e resultados.</p>
+            `
+        }
+    };
+
+    // Remove criação de modal dinâmico para projetos (mantém apenas o modal original do HTML)
+    // Cria modal de experiência se não existir
+    if (!document.getElementById('expModalOverlay')) {
+        const modal = document.createElement('div');
+        modal.id = 'expModalOverlay';
+        modal.className = 'project-modal-overlay';
+        modal.innerHTML = `
+            <div class="project-modal-content">
+                <button class="project-modal-close" id="expModalClose">&times;</button>
+                <div id="expModalBody"></div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // Inicializa modais e menu hambúrguer após DOM
     document.addEventListener('DOMContentLoaded', function() {
+        // Menu hambúrguer mobile
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        if (hamburgerButton && mobileNav && mobileMenuOverlay) {
+            hamburgerButton.addEventListener('click', function() {
+                mobileNav.classList.add('open');
+                mobileMenuOverlay.classList.add('open');
+            });
+            mobileMenuOverlay.addEventListener('click', function() {
+                mobileNav.classList.remove('open');
+                mobileMenuOverlay.classList.remove('open');
+            });
+        }
+        // Modal de experiência (novo padrão)
         document.querySelectorAll('.experience-item-v2').forEach(item => {
             item.addEventListener('click', function() {
                 const key = item.getAttribute('data-exp');
                 if (expContent[key]) {
                     document.getElementById('expModalBody').innerHTML = `<h2>${expContent[key].title}</h2>${expContent[key].html}`;
-                    document.getElementById('expModal').style.display = 'flex';
+                    document.getElementById('expModalOverlay').style.display = 'flex';
                 }
             });
         });
         const expModalClose = document.getElementById('expModalClose');
         if (expModalClose) {
             expModalClose.addEventListener('click', function() {
-                document.getElementById('expModal').style.display = 'none';
+                document.getElementById('expModalOverlay').style.display = 'none';
             });
         }
-        const expModal = document.getElementById('expModal');
-        if (expModal) {
-            expModal.addEventListener('click', function(e) {
+        const expModalOverlay = document.getElementById('expModalOverlay');
+        if (expModalOverlay) {
+            expModalOverlay.addEventListener('click', function(e) {
+                if (e.target === this) this.style.display = 'none';
+            });
+        }
+
+        // Modal de projeto do portfólio: restaura funcionamento original
+        document.querySelectorAll('.portfolio-item').forEach(card => {
+            card.addEventListener('click', function() {
+                document.getElementById('projectModal').style.display = 'flex';
+            });
+        });
+        const modalCloseButton = document.getElementById('modalCloseButton');
+        if (modalCloseButton) {
+            modalCloseButton.addEventListener('click', function() {
+                document.getElementById('projectModal').style.display = 'none';
+            });
+        }
+        const projectModal = document.getElementById('projectModal');
+        if (projectModal) {
+            projectModal.addEventListener('click', function(e) {
                 if (e.target === this) this.style.display = 'none';
             });
         }
