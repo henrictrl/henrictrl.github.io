@@ -3,7 +3,26 @@
 <head>
     <style>
         /* Mostra o botão do menu hambúrguer apenas no mobile */
-        .hamburger-menu { display: none; }
+        .hamburger-menu {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 10001;
+            background: none;
+            border: none;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+        }
+        .hamburger-menu .material-symbols-outlined {
+            font-size: 2.2rem;
+            color: var(--text, #222);
+            transition: color 0.2s;
+        }
         @media (max-width: 900px) {
             .hamburger-menu { display: flex !important; }
         }
@@ -35,7 +54,7 @@
 
     <!-- Botão do menu hambúrguer para mobile -->
     <button id="hamburgerButton" class="hamburger-menu" title="Abrir menu" aria-label="Abrir menu" style="position:fixed;top:18px;left:18px;z-index:10001;background:none;border:none;padding:0;display:flex;align-items:center;justify-content:center;width:48px;height:48px;cursor:pointer;">
-        <span class="material-symbols-outlined" style="font-size:2.2rem;">menu</span>
+        <span class="material-symbols-outlined">menu</span>
     </button>
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
