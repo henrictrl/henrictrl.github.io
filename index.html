@@ -446,52 +446,6 @@
         document.body.appendChild(modal);
     }
 
-    // Inicializa modais e menu hambúrguer após DOM
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- MENU HAMBÚRGUER MOBILE (funcionalidade igual à página sobre mim) ---
-        const hamburgerButton = document.getElementById('hamburgerButton');
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        // Fecha menu mobile
-        function closeMobileMenu() {
-            mobileNav.classList.remove('open');
-            mobileMenuOverlay.classList.remove('open');
-            hamburgerButton.setAttribute('aria-expanded', 'false');
-        }
-        // Abre menu mobile
-        function openMobileMenu() {
-            mobileNav.classList.add('open');
-            mobileMenuOverlay.classList.add('open');
-            hamburgerButton.setAttribute('aria-expanded', 'true');
-            // Foco acessível no primeiro link
-            const firstLink = mobileNav.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])');
-            if (firstLink) firstLink.focus();
-        }
-        if (hamburgerButton && mobileNav && mobileMenuOverlay) {
-            hamburgerButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (mobileNav.classList.contains('open')) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-            });
-            // Fecha ao clicar fora
-            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            // Fecha ao pressionar ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
-                    closeMobileMenu();
-                }
-            });
-            // Fecha ao clicar em qualquer link ou botão do menu
-            mobileNav.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('click', function() {
-                    closeMobileMenu();
-                });
-            });
-        }
-
         // --- MODAL DE EXPERIÊNCIA (novo padrão) ---
         document.querySelectorAll('.experience-item-v2').forEach(item => {
             item.addEventListener('click', function() {
