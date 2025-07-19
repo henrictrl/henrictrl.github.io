@@ -53,8 +53,7 @@
 <body class="about-page">
 
     <!-- Botão do menu hambúrguer para mobile -->
-    <button id="hamburgerButton" class="hamburger-menu" title="Abrir menu" aria-label="Abrir menu" style="position:fixed;top:18px;left:18px;z-index:10001;background:none;border:none;padding:0;display:flex;align-items:center;justify-content:center;width:48px;height:48px;cursor:pointer;">
-        <span class="material-symbols-outlined">menu</span>
+<button id="hamburger-btn" class="hamburger-btn" title="Abrir menu" aria-label="Abrir menu">        <span class="material-symbols-outlined">menu</span>
     </button>
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
@@ -447,23 +446,7 @@
         document.body.appendChild(modal);
     }
 
-    // Inicializa modais e menu hambúrguer após DOM
-    document.addEventListener('DOMContentLoaded', function() {
-        // Menu hambúrguer mobile
-        const hamburgerButton = document.getElementById('hamburgerButton');
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        if (hamburgerButton && mobileNav && mobileMenuOverlay) {
-            hamburgerButton.addEventListener('click', function() {
-                mobileNav.classList.add('open');
-                mobileMenuOverlay.classList.add('open');
-            });
-            mobileMenuOverlay.addEventListener('click', function() {
-                mobileNav.classList.remove('open');
-                mobileMenuOverlay.classList.remove('open');
-            });
-        }
-        // Modal de experiência (novo padrão)
+        // --- MODAL DE EXPERIÊNCIA (novo padrão) ---
         document.querySelectorAll('.experience-item-v2').forEach(item => {
             item.addEventListener('click', function() {
                 const key = item.getAttribute('data-exp');
@@ -486,7 +469,7 @@
             });
         }
 
-        // Modal de projeto do portfólio: restaura funcionamento original
+        // --- MODAL DE PROJETO DO PORTFÓLIO: restaura funcionamento original ---
         document.querySelectorAll('.portfolio-item').forEach(card => {
             card.addEventListener('click', function() {
                 document.getElementById('projectModal').style.display = 'flex';
