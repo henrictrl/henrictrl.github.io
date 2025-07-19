@@ -736,23 +736,29 @@ setupSidebarColorPicker('.mobile-nav .sidebar-color-picker', '.hex-input', '#col
 /* =================================================================== */
 /* === LÓGICA DO MENU HAMBÚRGUER (MOBILE) === */
 /* =================================================================== */
-const hamburgerBtn = document.getElementById('hamburger-btn');
-const mobileNav = document.getElementById('mobile-nav');
-const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
 
-if (hamburgerBtn && mobileNav && mobileMenuOverlay) {
-    const toggleMenu = () => {
-        const isMenuOpen = hamburgerBtn.classList.contains('active');
+    if (hamburgerBtn && mobileNav && mobileMenuOverlay) {
+        const toggleMenu = () => {
+            const isMenuOpen = hamburgerBtn.classList.contains('active');
 
-        hamburgerBtn.classList.toggle('active');
-        mobileNav.classList.toggle('open');
-        mobileMenuOverlay.classList.toggle('visible');
-        document.body.classList.toggle('modal-open'); // Reutiliza a classe que trava o scroll
+            hamburgerBtn.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+            mobileMenuOverlay.classList.toggle('visible');
+            document.body.classList.toggle('modal-open');
 
-        // Atualiza o atributo aria-expanded para acessibilidade
-        hamburgerBtn.setAttribute('aria-expanded', !isMenuOpen);
-    };
+            hamburgerBtn.setAttribute('aria-expanded', !isMenuOpen);
+        };
 
-    hamburgerBtn.addEventListener('click', toggleMenu);
-    mobileMenuOverlay.addEventListener('click', toggleMenu);
-}
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMenu);
+
+        // Adicionado: Fecha o menu ao clicar em um link
+        const navLinks = mobileNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+    }
