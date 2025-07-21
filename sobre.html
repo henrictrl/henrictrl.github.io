@@ -15,35 +15,58 @@
 
     <link rel="icon" href="./images/profile.ico" type="image/x-icon">
 
-    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
+    <style>
+        .hamburger-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 10001;
+            background: none;
+            border: none;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+        }
+        .hamburger-btn .material-symbols-outlined {
+            font-size: 2.2rem;
+            color: var(--text, #222);
+            transition: color 0.2s, transform 0.3s;
+        }
+        .hamburger-btn .material-symbols-outlined.is-x {
+            transform: rotate(90deg) scale(1.2);
+            color: var(--accent, #e74c3c);
+        }
+        @media (max-width: 900px) {
+            .hamburger-btn { display: flex !important; }
+        }
+    </style>
 
 </head>
 <body class="about-page">
 
-    <body class="about-page">
-
+    <button id="hamburger-btn" class="hamburger-btn" title="Abrir menu" aria-label="Abrir menu">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
-        <ul>
-
-            <button id="theme-toggle" class="theme-toggle-button" title="Alternar tema">
+        <div class="mobile-nav-group">
+            <button id="theme-toggle" class="theme-toggle-button" title="Alternar tema" style="margin-bottom: 20px;">
                 <div class="slider-bg"></div>
                 <span class="material-symbols-outlined icon-sun">light_mode</span>
                 <span class="material-symbols-outlined icon-moon">dark_mode</span>
             </button>
-
-            <li><a href="./index.html#inicio" data-translate-key="navHome">Início</a></li>
-            <li><a href="./index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="./index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="./index.html#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="./sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="./artigos.html" data-translate-key="navArticles">Artigos</a></li>
-        </ul>
-         <div class="language-switcher">
+            <a href="./index.html#inicio" data-translate-key="navHome" style="margin-bottom: 20px;">Início</a>
+            <a href="./index.html#experiencia" data-translate-key="navExperience" style="margin-bottom: 20px;">Experiência</a>
+            <a href="./index.html#portfolio" data-translate-key="navPortfolio" style="margin-bottom: 20px;">Portfólio</a>
+            <a href="./index.html#contato" data-translate-key="navContact" style="margin-bottom: 20px;">Contato</a>
+            <span class="nav-separator" style="margin-bottom: 20px;"><a href="./sobre.html" data-translate-key="navAbout">Sobre Mim</a></span>
+            <a href="./artigos.html" data-translate-key="navArticles">Artigos</a>
+        </div>
+        <div class="language-switcher">
             <button class="lang-button" data-lang="pt" title="Português">
                  <img src="./images/brazil.png" alt="Bandeira do Brasil">
             </button>
@@ -202,6 +225,66 @@
     
     <script async src="//www.instagram.com/embed.js"></script>
     <script src="./sobre.js" defer></script> 
+
+    <script>
+    // MENU HAMBÚRGUER MOBILE
+    const hamburgerButton = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    function closeMobileMenu() {
+        mobileNav.classList.remove('open');
+        mobileMenuOverlay.classList.remove('active');
+        hamburgerButton.classList.remove('active');
+        hamburgerButton.setAttribute('aria-expanded', 'false');
+        // Animar ícone para menu
+        const icon = hamburgerButton.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.classList.remove('is-x');
+            icon.textContent = 'menu';
+        }
+    }
+    function openMobileMenu() {
+        mobileNav.classList.add('open');
+        mobileMenuOverlay.classList.add('active');
+        hamburgerButton.classList.add('active');
+        hamburgerButton.setAttribute('aria-expanded', 'true');
+        // Animar ícone para X
+        const icon = hamburgerButton.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.classList.add('is-x');
+            icon.textContent = 'close';
+        }
+        const firstLink = mobileNav.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])');
+        if (firstLink) firstLink.focus();
+    }
+    if (hamburgerButton && mobileNav && mobileMenuOverlay) {
+        hamburgerButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (mobileNav.classList.contains('open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+        // Não fecha o menu ao clicar no botão de tema
+        mobileNav.querySelectorAll('a, button').forEach(el => {
+            if (el.classList.contains('theme-toggle-button')) {
+                el.addEventListener('click', function(ev) {
+                    ev.stopPropagation();
+                    // Executa apenas a troca de tema
+                });
+            } else {
+                el.addEventListener('click', closeMobileMenu);
+            }
+        });
+    }
+    </script>
 
 </section>
 
