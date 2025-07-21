@@ -487,7 +487,44 @@
                 if (e.target === this) this.style.display = 'none';
             });
         }
+
+// MENU HAMBÚRGUER MOBILE
+const hamburgerButton = document.getElementById('hamburger-btn');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+function closeMobileMenu() {
+    mobileNav.classList.remove('open');
+    mobileMenuOverlay.classList.remove('active');
+    hamburgerButton.classList.remove('active');
+    hamburgerButton.setAttribute('aria-expanded', 'false');
+}
+function openMobileMenu() {
+    mobileNav.classList.add('open');
+    mobileMenuOverlay.classList.add('active');
+    hamburgerButton.classList.add('active');
+    hamburgerButton.setAttribute('aria-expanded', 'true');
+    const firstLink = mobileNav.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])');
+    if (firstLink) firstLink.focus();
+}
+if (hamburgerButton && mobileNav && mobileMenuOverlay) {
+    hamburgerButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
     });
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        }
+    });
+    mobileNav.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('click', closeMobileMenu);
+    });
+}
     </script>
     <script src="main.js"></script>
     </section>
