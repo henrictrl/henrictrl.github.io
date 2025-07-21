@@ -3,11 +3,11 @@
 <head>
     <style>
         /* Mostra o botão do menu hambúrguer apenas no mobile */
-        .hamburger-menu {
+        .hamburger-btn {
             display: none;
             position: fixed;
             top: 16px;
-            left: 16px;
+            right: 16px;
             z-index: 10001;
             background: none;
             border: none;
@@ -18,13 +18,17 @@
             height: 48px;
             cursor: pointer;
         }
-        .hamburger-menu .material-symbols-outlined {
+        .hamburger-btn .material-symbols-outlined {
             font-size: 2.2rem;
             color: var(--text, #222);
-            transition: color 0.2s;
+            transition: color 0.2s, transform 0.3s;
+        }
+        .hamburger-btn .material-symbols-outlined.is-x {
+            transform: rotate(90deg) scale(1.2);
+            color: var(--accent, #e74c3c);
         }
         @media (max-width: 900px) {
-            .hamburger-menu { display: flex !important; }
+            .hamburger-btn { display: flex !important; }
         }
     </style>
     <meta charset="UTF-8">
@@ -487,7 +491,64 @@
                 if (e.target === this) this.style.display = 'none';
             });
         }
+
+// MENU HAMBÚRGUER MOBILE
+const hamburgerButton = document.getElementById('hamburger-btn');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+function closeMobileMenu() {
+    mobileNav.classList.remove('open');
+    mobileMenuOverlay.classList.remove('active');
+    hamburgerButton.classList.remove('active');
+    hamburgerButton.setAttribute('aria-expanded', 'false');
+    // Animar ícone para menu
+    const icon = hamburgerButton.querySelector('.material-symbols-outlined');
+    if (icon) {
+        icon.classList.remove('is-x');
+        icon.textContent = 'menu';
+    }
+}
+function openMobileMenu() {
+    mobileNav.classList.add('open');
+    mobileMenuOverlay.classList.add('active');
+    hamburgerButton.classList.add('active');
+    hamburgerButton.setAttribute('aria-expanded', 'true');
+    // Animar ícone para X
+    const icon = hamburgerButton.querySelector('.material-symbols-outlined');
+    if (icon) {
+        icon.classList.add('is-x');
+        icon.textContent = 'close';
+    }
+    const firstLink = mobileNav.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])');
+    if (firstLink) firstLink.focus();
+}
+if (hamburgerButton && mobileNav && mobileMenuOverlay) {
+    hamburgerButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
     });
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        }
+    });
+    // Não fecha o menu ao clicar no botão de tema
+    mobileNav.querySelectorAll('a, button').forEach(el => {
+        if (el.classList.contains('theme-toggle-button')) {
+            el.addEventListener('click', function(ev) {
+                ev.stopPropagation();
+                // Executa apenas a troca de tema
+            });
+        } else {
+            el.addEventListener('click', closeMobileMenu);
+        }
+    });
+}
     </script>
     <script src="main.js"></script>
     </section>
