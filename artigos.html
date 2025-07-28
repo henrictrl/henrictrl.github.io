@@ -6,6 +6,7 @@
     <title>Artigos - Henrique Marinhos</title>
     
     <link rel="stylesheet" href="style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Just+Me+Again+Down+Here&family=Preahvihear&display=swap" rel="stylesheet">
@@ -13,47 +14,41 @@
     <link rel="icon" href="images/profile.ico" type="image/x-icon">
 
 </head>
-<body class="articles-page">
+<nav class="sidebar-nav">
+    <button class="theme-toggle-button" title="Alternar tema"><div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span class="material-symbols-outlined icon-moon">dark_mode</span></button>
+    <ul>
+        <li><a href="index.html#inicio">Início</a></li>
+        <li><a href="index.html#experiencia">Experiência</a></li>
+        <li><a href="index.html#portfolio">Portfólio</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+        <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+        <li><a href="artigos.html" class="active">Artigos</a></li>
+    </ul>
+</nav>
 
-    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-    <nav id="mobile-nav" class="mobile-nav">
-        <ul>
-            <button class="theme-toggle-button" title="Alternar tema"><div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span class="material-symbols-outlined icon-moon">dark_mode</span></button>
-            <li><a href="./index.html#inicio">Início</a></li>
-            <li><a href="./index.html#experiencia">Experiência</a></li>
-            <li><a href="./index.html#portfolio">Portfólio</a></li>
-            <li><a href="./index.html#contato">Contato</a></li>
-            <li class="nav-separator"><a href="./sobre.html">Sobre Mim</a></li>
-            <li><a href="./artigos.html" class="active">Artigos</a></li>
-        </ul>
-        <div class="language-switcher">
-             <button class="lang-button" data-lang="pt" title="Português"><img src="./images/brazil.png" alt="Bandeira do Brasil"></button>
-            <button class="lang-button" data-lang="en" title="English"><img src="./images/usa.png" alt="United States Flag"></button>
-            <button class="lang-button" data-lang="es" title="Español"><img src="./images/spain.png" alt="Bandera de España"></button>
-        </div>
-    </nav>
-    <nav class="sidebar-nav">
-        <button class="theme-toggle-button" title="Alternar tema"><div class="slider-bg"></div><span class="material-symbols-outlined icon-sun">light_mode</span><span class="material-symbols-outlined icon-moon">dark_mode</span></button>
-        <ul>
-            <li><a href="index.html#inicio">Início</a></li>
-            <li><a href="index.html#experiencia">Experiência</a></li>
-            <li><a href="index.html#portfolio">Portfólio</a></li>
-            <li><a href="index.html#contato">Contato</a></li>
-            <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
-            <li><a href="artigos.html" class="active">Artigos</a></li>
-        </ul>
-        <div class="language-switcher">
-            <button class="lang-button" data-lang="pt" title="Português"><img src="images/brazil.png" alt="Bandeira do Brasil"></button>
-            <button class="lang-button" data-lang="en" title="English"><img src="images/usa.png" alt="United States Flag"></button>
-            <button class="lang-button" data-lang="es" title="Español"><img src="images/spain.png" alt="Bandera de España"></button>
-        </div>
-    </nav>
+<button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+<nav id="mobile-nav" class="mobile-nav">
+    <ul>
+        <li><a href="index.html#inicio">Início</a></li>
+        <li><a href="index.html#experiencia">Experiência</a></li>
+        <li><a href="index.html#portfolio">Portfólio</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+        <li class="nav-separator"><a href="sobre.html">Sobre Mim</a></li>
+        <li><a href="artigos.html" class="active">Artigos</a></li>
+    </ul>
+    <div class="mobile-nav-bottom">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div>
+            <span class="material-symbols-outlined icon-sun">light_mode</span>
+            <span class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+    </div>
+</nav>
 
     <main class="articles-main-v2 fade-in-on-load">
         <header class="about-header">
@@ -63,205 +58,671 @@
         <div class="toolbar-v2">
             <div class="filter-pills">
                 <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="favoritos" title="Favoritos">
+                    <span class="material-symbols-outlined">star</span>
+                </button>
                 <button class="filter-btn" data-filter="artigos">Artigos</button>
-                <button class="filter-btn" data-filter="cabines">Cabines</button>
                 <button class="filter-btn" data-filter="cinema">Cinema</button>
                 <button class="filter-btn" data-filter="literatura">Literatura</button>
                 <button class="filter-btn" data-filter="musica">Música</button>
+                <button class="filter-btn" data-filter="cabine">Cabine</button>
             </div>
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
-                <span class="material-symbols-outlined">search</span>
+
+            <div class="controls-wrapper">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="Pesquisar artigos...">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+                <div class="select-group">
+                    <div class="custom-select-wrapper">
+                        <select id="yearFilter" class="filter-select">
+                            <option value="all">Ano</option>
+                            </select>
+                    </div>
+                    <div class="custom-select-wrapper">
+                        <select id="sortSelect" class="filter-select">
+                            <option value="relevance">Relevância</option>
+                            <option value="latest">Mais recentes</option>
+                            <option value="oldest">Mais antigos</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
         <div class="mosaic-grid chroma-grid">
-            <article class="post-card-v2" data-category="cinema" data-date="2025-07-08">
-                <a href="artigo-hunters.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/hunters-capa.jpg" alt="Imagem promocional da série Hunters">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">08/07/2025</p>
-                        <h3 class="card-title">A 2ª temporada de Hunters aproveita as brechas da liberdade criativa</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2025-07-04">
-                <a href="artigo-pearl.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/pearl-capa.jpg" alt="Imagem do filme Pearl">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">24/03/2025</p>
-                        <h3 class="card-title">Pearl sangra até o próprio estrelato</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2023-02-28">
-                <a href="artigo-avatar.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                       <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/avatar-familia-na-agua.png" alt="Família Na'vi na água em Pandora">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">28/02/2023</p>
-                        <h3 class="card-title">Avatar: O Caminho da Água oferece um banquete aos olhos, mas não ao coração</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="musica" data-date="2023-02-02">
-                <a href="artigo-sza-ctrl.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <img src="images/artigos-imagens/sza-capa-computadores.jpg" alt="SZA sentada em meio a uma pilha de monitores de computador antigos">
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
                     <div class="card-gradient"></div>
+                    <img src="./images-artigos/as-melhores-series-de-2021.jpg" alt="As Melhores Séries de 2021">
+                </div>
+                <a href="https://personaunesp.com.br/as-melhores-series-de-2021/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">09/02/2022</p>
+                        <h3 class="card-title">As Melhores Séries de 2021</h3>
+                        <p class="card-author">Vários Autores</p>
                     </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/em-ctrl-deluxe-sza-prova-que-e-sempre-possivel-melhorar.jpg" alt="Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar">
+                </div>
+                <a href="https://personaunesp.com.br/ctrl-deluxe-critica/" class="card-link-wrapper">
                     <span class="card-tag">Música</span>
                     <div class="card-text-content">
                         <p class="card-date">02/02/2023</p>
                         <h3 class="card-title">Em Ctrl (Deluxe), SZA prova que é sempre possível melhorar</h3>
+                        <p class="card-author">Henrique Marinhos</p>
                     </div>
                 </a>
             </article>
-            <!-- Novos artigos adicionados abaixo -->
-            <article class="post-card-v2" data-category="musica" data-date="2023-11-02">
-                <a href="artigo-rosalia-el-mal-querer.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/rosalia-el-mal-querer-capa.jpg" alt="Capa do álbum El mal querer de Rosalía.">
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/avatar-o-caminho-da-agua.jpg" alt="Avatar: O Caminho da Água oferece um banquete aos olhos, mas não ao coração">
+                </div>
+                <a href="https://personaunesp.com.br/avatar-o-caminho-da-agua-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">28/02/2023</p>
+                        <h3 class="card-title">Avatar: O Caminho da Água oferece um banquete aos olhos, mas não ao coração</h3>
+                        <p class="card-author">Henrique Marinhos</p>
                     </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/as-melhores-series-de-2022.jpg" alt="As Melhores Séries de 2022">
+                </div>
+                <a href="https://personaunesp.com.br/as-melhores-series-de-2022/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">09/03/2023</p>
+                        <h3 class="card-title">As Melhores Séries de 2022</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/a-2a-temporada-de-hunters-aproveita-as-brechas.jpg" alt="A 2ª temporada de Hunters aproveita as brechas da liberdade criativa">
+                </div>
+                <a href="https://personaunesp.com.br/hunters-2a-temp-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">09/05/2023</p>
+                        <h3 class="card-title">A 2ª temporada de Hunters aproveita as brechas da liberdade criativa</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="literatura" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/em-as-primas-amor-arte-e-violencia.jpg" alt="Em As Primas, amor, Arte e violência se misturam na Argentina dos anos 1940">
+                </div>
+                <a href="https://personaunesp.com.br/as-primas-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Literatura</span>
+                    <div class="card-text-content">
+                        <p class="card-date">30/05/2023</p>
+                        <h3 class="card-title">Em As Primas, amor, Arte e violência se misturam na Argentina dos anos 1940</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/do-interior-a-metropole-marina-sena.jpg" alt="Do interior à metrópole, Marina Sena se arrisca com Vício Inerente">
+                </div>
+                <a href="https://personaunesp.com.br/vicio-inerente-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">12/06/2023</p>
+                        <h3 class="card-title">Do interior à metrópole, Marina Sena se arrisca com Vício Inerente</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/treta-revela-que-a-paz-interior-e-uma-jornada.jpg" alt="Treta revela que a paz interior é mais uma jornada do que um destino">
+                </div>
+                <a href="https://personaunesp.com.br/treta-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">16/06/2023</p>
+                        <h3 class="card-title">Treta revela que a paz interior é mais uma jornada do que um destino</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/john-wick-4-baba-yaga.jpg" alt="John Wick 4: Baba Yaga é um épico de ação que redefine riscos">
+                </div>
+                <a href="https://personaunesp.com.br/john-wick-4-baba-yaga-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">29/06/2023</p>
+                        <h3 class="card-title">John Wick 4: Baba Yaga é um épico de ação que redefine riscos</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/a-partir-do-afrofuturismo-dirty-computer.jpg" alt="A partir do afrofuturismo, Dirty Computer mantém seu impacto político intacto mesmo após 5 anos">
+                </div>
+                <a href="https://personaunesp.com.br/dirty-computer-5-anos/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">06/07/2023</p>
+                        <h3 class="card-title">A partir do afrofuturismo, Dirty Computer mantém seu impacto político intacto mesmo após 5 anos</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="artigos" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/my-mind-and-me-investiga-selena-gomez.jpg" alt="My Mind & Me investiga Selena Gomez pelos olhos da alma">
+                </div>
+                <a href="https://personaunesp.com.br/my-mind-me-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Artigos</span>
+                    <div class="card-text-content">
+                        <p class="card-date">02/10/2023</p>
+                        <h3 class="card-title">My Mind & Me investiga Selena Gomez pelos olhos da alma</h3>
+                        <p class="card-author">Henrique Marinhos e Vitória Vulcano</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/el-mal-querer-rosalia.jpg" alt="El mal querer: em novas roupagens, Rosalía apresentou o flamenco para novas gerações há 5 anos">
+                </div>
+                <a href="https://personaunesp.com.br/el-mal-querer-5-anos/" class="card-link-wrapper">
                     <span class="card-tag">Música</span>
                     <div class="card-text-content">
                         <p class="card-date">02/11/2023</p>
-                        <h3 class="card-title">El mal querer: Rosalía apresentou o flamenco para novas gerações há 5 anos</h3>
+                        <h3 class="card-title">El mal querer: em novas roupagens, Rosalía apresentou o flamenco para novas gerações há 5 anos</h3>
+                        <p class="card-author">Henrique Marinhos</p>
                     </div>
                 </a>
             </article>
-            <article class="post-card-v2" data-category="musica" data-date="2024-10-18">
-                <a href="Brat-charli-xcx.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/brat-remix-capa.jpg" alt="Capa do álbum de remixes de Brat, de Charli XCX">
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/do-lixo-ao-tesouro.jpg" alt="Do Lixo ao Tesouro: Transformando Negativos em Positivos celebra a Arte como resistência">
+                </div>
+                <a href="https://personaunesp.com.br/do-lixo-ao-tesouro-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
                     </div>
+                    <div class="card-text-content">
+                        <p class="card-date">01/11/2023</p>
+                        <h3 class="card-title">Do Lixo ao Tesouro: Transformando Negativos em Positivos celebra a Arte como resistência</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/dulcineia-explora-a-musica.jpg" alt="Dulcineia explora a música como a conexão, inspiração e destino de um artista em busca de sua identidade">
+                </div>
+                <a href="https://personaunesp.com.br/dulcineia-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">06/11/2023</p>
+                        <h3 class="card-title">Dulcineia explora a música como a conexão, inspiração e destino de um artista em busca de sua identidade</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/croma-kid-sintoniza-anos-90.jpg" alt="Croma Kid sintoniza a expressividade dos anos 90 em uma tela analógica">
+                </div>
+                <a href="https://personaunesp.com.br/croma-kid-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">13/11/2023</p>
+                        <h3 class="card-title">Croma Kid sintoniza a expressividade dos anos 90 em uma tela analógica</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="artigos" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/60-anos-de-x-men.jpg" alt="60 anos de X-Men e sua alegoria disruptiva">
+                </div>
+                <a href="https://personaunesp.com.br/x-men-60-anos-artigo/" class="card-link-wrapper">
+                    <span class="card-tag">Artigos</span>
+                    <div class="card-text-content">
+                        <p class="card-date">04/12/2023</p>
+                        <h3 class="card-title">60 anos de X-Men e sua alegoria disruptiva</h3>
+                        <p class="card-author">Henrique Marinhos e Henrique Rabachini</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/ai-mami-ha-5-anos-kali-uchis.jpg" alt="¡Ai, mami! Há 5 anos, Kali Uchis mostrou que un album como Isolation no lo encuentras en Europa">
+                </div>
+                <a href="https://personaunesp.com.br/isolation-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">14/12/2023</p>
+                        <h3 class="card-title">¡Ai, mami! Há 5 anos, Kali Uchis mostrou que un album como Isolation no lo encuentras en Europa</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/sem-mais-lagrimas-para-chorar-sweetener.jpg" alt="Sem mais lágrimas para chorar, há 5 anos Sweetener nos permitiu conhecer Ariana Grande em sua melhor versão">
+                </div>
+                <a href="https://personaunesp.com.br/sweetener-5-anos/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">15/12/2023</p>
+                        <h3 class="card-title">Sem mais lágrimas para chorar, há 5 anos Sweetener nos permitiu conhecer Ariana Grande em sua melhor versão</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/fale-direito-com-ela-bb-ang3l-tinashe.jpg" alt="Fale direito com ela: em BB/ANG3L, Tinashe reforça o porquê de não poder ser ignorada">
+                </div>
+                <a href="https://personaunesp.com.br/bb-ang3l-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">18/03/2024</p>
+                        <h3 class="card-title">Fale direito com ela: em BB/ANG3L, Tinashe reforça o porquê de não poder ser ignorada</h3>
+                        <p class="card-author">Henrique Marinhos e Leonardo Pulcherio</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/as-melhores-series-de-2023.jpg" alt="As Melhores Séries de 2023">
+                </div>
+                <a href="https://personaunesp.com.br/as-melhores-series-de-2023/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">25/03/2024</p>
+                        <h3 class="card-title">As Melhores Séries de 2023</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/depois-da-morte-guia-turistico-do-alem.jpg" alt="Depois da Morte é um guia turístico do além-otimismo religioso">
+                </div>
+                <a href="https://personaunesp.com.br/depois-da-morte-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">11/04/2024</p>
+                        <h3 class="card-title">Depois da Morte é um guia turístico do além-otimismo religioso</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/brat-nao-reinventa-a-roda.jpg" alt="BRAT não reinventa a roda, ele queima pneu">
+                </div>
+                <a href="https://personaunesp.com.br/brat-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">27/09/2024</p>
+                        <h3 class="card-title">BRAT não reinventa a roda, ele queima pneu</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/lady-gaga-harlequin.jpg" alt="Lady Gaga nem sabe do que está rindo em Harlequin">
+                </div>
+                <a href="https://personaunesp.com.br/harlequin-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">15/10/2024</p>
+                        <h3 class="card-title">Lady Gaga nem sabe do que está rindo em Harlequin</h3>
+                        <p class="card-author">Henrique Marinhos e Nathalia Tetzner</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/a-subversao-em-camadas-de-brat.jpg" alt="A subversão em camadas de Brat and it's completely different but also still brat">
+                </div>
+                <a href="https://personaunesp.com.br/brat-and-its-completely-different-but-also-still-brat-critica/" class="card-link-wrapper">
                     <span class="card-tag">Música</span>
                     <div class="card-text-content">
                         <p class="card-date">18/10/2024</p>
                         <h3 class="card-title">A subversão em camadas de Brat and it's completely different but also still brat</h3>
+                        <p class="card-author">Henrique Marinhos</p>
                     </div>
                 </a>
             </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2024-10-10">
-                <a href="artigo-mostra-sp.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/mostra-sp-capa.jpg" alt="Mostra Internacional de Cinema em São Paulo">
+            <article class="post-card-v2" data-category="cinema" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/corisco-e-dada-o-terror-a-luz-do-dia.jpg" alt="Corisco e Dadá: o Terror à luz do dia revive em alta definição">
+                </div>
+                <a href="https://personaunesp.com.br/corisco-e-dada-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
                     </div>
-                    <span class="card-tag">Cinema</span>
                     <div class="card-text-content">
-                        <p class="card-date">10/10/2024</p>
-                        <h3 class="card-title">48ª Mostra Internacional de Cinema em São Paulo: entre telas, trânsito e tesouros</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2024-09-15">
-                <a href="artigo-xmen.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/xmen-capa.jpg" alt="X-Men">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">15/09/2024</p>
-                        <h3 class="card-title">60 anos de X-Men e sua alegoria disruptiva</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="musica" data-date="2024-08-20">
-                <a href="dirty-computer.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/dirty-computer-capa.jpg" alt="Dirty Computer">
-                    </div>
-                    <span class="card-tag">Música</span>
-                    <div class="card-text-content">
-                        <p class="card-date">20/08/2024</p>
-                        <h3 class="card-title">Dirty Computer mantém seu impacto político intacto mesmo após 5 anos</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="musica" data-date="2024-07-30">
-                <a href="kali-uchis-isolation.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/kali-uchis-isolation-capa.jpg" alt="Kali Uchis Isolation">
-                    </div>
-                    <span class="card-tag">Música</span>
-                    <div class="card-text-content">
-                        <p class="card-date">30/07/2024</p>
-                        <h3 class="card-title">¡Ai, mami! Há 5 anos, Kali Uchis mostrou que un album como Isolation no lo encuentras en Europa</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="musica" data-date="2024-07-15">
-                <a href="brat-primeiro-charlixcx.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/brat-primeiro-capa.jpg" alt="BRAT Charli XCX">
-                    </div>
-                    <span class="card-tag">Música</span>
-                    <div class="card-text-content">
-                        <p class="card-date">15/07/2024</p>
-                        <h3 class="card-title">BRAT não reinventa a roda, ele queima pneu</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2024-07-01">
-                <a href="artigo-coracoes-jovens.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/coracoes-jovens-capa.jpg" alt="Corações Jovens">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">01/07/2024</p>
-                        <h3 class="card-title">Corações Jovens não sabe nomear o amor, mas sabe senti-lo</h3>
-                    </div>
-                </a>
-            </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2024-06-20">
-                <a href="artigo-corisco-e-dada.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/corisco-e-dada-capa.jpg" alt="Corisco e Dadá">
-                    </div>
-                    <span class="card-tag">Cinema</span>
-                    <div class="card-text-content">
-                        <p class="card-date">20/06/2024</p>
+                        <p class="card-date">28/10/2024</p>
                         <h3 class="card-title">Corisco e Dadá: o Terror à luz do dia revive em alta definição</h3>
+                        <p class="card-author">Henrique Marinhos</p>
                     </div>
                 </a>
             </article>
-            <article class="post-card-v2" data-category="cinema" data-date="2024-06-10">
-                <a href="artigo-croma-Kid.html" class="card-link-wrapper">
-                    <div class="card-image-container">
-                        <div class="card-gradient"></div>
-                        <img src="images/artigos-imagens/croma-kid-capa.jpg" alt="Croma Kid">
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/todo-mundo-ainda-tem-problemas-sexuais.jpg" alt="Todo Mundo (Ainda) Tem Problemas Sexuais (e amorosos)">
+                </div>
+                <a href="https://personaunesp.com.br/todo-mundo-ainda-tem-problemas-sexuais-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
                     </div>
+                    <div class="card-text-content">
+                        <p class="card-date">29/10/2024</p>
+                        <h3 class="card-title">Todo Mundo (Ainda) Tem Problemas Sexuais (e amorosos)</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/la-pampa-nao-desacelera.jpg" alt="La Pampa não desacelera nem nas curvas mais sinuosas">
+                </div>
+                <a href="https://personaunesp.com.br/la-pampa-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">01/11/2024</p>
+                        <h3 class="card-title">La Pampa não desacelera nem nas curvas mais sinuosas</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/lispectorante-e-um-espetaculo-espectral.jpg" alt="Lispectorante é um espetáculo espectral">
+                </div>
+                <a href="https://personaunesp.com.br/lispectorante-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">04/11/2024</p>
+                        <h3 class="card-title">Lispectorante é um espetáculo espectral</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/o-pardal-na-chamine.jpg" alt="O Pardal na Chaminé compartilha o desejo de escapar">
+                </div>
+                <a href="https://personaunesp.com.br/o-pardal-na-chamine-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">11/11/2024</p>
+                        <h3 class="card-title">O Pardal na Chaminé compartilha o desejo de escapar</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/coracoes-jovens-nao-sabe-nomear-o-amor.jpg" alt="Corações Jovens não sabe nomear o amor, mas sabe senti-lo">
+                </div>
+                <a href="https://personaunesp.com.br/coracoes-jovens-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">14/11/2024</p>
+                        <h3 class="card-title">Corações Jovens não sabe nomear o amor, mas sabe senti-lo</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="artigos" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/48a-mostra-internacional-de-cinema.jpg" alt="48ª Mostra Internacional de Cinema em São Paulo: entre telas, trânsito e tesouros">
+                </div>
+                <a href="https://personaunesp.com.br/48a-mostra-internacional-de-cinema-reportagem/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Artigos</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">19/11/2024</p>
+                        <h3 class="card-title">48ª Mostra Internacional de Cinema em São Paulo: entre telas, trânsito e tesouros</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema" data-favorito="true">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/no-sopro-da-vida-todas-as-estradas-de-terra.jpg" alt="No sopro da vida, descobrimos que Todas as Estradas de Terra Têm Gosto de Sal">
+                </div>
+                <a href="https://personaunesp.com.br/todas-as-estradas-de-terra-tem-gosto-de-sal-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">21/11/2024</p>
+                        <h3 class="card-title">No sopro da vida, descobrimos que Todas as Estradas de Terra Têm Gosto de Sal</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/pearl-sangra-ate-o-proprio-estrelato.jpg" alt="Pearl sangra até o próprio estrelato">
+                </div>
+                <a href="https://personaunesp.com.br/pearl-critica/" class="card-link-wrapper">
                     <span class="card-tag">Cinema</span>
                     <div class="card-text-content">
-                        <p class="card-date">10/06/2024</p>
-                        <h3 class="card-title">Croma Kid sintoniza a expressividade dos anos 90 em uma tela analógica</h3>
+                        <p class="card-date">24/11/2023</p>
+                        <h3 class="card-title">Pearl sangra até o próprio estrelato</h3>
+                        <p class="card-author">Henrique Marinhos e Vitória Vulcano</p>
                     </div>
                 </a>
             </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/os-melhores-filmes-de-2022.jpg" alt="Os Melhores Filmes de 2022">
+                </div>
+                <a href="https://personaunesp.com.br/os-melhores-filmes-de-2022/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">06/03/2023</p>
+                        <h3 class="card-title">Os Melhores Filmes de 2022</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/quantum-baby-coracao-partido.jpg" alt="Quantum Baby é para nós, sobreviventes de um coração partido">
+                </div>
+                <a href="https://personaunesp.com.br/quantum-baby-critica/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">11/09/2024</p>
+                        <h3 class="card-title">Quantum Baby é para nós, sobreviventes de um coração partido</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/black-panther-the-album-5-anos.jpg" alt="Os cinco anos de Black Panther: The Album e a narrativa sob o olhar norte-americano">
+                </div>
+                <a href="https://personaunesp.com.br/black-panther-the-album-aniversario/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">18/12/2023</p>
+                        <h3 class="card-title">Os cinco anos de Black Panther: The Album e a narrativa sob o olhar norte-americano</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/os-curtas-do-oscar-2023.jpg" alt="Os Curtas do Oscar 2023">
+                </div>
+                <a href="https://personaunesp.com.br/os-curtas-do-oscar-2023/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">11/03/2023</p>
+                        <h3 class="card-title">Os Curtas do Oscar 2023</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/os-melhores-discos-de-2023.jpg" alt="Os Melhores Discos de 2023">
+                </div>
+                <a href="https://personaunesp.com.br/os-melhores-discos-de-2023/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">21/03/2024</p>
+                        <h3 class="card-title">Os Melhores Discos de 2023</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="musica">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/os-melhores-discos-de-2022.jpg" alt="Os Melhores Discos de 2022">
+                </div>
+                <a href="https://personaunesp.com.br/os-melhores-discos-de-2022/" class="card-link-wrapper">
+                    <span class="card-tag">Música</span>
+                    <div class="card-text-content">
+                        <p class="card-date">10/03/2023</p>
+                        <h3 class="card-title">Os Melhores Discos de 2022</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/os-melhores-filmes-de-2023.jpg" alt="Os Melhores Filmes de 2023">
+                </div>
+                <a href="https://personaunesp.com.br/os-melhores-filmes-de-2023/" class="card-link-wrapper">
+                    <span class="card-tag">Cinema</span>
+                    <div class="card-text-content">
+                        <p class="card-date">27/03/2024</p>
+                        <h3 class="card-title">Os Melhores Filmes de 2023</h3>
+                        <p class="card-author">Vários Autores</p>
+                    </div>
+                </a>
+            </article>
+            <article class="post-card-v2" data-category="cinema">
+                <div class="card-image-container">
+                    <div class="card-gradient"></div>
+                    <img src="./images-artigos/uma-terra-deixada-para-tras.jpg" alt="O que podemos encontrar em Uma Terra Deixada para Trás?">
+                </div>
+                <a href="https://personaunesp.com.br/uma-terra-deixada-para-tras-critica/" class="card-link-wrapper">
+                    <div class="card-tags-container">
+                        <span class="card-tag">Cinema</span>
+                        <span class="card-tag">CABINE</span>
+                    </div>
+                    <div class="card-text-content">
+                        <p class="card-date">04/11/2024</p>
+                        <h3 class="card-title">O que podemos encontrar em Uma Terra Deixada para Trás?</h3>
+                        <p class="card-author">Henrique Marinhos</p>
+                    </div>
+                </a>
+            </article>
+
         </div>
     </main>
 
-    <script src="artigos.js" defer></script>
+    <div id="modal-iframe-overlay" class="modal-iframe-overlay">
+        <div class="modal-iframe-content">
+            <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="modal-external-link" title="Abrir em nova aba">
+                <span class="material-symbols-outlined">open_in_new</span>
+            </a>
+            <button id="modal-iframe-close" class="modal-iframe-close">&times;</button>
+            <div class="modal-iframe-loading">
+                <div class="loader-emoji">📰</div>
+                <span>Carregando artigo...</span>
+            </div>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="main.js" defer></script>
 </body>
 </html>

@@ -1,37 +1,56 @@
+// ====== Toggle Unesp Experiência ======
+document.addEventListener('DOMContentLoaded', function() {
+    const unespBtn = document.querySelector('.unesp-toggle-btn');
+    const unespContent = document.querySelector('.unesp-toggle-content');
+    if (unespBtn && unespContent) {
+        unespBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const expanded = unespContent.style.display === 'block';
+            unespContent.style.display = expanded ? 'none' : 'block';
+            const icon = unespBtn.querySelector('.material-symbols-outlined');
+            if (icon) icon.textContent = expanded ? 'expand_more' : 'expand_less';
+        });
+    }
+});
 document.addEventListener('DOMContentLoaded', () => {
 
     // =====================================================================
-    // === FUNÇÃO PARA COR DE DESTAQUE ALEATÓRIA ===
+    //  1. CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
     // =====================================================================
-    const setRandomHighlightColor = () => {
-        if (typeof iro === 'undefined') {
-            console.warn("iro.js não foi carregado, usando cor padrão.");
-            return;
-        }
-
-        // Se já existe uma cor salva, não define uma aleatória
-        if (localStorage.getItem('highlightColor')) {
-            return;
-        }
-
-        const MIN_BRIGHTNESS = 25;
-        const MAX_BRIGHTNESS = 90;
-        const MIN_SATURATION = 30;
-
-        const randomHue = Math.floor(Math.random() * 361);
-        const randomSaturation = Math.floor(MIN_SATURATION + (Math.random() * (100 - MIN_SATURATION)));
-        const randomValue = Math.floor(MIN_BRIGHTNESS + (Math.random() * (MAX_BRIGHTNESS - MIN_BRIGHTNESS)));
-
-        const tempColor = new iro.Color({ h: randomHue, s: randomSaturation, v: randomValue });
-        const randomColorHex = tempColor.hexString;
-        
-        document.documentElement.style.setProperty('--cor-destaque', randomColorHex);
-        localStorage.setItem('highlightColor', randomColorHex);
+    const body = document.body;
+    let colorPickerInstance = null;
+    const translations = {
+        pt: {
+            navHome: "Início",
+            navExperience: "Experiência",
+            navPortfolio: "Portfólio",
+            navContact: "Contato",
+            navAbout: "Sobre Mim",
+            navArticles: "Artigos",
+            aboutTitle: "Sobre Mim",
+            languagesTitle: "Línguas",
+            langPortuguese: "Português",
+            langPortugueseLevel: "Nativo",
+            langEnglish: "Inglês",
+            langEnglishLevel: "Avançado (C1)",
+            langSpanish: "Espanhol",
+            langSpanishLevel: "Em andamento",
+            githubTitle: "GitHub",
+            toolsTitle: "Ferramentas"
+        },
+        en: { /* Adicionar traduções em Inglês */ },
+        es: { /* Adicionar traduções em Espanhol */ }
     };
 
+
     // =====================================================================
-    // === FUNÇÃO PARA APLICAR COR SALVA ===
+    //  2. FUNCIONALIDADES DE TEMA E CORES (COMPARTILHADO)
     // =====================================================================
+
+    const applyTheme = (theme) => {
+        body.classList.toggle('night-mode', theme === 'night');
+    };
+
     const applySavedHighlightColor = () => {
         const savedColor = localStorage.getItem('highlightColor');
         if (savedColor) {
@@ -39,726 +58,527 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
-    // =====================================================================
-    // === CORREÇÃO DO SCROLL PARA O TOPO (LINK INÍCIO) E SEÇÕES ===
-    // =====================================================================
-    document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            
-            if (targetId === "#inicio") {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
-    // =====================================================================
-    // === LÓGICA DO EASTER EGG (MÃO E TÍTULO) ===
-    // =====================================================================
-    const contactNavLink = document.querySelector('.sidebar-nav a[href="#contato"]');
-    const handContainer = document.getElementById('hand-easter-egg-container');
-    const contactTitle = document.querySelector('#contato .section-title');
-
-    if (contactNavLink && handContainer && contactTitle) {
-        contactNavLink.addEventListener('click', (event) => {
-            if (!handContainer.classList.contains('animate')) {
-                handContainer.classList.add('animate');
-                contactTitle.classList.add('blinking-title');
-
-                setTimeout(() => {
-                    handContainer.classList.remove('animate');
-                    contactTitle.classList.remove('blinking-title');
-                }, 2300);
-            }
-        });
-    }
-
-    // =====================================================================
-    // === LÓGICA DE TRADUÇÃO (COPY ATUALIZADA) ===
-    // =====================================================================
-    const translations = {
-        pt: {
-            navHome: "Início",
-            navAbout: "Sobre Mim",
-            navExperience: "Experiência",
-            navPortfolio: "Portfólio",
-            navContact: "Contato",
-            navArticles: "Artigos",
-            navLocation: "São Paulo, Brasil",
-            heroText: "Sou um comunicólogo e profissional de Relações Públicas apaixonado por criar conexões autênticas. Exploro o universo da tecnologia, cultura e design, sempre em busca de novas formas de contar histórias.",
-            downloadButton: "Baixar",
-            scrollingBanner: "apoie artistas independentes &nbsp;&nbsp;&nbsp;",
-            experienceTitle: "Experiência",
-            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
-            jobInternCom: "Estagiário de Comunicação <br> <span class='at-symbol'>@</span> Rd Cultural",
-            jobInternPr: "Estagiário de Relações Públicas <br><span class='at-symbol'>@</span> Unesp",
-            jobAssistant: "Assistente de Compras <br> <span class='at-symbol'>@</span> Servimed",
-            portfolioTitle: "(Projetos)",
-            project1Name: "Nome do Projeto 1",
-            project1Cat: "Branding",
-            project2Name: "Nome do Projeto 2",
-            project2Cat: "Website",
-            project3Name: "Nome do Projeto 3",
-            project3Cat: "Identidade Visual",
-            project4Name: "Nome do Projeto 4",
-            project4Cat: "Campanha",
-            modalProjectName: "Nome do Projeto",
-            modalProjectDesc: "Aqui vai a descrição detalhada do projeto, com mais imagens, vídeos e texto.",
-            contactTitle: "Fale Comigo", // Revertido
-            contactIntro: "Tem um projeto em mente ou uma pergunta? Quer colaborar ou apenas tomar um café para trocar ideias? Envie uma mensagem e vamos conversar.", // Revertido e refinado
-            formName: "Seu Nome:",
-            formNamePlaceholder: "Nome Completo",
-            formEmail: "Seu E-mail:",
-            formEmailPlaceholder: "seu.email@exemplo.com",
-            formSubject: "Assunto:",
-            formSubjectPlaceholder: "Orçamento, Parceria, Café...",
-            formMessage: "Sua Mensagem:",
-            formMessagePlaceholder: "Me conte um pouco sobre sua ideia...",
-            formSubmit: "Enviar Mensagem",
-            contactOtherTitle: "Outras Formas de Contato",
-            contactPhone: "Telefone:",
-            formSending: "Enviando...",
-            formSuccess: "Mensagem enviada com sucesso!",
-            formError: "Ocorreu um erro. Tente novamente.",
-            formInvalid: "Por favor, corrija os erros.",
-            formSuccessButton: "Enviado!",
-            formErrorButton: "Erro! Tente Novamente",
-        },
-        en: {
-            navHome: "Home",
-            navAbout: "About Me",
-            navExperience: "Experience",
-            navPortfolio: "Portfolio",
-            navContact: "Contact",
-            navArticles: "Articles",
-            navLocation: "São Paulo, Brazil",
-            heroText: "I'm a communicologist and Public Relations professional passionate about creating authentic connections. I explore the universe of technology, culture, and design, always seeking new ways to tell stories.",
-            downloadButton: "Download",
-            scrollingBanner: "support independent artists &nbsp;&nbsp;&nbsp;",
-            experienceTitle: "Experience",
-            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
-            jobInternCom: "Communication Intern <br> <span class='at-symbol'>@</span> Rd Cultural",
-            jobInternPr: "Public Relations Intern <br><span class='at-symbol'>@</span> Unesp",
-            jobAssistant: "Purchasing Assistant <br> <span class='at-symbol'>@</span> Servimed",
-            portfolioTitle: "(Projects)",
-            project1Name: "Project Name 1",
-            project1Cat: "Branding",
-            project2Name: "Project Name 2",
-            project2Cat: "Website",
-            project3Name: "Project Name 3",
-            project3Cat: "Visual Identity",
-            project4Name: "Project Name 4",
-            project4Cat: "Campaign",
-            modalProjectName: "Project Name",
-            modalProjectDesc: "Here goes the detailed description of the project, with more images, videos, and text.",
-            contactTitle: "Talk to Me", // Reverted
-            contactIntro: "Have a project in mind or a question? Want to collaborate or just grab a coffee to exchange ideas? Send a message and let's talk.", // Reverted and refined
-            formName: "Your Name:",
-            formNamePlaceholder: "Full Name",
-            formEmail: "Your E-mail:",
-            formEmailPlaceholder: "your.email@example.com",
-            formSubject: "Subject:",
-            formSubjectPlaceholder: "Quote, Partnership, Coffee...",
-            formMessage: "Your Message:",
-            formMessagePlaceholder: "Tell me a little about your idea...",
-            formSubmit: "Send Message",
-            contactOtherTitle: "Other Ways to Contact",
-            contactPhone: "Phone:",
-            formSending: "Sending...",
-            formSuccess: "Message sent successfully!",
-            formError: "An error occurred. Please try again.",
-            formInvalid: "Please correct the errors.",
-            formSuccessButton: "Sent!",
-            formErrorButton: "Error! Try Again",
-        },
-        es: {
-            navHome: "Inicio",
-            navAbout: "Sobre Mí",
-            navExperience: "Experiencia",
-            navPortfolio: "Portafolio",
-            navContact: "Contacto",
-            navArticles: "Artículos",
-            navLocation: "São Paulo, Brasil",
-            heroText: "Soy un comunicólogo y profesional de Relaciones Públicas apasionado por crear conexiones auténticas. Exploro el universo de la tecnología, la cultura y el diseño, siempre en busca de nuevas formas de contar historias.",
-            downloadButton: "Descargar",
-            scrollingBanner: "apoya a los artistas independientes &nbsp;&nbsp;&nbsp;",
-            experienceTitle: "Experiencia",
-            jobFreelancer: "Freelancer <br> <span class='at-symbol'>@</span> t.pr agency <span class='at-symbol'>@</span> Sollaris",
-            jobInternCom: "Becario de Comunicación <br> <span class='at-symbol'>@</span> Rd Cultural",
-            jobInternPr: "Becario de Relaciones Públicas <br><span class='at-symbol'>@</span> Unesp",
-            jobAssistant: "Asistente de Compras <br> <span class='at-symbol'>@</span> Servimed",
-            portfolioTitle: "(Proyectos)",
-            project1Name: "Nome do Projeto 1",
-            project1Cat: "Branding",
-            project2Name: "Nome do Projeto 2",
-            project2Cat: "Sitio Web",
-            project3Name: "Nome do Projeto 3",
-            project3Cat: "Identidade Visual",
-            project4Name: "Nome do Projeto 4",
-            project4Cat: "Campanha",
-            modalProjectName: "Nome do Projeto",
-            modalProjectDesc: "Aqui va la descripción detallada del proyecto, con más imágenes, videos y texto.",
-            contactTitle: "Hable Conmigo", // Revertido
-            contactIntro: "¿Tienes un proyecto en mente o una pregunta? ¿Quieres colaborar o simplemente tomar un café para intercambiar ideas? Envía un mensaje y hablemos.", // Revertido y refinado
-            formName: "Tu Nombre:",
-            formNamePlaceholder: "Nombre Completo",
-            formEmail: "Tu E-mail:",
-            formEmailPlaceholder: "tu.email@ejemplo.com",
-            formSubject: "Asunto:",
-            formSubjectPlaceholder: "Presupuesto, Colaboración, Café...",
-            formMessage: "Tu Mensaje:",
-            formMessagePlaceholder: "Cuéntame un poco sobre tu idea...",
-            formSubmit: "Enviar Mensagem",
-            contactOtherTitle: "Otras Formas de Contacto",
-            contactPhone: "Teléfono:",
-            formSending: "Enviando...",
-            formSuccess: "¡Mensaje enviado con éxito!",
-            formError: "Ocurrió un error. Inténtalo de nuevo.",
-            formInvalid: "Por favor, corrija los errores.",
-            formSuccessButton: "¡Enviado!",
-            formErrorButton: "¡Error! Inténtalo de nuevo",
-        }
+    const setRandomHighlightColor = () => {
+        // Só define cor aleatória se for a primeira visita do usuário
+        if (localStorage.getItem('highlightColor')) return;
+        const randomHue = Math.floor(Math.random() * 361);
+        const randomColor = `hsl(${randomHue}, 80%, 60%)`;
+        document.documentElement.style.setProperty('--cor-destaque', randomColor);
+        localStorage.setItem('highlightColor', randomColor);
     };
 
-    const langButtons = document.querySelectorAll('.lang-button');
-    const translatableElements = document.querySelectorAll('[data-translate-key]');
-    const translatablePlaceholders = document.querySelectorAll('[data-translate-key-placeholder]');
-
-    const setLanguage = (lang) => {
-        translatableElements.forEach(el => {
-            const key = el.dataset.translateKey;
-            if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
-            }
-        });
-        translatablePlaceholders.forEach(el => {
-            const key = el.dataset.translateKeyPlaceholder;
-            if (translations[lang] && translations[lang][key]) {
-                el.placeholder = translations[lang][key];
-            }
-        });
-        
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-
-        localStorage.setItem('language', lang);
-    };
-
-    langButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const selectedLang = button.dataset.lang;
-            setLanguage(selectedLang);
-        });
-    });
-
-    // =====================================================================
-    // === LÓGICA DE TEMA (DIURNO/NOTURNO) ===
-    // =====================================================================
-    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
-const body = document.body;
-
-const applyTheme = (theme) => {
-    if (theme === 'night') {
-        body.classList.add('night-mode');
-    } else {
-        body.classList.remove('night-mode');
-    }
-};
-
-themeToggleButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    const validateAndAdjustColor = (color) => {
         const isNightMode = body.classList.contains('night-mode');
-        const newTheme = isNightMode ? 'day' : 'night';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-    });
-});
+        const hsv = color.hsv;
+        let needsUpdate = false;
 
-    // =====================================================================
-    // === SELETOR DE CORES (IRO.JS) E LÓGICA RESPONSIVA ===
-    // =====================================================================
-    
-    const pickerContainer = document.querySelector('.color-picker-container');
-    const hexInput = document.getElementById('hexInput');
-    const heroSection = document.querySelector('.hero-section');
-    const image1Container = document.getElementById('image1');
+        if (hsv.s < 20) { hsv.s = 20; needsUpdate = true; }
+        if (!isNightMode && hsv.v > 95) { hsv.v = 95; needsUpdate = true; }
+        if (isNightMode && hsv.v < 40) { hsv.v = 40; needsUpdate = true; }
 
-    if (pickerContainer && hexInput && typeof iro !== 'undefined') {
-        
-        const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+        if (needsUpdate) {
+            color.hsv = hsv;
+        }
+        return needsUpdate;
+    };
 
-        const colorPicker = new iro.ColorPicker(pickerContainer, {
-            width: 150,
-            color: initialColor,
-            borderWidth: 0,
-            borderColor: "#ffffff",
-            layout: [ 
+    const initializeColorPicker = (containerSelector) => {
+        const pickerContainer = document.querySelector(containerSelector);
+        if (!pickerContainer || typeof iro === 'undefined') return;
+
+        const initialColor = localStorage.getItem('highlightColor') || getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+
+        // Determina o layout do color picker com base no container
+        const layoutConfig = (containerSelector === '#colorPickerSidebar' && window.innerWidth > 992) ?
+            [ // Layout vertical para sidebar desktop
                 { component: iro.ui.Slider, options: { sliderType: 'hue' } },
                 { component: iro.ui.Slider, options: { sliderType: 'value' } }
-            ]
-        });
+            ] :
+            [ // Layout com Roda para a página "Sobre"
+                { component: iro.ui.Wheel, options: { wheelLightness: false } },
+                { component: iro.ui.Slider, options: { sliderType: 'value' } },
+            ];
 
-        hexInput.value = colorPicker.color.hexString;
-
-        colorPicker.on('color:change', (color) => {
-            
-            const MIN_BRIGHTNESS = 40;
-            const MAX_BRIGHTNESS = 90;
-            const MIN_SATURATION = 50;
-
-            let { h, s, v } = color.hsv;
-
-            if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
-            if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
-            if (s < MIN_SATURATION) { s = MIN_SATURATION; }
-            
-            color.hsv = { h, s, v };
-            
-            const novaCorHex = color.hexString;
-            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
-            hexInput.value = novaCorHex;
-            
-            localStorage.setItem('highlightColor', novaCorHex);
-        });
-
-        hexInput.addEventListener('input', () => {
-            const valor = hexInput.value;
-            if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
-                colorPicker.color.hexString = valor;
-            }
-        });
-    }
-
-    // --- LÓGICA CORRIGIDA PARA POSICIONAMENTO DO COLOR PICKER ---
-    const handleColorPickerLayout = () => {
-        if (!heroSection || !image1Container || !pickerContainer) {
-            return;
-        }
-
-        if (window.innerWidth <= 768) {
-            // Mobile: Se o elemento seguinte ao hero-section não for o picker, mova-o para lá.
-            if (heroSection.nextElementSibling !== pickerContainer) {
-                heroSection.after(pickerContainer);
-            }
-        } else {
-            // Desktop: Se o pai do picker não for o container da imagem, mova-o de volta.
-            if (pickerContainer.parentElement !== image1Container) {
-                image1Container.appendChild(pickerContainer);
-            }
-        }
-    };
-
-    // Executa no carregamento e no redimensionamento da tela
-    handleColorPickerLayout();
-    window.addEventListener('resize', handleColorPickerLayout);
-
-
-    // =====================================================================
-    // === BOTÃO DE DOWNLOAD ===
-    // =====================================================================
-    const downloadButton = document.getElementById('downloadButton');
-    const caricatureImageElement = document.querySelector('#image1 .main-cascade-image');
-
-    if (downloadButton && caricatureImageElement) {
-        downloadButton.addEventListener('click', () => {
-            try {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-
-                canvas.width = caricatureImageElement.naturalWidth;
-                canvas.height = caricatureImageElement.naturalHeight;
-
-                const backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
-
-                ctx.fillStyle = backgroundColor;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(caricatureImageElement, 0, 0);
-
-                const link = document.createElement('a');
-                link.download = 'caricatura-henrique-marinhos.jpg'; 
-                link.href = canvas.toDataURL('image/jpeg', 0.95); 
-
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-            } catch (e) {
-                console.error("Erro ao tentar baixar a imagem:", e);
-                alert("Ocorreu um erro ao tentar baixar a imagem. Isso pode ser devido a restrições de segurança do seu navegador ao executar arquivos locais.");
-            }
-        });
-    }
-
-    // =====================================================================
-    // === COLOR PICKER NA SIDEBAR E MOBILE NAV (IRO.JS) ===
-    // =====================================================================
-function setupSidebarColorPicker(containerSelector, inputSelector, iroContainerSelector) {
-    const container = document.querySelector(containerSelector);
-    const hexInput = container ? container.querySelector(inputSelector) : null;
-    const iroDiv = container ? container.querySelector(iroContainerSelector) : null;
-
-    if (container && hexInput && iroDiv && typeof iro !== 'undefined') {
-        iroDiv.innerHTML = '';
-        const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
-
-        // Reduz altura e remove padding extra do container
-        iroDiv.style.minHeight = '28px';
-        iroDiv.style.display = 'flex';
-        iroDiv.style.flexDirection = 'column';
-        iroDiv.style.alignItems = 'center';
-        iroDiv.style.justifyContent = 'center';
-        iroDiv.style.padding = '0';
-        iroDiv.style.margin = '0';
-
-        // Apenas dois sliders: hue e value (brilho). Remove qualquer campo extra.
-        const colorPicker = new iro.ColorPicker(iroDiv, {
-            width: 100,
+        colorPickerInstance = new iro.ColorPicker(pickerContainer, {
+            width: 120,
             color: initialColor,
-            borderWidth: 0,
-            borderColor: "#ffffff",
-            layout: [
-                { component: iro.ui.Slider, options: { sliderType: 'hue', sliderHeight: 14, sliderHandleHeight: 13 } },
-                { component: iro.ui.Slider, options: { sliderType: 'value', sliderHeight: 14, sliderHandleHeight: 13 } }
-            ]
+            borderWidth: 1,
+            borderColor: "var(--color-border)",
+            layoutDirection: 'vertical',
+            layout: layoutConfig
         });
 
-        // Ajusta sliders e handles para ficarem dentro do card e não ultrapassarem
-        setTimeout(() => {
-            const sliders = iroDiv.querySelectorAll('.IroSlider');
-            sliders.forEach(slider => {
-                slider.style.margin = '3px auto 0 auto';
-                slider.style.width = '100%';
-                slider.style.maxWidth = window.innerWidth <= 768 ? '110px' : '100px';
-                slider.style.minWidth = window.innerWidth <= 768 ? '80px' : '60px';
-                slider.style.height = window.innerWidth <= 768 ? '18px' : '14px';
-                slider.style.borderRadius = window.innerWidth <= 768 ? '9px' : '7px';
-                slider.style.overflow = 'hidden';
-                slider.style.padding = '0';
-                slider.style.position = 'relative';
-            });
-            const handles = iroDiv.querySelectorAll('.IroSliderHandle');
-            handles.forEach(handle => {
-                handle.style.width = window.innerWidth <= 768 ? '17px' : '13px';
-                handle.style.height = window.innerWidth <= 768 ? '17px' : '13px';
-                handle.style.minWidth = '0';
-                handle.style.minHeight = '0';
-                handle.style.maxWidth = window.innerWidth <= 768 ? '17px' : '13px';
-                handle.style.maxHeight = window.innerWidth <= 768 ? '17px' : '13px';
-                handle.style.top = '50%';
-                handle.style.left = '50%';
-                handle.style.transform = 'translate(-50%, -50%)';
-                handle.style.right = 'auto';
-                handle.style.position = 'absolute';
-                handle.style.boxShadow = '0 0 0 1.5px #fff, 0 0 0 2.5px var(--color-border)';
-                handle.style.border = '1.5px solid var(--color-border)';
-            });
-        }, 100);
-
-        hexInput.value = colorPicker.color.hexString;
-
-        colorPicker.on('color:change', (color) => {
-            const MIN_BRIGHTNESS = 40;
-            const MAX_BRIGHTNESS = 90;
-            const MIN_SATURATION = 50;
-            let { h, s, v } = color.hsv;
-            if (v < MIN_BRIGHTNESS) { v = MIN_BRIGHTNESS; }
-            if (v > MAX_BRIGHTNESS) { v = MAX_BRIGHTNESS; }
-            if (s < MIN_SATURATION) { s = MIN_SATURATION; }
-            color.hsv = { h, s, v };
-            const novaCorHex = color.hexString;
-            document.documentElement.style.setProperty('--cor-destaque', novaCorHex);
-            hexInput.value = novaCorHex;
-            localStorage.setItem('highlightColor', novaCorHex);
-        });
-
-        hexInput.addEventListener('input', () => {
-            const valor = hexInput.value;
-            if (/^#[0-9a-fA-F]{6}$/.test(valor)) {
-                colorPicker.color.hexString = valor;
-            }
-        });
-    }
-}
-
-// Inicializa o color picker na sidebar (desktop)
-setupSidebarColorPicker('.sidebar-nav .sidebar-color-picker', '.hex-input', '#colorPickerSidebar');
-// Inicializa o color picker na mobile-nav (mobile)
-setupSidebarColorPicker('.mobile-nav .sidebar-color-picker', '.hex-input', '#colorPickerMobile');
-
-    // =====================================================================
-    // === CASCATA DE IMAGENS HERO (ALTERNÂNCIA DE FOTOS) ===
-    // =====================================================================
-    const cascadeContainer = document.getElementById('cascadeContainer');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
-
-    if (cascadeContainer && image1 && image2) {
-        cascadeContainer.addEventListener('click', (event) => {
-            // Não alterna se clicar em um color picker ou input dentro da sidebar/mobile-nav
-            const isColorPicker = event.target.closest('.sidebar-color-picker');
-            if (isColorPicker) return;
-            image1.classList.toggle('top-image');
-            image1.classList.toggle('bottom-image');
-            image2.classList.toggle('top-image');
-            image2.classList.toggle('bottom-image');
-        });
-    }
-    
-    // =====================================================================
-    // === HOVER LISTA DE EXPERIÊNCIA ===
-    // =====================================================================
-    const experienceItemsV2 = document.querySelectorAll('.experience-item-v2');
-
-    experienceItemsV2.forEach(item => {
-        item.addEventListener('mouseover', () => {
-            item.classList.add('highlighted');
-        });
-
-        item.addEventListener('mouseout', () => {
-            item.classList.remove('highlighted');
-        });
-    });
-
-    // =====================================================================
-    // === JANELA MODAL PORTFÓLIO ===
-    // =====================================================================
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    const modalOverlay = document.getElementById('projectModal');
-    const modalCloseButton = document.getElementById('modalCloseButton');
-
-    if (modalOverlay && modalCloseButton) { 
-        portfolioItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.add('opening');
-                document.body.classList.add('modal-open'); 
-
-                setTimeout(() => {
-                    modalOverlay.classList.add('visible');
-                }, 300);
-            });
-        });
-
-        const closeModal = () => {
-            modalOverlay.classList.remove('visible');
-            document.body.classList.remove('modal-open');
-
-            setTimeout(() => {
-                const openingItem = document.querySelector('.portfolio-item.opening');
-                if (openingItem) {
-                    openingItem.classList.remove('opening');
-                }
-            }, 400); 
-        }
-
-        modalCloseButton.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (event) => {
-            if (event.target === modalOverlay) {
-                closeModal();
-            }
-        });
-    }
-    
-    // =====================================================================
-    // === FORMULÁRIO DE CONTATO (LÓGICA DE FEEDBACK NO BOTÃO) ===
-    // =====================================================================
-    const contactForm = document.getElementById('contactForm');
-
-    if (contactForm) {
-        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyGeCv27IzkZXXL23PgcLPo-nccHMf0vWONfwaQljIzlNPzo-CaSl2A0tqSPMNIfZM-lw/exec';
-        const formInputs = contactForm.querySelectorAll('input, textarea');
-        const submitButton = contactForm.querySelector('.submit-button');
-        
-        const validateField = (input) => {
-            const errorSpan = document.getElementById(`${input.id}Error`);
-            const value = input.value.trim();
-            let errorMessage = '';
-
-            if (input.hasAttribute('required') && value === '') {
-                errorMessage = 'Este campo é obrigatório.';
-            } else if (input.type === 'email' && value !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                errorMessage = 'Por favor, insira um e-mail válido.';
-            }
-
-            if (errorSpan) {
-                errorSpan.textContent = errorMessage;
-            }
-            
-            if (errorMessage) {
-                input.classList.add('invalid');
-                return false;
-            } else {
-                input.classList.remove('invalid');
-                return true;
-            }
-        };
-
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            let isFormValid = true;
-            formInputs.forEach(input => {
-                if (!validateField(input)) {
-                    isFormValid = false;
-                }
-            });
-
-            const currentLang = localStorage.getItem('language') || 'pt';
-            const originalButtonText = translations[currentLang].formSubmit;
-
-            const resetButton = (delay) => {
-                setTimeout(() => {
-                    submitButton.classList.remove('success', 'error');
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }, delay);
-            };
-
-            if (isFormValid) {
-                submitButton.disabled = true;
-                submitButton.textContent = translations[currentLang].formSending;
-                
-                fetch(googleScriptURL, {
-                    method: 'POST',
-                    body: new FormData(contactForm)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'success') {
-                        contactForm.reset();
-                        formInputs.forEach(input => input.classList.remove('invalid'));
-                        submitButton.classList.add('success');
-                        submitButton.textContent = translations[currentLang].formSuccessButton;
-                        resetButton(4000); 
-                    } else {
-                        console.error('Erro retornado pelo Google Script:', data.error);
-                        submitButton.classList.add('error');
-                        submitButton.textContent = translations[currentLang].formErrorButton;
-                        resetButton(5000);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao enviar o formulário:', error);
-                    submitButton.classList.add('error');
-                    submitButton.textContent = translations[currentLang].formErrorButton;
-                    resetButton(5000);
-                });
-
+        colorPickerInstance.on('color:change', (color) => {
+            if (color.event.type === 'input') {
+                document.documentElement.style.setProperty('--cor-destaque', color.hexString);
             }
         });
 
-        formInputs.forEach(input => {
-            input.addEventListener('blur', () => validateField(input));
-            input.addEventListener('input', () => {
-                if(submitButton.classList.contains('error')) {
-                    submitButton.classList.remove('error');
-                    const currentLang = localStorage.getItem('language') || 'pt';
-                    submitButton.textContent = translations[currentLang].formSubmit;
-                }
-            });
-        });
-    }
-
-    // =====================================================================
-    // === SCROLLSPY DA BARRA LATERAL ===
-    // =====================================================================
-    const scrollSpyLinks = document.querySelectorAll('.sidebar-nav a');
-    const sections = document.querySelectorAll('section[id], div.hero-section[id]');
-
-    const onScroll = () => {
-        const scrollPosition = window.scrollY + (window.innerHeight / 2);
-
-        let activeSet = false;
-        sections.forEach(section => {
-            if (section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
-                const currentId = section.getAttribute('id');
-                scrollSpyLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
-                });
-                activeSet = true;
+        colorPickerInstance.on('input:end', () => {
+            const currentColor = colorPickerInstance.color;
+            if (validateAndAdjustColor(currentColor)) {
+                colorPickerInstance.color.set(currentColor.hsv);
             }
+            const finalColor = colorPickerInstance.color.hexString;
+            document.documentElement.style.setProperty('--cor-destaque', finalColor);
+            localStorage.setItem('highlightColor', finalColor);
         });
-
-        // Se nenhuma seção estiver ativa (ex: no topo da página), ativa o "Início"
-        if (!activeSet) {
-             scrollSpyLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === '#inicio');
-            });
-        }
     };
 
-    window.addEventListener('scroll', onScroll);
-    
     // =====================================================================
-    // === LÓGICA DE TRANSIÇÃO DE PÁGINA ===
+    //  3. NAVEGAÇÃO E UI (COMPARTILHADO)
     // =====================================================================
-    const mainContainer = document.querySelector('.container.fade-in-on-load');
-    const allLinks = document.querySelectorAll('a');
 
-    allLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Verifica se é um link para outra página .html e não um link interno (#) ou externo
-            if (href && href.endsWith('.html') && !href.startsWith('http') && !href.startsWith('#')) {
-                e.preventDefault(); 
+    const setupMobileMenu = () => {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        if (!hamburgerBtn || !mobileNav || !mobileMenuOverlay) return;
 
-                if (mainContainer) {
-                    mainContainer.classList.add('fade-out-on-exit');
-                }
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 600); // Deve corresponder à duração da animação fadeOutOnExit
-            }
-        });
-    });
-    
-    // =====================================================================
-    // === INICIALIZAÇÃO DA PÁGINA ===
-    // =====================================================================
-    applySavedHighlightColor(); 
-    setRandomHighlightColor(); 
-    const savedLanguage = localStorage.getItem('language') || 'pt';
-    setLanguage(savedLanguage);
-    onScroll();
-
-});
-
-/* =================================================================== */
-/* === LÓGICA DO MENU HAMBÚRGUER (MOBILE) === */
-/* =================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-
-    if (hamburgerBtn && mobileNav && mobileMenuOverlay) {
         const toggleMenu = () => {
-            const isMenuOpen = hamburgerBtn.classList.contains('active');
-
-            hamburgerBtn.classList.toggle('active');
+            const isOpen = hamburgerBtn.classList.toggle('active');
             mobileNav.classList.toggle('open');
             mobileMenuOverlay.classList.toggle('visible');
-            document.body.classList.toggle('modal-open');
-
-            hamburgerBtn.setAttribute('aria-expanded', !isMenuOpen);
+            body.classList.toggle('modal-open');
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
         };
 
         hamburgerBtn.addEventListener('click', toggleMenu);
         mobileMenuOverlay.addEventListener('click', toggleMenu);
-
-        // Adicionado: Fecha o menu ao clicar em um link
-        const navLinks = mobileNav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
+        mobileNav.querySelectorAll('a').forEach(link => {
+            // Evita fechar o menu ao clicar no link de contato que tem o Easter Egg
+            if (link.getAttribute('href') !== '#contato' || !document.getElementById('hand-easter-egg-container')) {
+                 link.addEventListener('click', toggleMenu);
+            }
         });
-    }
+    };
+    
+    const setupTranslations = () => {
+        const langButtons = document.querySelectorAll('.lang-button');
+        const translatableElements = document.querySelectorAll('[data-translate-key]');
+        if (langButtons.length === 0) return;
+        
+        const setLanguage = (lang) => {
+            translatableElements.forEach(el => {
+                const key = el.dataset.translateKey;
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            localStorage.setItem('language', lang);
+        };
+
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => setLanguage(button.dataset.lang));
+        });
+
+        const savedLanguage = localStorage.getItem('language') || 'pt';
+        setLanguage(savedLanguage);
+    };
+
+    // =====================================================================
+    //  4. FUNCIONALIDADES DA PÁGINA PRINCIPAL
+    // =====================================================================
+
+    const setupScrollSpy = () => {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar-nav a, .mobile-nav a');
+        if (sections.length === 0) return;
+
+        const onScroll = () => {
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 100) { // offset aumentado para ativar antes
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') && link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Executa uma vez para definir o estado inicial
+    };
+
+    const setupImageCascade = () => {
+        const cascadeContainer = document.getElementById('cascadeContainer');
+        if (!cascadeContainer) return;
+
+        const image1 = document.getElementById('image1');
+        const image2 = document.getElementById('image2');
+        const textCaricature = document.getElementById('text-caricature');
+        const textProfile = document.getElementById('text-profile');
+        let isAnimating = false;
+
+        // Estado inicial
+        image1.classList.remove('top-image');
+        image1.classList.add('bottom-image');
+        image2.classList.remove('bottom-image');
+        image2.classList.add('top-image');
+        textCaricature.classList.remove('active', 'text-flip-in', 'text-flip-out');
+        textProfile.classList.add('active');
+        textProfile.classList.remove('text-flip-in', 'text-flip-out');
+
+        cascadeContainer.addEventListener('click', (event) => {
+            if (isAnimating || event.target.closest('.sidebar-color-picker')) return;
+            isAnimating = true;
+
+            image1.classList.toggle('top-image');
+            image1.classList.toggle('bottom-image');
+            image2.classList.toggle('top-image');
+            image2.classList.toggle('bottom-image');
+
+            const activeText = document.querySelector('.hero-text-content.active');
+            const inactiveText = activeText.id === 'text-caricature' ? textProfile : textCaricature;
+
+            activeText.classList.add('text-flip-out');
+            activeText.addEventListener('animationend', () => {
+                activeText.classList.remove('active', 'text-flip-out');
+                inactiveText.classList.add('active', 'text-flip-in');
+                inactiveText.addEventListener('animationend', () => {
+                    inactiveText.classList.remove('text-flip-in');
+                    isAnimating = false;
+                }, { once: true });
+            }, { once: true });
+        });
+    };
+
+    const setupPortfolioScroller = () => {
+        const scroller = document.querySelector('.portfolio-scroller');
+        if (!scroller) return;
+
+        const track = scroller.querySelector('.portfolio-track');
+        const items = Array.from(scroller.querySelectorAll('.portfolio-item'));
+        const scrollLeftBtn = document.getElementById('scroll-left-btn');
+        const scrollRightBtn = document.getElementById('scroll-right-btn');
+        if (items.length === 0) return;
+
+        const itemWidth = items[0].offsetWidth + 40; // largura + gap
+        let scrollIndex = 0;
+        let paused = false;
+        let autoScrollInterval;
+
+        const cloneItems = () => {
+            items.forEach(item => {
+                const clone = item.cloneNode(true);
+                clone.classList.add('clone');
+                track.appendChild(clone);
+            });
+        };
+
+        const scrollToIndex = (index, smooth = true) => {
+            track.style.transition = smooth ? 'transform 0.8s ease-in-out' : 'none';
+            track.style.transform = `translateX(-${index * itemWidth}px)`;
+        };
+        
+        const advanceScroll = () => {
+            scrollIndex++;
+            if (scrollIndex >= items.length) {
+                // Quando chega ao fim da lista original, salta para o início sem transição
+                scrollToIndex(items.length, true); // termina a animação para o último clone
+                setTimeout(() => {
+                    scrollIndex = 0;
+                    scrollToIndex(0, false); // salta para o início
+                }, 800);
+            } else {
+                scrollToIndex(scrollIndex);
+            }
+        };
+
+        const startAutoScroll = () => {
+            stopAutoScroll();
+            if (!paused) {
+                autoScrollInterval = setInterval(advanceScroll, 3000);
+            }
+        };
+
+        const stopAutoScroll = () => {
+            clearInterval(autoScrollInterval);
+        };
+        
+        scroller.addEventListener('mouseenter', () => { paused = true; stopAutoScroll(); });
+        scroller.addEventListener('mouseleave', () => { paused = false; startAutoScroll(); });
+        scrollRightBtn.addEventListener('click', () => { advanceScroll(); });
+        scrollLeftBtn.addEventListener('click', () => {
+            scrollIndex--;
+            if (scrollIndex < 0) {
+                scrollIndex = items.length - 1;
+                scrollToIndex(items.length, false); // Salta para o fim
+                 setTimeout(() => scrollToIndex(scrollIndex, true), 10);
+            } else {
+                scrollToIndex(scrollIndex);
+            }
+        });
+
+        cloneItems();
+        startAutoScroll();
+    };
+
+    const setupEasterEgg = () => {
+        const contactNavLinks = document.querySelectorAll('a[href="#contato"]');
+        const handContainer = document.getElementById('hand-easter-egg-container');
+        const contactTitle = document.querySelector('#contato .section-title[data-translate-key="contactTitle"]');
+        if (contactNavLinks.length === 0 || !handContainer || !contactTitle) return;
+
+        contactNavLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const mobileNav = document.getElementById('mobile-nav');
+                if (mobileNav && mobileNav.classList.contains('open')) {
+                    document.getElementById('hamburger-btn').click();
+                }
+                document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+
+                if (!handContainer.classList.contains('animate')) {
+                    handContainer.classList.add('animate');
+                    contactTitle.classList.add('blinking-title');
+                    setTimeout(() => {
+                        handContainer.classList.remove('animate');
+                        contactTitle.classList.remove('blinking-title');
+                    }, 2300);
+                }
+            });
+        });
+    };
+    
+    // Funções de formulário e modal (placeholders)
+    const setupContactForm = () => { /* ... (código do formulário aqui se necessário) ... */ };
+    const setupPortfolioModal = () => { /* ... (código do modal do portfolio aqui se necessário) ... */ };
+
+
+    // =====================================================================
+    //  5. FUNCIONALIDADES DA PÁGINA "SOBRE"
+    // =====================================================================
+
+    const loadInstagramEmbed = () => {
+        const container = document.getElementById('instagram-embed-container');
+        if (!container) return;
+
+        const loader = container.querySelector('.loading-indicator');
+        loader.style.display = 'block';
+
+        const blockquote = document.createElement('blockquote');
+        blockquote.className = 'instagram-media';
+        blockquote.setAttribute('data-instgrm-captioned', '');
+        blockquote.setAttribute('data-instgrm-permalink', 'https://www.instagram.com/reel/DC2hz8jP-Fe/?utm_source=ig_embed&utm_campaign=loading');
+        blockquote.setAttribute('data-instgrm-version', '14');
+        blockquote.style.display = 'none';
+        container.appendChild(blockquote);
+
+        // Carrega o script do Instagram se não estiver presente
+        if (!window.instgrm) {
+            const script = document.createElement('script');
+            script.src = "//www.instagram.com/embed.js";
+            script.async = true;
+            script.onload = () => {
+                window.instgrm.Embeds.process();
+            };
+            document.head.appendChild(script);
+        } else {
+             window.instgrm.Embeds.process();
+        }
+
+        // Observador para esconder o loader quando o post carregar
+        const observer = new MutationObserver(() => {
+            if (container.querySelector('.instagram-media.instagram-media-rendered')) {
+                loader.style.display = 'none';
+                blockquote.style.display = 'block';
+                observer.disconnect();
+            }
+        });
+        observer.observe(container, { childList: true, subtree: true });
+    };
+
+
+    // =====================================================================
+    //  6. FUNCIONALIDADES DA PÁGINA "ARTIGOS"
+    // =====================================================================
+
+    const setupArticleModal = () => {
+        const modalOverlay = document.getElementById('modal-iframe-overlay');
+        if (!modalOverlay) return;
+
+        const modalIframe = document.getElementById('modal-iframe');
+        const modalClose = document.getElementById('modal-iframe-close');
+        const modalLoader = document.querySelector('.modal-iframe-loading');
+        const modalExternalLink = document.getElementById('modal-external-link');
+
+        const closeModal = () => {
+            modalOverlay.style.opacity = '0';
+            modalOverlay.addEventListener('transitionend', () => {
+                modalOverlay.style.display = 'none';
+                modalIframe.src = 'about:blank';
+                body.classList.remove('modal-open');
+                document.documentElement.style.setProperty('--modal-bg-image', 'none');
+            }, { once: true });
+        };
+
+        document.querySelectorAll('.post-card-v2 a.card-link-wrapper').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+                const card = this.closest('.post-card-v2');
+                const imageUrl = card.querySelector('.card-image-container img')?.src;
+                
+                document.documentElement.style.setProperty('--modal-bg-image', imageUrl ? `url('${imageUrl}')` : 'none');
+                modalExternalLink.href = url;
+                modalIframe.style.opacity = '0';
+                modalLoader.style.display = 'flex';
+                modalOverlay.style.display = 'flex';
+                setTimeout(() => modalOverlay.style.opacity = '1', 10);
+                
+                body.classList.add('modal-open');
+                modalIframe.src = url;
+            });
+        });
+
+        modalIframe.addEventListener('load', () => {
+            modalLoader.style.display = 'none';
+            modalIframe.style.opacity = '1';
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => e.target === modalOverlay && closeModal());
+    };
+
+    const setupFiltering = () => {
+        const mosaicGridElem = document.querySelector('.mosaic-grid');
+        if (!mosaicGridElem) return;
+
+        const searchInputElem = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const yearFilterElem = document.getElementById('yearFilter');
+        const sortSelectElem = document.getElementById('sortSelect');
+        const cardsArr = Array.from(mosaicGridElem.querySelectorAll('.post-card-v2'));
+
+        // Preenche o select de anos
+        if (yearFilterElem) {
+            const years = [...new Set(cardsArr.map(card => card.querySelector('.card-date')?.textContent.trim().split('/')[2]).filter(Boolean))];
+            years.sort((a, b) => b.localeCompare(a)).forEach(year => {
+                yearFilterElem.add(new Option(year, year));
+            });
+        }
+
+        const parseCardDate = (card) => {
+            const dateStr = card.querySelector('.card-date')?.textContent.trim();
+            if (!dateStr) return new Date(0);
+            const [d, m, y] = dateStr.split('/');
+            return new Date(`${y}-${m}-${d}`);
+        };
+
+        const filterSortDisplay = () => {
+            const searchTerm = searchInputElem.value.toLowerCase().trim();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const selectedYear = yearFilterElem.value;
+            const sortOrder = sortSelectElem.value;
+
+            let visibleCards = cardsArr.filter(card => {
+                const category = card.dataset.category || '';
+                const isFavorito = card.dataset.favorito === 'true';
+                const textContent = card.textContent.toLowerCase();
+                const cardYear = card.querySelector('.card-date')?.textContent.trim().split('/')[2] || '';
+
+                const matchesSearch = textContent.includes(searchTerm);
+                const matchesYear = selectedYear === 'all' || cardYear === selectedYear;
+                let matchesMainFilter = false;
+                if (activeFilter === 'all') {
+                    matchesMainFilter = true;
+                } else if (activeFilter === 'favoritos') {
+                    matchesMainFilter = isFavorito;
+                } else if (activeFilter === 'cabine') {
+                    // Verifica se o card tem a tag CABINE
+                    const tags = Array.from(card.querySelectorAll('.card-tag'));
+                    matchesMainFilter = tags.some(tag => tag.textContent.trim().toLowerCase() === 'cabine');
+                } else {
+                    matchesMainFilter = category === activeFilter;
+                }
+                return matchesMainFilter && matchesSearch && matchesYear;
+            });
+
+            if (sortOrder === 'latest') visibleCards.sort((a, b) => parseCardDate(b) - parseCardDate(a));
+            else if (sortOrder === 'oldest') visibleCards.sort((a, b) => parseCardDate(a) - parseCardDate(b));
+            else visibleCards.sort((a, b) => cardsArr.indexOf(a) - cardsArr.indexOf(b));
+
+            // Move listas de melhores para o final
+            const isBestList = card => {
+                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                return (
+                    title.includes('melhores séries') ||
+                    title.includes('melhores filmes') ||
+                    title.includes('melhores discos')
+                );
+            };
+            const bestLists = visibleCards.filter(isBestList);
+            const notBestLists = visibleCards.filter(card => !isBestList(card));
+            const finalOrder = [...notBestLists, ...bestLists];
+
+            cardsArr.forEach(card => card.style.display = 'none');
+            finalOrder.forEach(card => {
+                mosaicGridElem.appendChild(card);
+                card.style.display = 'block';
+            });
+        };
+
+        filterBtns.forEach(btn => btn.addEventListener('click', () => {
+            document.querySelector('.filter-btn.active')?.classList.remove('active');
+            btn.classList.add('active');
+            filterSortDisplay();
+        }));
+
+        [searchInputElem, yearFilterElem, sortSelectElem].forEach(el => {
+            el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', filterSortDisplay);
+        });
+
+        if (sortSelectElem) sortSelectElem.value = 'latest';
+        filterSortDisplay();
+    };
+
+
+    // =====================================================================
+    //  7. INICIALIZAÇÃO GERAL
+    // =====================================================================
+    const init = () => {
+        // Funções globais que rodam em todas as páginas
+        applySavedHighlightColor();
+        setRandomHighlightColor();
+        const savedTheme = localStorage.getItem('theme') || 'day';
+        applyTheme(savedTheme);
+
+        document.querySelectorAll('.theme-toggle-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+                if (colorPickerInstance) {
+                    validateAndAdjustColor(colorPickerInstance.color);
+                }
+            });
+        });
+        
+        setupMobileMenu();
+        setupTranslations();
+
+        // Funções específicas de cada página (com verificação interna)
+        initializeColorPicker('#colorPickerSidebar'); // Para a página principal
+        initializeColorPicker('#colorPickerAbout');   // Para a página "Sobre"
+        
+        setupScrollSpy();
+        setupImageCascade();
+        setupPortfolioScroller();
+        setupContactForm();
+        setupPortfolioModal();
+        setupEasterEgg();
+        
+        loadInstagramEmbed();
+        
+        setupArticleModal();
+        setupFiltering();
+    };
+
+    init();
+});

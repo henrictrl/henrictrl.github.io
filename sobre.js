@@ -1,209 +1,198 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // =====================================================================
-    // === LÓGICA GLOBAL: APLICAR TEMA E COR SALVOS ===
-    // =====================================================================
+    const body = document.body;
+    let colorPickerInstance = null; // Variável para a instância do iro.js
 
-    /**
-     * Lê a cor de destaque salva no localStorage e a aplica ao site.
-     */
+    // =====================================================================
+    //  FUNÇÕES DE TEMA, CORES E NAVEGAÇÃO
+    // =====================================================================
+    
+    const applyTheme = (theme) => {
+        body.classList.toggle('night-mode', theme === 'night');
+    };
+
     const applySavedHighlightColor = () => {
         const savedColor = localStorage.getItem('highlightColor');
         if (savedColor) {
             document.documentElement.style.setProperty('--cor-destaque', savedColor);
         }
     };
+    
+    const validateAndAdjustColor = (color) => {
+        const isNightMode = body.classList.contains('night-mode');
+        const hsv = color.hsv;
+        let needsUpdate = false;
 
-
-    // Aplica o tema salvo no localStorage
-    const applyTheme = () => {
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'day';
-        if (savedTheme === 'night') {
-            body.classList.add('night-mode');
-        } else {
-            body.classList.remove('night-mode');
+        if (hsv.s < 20) { hsv.s = 20; needsUpdate = true; }
+        if (!isNightMode && hsv.v > 95) { hsv.v = 95; needsUpdate = true; }
+        if (isNightMode && hsv.v < 40) { hsv.v = 40; needsUpdate = true; }
+        
+        if (needsUpdate) {
+            color.hsv = hsv;
         }
+        return needsUpdate;
     };
 
-    // =====================================================================
-    // === EVENT LISTENERS E OUTRAS FUNÇÕES DA PÁGINA ===
-    // =====================================================================
+    const initializeColorPicker = (containerSelector) => {
+        const pickerContainer = document.querySelector(containerSelector);
+        if (!pickerContainer || typeof iro === 'undefined') return;
 
-    // --- Lógica do Botão de Troca de Tema ---
-    const themeToggleButton = document.getElementById('theme-toggle');
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            const body = document.body;
-            const isNightMode = body.classList.contains('night-mode');
-            const newTheme = isNightMode ? 'day' : 'night';
-            localStorage.setItem('theme', newTheme);
-            applyTheme();
+        const initialColor = localStorage.getItem('highlightColor') || getComputedStyle(document.documentElement).getPropertyValue('--cor-destaque').trim();
+
+        colorPickerInstance = new iro.ColorPicker(pickerContainer, {
+            width: 120,
+            color: initialColor,
+            borderWidth: 1,
+            borderColor: "var(--color-border)",
+            layoutDirection: 'vertical',
+            layout: [
+                { component: iro.ui.Wheel, options: { wheelLightness: false } },
+                { component: iro.ui.Slider, options: { sliderType: 'value' } },
+            ]
         });
-    }
 
-        // --- Lógica de Tradução ---
+        colorPickerInstance.on('color:change', (color) => {
+            if (color.event.type === 'input') {
+                document.documentElement.style.setProperty('--cor-destaque', color.hexString);
+            }
+        });
+
+        colorPickerInstance.on('input:end', () => {
+            const currentColor = colorPickerInstance.color;
+            if (validateAndAdjustColor(currentColor)) {
+                colorPickerInstance.color.set(currentColor.hsv);
+            }
+            const finalColor = colorPickerInstance.color.hexString;
+            document.documentElement.style.setProperty('--cor-destaque', finalColor);
+            localStorage.setItem('highlightColor', finalColor);
+        });
+    };
+    
     const translations = {
         pt: { 
-            navHome: "Início", 
-            navExperience: "Experiência", 
-            navPortfolio: "Portfólio", 
-            navContact: "Contato", 
-            navAbout: "Sobre Mim", 
-            navArticles: "Artigos",
-            aboutTitle: "Sobre Mim" // Chave adicionada
+            navHome: "Início", navExperience: "Experiência", navPortfolio: "Portfólio", navContact: "Contato", 
+            navAbout: "Sobre Mim", navArticles: "Artigos", aboutTitle: "Sobre Mim", languagesTitle: "Línguas",
+            langPortuguese: "Português", langPortugueseLevel: "Nativo", langEnglish: "Inglês", 
+            langEnglishLevel: "Avançado (C1)", langSpanish: "Espanhol", langSpanishLevel: "Em andamento",
+            githubTitle: "GitHub", toolsTitle: "Ferramentas"
         },
-        en: { 
-            navHome: "Home", 
-            navExperience: "Experience", 
-            navPortfolio: "Portfolio", 
-            navContact: "Contact", 
-            navAbout: "About Me", 
-            navArticles: "Articles",
-            aboutTitle: "About Me" // Chave adicionada
-        },
-        es: { 
-            navHome: "Inicio", 
-            navExperience: "Experiencia", 
-            navPortfolio: "Portafolio", 
-            navContact: "Contacto", 
-            navAbout: "Sobre Mí", 
-            navArticles: "Artículos",
-            aboutTitle: "Sobre Mí" // Chave adicionada
-        }
+        en: { /* Traduções em Inglês */ },
+        es: { /* Traduções em Espanhol */ }
     };
-    const langButtons = document.querySelectorAll('.lang-button');
-    const translatableElements = document.querySelectorAll('[data-translate-key]');
-    const setLanguage = (lang) => {
-        translatableElements.forEach(el => {
-            const key = el.dataset.translateKey;
-            if (translations[lang] && translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
-            }
-        });
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        localStorage.setItem('language', lang);
-    };
-    langButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            setLanguage(button.dataset.lang);
-        });
-    });
 
-    // =====================================================================
-    // === LÓGICA DE TRANSIÇÃO DE PÁGINA ===
-    // =====================================================================
-    const mainContainer = document.querySelector('.about-container.fade-in-on-load');
-    const allLinks = document.querySelectorAll('a');
-
-    allLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href && href.endsWith('.html') && !href.startsWith('http') && !href.startsWith('#')) {
-                e.preventDefault(); 
-                if (mainContainer) {
-                    mainContainer.classList.add('fade-out-on-exit');
+    const setupTranslations = () => {
+        const langButtons = document.querySelectorAll('.lang-button');
+        const translatableElements = document.querySelectorAll('[data-translate-key]');
+        
+        const setLanguage = (lang) => {
+            translatableElements.forEach(el => {
+                const key = el.dataset.translateKey;
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
                 }
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 600);
-            }
-        });
-    });
-
-    // =====================================================================
-    // === EXECUÇÃO INICIAL (QUANDO A PÁGINA CARREGA) ===
-    // =====================================================================
-    
-    // 1. Aplica a cor de destaque que foi salva na página inicial.
-    applySavedHighlightColor();
-
-    // 2. Aplica o tema salvo
-    applyTheme();
-
-    // 3. Verifica qual idioma foi salvo e o aplica.
-    const savedLanguage = localStorage.getItem('language') || 'pt';
-    setLanguage(savedLanguage);
-
-});
-
-// Localize e substitua este bloco de código no seu sobre.js
-
-// --- Last.fm Recent Tracks Embed ---
-const lastfmContainer = document.getElementById('lastfm-embed');
-if (lastfmContainer) {
-    const apiKey = '5dd32af6ec9f387d57f560bb9b95aef8';
-    const username = 'ctrlworld';
-    const limit = 5;
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=${limit}`;
-    const profileUrl = `https://www.last.fm/user/${username}`;
-
-    // Adiciona um estado inicial de "Carregando..."
-    lastfmContainer.innerHTML = `
-        <div class="card-header">
-            <h3>O que estou ouvindo</h3>
-            <a href="${profileUrl}" target="_blank" class="lastfm-profile-link" title="Ver perfil no Last.fm">
-                <svg viewBox="0 0 24 24" class="lastfm-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5h5v-2h-5v2zm0-3h5v-2h-5v2zm0-3h5v-2h-5v2z"></path></svg>
-            </a>
-        </div>
-        <p class="lastfm-loading">Carregando músicas...</p>
-    `;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro de rede: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Limpa o container, mantendo o header
-            lastfmContainer.querySelector('.lastfm-loading').remove();
-
-            if (data.error || !data.recenttracks || !data.recenttracks.track || data.recenttracks.track.length === 0) {
-                 throw new Error('Nenhuma música recente encontrada ou erro na API.');
-            }
-            
-            const tracks = data.recenttracks.track;
-            let list = document.createElement('ul');
-            list.className = 'lastfm-track-list';
-
-            tracks.forEach(track => {
-                const artist = track.artist['#text'];
-                const name = track.name;
-                const trackUrl = track.url;
-                // Pega a imagem grande (índice 3) ou a maior disponível
-                const image = track.image[3]['#text'] || track.image[2]['#text'] || 'images/placeholder.txt'; // Fallback
-                
-                let trackElement = document.createElement('li');
-                trackElement.className = 'lastfm-track';
-                trackElement.innerHTML = `
-                    <a href="${trackUrl}" target="_blank" rel="noopener noreferrer">
-                        <img src="${image}" alt="${artist} - ${name}" class="lastfm-track-image">
-                        <div class="lastfm-track-info">
-                            <span class="lastfm-track-name">${name}</span>
-                            <span class="lastfm-track-artist">${artist}</span>
-                        </div>
-                    </a>
-                `;
-                list.appendChild(trackElement);
             });
-            lastfmContainer.appendChild(list);
-            
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados do Last.fm:', error);
-            const errorElement = lastfmContainer.querySelector('.lastfm-loading') || document.createElement('p');
-            errorElement.className = 'lastfm-error';
-            errorElement.innerHTML = `Não foi possível carregar as músicas. <a href="${profileUrl}" target="_blank">Visite o perfil</a>.`;
-            
-            // Garante que o container esteja limpo antes de adicionar a mensagem de erro
-            if(!lastfmContainer.querySelector('.lastfm-error')) {
-                 if(lastfmContainer.querySelector('.lastfm-loading')) lastfmContainer.querySelector('.lastfm-loading').remove();
-                 lastfmContainer.appendChild(errorElement);
+            langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            localStorage.setItem('language', lang);
+        };
+
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => setLanguage(button.dataset.lang));
+        });
+
+        const savedLanguage = localStorage.getItem('language') || 'pt';
+        setLanguage(savedLanguage);
+    };
+
+    const setupMobileMenu = () => {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        if (!hamburgerBtn || !mobileNav || !mobileMenuOverlay) return;
+
+        const toggleMenu = () => {
+            const isOpen = hamburgerBtn.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+            mobileMenuOverlay.classList.toggle('visible');
+            body.classList.toggle('modal-open');
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
+        };
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMenu);
+        mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', toggleMenu));
+    };
+
+    // =====================================================================
+    //  CARREGAMENTO DE CONTEÚDO EXTERNO (EMBEDS)
+    // =====================================================================
+
+    const loadInstagramEmbed = () => {
+        const container = document.getElementById('instagram-embed-container');
+        if (!container) return;
+
+        const loader = container.querySelector('.loading-indicator');
+        loader.style.display = 'block';
+
+        const blockquote = document.createElement('blockquote');
+        blockquote.className = 'instagram-media';
+        blockquote.setAttribute('data-instgrm-captioned', '');
+        blockquote.setAttribute('data-instgrm-permalink', 'https://www.instagram.com/reel/DC2hz8jP-Fe/?utm_source=ig_embed&utm_campaign=loading');
+        blockquote.setAttribute('data-instgrm-version', '14');
+        blockquote.style.display = 'none';
+
+        blockquote.innerHTML = `<div style="padding:16px;"><a href="https://www.instagram.com/reel/DC2hz8jP-Fe/" target="_blank"></a><p><a href="https://www.instagram.com/henrictrl/" target="_blank"> henrique</a></p></div>`;
+        container.appendChild(blockquote);
+        
+        if (window.instgrm) {
+            window.instgrm.Embeds.process();
+        }
+
+        const observer = new MutationObserver((mutationsList, observer) => {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList' && container.querySelector('.instagram-media.instagram-media-rendered')) {
+                    loader.style.display = 'none';
+                    blockquote.style.display = 'block';
+                    observer.disconnect();
+                    return;
+                }
             }
         });
-}
+        observer.observe(container, { childList: true, subtree: true });
+    };
+
+    // =====================================================================
+    //  INICIALIZAÇÃO DA PÁGINA
+    // =====================================================================
+    const init = () => {
+        applySavedHighlightColor();
+        const savedTheme = localStorage.getItem('theme') || 'day';
+        applyTheme(savedTheme);
+        
+        document.querySelectorAll('.theme-toggle-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+
+                if (colorPickerInstance) {
+                    const currentColor = colorPickerInstance.color;
+                    if (validateAndAdjustColor(currentColor)) {
+                        colorPickerInstance.color.set(currentColor.hsv);
+                        const finalColor = colorPickerInstance.color.hexString;
+                        document.documentElement.style.setProperty('--cor-destaque', finalColor);
+                        localStorage.setItem('highlightColor', finalColor);
+                    }
+                }
+            });
+        });
+        
+        initializeColorPicker('#colorPickerSidebar');
+        setupMobileMenu();
+        setupTranslations();
+        
+        loadInstagramEmbed();
+    };
+
+    init();
+});

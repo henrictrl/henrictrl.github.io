@@ -1,17 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
     const body = document.body;
-
-    // ================== TROCA DE TEMA (NIGHT/DAY) ===================
-    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
-    themeToggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
-        });
-    });
 
     /**
      * Aplica o tema (claro/escuro) ao corpo do documento.
@@ -31,85 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
-
-    /**
-     * Procura por artigos com uma cor de destaque definida e pinta a sua tag.
-     */
-     const applyHighlightColorToCards = () => {
-        const articlesWithColor = document.querySelectorAll('.post-card-v2[data-highlight-color]');
-        articlesWithColor.forEach(article => {
-            const color = article.dataset.highlightColor;
-            if (color) {
-                // Define a cor de destaque em uma variável CSS local para o card
-                article.style.setProperty('--highlight-color', color);
-
-                // Muda a cor da tag para a cor de destaque para manter a consistência
-                const tag = article.querySelector('.card-tag');
-                if(tag) {
-                    tag.style.backgroundColor = color;
-                    // Você pode adicionar uma lógica para decidir a cor do texto da tag
-                    // com base no brilho da cor de destaque para melhor legibilidade.
-                    // Por agora, manterá a cor padrão.
-                }
-            }
-        });
-    };
-
-    /**
-     * [NOVO] Ordena os cards no grid pela data, do mais recente para o mais antigo.
-     */
-    const sortArticlesByDate = () => {
-        const grid = document.querySelector('.mosaic-grid');
-        if (!grid) return;
-
-        // Converte os cards (NodeList) para um Array para poder usar o sort()
-        const articles = Array.from(grid.children);
-
-        articles.sort((a, b) => {
-            // Pega as datas do atributo data-date
-            const dateA = new Date(a.dataset.date);
-            const dateB = new Date(b.dataset.date);
-            
-            // Ordena em ordem decrescente (mais recente primeiro)
-            return dateB - dateA;
-        });
-
-        // Limpa o grid e adiciona os artigos na nova ordem
-        articles.forEach(article => grid.appendChild(article));
-    };
     
     // =====================================================================
-    // === LÓGICA DE FILTROS, BUSCA E MENUS (EXISTENTE) ===
+    // === LÓGICA DE MENUS E TEMA ===
     // =====================================================================
 
-    const searchInput = document.getElementById('searchInput');
-    const filterContainer = document.querySelector('.filter-pills');
-    const postCards = document.querySelectorAll('.post-card-v2');
-
-    const updateGrid = () => {
-        if (!searchInput || !filterContainer) return;
-        const searchTerm = searchInput.value.toLowerCase();
-        const activeFilter = filterContainer.querySelector('.filter-btn.active').dataset.filter;
-
-        postCards.forEach(card => {
-            const cardCategory = card.dataset.category;
-            const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
-            const matchesFilter = (activeFilter === 'all') || (cardCategory === activeFilter);
-            const matchesSearch = cardTitle.includes(searchTerm);
-            card.style.display = (matchesFilter && matchesSearch) ? 'flex' : 'none';
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle-button');
+    themeToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const newTheme = body.classList.contains('night-mode') ? 'day' : 'night';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
         });
-    };
-
-    if (searchInput) searchInput.addEventListener('input', updateGrid);
-    if (filterContainer) filterContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('filter-btn')) {
-            filterContainer.querySelector('.filter-btn.active').classList.remove('active');
-            e.target.classList.add('active');
-            updateGrid();
-        }
     });
-
-
 
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');
@@ -131,41 +54,172 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'day';
     applyTheme(savedTheme);
     applySavedHighlightColor();
-    applyHighlightColorToCards();
-    sortArticlesByDate(); // Chama a nova função para ordenar os artigos
 
-    // ================= CHROMA CARD EFFECT =====================
-    // Aplica efeito de spotlight nos cards de artigo no desktop
-    function setupChromaCardEffect() {
-        const cards = document.querySelectorAll('.post-card-v2');
-        cards.forEach(card => {
-            card.classList.add('chroma-card');
-            // Remove overlays antigos para evitar duplicatas
-            card.querySelectorAll('.chroma-overlay, .chroma-fade').forEach(el => el.remove());
-            // Cria overlay para efeito de luz
-            const overlay = document.createElement('div');
-            overlay.className = 'chroma-overlay';
-            card.appendChild(overlay);
-            // Cria fade para efeito de saída
-            const fade = document.createElement('div');
-            fade.className = 'chroma-fade';
-            card.appendChild(fade);
-            // Eventos de mouse
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-                overlay.style.opacity = 1;
-                fade.style.opacity = 0;
+    // =====================================================================
+    // === MODAL COM IFRAME PARA ARTIGOS (LÓGICA CORRIGIDA) ===
+    // =====================================================================
+    const modalOverlay = document.getElementById('modal-iframe-overlay');
+    const modalIframe = document.getElementById('modal-iframe');
+    const modalClose = document.getElementById('modal-iframe-close');
+    const modalLoader = document.querySelector('.modal-iframe-loading');
+    const modalExternalLink = document.getElementById('modal-external-link');
+
+    // Função para fechar o modal
+    const closeModal = () => {
+        modalOverlay.style.opacity = '0';
+        
+        modalOverlay.addEventListener('transitionend', () => {
+            modalOverlay.style.display = 'none';
+            modalIframe.src = ''; // Limpa o iframe para parar a execução
+            document.body.classList.remove('modal-open');
+            // Reseta a variável da imagem de fundo
+            document.documentElement.style.setProperty('--modal-bg-image', 'none');
+        }, { once: true });
+    };
+
+    // Adiciona evento de clique nos cards para abrir o modal
+    document.querySelectorAll('.post-card-v2 a.card-link-wrapper').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const url = this.getAttribute('href');
+            const card = this.closest('.post-card-v2');
+            
+            // Pega a URL da imagem do card para o fundo
+            const imageUrl = card.querySelector('.card-image-container img')?.getAttribute('src');
+            if (imageUrl) {
+                // Define a variável CSS com a URL da imagem
+                document.documentElement.style.setProperty('--modal-bg-image', `url('${imageUrl}')`);
+            } else {
+                document.documentElement.style.setProperty('--modal-bg-image', 'none');
+            }
+            
+            modalExternalLink.href = url;
+            
+            modalIframe.style.opacity = '0'; // Esconde o iframe
+            modalLoader.style.display = 'flex'; // Mostra o loader
+            
+            modalOverlay.style.display = 'flex';
+            setTimeout(() => modalOverlay.style.opacity = '1', 10); // Força a transição de fade-in
+            
+            document.body.classList.add('modal-open');
+            modalIframe.src = url; // Carrega o iframe após tudo estar visível
+        });
+    });
+
+    // Evento para quando o iframe terminar de carregar
+    modalIframe.addEventListener('load', () => {
+        modalLoader.style.display = 'none'; // Esconde o loader
+        modalIframe.style.opacity = '1'; // Mostra o conteúdo do iframe
+    });
+
+    // Eventos de clique para fechar o modal
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    // =====================================================================
+    // === LÓGICA DE FILTRO, BUSCA, ANO E ORDENAÇÃO ===
+    // =====================================================================
+    (function setupFiltering() {
+        const searchInputElem = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const yearFilterElem = document.getElementById('yearFilter');
+        const sortSelectElem = document.getElementById('sortSelect');
+        const mosaicGridElem = document.querySelector('.mosaic-grid');
+        if (!mosaicGridElem) return;
+
+        const cardsArr = Array.from(mosaicGridElem.querySelectorAll('.post-card-v2'));
+
+        // Preenche dinamicamente o select de anos
+        if (yearFilterElem) {
+            const years = new Set();
+            cardsArr.forEach(card => {
+                const dateEl = card.querySelector('.card-date');
+                if (dateEl) {
+                    const year = dateEl.textContent.trim().split('/')[2];
+                    if (year) years.add(year);
+                }
             });
-            card.addEventListener('mouseleave', () => {
-                overlay.style.opacity = 0;
-                fade.style.opacity = 1;
+            Array.from(years).sort((a, b) => b.localeCompare(a)).forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearFilterElem.appendChild(option);
+            });
+        }
+
+        function parseCardDate(card) {
+            const dateEl = card.querySelector('.card-date');
+            if (!dateEl) return new Date(0);
+            const [d, m, y] = dateEl.textContent.trim().split('/');
+            return new Date(`${y}-${m}-${d}`);
+        }
+
+        function filterSortDisplay() {
+            const searchTerm = searchInputElem ? searchInputElem.value.toLowerCase().trim() : '';
+            const activeBtn = document.querySelector('.filter-btn.active');
+            const activeFilter = activeBtn ? activeBtn.dataset.filter : 'all';
+            const selectedYear = yearFilterElem ? yearFilterElem.value : 'all';
+            const sortOrder = sortSelectElem ? sortSelectElem.value : 'relevance';
+
+            let visibleCards = cardsArr.filter(card => {
+                const category = card.dataset.category || '';
+                const isFavorito = card.dataset.favorito === 'true';
+                const textContent = card.textContent.toLowerCase();
+                const cardYear = (card.querySelector('.card-date')?.textContent.trim().split('/')[2]) || '';
+                
+                const matchesSearch = textContent.includes(searchTerm);
+                const matchesYear = selectedYear === 'all' || cardYear === selectedYear;
+
+                let matchesMainFilter;
+                if (activeFilter === 'all') {
+                    matchesMainFilter = true;
+                } else if (activeFilter === 'favoritos') {
+                    matchesMainFilter = isFavorito;
+                } else {
+                    matchesMainFilter = category === activeFilter;
+                }
+
+                return matchesMainFilter && matchesSearch && matchesYear;
+            });
+
+            if (sortOrder === 'latest') {
+                visibleCards.sort((a, b) => parseCardDate(b) - parseCardDate(a));
+            } else if (sortOrder === 'oldest') {
+                visibleCards.sort((a, b) => parseCardDate(a) - parseCardDate(b));
+            } else { // 'relevance' - mantém a ordem original do HTML
+                visibleCards.sort((a, b) => cardsArr.indexOf(a) - cardsArr.indexOf(b));
+            }
+
+            // Esconde todos os cards primeiro
+            cardsArr.forEach(card => card.style.display = 'none');
+            
+            // Reanexa os cards filtrados e ordenados ao grid e os torna visíveis
+            visibleCards.forEach(card => {
+                mosaicGridElem.appendChild(card);
+                card.style.display = 'block';
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active')?.classList.remove('active');
+                btn.classList.add('active');
+                filterSortDisplay();
             });
         });
-    }
-    setupChromaCardEffect();
-    window.addEventListener('resize', setupChromaCardEffect);
+
+        if (searchInputElem) searchInputElem.addEventListener('input', filterSortDisplay);
+        if (yearFilterElem) yearFilterElem.addEventListener('change', filterSortDisplay);
+        if (sortSelectElem) sortSelectElem.addEventListener('change', filterSortDisplay);
+        
+        // Define a ordenação padrão como "Mais recentes"
+        if (sortSelectElem) sortSelectElem.value = 'latest';
+
+        // Exibição inicial
+        filterSortDisplay();
+    })();
 });
