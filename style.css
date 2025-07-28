@@ -1,6 +1,6 @@
-/* Gradiente preto para títulos dos cards customizados e Notion */
+/* Gradiente preto suave para títulos dos cards customizados e Notion */
 .card-gradient-title {
-  background: linear-gradient(0deg, rgba(0,0,0,0.92) 60%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0.0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
 }
 /* ====== Hover: colorir @ e nome do lugar (e toggle Unesp) com cor de destaque, cargos sempre brancos ====== */
 /* ====== Experiência: hover colorido @ e nome, cargos sempre brancos ====== */
