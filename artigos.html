@@ -56,17 +56,22 @@
         </header>
 
         <div class="toolbar-v2">
-            <div class="filter-pills">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="favoritos" title="Favoritos">
-                    <span class="material-symbols-outlined">star</span>
-                </button>
-                <button class="filter-btn" data-filter="artigos">Artigos</button>
-                <button class="filter-btn" data-filter="cinema">Cinema</button>
-                <button class="filter-btn" data-filter="literatura">Literatura</button>
-                <button class="filter-btn" data-filter="musica">Música</button>
-                <button class="filter-btn" data-filter="cabine">Cabine</button>
-            </div>
+<div class="filter-pills">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="favoritos" title="Favoritos">
+        <span class="material-symbols-outlined">star</span>
+    </button>
+    <div class="custom-select-wrapper">
+        <select id="categoryFilter" class="filter-select">
+            <option value="all">Categorias</option>
+            <option value="artigos">Artigos</option>
+            <option value="cinema">Cinema</option>
+            <option value="literatura">Literatura</option>
+            <option value="musica">Música</option>
+            <option value="cabine">Cabine</option>
+        </select>
+    </div>
+</div>
 
             <div class="controls-wrapper">
                 <div class="search-wrapper">

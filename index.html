@@ -1,111 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Henrique Marinhos</title>
-    
-    <meta name="description" content="Comunicólogo e profissional de Relações Públicas apaixonado por criar conexões autênticas. Explore meu portfólio e artigos sobre tecnologia, cultura e design.">
+
+    <meta name="description"
+        content="Comunicólogo e profissional de Relações Públicas apaixonado por criar conexões autênticas. Explore meu portfólio e artigos sobre tecnologia, cultura e design.">
     <meta property="og:title" content="Henrique Marinhos">
-    <meta property="og:description" content="Comunicólogo e profissional de Relações Públicas apaixonado por criar conexões autênticas.">
+    <meta property="og:description"
+        content="Comunicólogo e profissional de Relações Públicas apaixonado por criar conexões autênticas.">
     <meta property="og:image" content="images/profile2.png">
     <meta property="og:url" content="https://henrictrl.github.io">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="icon" href="images/profile.ico" type="image/x-icon">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
-    <style>
-        /* ----- Styles for Experience Section Enhancement ----- */
-    
-        .experience-item .company-name {
-            text-decoration: none;
-            color: inherit;
-        }
-    
-        .experience-item:hover .company-name {
-            text-decoration: underline;
-        }
-        
-        .experience-item.unesp-toggle summary {
-            cursor: pointer;
-            list-style: none; /* Removes the default triangle marker */
-        }
-    
-        .experience-item.unesp-toggle summary::-webkit-details-marker {
-            display: none; /* Removes the marker for Chrome/Safari */
-        }
-    
-        .unesp-sub-list {
-            margin-top: 1rem;
-            padding-left: 1rem;
-            list-style: none;
-        }
-    
-        .unesp-sub-list li {
-            margin-bottom: 0.5rem;
-        }
-    
-        .unesp-sub-list a {
-            text-decoration: none;
-            color: inherit;
-        }
-    
-        /* Hover effect for the items within the Unesp toggle */
-        .unesp-sub-list li:hover a {
-            text-decoration: underline;
-        }
-    </style>
 </head>
-<body>
-<nav class="sidebar-nav">
-    <button class="theme-toggle-button" title="Alternar tema">
-        <div class="slider-bg"></div>
-        <span class="material-symbols-outlined icon-sun">light_mode</span>
-        <span class="material-symbols-outlined icon-moon">dark_mode</span>
-    </button>
-    <div class="sidebar-color-picker">
-        <div id="colorPickerSidebar"></div>
-    </div>
-    <ul>
-        <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
-        <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
-        <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-        <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
-        <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-        <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-    </ul>
-</nav>
 
-<button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-</button>
-<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-<nav id="mobile-nav" class="mobile-nav">
-    <ul>
-        <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
-        <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
-        <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-        <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
-        <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-        <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-    </ul>
-    <div class="mobile-nav-bottom">
+<body>
+    <nav class="sidebar-nav">
         <button class="theme-toggle-button" title="Alternar tema">
             <div class="slider-bg"></div>
             <span class="material-symbols-outlined icon-sun">light_mode</span>
             <span class="material-symbols-outlined icon-moon">dark_mode</span>
         </button>
-    </div>
-</nav>
+        <div class="sidebar-color-picker">
+            <div id="colorPickerSidebar"></div>
+        </div>
+        <ul>
+            <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
+            <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
+            <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+            <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
+            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+        </ul>
+    </nav>
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <nav id="mobile-nav" class="mobile-nav">
+        <ul>
+            <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
+            <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
+            <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+            <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
+            <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
+            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+        </ul>
+        <div class="mobile-nav-bottom">
+            <div id="colorPickerMobile" class="sidebar-color-picker"></div>
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div>
+                <span class="material-symbols-outlined icon-sun">light_mode</span>
+                <span class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+        </div>
+    </nav>
 
     <div class="container fade-in-on-load">
         <header class="main-header">
@@ -121,15 +88,23 @@
             <section class="hero-section" id="inicio">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <div id="text-caricature" class="hero-text-content active">
+                        <div id="text-caricature" class="hero-text-content">
                             <p class="quote">
-                                “Há mais bem em você do que sabe, filho do gentil Oeste. Alguma coragem e alguma sabedoria, mescladas em boa medida. Se mais de nós dessem valor à comida, à alegria e às canções acima do ouro entesourado, este mundo seria um mundo mais feliz.”
+                                “Há mais bem em você do que sabe, filho do gentil Oeste. Alguma coragem e alguma
+                                sabedoria, mescladas em boa medida. Se mais de nós dessem valor à comida, à alegria e às
+                                canções acima do ouro entesourado, este mundo seria um mundo mais feliz.”
                             </p>
                             <p class="author">- J.R.R. Tolkien (O Hobbit, 1937, p. 308)</p>
                         </div>
-                        <div id="text-profile" class="hero-text-content">
+                        <div id="text-profile" class="hero-text-content active">
                             <p>
-                                De formação, <span class="highlight-tooltip">relações-públicas<span class="tooltip-text">Bacharel pela Unesp</span></span>. De coração, <span class="highlight-tooltip">comunicólogo<span class="tooltip-text">“Os limites da minha linguagem são os limites do meu mundo.” – Ludwig Wittgenstein</span></span>, muito tocado pela cultura, construí minha trajetória acadêmica e profissional em organizações e projetos desse setor, consequentemente, trabalhando em suas marcas e reputações.
+                                De formação, <span class="highlight-tooltip">relações-públicas<span
+                                        class="tooltip-text">Bacharel pela Unesp</span></span>. De coração, <span
+                                    class="highlight-tooltip">comunicólogo<span class="tooltip-text">“Os limites da
+                                        minha linguagem são os limites do meu mundo.” – Ludwig
+                                        Wittgenstein</span></span>, muito tocado pela cultura, construí minha trajetória
+                                acadêmica e profissional em organizações e projetos desse setor, consequentemente,
+                                trabalhando em suas marcas e reputações.
                             </p>
                             <div class="profile-tags">
                                 <span class="profile-tag">Relações Públicas</span>
@@ -141,7 +116,8 @@
                     </div>
                     <div class="hero-image" id="cascadeContainer">
                         <div class="image-with-banner-container top-image" id="image1">
-                            <img src="images/CARICATUA 008909.png" alt="Caricatura de Henrique Marinhos" class="main-cascade-image">
+                            <img src="images/CARICATUA 008909.png" alt="Caricatura de Henrique Marinhos"
+                                class="main-cascade-image">
                         </div>
                         <div class="image-with-banner-container bottom-image" id="image2">
                             <img src="images/profile2.png" alt="Foto de Henrique Marinhos" class="main-cascade-image">
@@ -153,231 +129,305 @@
             <section class="experience-section" id="experiencia">
                 <div class="section-header">
                     <h2 class="section-title" data-translate-key="experienceTitle">Experiência</h2>
-                    <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a>
                 </div>
                 <ul class="experience-list">
                     <li class="experience-item" data-exp="freelancer">
                         <h3 data-translate-key="jobFreelancer">Freelancer <br>
-                            <a href="https://www.instagram.com/classic_tattoo_pch/" target="_blank" rel="noopener noreferrer" class="company-name">@ t.pr agency</a> &amp; <a href="https://www.instagram.com/s.ollaris/" target="_blank" rel="noopener noreferrer" class="company-name">@ Sollaris</a>
+                            <a href="https://www.instagram.com/classic_tattoo_pch/" target="_blank"
+                                rel="noopener noreferrer" class="company-name">@ t.pr agency</a> &amp; <a
+                                href="https://www.instagram.com/s.ollaris/" target="_blank" rel="noopener noreferrer"
+                                class="company-name">@ Sollaris</a>
                         </h3>
                         <p class="job-dates">2024</p>
                     </li>
                     <li class="experience-item" data-exp="internCom">
                         <h3 data-translate-key="jobInternCom">Estagiário de Comunicação <br>
-                            <a href="https://www.instagram.com/rdcultural/" target="_blank" rel="noopener noreferrer" class="company-name">@ Rd Cultural</a>
+                            <a href="https://www.instagram.com/rdcultural/" target="_blank" rel="noopener noreferrer"
+                                class="company-name">@ Rd Cultural</a>
                         </h3>
                         <p class="job-dates">2023</p>
                     </li>
                     <li class="experience-item unesp-toggle" data-exp="internPr">
                         <details>
                             <summary>
-                                <h3 data-translate-key="jobInternPr">Estagiário de Relações Públicas <br><span class="company-name">@ Unesp</span></h3>
+                                <h3 data-translate-key="jobInternPr">Estagiário de Relações Públicas <br><span
+                                        class="company-name">@ Unesp</span></h3>
                                 <p class="job-dates">2021 - 2025</p>
                             </summary>
                             <ul class="unesp-sub-list">
-                                <li><a href="https://www.instagram.com/ntapsunesp/" target="_blank" rel="noopener noreferrer">@NTAPS | Núcleo Técnico de Atenção Psicossocial</a></li>
-                                <li><a href="https://www.instagram.com/csunesp/" target="_blank" rel="noopener noreferrer">@CSUNESP | Coordenadoria de Saúde da Unesp</a></li>
-                                <li><a href="https://www.instagram.com/proec_unesp/" target="_blank" rel="noopener noreferrer">@PROEC | Pró-Reitoria de Extensão Universitária e Cultura</a></li>
-                                <li><a href="https://www.instagram.com/rpunesp/" target="_blank" rel="noopener noreferrer">@Evento 40 Anos | Relações Públicas</a></li>
+                                <li><a href="https://www.instagram.com/ntapsunesp/" target="_blank"
+                                        rel="noopener noreferrer">@NTAPS | Núcleo Técnico de Atenção Psicossocial</a>
+                                </li>
+                                <li><a href="https://www.instagram.com/csunesp/" target="_blank"
+                                        rel="noopener noreferrer">@CSUNESP | Coordenadoria de Saúde da Unesp</a></li>
+                                <li><a href="https://www.instagram.com/proec_unesp/" target="_blank"
+                                        rel="noopener noreferrer">@PROEC | Pró-Reitoria de Extensão Universitária e
+                                        Cultura</a></li>
+                                <li><a href="https://www.instagram.com/rpunesp/" target="_blank"
+                                        rel="noopener noreferrer">@Evento 40 Anos | Relações Públicas</a></li>
                             </ul>
                         </details>
                     </li>
                     <li class="experience-item" data-exp="assistant">
                         <h3 data-translate-key="jobAssistant">Assistente de Compras <br>
-                            <a href="https://www.instagram.com/servimed/" target="_blank" rel="noopener noreferrer" class="company-name">@ Servimed</a>
+                            <a href="https://www.instagram.com/servimed/" target="_blank" rel="noopener noreferrer"
+                                class="company-name">@ Servimed</a>
                         </h3>
                         <p class="job-dates">2020 - 2022</p>
                     </li>
                 </ul>
             </section>
-<section class="portfolio-section" id="portfolio">
+            <section class="portfolio-section" id="portfolio">
 
-    <div class="section-header">
-    <h2 class="section-title">Projetos</h2>
-  </div>
+                <div class="section-header">
+                    <h2 class="section-title">Projetos</h2>
+                </div>
 
-  <div class="portfolio-controls">
-    <button id="scroll-left-btn" class="scroll-btn" aria-label="Rolar para esquerda">
-      <span class="material-symbols-outlined">arrow_back</span>
-    </button>
-    <button id="scroll-right-btn" class="scroll-btn" aria-label="Rolar para direita">
-      <span class="material-symbols-outlined">arrow_forward</span>
-    </button>
-  </div>
-  
-        <div class="portfolio-scroller">
-            <div class="portfolio-track">
-                <div class="portfolio-item custom-project" data-project-id="12" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/tcc-placeholder.jpg" alt="TCC Relações Públicas" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            TCC Relações Públicas: Guia de Marca e Processos Persona
+                <div class="portfolio-controls">
+                    <button id="scroll-left-btn" class="scroll-btn" aria-label="Rolar para esquerda">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <button id="scroll-right-btn" class="scroll-btn" aria-label="Rolar para direita">
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+
+                <div class="portfolio-scroller">
+                    <div class="portfolio-track">
+                        <div class="portfolio-item custom-project" data-project-id="12">
+                            <img src="images/tcc-placeholder.jpg" alt="TCC Relações Públicas"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">TCC Relações Públicas: Guia de Marca e Processos
+                                    Persona</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="13">
+                            <img src="https://marinhos.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F5899b088-34a8-40e9-a319-ca933405b8fb%2F31c6a2e4-a15d-4f36-9289-5182a45c614b%2FCapa_Hobbit.png?table=block&id=15ef05e2-f110-8073-976c-eaa388975719&spaceId=5899b088-34a8-40e9-a319-ca933405b8fb&width=2000&userId=&cache=v2"
+                                alt="Análise Literária de O Hobbit" class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">Análise Literária de O Hobbit: Lá e De Volta Outra Vez
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="14">
+                            <img src="images/classic-tattoo-placeholder.jpg" alt="Classic Tattoo PCH | California"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">Classic Tattoo PCH | California</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="15">
+                            <img src="images/edhunesp-placeholder.jpg" alt="13° Encontro de Direitos Humanos da Unesp"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">13° Encontro de Direitos Humanos da Unesp</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="16">
+                            <img src="images/girlpower-placeholder.jpg" alt="Cobertura Fotográfica: Copa GirlPower"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">Cobertura Fotográfica: Copa GirlPower</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="17">
+                            <img src="images/saudemental-placeholder.jpg" alt="I Mostra de Saúde Mental da Unesp"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">I Mostra de Saúde Mental da Unesp: Caminhos de Atenção
+                                    e Cuidados</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="18">
+                            <img src="images/interserv-placeholder.jpg" alt="InterServ 2023/2024"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">InterServ 2023/2024</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="19">
+                            <img src="images/nupe-placeholder.jpg"
+                                alt="Redesign | NUPE - Núcleo Negro da Unesp para Pesquisa e Extensão"
+                                class="custom-project-img" />
+                            <div class="custom-project-title-container">
+                                <div class="custom-project-title">Redesign | NUPE - Núcleo Negro da Unesp para Pesquisa
+                                    e Extensão</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-project-id="1">
+                            <iframe src="https://www.behance.net/embed/project/198475783?ilo0=1&background=transparent"
+                                height="316" width="404" allowfullscreen lazyload frameborder="0"
+                                allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="2">
+                            <iframe src="https://www.behance.net/embed/project/188648291?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="3">
+                            <iframe src="https://www.behance.net/embed/project/182949249?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="4">
+                            <iframe src="https://www.behance.net/embed/project/181930457?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="5">
+                            <iframe src="https://www.behance.net/embed/project/181925151?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="6">
+                            <iframe src="https://www.behance.net/embed/project/163701153?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="7">
+                            <iframe src="https://www.behance.net/embed/project/163507589?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="8">
+                            <iframe src="https://www.behance.net/embed/project/162373799?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="9">
+                            <iframe src="https://www.behance.net/embed/project/160862059?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item" data-project-id="10">
+                            <iframe src="https://www.behance.net/embed/project/160845099?ilo0=1" height="316"
+                                width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write"
+                                refererPolicy="strict-origin-when-cross-origin" scrolling="no"
+                                class="behance-iframe"></iframe>
+                        </div>
+                        <div class="portfolio-item custom-project" data-project-id="11">
+                            <div class="notion-thumb">
+                                <div class="custom-project-title-container">
+                                    <div class="custom-project-title notion-title">
+                                        Notion EBD
+                                        <span class="material-symbols-outlined">open_in_new</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-item custom-project" data-project-id="13" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/hobbit-placeholder.jpg" alt="Análise Literária de O Hobbit" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            Análise Literária de O Hobbit: Lá e De Volta Outra Vez
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="14" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/classic-tattoo-placeholder.jpg" alt="Classic Tattoo PCH | California" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            Classic Tattoo PCH | California
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="15" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/edhunesp-placeholder.jpg" alt="13° Encontro de Direitos Humanos da Unesp" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            13° Encontro de Direitos Humanos da Unesp
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="16" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/girlpower-placeholder.jpg" alt="Cobertura Fotográfica: Copa GirlPower" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            Cobertura Fotográfica: Copa GirlPower
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="17" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/saudemental-placeholder.jpg" alt="I Mostra de Saúde Mental da Unesp" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            I Mostra de Saúde Mental da Unesp: Caminhos de Atenção e Cuidados
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="18" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/interserv-placeholder.jpg" alt="InterServ 2023/2024" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            InterServ 2023/2024
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item custom-project" data-project-id="19" style="width:404px;height:316px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;cursor:pointer;position:relative;overflow:hidden;border-radius:8px;background:#f6f6f6;border:1px solid #e0e0e0;">
-                    <img src="images/nupe-placeholder.jpg" alt="Redesign | NUPE - Núcleo Negro da Unesp para Pesquisa e Extensão" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;" />
-                    <div class="card-gradient-title" style="width:100%;position:absolute;bottom:0;left:0;z-index:2;padding:0 0 0 0;">
-                        <div style="padding:18px 12px 14px 12px;text-align:center;font-size:1.08rem;font-weight:600;color:#fff;">
-                            Redesign | NUPE - Núcleo Negro da Unesp para Pesquisa e Extensão
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-project-id="1" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/198475783?ilo0=1&background=transparent" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="2" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/188648291?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="3" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/182949249?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="4" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/181930457?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="5" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/181925151?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="6" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/163701153?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="7" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/163507589?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="8" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/162373799?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="9" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/160862059?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-                <div class="portfolio-item" data-project-id="10" style="display: flex; flex-direction: column; align-items: center;">
-                    <iframe src="https://www.behance.net/embed/project/160845099?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0" allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin" scrolling="no" style="overflow:hidden;border-radius:8px;background:transparent;display:block;"></iframe>
-                </div>
-            </div>
-        </div>
-</section>
+            </section>
             <section class="contact-section" id="contato">
                 <div class="contact-header">
                     <div id="hand-easter-egg-container">
-                        <svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 372.73 424.08" class="hand-svg">
-                          <g>
-                            <path d="M66.5,177.7c-1-.5-5.9-1.1-10.9-1.3-5-.1-9.9-.4-10.8-.6-2.5-.6-5.4-3.5-6.8-6.9-2-4.8,2.3-13.7,7-14.4.3,0,2.3-.7,4.4-1.4,4.2-1.5,16.2-1,20.9.8,1.5.6,5.6.8,9.2.4,6.4-.6,6.5-.5,6.5,1.8s.7,3.2,1.4,4.2c1.3,1.7,1.4,1.6,1.9-.2.3-1.1,0-2.5-.9-3.2-2.5-2.1-1.5-3.8,2.9-4.9,6.3-1.6,10.8-3.8,14.7-7.2,1.9-1.7,2.8-2.7,2.1-2.3-1,.6-.8-.2.6-2.6,1.1-1.9,2.6-3.3,3.2-3.1.7.1,1-.2.7-.7-.4-.5.7-3.3,2.4-6.1,1.6-2.7,3.3-6.3,3.7-7.7.3-1.5,2-5.7,3.6-9.3,1.6-3.6,3.5-8.3,4.2-10.5l1.3-4,.2,3.5c0,2.9.3,3.2,1,1.5,1.1-2.5,1.3-6.8.3-6.2s-.8-4.1-.8-9.8.4-9.8.8-9.2c.6.8.7.5.3-.6-.3-1-.6-2.5-.6-3.3s-.4-1.3-.9-1c-1,.6-8.1-20.4-8.1-24s.9-4.3,2-6.4c2.6-5.1,6.1-6.2,9.6-2.9,2.6,2.4,6.8,9.4,8,13.2.3,1.2,1.5,4,2.4,6.2,5.9,13.2,7.1,16.5,6.5,17.4-.3.6,0,1.1.5,1.1.9,0,1.1,2.4.8,8-.2,4.4.1,8,.6,8s.6,1.7.3,3.7c-.8,4.7,0,8.3,1.9,8.3s1.4.6,1.4,1.2c0,1.9,2.6-2.3,3.9-6.2.6-1.9,2.2-5.7,3.6-8.4,1.4-2.7,2.5-5.5,2.5-6.2s1.1-2.1,2.5-3c1.8-1.2,2.5-2.5,2.5-5s.3-2.7.7-3.4v-4.2c-.9-.2-1.2-.6-1.3-1.3-.3-3.6-4.6-11.5-6.2-11.5s-1.2.6-.8,1.6c.4.9,1.2,5.8,1.8,10.8l1.1,9.1-5.4,11.5-5.4,11.4-.7-4.9c-.3-2.8-.7-8.4-.7-12.6,0-8-1.3-13.2-5.1-21.4-7.5-16.6-11.4-23.6-14-25.5-3.8-2.7-8.1-2.6-10.7.2-4,4.5-5.3,7.3-5.3,11.3s.5,4.6,1.1,5.2c.6.6,1.2,2.1,1.3,3.4.2,1.3,1,4.2,1.9,6.4.8,2.2,1.8,4.9,2.2,6,3.8,10.4,1.4,34-4.5,44-.9,1.6-2.6,5.2-3.6,8-1,2.7-2.1,5.2-2.4,5.5s-2.3,3.3-4.4,6.8c-3.9,6.5-9.9,11.8-14.5,12.9-1.4.3-3,.9-3.6,1.3-.5.4-4.2,1.3-8.2,2-5.6.9-8.9.9-14.6,0-9.8-1.6-20.1-1-25.2,1.5-2.8,1.4-4.7,3.3-6.2,6.5-3,5.9-2.9,7.9,1,13.6l3.2,4.9,7.6,1.1c9.2,1.3,21.2.7,18.4-.9ZM166.7,71.2c.2,2.1.2,5.5,0,7.5-.2,2.1-.4.4-.4-3.7s.2-5.8.4-3.8Z"/>
-                            <path d="M121.7,47.2c-.4,3.3,1.5,12.6,3.3,15.7.7,1.3.9,1,1-1.4,0-1.7-.8-4.1-1.7-5.4-1-1.5-1.6-4.2-1.5-7.3.1-5.5-.4-6.3-1.1-1.6Z"/>
-                            <path d="M177.6,64.9c1.8-1.5,1.8-1.6-.5-2.2-1.4-.3-1.7,0-1.4,1.4.4,1.5.8,1.7,1.9.8Z"/>
-                            <path d="M138.6,92.5c0-1.4,0-2.5,0-2.5,0,0-.6.5-1.2,1.1-.6.6-.9,1.8-.6,2.5.9,2.3,2.1,1.6,1.9-1.1Z"/>
-                            <path d="M138.4,102.9c2.5-2.4,2.8-6.9.5-7.1-1.1,0-2.5,0-3.1-.2-.7,0-1.6-.6-2-1.1-.4-.6-.8-.8-.9-.5-.1.3-.3,1.5-.4,2.8-.2,2,0,2.1,1.4.9.9-.7,2.4-1.2,3.4-.9,1.9.4,1.9,1.2.2,5.7q-.7,1.9.9.4Z"/>
-                            <path d="M159.1,103.5c.5-.4.9-1.4.9-2.4,0-2.3,2.5-4.5,4.1-3.6.8.6.8.2,0-1.4-1.4-2.6-1.8-2.6-3.2,0-1.7,3.3-2.9,8-1.8,7.4Z"/>
-                            <path d="M146.9,95c0,.3-.2,1.3-.4,2.2-.2,1,0,1.8.5,1.8,1.5,0,1.9-1.5.9-3-.5-.8-.9-1.3-1-1Z"/>
-                            <path d="M232.6,225c.8-.4.7-1.3-.2-3.5-.8-2-1.4-2.5-1.7-1.5-.2.8-.9,3.1-1.5,5s-1.4,5.8-1.8,8.5c-.3,2.8-1.2,5.8-1.8,6.8-1.7,2.2-9.5,5.7-11.4,4.9-.9-.3-1.3-.1-.9.5,1.6,2.6-8.8,7.3-12,5.4-1-.6-1.4-1.1-.9-1.1s0-.7-1-1.5c-1.6-1.3-1.7-1.6-.4-2.5,1.2-.8,1.1-1-.8-1s-2.1-.4-1.8-.8c.3-.5,1.8-.7,3.3-.5,1.7.3,5.3-.6,8.7-2.1,6.5-2.9,6.6-2.9,6.6-1.9s-3.2,2.1-7,3.7c-3.9,1.7-7,3.4-7,3.9,0,1.2,4.3.1,9.3-2.3,2.1-1,4.4-1.7,5.1-1.4,1.4.5,10-8.5,9-9.5s-1.3.4-2.2,1.6c-1.2,1.6-2.1,2-3.2,1.3-1.1-.7-.6-1.6,2.7-4.7,2.6-2.4,4.4-5.1,4.8-7.3.4-1.9,1.1-4,1.6-4.6.5-.7-.3-1.9-2.2-3.3-3.9-2.9-3-4,.9-1.2,3.2,2.3,4.2,2.6,4.2,1.3s-1.7-1.8-3.7-3c-4.8-2.7-13-10.7-15-14.6-.9-1.7-3.1-5.1-5-7.5-3.9-5.2-4.1-8.1-1-14.1,1.6-3.3,3.6-5.3,7.4-7.5,2.9-1.7,5.2-3.3,5.3-3.6,0-1.4-5.2-1.6-5.7-.3-.4,1.1-2.6,1.5-4,1.3-.8.8-1.9,1.9-3.8,3.6-1,.9-1.8,1.7-2.5,2.4,0,.4-.4.9-1,1.4-.8.7-2.2,2.5-3,4.2-.8,1.6-1.6,3.4-1.9,3.9-.2.5.1.6.7.2.7-.4,1.2,0,1.2.8,0,2-.5,2-2.5,0-.4-.5-.7-.8-.9-1.2-.1.3-.3.5-.4.8,1,1,1.9,2.1,2.8,3,2.6,2.9,4.4,6,5,7,2.7,4.6,2.3,5.7,4.8,9.3,1.6,2.3,3.4,4.2,5.4,6.2,1.6,1.7,2.7,2.8,4.8,5.1,2.2,2.3,2.8,3.1,3,4.3.1,1.1-.2,2.3-2,4.8-1.9,2.4-4,4.4-8.4,7.5-3.9,2.8-5.8,4.2-7.7,4.8-4.1,1.4-7.7.9-9,.7-3.7-.5-6.2-1.9-8.3-3.1-2.9-1.6-2.3-1.9-5.4-3.8-2.8-1.7-3.5-1.6-10.6-5-1.8-.9-2.8-1.3-3.9-2-2-1.2-3.9-2.4-5.2-4.2-1.8-2.5-2-5.2-2-6.8,0-1.8.1-3.8.6-5.8-.3.3-.8.7-1.5,1.2-1.4.9-3.7,1.6-5.2,1.6-2.6,0-7.8-3.3-6.8-4.3s-.5-.3-1.8,0c-1.6.3-1.9.2-.9-.5.9-.7,1-1.2.2-1.6l-1.1.4c0,.7-.7,1-1.5.6-2.9-1.1-1.5.4,2.3,2.3,5.1,2.8,1.3,2.7-4.1,0-2.3-1.2-5-2.8-5.9-3.7-2.6-2.2-12.9-6.5-16-6.6-1.6,0-2.8-.6-2.8-1.2,0-1-6.1-4.4-8.1-4.4s-2.8-1.2-5-2.7c-2.2-1.4-4.8-2.7-5.7-2.8-3.3-.4-8.6-3.3-8.8-4.9-.1-1,.7-1.8,2.2-2.2,1.3-.3,2.6-1.5,3-2.6.7-2.4.4-2.8-2.8-3.3-3-.6-8.8,4.7-6.7,6,.7.5,1.9,0,3.1-1.5,1.3-1.6,1.8-1.8,1.8-.7s-.5,1.9-1,2.2c-.6.4-.7,1.1-.4,1.7.5.7-.8.9-4.2.4-8.3-1-13-1.5-10.6-1,1.2.3,2.2,1,2.2,1.5s1.1.9,2.4.9c2.8,0,7.9,1.6,12.6,3.9,1.9,1,5.4,2.4,7.8,3.1,2.3.7,4.2,1.7,4.2,2.1s1.7,1.3,3.8,1.9c4.8,1.5,23.5,10.3,33.2,15.6,2.5,1.4,5.2,2.3,6.1,2.1.9-.2,1.6,0,1.6.8,0,2.6,5.3,12.2,8.4,15q3.1,3,2.4.5c-.4-1.4-1.5-3.4-2.5-4.5-2.4-2.7-6.3-10.5-5.6-11.2s1.5.5,2.7,1.8c1.1,1.3,1.8,1.9,1.5,1.3-.3-.6.6-1.6,2-2.3q3.1-1.4,3.1.4c0,.8-.3,1.5-.7,1.5s-1.4.6-2.4,1.3c-1.8,1.3-1.6,1.7,2.1,7.6,2.1,3.4,4.2,5.9,4.5,5.5.4-.3,1.9.3,3.5,1.5,1.5,1.1,5.9,2.7,9.6,3.5,3.7.9,8,2.4,9.5,3.4,1.5,1.1,3.9,2.6,5.3,3.5,2.4,1.5,4.7,4.6,10.9,14.7,2.5,4.2,4.3,4.8,7.3,2.5,1.8-1.3,1.7-1.4-1.4-1.7-1.8-.2-3.4-.8-3.6-1.3-.3-1.2,12.1-1.4,13.3-.2.4.4.2.7-.5.7s-2.8,1.1-4.8,2.5c-2.9,1.9-3.3,2.6-2,3.1.9.3,3-.2,4.6-1.2,3-1.8,3.3-2.2,3.5-5.4,0-1.8,8.2-8,10.6-8s4.4-2.7,4.6-7.3c.4-9,.9-12.2,2-12.7ZM218,231.7c1.8-2.6,3.5-4.7,3.7-4.7.8,0-3.3,6.2-5.1,7.8-1.1.9-.5-.4,1.4-3.1ZM219.1,238c.5,0,.9.4.9.8,0,1.2-3.9,4.6-4.5,4.1-.6-.7,2.4-4.9,3.6-4.9Z"/>
-                            <path d="M159,201.1c0-.6-.4-1.1-1-1.1-1.4,0-1.3.7.5,3.4.5.7.8,1.2.9,1.6.2-.6.4-1.2.6-1.9-.6-.7-1.1-1.4-1.1-2.1Z"/>
-                            <path d="M215.1,157.3c.9.7,1.9,2.1,2.2,3.2q.5,1.9.6,0c0-2.1-1.6-4.4-3.3-4.4s-.4.6.5,1.3Z"/>
-                            <path d="M89.4,178.6c-1-.4-1.4,0-1.2.6.5,1.5,2.8,2.3,2.8,1s-.7-1.3-1.6-1.6Z"/>
-                            <path d="M113,189.5c-.7.8-1.1,1.5-.9,1.6,3.6.8,5.9.8,5.9,0s-.7-.7-1.7-.4c-1,.4-1.4.2-.9-.5,1-1.7-1-2.3-2.4-.7Z"/>
-                            <path d="M235,227.5c-.7-1.9-.8-1.8-1.4.5-.3,1.4-.8,5.2-1.1,8.4-.3,3.3-1.2,7.1-2.2,8.5q-1.6,2.5.1,1.2c3.5-2.9,6.2-14.1,4.6-18.6Z"/>
-                            <path d="M173.1,247c-1.2-1.1-2.7-1.7-3.2-1.4-.5.3-.9,0-.9-.9s-1.4-2.6-3.2-4.3c-1.7-1.6-2.7-2.2-2.3-1.4,2.3,4,5.3,7.3,7.7,8.6,3.8,2,4.7,1.7,1.9-.6Z"/>
-                            <path d="M170.5,242c1.8,1.7,2.5,1.9,2.5.9,0-1.8-3.7-5.1-4.4-4-.3.4.6,1.9,1.9,3.1Z"/>
-                            <path d="M222.4,240.1q-1.9,2.2.4,1c1.2-.6,2.2-1.6,2.2-2.1,0-1.5-.5-1.2-2.6,1.1Z"/>
-                            <path d="M174,244.2c0,.9.5,2,1.1,2.3,1.7,1.1,1.8.2.3-1.9-1.2-1.7-1.4-1.7-1.4-.4Z"/>
-                            <path d="M204,249.9c.8,0,2.6-.6,4-1.4,3.2-1.8,1.4-1.8-2.5,0-1.6.7-2.3,1.4-1.5,1.4Z"/>
-                            <path d="M159.4,205c-.1.4-.2.8-.3,1.1.3-.4.4-.7.3-1.1Z"/>
-                            <path d="M203,173.9c0-.1,0-.2,0-.3-.3-.3-1.2,0-2.1.7-.8.6-2.5,2.8-3.7,4.9-1.4,2.2-1.8,3.1-1.5,4,.6-1.3,1.3-2.8,3.3-5,.9-1,2.1-2.3,4.1-4.2Z"/>
-                          </g>
-                          <path d="M194.3,111.9"/>
-                          <path d="M192.5,112.6"/>
-                          <path d="M189.5,116.1"/>
-                          <g>
-                            <path d="M191,115.3s0,0,0-.1v.6c0-.1,0-.3,0-.4Z"/>
-                            <path d="M217.6,152.3c-1.2-.3-7-.7-12.9-.7-9.2,0-11-.4-11.8-1.8-1.6-2.9-.5-6.3,3.3-11.1,2.1-2.4,4.3-5.7,5-7.3.7-1.6,2.5-3.9,3.9-5.2,1.5-1.2,3.9-4.6,5.5-7.5,2.4-4.5,2.8-6.3,2.8-14.2,0-12.8-2.8-19.8-10.1-24.7-3.7-2.4-6.9-2.3-10.1.3l-2.7,2.1-.8-3.9c-.8-3.7-1.5-8.2-3.8-21.6-.6-3.7-1.5-6.7-2-6.7s-.9-.4-.9-.9-1.6-3.7-3.6-7.3c-2.5-4.4-4.8-7.2-7.8-9.1-4.7-2.9-4.9-3-8.6-1.6-6.7,2.5-9,12.8-4.8,21.4,3.3,6.7,5.2,5.9,2.7-1.2-2.3-6.8-2.3-8.1-.3-13.2,1.2-3.1,2.3-4.1,4.6-4.6,1.7-.4,3.5-.2,4.1.4.8.8.7,1.1-.2,1.1s-1.1.3,0,1.5c1.4,1.7,3.5,2.1,2.5.5-.3-.6-.2-1,.4-1,1.1,0,5.1,6.1,5.1,7.8s1.1,2.2,2.4,3.5c1.6,1.7,2.9,4.7,3.9,9.8,4.7,23.3,4.5,30.8-1.5,43.7-2.1,4.7-4.3,10.3-4.7,12.6-.5,2.3-1.2,5-1.6,6-.6,1.4-.5,1.7.3,1.2.7-.4,1.2-.2,1.2.3s.7,1.1,1.5,1.1c1.4,0,2.9-1.4,7-6.5,1.2-1.5,1.2-1.1-.2,1.4,0,.1-.1.2-.2.3.4-.3.7-.6,1.1-.9,1-.9,2-1.7,3.1-2.6,0,0,0-.2,0-.3.3-1.1.8-3.5,1-5.4.3-1.9,1-4.8,1.6-6.5.6-1.6.9-4.4.5-6.1-.7-3.8.8-11.2,2.6-12.8.9-.8,1-.7.5.4-.5.9-.2.8.7-.3,1.9-2.3,5.1-2.3,4.5,0-.3,1.2.2,2.4,1.3,3.1,1.6.9,1.9.8,1.9-.5,0-3.2,2.3-.7,4.6,5.1,1.7,4.2,2.5,8.1,2.6,13.5.2,7,0,8-3.5,14.3-2.1,3.7-4.4,6.7-5.1,6.7s-1.8,1.2-2.5,2.7c-.7,1.6-2.7,4.9-4.4,7.6-2.2,3.4-3.3,4.4-3.9,3.5-.6-.9-.7-.6-.4.8.4,1.1-.1,2.9-.9 4-1.3,1.7-1.7,3.9-1.2,6.1,3.5,3,3.7,4.3,6.5,5.4,1,0,2.2,0,3.7,0,3.8,0,7.3-.4,7.8-.7,1.3-.8,4.2,3.4,4.8,7,.7,4,3.8,4.5,3.5.5,0-1.5-.7-3.5-1.3-4.2-.7-.8-.9-1.7-.5-2,.3-.4-.2-.7-1.2-.7s-1.6-.3-.9-1c.6-.6,2-.6,4.1.2,3.4,1.3,6,6.7,4.1,8.6-.6.6-.7,1.6-.3,2.2,1,1.7,2.5-.7,2.5-4.2s-2-7.6-4.4-8.5ZM180.4,115.8c-.4-.5,0-3.5,1.1-6.8s1.8-6.7,1.8-7.5.3-1.5.6-1.5,1.2-1.4,1.9-3c1.5-3.4,4.2-4,4.2-1,0,6.1-7.6,21.8-9.6,19.8Z"/>
-                            <path d="M185,118.5h-.7c0,.1,0,.2,0,.2l.8-.2Z"/>
-                            <path d="M184.3,118.6c.3-.5.6-.9.8-1.4-.6.5-1.2,1-1.8,1.5h1Z"/>
-                            <path d="M182.5,119l.7.8c.4-.4.7-.8,1-1.2l-1.7.4Z"/>
-                          </g>
+                        <svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                            viewBox="0 0 372.73 424.08" class="hand-svg">
+                            <g>
+                                <path
+                                    d="M66.5,177.7c-1-.5-5.9-1.1-10.9-1.3-5-.1-9.9-.4-10.8-.6-2.5-.6-5.4-3.5-6.8-6.9-2-4.8,2.3-13.7,7-14.4.3,0,2.3-.7,4.4-1.4,4.2-1.5,16.2-1,20.9.8,1.5.6,5.6.8,9.2.4,6.4-.6,6.5-.5,6.5,1.8s.7,3.2,1.4,4.2c1.3,1.7,1.4,1.6,1.9-.2.3-1.1,0-2.5-.9-3.2-2.5-2.1-1.5-3.8,2.9-4.9,6.3-1.6,10.8-3.8,14.7-7.2,1.9-1.7,2.8-2.7,2.1-2.3-1,.6-.8-.2.6-2.6,1.1-1.9,2.6-3.3,3.2-3.1.7.1,1-.2.7-.7-.4-.5.7-3.3,2.4-6.1,1.6-2.7,3.3-6.3,3.7-7.7.3-1.5,2-5.7,3.6-9.3,1.6-3.6,3.5-8.3,4.2-10.5l1.3-4,.2,3.5c0,2.9.3,3.2,1,1.5,1.1-2.5,1.3-6.8.3-6.2s-.8-4.1-.8-9.8.4-9.8.8-9.2c.6.8.7.5.3-.6-.3-1-.6-2.5-.6-3.3s-.4-1.3-.9-1c-1,.6-8.1-20.4-8.1-24s.9-4.3,2-6.4c2.6-5.1,6.1-6.2,9.6-2.9,2.6,2.4,6.8,9.4,8,13.2.3,1.2,1.5,4,2.4,6.2,5.9,13.2,7.1,16.5,6.5,17.4-.3.6,0,1.1.5,1.1.9,0,1.1,2.4.8,8-.2,4.4.1,8,.6,8s.6,1.7.3,3.7c-.8,4.7,0,8.3,1.9,8.3s1.4.6,1.4,1.2c0,1.9,2.6-2.3,3.9-6.2.6-1.9,2.2-5.7,3.6-8.4,1.4-2.7,2.5-5.5,2.5-6.2s1.1-2.1,2.5-3c1.8-1.2,2.5-2.5,2.5-5s.3-2.7.7-3.4v-4.2c-.9-.2-1.2-.6-1.3-1.3-.3-3.6-4.6-11.5-6.2-11.5s-1.2.6-.8,1.6c.4.9,1.2,5.8,1.8,10.8l1.1,9.1-5.4,11.5-5.4,11.4-.7-4.9c-.3-2.8-.7-8.4-.7-12.6,0-8-1.3-13.2-5.1-21.4-7.5-16.6-11.4-23.6-14-25.5-3.8-2.7-8.1-2.6-10.7.2-4,4.5-5.3,7.3-5.3,11.3s.5,4.6,1.1,5.2c.6.6,1.2,2.1,1.3,3.4.2,1.3,1,4.2,1.9,6.4.8,2.2,1.8,4.9,2.2,6,3.8,10.4,1.4,34-4.5,44-.9,1.6-2.6,5.2-3.6,8-1,2.7-2.1,5.2-2.4,5.5s-2.3,3.3-4.4,6.8c-3.9,6.5-9.9,11.8-14.5,12.9-1.4.3-3,.9-3.6,1.3-.5.4-4.2,1.3-8.2,2-5.6.9-8.9.9-14.6,0-9.8-1.6-20.1-1-25.2,1.5-2.8,1.4-4.7,3.3-6.2,6.5-3,5.9-2.9,7.9,1,13.6l3.2,4.9,7.6,1.1c9.2,1.3,21.2.7,18.4-.9ZM166.7,71.2c.2,2.1.2,5.5,0,7.5-.2,2.1-.4.4-.4-3.7s.2-5.8.4-3.8Z" />
+                                <path
+                                    d="M121.7,47.2c-.4,3.3,1.5,12.6,3.3,15.7.7,1.3.9,1,1-1.4,0-1.7-.8-4.1-1.7-5.4-1-1.5-1.6-4.2-1.5-7.3.1-5.5-.4-6.3-1.1-1.6Z" />
+                                <path d="M177.6,64.9c1.8-1.5,1.8-1.6-.5-2.2-1.4-.3-1.7,0-1.4,1.4.4,1.5.8,1.7,1.9.8Z" />
+                                <path
+                                    d="M138.6,92.5c0-1.4,0-2.5,0-2.5,0,0-.6.5-1.2,1.1-.6.6-.9,1.8-.6,2.5.9,2.3,2.1,1.6,1.9-1.1Z" />
+                                <path
+                                    d="M138.4,102.9c2.5-2.4,2.8-6.9.5-7.1-1.1,0-2.5,0-3.1-.2-.7,0-1.6-.6-2-1.1-.4-.6-.8-.8-.9-.5-.1.3-.3,1.5-.4,2.8-.2,2,0,2.1,1.4.9.9-.7,2.4-1.2,3.4-.9,1.9.4,1.9,1.2.2,5.7q-.7,1.9.9.4Z" />
+                                <path
+                                    d="M159.1,103.5c.5-.4.9-1.4.9-2.4,0-2.3,2.5-4.5,4.1-3.6.8.6.8.2,0-1.4-1.4-2.6-1.8-2.6-3.2,0-1.7,3.3-2.9,8-1.8,7.4Z" />
+                                <path
+                                    d="M146.9,95c0,.3-.2,1.3-.4,2.2-.2,1,0,1.8.5,1.8,1.5,0,1.9-1.5.9-3-.5-.8-.9-1.3-1-1Z" />
+                                <path
+                                    d="M232.6,225c.8-.4.7-1.3-.2-3.5-.8-2-1.4-2.5-1.7-1.5-.2.8-.9,3.1-1.5,5s-1.4,5.8-1.8,8.5c-.3,2.8-1.2,5.8-1.8,6.8-1.7,2.2-9.5,5.7-11.4,4.9-.9-.3-1.3-.1-.9.5,1.6,2.6-8.8,7.3-12,5.4-1-.6-1.4-1.1-.9-1.1s0-.7-1-1.5c-1.6-1.3-1.7-1.6-.4-2.5,1.2-.8,1.1-1-.8-1s-2.1-.4-1.8-.8c.3-.5,1.8-.7,3.3-.5,1.7.3,5.3-.6,8.7-2.1,6.5-2.9,6.6-2.9,6.6-1.9s-3.2,2.1-7,3.7c-3.9,1.7-7,3.4-7,3.9,0,1.2,4.3.1,9.3-2.3,2.1-1,4.4-1.7,5.1-1.4,1.4.5,10-8.5,9-9.5s-1.3.4-2.2,1.6c-1.2,1.6-2.1,2-3.2,1.3-1.1-.7-.6-1.6,2.7-4.7,2.6-2.4,4.4-5.1,4.8-7.3.4-1.9,1.1-4,1.6-4.6.5-.7-.3-1.9-2.2-3.3-3.9-2.9-3-4,.9-1.2,3.2,2.3,4.2,2.6,4.2,1.3s-1.7-1.8-3.7-3c-4.8-2.7-13-10.7-15-14.6-.9-1.7-3.1-5.1-5-7.5-3.9-5.2-4.1-8.1-1-14.1,1.6-3.3,3.6-5.3,7.4-7.5,2.9-1.7,5.2-3.3,5.3-3.6,0-1.4-5.2-1.6-5.7-.3-.4,1.1-2.6,1.5-4,1.3-.8.8-1.9,1.9-3.8,3.6-1,.9-1.8,1.7-2.5,2.4,0,.4-.4.9-1,1.4-.8.7-2.2,2.5-3,4.2-.8,1.6-1.6,3.4-1.9,3.9-.2.5.1.6.7.2.7-.4,1.2,0,1.2.8,0,2-.5,2-2.5,0-.4-.5-.7-.8-.9-1.2-.1.3-.3.5-.4.8,1,1,1.9,2.1,2.8,3,2.6,2.9,4.4,6,5,7,2.7,4.6,2.3,5.7,4.8,9.3,1.6,2.3,3.4,4.2,5.4,6.2,1.6,1.7,2.7,2.8,4.8,5.1,2.2,2.3,2.8,3.1,3,4.3.1,1.1-.2,2.3-2,4.8-1.9,2.4-4,4.4-8.4,7.5-3.9,2.8-5.8,4.2-7.7,4.8-4.1,1.4-7.7.9-9,.7-3.7-.5-6.2-1.9-8.3-3.1-2.9-1.6-2.3-1.9-5.4-3.8-2.8-1.7-3.5-1.6-10.6-5-1.8-.9-2.8-1.3-3.9-2-2-1.2-3.9-2.4-5.2-4.2-1.8-2.5-2-5.2-2-6.8,0-1.8.1-3.8.6-5.8-.3.3-.8.7-1.5,1.2-1.4.9-3.7,1.6-5.2,1.6-2.6,0-7.8-3.3-6.8-4.3s-.5-.3-1.8,0c-1.6.3-1.9.2-.9-.5.9-.7,1-1.2.2-1.6l-1.1.4c0,.7-.7,1-1.5.6-2.9-1.1-1.5.4,2.3,2.3,5.1,2.8,1.3,2.7-4.1,0-2.3-1.2-5-2.8-5.9-3.7-2.6-2.2-12.9-6.5-16-6.6-1.6,0-2.8-.6-2.8-1.2,0-1-6.1-4.4-8.1-4.4s-2.8-1.2-5-2.7c-2.2-1.4-4.8-2.7-5.7-2.8-3.3-.4-8.6-3.3-8.8-4.9-.1-1,.7-1.8,2.2-2.2,1.3-.3,2.6-1.5,3-2.6.7-2.4.4-2.8-2.8-3.3-3-.6-8.8,4.7-6.7,6,.7.5,1.9,0,3.1-1.5,1.3-1.6,1.8-1.8,1.8-.7s-.5,1.9-1,2.2c-.6.4-.7,1.1-.4,1.7.5.7-.8.9-4.2.4-8.3-1-13-1.5-10.6-1,1.2.3,2.2,1,2.2,1.5s1.1.9,2.4.9c2.8,0,7.9,1.6,12.6,3.9,1.9,1,5.4,2.4,7.8,3.1,2.3.7,4.2,1.7,4.2,2.1s1.7,1.3,3.8,1.9c4.8,1.5,23.5,10.3,33.2,15.6,2.5,1.4,5.2,2.3,6.1,2.1.9-.2,1.6,0,1.6.8,0,2.6,5.3,12.2,8.4,15q3.1,3,2.4.5c-.4-1.4-1.5-3.4-2.5-4.5-2.4-2.7-6.3-10.5-5.6-11.2s1.5.5,2.7,1.8c1.1,1.3,1.8,1.9,1.5,1.3-.3-.6.6-1.6,2-2.3q3.1-1.4,3.1.4c0,.8-.3,1.5-.7,1.5s-1.4.6-2.4,1.3c-1.8,1.3-1.6,1.7,2.1,7.6,2.1,3.4,4.2,5.9,4.5,5.5.4-.3,1.9.3,3.5,1.5,1.5,1.1,5.9,2.7,9.6,3.5,3.7.9,8,2.4,9.5,3.4,1.5,1.1,3.9,2.6,5.3,3.5,2.4,1.5,4.7,4.6,10.9,14.7,2.5,4.2,4.3,4.8,7.3,2.5,1.8-1.3,1.7-1.4-1.4-1.7-1.8-.2-3.4-.8-3.6-1.3-.3-1.2,12.1-1.4,13.3-.2.4.4.2.7-.5.7s-2.8,1.1-4.8,2.5c-2.9,1.9-3.3,2.6-2,3.1.9.3,3-.2,4.6-1.2,3-1.8,3.3-2.2,3.5-5.4,0-1.8,8.2-8,10.6-8s4.4-2.7,4.6-7.3c.4-9,.9-12.2,2-12.7ZM218,231.7c1.8-2.6,3.5-4.7,3.7-4.7.8,0-3.3,6.2-5.1,7.8-1.1.9-.5-.4,1.4-3.1ZM219.1,238c.5,0,.9.4.9.8,0,1.2-3.9,4.6-4.5,4.1-.6-.7,2.4-4.9,3.6-4.9Z" />
+                                <path
+                                    d="M159,201.1c0-.6-.4-1.1-1-1.1-1.4,0-1.3.7.5,3.4.5.7.8,1.2.9,1.6.2-.6.4-1.2.6-1.9-.6-.7-1.1-1.4-1.1-2.1Z" />
+                                <path
+                                    d="M215.1,157.3c.9.7,1.9,2.1,2.2,3.2q.5,1.9.6,0c0-2.1-1.6-4.4-3.3-4.4s-.4.6.5,1.3Z" />
+                                <path d="M89.4,178.6c-1-.4-1.4,0-1.2.6.5,1.5,2.8,2.3,2.8,1s-.7-1.3-1.6-1.6Z" />
+                                <path
+                                    d="M113,189.5c-.7.8-1.1,1.5-.9,1.6,3.6.8,5.9.8,5.9,0s-.7-.7-1.7-.4c-1,.4-1.4.2-.9-.5,1-1.7-1-2.3-2.4-.7Z" />
+                                <path
+                                    d="M235,227.5c-.7-1.9-.8-1.8-1.4.5-.3,1.4-.8,5.2-1.1,8.4-.3,3.3-1.2,7.1-2.2,8.5q-1.6,2.5.1,1.2c3.5-2.9,6.2-14.1,4.6-18.6Z" />
+                                <path
+                                    d="M173.1,247c-1.2-1.1-2.7-1.7-3.2-1.4-.5.3-.9,0-.9-.9s-1.4-2.6-3.2-4.3c-1.7-1.6-2.7-2.2-2.3-1.4,2.3,4,5.3,7.3,7.7,8.6,3.8,2,4.7,1.7,1.9-.6Z" />
+                                <path d="M170.5,242c1.8,1.7,2.5,1.9,2.5.9,0-1.8-3.7-5.1-4.4-4-.3.4.6,1.9,1.9,3.1Z" />
+                                <path d="M222.4,240.1q-1.9,2.2.4,1c1.2-.6,2.2-1.6,2.2-2.1,0-1.5-.5-1.2-2.6,1.1Z" />
+                                <path d="M174,244.2c0,.9.5,2,1.1,2.3,1.7,1.1,1.8.2.3-1.9-1.2-1.7-1.4-1.7-1.4-.4Z" />
+                                <path d="M204,249.9c.8,0,2.6-.6,4-1.4,3.2-1.8,1.4-1.8-2.5,0-1.6.7-2.3,1.4-1.5,1.4Z" />
+                                <path d="M159.4,205c-.1.4-.2.8-.3,1.1.3-.4.4-.7.3-1.1Z" />
+                                <path
+                                    d="M203,173.9c0-.1,0-.2,0-.3-.3-.3-1.2,0-2.1.7-.8.6-2.5,2.8-3.7,4.9-1.4,2.2-1.8,3.1-1.5,4,.6-1.3,1.3-2.8,3.3-5,.9-1,2.1-2.3,4.1-4.2Z" />
+                            </g>
+                            <path d="M194.3,111.9" />
+                            <path d="M192.5,112.6" />
+                            <path d="M189.5,116.1" />
+                            <g>
+                                <path d="M191,115.3s0,0,0-.1v.6c0-.1,0-.3,0-.4Z" />
+                                <path
+                                    d="M217.6,152.3c-1.2-.3-7-.7-12.9-.7-9.2,0-11-.4-11.8-1.8-1.6-2.9-.5-6.3,3.3-11.1,2.1-2.4,4.3-5.7,5-7.3.7-1.6,2.5-3.9,3.9-5.2,1.5-1.2,3.9-4.6,5.5-7.5,2.4-4.5,2.8-6.3,2.8-14.2,0-12.8-2.8-19.8-10.1-24.7-3.7-2.4-6.9-2.3-10.1.3l-2.7,2.1-.8-3.9c-.8-3.7-1.5-8.2-3.8-21.6-.6-3.7-1.5-6.7-2-6.7s-.9-.4-.9-.9-1.6-3.7-3.6-7.3c-2.5-4.4-4.8-7.2-7.8-9.1-4.7-2.9-4.9-3-8.6-1.6-6.7,2.5-9,12.8-4.8,21.4,3.3,6.7,5.2,5.9,2.7-1.2-2.3-6.8-2.3-8.1-.3-13.2,1.2-3.1,2.3-4.1,4.6-4.6,1.7-.4,3.5-.2,4.1.4.8.8.7,1.1-.2,1.1s-1.1.3,0,1.5c1.4,1.7,3.5,2.1,2.5.5-.3-.6-.2-1,.4-1,1.1,0,5.1,6.1,5.1,7.8s1.1,2.2,2.4,3.5c1.6,1.7,2.9,4.7,3.9,9.8,4.7,23.3,4.5,30.8-1.5,43.7-2.1,4.7-4.3,10.3-4.7,12.6-.5,2.3-1.2,5-1.6,6-.6,1.4-.5,1.7.3,1.2.7-.4,1.2-.2,1.2.3s.7,1.1,1.5,1.1c1.4,0,2.9-1.4,7-6.5,1.2-1.5,1.2-1.1-.2,1.4,0,.1-.1.2-.2.3.4-.3.7-.6,1.1-.9,1-.9,2-1.7,3.1-2.6,0,0,0-.2,0-.3.3-1.1.8-3.5,1-5.4.3-1.9,1-4.8,1.6-6.5.6-1.6.9-4.4.5-6.1-.7-3.8.8-11.2,2.6-12.8.9-.8,1-.7.5.4-.5.9-.2.8.7-.3,1.9-2.3,5.1-2.3,4.5,0-.3,1.2.2,2.4,1.3,3.1,1.6.9,1.9.8,1.9-.5,0-3.2,2.3-.7,4.6,5.1,1.7,4.2,2.5,8.1,2.6,13.5.2,7,0,8-3.5,14.3-2.1,3.7-4.4,6.7-5.1,6.7s-1.8,1.2-2.5,2.7c-.7,1.6-2.7,4.9-4.4,7.6-2.2,3.4-3.3,4.4-3.9,3.5-.6-.9-.7-.6-.4.8.4,1.1-.1,2.9-.9 4-1.3,1.7-1.7,3.9-1.2,6.1,3.5,3,3.7,4.3,6.5,5.4,1,0,2.2,0,3.7,0,3.8,0,7.3-.4,7.8-.7,1.3-.8,4.2,3.4,4.8,7,.7,4,3.8,4.5,3.5.5,0-1.5-.7-3.5-1.3-4.2-.7-.8-.9-1.7-.5-2,.3-.4-.2-.7-1.2-.7s-1.6-.3-.9-1c.6-.6,2-.6,4.1.2,3.4,1.3,6,6.7,4.1,8.6-.6.6-.7,1.6-.3,2.2,1,1.7,2.5-.7,2.5-4.2s-2-7.6-4.4-8.5ZM180.4,115.8c-.4-.5,0-3.5,1.1-6.8s1.8-6.7,1.8-7.5.3-1.5.6-1.5,1.2-1.4,1.9-3c1.5-3.4,4.2-4,4.2-1,0,6.1-7.6,21.8-9.6,19.8Z" />
+                                <path d="M185,118.5h-.7c0,.1,0,.2,0,.2l.8-.2Z" />
+                                <path d="M184.3,118.6c.3-.5.6-.9.8-1.4-.6.5-1.2,1-1.8,1.5h1Z" />
+                                <path d="M182.5,119l.7.8c.4-.4.7-.8,1-1.2l-1.7.4Z" />
+                            </g>
                         </svg>
                     </div>
                     <h2 class="section-title" data-translate-key="contactTitle">Fale Comigo</h2>
                     <p class="contact-intro-text" data-translate-key="contactIntro">
-                         Tem um projeto em mente ou uma pergunta? Quer colaborar ou apenas tomar um café para trocar ideias? Envie uma mensagem e vamos conversar.
+                        Tem um projeto em mente ou uma pergunta? Quer colaborar ou apenas tomar um café para trocar
+                        ideias? Envie uma mensagem e vamos conversar.
                     </p>
                 </div>
                 <div class="contact-content">
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
                             <label for="name" data-translate-key="formName">Seu Nome:</label>
-                            <input type="text" id="name" name="name" required data-translate-key-placeholder="formNamePlaceholder">
+                            <input type="text" id="name" name="name" required
+                                data-translate-key-placeholder="formNamePlaceholder">
                             <span class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="email" data-translate-key="formEmail">Seu E-mail:</label>
-                            <input type="email" id="email" name="email" required data-translate-key-placeholder="formEmailPlaceholder">
+                            <input type="email" id="email" name="email" required
+                                data-translate-key-placeholder="formEmailPlaceholder">
                             <span class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="subject" data-translate-key="formSubject">Assunto:</label>
-                            <input type="text" id="subject" name="subject" data-translate-key-placeholder="formSubjectPlaceholder">
+                            <input type="text" id="subject" name="subject"
+                                data-translate-key-placeholder="formSubjectPlaceholder">
                             <span class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="message" data-translate-key="formMessage">Sua Mensagem:</label>
-                            <textarea id="message" name="message" rows="4" required data-translate-key-placeholder="formMessagePlaceholder"></textarea>
+                            <textarea id="message" name="message" rows="4" required
+                                data-translate-key-placeholder="formMessagePlaceholder"></textarea>
                             <span class="error-message"></span>
                         </div>
-                        <button type="submit" class="submit-button" data-translate-key="formSubmit">Enviar Mensagem</button>
+                        <button type="submit" class="submit-button" data-translate-key="formSubmit">Enviar
+                            Mensagem</button>
                     </form>
                     <div class="contact-info">
                         <h3 data-translate-key="contactOtherTitle">Outras Formas de Contato</h3>
                         <p>E-mail: <a href="mailto:henriquemarinhos@icloud.com">henriquemarinhos@icloud.com</a></p>
-                        <p><span data-translate-key="contactPhone">Telefone:</span> <a href="tel:+5514991394590">+55 14 99139-4590</a></p>
+                        <p><span data-translate-key="contactPhone">Telefone:</span> <a href="tel:+5514991394590">+55 14
+                                99139-4590</a></p>
                         <div class="social-links">
-                            <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                            <a href="https://instagram.com/henrictrl" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            <a href="https://br.linkedin.com/in/henrique-marinhos" target="_blank"
+                                rel="noopener noreferrer">LinkedIn</a>
+                            <a href="https://instagram.com/henrictrl" target="_blank"
+                                rel="noopener noreferrer">Instagram</a>
                         </div>
                     </div>
                 </div>
@@ -393,47 +443,48 @@
         <div class="modal-content">
             <button class="modal-close" id="modalCloseButton">&times;</button>
             <div id="modal-project-content">
-                </div>
+            </div>
         </div>
     </div>
 
     <script src="main.js"></script>
-<script>
-// Abre modal com iframe do Notion ao clicar nos projetos customizados
-document.addEventListener('DOMContentLoaded', function() {
-  const notionProjects = {
-    11: { url: 'https://marinhos.notion.site/ebd/15ef05e2f11080c2a895d08c5c051a38' },
-    12: { url: 'https://marinhos.notion.site/ebd/160f05e2f11080ea9447ea56f66e7394' },
-    13: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108073976ceaa388975719' },
-    14: { url: 'https://marinhos.notion.site/ebd/02fb5a9eca064bcd8ea40698e049304e' },
-    15: { url: 'https://marinhos.notion.site/ebd/15ef05e2f11080c2a895d08c5c051a38' },
-    16: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108036925fdf00a1784997' },
-    17: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108023afe5eef25cf28cbe' },
-    18: { url: 'https://marinhos.notion.site/ebd/15ef05e2f110805ca39afc0e5a0d052f' },
-    19: { url: 'https://marinhos.notion.site/ebd/1caf05e2f11080b08f48f61b28c39010' }
-  };
-  Object.keys(notionProjects).forEach(function(id) {
-    var item = document.querySelector('.portfolio-item[data-project-id="'+id+'"]');
-    if(item) {
-      item.addEventListener('click', function() {
-        var modal = document.getElementById('projectModal');
-        var modalContent = document.getElementById('modal-project-content');
-        modalContent.innerHTML = '<iframe src="'+notionProjects[id].url+'" width="100%" height="600" frameborder="0" allowfullscreen style="border-radius:8px;background:#fff;"></iframe>';
-        modal.style.display = 'flex';
-        setTimeout(function(){modal.classList.add('visible');},10);
-      });
-    }
-  });
-  var closeBtn = document.getElementById('modalCloseButton');
-  if(closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      var modal = document.getElementById('projectModal');
-      var modalContent = document.getElementById('modal-project-content');
-      modal.classList.remove('visible');
-      setTimeout(function(){modal.style.display = 'none';modalContent.innerHTML = '';},300);
-    });
-  }
-});
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notionProjects = {
+                11: { url: 'https://marinhos.notion.site/ebd/15ef05e2f11080c2a895d08c5c051a38' },
+                12: { url: 'https://www.notion.so/marinhos/TCC-Rela-es-P-blicas-Guia-de-Marca-e-Processos-Persona-160f05e2f11080ea9447ea56f66e7394' },
+                13: { url: 'https://marinhos.notion.site/An-lise-Liter-ria-de-O-Hobbit-L-e-De-Volta-Outra-Vez-15ef05e2f1108073976ceaa388975719' },
+                14: { url: 'https://marinhos.notion.site/Classic-Tattoo-PCH-California-02fb5a9eca064bcd8ea40698e049304e' },
+                15: { url: 'https://marinhos.notion.site/13-Encontro-de-Direitos-Humanos-da-Unesp-15ef05e2f11080c2a895d08c5c051a38' },
+                16: { url: 'https://marinhos.notion.site/Cobertura-Fotogr-fica-Copa-GirlPower-15ef05e2f1108036925fdf00a1784997' },
+                17: { url: 'https://marinhos.notion.site/I-Mostra-de-Sa-de-Mental-da-Unesp-Caminhos-de-Aten-o-e-Cuidados-15ef05e2f1108023afe5eef25cf28cbe' },
+                18: { url: 'https://marinhos.notion.site/InterServ-2023-2024-15ef05e2f110805ca39afc0e5a0d052f' },
+                19: { url: 'https://marinhos.notion.site/Redesign-NUPE-N-cleo-Negro-da-Unesp-para-Pesquisa-e-Extens-o-1caf05e2f11080b08f48f61b28c39010' }
+            };
+            Object.keys(notionProjects).forEach(function (id) {
+                var item = document.querySelector('.portfolio-item[data-project-id="' + id + '"]');
+                if (item) {
+                    item.addEventListener('click', function () {
+                        var modal = document.getElementById('projectModal');
+                        var modalContent = document.getElementById('modal-project-content');
+                        // Adiciona um contêiner para o iframe para estilização responsiva
+                        modalContent.innerHTML = '<div class="iframe-container"><iframe src="' + notionProjects[id].url + '" allow="fullscreen"></iframe></div>';
+                        modal.style.display = 'flex';
+                        setTimeout(function () { modal.classList.add('visible'); }, 10);
+                    });
+                }
+            });
+            var closeBtn = document.getElementById('modalCloseButton');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function () {
+                    var modal = document.getElementById('projectModal');
+                    var modalContent = document.getElementById('modal-project-content');
+                    modal.classList.remove('visible');
+                    setTimeout(function () { modal.style.display = 'none'; modalContent.innerHTML = ''; }, 300);
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>
