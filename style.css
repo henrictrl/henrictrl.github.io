@@ -3482,6 +3482,20 @@ body.night-mode .theme-toggle-button .icon-moon {
     }
 }
 
+@media (max-width: 768px) {
+    /* ... outras regras existentes ... */
+
+    .hero-text p {
+        font-size: 20px;
+    }
+
+    .hero-image {
+        margin-top: 4rem; /* Adicione esta linha */
+    }
+
+    /* ... outras regras existentes ... */
+}
+
 .mobile-nav ul {
     width: 100%;
 }

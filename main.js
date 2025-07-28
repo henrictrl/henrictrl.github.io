@@ -340,15 +340,7 @@ const setupImageCascade = () => {
         if (!modal || !modalContent || !closeBtn) return;
         
         const notionProjects = {
-            11: { url: 'https://marinhos.notion.site/ebd/15ef05e2f11080c2a895d08c5c051a38' },
-            12: { url: 'https://marinhos.notion.site/ebd/160f05e2f11080ea9447ea56f66e7394' },
-            13: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108073976ceaa388975719' },
-            14: { url: 'https://marinhos.notion.site/ebd/02fb5a9eca064bcd8ea40698e049304e' },
-            15: { url: 'https://marinhos.notion.site/ebd/15ef05e2f11080c2a895d08c5c051a38' },
-            16: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108036925fdf00a1784997' },
-            17: { url: 'https://marinhos.notion.site/ebd/15ef05e2f1108023afe5eef25cf28cbe' },
-            18: { url: 'https://marinhos.notion.site/ebd/15ef05e2f110805ca39afc0e5a0d052f' },
-            19: { url: 'https://marinhos.notion.site/ebd/1caf05e2f11080b08f48f61b28c39010' }
+            12: { url: 'https://www.notion.so/marinhos/TCC-Rela-es-P-blicas-Guia-de-Marca-e-Processos-Persona-160f05e2f11080ea9447ea56f66e7394' }
         };
 
         document.querySelectorAll('.portfolio-item[data-project-id]').forEach(item => {
