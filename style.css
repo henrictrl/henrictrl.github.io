@@ -1743,7 +1743,7 @@ a.lb-main-link {
 .contact-section {
     padding-top: 60px;
     margin-top: 60px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border); /* Adiciona a borda a todas as seções */
 }
 
 .experience-list {
@@ -1868,6 +1868,8 @@ a.lb-main-link {
     display: flex;
     gap: 40px;
     align-items: flex-start;
+    justify-content: center; /* Adicionado para centralizar o conteúdo */
+    flex-wrap: wrap; /* Adicionado para melhor responsividade em telas médias */
 }
 
 .contact-form {
@@ -3520,5 +3522,121 @@ body.night-mode .theme-toggle-button .icon-moon {
     #linkedin-card iframe {
         width: 100% !important;
         max-width: 100%;
+    }
+}
+
+/* Estilos para o container do color picker no topo do menu mobile */
+.mobile-nav-top-controls {
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+}
+
+/* Ajusta a largura do color picker mobile */
+#colorPickerMobile {
+    width: 100%;
+}
+
+/* =================================================================== */
+/* 12. CORREÇÕES FINAIS DE RESPONSIVIDADE PARA PÁGINA "SOBRE"
+/* =================================================================== */
+
+@media (max-width: 767px) {
+    .about-page-body .container {
+        padding: 0 16px; /* Ajusta o padding para telas bem pequenas */
+    }
+
+    .about-grid {
+        display: flex; /* Muda de grid para flexbox para melhor controle */
+        flex-direction: column; /* Organiza em uma única coluna */
+        gap: 24px;
+    }
+
+    .about-grid-col {
+        width: 100%; /* Garante que a coluna ocupe todo o espaço */
+    }
+
+    .about-grid .grid-item {
+        width: 100%;
+        box-sizing: border-box; /* Previne que padding afete a largura */
+    }
+    
+    /* Força a imagem do GitHub a se ajustar ao contêiner */
+    .github-stats-img {
+        max-width: 100%;
+        width: auto; /* Permite que a imagem encolha */
+        align-self: center;
+    }
+
+    /* Força o iframe do LinkedIn a ser 100% responsivo */
+    #linkedin-card iframe {
+        width: 100% !important;
+        max-width: 100%;
+        min-height: 450px; /* Define uma altura mínima para melhor visualização */
+    }
+}
+
+/* Estilos para o Toggle da Unesp */
+.experience-item.unesp-toggle {
+    flex-direction: column;
+    align-items: stretch;
+    cursor: pointer;
+}
+
+.summary-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.date-and-toggle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: right;
+}
+
+.toggle-icon {
+    font-size: 32px;
+    color: var(--color-text-tertiary);
+    transition: transform 0.3s ease;
+}
+
+.unesp-toggle.open .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.unesp-sub-list {
+    list-style: none;
+    padding-left: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+.unesp-sub-list li {
+    margin-bottom: 0.8rem;
+}
+
+.unesp-sub-list a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.unesp-sub-list a:hover {
+    color: var(--cor-destaque);
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    /* ... (outras regras mobile aqui) ... */
+
+    /* Garante que o conteúdo da seção de contato não toque as bordas no mobile */
+    .contact-content {
+        padding: 0 1rem; /* Adiciona um espaçamento lateral */
     }
 }

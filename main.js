@@ -160,26 +160,24 @@ const initializeColorPicker = (containerSelector) => {
     //  4. FUNCIONALIDADES DA PÁGINA PRINCIPAL
     // =====================================================================
 
-    const setupUnespToggle = () => {
-        const unespToggle = document.querySelector('.unesp-toggle');
-        if (unespToggle) {
-            const summary = unespToggle.querySelector('summary');
-            const content = unespToggle.querySelector('.unesp-sub-list');
-            if(summary && content){
-                summary.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const icon = summary.querySelector('.material-symbols-outlined');
-                    if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                        if(icon) icon.textContent = 'expand_more';
-                    } else {
-                        content.style.display = 'block';
-                         if(icon) icon.textContent = 'expand_less';
-                    }
-                });
-            }
-        }
-    };
+const setupUnespToggle = () => {
+    const unespToggle = document.querySelector('.unesp-toggle');
+    if (!unespToggle) return;
+
+    const summaryContainer = unespToggle.querySelector('.summary-container');
+    const content = unespToggle.querySelector('.unesp-sub-list');
+    const icon = unespToggle.querySelector('.toggle-icon');
+
+    if (summaryContainer && content && icon) {
+        summaryContainer.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = content.style.display === 'block';
+            content.style.display = isOpen ? 'none' : 'block';
+            icon.textContent = isOpen ? 'expand_more' : 'expand_less';
+            unespToggle.classList.toggle('open');
+        });
+    }
+};
     
     const setupScrollSpy = () => {
         const sections = document.querySelectorAll('section[id]');
