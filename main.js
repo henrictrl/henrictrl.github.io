@@ -45,14 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const setRandomHighlightColor = () => {
-        if (localStorage.getItem('highlightColor')) return;
-        const randomHue = Math.floor(Math.random() * 361);
-        const randomColor = `hsl(${randomHue}, 80%, 60%)`;
-        document.documentElement.style.setProperty('--cor-destaque', randomColor);
-        localStorage.setItem('highlightColor', randomColor);
-    };
-
     const validateAndAdjustColor = (color) => {
         if (!color) return false;
         const isNightMode = body.classList.contains('night-mode');
@@ -559,7 +551,6 @@ const setupEasterEgg = () => {
     const init = () => {
         // Funções globais que rodam em todas as páginas
         applySavedHighlightColor();
-        setRandomHighlightColor();
         const savedTheme = localStorage.getItem('theme') || 'day';
         applyTheme(savedTheme);
 
