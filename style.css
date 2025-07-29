@@ -2390,6 +2390,21 @@ a.lb-main-link {
     background: rgba(255, 255, 255, 0.9);
 }
 
+/* Estilos para telas menores, como celulares */
+@media (max-width: 767px) {
+  .hero-flip-card {
+    width: 80%; /* Ocupa mais da largura da tela */
+    margin-bottom: 20px; /* Adiciona um espaço abaixo de cada card */
+  }
+
+  /* Se os cards estiverem lado a lado em um container flex, 
+     você pode querer que eles fiquem um abaixo do outro */
+  .container-dos-cards { /* Substitua pelo nome real do seu container */
+    flex-direction: column;
+    align-items: center; /* Centraliza os cards que agora estão em coluna */
+  }
+}
+
 @media (max-width: 900px) {
 
     .hero-flip-front,
