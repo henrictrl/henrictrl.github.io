@@ -32,51 +32,52 @@
 </head>
 
 <body>
-    <nav class="sidebar-nav">
-        <button class="theme-toggle-button" title="Alternar tema">
-            <div class="slider-bg"></div>
-            <span class="material-symbols-outlined icon-sun">light_mode</span>
-            <span class="material-symbols-outlined icon-moon">dark_mode</span>
-        </button>
-        <div class="sidebar-color-picker">
-            <div id="colorPickerSidebar"></div>
-        </div>
-        <ul>
-            <li><a href="#inicio" class="active" data-translate-key="navHome">Início</a></li>
-            <li><a href="#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-        </ul>
-    </nav>
+<!-- Sidebar (versão desktop) -->
+<nav class="sidebar-nav">
+  <button class="theme-toggle-button" title="Alternar tema">
+    <div class="slider-bg"></div>
+    <span class="material-symbols-outlined icon-sun">light_mode</span>
+    <span class="material-symbols-outlined icon-moon">dark_mode</span>
+  </button>
+  <ul>
+    <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
+    <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
+    <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+    <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
+    <li><a href="sobre.html" class="active" data-translate-key="navAbout">Sobre Mim</a></li>
+    <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+  </ul>
+</nav>
 
-    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+<!-- Botão de menu hamburguer (aparece no mobile) -->
+<button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+<!-- Menu expansivo mobile -->
+<nav id="mobile-nav" class="mobile-nav">
+      <div class="mobile-nav-top-controls">
+    <div id="colorPickerMobile"></div>
+  </div>
+  <ul>
+    <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
+    <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
+    <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+    <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
+    <li><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
+    <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+  </ul>
+
+  <div class="mobile-nav-bottom">
+    <button class="theme-toggle-button" title="Alternar tema">
+      <div class="slider-bg"></div>
+      <span class="material-symbols-outlined icon-sun">light_mode</span>
+      <span class="material-symbols-outlined icon-moon">dark_mode</span>
     </button>
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-    <nav id="mobile-nav" class="mobile-nav">
-        <div class="mobile-nav-top-controls">
-            <div id="colorPickerMobile" class="sidebar-color-picker"></div>
-        </div>
+  </div>
+</nav>
 
-        <ul>
-            <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
-            <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-            <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-            <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
-            <li class="nav-separator"><a href="sobre.html" data-translate-key="navAbout">Sobre Mim</a></li>
-            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-        </ul>
-
-        <div class="mobile-nav-bottom">
-            <button class="theme-toggle-button" title="Alternar tema">
-                <div class="slider-bg"></div>
-                <span class="material-symbols-outlined icon-sun">light_mode</span>
-                <span class="material-symbols-outlined icon-moon">dark_mode</span>
-            </button>
-        </div>
-    </nav>
     <div class="container fade-in-on-load">
         <header class="main-header">
             <div class="logo">
@@ -374,11 +375,7 @@
                     </g>
                 </svg>
             </div>
-            <h2 class="section-title" data-translate-key="contactTitle">Fale Comigo</h2>
-            <p class="contact-intro-text" data-translate-key="contactIntro">
-                Aceito convites para um café ou uma mensagem nas minhas redes sociais. Se preferir, é só me mandar uma
-                mensagem nos campos abaixo!
-            </p>
+            <h2 class="section-title" data-translate-key="contactTitle">Fale comigo</h2>
 
         </div>
         <div class="contact-content">

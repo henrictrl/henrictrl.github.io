@@ -194,7 +194,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 .sidebar-nav ul .nav-separator {
     margin-top: 8px;
     padding-top: 8px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .sidebar-nav a {
@@ -358,7 +358,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 .mobile-nav .nav-separator {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .mobile-nav .language-switcher {
@@ -1022,7 +1022,7 @@ body.modal-open {
 .sidebar-nav ul .nav-separator {
     margin-top: 8px;
     padding-top: 8px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .sidebar-nav a {
@@ -1048,10 +1048,13 @@ body.modal-open {
     background-color: color-mix(in srgb, var(--cor-destaque) 15%, transparent);
 }
 
+/* Ajuste de tamanho para o seletor de cores na barra lateral e versão mobile.
+ * Ampliamos a largura padrão de 120px para 160px para melhorar a usabilidade em telas estreitas.
+ */
 .sidebar-color-picker {
     display: flex;
     justify-content: center;
-    width: 120px;
+    width: 160px;
     padding-top: 15px;
     border-top: 1px solid var(--color-border);
 }
@@ -1251,7 +1254,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 .mobile-nav .nav-separator {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .mobile-nav .mobile-nav-bottom {
@@ -2722,7 +2725,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 .sidebar-nav ul .nav-separator {
     margin-top: 8px;
     padding-top: 8px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .sidebar-nav a {
@@ -2886,7 +2889,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 .mobile-nav .nav-separator {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid transparent;
 }
 
 .mobile-nav .language-switcher {
@@ -3653,4 +3656,51 @@ body.night-mode .theme-toggle-button .icon-moon {
     .contact-content {
         padding: 0 1rem; /* Adiciona um espaçamento lateral */
     }
+}
+
+/* =================================================================== */
+/* Ajustes personalizados solicitados para melhorar a experiência mobile */
+/* =================================================================== */
+
+/* Oculta os separadores (linhas) nos menus lateral e mobile para um design mais limpo */
+.sidebar-nav ul .nav-separator,
+.mobile-nav .nav-separator {
+    border-top: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: none;
+}
+
+/* Ajustes de responsividade para o formulário de contato: os campos devem aproveitar melhor a largura em telas menores */
+@media (max-width: 767px) {
+    .contact-form,
+    .contact-info {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Reduz o tamanho dos cards de projetos no mobile para se adequarem melhor ao tamanho da tela de celulares */
+@media (max-width: 600px) {
+    .portfolio-item.custom-project {
+        width: 260px;
+        height: 205px;
+    }
+    .portfolio-track {
+        gap: 20px;
+    }
+}
+
+/* Mantém a cor de destaque sempre visível nos nomes de empresas na seção de experiência */
+.experience-item h3 {
+    color: var(--color-text-primary);
+}
+.experience-item h3 a.company-name {
+    color: var(--cor-destaque);
+}
+.experience-item:hover h3 {
+    color: var(--color-text-primary);
+}
+.experience-item:hover h3 a.company-name {
+    color: var(--cor-destaque);
 }
