@@ -3851,49 +3851,38 @@ body.night-mode .theme-toggle-button .icon-moon {
         /* Exibe o bloco em telas de até 768px de largura */
     }
 
-    .hero-image {
-        /* Adicionado para centralizar os cards */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* Define uma altura mínima para dar espaço ao conteúdo */
+ .hero-image {
+        position: relative; /* Define um contexto para o posicionamento absoluto */
         min-height: 380px;
+        display: block; /* Garante que não haja conflito com flexbox */
     }
 
     .image-with-banner-container {
-        /* Altera o posicionamento para funcionar com flexbox */
-        position: relative;
-        width: 70%;
-        /* Um pouco maior para melhor visualização no celular */
-        /* Reseta o posicionamento absoluto */
-        top: auto;
-        left: auto;
+        position: absolute; /* Posiciona ambos os cards de forma absoluta */
+        width: 60%;
+        top: 50%; /* Alinha ao meio verticalmente */
+        left: 50%; /* Alinha ao meio horizontalmente */
     }
 
     .bottom-image {
-        /* Reseta o posicionamento e mantém apenas a rotação */
-        top: auto;
-        left: auto;
-        transform: rotate(8deg);
+        /* Centraliza, depois desloca 25% para a direita e rotaciona */
+        transform: translate(-25%, -50%) rotate(8deg);
         z-index: 1;
     }
 
     .top-image {
-        /* Reseta o posicionamento */
-        top: auto;
-        left: auto;
+        /* Centraliza, depois desloca 25% para a esquerda e rotaciona */
+        transform: translate(-75%, -50%) rotate(-6deg);
         z-index: 2;
-        /* Usa margem negativa para a sobreposição */
-        margin-left: -50%;
-        /* Mantém a rotação */
-        transform: rotate(-6deg);
     }
 
     .hero-image:hover .bottom-image {
-        transform: rotate(12deg) scale(1.02);
+        /* Mantém a posição e aplica a nova rotação e escala */
+        transform: translate(-25%, -50%) rotate(12deg) scale(1.02);
     }
 
     .hero-image:hover .top-image {
-        transform: rotate(-8deg) scale(1.02);
+        /* Mantém a posição e aplica a nova rotação e escala */
+        transform: translate(-75%, -50%) rotate(-8deg) scale(1.02);
     }
 }
