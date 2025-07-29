@@ -3757,3 +3757,28 @@ body.night-mode .theme-toggle-button .icon-moon {
   color: var(--cor-destaque);
   font-weight: 600;
 }
+
+/* Links abaixo do hero (visível apenas no mobile) */
+.mobile-links-section {
+  display: none; /* Oculto por padrão em telas maiores */
+  text-align: center;
+  padding: 2rem 1rem; /* Espaçamento interno */
+}
+
+.mobile-links-section p {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+}
+
+.mobile-links-section a {
+  color: var(--cor-destaque);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Media query para exibir o bloco em telas menores */
+@media (max-width: 768px) {
+  .mobile-links-section {
+    display: block; /* Exibe o bloco em telas de até 768px de largura */
+  }
+}
