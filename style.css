@@ -762,7 +762,7 @@ body.night-mode .theme-toggle-button .icon-moon {
     }
 
     .post-card-v2 .card-title {
-        font-size: 20px !important;
+        font-size: clamp(18px, 4.8vw, 22px) !important;
     }
 }
 
@@ -3851,17 +3851,22 @@ body.night-mode .theme-toggle-button .icon-moon {
         /* Exibe o bloco em telas de até 768px de largura */
     }
 
- .hero-image {
-        position: relative; /* Define um contexto para o posicionamento absoluto */
+    .hero-image {
+        position: relative;
+        /* Define um contexto para o posicionamento absoluto */
         min-height: 380px;
-        display: block; /* Garante que não haja conflito com flexbox */
+        display: block;
+        /* Garante que não haja conflito com flexbox */
     }
 
     .image-with-banner-container {
-        position: absolute; /* Posiciona ambos os cards de forma absoluta */
+        position: absolute;
+        /* Posiciona ambos os cards de forma absoluta */
         width: 60%;
-        top: 50%; /* Alinha ao meio verticalmente */
-        left: 50%; /* Alinha ao meio horizontalmente */
+        top: 50%;
+        /* Alinha ao meio verticalmente */
+        left: 50%;
+        /* Alinha ao meio horizontalmente */
     }
 
     .bottom-image {

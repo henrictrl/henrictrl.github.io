@@ -19,59 +19,61 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-
-    <link rel="icon" href="images/profile.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 
 <body class="about-page-body">
 
-<!-- Sidebar (versão desktop) -->
-<nav class="sidebar-nav">
-  <button class="theme-toggle-button" title="Alternar tema">
-    <div class="slider-bg"></div>
-    <span class="material-symbols-outlined icon-sun">light_mode</span>
-    <span class="material-symbols-outlined icon-moon">dark_mode</span>
-  </button>
-  <ul>
-    <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
-    <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-    <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-    <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
-    <li><a href="sobre.html" class="active" data-translate-key="navAbout">Sobre Mim</a></li>
-    <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-  </ul>
-</nav>
+    <!-- Sidebar (versão desktop) -->
+    <nav class="sidebar-nav">
+        <button class="theme-toggle-button" title="Alternar tema">
+            <div class="slider-bg"></div>
+            <span class="material-symbols-outlined icon-sun">light_mode</span>
+            <span class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+        <ul>
+            <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
+            <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
+            <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+            <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
+            <li><a href="sobre.html" class="active" data-translate-key="navAbout">Sobre Mim</a></li>
+            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+        </ul>
+    </nav>
 
-<!-- Botão de menu hamburguer (aparece no mobile) -->
-<button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
-<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-
-<!-- Menu expansivo mobile -->
-<nav id="mobile-nav" class="mobile-nav">
-      <div class="mobile-nav-top-controls">
-    <div id="colorPickerMobile"></div>
-  </div>
-  <ul>
-    <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
-    <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
-    <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
-    <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
-    <li><a href="sobre.html" class="active" data-translate-key="navAbout">Sobre Mim</a></li>
-    <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
-  </ul>
-
-  <div class="mobile-nav-bottom">
-    <button class="theme-toggle-button" title="Alternar tema">
-      <div class="slider-bg"></div>
-      <span class="material-symbols-outlined icon-sun">light_mode</span>
-      <span class="material-symbols-outlined icon-moon">dark_mode</span>
+    <!-- Botão de menu hamburguer (aparece no mobile) -->
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
     </button>
-  </div>
-</nav>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+    <!-- Menu expansivo mobile -->
+    <nav id="mobile-nav" class="mobile-nav">
+        <div class="mobile-nav-top-controls">
+            <div id="colorPickerMobile"></div>
+        </div>
+        <ul>
+            <li><a href="index.html#inicio" data-translate-key="navHome">Início</a></li>
+            <li><a href="index.html#experiencia" data-translate-key="navExperience">Experiência</a></li>
+            <li><a href="index.html#portfolio" data-translate-key="navPortfolio">Portfólio</a></li>
+            <li><a href="index.html#contato" data-translate-key="navContact">Contato</a></li>
+            <li><a href="sobre.html" class="active" data-translate-key="navAbout">Sobre Mim</a></li>
+            <li><a href="artigos.html" data-translate-key="navArticles">Artigos</a></li>
+        </ul>
+
+        <div class="mobile-nav-bottom">
+            <button class="theme-toggle-button" title="Alternar tema">
+                <div class="slider-bg"></div>
+                <span class="material-symbols-outlined icon-sun">light_mode</span>
+                <span class="material-symbols-outlined icon-moon">dark_mode</span>
+            </button>
+        </div>
+    </nav>
 
     <div class="container fade-in-on-load">
         <header class="page-header">
@@ -205,7 +207,10 @@
                     <div class="card-header">
                         <h3>LinkedIn</h3>
                     </div>
-                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7267958815411621888?collapsed=1" height="670" width="504" frameborder="0" allowfullscreen title="Publicação incorporada"></iframe>
+                    <iframe
+                        src="https://www.linkedin.com/embed/feed/update/urn:li:share:7267958815411621888?collapsed=1"
+                        height="670" width="504" frameborder="0" allowfullscreen
+                        title="Publicação incorporada"></iframe>
                 </div>
             </div>
         </main>
