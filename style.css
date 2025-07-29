@@ -3695,16 +3695,6 @@ body.night-mode .theme-toggle-button .icon-moon {
     }
 }
 
-/* Reduz o tamanho dos cards de projetos no mobile para se adequarem melhor ao tamanho da tela de celulares */
-@media (max-width: 600px) {
-    .portfolio-item.custom-project {
-        width: 260px;
-        height: 205px;
-    }
-    .portfolio-track {
-        gap: 20px;
-    }
-}
 
 /* Mantém a cor de destaque sempre visível nos nomes de empresas na seção de experiência */
 .experience-item h3 {
@@ -3718,4 +3708,18 @@ body.night-mode .theme-toggle-button .icon-moon {
 }
 .experience-item:hover h3 a.company-name {
     color: var(--cor-destaque);
+}
+
+@media (max-width: 768px) {
+    /* ... outras regras existentes ... */
+
+    .portfolio-item, .portfolio-item.custom-project {
+        width: 320px; /* Novo tamanho para os cards */
+        height: 252px; /* Novo tamanho para os cards */
+    }
+
+    .portfolio-item iframe {
+        width: 100%;
+        height: 100%;
+    }
 }
