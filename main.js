@@ -45,14 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const setRandomHighlightColor = () => {
-        if (localStorage.getItem('highlightColor')) return;
-        const randomHue = Math.floor(Math.random() * 361);
-        const randomColor = `hsl(${randomHue}, 80%, 60%)`;
-        document.documentElement.style.setProperty('--cor-destaque', randomColor);
-        localStorage.setItem('highlightColor', randomColor);
-    };
-
     const validateAndAdjustColor = (color) => {
         if (!color) return false;
         const isNightMode = body.classList.contains('night-mode');
@@ -109,29 +101,31 @@ const initializeColorPicker = (containerSelector) => {
     //  3. NAVEGAÇÃO E UI (COMPARTILHADO)
     // =====================================================================
 
-    const setupMobileMenu = () => {
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        if (!hamburgerBtn || !mobileNav || !mobileMenuOverlay) return;
+const setupMobileMenu = () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    if (!hamburgerBtn || !mobileNav || !mobileMenuOverlay) return;
 
-        const toggleMenu = () => {
-            const isOpen = hamburgerBtn.classList.toggle('active');
-            mobileNav.classList.toggle('open');
-            mobileMenuOverlay.classList.toggle('visible');
-            body.classList.toggle('modal-open');
-            hamburgerBtn.setAttribute('aria-expanded', isOpen);
-        };
-
-        hamburgerBtn.addEventListener('click', toggleMenu);
-        mobileMenuOverlay.addEventListener('click', toggleMenu);
-        mobileNav.querySelectorAll('a').forEach(link => {
-            if (link.getAttribute('href') !== '#contato' || !document.getElementById('hand-easter-egg-container')) {
-                 link.addEventListener('click', toggleMenu);
-            }
-        });
+    const toggleMenu = () => {
+        const isOpen = hamburgerBtn.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        mobileMenuOverlay.classList.toggle('visible');
+        body.classList.toggle('modal-open');
+        hamburgerBtn.setAttribute('aria-expanded', isOpen);
     };
-    
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    mobileMenuOverlay.addEventListener('click', toggleMenu);
+    mobileNav.querySelectorAll('a').forEach(link => {
+        // CORREÇÃO: Verifica se o href do link NÃO termina com #contato.
+        // Isso garante que o easter egg funcione sem fechar o menu.
+        if (!link.href.endsWith('#contato')) {
+             link.addEventListener('click', toggleMenu);
+        }
+    });
+};
+
     const setupTranslations = () => {
         const langButtons = document.querySelectorAll('.lang-button');
         const translatableElements = document.querySelectorAll('[data-translate-key]');
@@ -171,10 +165,15 @@ const setupUnespToggle = () => {
     if (summaryContainer && content && icon) {
         summaryContainer.addEventListener('click', (e) => {
             e.preventDefault();
-            const isOpen = content.style.display === 'block';
-            content.style.display = isOpen ? 'none' : 'block';
-            icon.textContent = isOpen ? 'expand_more' : 'expand_less';
+            
+            // Ação de abrir/fechar o toggle
             unespToggle.classList.toggle('open');
+            
+            // Verifica o novo estado
+            const isOpen = unespToggle.classList.contains('open');
+            
+            // Define o ícone correto com base no novo estado
+            icon.textContent = isOpen ? 'expand_less' : 'expand_more';
         });
     }
 };
@@ -310,28 +309,30 @@ const setupImageCascade = () => {
         startAutoScroll();
     };
 
-    const setupEasterEgg = () => {
-        const contactNavLinks = document.querySelectorAll('a[href="#contato"]');
-        const handContainer = document.getElementById('hand-easter-egg-container');
-        const contactTitle = document.querySelector('#contato .section-title[data-translate-key="contactTitle"]');
-        if (contactNavLinks.length === 0 || !handContainer || !contactTitle) return;
+const setupEasterEgg = () => {
+    // CORREÇÃO: Seleciona links cujo href TERMINA com "#contato".
+    // Isso captura tanto "index.html#contato" quanto "#contato".
+    const contactNavLinks = document.querySelectorAll('a[href$="#contato"]');
+    const handContainer = document.getElementById('hand-easter-egg-container');
+    const contactTitle = document.querySelector('#contato .section-title[data-translate-key="contactTitle"]');
+    if (contactNavLinks.length === 0 || !handContainer || !contactTitle) return;
 
-        contactNavLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+    contactNavLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
 
-                if (!handContainer.classList.contains('animate')) {
-                    handContainer.classList.add('animate');
-                    contactTitle.classList.add('blinking-title');
-                    setTimeout(() => {
-                        handContainer.classList.remove('animate');
-                        contactTitle.classList.remove('blinking-title');
-                    }, 2300);
-                }
-            });
+            if (!handContainer.classList.contains('animate')) {
+                handContainer.classList.add('animate');
+                contactTitle.classList.add('blinking-title');
+                setTimeout(() => {
+                    handContainer.classList.remove('animate');
+                    contactTitle.classList.remove('blinking-title');
+                }, 2300);
+            }
         });
-    };
+    });
+};
 
     const setupPortfolioModal = () => {
         const modal = document.getElementById('projectModal');
@@ -550,7 +551,6 @@ const setupImageCascade = () => {
     const init = () => {
         // Funções globais que rodam em todas as páginas
         applySavedHighlightColor();
-        setRandomHighlightColor();
         const savedTheme = localStorage.getItem('theme') || 'day';
         applyTheme(savedTheme);
 
@@ -586,4 +586,45 @@ const setupImageCascade = () => {
     // Roda a inicialização!
     init();
 
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o envio padrão do formulário
+
+            const submitButton = form.querySelector('.submit-button');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+
+            // Cole a URL do seu Google Apps Script aqui
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwl510ABStA9vZMFWiwk4d1ZF3hiw3PxcoH_5vkenTNpnSlQE2TrbKwjjnU0y9IRKVllA/exec';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('Mensagem enviada com sucesso! Obrigado.');
+                    form.reset();
+                } else {
+                    console.error('Erro retornado pelo script:', data.message);
+                    alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição Fetch:', error);
+                alert('Ocorreu um erro de comunicação. Verifique sua conexão ou tente mais tarde.');
+            })
+            .finally(() => {
+                // Restaura o botão após o envio
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            });
+        });
+    }
 });
