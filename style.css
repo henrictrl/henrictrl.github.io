@@ -2247,6 +2247,17 @@ a.lb-main-link {
         font-size: 20px;
     }
 
+    /* Remove o espaço abaixo dos cards iniciais */
+    .hero-flip-container {
+        margin-bottom: 0;
+    }
+
+    /* Remove o espaço acima da seção de experiência */
+    .experience-section {
+        margin-top: 0;
+        padding-top: 30px; /* Reduzido de 60px para 30px */
+    }
+
     .experience-item {
         flex-direction: column;
         align-items: flex-start;
@@ -2256,12 +2267,7 @@ a.lb-main-link {
     .job-dates {
         text-align: left;
     }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 100px;
-    }
-
+    
     .about-grid {
         grid-template-columns: 1fr;
     }
@@ -2276,24 +2282,30 @@ a.lb-main-link {
         grid-row: auto;
         align-self: start;
     }
-}
 
-.portfolio-section {
-    position: relative;
-}
+    /* Garante que o conteúdo da seção de contato não toque as bordas no mobile */
+    .contact-content {
+        padding: 0 1rem;
+    }
 
-.portfolio-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none;
-    /* evita conflito com o carrossel */
-    z-index: 10;
-}
+    /* Ativa o scroll por toque no portfólio */
+    .portfolio-scroller {
+       overflow-x: auto;
+       -webkit-overflow-scrolling: touch; /* Melhora a experiência de scroll em iOS */
+       -ms-overflow-style: -ms-autohiding-scrollbar; /* Oculta a barra de scroll no IE/Edge */
+       scrollbar-width: none; /* Oculta a barra de scroll no Firefox */
+    }
 
+    /* Oculta a barra de scroll no Chrome/Safari/Opera */
+    .portfolio-scroller::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Oculta os botões de navegação do portfólio */
+    .portfolio-controls {
+        display: none;
+    }
+}
 .scroll-btn {
     pointer-events: all;
     /* permite clique mesmo com o pai desativado */
