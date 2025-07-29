@@ -1,26 +1,32 @@
 /* Gradiente preto suave para títulos dos cards customizados e Notion */
 .card-gradient-title {
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
 }
+
 /* ====== Experiência: hover colorido @ e nome, cargos sempre brancos ====== */
 .experience-item h3 {
-    color: var(--color-text-primary); /* Garante cor padrão do texto */
+    color: var(--color-text-primary);
+    /* Garante cor padrão do texto */
 }
 
 .experience-item h3 a {
     text-decoration: none;
-    color: inherit; /* Remove o azul padrão, herdando a cor do h3 */
+    color: inherit;
+    /* Remove o azul padrão, herdando a cor do h3 */
     transition: color 0.2s ease;
 }
 
 .experience-item:hover h3,
 .experience-item:hover h3 a {
-    color: var(--cor-destaque); /* Aplica a cor de destaque no hover */
+    color: var(--cor-destaque);
+    /* Aplica a cor de destaque no hover */
 }
 
 .experience-item h3 a:hover {
-    text-decoration: underline; /* Adiciona sublinhado apenas no link ao passar o mouse */
+    text-decoration: underline;
+    /* Adiciona sublinhado apenas no link ao passar o mouse */
 }
+
 /* =================================================================== */
 /* === Conteúdo de artigos.css === */
 /* =================================================================== */
@@ -662,8 +668,10 @@ body.night-mode .theme-toggle-button .icon-moon {
 .card-tags-container {
     display: flex;
     justify-content: center;
-    gap: 8px; /* Espaço entre as tags */
-    margin-bottom: 8px; /* Espaçamento opcional para o conteúdo abaixo */
+    gap: 8px;
+    /* Espaço entre as tags */
+    margin-bottom: 8px;
+    /* Espaçamento opcional para o conteúdo abaixo */
 }
 
 /* Estilo original da tag, agora aplicado a todas as tags */
@@ -683,6 +691,7 @@ body.night-mode .theme-toggle-button .icon-moon {
     background-color: var(--cor-cabine) !important;
     color: #fff !important;
 }
+
 /* Removed invalid CSS properties that were outside of a selector */
 
 .post-card-v2 .card-date {
@@ -1746,7 +1755,8 @@ a.lb-main-link {
 .contact-section {
     padding-top: 60px;
     margin-top: 60px;
-    border-top: 1px solid var(--color-border); /* Adiciona a borda a todas as seções */
+    border-top: 1px solid var(--color-border);
+    /* Adiciona a borda a todas as seções */
 }
 
 .experience-list {
@@ -1871,8 +1881,10 @@ a.lb-main-link {
     display: flex;
     gap: 40px;
     align-items: flex-start;
-    justify-content: center; /* Adicionado para centralizar o conteúdo */
-    flex-wrap: wrap; /* Adicionado para melhor responsividade em telas médias */
+    justify-content: center;
+    /* Adicionado para centralizar o conteúdo */
+    flex-wrap: wrap;
+    /* Adicionado para melhor responsividade em telas médias */
 }
 
 .contact-form {
@@ -2255,7 +2267,8 @@ a.lb-main-link {
     /* Remove o espaço acima da seção de experiência */
     .experience-section {
         margin-top: 0;
-        padding-top: 30px; /* Reduzido de 60px para 30px */
+        padding-top: 30px;
+        /* Reduzido de 60px para 30px */
     }
 
     .experience-item {
@@ -2267,7 +2280,7 @@ a.lb-main-link {
     .job-dates {
         text-align: left;
     }
-    
+
     .about-grid {
         grid-template-columns: 1fr;
     }
@@ -2290,10 +2303,13 @@ a.lb-main-link {
 
     /* Ativa o scroll por toque no portfólio */
     .portfolio-scroller {
-       overflow-x: auto;
-       -webkit-overflow-scrolling: touch; /* Melhora a experiência de scroll em iOS */
-       -ms-overflow-style: -ms-autohiding-scrollbar; /* Oculta a barra de scroll no IE/Edge */
-       scrollbar-width: none; /* Oculta a barra de scroll no Firefox */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        /* Melhora a experiência de scroll em iOS */
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        /* Oculta a barra de scroll no IE/Edge */
+        scrollbar-width: none;
+        /* Oculta a barra de scroll no Firefox */
     }
 
     /* Oculta a barra de scroll no Chrome/Safari/Opera */
@@ -2306,6 +2322,7 @@ a.lb-main-link {
         display: none;
     }
 }
+
 .scroll-btn {
     pointer-events: all;
     /* permite clique mesmo com o pai desativado */
@@ -2404,17 +2421,21 @@ a.lb-main-link {
 
 /* Estilos para telas menores, como celulares */
 @media (max-width: 767px) {
-  .hero-flip-card {
-    width: 80%; /* Ocupa mais da largura da tela */
-    margin-bottom: 20px; /* Adiciona um espaço abaixo de cada card */
-  }
+    .hero-flip-card {
+        width: 80%;
+        /* Ocupa mais da largura da tela */
+        margin-bottom: 20px;
+        /* Adiciona um espaço abaixo de cada card */
+    }
 
-  /* Se os cards estiverem lado a lado em um container flex, 
+    /* Se os cards estiverem lado a lado em um container flex, 
      você pode querer que eles fiquem um abaixo do outro */
-  .container-dos-cards { /* Substitua pelo nome real do seu container */
-    flex-direction: column;
-    align-items: center; /* Centraliza os cards que agora estão em coluna */
-  }
+    .container-dos-cards {
+        /* Substitua pelo nome real do seu container */
+        flex-direction: column;
+        align-items: center;
+        /* Centraliza os cards que agora estão em coluna */
+    }
 }
 
 @media (max-width: 900px) {
@@ -3438,20 +3459,21 @@ body.night-mode .theme-toggle-button .icon-moon {
 }
 
 .glass-tag {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
-  color: var(--color-text-primary);
-  border: 1px solid rgba(255,255,255,0.3);
-  margin-left: 8px;
-  font-weight: 600;
-  border-radius: 20px;
-  padding: 6px 16px;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  letter-spacing: 0.02em;
-  transition: background 0.2s;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    color: var(--color-text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left: 8px;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 6px 16px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
 }
+
 .portfolio-item.custom-project {
     position: relative;
     overflow: hidden;
@@ -3484,7 +3506,7 @@ body.night-mode .theme-toggle-button .icon-moon {
     left: 0;
     z-index: 2;
     padding: 0;
-    background: linear-gradient(0deg, rgba(0,0,0,0.92) 60%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0.0) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.92) 60%, rgba(0, 0, 0, 0.5) 90%, rgba(0, 0, 0, 0.0) 100%);
 }
 
 .card-gradient-title div {
@@ -3502,13 +3524,16 @@ body.night-mode .theme-toggle-button .icon-moon {
     }
 
     .hero-text {
-        order: 1; /* Garante que o texto venha primeiro */
+        order: 1;
+        /* Garante que o texto venha primeiro */
     }
 
     .hero-image {
-        order: 2; /* A imagem vem depois */
+        order: 2;
+        /* A imagem vem depois */
         margin-top: 2rem;
-        height: 400px; /* Ajuste a altura conforme necessário */
+        height: 400px;
+        /* Ajuste a altura conforme necessário */
     }
 }
 
@@ -3520,7 +3545,8 @@ body.night-mode .theme-toggle-button .icon-moon {
     }
 
     .hero-image {
-        margin-top: 4rem; /* Adicione esta linha */
+        margin-top: 4rem;
+        /* Adicione esta linha */
     }
 
     /* ... outras regras existentes ... */
@@ -3551,6 +3577,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 /* =================================================================== */
 
 @media (max-width: 768px) {
+
     /* Garante que a coluna da grid ocupe toda a largura */
     .about-grid-col {
         width: 100%;
@@ -3559,7 +3586,8 @@ body.night-mode .theme-toggle-button .icon-moon {
     /* Garante que todos os cards dentro da grid se ajustem à largura */
     .about-grid .grid-item {
         width: 100%;
-        box-sizing: border-box; /* Evita que padding cause overflow */
+        box-sizing: border-box;
+        /* Evita que padding cause overflow */
     }
 
     /* Ajusta o iframe do LinkedIn para ser responsivo */
@@ -3589,28 +3617,34 @@ body.night-mode .theme-toggle-button .icon-moon {
 
 @media (max-width: 767px) {
     .about-page-body .container {
-        padding: 0 16px; /* Ajusta o padding para telas bem pequenas */
+        padding: 0 16px;
+        /* Ajusta o padding para telas bem pequenas */
     }
 
     .about-grid {
-        display: flex; /* Muda de grid para flexbox para melhor controle */
-        flex-direction: column; /* Organiza em uma única coluna */
+        display: flex;
+        /* Muda de grid para flexbox para melhor controle */
+        flex-direction: column;
+        /* Organiza em uma única coluna */
         gap: 24px;
     }
 
     .about-grid-col {
-        width: 100%; /* Garante que a coluna ocupe todo o espaço */
+        width: 100%;
+        /* Garante que a coluna ocupe todo o espaço */
     }
 
     .about-grid .grid-item {
         width: 100%;
-        box-sizing: border-box; /* Previne que padding afete a largura */
+        box-sizing: border-box;
+        /* Previne que padding afete a largura */
     }
-    
+
     /* Força a imagem do GitHub a se ajustar ao contêiner */
     .github-stats-img {
         max-width: 100%;
-        width: auto; /* Permite que a imagem encolha */
+        width: auto;
+        /* Permite que a imagem encolha */
         align-self: center;
     }
 
@@ -3618,7 +3652,8 @@ body.night-mode .theme-toggle-button .icon-moon {
     #linkedin-card iframe {
         width: 100% !important;
         max-width: 100%;
-        min-height: 450px; /* Define uma altura mínima para melhor visualização */
+        min-height: 450px;
+        /* Define uma altura mínima para melhor visualização */
     }
 }
 
@@ -3645,7 +3680,8 @@ body.night-mode .theme-toggle-button .icon-moon {
 
 .toggle-icon {
     font-size: 32px;
-    color: var(--cor-destaque); /* Alterado de --color-text-tertiary */
+    color: var(--cor-destaque);
+    /* Alterado de --color-text-tertiary */
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -3660,7 +3696,7 @@ body.night-mode .theme-toggle-button .icon-moon {
     padding-left: 2rem;
     width: 100%;
     font-family: 'Inter', sans-serif;
-    
+
     /* Propriedades para a animação fluida */
     overflow: hidden;
     max-height: 0;
@@ -3671,16 +3707,19 @@ body.night-mode .theme-toggle-button .icon-moon {
 
 /* 4. Define o estado "aberto" do toggle para a animação */
 .unesp-toggle.open .unesp-sub-list {
-    max-height: 20rem; /* Um valor alto o suficiente para caber o conteúdo */
+    max-height: 20rem;
+    /* Um valor alto o suficiente para caber o conteúdo */
     opacity: 1;
-    margin-top: 1rem; /* Adiciona o espaçamento quando estiver aberto */
+    margin-top: 1rem;
+    /* Adiciona o espaçamento quando estiver aberto */
 }
 
 /* Remove a cor do link em si, ele agora serve como um container */
 .unesp-sub-list a {
     text-decoration: none;
     font-size: 1.1rem;
-    color: inherit; /* Herda a cor do texto pai */
+    color: inherit;
+    /* Herda a cor do texto pai */
 }
 
 /* Define a cor padrão para o texto da descrição */
@@ -3698,7 +3737,8 @@ body.night-mode .theme-toggle-button .icon-moon {
 
     /* Garante que o conteúdo da seção de contato não toque as bordas no mobile */
     .contact-content {
-        padding: 0 1rem; /* Adiciona um espaçamento lateral */
+        padding: 0 1rem;
+        /* Adiciona um espaçamento lateral */
     }
 }
 
@@ -3717,6 +3757,7 @@ body.night-mode .theme-toggle-button .icon-moon {
 
 /* Ajustes de responsividade para o formulário de contato: os campos devem aproveitar melhor a largura em telas menores */
 @media (max-width: 767px) {
+
     .contact-form,
     .contact-info {
         max-width: 100% !important;
@@ -3729,12 +3770,15 @@ body.night-mode .theme-toggle-button .icon-moon {
 .experience-item h3 {
     color: var(--color-text-primary);
 }
+
 .experience-item h3 a.company-name {
     color: var(--cor-destaque);
 }
+
 .experience-item:hover h3 {
     color: var(--color-text-primary);
 }
+
 .experience-item:hover h3 a.company-name {
     color: var(--cor-destaque);
 }
@@ -3742,9 +3786,12 @@ body.night-mode .theme-toggle-button .icon-moon {
 @media (max-width: 768px) {
     /* ... outras regras existentes ... */
 
-    .portfolio-item, .portfolio-item.custom-project {
-        width: 320px; /* Novo tamanho para os cards */
-        height: 252px; /* Novo tamanho para os cards */
+    .portfolio-item,
+    .portfolio-item.custom-project {
+        width: 320px;
+        /* Novo tamanho para os cards */
+        height: 252px;
+        /* Novo tamanho para os cards */
     }
 
     .portfolio-item iframe {
@@ -3754,43 +3801,99 @@ body.night-mode .theme-toggle-button .icon-moon {
 }
 
 .mention-highlight {
-  color: var(--cor-destaque);
-  font-weight: 600;
+    color: var(--cor-destaque);
+    font-weight: 600;
 }
 
 /* Links abaixo do hero (visível apenas no mobile) */
 .mobile-links-section {
-  display: none; /* Oculto por padrão em telas maiores */
-  text-align: center;
-  padding: 2rem 1rem; /* Espaçamento interno */
+    display: none;
+    /* Oculto por padrão em telas maiores */
+    text-align: center;
+    padding: 2rem 1rem;
+    /* Espaçamento interno */
 }
 
 .mobile-links-section p {
-  font-size: 1.1rem;
-  color: var(--color-text-secondary);
-  line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
 }
 
 .mobile-links-section a {
-  display: inline-block; /* Permite a aplicação de padding e outros estilos de bloco */
-  background-color: var(--cor-destaque);
-  color: #fff;
-  padding: 1px 12px; /* Espaçamento interno para criar a forma de tag */
-  border-radius: 16px; /* Bordas arredondadas */
-  text-decoration: none; /* Remove o sublinhado */
-  font-weight: 600;
-  font-size: 0.95rem; /* Ajusta o tamanho da fonte */
-  margin: 0 2px; /* Pequeno espaçamento para não colar no texto */
-  transition: transform 0.2s ease;
+    display: inline-block;
+    /* Permite a aplicação de padding e outros estilos de bloco */
+    background-color: var(--cor-destaque);
+    color: #fff;
+    padding: 1px 12px;
+    /* Espaçamento interno para criar a forma de tag */
+    border-radius: 16px;
+    /* Bordas arredondadas */
+    text-decoration: none;
+    /* Remove o sublinhado */
+    font-weight: 600;
+    font-size: 0.95rem;
+    /* Ajusta o tamanho da fonte */
+    margin: 0 2px;
+    /* Pequeno espaçamento para não colar no texto */
+    transition: transform 0.2s ease;
 }
 
 .mobile-links-section a:hover {
-  transform: translateY(-2px); /* Efeito suave ao passar o mouse */
+    transform: translateY(-2px);
+    /* Efeito suave ao passar o mouse */
 }
 
 /* Media query para exibir o bloco em telas menores */
 @media (max-width: 768px) {
-  .mobile-links-section {
-    display: block; /* Exibe o bloco em telas de até 768px de largura */
-  }
+    .mobile-links-section {
+        display: block;
+        /* Exibe o bloco em telas de até 768px de largura */
+    }
+
+    .hero-image {
+        /* Adicionado para centralizar os cards */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Define uma altura mínima para dar espaço ao conteúdo */
+        min-height: 380px;
+    }
+
+    .image-with-banner-container {
+        /* Altera o posicionamento para funcionar com flexbox */
+        position: relative;
+        width: 70%;
+        /* Um pouco maior para melhor visualização no celular */
+        /* Reseta o posicionamento absoluto */
+        top: auto;
+        left: auto;
+    }
+
+    .bottom-image {
+        /* Reseta o posicionamento e mantém apenas a rotação */
+        top: auto;
+        left: auto;
+        transform: rotate(8deg);
+        z-index: 1;
+    }
+
+    .top-image {
+        /* Reseta o posicionamento */
+        top: auto;
+        left: auto;
+        z-index: 2;
+        /* Usa margem negativa para a sobreposição */
+        margin-left: -50%;
+        /* Mantém a rotação */
+        transform: rotate(-6deg);
+    }
+
+    .hero-image:hover .bottom-image {
+        transform: rotate(12deg) scale(1.02);
+    }
+
+    .hero-image:hover .top-image {
+        transform: rotate(-8deg) scale(1.02);
+    }
 }
