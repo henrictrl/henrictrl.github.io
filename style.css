@@ -3768,12 +3768,24 @@ body.night-mode .theme-toggle-button .icon-moon {
 .mobile-links-section p {
   font-size: 1.1rem;
   color: var(--color-text-secondary);
+  line-height: 1.8;
 }
 
 .mobile-links-section a {
-  color: var(--cor-destaque);
+  display: inline-block; /* Permite a aplicação de padding e outros estilos de bloco */
+  background-color: var(--cor-destaque);
+  color: #fff;
+  padding: 1px 12px; /* Espaçamento interno para criar a forma de tag */
+  border-radius: 16px; /* Bordas arredondadas */
+  text-decoration: none; /* Remove o sublinhado */
   font-weight: 600;
-  text-decoration: underline;
+  font-size: 0.95rem; /* Ajusta o tamanho da fonte */
+  margin: 0 2px; /* Pequeno espaçamento para não colar no texto */
+  transition: transform 0.2s ease;
+}
+
+.mobile-links-section a:hover {
+  transform: translateY(-2px); /* Efeito suave ao passar o mouse */
 }
 
 /* Media query para exibir o bloco em telas menores */
