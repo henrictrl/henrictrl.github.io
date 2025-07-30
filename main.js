@@ -628,3 +628,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const certificadosBtn = document.getElementById('certificadosBtn');
+    const certificadosModal = document.getElementById('certificadosModal');
+    const certificadosModalClose = document.getElementById('certificadosModalClose');
+
+    if (certificadosBtn && certificadosModal && certificadosModalClose) {
+        certificadosBtn.addEventListener('click', () => {
+            certificadosModal.style.display = 'block';
+        });
+
+        certificadosModalClose.addEventListener('click', () => {
+            certificadosModal.style.display = 'none';
+        });
+
+        // Fechar o modal se o usuário clicar fora dele
+        window.addEventListener('click', (event) => {
+            if (event.target == certificadosModal) {
+                certificadosModal.style.display = 'none';
+            }
+        });
+    }
+});
