@@ -117,12 +117,12 @@ const setupMobileMenu = () => {
 
     hamburgerBtn.addEventListener('click', toggleMenu);
     mobileMenuOverlay.addEventListener('click', toggleMenu);
+    
+    // CORREÇÃO APLICADA AQUI:
+    // O evento de fechar o menu agora é adicionado a todos os links,
+    // incluindo o de Contato.
     mobileNav.querySelectorAll('a').forEach(link => {
-        // CORREÇÃO: Verifica se o href do link NÃO termina com #contato.
-        // Isso garante que o easter egg funcione sem fechar o menu.
-        if (!link.href.endsWith('#contato')) {
-             link.addEventListener('click', toggleMenu);
-        }
+        link.addEventListener('click', toggleMenu);
     });
 };
 
