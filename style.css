@@ -2146,3 +2146,7 @@ a.lb-main-link {
   }
 }
 
+body.night-mode .mobile-nav {
+  background-color: rgba(26, 26, 26, 0.75);
+}
+
