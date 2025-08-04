@@ -941,7 +941,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 60px;
   flex-wrap: wrap;
 }
 
@@ -1996,7 +1996,7 @@ a.lb-main-link {
   }
 
   .hero-section {
-    padding-top: 0px;
+    padding-top: 3rem;
   }
 
   .hero-image {
