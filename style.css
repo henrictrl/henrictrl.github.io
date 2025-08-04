@@ -18,17 +18,17 @@
   --cor-favoritos: #FFBF00;
 
   /* === Tema Diurno (Padrão) === */
-  --color-background: #FAF9F6;
-  --color-surface-1: #ffffff;
-  --color-surface-2: #f0f0f0;
+  --color-background: #fff9e3;
+  --color-surface-1: #f3efce;
+  --color-surface-2: #d5d2bb;
   --color-text-primary: #0b1215;
   --color-text-secondary: #555555;
   --color-text-tertiary: #888888;
   --color-border: #e0e0e0;
   --color-shadow-weak: rgba(11, 18, 21, 0.08);
   --color-shadow-strong: rgba(11, 18, 21, 0.15);
-  --backdrop-bg: rgba(250, 249, 246, 0.7);
-  --modal-bg: #EFEFEF;
+  --backdrop-bg: rgba(255, 249, 227, 0.50);
+  --modal-bg: #fff9e3;
 
   /* Cores do botão de tema */
   --theme-toggle-slider-bg: var(--cor-destaque);
@@ -351,7 +351,7 @@ footer {
   height: 100vh;
   padding: 80px 30px 20px;
   border-left: 1px solid var(--color-border);
-  background-color: var(--color-surface-1);
+  background-color: rgba(255, 249, 227, 0.8);;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
