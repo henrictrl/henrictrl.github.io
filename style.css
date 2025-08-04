@@ -2,7 +2,7 @@
 /* 1. FONTES E VARIÁVEIS GLOBAIS
 /* =================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Helvetica:ital,wght@0,400;0,700;1,400&family=Just+Me+Again+Down+Here&display=swap');
 
 :root {
   /* Cor de Destaque (Controlada via JS) */
@@ -86,7 +86,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-text-primary);
-  font-family: 'Lora', serif;
+  font-family: 'Helvetica', sans-serif;
   transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -618,7 +618,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   border: 1px solid var(--color-border);
   background-color: var(--color-surface-1);
   color: var(--color-text-primary);
-  font-family: 'Lora', serif;
+  font-family: 'Helvetica', sans-serif;
   font-size: 16px;
   transition: all 0.3s ease;
 }
@@ -981,7 +981,7 @@ body.night-mode .theme-toggle-button .slider-bg {
 .hero-text-content p,
 .hero-text .quote {
   margin-bottom: 1em;
-  font-family: 'Lora', serif;
+  font-family: 'Helvetica', sans-serif;
   font-size: 22px;
   line-height: 1.6;
   text-align: left;
@@ -1518,7 +1518,7 @@ a.lb-main-link {
 .lb-bio {
   margin: 4px 0;
   color: var(--color-text-secondary);
-  font-family: 'Lora', serif;
+  font-family: 'Helvetica', sans-serif;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -1711,7 +1711,10 @@ a.lb-main-link {
   align-self: center;
   padding: 6px 14px;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   color: #ffffff !important;
   font-size: 11px;
   font-weight: 900;
@@ -1990,6 +1993,10 @@ a.lb-main-link {
 
   .hero-text p {
     font-size: 20px;
+  }
+
+  .hero-section {
+    padding-top: 40px;
   }
 
   .hero-image {
