@@ -1060,7 +1060,7 @@ body.night-mode .theme-toggle-button .slider-bg {
 
 .mobile-links-section a {
   display: inline-block;
-  margin: 0 2px;
+  margin: 5px 8px;
   padding: 1px 12px;
   border-radius: 16px;
   background-color: var(--cor-destaque);
