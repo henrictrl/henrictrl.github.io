@@ -913,7 +913,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 2.5rem;
+  margin-top: 5px
 }
 
 .profile-tag {
@@ -989,7 +989,7 @@ body.night-mode .theme-toggle-button .slider-bg {
 
 .hero-text .quote {
   font-style: italic;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
 }
 
 .hero-text .author {
@@ -997,7 +997,9 @@ body.night-mode .theme-toggle-button .slider-bg {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   text-align: right;
+  margin-top: -0.3em;
 }
+
 
 .hero-image {
   position: relative;
@@ -1738,7 +1740,7 @@ a.lb-main-link {
 }
 
 .post-card-v2 .card-author {
-  margin-top: 4px;
+  margin-top: 2px;
   color: #fff !important;
   font-size: 13px;
   font-weight: 500;
@@ -2140,3 +2142,4 @@ a.lb-main-link {
     font-size: clamp(18px, 4.8vw, 22px) !important;
   }
 }
+
