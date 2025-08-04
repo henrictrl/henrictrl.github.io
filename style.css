@@ -2002,7 +2002,7 @@ a.lb-main-link {
   .hero-image {
     position: relative;
     display: block;
-    min-height: auto;
+    min-height: 200px;
     margin-top: 0;
   }
 
