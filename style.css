@@ -941,7 +941,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: 80px;
   flex-wrap: wrap;
 }
 
