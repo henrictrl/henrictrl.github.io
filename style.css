@@ -1055,7 +1055,7 @@ body.night-mode .theme-toggle-button .slider-bg {
 .mobile-links-section p {
   color: var(--color-text-secondary);
   font-size: 1.1rem;
-  line-height: 1.8;
+  line-height: 1.4;
 }
 
 .mobile-links-section a {
