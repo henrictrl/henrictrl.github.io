@@ -18,17 +18,17 @@
   --cor-favoritos: #FFBF00;
 
   /* === Tema Diurno (Padrão) === */
-  --color-background: #FAF9F6;
-  --color-surface-1: #ffffff;
-  --color-surface-2: #f0f0f0;
+  --color-background: #fff9e3;
+  --color-surface-1: #f3efce;
+  --color-surface-2: #d5d2bb;
   --color-text-primary: #0b1215;
   --color-text-secondary: #555555;
   --color-text-tertiary: #888888;
   --color-border: #e0e0e0;
   --color-shadow-weak: rgba(11, 18, 21, 0.08);
   --color-shadow-strong: rgba(11, 18, 21, 0.15);
-  --backdrop-bg: rgba(250, 249, 246, 0.7);
-  --modal-bg: #EFEFEF;
+  --backdrop-bg: rgba(255, 249, 227, 0.50);
+  --modal-bg: #fff9e3;
 
   /* Cores do botão de tema */
   --theme-toggle-slider-bg: var(--cor-destaque);
@@ -351,7 +351,7 @@ footer {
   height: 100vh;
   padding: 80px 30px 20px;
   border-left: 1px solid var(--color-border);
-  background-color: var(--color-surface-1);
+  background-color: rgba(255, 249, 227, 0.8);;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -913,7 +913,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 3px
 }
 
 .profile-tag {
@@ -941,7 +941,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 60px;
   flex-wrap: wrap;
 }
 
@@ -982,13 +982,14 @@ body.night-mode .theme-toggle-button .slider-bg {
 .hero-text .quote {
   margin-bottom: 1em;
   font-family: 'Helvetica', sans-serif;
-  font-size: 22px;
+  font-size: 19px;
   line-height: 1.6;
   text-align: left;
 }
 
 .hero-text .quote {
   font-style: italic;
+  margin-bottom: 0.2em;
 }
 
 .hero-text .author {
@@ -996,7 +997,9 @@ body.night-mode .theme-toggle-button .slider-bg {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   text-align: right;
+  margin-top: -0.3em;
 }
+
 
 .hero-image {
   position: relative;
@@ -1052,20 +1055,23 @@ body.night-mode .theme-toggle-button .slider-bg {
 .mobile-links-section p {
   color: var(--color-text-secondary);
   font-size: 1.1rem;
-  line-height: 1.8;
+  line-height: 1.4;
 }
 
 .mobile-links-section a {
   display: inline-block;
-  margin: 0 2px;
-  padding: 1px 12px;
-  border-radius: 16px;
-  background-color: var(--cor-destaque);
+  margin: 0;
+  padding: 0;
+  border-radius: 0px;
+  background-color: transparent;
   color: #fff;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  color: var(--cor-destaque);
+  font-size: inherit;
+  font-weight: 700;
+  transition: transform none;
 }
 
 .mobile-links-section a:hover {
@@ -1737,7 +1743,7 @@ a.lb-main-link {
 }
 
 .post-card-v2 .card-author {
-  margin-top: 4px;
+  margin-top: 2px;
   color: #fff !important;
   font-size: 13px;
   font-weight: 500;
@@ -1895,7 +1901,7 @@ a.lb-main-link {
   }
 
   .hero-content {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 40px;
     text-align: center;
   }
@@ -1993,17 +1999,18 @@ a.lb-main-link {
 
   .hero-text p {
     font-size: 20px;
+    margin-top: 80px;
   }
 
   .hero-section {
-    padding-top: 40px;
+    padding-top: 3rem;
   }
 
   .hero-image {
     position: relative;
     display: block;
-    min-height: 380px;
-    margin-top: 4rem;
+    min-height: 200px;
+    margin-top: 0;
   }
 
   .image-with-banner-container {
@@ -2015,12 +2022,12 @@ a.lb-main-link {
 
   .bottom-image {
     z-index: 1;
-    transform: translate(-25%, -50%) rotate(8deg);
+    transform: translate(-20%, -50%) rotate(8deg);
   }
 
   .top-image {
     z-index: 2;
-    transform: translate(-75%, -50%) rotate(-6deg);
+    transform: translate(-80%, -50%) rotate(-6deg);
   }
 
   .hero-image:hover .bottom-image {
@@ -2033,6 +2040,7 @@ a.lb-main-link {
 
   .mobile-links-section {
     display: block;
+    margin-top: 4rem;
   }
 
   .experience-section {
@@ -2137,3 +2145,8 @@ a.lb-main-link {
     font-size: clamp(18px, 4.8vw, 22px) !important;
   }
 }
+
+body.night-mode .mobile-nav {
+  background-color: rgba(26, 26, 26, 0.75);
+}
+
