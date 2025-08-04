@@ -913,7 +913,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 2.5rem;
 }
 
 .profile-tag {
@@ -2035,7 +2035,7 @@ a.lb-main-link {
 
   .mobile-links-section {
     display: block;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
   }
 
   .experience-section {
