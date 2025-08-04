@@ -913,7 +913,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 5px
+  margin-top: 3px
 }
 
 .profile-tag {
