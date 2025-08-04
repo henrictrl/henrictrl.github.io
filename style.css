@@ -982,13 +982,14 @@ body.night-mode .theme-toggle-button .slider-bg {
 .hero-text .quote {
   margin-bottom: 1em;
   font-family: 'Helvetica', sans-serif;
-  font-size: 22px;
+  font-size: 19px;
   line-height: 1.6;
   text-align: left;
 }
 
 .hero-text .quote {
   font-style: italic;
+  margin-bottom: 0.5em;
 }
 
 .hero-text .author {
@@ -2016,12 +2017,12 @@ a.lb-main-link {
 
   .bottom-image {
     z-index: 1;
-    transform: translate(-25%, -50%) rotate(8deg);
+    transform: translate(-20%, -50%) rotate(8deg);
   }
 
   .top-image {
     z-index: 2;
-    transform: translate(-75%, -50%) rotate(-6deg);
+    transform: translate(-80%, -50%) rotate(-6deg);
   }
 
   .hero-image:hover .bottom-image {
