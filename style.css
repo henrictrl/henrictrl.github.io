@@ -1060,15 +1060,17 @@ body.night-mode .theme-toggle-button .slider-bg {
 
 .mobile-links-section a {
   display: inline-block;
-  margin: 5px 8px;
-  padding: 1px 12px;
-  border-radius: 16px;
-  background-color: var(--cor-destaque);
+  margin: 0;
+  padding: 0;
+  border-radius: 0px;
+  background-color: transparent;
   color: #fff;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  color: var(--cor-destaque);
+  font-size: inherit;
+  transition: transform none;
 }
 
 .mobile-links-section a:hover {
