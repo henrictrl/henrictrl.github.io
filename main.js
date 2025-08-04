@@ -651,3 +651,54 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 });
+
+const setupTooltipToggleMobile = () => {
+        const tooltips = document.querySelectorAll('.highlight-tooltip');
+
+        tooltips.forEach(tooltip => {
+            tooltip.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const currentTooltipText = this.querySelector('.tooltip-text');
+                const isVisible = currentTooltipText.classList.contains('visible');
+
+                document.querySelectorAll('.tooltip-text.visible').forEach(tt => {
+                    tt.classList.remove('visible');
+                });
+
+                if (!isVisible) {
+                    currentTooltipText.classList.add('visible');
+                }
+            });
+        });
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.tooltip-text.visible').forEach(tt => {
+                tt.classList.remove('visible');
+            });
+        });
+    };
+
+    const init = () => {
+        // ... (outras inicializações) ...
+
+        if (window.innerWidth < 993) {
+            setupTooltipToggleMobile();
+        }
+    };
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth < 993) {
+        setupTooltipToggleMobile();
+    } else {
+        // Opcional: remover listeners de clique se voltar para o desktop
+        const tooltips = document.querySelectorAll('.highlight-tooltip');
+        tooltips.forEach(tooltip => {
+            tooltip.removeEventListener('click', /* listener function */); // Precisa guardar a referência da função para remover
+            const tooltipText = tooltip.querySelector('.tooltip-text');
+            if (tooltipText) {
+                tooltipText.classList.remove('visible'); // Garante que os tooltips não fiquem visíveis no desktop
+            }
+        });
+        document.removeEventListener('click', /* listener function */); // Precisa guardar a referência da função para remover
+    }
+});
