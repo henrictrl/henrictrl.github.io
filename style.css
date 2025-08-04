@@ -1996,14 +1996,14 @@ a.lb-main-link {
   }
 
   .hero-section {
-    padding-top: 10px;
+    padding-top: 0px;
   }
 
   .hero-image {
     position: relative;
     display: block;
-    min-height: 380px;
-    margin-top: 1rem;
+    min-height: auto;
+    margin-top: 0;
   }
 
   .image-with-banner-container {
@@ -2033,6 +2033,7 @@ a.lb-main-link {
 
   .mobile-links-section {
     display: block;
+    margin-top: 2.5rem;
   }
 
   .experience-section {
