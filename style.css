@@ -1895,7 +1895,7 @@ a.lb-main-link {
   }
 
   .hero-content {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 40px;
     text-align: center;
   }
@@ -1996,14 +1996,14 @@ a.lb-main-link {
   }
 
   .hero-section {
-    padding-top: 40px;
+    padding-top: 10px;
   }
 
   .hero-image {
     position: relative;
     display: block;
     min-height: 380px;
-    margin-top: 4rem;
+    margin-top: 1rem;
   }
 
   .image-with-banner-container {
