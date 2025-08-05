@@ -18,17 +18,17 @@
   --cor-favoritos: #FFBF00;
 
   /* === Tema Diurno (Padrão) === */
-  --color-background: #e1ddd3;
+  --color-background: #d5d5d5;
   --color-surface-1: #c8c8c8;
   --color-surface-2: #c3c3c3;
   --color-text-primary: #59534e;
-  --color-text-secondary: #8c8680;
-  --color-text-tertiary: #babaaa;
+  --color-text-secondary: #9e9e9e;
+  --color-text-tertiary: #bfbfbf;
   --color-border: #d1cdc7;
   --color-shadow-weak: rgba(168, 165, 165, 0.07);
   --color-shadow-strong: rgba(89, 83, 78, 0.14);
   --backdrop-bg: rgba(226, 226, 226, 0.753);
-  --modal-bg: #fbfaf8;
+  --modal-bg: #e2e2e2;
 
 
   /* Cores do botão de tema */
