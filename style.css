@@ -352,7 +352,7 @@ footer {
   height: 100vh;
   padding: 80px 30px 20px;
   border-left: 1px solid var(--color-border);
-  background-color: rgba(255, 249, 227, 0.8);;
+background-color: rgba(251, 250, 248, 0.85);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
