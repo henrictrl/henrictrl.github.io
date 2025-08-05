@@ -27,7 +27,7 @@
   --color-border: #d1cdc7;
   --color-shadow-weak: rgba(168, 165, 165, 0.07);
   --color-shadow-strong: rgba(89, 83, 78, 0.14);
-  --backdrop-bg: rgba(89, 83, 78, 0.3);
+  --backdrop-bg: rgba(255, 247, 225, 0.753);
   --modal-bg: #fbfaf8;
 
 
@@ -352,7 +352,7 @@ footer {
   height: 100vh;
   padding: 80px 30px 20px;
   border-left: 1px solid var(--color-border);
-background-color: rgba(251, 250, 248, 0.85);
+background-color: rgba(251, 250, 248);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
