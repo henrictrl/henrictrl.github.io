@@ -19,15 +19,15 @@
 
   /* === Tema Diurno (Padrão) === */
   --color-background: #fff9e3;
-  --color-surface-1: #f3efce;
-  --color-surface-2: #d5d2bb;
+  --color-surface-1: #f7f3ce;
+  --color-surface-2: #fffbdf;
   --color-text-primary: #0b1215;
-  --color-text-secondary: #555555;
-  --color-text-tertiary: #888888;
+  --color-text-secondary: #898067;
+  --color-text-tertiary: #bfb57d;
   --color-border: #e0e0e0;
   --color-shadow-weak: rgba(11, 18, 21, 0.08);
   --color-shadow-strong: rgba(11, 18, 21, 0.15);
-  --backdrop-bg: rgba(255, 249, 227, 0.50);
+  --backdrop-bg: rgba(255, 241, 188, 0.5);
   --modal-bg: #fff9e3;
 
   /* Cores do botão de tema */
