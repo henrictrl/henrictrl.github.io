@@ -18,17 +18,18 @@
   --cor-favoritos: #FFBF00;
 
   /* === Tema Diurno (Padrão) === */
-  --color-background: #f4f1ea;
-  --color-surface-1: #e9e4d9;
-  --color-surface-2: #faf7f0;
-  --color-text-primary: #4a443c;
-  --color-text-secondary: #7a7368;
-  --color-text-tertiary: #a9a299;
-  --color-border: #d9d2c5;
-  --color-shadow-weak: rgba(74, 68, 60, 0.08);
-  --color-shadow-strong: rgba(74, 68, 60, 0.16);
-  --backdrop-bg: rgba(74, 68, 60, 0.4);
-  --modal-bg: #faf7f0;
+  --color-background: #f2efe9;
+  --color-surface-1: #e3ded7;
+  --color-surface-2: #fbfaf8;
+  --color-text-primary: #59534e;
+  --color-text-secondary: #8c8680;
+  --color-text-tertiary: #babaaa;
+  --color-border: #d1cdc7;
+  --color-shadow-weak: rgba(168, 165, 165, 0.07);
+  --color-shadow-strong: rgba(89, 83, 78, 0.14);
+  --backdrop-bg: rgba(89, 83, 78, 0.3);
+  --modal-bg: #fbfaf8;
+
 
   /* Cores do botão de tema */
   --theme-toggle-slider-bg: var(--cor-destaque);
