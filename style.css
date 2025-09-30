@@ -375,12 +375,12 @@ background-color: rgba(251, 250, 248);
 }
 
 .mobile-nav ul a:hover {
-  background-color: var(--color-surface-2);
-  color: var(--color-text-primary);
+  background-color: transparent; /* Remove o fundo ao passar o rato */
+  color: var(--cor-destaque);    /* Muda apenas a cor do texto */
 }
 
 .mobile-nav ul a.active {
-  background-color: color-mix(in srgb, var(--cor-destaque) 15%, transparent);
+  background-color: transparent; /* Remove o fundo do item ativo */
   color: var(--cor-destaque);
 }
 
