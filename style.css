@@ -6,10 +6,10 @@
 
 :root {
   /* Cor de Destaque (Controlada via JS) */
-  --cor-destaque: #ff4948;
+  --cor-destaque: #5c6ac4; /* Mudei para um azul suave e neutro */
 
-  /* Cores das Categorias (Página Artigos) */
-  --cor-todos: #ff4948;
+  /* Cores das Categorias (Página Artigos) - Mantidas para identidade visual */
+  --cor-todos: #5c6ac4; /* Atualizei para corresponder à nova cor de destaque */
   --cor-artigos: #4285F4;
   --cor-cinema: #FB8C00;
   --cor-literatura: #33b862;
@@ -17,39 +17,38 @@
   --cor-cabine: #ff4fd8;
   --cor-favoritos: #FFBF00;
 
-  /* === Tema Diurno (Padrão) === */
-  --color-background: #FFFAF0;
-  --color-surface-1: #fbf6e6;
-  --color-surface-2: #F8F4E3;
-  --color-text-primary: #59534e;
-  --color-text-secondary: #8A817C;
-  --color-text-tertiary: #B0A8A1;
-  --color-border: #E0DACE;
-  --color-shadow-weak: rgba(89, 83, 78, 0.07);
-  --color-shadow-strong: rgba(89, 83, 78, 0.14);
-  --backdrop-bg: #FFFAF0;
-  --modal-bg: #FFFAF0;
-
+  /* === Tema Diurno Neutro === */
+  --color-background: #f8f9fa;       /* Branco suave */
+  --color-surface-1: #ffffff;        /* Branco puro para os cards */
+  --color-surface-2: #e9ecef;        /* Cinza claro para fundos secundários */
+  --color-text-primary: #212529;     /* Preto suave para texto principal */
+  --color-text-secondary: #6c757d;    /* Cinza médio para texto secundário */
+  --color-text-tertiary: #adb5bd;     /* Cinza claro para texto terciário */
+  --color-border: #dee2e6;           /* Cinza para as bordas */
+  --color-shadow-weak: rgba(0, 0, 0, 0.05);
+  --color-shadow-strong: rgba(0, 0, 0, 0.1);
+  --backdrop-bg: rgba(248, 249, 250, 0.7); /* Fundo do modal com transparência */
+  --modal-bg: #ffffff;
 
   /* Cores do botão de tema */
   --theme-toggle-slider-bg: var(--cor-destaque);
-  --theme-icon-active: var(--color-background);
+  --theme-icon-active: #ffffff;
   --theme-icon-inactive: var(--color-text-secondary);
 }
 
 body.night-mode {
-  /* === Tema Noturno === */
-  --color-background: #0b1215;
-  --color-surface-1: #1a1a1a;
-  --color-surface-2: #2a2a2a;
-  --color-text-primary: #F8F8F8;
-  --color-text-secondary: #888888;
-  --color-text-tertiary: #666666;
-  --color-border: #2a2a2a;
+  /* === Tema Noturno Ajustado === */
+  --color-background: #121212;       /* Cinza muito escuro */
+  --color-surface-1: #1e1e1e;        /* Cinza escuro para os cards */
+  --color-surface-2: #282828;        /* Cinza para fundos secundários */
+  --color-text-primary: #e8e8e8;     /* Branco suave para texto */
+  --color-text-secondary: #a0a0a0;    /* Cinza claro para texto secundário */
+  --color-text-tertiary: #6c6c6c;     /* Cinza médio para texto terciário */
+  --color-border: #2c2c2c;           /* Borda escura subtil */
   --color-shadow-weak: rgba(0, 0, 0, 0.15);
   --color-shadow-strong: rgba(0, 0, 0, 0.3);
-  --backdrop-bg: rgba(26, 26, 26, 0.7);
-  --modal-bg: #111;
+  --backdrop-bg: rgba(30, 30, 30, 0.7);
+  --modal-bg: #1e1e1e;
 }
 
 body.night-mode .theme-toggle-button .icon-sun {
@@ -368,7 +367,7 @@ background-color: rgba(251, 250, 248);
   display: block;
   padding: 15px 10px;
   border-radius: 8px;
-  color: var(--color-text-secondary);
+  background-color: var(--color-surface-1);
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
