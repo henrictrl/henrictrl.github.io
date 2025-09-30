@@ -1385,7 +1385,7 @@ body.night-mode .theme-toggle-button .slider-bg {
   padding: 20px;
   border-radius: 12px;
   border: 1px solid var(--color-border);
-  background-color: var(--color-background);
+  background-color: var(--color-surface-1); 
   box-shadow: 0 5px 15px var(--color-shadow-weak);
   transition: all 0.4s ease;
 }
