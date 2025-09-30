@@ -374,9 +374,13 @@ background-color: rgba(251, 250, 248);
   transition: all 0.2s ease;
 }
 
-.mobile-nav ul a:hover,
-.mobile-nav ul a.active {
+.mobile-nav ul a:hover {
   background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+.mobile-nav ul a.active {
+  background-color: color-mix(in srgb, var(--cor-destaque) 15%, transparent);
   color: var(--cor-destaque);
 }
 
