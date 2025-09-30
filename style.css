@@ -2153,3 +2153,7 @@ body.night-mode .mobile-nav {
   background-color: rgba(26, 26, 26, 0.75);
 }
 
+.sidebar-nav a:visited,
+.mobile-nav ul a:visited {
+  color: var(--color-text-secondary);
+}   
