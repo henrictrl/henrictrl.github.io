@@ -2155,5 +2155,5 @@ body.night-mode .mobile-nav {
 
 .sidebar-nav a:visited,
 .mobile-nav ul a:visited {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 }   
