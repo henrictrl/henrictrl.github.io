@@ -3025,6 +3025,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const livePreviewResize = new ResizeObserver(syncLiveProjectPreviews);
   const observeLiveProjectPreviews = () => {
+    livePreviewResize.disconnect();
     document.querySelectorAll('.work-card-live-preview .work-card-media').forEach(media => livePreviewResize.observe(media));
     syncLiveProjectPreviews();
   };
