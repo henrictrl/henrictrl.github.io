@@ -576,6 +576,19 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-body.no-toc { grid-template-columns: minmax(0, 1fr); max-width: 1400px; }
 .dk-imgs { min-width: 0; }
 .dk-imgs > img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--gray-100); content-visibility: auto; contain-intrinsic-size: auto 600px; } /* só as páginas da apresentação */
+
+/* Grade adaptável de miniaturas — Rino: peças */
+.rino-pecas-gallery { padding: 0 0 48px; }
+.rino-pecas-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 12px; }
+.rino-piece { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; min-width: 0; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.rino-piece-thumb { display: block; aspect-ratio: 16/9; overflow: hidden; background: var(--gray-100); }
+.rino-piece-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .25s var(--ease); }
+.rino-piece:hover .rino-piece-thumb img { transform: scale(1.025); }
+.rino-piece:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+.rino-piece-title { display: block; font-size: 12px; line-height: 1.35; color: var(--gray-500); }
+@media (max-width: 1199px) { .rino-pecas-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 899px) { .rino-pecas-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; } }
+@media (max-width: 559px) { .rino-pecas-gallery { padding: 0 12px 32px; } .rino-pecas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 8px; } .rino-piece-title { font-size: 11px; } }
 .dk-cap { max-width: 620px; margin: 0 auto; padding: 40px 24px; text-align: center; }
 .dk-cap h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
 .dk-cap p { font-size: 14px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
@@ -1540,7 +1553,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="tools-float" id="tools-float" aria-hidden="true"></div>
   <div class="footer-inner">
     <div>
-      <h2 class="footer-headline" data-i18n="footer.headline">Contato</h2>
+      <h2 class="footer-headline" data-i18n="footer.headline">Vamos trabalhar juntos?</h2>
     </div>
     <nav class="footer-socials" aria-label="Redes e contatos">
       <a href="mailto:henriquemarinhos@icloud.com" class="footer-social">E-mail</a>
@@ -1782,7 +1795,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'am.loading': 'Loading…', 'am.translating': 'Translating…',
       'am.note': 'Machine translation from Portuguese.', 'am.original': 'Read the original',
       'dk.pdf': 'Download PDF', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
-      'footer.headline': 'Contact',
+      'footer.headline': "Let's work together?",
       'pm.live': 'See it live', 'pm.context': 'Context', 'pm.solution': 'Solution', 'pm.did': 'What I did', 'pm.tools': 'Tools',
       'lightbox.hint': 'Scroll to zoom · drag to move',
       'sm.eyebrow': 'Service', 'sm.included': "What's included", 'sm.process': 'How I work', 'sm.related': 'Related projects', 'sm.cta': 'Request a quote',
@@ -1817,7 +1830,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'am.loading': 'Cargando…', 'am.translating': 'Traduciendo…',
       'am.note': 'Traducción automática del portugués.', 'am.original': 'Leer el original',
       'dk.pdf': 'Descargar PDF', 'aboutp.photo': 'Foto de perfil', 'aboutp.exp': 'Experiencia', 'aboutp.edu': 'Formación', 'aboutp.extra': 'Actividades complementarias', 'aboutp.skills': 'Habilidades técnicas', 'art.grid': 'Ver en cuadrícula',
-      'footer.headline': 'Contacto',
+      'footer.headline': '¿Trabajamos juntos?',
       'pm.live': 'Ver en vivo', 'pm.context': 'Contexto', 'pm.solution': 'Solución', 'pm.did': 'Lo que hice', 'pm.tools': 'Herramientas',
       'lightbox.hint': 'Desplaza para hacer zoom · arrastra para mover',
       'sm.eyebrow': 'Servicio', 'sm.included': 'Qué incluye', 'sm.process': 'Cómo trabajo', 'sm.related': 'Proyectos relacionados', 'sm.cta': 'Solicitar presupuesto',
@@ -2966,13 +2979,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
   const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['editorial', { pt: 'Campanhas e editorial', en: 'Campaigns and editorial', es: 'Campañas y editorial' }], ['web', { pt: 'Programação', en: 'Web development', es: 'Programación' }], ['conteudo', { pt: 'Carrosséis e posts', en: 'Carousels and posts', es: 'Carruseles y posts' }], ['exploracoes', { pt: 'Explorações', en: 'Explorations', es: 'Exploraciones' }]];   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjFiltro = 'all';
-  const naHome = (p) => ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
+  const naHome = (p) => p.slug !== 'rino-pecas' && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
     const dashboardCTA = document.getElementById('work-dashboard-cta');
     if (!grid) return;
-    const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit');
+    const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit' && p.slug !== 'rino-pecas');
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
@@ -3398,19 +3411,25 @@ document.addEventListener('DOMContentLoaded', () => {
     tb.hidden = !p.web; tb.innerHTML = TRY_ICO + lx(DK_L.try);
     // telas (páginas da apresentação) empilhadas; legenda entre imagens só onde há descrição
     const blocks = deckBlocks(p);
-    document.getElementById('dk-imgs').innerHTML = p.telas.map((t, k) => {
-      const d = k > 0 ? lx(t.d) : '';
-      return (d ? `<div class="dk-cap"><h3>${lx(t.t)}</h3><p>${d}</p></div>` : '') + `<img id="dk-p${k + 1}" src="${p.dir}${t.img}.webp" alt="${lx(t.t)}" width="2048" height="1152" decoding="async"${k > 1 ? ' loading="lazy"' : ''}>`;
-    }).join('') + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
+    const telasHTML = p.slug === 'rino-pecas'
+      ? `<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">${p.telas.map((t, k) => `<button class="rino-piece" id="dk-p${k + 1}" type="button" aria-label="Abrir ${esc(lx(t.t))}" title="${esc(lx(t.t))}" onclick="openLightbox('${p.dir}${t.img}.webp')"><span class="rino-piece-thumb"><img src="${p.dir}${t.img}-t.webp" alt="${esc(lx(t.t))}" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">${esc(lx(t.t))}</span></button>`).join('')}</div></section>`
+      : p.telas.map((t, k) => {
+          const d = k > 0 ? lx(t.d) : '';
+          return (d ? `<div class="dk-cap"><h3>${lx(t.t)}</h3><p>${d}</p></div>` : '') + `<img id="dk-p${k + 1}" src="${p.dir}${t.img}.webp" alt="${lx(t.t)}" width="2048" height="1152" decoding="async"${k > 1 ? ' loading="lazy"' : ''}>`;
+        }).join('');
+    document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
     // sumário: seções das telas + blocos; a seção visível fica marcada
     const toc = document.getElementById('dk-toc'), sc = document.getElementById('dk-scroll');
     const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
     if (p.html === 'meta') initMeta();
-    const nx = PJ[(PJ.indexOf(p) + 1) % PJ.length];
-    const nb = document.getElementById('dk-next'); nb.hidden = PJ.length < 2;
-    nb.innerHTML = `<span>${lx(NEXT_L)}</span>${nx.titulo} →`; nb.onclick = () => openDeck(nx.slug);
+    const navPJ = PJ.filter(item => item.slug !== 'rino-pecas');
+    const navIndex = navPJ.indexOf(p);
+    const nx = navIndex >= 0 ? navPJ[(navIndex + 1) % navPJ.length] : null;
+    const nb = document.getElementById('dk-next'); nb.hidden = !nx || navPJ.length < 2;
+    nb.innerHTML = nx ? `<span>${lx(NEXT_L)}</span>${nx.titulo} →` : '';
+    nb.onclick = nx ? () => openDeck(nx.slug) : null;
     sc.scrollTop = 0;
     dsInit();
     const siteHeader = document.querySelector('header.top-header');
