@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Rino — Definidor de cores</title>
+  <desc id="desc">Capa em azul-marinho e tons neutros para a ferramenta de definição de cores da Rino.</desc>
+  <rect width="1200" height="800" fill="#f1efec"/>
+  <rect x="38" y="38" width="1124" height="724" rx="24" fill="#fff" stroke="#dce3e9" stroke-width="2"/>
+  <path d="M62 38h1076a24 24 0 0 1 24 24v84H38V62a24 24 0 0 1 24-24Z" fill="#123458"/>
+  <text x="82" y="105" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="3" fill="#f1efec">RINO</text>
+  <text x="1115" y="101" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2.5" fill="#d7e0e8">FERRAMENTA DE MARCA</text>
+  <text x="82" y="209" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700" letter-spacing="-1.5" fill="#182331">Definidor de cores</text>
+  <text x="84" y="246" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#6f7d8e">Teste combinações diretamente no logotipo.</text>
+  <rect x="82" y="284" width="478" height="406" rx="18" fill="#f4f6f8" stroke="#e1e7ed" stroke-width="2"/>
+  <text x="110" y="322" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="1.6" fill="#6f7d8e">PRÉ-VISUALIZAÇÃO</text>
+  <rect x="110" y="345" width="422" height="251" rx="12" fill="#123458"/>
+  <path d="M157 504c18-34 40-53 76-62l47-9 28-31 42 5 29 35 49 7 34 31-7 38-49 8-14-19-36-3-17 31-43 0-16-30-32-2-9 20-42-1-9-18Z" fill="#f1efec"/>
+  <circle cx="340" cy="430" r="11" fill="#3a5674"/>
+  <text x="321" y="568" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="5" fill="#f1efec">RINO</text>
+  <text x="110" y="634" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6f7d8e">Prévia ao vivo · ajustes por elemento</text>
+  <rect x="584" y="284" width="534" height="406" rx="18" fill="#fff" stroke="#e1e7ed" stroke-width="2"/>
+  <text x="614" y="323" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#182331">Combinações de cor</text>
+  <text x="614" y="350" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6f7d8e">Selecione uma paleta ou ajuste cada parte.</text>
+  <rect x="614" y="374" width="474" height="74" rx="12" fill="#f1efec" stroke="#dce3e9"/>
+  <text x="634" y="402" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#182331">Paleta azul</text>
+  <g transform="translate(634 414)">
+    <rect width="38" height="20" rx="4" fill="#123458"/><rect x="44" width="38" height="20" rx="4" fill="#3a5674"/><rect x="88" width="38" height="20" rx="4" fill="#617890"/><rect x="132" width="38" height="20" rx="4" fill="#899aac"/><rect x="176" width="38" height="20" rx="4" fill="#b0bbc7"/><rect x="220" width="38" height="20" rx="4" fill="#f1efec" stroke="#cfd8e0"/><rect x="264" width="38" height="20" rx="4" fill="#2b2b2b"/>
+  </g>
+  <rect x="614" y="462" width="474" height="74" rx="12" fill="#f7f9fb" stroke="#e1e7ed"/>
+  <text x="634" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#182331">Partes do logotipo</text>
+  <g transform="translate(634 502)">
+    <rect width="93" height="21" rx="5" fill="#123458"/><rect x="101" width="93" height="21" rx="5" fill="#f1efec" stroke="#d1dae2"/><rect x="202" width="93" height="21" rx="5" fill="#899aac"/><rect x="303" width="93" height="21" rx="5" fill="#2b2b2b"/>
+  </g>
+  <rect x="614" y="551" width="474" height="108" rx="12" fill="#fff" stroke="#e1e7ed"/>
+  <text x="634" y="580" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#182331">Ajuste fino</text>
+  <rect x="634" y="594" width="270" height="9" rx="5" fill="#dce3e9"/>
+  <rect x="634" y="594" width="174" height="9" rx="5" fill="#3a5674"/>
+  <circle cx="808" cy="598.5" r="9" fill="#fff" stroke="#123458" stroke-width="3"/>
+  <rect x="932" y="590" width="132" height="34" rx="8" fill="#123458"/>
+  <text x="998" y="612" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff">EXPORTAR PNG</text>
+</svg>
