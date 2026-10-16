@@ -19,6 +19,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo",
+      "manual-marca"
+    ],
+    "setor": [
+      "tatuagem",
+      "servicos-locais"
+    ],
+    "contexto": [
+      "cliente",
+      "internacional"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
   "link": "https://www.classictattoopch.com",
   "dir": "assets/projetos/classic-tattoo/",
@@ -587,6 +605,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo",
+      "manual-marca"
+    ],
+    "setor": [
+      "b2b",
+      "credito-financas"
+    ],
+    "contexto": [
+      "cliente"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/rino/capa.webp",
   "dir": "assets/projetos/rino/",
   "telas": [
@@ -1324,6 +1359,24 @@ window.PROJETOS = [
     "es": "Diseño gráfico y editorial"
   },
   "filtro": "editorial",
+  "etiquetas": {
+    "entrega": [
+      "pecas-graficas",
+      "embalagens"
+    ],
+    "setor": [
+      "b2b",
+      "credito-financas"
+    ],
+    "contexto": [
+      "cliente",
+      "desdobramento-marca"
+    ],
+    "competencias": [
+      "design-grafico",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/rino-pecas/capa.webp",
   "dir": "assets/projetos/rino-pecas/",
   "telas": [
@@ -2195,6 +2248,24 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
+  "etiquetas": {
+    "entrega": [
+      "ferramenta-interativa",
+      "site"
+    ],
+    "setor": [
+      "b2b",
+      "tecnologia"
+    ],
+    "contexto": [
+      "cliente",
+      "ferramenta-propria"
+    ],
+    "competencias": [
+      "programacao",
+      "design-interface"
+    ]
+  },
   "capa": "assets/projetos/rino/capa-definidor.svg",
   "dir": "assets/projetos/rino/",
   "intro": {
@@ -2229,6 +2300,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo",
+      "aplicacoes-marca"
+    ],
+    "setor": [
+      "varejo",
+      "optica"
+    ],
+    "contexto": [
+      "cliente",
+      "rebranding"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
@@ -2473,6 +2562,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo",
+      "manual-marca"
+    ],
+    "setor": [
+      "moda-acessorios",
+      "beleza"
+    ],
+    "contexto": [
+      "cliente"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/sollaris/capa.webp",
   "dir": "assets/projetos/sollaris/",
   "telas": [
@@ -2895,6 +3001,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo"
+    ],
+    "setor": [
+      "tecnologia",
+      "podcast"
+    ],
+    "contexto": [
+      "cliente",
+      "projeto-ligado"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/equity360/capa.webp",
   "dir": "assets/projetos/equity360/",
   "telas": [
@@ -3065,6 +3188,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "pecas-graficas"
+    ],
+    "setor": [
+      "institucional",
+      "educacao"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "direcao-arte",
+      "design-grafico"
+    ]
+  },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
@@ -3312,6 +3453,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "pictogramas"
+    ],
+    "setor": [
+      "institucional",
+      "esporte"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "design-grafico"
+    ]
+  },
   "capa": "assets/projetos/interserv/capa.webp",
   "dir": "assets/projetos/interserv/",
   "telas": [
@@ -3543,6 +3702,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "manual-marca"
+    ],
+    "setor": [
+      "institucional",
+      "saude"
+    ],
+    "contexto": [
+      "cliente"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/ntaps/capa.webp",
   "dir": "assets/projetos/ntaps/",
   "telas": [
@@ -3743,6 +3919,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "manual-marca",
+      "estrategia-marca"
+    ],
+    "setor": [
+      "institucional",
+      "saude"
+    ],
+    "contexto": [
+      "projeto-academico",
+      "colaboracao"
+    ],
+    "competencias": [
+      "estrategia-marca",
+      "identidade-visual"
+    ]
+  },
   "capa": "assets/projetos/csunesp/capa.webp",
   "dir": "assets/projetos/csunesp/",
   "telas": [
@@ -3961,6 +4155,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "pecas-graficas"
+    ],
+    "setor": [
+      "institucional",
+      "saude"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
@@ -4161,6 +4373,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "manual-marca"
+    ],
+    "setor": [
+      "institucional",
+      "cultura"
+    ],
+    "contexto": [
+      "cliente"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/nupe/capa.webp",
   "dir": "assets/projetos/nupe/",
   "telas": [
@@ -4450,6 +4679,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "posts-carrosseis"
+    ],
+    "setor": [
+      "institucional",
+      "cultura"
+    ],
+    "contexto": [
+      "campanha",
+      "evento"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
@@ -4577,6 +4824,24 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "manual-marca",
+      "editorial"
+    ],
+    "setor": [
+      "consultoria",
+      "tecnologia"
+    ],
+    "contexto": [
+      "projeto-academico",
+      "colaboracao"
+    ],
+    "competencias": [
+      "design-editorial",
+      "diagramacao"
+    ]
+  },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
   "dir": "assets/projetos/prisma-brandbook/",
   "telas": [
@@ -4762,6 +5027,23 @@ window.PROJETOS = [
     "es": "Identidad de marca"
   },
   "filtro": "identidade",
+  "etiquetas": {
+    "entrega": [
+      "logotipo",
+      "manual-marca"
+    ],
+    "setor": [
+      "consultoria",
+      "comunicacao"
+    ],
+    "contexto": [
+      "projeto-academico"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "design-grafico"
+    ]
+  },
   "capa": "assets/projetos/cminds/capa.webp",
   "dir": "assets/projetos/cminds/",
   "telas": [
@@ -5013,6 +5295,24 @@ window.PROJETOS = [
     "es": "Campañas, eventos y fotografía"
   },
   "filtro": "campanhas",
+  "etiquetas": {
+    "entrega": [
+      "campanha",
+      "cartaz-folder"
+    ],
+    "setor": [
+      "institucional",
+      "saude"
+    ],
+    "contexto": [
+      "campanha",
+      "evento"
+    ],
+    "competencias": [
+      "design-grafico",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
   "dir": "assets/projetos/setembro-amarelo/",
   "telas": [
@@ -5138,6 +5438,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "stories-gifs"
+    ],
+    "setor": [
+      "educacao",
+      "cultura"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "social-media",
+      "design-grafico"
+    ]
+  },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
@@ -5320,6 +5638,24 @@ window.PROJETOS = [
     "es": "Estrategia, educación e investigación"
   },
   "filtro": "estrategia",
+  "etiquetas": {
+    "entrega": [
+      "proposta-estrategica",
+      "apresentacao"
+    ],
+    "setor": [
+      "consultoria",
+      "tecnologia"
+    ],
+    "contexto": [
+      "projeto-academico",
+      "competicao"
+    ],
+    "competencias": [
+      "estrategia-marca",
+      "diagramacao"
+    ]
+  },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
@@ -5580,6 +5916,24 @@ window.PROJETOS = [
     "es": "Diseño gráfico y editorial"
   },
   "filtro": "editorial",
+  "etiquetas": {
+    "entrega": [
+      "folder",
+      "editorial"
+    ],
+    "setor": [
+      "esporte",
+      "terceiro-setor"
+    ],
+    "contexto": [
+      "cliente",
+      "internacional"
+    ],
+    "competencias": [
+      "design-editorial",
+      "diagramacao"
+    ]
+  },
   "capa": "assets/projetos/inspirit/capa.webp",
   "dir": "assets/projetos/inspirit/",
   "telas": [
@@ -5687,6 +6041,24 @@ window.PROJETOS = [
     "es": "Diseño gráfico y editorial"
   },
   "filtro": "editorial",
+  "etiquetas": {
+    "entrega": [
+      "cartaz-folder",
+      "ilustracao"
+    ],
+    "setor": [
+      "cultura",
+      "evento"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "design-grafico",
+      "ilustracao"
+    ]
+  },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
   "dir": "assets/projetos/festa-da-polenta/",
   "telas": [
@@ -5794,6 +6166,23 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
+  "etiquetas": {
+    "entrega": [
+      "site",
+      "portfolio-site"
+    ],
+    "setor": [
+      "jornalismo-cultural",
+      "cultura"
+    ],
+    "contexto": [
+      "cliente"
+    ],
+    "competencias": [
+      "programacao",
+      "design-interface"
+    ]
+  },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
   "dir": "assets/projetos/fellipe-gualberto/",
   "intro": {
@@ -5959,6 +6348,24 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
+  "etiquetas": {
+    "entrega": [
+      "catalogo-digital",
+      "exportacao-png"
+    ],
+    "setor": [
+      "varejo",
+      "tecnologia"
+    ],
+    "contexto": [
+      "cliente",
+      "ferramenta-comercial"
+    ],
+    "competencias": [
+      "programacao",
+      "design-interface"
+    ]
+  },
   "capa": "assets/projetos/nova-rio-branco/capa.webp",
   "dir": "assets/projetos/nova-rio-branco/",
   "telas": [
@@ -6097,6 +6504,24 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
+  "etiquetas": {
+    "entrega": [
+      "ferramenta-interativa",
+      "exportacao"
+    ],
+    "setor": [
+      "tecnologia",
+      "arte-digital"
+    ],
+    "contexto": [
+      "ferramenta-propria",
+      "projeto-independente"
+    ],
+    "competencias": [
+      "programacao",
+      "processamento-grafico"
+    ]
+  },
   "capa": "assets/projetos/pixelar/capa.webp",
   "dir": "assets/projetos/pixelar/",
   "intro": {
@@ -6275,6 +6700,24 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
+  "etiquetas": {
+    "entrega": [
+      "portfolio-site",
+      "processo"
+    ],
+    "setor": [
+      "design",
+      "tecnologia"
+    ],
+    "contexto": [
+      "portfolio",
+      "projeto-independente"
+    ],
+    "competencias": [
+      "programacao",
+      "design-interface"
+    ]
+  },
   "capa": "assets/projetos/metaprojeto/capa.webp",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
@@ -6296,6 +6739,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "conteudo-recorrente"
+    ],
+    "setor": [
+      "b2b",
+      "legaltech"
+    ],
+    "contexto": [
+      "trabalho-recorrente",
+      "cliente"
+    ],
+    "competencias": [
+      "social-media",
+      "redacao"
+    ]
+  },
   "capa": "assets/projetos/basement/capa.webp",
   "dir": "assets/projetos/basement/",
   "intro": {
@@ -6328,6 +6789,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "artigos"
+    ],
+    "setor": [
+      "cultura",
+      "jornalismo-cultural"
+    ],
+    "contexto": [
+      "trabalho-recorrente",
+      "projeto-editorial"
+    ],
+    "competencias": [
+      "redacao",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/tesoura/capa.webp",
   "dir": "assets/projetos/tesoura/",
   "intro": {
@@ -6356,6 +6835,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "artigos"
+    ],
+    "setor": [
+      "cultura",
+      "educacao"
+    ],
+    "contexto": [
+      "grupo-pesquisa",
+      "trabalho-recorrente"
+    ],
+    "competencias": [
+      "redacao",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/persona/capa.webp",
   "dir": "assets/projetos/persona/",
   "intro": {
@@ -6385,6 +6882,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "conteudo-editorial"
+    ],
+    "setor": [
+      "musica",
+      "entretenimento"
+    ],
+    "contexto": [
+      "trabalho-recorrente",
+      "projeto-independente"
+    ],
+    "competencias": [
+      "redacao",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/desvendando/capa.webp",
   "dir": "assets/projetos/desvendando/",
   "intro": {
@@ -6411,6 +6926,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "divulgacao-evento"
+    ],
+    "setor": [
+      "institucional",
+      "cultura"
+    ],
+    "contexto": [
+      "trabalho-recorrente",
+      "cliente"
+    ],
+    "competencias": [
+      "social-media",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/proec/capa.webp",
   "dir": "assets/projetos/proec/",
   "intro": {
@@ -6522,6 +7055,23 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis"
+    ],
+    "setor": [
+      "moda-acessorios",
+      "beleza"
+    ],
+    "contexto": [
+      "desdobramento-marca",
+      "cliente"
+    ],
+    "competencias": [
+      "social-media",
+      "direcao-arte"
+    ]
+  },
   "capa": "assets/projetos/sollaris-instagram/capa.webp",
   "dir": "assets/projetos/sollaris-instagram/",
   "intro": {
@@ -6545,6 +7095,24 @@ window.PROJETOS = [
     "es": "Contenido y redes sociales"
   },
   "filtro": "conteudo",
+  "etiquetas": {
+    "entrega": [
+      "posts-carrosseis",
+      "divulgacao-evento"
+    ],
+    "setor": [
+      "entretenimento",
+      "turismo"
+    ],
+    "contexto": [
+      "trabalho-recorrente",
+      "estagio"
+    ],
+    "competencias": [
+      "social-media",
+      "redacao"
+    ]
+  },
   "capa": "assets/projetos/rd-cultural/capa.webp",
   "dir": "assets/projetos/rd-cultural/",
   "exp": "Rd Cultural",
@@ -6573,6 +7141,24 @@ window.PROJETOS = [
     "es": "Campañas, eventos y fotografía"
   },
   "filtro": "campanhas",
+  "etiquetas": {
+    "entrega": [
+      "identidade-visual",
+      "posts-carrosseis"
+    ],
+    "setor": [
+      "musica",
+      "cultura"
+    ],
+    "contexto": [
+      "evento",
+      "projeto-academico"
+    ],
+    "competencias": [
+      "identidade-visual",
+      "social-media"
+    ]
+  },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
   "dir": "assets/projetos/encantos-do-brasil/",
   "intro": {
@@ -6755,6 +7341,24 @@ window.PROJETOS = [
     "es": "Campañas, eventos y fotografía"
   },
   "filtro": "campanhas",
+  "etiquetas": {
+    "entrega": [
+      "fotografia",
+      "organizacao-evento"
+    ],
+    "setor": [
+      "institucional",
+      "direitos-humanos"
+    ],
+    "contexto": [
+      "evento",
+      "cliente"
+    ],
+    "competencias": [
+      "organizacao-evento",
+      "fotografia"
+    ]
+  },
   "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
   "dir": "assets/projetos/encontro-direitos-humanos/",
   "telas": [
@@ -6847,6 +7451,24 @@ window.PROJETOS = [
     "es": "Campañas, eventos y fotografía"
   },
   "filtro": "campanhas",
+  "etiquetas": {
+    "entrega": [
+      "fotografia",
+      "cobertura-fotografica"
+    ],
+    "setor": [
+      "esporte",
+      "educacao"
+    ],
+    "contexto": [
+      "evento",
+      "projeto-academico"
+    ],
+    "competencias": [
+      "fotografia",
+      "organizacao-evento"
+    ]
+  },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
   "dir": "assets/projetos/copa-girlpower/",
   "telas": [
@@ -6969,6 +7591,24 @@ window.PROJETOS = [
     "es": "Estrategia, educación e investigación"
   },
   "filtro": "estrategia",
+  "etiquetas": {
+    "entrega": [
+      "oficina",
+      "material-didatico"
+    ],
+    "setor": [
+      "educacao",
+      "design"
+    ],
+    "contexto": [
+      "projeto-academico",
+      "colaboracao"
+    ],
+    "competencias": [
+      "gestao-projetos",
+      "design-grafico"
+    ]
+  },
   "capa": "assets/projetos/oficina-gestao-projetos/capa.webp",
   "dir": "assets/projetos/oficina-gestao-projetos/",
   "telas": [
@@ -7106,6 +7746,24 @@ window.PROJETOS = [
     "es": "Estrategia, educación e investigación"
   },
   "filtro": "estrategia",
+  "etiquetas": {
+    "entrega": [
+      "analise-literaria",
+      "editorial"
+    ],
+    "setor": [
+      "literatura",
+      "educacao"
+    ],
+    "contexto": [
+      "projeto-academico",
+      "colaboracao"
+    ],
+    "competencias": [
+      "redacao",
+      "analise-dados"
+    ]
+  },
   "capa": "assets/projetos/o-hobbit/capa.webp",
   "dir": "assets/projetos/o-hobbit/",
   "telas": [
@@ -7273,6 +7931,23 @@ window.PROJETOS = [
    "es": "Dashboard"
   },
   "filtro": "dashboards",
+  "etiquetas": {
+    "entrega": [
+      "dashboard"
+    ],
+    "setor": [
+      "dados",
+      "redes-sociais"
+    ],
+    "contexto": [
+      "portfolio",
+      "analise-transversal"
+    ],
+    "competencias": [
+      "analise-dados",
+      "visualizacao-dados"
+    ]
+  },
   "capa": "assets/projetos/dashboards/geral.svg",
   "dir": "assets/projetos/dashboards/",
   "intro": {
