@@ -1232,6 +1232,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .resource-inline { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
 .cert-inline { margin:24px 0 0 auto; }
 @media (max-width:767px) { .cert-inline { margin:24px auto 0; } }
+.free-tools-inline { margin:24px 0 0 auto; }
+@media (max-width:767px) { .free-tools-inline { margin:24px auto 0; } }
 .resource-modal-overlay { position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.45); }
 .resource-modal-overlay[hidden] { display:none; }
 .resource-modal { width:min(760px,100%); max-height:min(82svh,850px); overflow:auto; background:var(--white); border-radius:var(--r); padding:24px; box-shadow:0 20px 70px rgba(0,0,0,.18); }
@@ -1503,21 +1505,16 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
         <div class="cv-list" id="cv-skills"></div>
       </div>
+      <div class="cv-list resource-inline free-tools-inline">
+        <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
+        <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
+      </div>
     </section>
     <!-- IDIOMAS: bandeiras em SVG (as mesmas do seletor de idioma; emoji de bandeira não aparece no Windows) -->
     <section class="section-block">
       <div class="section-grid">
         <p class="section-label" data-i18n="aboutp.lang">Idiomas</p>
         <div class="cv-list" id="cv-lang"></div>
-      </div>
-    </section>
-    <section class="section-block" id="ferramentas-gratuitas">
-      <div class="section-grid">
-        <p class="section-label">Ferramentas gratuitas</p>
-        <div class="cv-list resource-inline">
-          <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
-          <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
-        </div>
       </div>
     </section>
   </div>
