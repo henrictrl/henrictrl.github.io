@@ -2271,7 +2271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const MESES = { pt: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'],
                   en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
                   es: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'] };
-  const fmtData = (iso) => { if (/^\\d{4}$/.test(iso)) return iso; const [y, m, d] = iso.split('-'); const mm = MESES[LANG][m - 1]; return LANG === 'en' ? `${mm} ${+d}, ${y}` : `${+d} ${mm} ${y}`; };
+  const fmtData = (iso) => { if (/^\d{4}$/.test(iso)) return iso; const [y, m, d] = iso.split('-'); const mm = MESES[LANG][m - 1]; return LANG === 'en' ? `${mm} ${+d}, ${y}` : `${+d} ${mm} ${y}`; };
   const tagName = (tg) => i18n('tag.' + tg, tg);
   const artTitle = (a) => (LANG !== 'pt' && a['t_' + LANG]) || a.t;
   let artFilter = 'all';
