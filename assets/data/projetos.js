@@ -6572,7 +6572,7 @@ window.PROJETOS = [
   },
   "filtro": [
    "identidade",
-   "conteudo"
+   "editorial"
   ],
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
   "dir": "assets/projetos/encantos-do-brasil/",
