@@ -1193,22 +1193,16 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pg-i b { font-size: 12px; font-weight: 600; }
 .pg-t:hover .pg-i, .pg-t:focus-visible .pg-i { opacity: 1; }
 @media (hover: none) { .pg-i { opacity: 1; } }
-/* página inicial: duas faixas de projetos rolando */
-.hr-rows { display: flex; flex-direction: column; gap: 34px; margin: 0 calc(50% - 50vw); padding: 28px 0; overflow: hidden; }
-.hr-row { overflow: visible; touch-action: pan-y; cursor: grab; user-select: none; }
-.hr-track { display: flex; gap: 16px; width: max-content; will-change: transform; padding: 0 8px; }
-.hr-card { position: relative; flex: none; width: 300px; text-decoration: none; color: inherit; transition: transform .35s var(--ease), z-index 0s .35s; z-index: 0; -webkit-user-drag: none; }
-.hr-media { aspect-ratio: 3/2; border-radius: var(--r); overflow: hidden; background: var(--gray-100); box-shadow: 0 0 0 rgba(0,0,0,0); transition: box-shadow .35s var(--ease); }
-.hr-media img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-.hr-info { padding: 10px 2px 0; }
-.hr-t { font-size: 14px; font-weight: 500; } .hr-c { font-size: 12px; color: var(--gray-500); }
-@media (hover: hover) {
-  .hr-card.pv { transform: scale(1.24); z-index: 3; transition: transform .35s var(--ease), z-index 0s; }
-  .hr-card.pv .hr-media { box-shadow: 0 22px 44px -18px rgba(0,0,0,.45); }
-  .hr-card.pv .hr-media img { object-fit: cover; animation: hrfade .45s var(--ease); }
-}
-@keyframes hrfade { from { opacity: .6; } to { opacity: 1; } }
-@media (max-width: 767px) { .hr-card { width: 220px; } .hr-rows { gap: 12px; } }
+/* Grade de projetos estática: oito posições para a curadoria posterior. */
+.home-projects-note { padding: 8px 0 16px; color: var(--gray-500); font-size: 14px; line-height: 1.6; }
+.project-grid-note { font-size: 13px; line-height: 1.6; color: var(--gray-500); margin: 0 0 24px; }
+.project-slot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
+.project-slot { aspect-ratio: 3 / 2; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(12px, 1.8vw, 22px); border: 1px dashed var(--gray-200); border-radius: var(--r); background: var(--gray-100); color: var(--gray-400); }
+.project-slot-index { font-size: 11px; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.project-slot-mark { align-self: center; font: 300 clamp(28px, 3.5vw, 40px)/1 'Inter', sans-serif; color: var(--gray-400); }
+.project-slot-title { font-size: 12px; color: var(--gray-500); }
+@media (min-width: 768px) { .project-slot-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 18px; } }
+.contact-to-top { align-self: flex-end; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -1384,7 +1378,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       <div class="max-w">
         <div class="work-intro reveal">
           <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
-          <p style="font-size:14px; color:var(--gray-500); max-width:60ch; line-height:1.6;">[Uma frase descrevendo o tipo de projeto que você seleciona aqui.]</p>
+          <p style="font-size:14px; color:var(--gray-500); max-width:60ch; line-height:1.6;">A seleção está em curadoria; os oito espaços da página Projetos já estão preparados.</p>
           <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver todos</a>
         </div>
         <div class="work-grid" id="work-grid"></div>
@@ -1402,8 +1396,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     </section>
     <section class="section-block" style="padding-top:0;">
       <div class="max-w">
-        <div class="pj-filters" id="pj-filters" hidden></div>
-        <div class="work-grid" id="work-case-grid"></div>
+        <p class="project-grid-note" id="project-grid-note">Oito espaços reservados para os projetos que serão escolhidos na curadoria.</p>
+        <div class="project-slot-grid" id="work-case-grid" aria-label="Oito espaços reservados para projetos">
+          <article class="project-slot" aria-label="Espaço reservado para projeto 01"><span class="project-slot-index">01 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 01</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 02"><span class="project-slot-index">02 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 02</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 03"><span class="project-slot-index">03 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 03</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 04"><span class="project-slot-index">04 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 04</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 05"><span class="project-slot-index">05 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 05</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 06"><span class="project-slot-index">06 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 06</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 07"><span class="project-slot-index">07 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 07</span></article>
+          <article class="project-slot" aria-label="Espaço reservado para projeto 08"><span class="project-slot-index">08 / 08</span><span class="project-slot-mark" aria-hidden="true">+</span><span class="project-slot-title">Projeto 08</span></article>
+        </div>
       </div>
     </section>
   </div>
@@ -1478,11 +1481,11 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       <a href="https://wa.me/5514991394590" class="footer-social" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
       <a href="https://substack.com/@henrictrl" class="footer-social" target="_blank" rel="noopener noreferrer">Substack</a>
+      <button class="to-top contact-to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button>
     </nav>
   </div>
   <!-- créditos -->
-  <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span> <a href="#projeto/metaprojeto" data-pj="metaprojeto" data-i18n="credit.link">Como este site foi feito →</a></span>
-    <button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button></div>
+  <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span> <a href="#projeto/metaprojeto" data-pj="metaprojeto" data-i18n="credit.link">Como este site foi feito →</a></span></div>
 </footer>
 
 <!-- --- Modals --- -->
@@ -2792,28 +2795,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const pjCard = (p) => `<a class="work-card" href="#projeto/${p.slug}" data-pj="${p.slug}">
       <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
-  // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['editorial', { pt: 'Campanhas e editorial', en: 'Campaigns and editorial', es: 'Campañas y editorial' }], ['web', { pt: 'Programação', en: 'Web development', es: 'Programación' }], ['conteudo', { pt: 'Carrosséis e posts', en: 'Carousels and posts', es: 'Carruseles y posts' }], ['exploracoes', { pt: 'Explorações', en: 'Explorations', es: 'Exploraciones' }]];
-  const DASH_BTN = { pt: 'Dashboard: visão geral', en: 'Dashboard: overview', es: 'Dashboard: visión general' };
-  let pjFiltro = 'all';
-  const naHome = (p) => ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
-    const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
+    const grid = document.getElementById('work-case-grid');
     if (!grid) return;
-    const inF = (p, k) => [].concat(p.filtro).includes(k);
-    const usados = FILTROS.filter(([k]) => k === 'all' || PJ.some(p => inF(p, k)));
-    bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => `<button class="art-filter" data-k="${k}" aria-pressed="${k === pjFiltro}">${lx(l)}</button>`).join('')
-      + (PJ_BY['dash-geral'] ? `<a class="pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral"><i></i><i></i><i></i><span>${lx(DASH_BTN)}</span></a>` : '');
-    if (pjFiltro === 'all') {
-      grid.classList.remove('work-grid');
-      grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => { const ps = PJ.filter(p => inF(p, k));
-        return `<section class="pj-group"><h2 class="pj-group-title">${lx(l)}<small>${ps.length}</small></h2><div class="work-grid">${ps.map(pjCard).join('')}</div></section>`; }).join('');
-    } else if (pjFiltro === 'conteudo') { grid.classList.remove('work-grid'); grid.innerHTML = pgHTML(); }
-    else { grid.classList.add('work-grid'); grid.innerHTML = PJ.filter(p => inF(p, pjFiltro)).map(pjCard).join(''); }
+    const label = { pt: 'Projeto', en: 'Project', es: 'Proyecto' };
+    const note = { pt: 'Espaço reservado', en: 'Reserved space', es: 'Espacio reservado' };
+    grid.setAttribute('aria-label', lx({ pt: 'Oito espaços reservados para projetos', en: 'Eight reserved project spaces', es: 'Ocho espacios reservados para proyectos' }));
+    grid.innerHTML = Array.from({ length: 8 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0');
+      return `<article class="project-slot" aria-label="${lx(note)} ${n}">
+        <span class="project-slot-index">${n} / 08</span>
+        <span class="project-slot-mark" aria-hidden="true">+</span>
+        <span class="project-slot-title">${lx(label)} ${n}</span>
+      </article>`;
+    }).join('');
+    const intro = document.getElementById('project-grid-note');
+    if (intro) intro.textContent = lx({
+      pt: 'Oito espaços reservados para os projetos que serão escolhidos na curadoria.',
+      en: 'Eight spaces reserved for the projects to be selected during curation.',
+      es: 'Ocho espacios reservados para los proyectos que se elegirán durante la curaduría.'
+    });
   };
-  document.getElementById('pj-filters').addEventListener('click', (e) => { const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; renderPJ(); });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
      5 colunas; filtros por organização (conta) e ordenação por interações, data, organização ou projeto. */
@@ -2845,46 +2848,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('work-case-grid').addEventListener('change', (e) => { if (e.target.id === 'pg-ord') { pgOrd = e.target.value; renderPJ(); } });
 
-  /* --- Página inicial: projetos em duas faixas que rolam na horizontal (sentidos opostos) ---
-     Hover estilo "Netflix": o card cresce e passa pelas primeiras páginas do case. Para quando o mouse está em cima. */
+  /* A home não usa carrossel de projetos: a seleção final fica na página Projetos. */
   const renderHomeRows = () => {
     const home = document.getElementById('work-grid'); if (!home) return;
-    const ps = PJ.filter(naHome); const half = Math.ceil(ps.length / 2), rows = [ps.slice(0, half), ps.slice(half)];
-    const card = (p) => { const pv = (p.telas || []).slice(0, 5).map(t => `${p.dir}${t.img}`).join('|');
-      return `<a class="hr-card" href="#projeto/${p.slug}" data-pj="${p.slug}" data-pv="${pv}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`; };
-    home.className = 'hr-rows';
-    home.innerHTML = rows.map((r, i) => `<div class="hr-row" data-dir="${i ? -1 : 1}"><div class="hr-track">${r.map(card).join('')}${r.map(card).join('').replace(/class="hr-card"/g, 'class="hr-card" aria-hidden="true" tabindex="-1"')}</div></div>`).join('');
-    initHomeRows();
-  };
-  let hrInit = false;
-  const initHomeRows = () => {
-    const rows = [...document.querySelectorAll('.hr-row')]; if (!rows.length) return;
-    const st = rows.map(r => ({ r, tr: r.querySelector('.hr-track'), x: 0, dir: +r.dataset.dir, hover: false, drag: null, w: 0 }));
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    st.forEach(s => { s.w = s.tr.scrollWidth / 2; if (s.dir < 0) s.x = -s.w / 2;
-      s.r.addEventListener('pointerenter', () => s.hover = true); s.r.addEventListener('pointerleave', () => { s.hover = false; s.drag = null; });
-      s.r.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { s.x -= e.deltaX; e.preventDefault(); } }, { passive: false });
-      s.r.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button) return; s.drag = { x0: e.clientX, sx: s.x, moved: false }; });
-      s.r.addEventListener('pointermove', (e) => { if (!s.drag) return; const dx = e.clientX - s.drag.x0; if (Math.abs(dx) > 5) s.drag.moved = true; s.x = s.drag.sx + dx; });
-      s.r.addEventListener('pointerup', () => { setTimeout(() => s.drag = null, 0); });
-      s.r.addEventListener('click', (e) => { if (s.drag && s.drag.moved) { e.preventDefault(); e.stopPropagation(); } }, true); });
-    let inView = false, raf = 0, last = 0;
-    const tick = (now) => { const dt = Math.min(0.05, (now - last) / 1000); last = now;
-      st.forEach(s => { if (!s.hover && !s.drag && !reduce) s.x -= s.dir * 28 * dt; if (s.x <= -s.w) s.x += s.w; if (s.x > 0) s.x -= s.w; s.tr.style.transform = `translate3d(${s.x.toFixed(1)}px,0,0)`; });
-      raf = inView ? requestAnimationFrame(tick) : 0; };
-    new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); } }).observe(rows[0].parentNode);
-    window.addEventListener('resize', () => st.forEach(s => s.w = s.tr.scrollWidth / 2));
-    if (hrInit) return; hrInit = true;
-    // preview: troca as imagens do card enquanto o mouse está em cima
-    let pvT = 0, pvEl = null;
-    document.addEventListener('pointerover', (e) => { const c = e.target.closest('.hr-card'); if (c === pvEl) return;
-      if (pvEl) { clearInterval(pvT); pvEl.classList.remove('pv'); const im = pvEl.querySelector('.hr-media img'); im.src = im.dataset.cap || im.src; }
-      pvEl = c; if (!c || matchMedia('(hover: none)').matches) return;
-      const im = c.querySelector('.hr-media img'), list = (c.dataset.pv || '').split('|').filter(Boolean); im.dataset.cap = im.dataset.cap || im.getAttribute('src');
-      c.classList.add('pv'); if (!list.length) return;
-      list.forEach(u => { const i = new Image(); i.src = u + '-t.webp'; });
-      let k = 0; pvT = setInterval(() => { const u = list[k++ % list.length]; const pre = new Image(); pre.onload = () => { if (pvEl === c) im.src = pre.src; }; pre.src = u + '.webp'; }, 1100);
-    });
+    home.className = 'home-projects-note';
+    home.innerHTML = `<p>${lx({
+      pt: 'A seleção final está em curadoria. A página Projetos já tem oito espaços prontos para receber os trabalhos escolhidos.',
+      en: 'The final selection is being curated. The Projects page has eight spaces ready for the selected work.',
+      es: 'La selección final está en curaduría. La página Proyectos ya tiene ocho espacios listos para recibir los trabajos elegidos.'
+    })}</p>`;
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
