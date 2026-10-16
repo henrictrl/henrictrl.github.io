@@ -331,6 +331,11 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.5s var(--ease);
 }
+.work-card-live-preview .work-card-media { isolation: isolate; }
+.work-card-live-preview .work-card-media iframe {
+  position: absolute; top: 0; left: 0; width: 1200px; height: 800px;
+  border: 0; display: block; transform-origin: top left; pointer-events: none;
+}
 .work-card:hover .work-card-media img { transform: scale(1.02); }
 .work-card-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
 .work-card-tag { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
@@ -3012,9 +3017,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Projetos: cards + apresentação (deck) --- */
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
+  // Mantém a prévia real do editor em viewport desktop e escala o iframe para o card.
+  const syncLiveProjectPreviews = () => document.querySelectorAll('.work-card-live-preview .work-card-media').forEach(media => {
+    const frame = media.querySelector('iframe'); if (!frame) return;
+    const scale = Math.min(media.clientWidth / 1200, media.clientHeight / 800);
+    frame.style.transform = `scale(${scale})`;
+  });
+  const livePreviewResize = new ResizeObserver(syncLiveProjectPreviews);
+  const observeLiveProjectPreviews = () => {
+    document.querySelectorAll('.work-card-live-preview .work-card-media').forEach(media => livePreviewResize.observe(media));
+    syncLiveProjectPreviews();
+  };
+  window.addEventListener('resize', syncLiveProjectPreviews);
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
-  const pjCard = (p) => `<a class="work-card" href="#projeto/${p.slug}" data-pj="${p.slug}">
-      <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
+  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
+      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
   const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade de marca', en: 'Brand identity', es: 'Identidad de marca' }], ['web', { pt: 'Sites, ferramentas e produtos digitais', en: 'Websites, tools & digital products', es: 'Sitios, herramientas y productos digitales' }], ['conteudo', { pt: 'Conteúdo e mídias sociais', en: 'Content & social media', es: 'Contenido y redes sociales' }], ['campanhas', { pt: 'Campanhas, eventos e fotografia', en: 'Campaigns, events & photography', es: 'Campañas, eventos y fotografía' }], ['estrategia', { pt: 'Estratégia, educação e pesquisa', en: 'Strategy, education & research', es: 'Estrategia, educación e investigación' }]];
@@ -3086,7 +3103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.classList.add('work-grid');
       grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join('');
     }
-  };;
+    requestAnimationFrame(observeLiveProjectPreviews);
+  };
   document.getElementById('pj-filters').addEventListener('click', (e) => { if (e.target.closest('[data-clear-pj-tag]')) { pjEtiqueta = null; pjFiltro = 'all'; renderPJ(); return; } const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; pjEtiqueta = null; renderPJ(); });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
