@@ -759,7 +759,7 @@ a.cv-link:hover { text-decoration: underline; text-underline-offset: 3px; text-d
 
 /* --- Lightbox --- */
 .lightbox-overlay {
-  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.96);
+  position: fixed; inset: 0; z-index: 700; background: rgba(0,0,0,0.96);
   display: flex; align-items: center; justify-content: center; opacity: 0;
   pointer-events: none; transition: opacity 0.3s var(--ease);
 }
@@ -807,7 +807,7 @@ footer.contact-footer { background: var(--gray-100); padding: 40px var(--gutter)
 @media (min-width: 900px) { .work-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; } }
 .work-card-media { aspect-ratio: 3/2; margin-bottom: 12px; box-shadow: 0 6px 18px -6px rgba(0,0,0,0.14), 0 1px 3px rgba(0,0,0,0.05); }
 .work-card-media img { object-fit: cover; }
-.work-card.rino-site-cover-inverted .work-card-media img { filter: invert(1); }
+.work-card.rino-site-cover-swapped .work-card-media img { filter: url(#rino-swap-blue-white); }
 .work-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 .work-card-tag { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
 
@@ -862,6 +862,22 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @media (max-width: 480px) { .dk-link + .dk-try { margin-left: 0; display: flex; margin: 18px auto 0; } }
 .dk-try[hidden] { display: none; }
 .dk-block { padding: 8px 0 56px; }
+
+/* Rino Cores: apresentação editorial e demonstração funcional */
+.rino-case-block{padding-top:20px!important}
+.rino-case-intro{max-width:950px;margin:0 auto;padding:12px clamp(18px,4vw,52px) 38px;text-align:center}
+.rino-case-eyebrow{margin:0 0 12px;color:var(--gray-400);font-size:10px;font-weight:700;letter-spacing:.14em}
+.rino-case-intro h3{max-width:800px;margin:0 auto 15px;font-size:clamp(28px,4vw,48px);font-weight:450;line-height:1.08;letter-spacing:-.045em;text-wrap:balance}
+.rino-case-intro>p:not(.rino-case-eyebrow){max-width:620px;margin:0 auto;color:var(--gray-500);font-size:15px;line-height:1.7;text-wrap:balance}
+.rino-case-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:34px auto 0;padding-top:22px;border-top:1px solid var(--gray-200);text-align:left}
+.rino-case-features article{min-width:0}.rino-case-features h4{margin:0 0 6px;font-size:13px;font-weight:650}.rino-case-features p{margin:0;color:var(--gray-500);font-size:12px;line-height:1.6}
+.rino-case-demo-head{max-width:1340px;margin:0 auto 12px;padding:0 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.rino-case-demo-head>span{font-size:10px;color:var(--gray-400);font-weight:700;letter-spacing:.12em}.rino-case-demo-head .dk-try{margin:0;padding:8px 12px;font-size:11px}
+.rino-case-frame{width:calc(100% - 36px);max-width:1340px;height:min(75vh,760px);min-height:530px;margin:0 auto;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;background:#f4f6f8;box-shadow:0 20px 55px -30px rgba(0,0,0,.22)}
+.rino-case-frame iframe{display:block;width:100%;height:100%;border:0;background:#f4f6f8}
+@media(max-width:767px){.pc-block+.ds{margin-top:18px;padding-top:24px}.rino-case-intro{padding:8px 18px 26px}.rino-case-intro h3{font-size:30px}.rino-case-intro>p:not(.rino-case-eyebrow){font-size:13px}.rino-case-features{grid-template-columns:1fr;gap:14px;margin-top:24px;padding-top:18px}.rino-case-features article{padding-bottom:10px;border-bottom:1px solid var(--gray-200)}.rino-case-features article:last-child{padding-bottom:0;border:0}.rino-case-demo-head{align-items:flex-start;flex-direction:column}.rino-case-frame{width:calc(100% - 24px);height:min(68svh,620px);min-height:470px;border-radius:9px}}
+
+.pc-block + .ds { margin-top: 26px; padding-top: 30px; border-top: 1px solid var(--gray-200); }
 .dk-block-title { max-width: 620px; margin: 0 auto; padding: 24px 24px 28px; text-align: center; font-size: 15px; font-weight: 500; }
 .dk-block-title span { display: block; font-size: 13px; font-weight: 400; color: var(--gray-500); margin-top: 6px; }
 /* capturas: janela de navegador e celulares */
@@ -916,7 +932,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .ig-links { justify-content: flex-start; padding: 0 16px; }
 }
 /* modal do post */
-.pv-ov { position: fixed; inset: 0; z-index: 420; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+.pv-ov { position: fixed; inset: 0; z-index: 620; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
 .pv-ov.open { opacity: 1; pointer-events: auto; }
 .pv-x { position: absolute; top: 14px; right: 18px; z-index: 2; }
 .pv-scroll { position: absolute; inset: 0; overflow-y: auto; padding-top: 64px; overscroll-behavior: contain; }
@@ -1282,6 +1298,16 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 </style>
 </head>
 <body>
+<svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;pointer-events:none">
+  <filter id="rino-swap-blue-white" color-interpolation-filters="sRGB">
+    <feComponentTransfer>
+      <feFuncR type="discrete" tableValues="0 0.00392 0.00784 0.01176 0.01569 0.01961 0.02353 0.02745 0.03137 0.03529 0.03922 0.04314 0.04706 0.05098 0.0549 0.05882 0.06275 0.06667 1 0.07451 0.07843 0.08235 0.08627 0.0902 0.09412 0.09804 0.10196 0.10588 0.1098 0.11373 0.11765 0.12157 0.12549 0.12941 0.13333 0.13725 0.14118 0.1451 0.14902 0.15294 0.15686 0.16078 0.16471 0.16863 0.17255 0.17647 0.18039 0.18431 0.18824 0.19216 0.19608 0.2 0.20392 0.20784 0.21176 0.21569 0.21961 0.22353 0.22745 0.23137 0.23529 0.23922 0.24314 0.24706 0.25098 0.2549 0.25882 0.26275 0.26667 0.27059 0.27451 0.27843 0.28235 0.28627 0.2902 0.29412 0.29804 0.30196 0.30588 0.3098 0.31373 0.31765 0.32157 0.32549 0.32941 0.33333 0.33725 0.34118 0.3451 0.34902 0.35294 0.35686 0.36078 0.36471 0.36863 0.37255 0.37647 0.38039 0.38431 0.38824 0.39216 0.39608 0.4 0.40392 0.40784 0.41176 0.41569 0.41961 0.42353 0.42745 0.43137 0.43529 0.43922 0.44314 0.44706 0.45098 0.4549 0.45882 0.46275 0.46667 0.47059 0.47451 0.47843 0.48235 0.48627 0.4902 0.49412 0.49804 0.50196 0.50588 0.5098 0.51373 0.51765 0.52157 0.52549 0.52941 0.53333 0.53725 0.54118 0.5451 0.54902 0.55294 0.55686 0.56078 0.56471 0.56863 0.57255 0.57647 0.58039 0.58431 0.58824 0.59216 0.59608 0.6 0.60392 0.60784 0.61176 0.61569 0.61961 0.62353 0.62745 0.63137 0.63529 0.63922 0.64314 0.64706 0.65098 0.6549 0.65882 0.66275 0.66667 0.67059 0.67451 0.67843 0.68235 0.68627 0.6902 0.69412 0.69804 0.70196 0.70588 0.7098 0.71373 0.71765 0.72157 0.72549 0.72941 0.73333 0.73725 0.74118 0.7451 0.74902 0.75294 0.75686 0.76078 0.76471 0.76863 0.77255 0.77647 0.78039 0.78431 0.78824 0.79216 0.79608 0.8 0.80392 0.80784 0.81176 0.81569 0.81961 0.82353 0.82745 0.83137 0.83529 0.83922 0.84314 0.84706 0.85098 0.8549 0.85882 0.86275 0.86667 0.87059 0.87451 0.87843 0.88235 0.88627 0.8902 0.89412 0.89804 0.90196 0.90588 0.9098 0.91373 0.91765 0.92157 0.92549 0.92941 0.93333 0.93725 0.94118 0.07059 0.94902 0.95294 0.95686 0.96078 0.96471 0.96863 0.97255 0.97647 0.98039 0.98431 0.98824 0.99216 0.99608 0.07059"/>
+      <feFuncG type="discrete" tableValues="0 0.00392 0.00784 0.01176 0.01569 0.01961 0.02353 0.02745 0.03137 0.03529 0.03922 0.04314 0.04706 0.05098 0.0549 0.05882 0.06275 0.06667 0.07059 0.07451 0.07843 0.08235 0.08627 0.0902 0.09412 0.09804 0.10196 0.10588 0.1098 0.11373 0.11765 0.12157 0.12549 0.12941 0.13333 0.13725 0.14118 0.1451 0.14902 0.15294 0.15686 0.16078 0.16471 0.16863 0.17255 0.17647 0.18039 0.18431 0.18824 0.19216 0.19608 0.2 1 0.20784 0.21176 0.21569 0.21961 0.22353 0.22745 0.23137 0.23529 0.23922 0.24314 0.24706 0.25098 0.2549 0.25882 0.26275 0.26667 0.27059 0.27451 0.27843 0.28235 0.28627 0.2902 0.29412 0.29804 0.30196 0.30588 0.3098 0.31373 0.31765 0.32157 0.32549 0.32941 0.33333 0.33725 0.34118 0.3451 0.34902 0.35294 0.35686 0.36078 0.36471 0.36863 0.37255 0.37647 0.38039 0.38431 0.38824 0.39216 0.39608 0.4 0.40392 0.40784 0.41176 0.41569 0.41961 0.42353 0.42745 0.43137 0.43529 0.43922 0.44314 0.44706 0.45098 0.4549 0.45882 0.46275 0.46667 0.47059 0.47451 0.47843 0.48235 0.48627 0.4902 0.49412 0.49804 0.50196 0.50588 0.5098 0.51373 0.51765 0.52157 0.52549 0.52941 0.53333 0.53725 0.54118 0.5451 0.54902 0.55294 0.55686 0.56078 0.56471 0.56863 0.57255 0.57647 0.58039 0.58431 0.58824 0.59216 0.59608 0.6 0.60392 0.60784 0.61176 0.61569 0.61961 0.62353 0.62745 0.63137 0.63529 0.63922 0.64314 0.64706 0.65098 0.6549 0.65882 0.66275 0.66667 0.67059 0.67451 0.67843 0.68235 0.68627 0.6902 0.69412 0.69804 0.70196 0.70588 0.7098 0.71373 0.71765 0.72157 0.72549 0.72941 0.73333 0.73725 0.74118 0.7451 0.74902 0.75294 0.75686 0.76078 0.76471 0.76863 0.77255 0.77647 0.78039 0.78431 0.78824 0.79216 0.79608 0.8 0.80392 0.80784 0.81176 0.81569 0.81961 0.82353 0.82745 0.83137 0.83529 0.83922 0.84314 0.84706 0.85098 0.8549 0.85882 0.86275 0.86667 0.87059 0.87451 0.87843 0.88235 0.88627 0.8902 0.89412 0.89804 0.90196 0.90588 0.9098 0.91373 0.91765 0.92157 0.92549 0.92941 0.93333 0.20392 0.94118 0.9451 0.94902 0.95294 0.95686 0.96078 0.96471 0.96863 0.97255 0.97647 0.98039 0.98431 0.98824 0.99216 0.99608 0.20392"/>
+      <feFuncB type="discrete" tableValues="0 0.00392 0.00784 0.01176 0.01569 0.01961 0.02353 0.02745 0.03137 0.03529 0.03922 0.04314 0.04706 0.05098 0.0549 0.05882 0.06275 0.06667 0.07059 0.07451 0.07843 0.08235 0.08627 0.0902 0.09412 0.09804 0.10196 0.10588 0.1098 0.11373 0.11765 0.12157 0.12549 0.12941 0.13333 0.13725 0.14118 0.1451 0.14902 0.15294 0.15686 0.16078 0.16471 0.16863 0.17255 0.17647 0.18039 0.18431 0.18824 0.19216 0.19608 0.2 0.20392 0.20784 0.21176 0.21569 0.21961 0.22353 0.22745 0.23137 0.23529 0.23922 0.24314 0.24706 0.25098 0.2549 0.25882 0.26275 0.26667 0.27059 0.27451 0.27843 0.28235 0.28627 0.2902 0.29412 0.29804 0.30196 0.30588 0.3098 0.31373 0.31765 0.32157 0.32549 0.32941 0.33333 0.33725 0.34118 1 0.34902 0.35294 0.35686 0.36078 0.36471 0.36863 0.37255 0.37647 0.38039 0.38431 0.38824 0.39216 0.39608 0.4 0.40392 0.40784 0.41176 0.41569 0.41961 0.42353 0.42745 0.43137 0.43529 0.43922 0.44314 0.44706 0.45098 0.4549 0.45882 0.46275 0.46667 0.47059 0.47451 0.47843 0.48235 0.48627 0.4902 0.49412 0.49804 0.50196 0.50588 0.5098 0.51373 0.51765 0.52157 0.52549 0.52941 0.53333 0.53725 0.54118 0.5451 0.54902 0.55294 0.55686 0.56078 0.56471 0.56863 0.57255 0.57647 0.58039 0.58431 0.58824 0.59216 0.59608 0.6 0.60392 0.60784 0.61176 0.61569 0.61961 0.62353 0.62745 0.63137 0.63529 0.63922 0.64314 0.64706 0.65098 0.6549 0.65882 0.66275 0.66667 0.67059 0.67451 0.67843 0.68235 0.68627 0.6902 0.69412 0.69804 0.70196 0.70588 0.7098 0.71373 0.71765 0.72157 0.72549 0.72941 0.73333 0.73725 0.74118 0.7451 0.74902 0.75294 0.75686 0.76078 0.76471 0.76863 0.77255 0.77647 0.78039 0.78431 0.78824 0.79216 0.79608 0.8 0.80392 0.80784 0.81176 0.81569 0.81961 0.82353 0.82745 0.83137 0.83529 0.83922 0.84314 0.84706 0.85098 0.8549 0.85882 0.86275 0.86667 0.87059 0.87451 0.87843 0.88235 0.88627 0.8902 0.89412 0.89804 0.90196 0.90588 0.9098 0.91373 0.91765 0.92157 0.3451 0.92941 0.93333 0.93725 0.94118 0.9451 0.94902 0.95294 0.95686 0.96078 0.96471 0.96863 0.97255 0.97647 0.98039 0.98431 0.98824 0.99216 0.99608 0.3451"/>
+      <feFuncA type="identity"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
 
 <header class="top-header">
   <div class="header-inner">
@@ -2974,7 +3000,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
-  const pjCard = (p) => `<a class="work-card${p.slug === 'rino-site' ? ' rino-site-cover-inverted' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
+  const pjCard = (p) => `<a class="work-card${p.slug === 'rino-site' ? ' rino-site-cover-swapped' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
       <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
@@ -3371,14 +3397,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const deckBlocks = (p) => {
     const out = [], toc = [];
-    if (p.shots && p.shots.length) {
+    if (p.slug === "rino-site") {
+      const RC = {
+        eyebrow: {pt:"FERRAMENTA DE IDENTIDADE",en:"BRAND TOOL",es:"HERRAMIENTA DE MARCA"},
+        title: {pt:"A marca em todas as suas possibilidades de cor.",en:"The brand in every colour possibility.",es:"La marca en todas sus posibilidades de color."},
+        desc: {pt:"Um espaço de experimentação para o cliente participar da decisão visual com autonomia: testar combinações, ajustar cada parte e avaliar o conjunto antes da aprovação.",en:"A space for the client to participate in visual decisions: test combinations, adjust each part and assess the whole before approval.",es:"Un espacio para que el cliente participe en las decisiones visuales: probar combinaciones, ajustar cada parte y evaluar el conjunto antes de aprobar."},
+        features: [
+          [{pt:"Prévia ao vivo",en:"Live preview",es:"Vista previa en vivo"},{pt:"As mudanças aparecem no próprio logotipo.",en:"Changes appear directly on the logo.",es:"Los cambios aparecen en el propio logotipo."}],
+          [{pt:"Exploração guiada",en:"Guided exploration",es:"Exploración guiada"},{pt:"Paletas sugeridas e ajustes pontuais por parte.",en:"Suggested palettes and part-by-part adjustments.",es:"Paletas sugeridas y ajustes por parte."}],
+          [{pt:"Entrega prática",en:"Practical handoff",es:"Entrega práctica"},{pt:"Combinações guardadas e exportação em PNG.",en:"Saved combinations and PNG export.",es:"Combinaciones guardadas y exportación en PNG."}]
+        ],
+        demo: {pt:"EXPERIMENTE A FERRAMENTA",en:"TRY THE TOOL",es:"PRUEBA LA HERRAMIENTA"},
+        launch: {pt:"Abrir em janela",en:"Open in a window",es:"Abrir en ventana"}
+      };
+      const featureHTML = RC.features.map(f => "<article><h4>" + lx(f[0]) + "</h4><p>" + lx(f[1]) + "</p></article>").join("");
+      out.push("<section class=\"dk-block rino-case-block\" id=\"dk-b-rino-case\">" +
+        "<div class=\"rino-case-intro\"><p class=\"rino-case-eyebrow\">" + lx(RC.eyebrow) + "</p><h3>" + lx(RC.title) + "</h3><p>" + lx(RC.desc) + "</p><div class=\"rino-case-features\">" + featureHTML + "</div></div>" +
+        "<div class=\"rino-case-demo-head\"><span>" + lx(RC.demo) + "</span><button class=\"dk-try\" type=\"button\" data-web=\"" + p.slug + "\">" + TRY_ICO + lx(RC.launch) + "</button></div>" +
+        "<div class=\"rino-case-frame\"><iframe src=\"" + p.web.url + "\" title=\"" + esc(p.titulo) + " — prévia interativa\" loading=\"lazy\"></iframe></div></section>");
+      toc.push(["dk-b-rino-case", {pt:"Experiência interativa",en:"Interactive experience",es:"Experiencia interactiva"}]);
+    }
+    if (p.shots && p.shots.length && p.slug !== "rino-site") {
       const desk = p.shots.filter(s => s.d !== 'mobile'), mob = p.shots.filter(s => s.d === 'mobile');
       out.push(`<section class="dk-block" id="dk-b-shots"><h3 class="dk-block-title">${lx(p.siteIntro ? DK_L.site : DK_L.shotsT)}${p.siteIntro ? `<span>${lx(p.siteIntro)}</span>` : ''}${p.siteIntro && p.web ? `<br><button class="dk-try" type="button" data-web="${p.slug}">${TRY_ICO}${lx(DK_L.try)}</button>` : ''}</h3>${desk.map(s => `<div class="shot-desk${s.d === 'pagina' ? ' shot-page' : ''}"><img src="${p.dir}${s.img}" alt="" loading="lazy" decoding="async"></div>`).join('')}${mob.length ? `<div class="shot-phones">${mob.map(s => `<div class="shot-phone"><img src="${p.dir}${s.img}" alt="" loading="lazy" decoding="async"></div>`).join('')}</div>` : ''}</section>`);
       toc.push(['dk-b-shots', p.siteIntro ? DK_L.site : DK_L.telas]);
     }
     if (p.galeria && p.slug !== 'pixelar') { out.push(`<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">${lx(DK_L.gal)}</h3><div class="dk-gal">${p.galeria.map(g => `<img src="${p.dir}${g}" alt="" loading="lazy" decoding="async" onclick="openLightbox('${p.dir}${g}')">`).join('')}</div></section>`); toc.push(['dk-b-gal', DK_L.gal]); }
     if (p.html === 'meta') { out.push(`<section class="dk-block" id="dk-b-meta">${metaHTML()}</section>`); toc.push(['dk-b-meta', DK_L.meta]); }
-    if (p.dash) { const ds = dashHTML(p); out.push(ds.html); toc.push(...ds.toc); }
+    // As análises entram após os grupos de posts e carrosséis.
     // posts: carrossel = várias imagens SEM texto publicado; o resto (imagem única ou ligado a um artigo) = post
     const kind = (x) => x.n > 1 && !x.art ? 'car' : 'post';
     const grupos = p.postGroups || (p.posts ? [{ g: p.posts }] : []);
@@ -3394,6 +3440,7 @@ document.addEventListener('DOMContentLoaded', () => {
       out.push(`<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">${lx(DK_L.posts)}<span>${todos.length}${lx(DK_L.nPosts)}</span></h3>${filtro}${corpo}</section>`);
       if (!grupos.some(g => g.t)) toc.push(['dk-b-posts-all', DK_L.posts]);
     }
+    if (p.dash) { const ds = dashHTML(p); out.push(ds.html); toc.push(...ds.toc); }
     return { html: out.join(''), toc };
   };
   const openDeck = (slug) => {
