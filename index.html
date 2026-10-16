@@ -3109,7 +3109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ol = Object.entries(orgs).sort((a, b) => b[1] - a[1] || pgOrgName(a[0]).localeCompare(pgOrgName(b[0])));
     let ps = POSTS.filter(x => pgOrg === 'all' || pgOrgKey(x.user) === pgOrg);
     const by = { i: (a, b) => pgInt(b) - pgInt(a), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
-      o: (a, b) => pgOrgName(a.user).localeCompare(pgOrgName(b.user)) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
+      o: (a, b) => pgOrgName(pgOrgKey(a.user)).localeCompare(pgOrgName(pgOrgKey(b.user))) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
     ps = ps.slice().sort(by[pgOrd]);
     const chips = `<button class="art-filter" data-org="all" aria-pressed="${pgOrg === 'all'}">${lx(PG_L.todas)} <span>${POSTS.length}</span></button>` + ol.map(([u, n]) => `<button class="art-filter" data-org="${u}" aria-pressed="${pgOrg === u}">${esc(pgOrgName(u))} <span>${n}</span></button>`).join('');
     const sel = `<label class="pg-sort"><span>${lx(PG_L.ord)}</span><select id="pg-ord">${[['i', PG_L.oI], ['n', PG_L.oN], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<option value="${k}"${k === pgOrd ? ' selected' : ''}>${lx(l)}</option>`).join('')}</select></label>`;
