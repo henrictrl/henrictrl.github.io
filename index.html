@@ -571,6 +571,15 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: 0.04em; }
 .dk-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; }
 .dk-intro { font-size: 15px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
+.dk-tags { max-width: 760px; margin: 18px auto 0; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; }
+.dk-tags[hidden] { display: none !important; }
+.dk-tag-group { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; }
+.dk-tag-group-label { color: var(--gray-400); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dk-tag { display: inline-flex; align-items: center; min-height: 25px; padding: 5px 8px; border: 1px solid var(--gray-200); border-radius: 999px; background: #fff; color: var(--gray-500); font: inherit; font-size: 11px; line-height: 1.2; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
+.dk-tag:hover, .dk-tag:focus-visible { border-color: var(--ink); color: var(--ink); background: #f8f9fa; }
+.pj-tag-result { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 8px; padding: 12px 14px; border: 1px solid var(--gray-200); border-radius: var(--r); font-size: 13px; color: var(--gray-500); }
+.pj-tag-result strong { color: var(--ink); font-weight: 600; }
+.pj-tag-result .art-filter { margin: 0; }
 .dk-link { display: inline-block; margin-top: 18px; font-size: 13px; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .dk-link[hidden], .dk-btn[hidden], .dk-toc[hidden] { display: none; }
 .dk-body.no-toc { grid-template-columns: minmax(0, 1fr); max-width: 1400px; }
@@ -596,7 +605,11 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-next { font: inherit; font-size: 15px; background: none; border: 0; cursor: pointer; color: var(--ink); padding: 0; }
 .dk-next span { color: var(--gray-400); font-size: 12px; display: block; margin-bottom: 4px; text-align: left; }
 @media (max-width: 767px) {
-  .dk-top { padding: 12px 16px; }
+  .dk-tags { margin: 12px auto 0; padding: 0 18px; gap: 7px 10px; }
+   .dk-tag-group { gap: 4px; }
+   .dk-tag-group-label { font-size: 8px; }
+   .dk-tag { min-height: 24px; padding: 5px 7px; font-size: 10px; }
+   .dk-top { padding: 12px 16px; }
   body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
   .dk-meta { display: none; }
   .dk-body { display: block; padding: 0; }
@@ -1678,7 +1691,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="dk-top"><div><span class="dk-name" id="dk-name"></span><span class="dk-meta" id="dk-meta"></span></div>
     <div class="dk-acts"><button class="dk-x" id="dk-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>
   <div class="dk-scroll" id="dk-scroll">
-    <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
+    <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><div class="dk-tags" id="dk-tags" aria-label="Etiquetas do projeto" hidden></div><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
     <div class="dk-body"><nav class="dk-toc" id="dk-toc" aria-label="Sumário"></nav><div class="dk-imgs" id="dk-imgs"></div></div>
     <footer class="dk-foot"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button><button class="dk-next" id="dk-next"></button></footer>
   </div>
@@ -2994,8 +3007,23 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade de marca', en: 'Brand identity', es: 'Identidad de marca' }], ['editorial', { pt: 'Design gráfico e editorial', en: 'Graphic & editorial design', es: 'Diseño gráfico y editorial' }], ['web', { pt: 'Sites, ferramentas e produtos digitais', en: 'Websites, tools & digital products', es: 'Sitios, herramientas y productos digitales' }], ['conteudo', { pt: 'Conteúdo e mídias sociais', en: 'Content & social media', es: 'Contenido y redes sociales' }], ['campanhas', { pt: 'Campanhas, eventos e fotografia', en: 'Campaigns, events & photography', es: 'Campañas, eventos y fotografía' }], ['estrategia', { pt: 'Estratégia, educação e pesquisa', en: 'Strategy, education & research', es: 'Estrategia, educación e investigación' }]];   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
+  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade de marca', en: 'Brand identity', es: 'Identidad de marca' }], ['editorial', { pt: 'Design gráfico e editorial', en: 'Graphic & editorial design', es: 'Diseño gráfico y editorial' }], ['web', { pt: 'Sites, ferramentas e produtos digitais', en: 'Websites, tools & digital products', es: 'Sitios, herramientas y productos digitales' }], ['conteudo', { pt: 'Conteúdo e mídias sociais', en: 'Content & social media', es: 'Contenido y redes sociales' }], ['campanhas', { pt: 'Campanhas, eventos e fotografia', en: 'Campaigns, events & photography', es: 'Campañas, eventos y fotografía' }], ['estrategia', { pt: 'Estratégia, educação e pesquisa', en: 'Strategy, education & research', es: 'Estrategia, educación e investigación' }]];
+
+  const ETIQUETA_LABELS = {"identidade-visual":{"pt":"Identidade visual","en":"Visual identity","es":"Identidad visual"},"logotipo":{"pt":"Logotipo","en":"Logo","es":"Logotipo"},"manual-marca":{"pt":"Manual de marca","en":"Brand manual","es":"Manual de marca"},"aplicacoes-marca":{"pt":"Aplicações de marca","en":"Brand applications","es":"Aplicaciones de marca"},"pecas-graficas":{"pt":"Peças gráficas","en":"Graphic materials","es":"Piezas gráficas"},"ferramenta-interativa":{"pt":"Ferramenta interativa","en":"Interactive tool","es":"Herramienta interactiva"},"catalogo-digital":{"pt":"Catálogo digital","en":"Digital catalog","es":"Catálogo digital"},"posts-carrosseis":{"pt":"Posts e carrosséis","en":"Posts & carousels","es":"Posts y carruseles"},"proposta-estrategica":{"pt":"Proposta estratégica","en":"Strategy proposal","es":"Propuesta estratégica"},"cartaz-folder":{"pt":"Cartaz e folder","en":"Poster & brochure","es":"Cartel y folleto"},"cobertura-fotografica":{"pt":"Cobertura fotográfica","en":"Photo coverage","es":"Cobertura fotográfica"},"organizacao-evento":{"pt":"Organização de eventos","en":"Event management","es":"Organización de eventos"},"analise-literaria":{"pt":"Análise literária","en":"Literary analysis","es":"Análisis literario"},"dashboard":{"pt":"Dashboard","en":"Dashboard","es":"Dashboard"},"direcao-arte":{"pt":"Direção de arte","en":"Art direction","es":"Dirección de arte"},"design-grafico":{"pt":"Design gráfico","en":"Graphic design","es":"Diseño gráfico"},"design-editorial":{"pt":"Design editorial","en":"Editorial design","es":"Diseño editorial"},"design-interface":{"pt":"Design de interface","en":"Interface design","es":"Diseño de interfaces"},"gestao-projetos":{"pt":"Gestão de projetos","en":"Project management","es":"Gestión de proyectos"},"visualizacao-dados":{"pt":"Visualização de dados","en":"Data visualization","es":"Visualización de datos"},"analise-dados":{"pt":"Análise de dados","en":"Data analysis","es":"Análisis de datos"},"credito-financas":{"pt":"Crédito e finanças","en":"Credit & finance","es":"Crédito y finanzas"},"moda-acessorios":{"pt":"Moda e acessórios","en":"Fashion & accessories","es":"Moda y accesorios"},"jornalismo-cultural":{"pt":"Jornalismo cultural","en":"Cultural journalism","es":"Periodismo cultural"},"direitos-humanos":{"pt":"Direitos humanos","en":"Human rights","es":"Derechos humanos"},"servicos-locais":{"pt":"Serviços locais","en":"Local services","es":"Servicios locales"},"desdobramento-marca":{"pt":"Desdobramentos de marca","en":"Brand extensions","es":"Aplicaciones de marca"},"tecnologia":{"pt":"Tecnologia","en":"Technology","es":"Tecnología"},"tatuagem":{"pt":"Tatuagem","en":"Tattoo","es":"Tatuaje"},"cliente":{"pt":"Cliente","en":"Client","es":"Cliente"},"internacional":{"pt":"Internacional","en":"International","es":"Internacional"},"b2b":{"pt":"B2B","en":"B2B","es":"B2B"},"varejo":{"pt":"Varejo","en":"Retail","es":"Comercio minorista"},"optica":{"pt":"Óptica","en":"Optical retail","es":"Óptica"},"beleza":{"pt":"Beleza","en":"Beauty","es":"Belleza"},"podcast":{"pt":"Podcast","en":"Podcast","es":"Pódcast"},"institucional":{"pt":"Institucional","en":"Institutional","es":"Institucional"},"educacao":{"pt":"Educação","en":"Education","es":"Educación"},"saude":{"pt":"Saúde","en":"Health","es":"Salud"},"esporte":{"pt":"Esporte","en":"Sports","es":"Deporte"},"cultura":{"pt":"Cultura","en":"Culture","es":"Cultura"},"musica":{"pt":"Música","en":"Music","es":"Música"},"consultoria":{"pt":"Consultoria","en":"Consulting","es":"Consultoría"},"entretenimento":{"pt":"Entretenimento","en":"Entertainment","es":"Entretenimiento"},"turismo":{"pt":"Turismo","en":"Tourism","es":"Turismo"},"literatura":{"pt":"Literatura","en":"Literature","es":"Literatura"},"dados":{"pt":"Dados","en":"Data","es":"Datos"},"arte-digital":{"pt":"Arte digital","en":"Digital art","es":"Arte digital"},"fotografia":{"pt":"Fotografia","en":"Photography","es":"Fotografía"},"evento":{"pt":"Evento","en":"Event","es":"Evento"},"campanha":{"pt":"Campanha","en":"Campaign","es":"Campaña"},"projeto-academico":{"pt":"Projeto acadêmico","en":"Academic project","es":"Proyecto académico"},"colaboracao":{"pt":"Colaboração","en":"Collaboration","es":"Colaboración"},"trabalho-recorrente":{"pt":"Trabalho recorrente","en":"Ongoing work","es":"Trabajo recurrente"},"rebranding":{"pt":"Redesign de marca","en":"Rebranding","es":"Rediseño de marca"},"ferramenta-propria":{"pt":"Ferramenta própria","en":"Own tool","es":"Herramienta propia"},"portfolio":{"pt":"Portfólio","en":"Portfolio","es":"Portafolio"},"grupo-pesquisa":{"pt":"Grupo de pesquisa","en":"Research group","es":"Grupo de investigación"},"competicao":{"pt":"Competição","en":"Competition","es":"Competición"},"estagio":{"pt":"Estágio","en":"Internship","es":"Prácticas"},"redacao":{"pt":"Redação","en":"Writing","es":"Redacción"},"social-media":{"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},"programacao":{"pt":"Programação","en":"Programming","es":"Programación"},"diagramacao":{"pt":"Diagramação","en":"Layout & typesetting","es":"Maquetación"},"ilustracao":{"pt":"Ilustração","en":"Illustration","es":"Ilustración"},"redes-sociais":{"pt":"Redes sociais","en":"Social media","es":"Redes sociales"},"site":{"pt":"Site","en":"Website","es":"Sitio web"},"editorial":{"pt":"Editorial","en":"Editorial","es":"Editorial"},"folder":{"pt":"Folder","en":"Brochure","es":"Folleto"},"embalagens":{"pt":"Embalagens","en":"Packaging","es":"Empaques"},"oficina":{"pt":"Oficina","en":"Workshop","es":"Taller"},"material-didatico":{"pt":"Material didático","en":"Learning materials","es":"Material didáctico"},"apresentacao":{"pt":"Apresentação","en":"Presentation","es":"Presentación"},"artigos":{"pt":"Artigos","en":"Articles","es":"Artículos"},"processamento-grafico":{"pt":"Processamento gráfico","en":"Graphics processing","es":"Procesamiento gráfico"}};
+  const ETIQUETA_GRUPOS = {
+    entrega:{pt:"Entrega",en:"Deliverables",es:"Entregas"},
+    setor:{pt:"Setor",en:"Sector",es:"Sector"},
+    contexto:{pt:"Contexto",en:"Context",es:"Contexto"},
+    competencias:{pt:"Competências",en:"Skills",es:"Competencias"}
+  };
+  const etiquetaNome = (id) => {
+    if (ETIQUETA_LABELS[id]) return lx(ETIQUETA_LABELS[id]);
+    const words = id.replace(/-/g," ").split(" ").map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
+    return words;
+  };
+   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjFiltro = 'all';
+  let pjEtiqueta = null;
   const naHome = (p) => p.slug !== 'rino-pecas' && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
@@ -3006,11 +3034,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (k === pjFiltro) + '">' + lx(l) + '</button>').join('');
+    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (!pjEtiqueta && k === pjFiltro) + '">' + lx(l) + '</button>').join('');
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
       ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>'
       : '';
-    if (pjFiltro === 'all') {
+    if (pjEtiqueta) {
+      const correspondentes = displayedPJ.filter(p => Object.values(p.etiquetas || {}).some(lista => Array.isArray(lista) && lista.includes(pjEtiqueta)));
+      grid.classList.add('work-grid');
+      grid.innerHTML = '<div class="pj-tag-result"><span>' + lx({pt:'Projetos com a etiqueta',en:'Projects tagged',es:'Proyectos con la etiqueta'}) + ' <strong>' + esc(etiquetaNome(pjEtiqueta)) + '</strong> · ' + correspondentes.length + '</span><button type="button" class="art-filter" data-clear-pj-tag>' + lx({pt:'Limpar etiqueta',en:'Clear tag',es:'Quitar etiqueta'}) + ' ×</button></div>' + correspondentes.map(pjCard).join('');
+    } else if (pjFiltro === 'all') {
       grid.classList.remove('work-grid');
       grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => {
         const ps = displayedPJ.filter(p => inF(p, k));
@@ -3024,7 +3056,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join('');
     }
   };;
-  document.getElementById('pj-filters').addEventListener('click', (e) => { const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; renderPJ(); });
+  document.getElementById('pj-filters').addEventListener('click', (e) => { if (e.target.closest('[data-clear-pj-tag]')) { pjEtiqueta = null; pjFiltro = 'all'; renderPJ(); return; } const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; pjEtiqueta = null; renderPJ(); });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
      5 colunas; filtros por organização (conta) e ordenação por interações, data, organização ou projeto. */
@@ -3431,6 +3463,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dk-kicker').textContent = lx(p.cat) + ' · ' + p.ano;
     document.getElementById('dk-title').textContent = p.titulo;
     document.getElementById('dk-intro').textContent = lx(p.intro || (p.telas[0] && p.telas[0].d));
+    const tagWrap = document.getElementById('dk-tags');
+    const tagGroups = Object.entries(p.etiquetas || {}).filter(([,ids]) => Array.isArray(ids) && ids.length);
+    tagWrap.hidden = !tagGroups.length;
+    tagWrap.innerHTML = tagGroups.map(([grupo,ids]) => '<div class="dk-tag-group"><span class="dk-tag-group-label">' + lx(ETIQUETA_GRUPOS[grupo] || {pt:grupo,en:grupo,es:grupo}) + '</span>' + ids.map(id => '<button type="button" class="dk-tag" data-pj-tag="' + esc(id) + '">' + esc(etiquetaNome(id)) + '</button>').join('') + '</div>').join('');
     const lk = document.getElementById('dk-link'); lk.hidden = !p.link;
     if (p.link) { lk.href = p.link; lk.textContent = p.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/(index\.html)?$/, ''); }
     // botão "Testar o site" (abre o site rodando num celular/janela)
@@ -3484,6 +3520,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   const closeDeck = () => { dk.classList.remove('open'); document.body.classList.remove('project-deck-open'); document.documentElement.style.removeProperty('--project-header-height'); if (!webOv.classList.contains('open')) document.body.style.overflow = ''; document.getElementById('dk-imgs').innerHTML = ''; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} };
   document.getElementById('dk-x').onclick = closeDeck;
+  document.getElementById('dk-tags').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-pj-tag]'); if (!b) return;
+    pjEtiqueta = b.dataset.pjTag; pjFiltro = 'all';
+    closeDeck();
+    const route = document.querySelector('[data-route="work"]');
+    if (route) route.click(); else renderPJ();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      renderPJ();
+      document.getElementById('work-case-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+  });
+
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
     const sc = document.getElementById('dk-scroll'), el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
