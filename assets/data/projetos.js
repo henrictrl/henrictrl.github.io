@@ -2195,7 +2195,7 @@ window.PROJETOS = [
     "es": "Sitios, herramientas y productos digitales"
   },
   "filtro": "web",
-  "capa": "assets/projetos/rino/capa.webp",
+  "capa": "assets/projetos/rino/capa-definidor.svg",
   "dir": "assets/projetos/rino/",
   "intro": {
    "pt": "Um definidor de cores para explorar, comparar e aprovar combinações aplicadas diretamente ao logotipo. A interface reúne pré-visualização ao vivo, paletas sugeridas, controles de cor e exportação em PNG.",
