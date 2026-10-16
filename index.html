@@ -3055,14 +3055,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (!pjEtiqueta && k === pjFiltro) + '">' + lx(l) + '</button>').join('');
+    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (!pjEtiqueta && k === pjFiltro) + '">' + lx(l) + '</button>').join('') + (pjEtiqueta ? '<button type="button" class="art-filter" data-clear-pj-tag>' + lx({pt:'Limpar etiqueta',en:'Clear tag',es:'Quitar etiqueta'}) + ' ×</button>' : '');
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
       ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>'
       : '';
     if (pjEtiqueta) {
       const correspondentes = displayedPJ.filter(p => Object.values(p.etiquetas || {}).some(lista => Array.isArray(lista) && lista.includes(pjEtiqueta)));
       grid.classList.add('work-grid');
-      grid.innerHTML = '<div class="pj-tag-result"><span>' + lx({pt:'Projetos com a etiqueta',en:'Projects tagged',es:'Proyectos con la etiqueta'}) + ' <strong>' + esc(etiquetaNome(pjEtiqueta)) + '</strong> · ' + correspondentes.length + '</span><button type="button" class="art-filter" data-clear-pj-tag>' + lx({pt:'Limpar etiqueta',en:'Clear tag',es:'Quitar etiqueta'}) + ' ×</button></div>' + correspondentes.map(pjCard).join('');
+      grid.innerHTML = '<div class="pj-tag-result"><span>' + lx({pt:'Projetos com a etiqueta',en:'Projects tagged',es:'Proyectos con la etiqueta'}) + ' <strong>' + esc(etiquetaNome(pjEtiqueta)) + '</strong> · ' + correspondentes.length + '</span></div>' + correspondentes.map(pjCard).join('');
     } else if (pjFiltro === 'all') {
       grid.classList.remove('work-grid');
       grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => {
