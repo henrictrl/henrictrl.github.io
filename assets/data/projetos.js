@@ -6293,7 +6293,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/basement/capa.webp",
   "dir": "assets/projetos/basement/",
   "intro": {
@@ -6325,7 +6325,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/tesoura/capa.webp",
   "dir": "assets/projetos/tesoura/",
   "intro": {
@@ -6353,7 +6353,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/persona/capa.webp",
   "dir": "assets/projetos/persona/",
   "intro": {
@@ -6382,7 +6382,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/desvendando/capa.webp",
   "dir": "assets/projetos/desvendando/",
   "intro": {
@@ -6408,7 +6408,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/proec/capa.webp",
   "dir": "assets/projetos/proec/",
   "intro": {
@@ -6519,7 +6519,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/sollaris-instagram/capa.webp",
   "dir": "assets/projetos/sollaris-instagram/",
   "intro": {
@@ -6542,7 +6542,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "conteudo",
+  "filtro": "editorial",
   "capa": "assets/projetos/rd-cultural/capa.webp",
   "dir": "assets/projetos/rd-cultural/",
   "exp": "Rd Cultural",
@@ -6572,7 +6572,7 @@ window.PROJETOS = [
   },
   "filtro": [
    "identidade",
-   "conteudo"
+   "editorial"
   ],
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
   "dir": "assets/projetos/encantos-do-brasil/",
