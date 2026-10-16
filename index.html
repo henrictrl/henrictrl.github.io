@@ -1226,7 +1226,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .work-dashboard-cta .pj-dash-btn { margin-left:0; }
 .top-before-contact { display:flex; justify-content:center; padding:28px var(--gutter) 24px; background:var(--white); }
 .cv-actions { padding-top:24px; padding-bottom:24px; }
-.cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
 .resource-action { display:inline-flex; align-items:center; gap:12px; border:1px solid var(--gray-200); border-radius:var(--r); padding:11px 15px; background:var(--white); color:var(--ink); font:inherit; font-size:13px; cursor:pointer; transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease); }
 .resource-action:hover { border-color:var(--ink); }
 .resource-action-primary { background:var(--ink); border-color:var(--ink); color:var(--white); font-size:14px; font-weight:500; padding:13px 18px; }
@@ -1259,7 +1259,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .free-tool strong { display:block; font-size:14px; font-weight:500; margin-bottom:4px; }
 .free-tool p { font-size:12px; color:var(--gray-500); line-height:1.5; }
 .free-tool a { display:inline-block; font-size:12px; margin-top:8px; text-decoration:underline; text-underline-offset:3px; }
-@media (max-width:600px) { .resource-modal { padding:18px; } .resource-modal-head h2 { font-size:21px; } .cv-actions-inner { align-items:flex-start; flex-direction:column; } }
+@media (max-width:600px) { .resource-modal { padding:18px; } .resource-modal-head h2 { font-size:21px; } .cv-actions-inner { align-items:center; justify-content:center; flex-direction:row; } }
 
 </style>
 </head>
@@ -1340,8 +1340,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <p class="section-label" data-i18n="about.label">Sobre mim</p>
         <div class="reveal section-body">
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
-          <p class="about-text about-desk" data-i18n-about="31.6"><span class="l">Formado em Relações Públicas pela Unesp, desenvolvo marcas e</span> <span class="l">estratégias de <em>branding</em>. Atuo de forma crítica em construção de</span> <span class="l">narrativas e sou redator cultural em portais jornalísticos.</span></p>
-          <p class="about-text about-mob" data-i18n-about="19.7"><span class="l">Formado em Relações Públicas pela</span> <span class="l">Unesp, desenvolvo marcas e estratégias</span> <span class="l">de <em>branding</em>. Atuo de forma crítica em</span> <span class="l">construção de narrativas e sou redator</span> <span class="l">cultural em portais jornalísticos.</span></p>
+          <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
+          <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
           <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link" data-i18n="about.more">Saiba mais</a>
         </div>
       </div>
@@ -1478,8 +1478,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div id="view-about" style="display:none;">
     <section class="cv-actions section-block" aria-label="Currículo">
       <div class="cv-actions-inner">
-        <button type="button" class="resource-action resource-action-primary" id="cv-download-btn">Baixar Currículo <span aria-hidden="true">↓</span></button>
-        <span class="cv-document-note">PDF do currículo: documento em breve.</span>
+        <button type="button" class="art-filter" id="cv-download-btn">Baixar currículo</button>
       </div>
     </section>
     <!-- conteúdo = currículo (dados em CV, no script) -->
@@ -1494,10 +1493,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <div class="section-heading">
           <p class="section-label" data-i18n="aboutp.edu">Formação</p>
           <div class="resource-inline cert-inline">
-            <p class="cv-name">Certificados</p>
-            <p class="cv-desc">Certificados e comprovantes em uma galeria de imagens e PDFs.</p>
-            <button type="button" class="resource-action" id="certificates-btn">Ver certificados <span aria-hidden="true">↗</span></button>
-            <p class="cv-document-note">Documentos em breve.</p>
+            <button type="button" class="resource-action" id="certificates-btn">Certificados</button>
           </div>
         </div>
         <div class="cv-side">
@@ -1516,9 +1512,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <div class="section-heading">
           <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
           <div class="resource-inline free-tools-inline">
-            <p class="cv-name">Ferramentas gratuitas</p>
-            <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
-            <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
+            <button type="button" class="resource-action" id="free-tools-btn">Ferramentas gratuitas</button>
           </div>
         </div>
         <div class="cv-side">
@@ -1767,8 +1761,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'portrait.aria': 'Portrait of Henrique Marinhos. Activate to see it in motion.',
       'about.label': 'About me', 'about.more': 'Learn more',
       // dois textos: cada um escolhido para justificar sem buracos na sua largura (desktop 31.6em / mobile 19.7em)
-      'about.text.d': 'I graduated in Public Relations from Unesp and I create brands and <em>branding</em> strategies. I take a critical approach to building narratives and write about culture for news outlets.',
-      'about.text.m': 'A Public Relations graduate from Unesp, I develop brands and <em>branding</em> strategies. I work critically on building narratives and I am a culture writer for news outlets.',
+      'about.text.d': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
+      'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
       'services.title': 'Services',
       'svc.identidade.t': 'Visual identity', 'svc.identidade.d': 'Logo, palette, typography and the pieces that take the brand into the world: business cards, stationery, packaging and event print.',
       'svc.social.t': 'Brand strategy', 'svc.social.d': 'Visual planning and graphic design for social media, campaigns and presentations.',
@@ -1802,8 +1796,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'hint.mouse': 'pasa el mouse - haz clic para animar', 'hint.touch': 'arrastra el dedo - toca para animar',
       'portrait.aria': 'Retrato de Henrique Marinhos. Actívalo para verlo en movimiento.',
       'about.label': 'Sobre mí', 'about.more': 'Saber más',
-      'about.text.d': 'Graduado en Relaciones Públicas en la Unesp, desarrollo marcas y estrategias de <em>branding</em>. Actúo de forma crítica en la construcción de narrativas y soy redactor cultural en portales periodísticos.',
-      'about.text.m': 'Me gradué en Relaciones Públicas en la Unesp y desarrollo marcas y estrategias de <em>branding</em>. Actúo de forma crítica en la construcción de narrativas y soy redactor cultural en portales periodísticos.',
+      'about.text.d': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
+      'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
       'services.title': 'Servicios',
       'svc.identidade.t': 'Identidad visual', 'svc.identidade.d': 'Logotipo, paleta, tipografía y las piezas que llevan la marca al mundo: tarjetas, papelería, empaques e impresos para eventos.',
       'svc.social.t': 'Estrategia de marca', 'svc.social.d': 'Planificación visual y creación de piezas gráficas para redes, campañas y presentaciones.',
@@ -2473,9 +2467,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Idiomas: texto no formato pedido; bandeiras em SVG (BR, EUA, Espanha)
   const FLAG_US = '<svg viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg>';
   const IDIOMAS = [
-    { f: () => FLAGS.pt(), t: { pt: 'Português - Nativo', en: 'Portuguese - Native', es: 'Portugués - Nativo' } },
-    { f: () => FLAG_US, t: { pt: 'Inglês B2 First | Level C1 - de 2016 a 2021 no CNA (Cambridge University Press & Assessment)', en: 'English B2 First | Level C1 - from 2016 to 2021 at CNA (Cambridge University Press & Assessment)', es: 'Inglés B2 First | Level C1 - de 2016 a 2021 en CNA (Cambridge University Press & Assessment)' } },
-    { f: () => FLAGS.es(), t: { pt: 'Espanhol - Em andamento - intermediário (previsão de conclusão no meio de 2027)', en: 'Spanish - In progress - intermediate (expected completion mid-2027)', es: 'Español - En curso - intermedio (finalización prevista a mediados de 2027)' } }
+    { f: () => FLAGS.es(), t: { pt: 'Espanhol Intermediário', en: 'Spanish — Intermediate', es: 'Español intermedio' } }
   ];
   // Ferramentas gratuitas: alternativas aos programas pagos. Formato: { n: 'Nome', svg: '<svg…>' } (logos em assets/data/ferramentas.js servem de modelo)
   // Edite esta lista por categoria conforme as alternativas realmente usadas; a seleção está em teste.
@@ -2901,9 +2893,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // A rolagem vertical comum continua descendo a página (a faixa não prende quem só quer rolar).
     mask.addEventListener('wheel', (e) => {
       const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? mask.clientWidth : 1;
-      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
-      if (!dx) return;
-      e.preventDefault();
+      const horizontalTrackpad = Math.abs(e.deltaX) > 0.5 && Math.abs(e.deltaX) >= Math.abs(e.deltaY) * 0.35;
+      const dx = horizontalTrackpad ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (Math.abs(dx) <= 0.5) return;
+      if (e.cancelable) e.preventDefault();
       x += dx * k; wrap(); v = 0; target = 0; resumeT = performance.now() + 1400; paint();
       if (!raf && inView) start();
     }, { passive: false });
