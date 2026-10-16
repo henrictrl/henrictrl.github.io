@@ -2665,7 +2665,18 @@ window.PROJETOS = [
      "pt": ""
     }
    },
-   {
+      {
+    "img": "19",
+    "t": {
+     "pt": "Introdução",
+     "en": "Introduction",
+     "es": "Introducción"
+    },
+    "d": {
+     "pt": ""
+    }
+   },
+{
     "img": "20",
     "t": {
      "pt": "Paleta principal",
@@ -2843,7 +2854,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 24,
+    "p": 25,
     "t": {
      "pt": "Tipografia",
      "en": "Typography",
@@ -2851,7 +2862,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 28,
+    "p": 29,
     "t": {
      "pt": "Aplicações",
      "en": "Applications",
