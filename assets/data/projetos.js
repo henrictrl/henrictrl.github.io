@@ -1354,11 +1354,11 @@ window.PROJETOS = [
   "titulo": "Rino: peças",
   "ano": "2026",
   "cat": {
-    "pt": "Design gráfico e editorial",
-    "en": "Graphic & editorial design",
-    "es": "Diseño gráfico y editorial"
+    "pt": "Campanhas, eventos e fotografia",
+    "en": "Campaigns, events & photography",
+    "es": "Campañas, eventos y fotografía"
   },
-  "filtro": "editorial",
+  "filtro": "campanhas",
   "etiquetas": {
     "entrega": [
       "pecas-graficas",
@@ -5911,11 +5911,11 @@ window.PROJETOS = [
   "titulo": "Inspirit Jiu Jitsu",
   "ano": "2026",
   "cat": {
-    "pt": "Design gráfico e editorial",
-    "en": "Graphic & editorial design",
-    "es": "Diseño gráfico y editorial"
+    "pt": "Campanhas, eventos e fotografia",
+    "en": "Campaigns, events & photography",
+    "es": "Campañas, eventos y fotografía"
   },
-  "filtro": "editorial",
+  "filtro": "campanhas",
   "etiquetas": {
     "entrega": [
       "folder",
@@ -6036,11 +6036,11 @@ window.PROJETOS = [
   "titulo": "Festa da Polenta",
   "ano": "2026",
   "cat": {
-    "pt": "Design gráfico e editorial",
-    "en": "Graphic & editorial design",
-    "es": "Diseño gráfico y editorial"
+    "pt": "Campanhas, eventos e fotografia",
+    "en": "Campaigns, events & photography",
+    "es": "Campañas, eventos y fotografía"
   },
-  "filtro": "editorial",
+  "filtro": "campanhas",
   "etiquetas": {
     "entrega": [
       "cartaz-folder",
