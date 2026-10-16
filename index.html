@@ -3190,12 +3190,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const openWeb = (p) => {
     document.getElementById('web-name').textContent = p.titulo;
     document.getElementById('web-open').href = p.web.url;
-    setDev(p.web.dev || 'mobile'); webIframe.src = p.web.url;
+    setDev(p.web.dev || 'mobile');
+    const siteUrl = new URL(p.web.url, window.location.href);
+    if (p.slug === 'rino-site') siteUrl.searchParams.set('portfolioPreview', '1');
+    webIframe.src = siteUrl.href;
     webOv.classList.add('open'); document.body.style.overflow = 'hidden';
   };
   const closeWeb = () => { webOv.classList.remove('open'); if (!dk.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!webOv.classList.contains('open')) webIframe.src = 'about:blank'; }, 350); };
   webOv.querySelector('.web-dev').addEventListener('click', (e) => { const b = e.target.closest('[data-dev]'); if (b) setDev(b.dataset.dev); });
   document.getElementById('web-x').onclick = closeWeb;
+  window.addEventListener('message', (e) => {
+    if (e.source !== webIframe.contentWindow || e.origin !== window.location.origin) return;
+    if (e.data && e.data.type === 'rino:close-preview') closeWeb();
+  });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && webOv.classList.contains('open')) closeWeb(); });
 
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
