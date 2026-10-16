@@ -1170,13 +1170,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   *, .reveal, .reveal-stagger > * { transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
-/* botão do dashboard (visão geral), separado dos filtros */
-.pj-dash-btn { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; padding: 7px 14px 7px 10px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #fff; text-decoration: none;
-  background: linear-gradient(110deg, #2a78d6, #8a3ffc 45%, #e8318a 75%, #f4a300); background-size: 200% 100%; animation: pjdash 6s ease-in-out infinite alternate; box-shadow: 0 6px 18px -8px rgba(138,63,252,.6); }
-.pj-dash-btn i { display: inline-block; width: 4px; border-radius: 2px; background: #fff; align-self: flex-end; margin-bottom: 3px; }
-.pj-dash-btn i:nth-child(1) { height: 7px; } .pj-dash-btn i:nth-child(2) { height: 12px; } .pj-dash-btn i:nth-child(3) { height: 9px; margin-right: 2px; }
-@keyframes pjdash { to { background-position: 100% 0; } }
-@media (prefers-reduced-motion: reduce) { .pj-dash-btn { animation: none; } }
+/* botão Veja os números: usa a mesma aparência dos filtros de categoria */
+.pj-dash-btn { text-decoration: none; margin-left: 0; }
 /* grade de todos os posts */
 .pg-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-bottom: 14px; }
 .pg-orgs { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -2467,6 +2462,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Idiomas: texto no formato pedido; bandeiras em SVG (BR, EUA, Espanha)
   const FLAG_US = '<svg viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg>';
   const IDIOMAS = [
+    { f: () => FLAGS.pt(), t: { pt: 'Português - Nativo', en: 'Portuguese - Native', es: 'Portugués - Nativo' } },
+    { f: () => FLAG_US, t: { pt: 'Inglês B2 First | Level C1 - de 2016 a 2021 no CNA (Cambridge University Press & Assessment)', en: 'English B2 First | Level C1 - from 2016 to 2021 at CNA (Cambridge University Press & Assessment)', es: 'Inglés B2 First | Level C1 - de 2016 a 2021 en CNA (Cambridge University Press & Assessment)' } },
     { f: () => FLAGS.es(), t: { pt: 'Espanhol Intermediário', en: 'Spanish — Intermediate', es: 'Español intermedio' } }
   ];
   // Ferramentas gratuitas: alternativas aos programas pagos. Formato: { n: 'Nome', svg: '<svg…>' } (logos em assets/data/ferramentas.js servem de modelo)
@@ -2968,7 +2965,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bar.hidden = usados.length < 3;
     bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (k === pjFiltro) + '">' + lx(l) + '</button>').join('');
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
-      ? '<a class="pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral"><i></i><i></i><i></i><span>' + lx(DASH_BTN) + '</span></a>'
+      ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>'
       : '';
     if (pjFiltro === 'all') {
       grid.classList.remove('work-grid');
