@@ -281,9 +281,9 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 @media (min-width: 768px) { .section-label { align-self: start; } }
 
 .section-body p { font-size: 15px; line-height: 1.65; color: var(--ink); max-width: 470px; text-align: justify; hyphens: manual; text-wrap: pretty; }
-/* Texto "Sobre": 6 linhas fixas (.l), escolhidas por cálculo para o justificado nunca abrir buracos
-   (calculadas com as métricas reais da Inter). A fonte acompanha a largura da coluna (até 16px), então as quebras
-   são idênticas em qualquer tela. Ao trocar o texto, as quebras precisam ser recalculadas. */
+/* Texto "Sobre": as quebras são calculadas para cada largura e tamanho de fonte com as métricas reais da Inter.
+   O alinhamento é à esquerda, sem expandir os espaços entre palavras. Ao trocar o texto, revise as quebras. */
+.section-body p.about-text { text-align: left; text-align-last: left; }
 .about-text { line-height: 1.5; max-width: 100%; text-wrap: wrap; }
 /* Celular (5 linhas): fonte = largura útil / 19.7 */
 .section-body .about-mob {
@@ -545,9 +545,11 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 /* --- Apresentação dos projetos (deck) ---
    Desktop e celular: cabeçalho do projeto e todas as páginas empilhadas (rolagem vertical, estilo Behance). */
 /* Durante um projeto, a navegação principal continua acessível acima da apresentação. */
-body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; background: var(--white); border-bottom: 1px solid var(--gray-100); }
+body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
 body.project-deck-open > header.floating-header { display: none !important; }
-body.project-deck-open .dk-ov.open { top: var(--project-header-height, 72px); }
+/* O painel cobre também a área sob a navegação; seu cabeçalho interno reserva o espaço da barra fixa. */
+body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; }
+body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
 .dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
 .dk-ov.open { opacity: 1; pointer-events: auto; }
 .dk-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 32px; }
@@ -582,6 +584,7 @@ body.project-deck-open .dk-ov.open { top: var(--project-header-height, 72px); }
 .dk-next span { color: var(--gray-400); font-size: 12px; display: block; margin-bottom: 4px; text-align: left; }
 @media (max-width: 767px) {
   .dk-top { padding: 12px 16px; }
+  body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
   .dk-meta { display: none; }
   .dk-body { display: block; padding: 0; }
   .dk-toc { position: static; padding: 0 18px 28px; }
@@ -1752,7 +1755,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   /* ===================== IDIOMAS (PT · EN · ES) =====================
      PT é o texto do próprio HTML. EN/ES vêm deste dicionário.
      data-i18n="chave" → troca o innerHTML · data-i18n-aria="chave" → troca o aria-label
-     data-i18n-about="larguraEm" → parágrafo justificado; as quebras são recalculadas no idioma (sem hífen, sem buracos) */
+     data-i18n-about="larguraEm" → texto alinhado à esquerda; as quebras são calculadas para a largura indicada */
   const I18N = {
     en: {
       'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
@@ -1837,9 +1840,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     const v = LANG === 'pt' ? PT_HTML.get(el) : I18N[LANG][el.dataset.i18n];
     if (v != null && el.innerHTML !== v) el.innerHTML = v;
   };
-  // parágrafo justificado: divide em linhas que preenchem a largura (programação dinâmica, menor sobra total)
+  // Calcula as quebras de linha do texto traduzido de Sobre para manter uma largura visual previsível.
   const measureCtx = document.createElement('canvas').getContext('2d');
-  const justifyLines = (el, html, widthEm) => {
+  const layoutAboutLines = (el, html, widthEm) => {
     const fam = getComputedStyle(el).fontFamily, W = widthEm * 100;
     const words = html.split(' ');
     const wOf = (w) => { measureCtx.font = `${/<em>/.test(w) ? 'italic ' : ''}400 100px ${fam}`; return measureCtx.measureText(w.replace(/<[^>]+>/g, '')).width; };
@@ -1871,7 +1874,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     document.querySelectorAll('[data-i18n-about]').forEach(el => {
       if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
       if (LANG === 'pt') el.innerHTML = PT_HTML.get(el);
-      else document.fonts.ready.then(() => { if (LANG !== 'pt') justifyLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); });
+      else document.fonts.ready.then(() => { if (LANG !== 'pt') layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); });
     });
     const md = document.querySelector('meta[name="description"]');
     if (md) { if (!md.dataset.pt) md.dataset.pt = md.content; md.content = i18n('doc.desc', md.dataset.pt); }
@@ -3413,12 +3416,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteHeader = document.querySelector('header.top-header');
     if (siteHeader) {
       document.body.classList.add('project-deck-open');
-      document.documentElement.style.setProperty('--project-header-height', siteHeader.offsetHeight + 'px');
+      document.documentElement.style.setProperty('--project-header-height', Math.ceil(siteHeader.getBoundingClientRect().height) + 'px');
     }
     dk.classList.add('open'); document.body.style.overflow = 'hidden';
     try { history.replaceState(null, '', '#projeto/' + slug); } catch (e) {}
     return true;
   };
+  window.addEventListener('resize', () => {
+    if (!document.body.classList.contains('project-deck-open')) return;
+    const siteHeader = document.querySelector('header.top-header');
+    if (siteHeader) document.documentElement.style.setProperty('--project-header-height', Math.ceil(siteHeader.getBoundingClientRect().height) + 'px');
+  }, { passive: true });
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-web]'); if (b && PJ_BY[b.dataset.web]) openWeb(PJ_BY[b.dataset.web]); });
   // seção atual do sumário pela rolagem
   document.getElementById('dk-scroll').addEventListener('scroll', () => {
