@@ -104,9 +104,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
 .btn-icone:hover:not(:disabled) { border-color: #bdc9d6; background: #f7f9fb; color: var(--ink); }
 .btn-icone:disabled { cursor: not-allowed; opacity: .38; }
 .btn-icone svg { display: block; }
-.btn-sair-teste { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); font-size: 12px; font-weight: 650; white-space: nowrap; cursor: pointer; flex: none; }
-.btn-sair-teste:hover { background: var(--accent-soft); border-color: #bdc9d6; }
-.btn-sair-teste svg { display: block; width: 15px; height: 15px; }
+
 
 /* Estrutura principal */
 .layout {
@@ -376,7 +374,74 @@ body{font-size:13px;line-height:1.45}
 }
 @media(max-width:370px){.marca-eyebrow{display:none}.topo-titulos h1{font-size:13px}.coluna-logo{flex-basis:clamp(180px,29vh,210px);height:clamp(180px,29vh,210px)}.painel-intro h2{font-size:13px}.mode-tab{padding:0 6px}.palette-swatches{grid-template-columns:repeat(3,minmax(0,1fr))}.palette-swatch{height:13px}}
 
-@media (max-width: 760px) { .btn-sair-teste { min-height: 28px; gap: 3px; padding: 0 6px; border-radius: 7px; font-size: 10px; } .btn-sair-teste svg { width: 13px; height: 13px; } }
+
+/* Outubro 2026 — tipografia maior e painéis mais compactos */
+body{font-size:14px;line-height:1.5}
+:root{--header-h:74px}
+.topo{padding:10px clamp(12px,1.8vw,24px);gap:12px}
+.topo-identidade{gap:10px}
+.marca-eyebrow{font-size:9px}
+.topo-titulos h1{font-size:clamp(17px,1.7vw,22px)}
+.topo-titulos p{font-size:12px}
+.btn-icone{width:38px;height:38px}
+.btn-tutorial{min-height:38px;padding:0 13px;font-size:12px}
+.coluna-logo{padding:12px clamp(12px,2vw,24px) 10px}
+.preview-label{font-size:10px}.preview-status{font-size:11px}.preview-hint{font-size:11px}
+.coluna-controles{padding:14px clamp(12px,1.8vw,24px) 10px}
+.painel-intro{margin-bottom:8px}
+.painel-intro h2{font-size:clamp(18px,1.7vw,22px)}
+.painel-eyebrow{font-size:10px}
+.bloco{padding:13px}
+.bloco h2{font-size:14px;margin-bottom:8px}
+.paletas-prontas{gap:7px}
+.paleta-pronta{padding:10px}
+.paleta-title{font-size:13px}
+.paleta-sub{font-size:11px}
+.palette-swatches{margin-top:7px}
+.palette-swatch{height:23px}
+.mode-tab{min-height:34px;padding:0 10px;font-size:11.5px}
+.chip-parte{min-height:39px;padding:7px 8px}
+.nome-parte{font-size:11px}
+.editor{margin-top:6px;padding-top:6px}
+.editor-titulo span{font-size:12px}
+.subtitulo-secao{font-size:10.5px}
+.campo-slider label,.campo-slider label span:last-child{font-size:10.5px}
+.campo-hex label{font-size:11px}
+.campo-hex input{font-size:11.5px;height:32px}
+.rodape-acoes{padding-top:6px;gap:7px}
+.btn{min-height:40px;padding:9px 12px;font-size:11.5px}
+@media(max-width:760px){
+ :root{--header-h:62px}
+ .topo{height:var(--header-h);min-height:var(--header-h);padding:5px 9px;gap:6px}
+ .topo-titulos h1{font-size:15px}
+ .marca-eyebrow{font-size:7.5px}
+ .btn-icone{width:30px;height:30px}
+ .btn-tutorial{min-height:30px;padding:0 7px;font-size:10px}
+ .coluna-logo{flex-basis:clamp(172px,27vh,205px);height:clamp(172px,27vh,205px);padding:7px 10px}
+ .moldura-logo{max-width:136px}
+ .coluna-controles{padding:7px 8px 5px}
+ .painel-intro{gap:5px;margin-bottom:6px}
+ .painel-intro h2{font-size:15px}
+ .painel-eyebrow{font-size:9px}
+ .mode-tab{min-height:29px;padding:0 7px;font-size:10.5px}
+ .bloco{padding:9px}
+ .bloco h2{font-size:12px;margin-bottom:7px}
+ .paleta-pronta{padding:8px}
+ .paleta-title{font-size:11.5px}
+ .paleta-sub{font-size:10px}
+ .palette-swatches{gap:3px;margin-top:6px}
+ .palette-swatch{height:18px}
+ .chip-parte{min-height:34px;padding:5px 6px}
+ .nome-parte{font-size:10px}
+ .editor-titulo span{font-size:10.5px}
+ .subtitulo-secao{font-size:9.5px}
+ .campo-slider label,.campo-slider label span:last-child{font-size:9px}
+ .campo-hex label{font-size:10px}
+ .campo-hex input{width:88px;font-size:10.5px;height:29px}
+ .rodape-acoes{padding-top:5px;gap:5px}
+ .btn{min-height:35px;padding:7px 9px;font-size:10px}
+}
+
 </style>
 </head>
 
@@ -395,9 +460,7 @@ body{font-size:13px;line-height:1.45}
     </div>
   </div>
   <div class="topo-acoes" aria-label="Ações da edição">
-    <button type="button" class="btn-sair-teste" id="btn-sair-teste" title="Sair do teste e voltar ao portfólio" aria-label="Sair do teste e voltar ao portfólio" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 19 3 12l7-7"/><path d="M3 12h18"/></svg><span>Sair</span>
-    </button>
+    
     <button type="button" class="btn-icone" id="btn-desfazer" title="Desfazer (Ctrl+Z)" aria-label="Desfazer" disabled>
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>
     </button>
@@ -1750,11 +1813,6 @@ document.addEventListener(
    · combinações guardadas (localStorage "rino-favoritas") · copiar cores · 1ª parte já selecionada */
 (function(){
   const $ = (id)=>document.getElementById(id);
-  const btnSairTeste = $('btn-sair-teste');
-  if (btnSairTeste && new URLSearchParams(window.location.search).get('portfolioPreview') === '1' && window.parent !== window) {
-    btnSairTeste.hidden = false;
-    btnSairTeste.addEventListener('click', () => window.parent.postMessage({ type: 'rino:close-preview' }, window.location.origin));
-  }
   // --- histórico: guarda o estado antes de cada mudança (agrupa arrastes de slider em 1 passo) ---
   const hist=[], fut=[]; let ultimo=0, aplicando=false;
   const snap=()=>JSON.stringify(estadoCores);
