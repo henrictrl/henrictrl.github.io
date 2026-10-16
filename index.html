@@ -1233,9 +1233,12 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .resource-action-primary:hover { background:#333; }
 .cv-document-note { color:var(--gray-500); font-size:12px; }
 .resource-inline { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+.section-heading { display:flex; flex-direction:column; align-items:flex-start; gap:12px; width:100%; }
+.section-heading .resource-inline { margin:8px 0 0; max-width:280px; }
 .cv-side { width:100%; max-width:560px; display:flex; flex-direction:column; gap:24px; }
 .cv-side > .cv-list { width:100%; max-width:none; }
 .cert-inline, .free-tools-inline { margin:0; }
+@media (min-width:768px) { .section-heading { flex:0 0 30%; width:30%; } }
 .resource-modal-overlay { position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.45); }
 .resource-modal-overlay[hidden] { display:none; }
 .resource-modal { width:min(760px,100%); max-height:min(82svh,850px); overflow:auto; background:var(--white); border-radius:var(--r); padding:24px; box-shadow:0 20px 70px rgba(0,0,0,.18); }
@@ -1488,15 +1491,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     </section>
     <section class="section-block">
       <div class="section-grid">
-        <p class="section-label" data-i18n="aboutp.edu">Formação</p>
-        <div class="cv-side">
-          <div class="cv-list" id="cv-edu"></div>
+        <div class="section-heading">
+          <p class="section-label" data-i18n="aboutp.edu">Formação</p>
           <div class="resource-inline cert-inline">
             <p class="cv-name">Certificados</p>
             <p class="cv-desc">Certificados e comprovantes em uma galeria de imagens e PDFs.</p>
             <button type="button" class="resource-action" id="certificates-btn">Ver certificados <span aria-hidden="true">↗</span></button>
             <p class="cv-document-note">Documentos em breve.</p>
           </div>
+        </div>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-edu"></div>
         </div>
       </div>
     </section>
@@ -1508,14 +1513,16 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     </section>
     <section class="section-block">
       <div class="section-grid">
-        <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
-        <div class="cv-side">
-          <div class="cv-list" id="cv-skills"></div>
+        <div class="section-heading">
+          <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
           <div class="resource-inline free-tools-inline">
             <p class="cv-name">Ferramentas gratuitas</p>
             <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
             <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
           </div>
+        </div>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-skills"></div>
         </div>
       </div>
     </section>
