@@ -247,7 +247,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   pointer-events: none; transition: opacity 0.4s var(--ease);
 }
 .hero-portrait.touched + .portrait-hint { opacity: 0; }
-.portrait-hint.is-credit { opacity: 1 !important; color: var(--ink); }
+.portrait-hint.is-credit { opacity: 1 !important; color: var(--gray-400) !important; }
 .portrait-hint.is-credit .portrait-credit-label { font-weight: 500; }
 .portrait-hint .hint-touch { display: none; }
 @media (hover: none) {
@@ -259,7 +259,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 /* metade do espaço em cima + metade embaixo → distância igual entre todas as seções */
 /* 1ª tela (desktop): hero + Sobre preenchem a altura da janela abaixo do cabeçalho; espaço extra fica em volta do conteúdo */
 @media (min-width: 768px) {
-  .first-screen { min-height: calc(100svh - var(--hdr-h, 72px)); display: flex; flex-direction: column; justify-content: center; }
+  .first-screen { min-height: calc(100svh - var(--hdr-h, 72px) - 48px); display: flex; flex-direction: column; justify-content: center; }
 }
 .section-block { padding: calc(var(--space-y) / 2) var(--gutter); }
 
@@ -1213,14 +1213,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @media (max-width: 767px) { .hr-card { width: 220px; } .hr-rows { gap: 12px; } }
 
 /* Revisão de portfólio — outubro de 2026 */
-.home-featured-grid { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 12px !important; overflow:visible !important; }
+/* Home cards match Projects in width, columns, ratio and spacing. */
+.home-featured-grid { display:grid !important; grid-template-columns:1fr; gap:32px 16px !important; overflow:visible !important; width:100%; margin:0 !important; padding:0 !important; }
 .home-featured-grid .hr-card { width:auto !important; min-width:0; }
-.home-featured-grid .hr-media { aspect-ratio:3/2; border-radius:var(--r); overflow:hidden; }
-.home-featured-grid .hr-info { padding-top:8px; }
-@media (min-width:768px) { .home-featured-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px 20px !important; } }
-.pj-filters .art-filter[aria-pressed="true"] { background:var(--ink); color:var(--white); border-color:var(--ink); }
-.pj-filters .art-filter { border:1px solid var(--gray-200); border-radius:999px; padding:9px 14px; transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease); }
-.pj-filters .art-filter:hover { border-color:var(--ink); }
+.home-featured-grid .hr-media { aspect-ratio:3/2; border-radius:var(--r); overflow:hidden; margin-bottom:12px; box-shadow:0 6px 18px -6px rgba(0,0,0,0.14), 0 1px 3px rgba(0,0,0,0.05); }
+.home-featured-grid .hr-info { padding:0; }
+.home-featured-grid .hr-t { font-size:15px; font-weight:500; line-height:1.35; letter-spacing:-0.01em; }
+.home-featured-grid .hr-c { font-size:12px; color:var(--gray-400); margin-top:4px; }
+@media (min-width:640px) { .home-featured-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 16px !important; } }
+@media (min-width:900px) { .home-featured-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:40px 20px !important; } }
+.work-dashboard-cta { margin-top:22px; }
+.work-dashboard-cta .pj-dash-btn { margin-left:0; }
 .top-before-contact { display:flex; justify-content:center; padding:28px var(--gutter) 24px; background:var(--white); }
 .cv-actions { padding-top:24px; padding-bottom:24px; }
 .cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
@@ -1230,10 +1233,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .resource-action-primary:hover { background:#333; }
 .cv-document-note { color:var(--gray-500); font-size:12px; }
 .resource-inline { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
-.cert-inline { margin:24px 0 0 auto; }
-@media (max-width:767px) { .cert-inline { margin:24px auto 0; } }
-.free-tools-inline { margin:24px 0 0 auto; }
-@media (max-width:767px) { .free-tools-inline { margin:24px auto 0; } }
+.cv-side { width:100%; max-width:560px; display:flex; flex-direction:column; gap:24px; }
+.cv-side > .cv-list { width:100%; max-width:none; }
+.cert-inline, .free-tools-inline { margin:0; }
 .resource-modal-overlay { position:fixed; inset:0; z-index:10000; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.45); }
 .resource-modal-overlay[hidden] { display:none; }
 .resource-modal { width:min(760px,100%); max-height:min(82svh,850px); overflow:auto; background:var(--white); border-radius:var(--r); padding:24px; box-shadow:0 20px 70px rgba(0,0,0,.18); }
@@ -1343,7 +1345,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     </section>
 
     </div>
-    <section class="section-block">
+    <section class="section-block services-block" style="padding-top:calc(var(--space-y) / 3);">
       <div class="max-w">
         <p class="services-title" data-i18n="services.title">Serviços</p>
         <div class="services-grid reveal-stagger">
@@ -1445,6 +1447,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <!-- TÍTULO DA PÁGINA PROJETOS: a definir. Mesma formatação do título da home (cinza = .dim, preto = resto).
              Para trocar: edite as duas linhas abaixo e o 'work.title' do dicionário EN/ES. -->
         <h1 class="work-page-title hero-like reveal" id="work-title" data-i18n="work.title"><span class="dim">Projetos gráficos,</span><br>marcas e interfaces</h1>
+        <div class="work-dashboard-cta" id="work-dashboard-cta"></div>
       </div>
     </section>
     <section class="section-block" style="padding-top:0;">
@@ -1486,13 +1489,15 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     <section class="section-block">
       <div class="section-grid">
         <p class="section-label" data-i18n="aboutp.edu">Formação</p>
-        <div class="cv-list" id="cv-edu"></div>
-      </div>
-      <div class="cv-list resource-inline cert-inline">
-        <p class="cv-name">Certificados</p>
-        <p class="cv-desc">Certificados e comprovantes em uma galeria de imagens e PDFs.</p>
-        <button type="button" class="resource-action" id="certificates-btn">Ver certificados <span aria-hidden="true">↗</span></button>
-        <p class="cv-document-note">Documentos em breve.</p>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-edu"></div>
+          <div class="resource-inline cert-inline">
+            <p class="cv-name">Certificados</p>
+            <p class="cv-desc">Certificados e comprovantes em uma galeria de imagens e PDFs.</p>
+            <button type="button" class="resource-action" id="certificates-btn">Ver certificados <span aria-hidden="true">↗</span></button>
+            <p class="cv-document-note">Documentos em breve.</p>
+          </div>
+        </div>
       </div>
     </section>
     <section class="section-block">
@@ -1504,12 +1509,14 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
     <section class="section-block">
       <div class="section-grid">
         <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
-        <div class="cv-list" id="cv-skills"></div>
-      </div>
-      <div class="cv-list resource-inline free-tools-inline">
-        <p class="cv-name">Ferramentas gratuitas</p>
-        <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
-        <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-skills"></div>
+          <div class="resource-inline free-tools-inline">
+            <p class="cv-name">Ferramentas gratuitas</p>
+            <p class="cv-desc">Alternativas gratuitas a softwares pagos. Lista em teste e atualização contínua.</p>
+            <button type="button" class="resource-action" id="free-tools-btn">Explorar ferramentas <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
       </div>
     </section>
     <!-- IDIOMAS: bandeiras em SVG (as mesmas do seletor de idioma; emoji de bandeira não aparece no Windows) -->
@@ -2748,9 +2755,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pos = (e) => { const r = box.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 
+    let creditTimer = null;
     const toggle = (x, y) => {
       const hint = box.parentElement && box.parentElement.querySelector('.portrait-hint');
-      if (hint) { hint.classList.add('is-credit'); hint.innerHTML = '<span class="portrait-credit-label">Feito no Pixelar</span>'; }
+      if (hint) {
+        clearTimeout(creditTimer);
+        if (!hint.dataset.originalContent) hint.dataset.originalContent = hint.innerHTML;
+        hint.classList.add('is-credit');
+        hint.innerHTML = '<span class="portrait-credit-label">Feito no Pixelar</span>';
+        creditTimer = setTimeout(() => {
+          hint.classList.remove('is-credit');
+          hint.innerHTML = hint.dataset.originalContent || '';
+        }, 2600);
+      }
       box.classList.add('touched');
       s.locked = !s.locked;
       box.setAttribute('aria-pressed', String(s.locked));
@@ -2937,25 +2954,36 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['editorial', { pt: 'Campanhas, editorial e conteúdo', en: 'Campaigns, editorial and content', es: 'Campañas, editorial y contenido' }], ['web', { pt: 'Programação', en: 'Web development', es: 'Programación' }], ['exploracoes', { pt: 'Explorações', en: 'Explorations', es: 'Exploraciones' }], ['dashboards', { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' }]];
+  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['editorial', { pt: 'Campanhas e editorial', en: 'Campaigns and editorial', es: 'Campañas y editorial' }], ['web', { pt: 'Programação', en: 'Web development', es: 'Programación' }], ['conteudo', { pt: 'Carrosséis e posts', en: 'Carousels and posts', es: 'Carruseles y posts' }], ['exploracoes', { pt: 'Explorações', en: 'Explorations', es: 'Exploraciones' }]];   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjFiltro = 'all';
   const naHome = (p) => ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
+    const dashboardCTA = document.getElementById('work-dashboard-cta');
     if (!grid) return;
     const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit');
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => `<button class="art-filter" data-k="${k}" aria-pressed="${k === pjFiltro}">${lx(l)}</button>`).join('')
-      ;
+    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (k === pjFiltro) + '">' + lx(l) + '</button>').join('');
+    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
+      ? '<a class="pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral"><i></i><i></i><i></i><span>' + lx(DASH_BTN) + '</span></a>'
+      : '';
     if (pjFiltro === 'all') {
       grid.classList.remove('work-grid');
-      grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => { const ps = displayedPJ.filter(p => inF(p, k));
-        return `<section class="pj-group"><h2 class="pj-group-title">${lx(l)}<small>${ps.length}</small></h2><div class="work-grid">${ps.map(pjCard).join('')}</div></section>`; }).join('');
-    } else { grid.classList.add('work-grid'); grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join(''); }
-  };
+      grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => {
+        const ps = displayedPJ.filter(p => inF(p, k));
+        return '<section class="pj-group"><h2 class="pj-group-title">' + lx(l) + '<small>' + ps.length + '</small></h2><div class="work-grid">' + ps.map(pjCard).join('') + '</div></section>';
+      }).join('');
+    } else if (pjFiltro === 'conteudo') {
+      grid.classList.remove('work-grid');
+      grid.innerHTML = pgHTML();
+    } else {
+      grid.classList.add('work-grid');
+      grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join('');
+    }
+  };;
   document.getElementById('pj-filters').addEventListener('click', (e) => { const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; renderPJ(); });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
