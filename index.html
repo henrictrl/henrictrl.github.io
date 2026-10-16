@@ -614,8 +614,8 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .cv-item.has-case:hover .cv-name span:first-child { text-decoration-color: var(--ink); }
 
 /* --- Currículo (página Sobre) --- */
-.cv-first { padding-top: 32px; }
-@media (min-width: 768px) { .cv-first { padding-top: 72px; } }
+.cv-first { padding-top: 16px; }
+@media (min-width: 768px) { .cv-first { padding-top: 36px; } }
 /* Experiência: título em cima e duas colunas (freelas | resto) na largura toda */
 @media (min-width: 768px) {
   .section-grid.cv-wide { flex-direction: column; width: 100%; gap: 32px; }
@@ -807,6 +807,7 @@ footer.contact-footer { background: var(--gray-100); padding: 40px var(--gutter)
 @media (min-width: 900px) { .work-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; } }
 .work-card-media { aspect-ratio: 3/2; margin-bottom: 12px; box-shadow: 0 6px 18px -6px rgba(0,0,0,0.14), 0 1px 3px rgba(0,0,0,0.05); }
 .work-card-media img { object-fit: cover; }
+.work-card.rino-site-cover-inverted .work-card-media img { filter: invert(1); }
 .work-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 .work-card-tag { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
 
@@ -1241,8 +1242,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .work-dashboard-cta { margin-top:22px; }
 .work-dashboard-cta .pj-dash-btn { margin-left:0; }
 .top-before-contact { display:flex; justify-content:center; padding:28px var(--gutter) 24px; background:var(--white); }
-.cv-actions { padding-top:32px; padding-bottom:0; }
-@media (min-width:768px) { .cv-actions { padding-top:72px; } }
+.cv-actions { padding-top:16px; padding-bottom:0; }
+@media (min-width:768px) { .cv-actions { padding-top:36px; } }
 .cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
 .resource-action { display:inline-flex; align-items:center; gap:12px; border:1px solid var(--gray-200); border-radius:var(--r); padding:11px 15px; background:var(--white); color:var(--ink); font:inherit; font-size:13px; cursor:pointer; transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease); }
 .resource-action:hover { border-color:var(--ink); }
@@ -2973,7 +2974,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
-  const pjCard = (p) => `<a class="work-card" href="#projeto/${p.slug}" data-pj="${p.slug}">
+  const pjCard = (p) => `<a class="work-card${p.slug === 'rino-site' ? ' rino-site-cover-inverted' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
       <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
