@@ -337,6 +337,41 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
+
+:root{--bg:#f4f6f8;--panel:#fff;--ink:#182331;--muted:#6f7d8e;--line:#e1e7ed;--accent:#173f67;--accent-soft:#edf3f8;--preview:#172636;--header-h:68px}
+html,body{width:100%;height:100%;min-height:0;overflow:hidden}
+body{font-size:13px;line-height:1.45}
+.topo{position:relative;z-index:20;height:var(--header-h);min-height:var(--header-h);padding:8px clamp(12px,2vw,28px);gap:10px}
+.topo-identidade{gap:12px}.marca-eyebrow{padding-right:11px;font-size:9px;letter-spacing:.1em}.topo-titulos h1{font-size:clamp(16px,1.7vw,20px)}.topo-titulos p{font-size:10px}
+.topo-acoes{display:flex;align-items:center;gap:5px;flex:none}.btn-icone{display:inline-grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);cursor:pointer}.btn-icone:disabled{opacity:.36;cursor:not-allowed}.btn-icone svg{width:16px;height:16px}.btn-tutorial{min-height:32px;padding:0 10px;font-size:10.5px}
+.layout{display:grid;grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);height:calc(100dvh - var(--header-h));min-height:0;overflow:hidden}
+.coluna-logo{position:relative;top:auto;height:100%;min-height:0;padding:14px clamp(12px,2vw,26px) 10px}.preview-label{font-size:9px}.preview-status{font-size:10px}.moldura-logo{max-width:350px;max-height:calc(100% - 34px);margin:7px auto}.preview-hint{font-size:10px}
+.coluna-controles{display:flex;flex-direction:column;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px clamp(12px,2vw,26px) 8px;scrollbar-gutter:stable}
+.painel-intro{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:760px;margin:0 auto 9px}.painel-intro-copy{min-width:0}.painel-eyebrow{margin:0 0 2px;font-size:9px;letter-spacing:.11em}.painel-intro h2{margin:0;font-size:clamp(16px,1.6vw,20px);line-height:1.2;font-weight:650;letter-spacing:-.03em}.painel-tabs{display:flex;gap:2px;flex:none;padding:3px;border:1px solid var(--line);border-radius:10px;background:#eef1f4}.mode-tab{min-height:29px;padding:0 10px;border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:10.5px;font-weight:650;cursor:pointer;white-space:nowrap}.mode-tab[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(19,35,52,.08)}
+.painel-panels,.painel-panel{width:100%;max-width:760px;margin:0 auto}.painel-panel[hidden]{display:none!important}
+.bloco{margin:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 4px 16px rgba(19,35,52,.035)}.bloco h2{display:flex;align-items:center;gap:7px;margin:0 0 9px;font-size:12px;font-weight:700;line-height:1.3}.bloco h2::before{content:"";display:block;width:3px;height:13px;flex:none;border-radius:4px;background:var(--accent)}
+.panel-hint{margin:7px 3px 0;color:var(--muted);font-size:10px;line-height:1.4}
+.paletas-prontas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.paleta-pronta{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);text-align:left;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}.paleta-pronta:hover{border-color:#b2c1cf;background:#fcfdfe;transform:translateY(-1px)}.paleta-title{font-size:11.5px;font-weight:700}.paleta-sub{margin-top:1px;color:var(--muted);font-size:9.5px}.palette-swatches{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:9px}.palette-swatch{display:block;width:100%;height:21px;border:1px solid rgba(18,35,50,.08);border-radius:4px}
+.bloco-partes{padding:10px}.chips-partes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.chip-parte{min-height:34px;gap:7px;padding:5px 7px;border:1px solid var(--line);border-radius:8px}.chip-parte.ativo{border-color:var(--accent);background:var(--accent-soft)}.chip-parte .amostra-cor{width:16px;height:16px;flex:0 0 16px;border-radius:4px}.nome-parte{font-size:10px;font-weight:600;line-height:1.25}
+.editor{margin-top:8px;padding-top:8px}.editor-titulo{gap:7px;margin-bottom:7px}.editor-titulo .amostra-grande{width:23px;height:23px;flex:0 0 23px;border-radius:6px}.editor-titulo span{font-size:10.5px}.editor-titulo::after{padding:2px 5px;font-size:7.5px}.subtitulo-secao{margin:7px 0 5px;font-size:9.5px}
+.grade-swatches{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.swatch{border-radius:5px}.editor-extra{margin-top:5px;border:1px solid var(--line);border-radius:8px;background:#fbfcfd}.editor-extra summary{display:flex;align-items:center;gap:7px;min-height:29px;padding:0 8px;font-size:10px;font-weight:650;cursor:pointer;list-style:none}.editor-extra summary::-webkit-details-marker{display:none}.editor-extra summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:14px}.editor-extra[open] summary::after{content:"−"}.editor-extra-body{padding:0 8px 8px}.faixa-matiz{gap:4px;padding:1px 1px 4px}.faixa-matiz .swatch{width:21px;min-width:21px;height:21px;border-radius:5px}
+.seletor-hsl{gap:8px}.area-sv{width:78px;height:78px;flex:0 0 78px;border-radius:7px}.sliders-hsl{gap:7px}.campo-slider{gap:4px}.campo-slider label{font-size:9px}.campo-slider label span:last-child{font-size:9px}.campo-slider input[type=range]{height:5px}.campo-slider input[type=range]::-webkit-slider-thumb{width:12px;height:12px}.campo-slider input[type=range]::-moz-range-thumb{width:10px;height:10px}
+.campo-hex{gap:7px;margin-top:8px;padding-top:7px}.campo-hex label{font-size:9.5px}.campo-hex input{width:92px;height:29px;padding:0 7px;font-size:10px;border-radius:7px}.aviso-sem-selecao{margin:7px 0 0;padding:8px;font-size:9.5px;line-height:1.35}
+.rodape-acoes{position:sticky;bottom:-1px;display:flex;gap:6px;width:100%;max-width:760px;margin:auto auto 0;padding:8px 0 1px;background:linear-gradient(to top,var(--bg) 75%,rgba(244,246,248,0));flex:none}.btn{min-height:36px;padding:7px 10px;border-radius:8px;font-size:10px}.toast{z-index:1000}.popover-fundo{z-index:1000}
+@media(max-width:980px){.layout{grid-template-columns:minmax(235px,.75fr) minmax(0,1.25fr)}.coluna-controles{padding-left:10px;padding-right:10px}.coluna-logo{padding-left:10px;padding-right:10px}.bloco{padding:10px}}
+@media(max-width:760px){
+ :root{--header-h:58px}.topo{height:var(--header-h);min-height:var(--header-h);padding:5px 9px;gap:7px}.topo-identidade{gap:7px}.marca-eyebrow{padding-right:7px;font-size:7px;letter-spacing:.06em}.topo-titulos h1{font-size:14px}.topo-titulos p{display:none}.topo-acoes{gap:3px}.btn-icone{width:28px;height:28px}.btn-tutorial{min-height:28px;padding:0 8px;font-size:9.5px}.btn-tutorial::before{width:13px;height:13px;font-size:8px}
+ .layout{display:flex;flex-direction:column;height:calc(100dvh - var(--header-h));min-height:0}
+ .coluna-logo{position:relative;top:auto;flex:0 0 clamp(190px,31vh,232px);height:clamp(190px,31vh,232px);min-height:0;width:100%;padding:7px 10px;z-index:1}.preview-label{font-size:8px}.preview-status{font-size:9px}.moldura-logo{max-width:138px;max-height:calc(100% - 31px);margin:4px auto}.preview-hint{font-size:9px}
+ .coluna-controles{flex:1;min-height:0;height:auto;overflow-y:auto;padding:8px 9px 6px;scrollbar-gutter:auto}
+ .painel-intro{gap:6px;margin-bottom:7px}.painel-eyebrow{font-size:8px}.painel-intro h2{font-size:14px}.painel-tabs{gap:2px;padding:2px;border-radius:8px}.mode-tab{min-height:27px;padding:0 7px;font-size:9.5px}
+ .bloco{padding:9px;border-radius:10px}.bloco h2{margin-bottom:7px;font-size:11px}.paletas-prontas{gap:6px}.paleta-pronta{padding:8px;border-radius:8px}.paleta-title{font-size:10.5px}.paleta-sub{font-size:9px}.palette-swatches{gap:3px;margin-top:7px}.palette-swatch{height:16px;border-radius:3px}.panel-hint{font-size:9px}
+ .bloco-partes{padding:8px}.chips-partes{gap:4px}.chip-parte{min-height:31px;gap:5px;padding:4px 5px;border-radius:7px}.chip-parte .amostra-cor{width:14px;height:14px;flex-basis:14px}.nome-parte{font-size:9px}
+ .editor{margin-top:7px;padding-top:7px}.editor-titulo{margin-bottom:6px}.editor-titulo .amostra-grande{width:20px;height:20px;flex-basis:20px}.editor-titulo span{font-size:9.5px}.editor-titulo::after{padding:2px 4px;font-size:7px}.subtitulo-secao{margin:5px 0 4px;font-size:8.5px}.grade-swatches{gap:4px}.swatch{border-radius:4px}.editor-extra{margin-top:4px}.editor-extra summary{min-height:26px;padding:0 7px;font-size:9px}.editor-extra-body{padding:0 7px 7px}.faixa-matiz{gap:3px}.faixa-matiz .swatch{width:18px;min-width:18px;height:18px}.seletor-hsl{gap:7px}.area-sv{width:66px;height:66px;flex-basis:66px}.sliders-hsl{gap:5px}.campo-slider{gap:3px}.campo-slider label{font-size:8px}.campo-hex{margin-top:6px;padding-top:6px}.campo-hex input{width:80px;height:27px;font-size:9.5px}
+ .aviso-sem-selecao{margin-top:5px;padding:6px 7px;font-size:9px}.rodape-acoes{gap:5px;padding:6px 0 1px}.btn{min-height:32px;padding:6px 8px;font-size:9px}
+}
+@media(max-width:370px){.marca-eyebrow{display:none}.topo-titulos h1{font-size:13px}.coluna-logo{flex-basis:clamp(180px,29vh,210px);height:clamp(180px,29vh,210px)}.painel-intro h2{font-size:13px}.mode-tab{padding:0 6px}.palette-swatches{grid-template-columns:repeat(3,minmax(0,1fr))}.palette-swatch{height:13px}}
+
 </style>
 </head>
 
@@ -423,13 +458,18 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
     <section class="coluna-controles" aria-label="Controles de cor">
 
       <div class="painel-intro">
-        <p class="painel-eyebrow">EDITOR DE IDENTIDADE</p>
-        <h2>Encontre a combinação certa.</h2>
-        <p>Comece por uma paleta pronta ou ajuste cada parte do logotipo até chegar ao resultado ideal.</p>
+        <div class="painel-intro-copy">
+          <p class="painel-eyebrow">RINO · CORES</p>
+          <h2>Definidor de cores</h2>
+        </div>
+        <div class="painel-tabs" role="tablist" aria-label="Modo de edição">
+          <button type="button" class="mode-tab" data-mode-tab="paletas" role="tab" aria-selected="true" aria-controls="painel-paletas">Paletas</button>
+          <button type="button" class="mode-tab" data-mode-tab="ajustes" role="tab" aria-selected="false" aria-controls="painel-ajustes">Editar cores</button>
+        </div>
       </div>
-
-      <!-- PALETAS -->
-      <div class="bloco">
+      <div class="painel-panels">
+        <section class="painel-panel" id="painel-paletas" data-mode-panel="paletas" role="tabpanel">
+<div class="bloco bloco-paletas">
         <h2>Combinações prontas</h2>
         <div class="paletas-prontas" id="paletas-prontas"></div>
       </div>
@@ -440,9 +480,10 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
         <div class="paletas-prontas" id="favoritas"></div>
         <p class="vazio" id="favoritas-vazio">Guarde as combinações de que gostar para comparar lado a lado.</p>
       </div>
-
-      <!-- PARTES -->
-      <div class="bloco">
+          <p class="panel-hint">Toque em uma paleta para aplicar a combinação ao logotipo.</p>
+        </section>
+        <section class="painel-panel" id="painel-ajustes" data-mode-panel="ajustes" role="tabpanel" hidden>
+<div class="bloco bloco-partes">
 
         <h2>Partes do logo</h2>
 
@@ -455,18 +496,28 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
             <span id="editor-nome">—</span>
           </div>
 
-          <div class="subtitulo-secao">Cores principais</div>
+          <div class="subtitulo-secao">Cores da parte selecionada</div>
           <div class="grade-swatches" id="swatches-paleta"></div>
-
-          <div class="subtitulo-secao">Outras cores</div>
-          <div class="grade-swatches" id="swatches-extra"></div>
-
-          <div class="subtitulo-secao">Matiz</div>
-          <div class="faixa-matiz" id="faixa-matiz"></div>
-
-          <div class="subtitulo-secao">Ajuste fino</div>
-
-          <div class="seletor-hsl">
+<div class="campo-hex">
+            <label for="input-hex">Hex</label>
+            <input
+              type="text"
+              id="input-hex"
+              maxlength="7"
+              value="#000000"
+            >
+          </div>
+          <details class="editor-extra">
+            <summary>Outras cores</summary>
+            <div class="editor-extra-body"><div class="grade-swatches" id="swatches-extra"></div></div>
+          </details>
+          <details class="editor-extra">
+            <summary>Ajuste fino (matiz e luminosidade)</summary>
+            <div class="editor-extra-body">
+              <div class="subtitulo-secao">Matiz</div>
+              <div class="faixa-matiz" id="faixa-matiz"></div>
+              <div class="subtitulo-secao">Ajuste HSL</div>
+              <div class="seletor-hsl">
 
             <div class="area-sv" id="area-sv">
               <div class="ponteiro" id="ponteiro-sv"></div>
@@ -518,16 +569,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
 
             </div>
           </div>
-
-          <div class="campo-hex">
-            <label for="input-hex">Hex</label>
-            <input
-              type="text"
-              id="input-hex"
-              maxlength="7"
-              value="#000000"
-            >
-          </div>
+            </div>
+          </details>
 
         </div>
 
@@ -541,6 +584,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid #4b87ba; outline-
       </div>
 
       <!-- AÇÕES -->
+        </section>
+      </div>
       <div class="rodape-acoes">
         <button
           class="btn btn-secundario"
@@ -705,6 +750,22 @@ const btnAjuda = document.getElementById("btn-ajuda");
 const popoverFundo = document.getElementById("popover-fundo");
 const fecharPopover = document.getElementById("fechar-popover");
 
+function setPainelModo(modo){
+  document.querySelectorAll("[data-mode-tab]").forEach(tab => {
+    const ativo = tab.dataset.modeTab === modo;
+    tab.setAttribute("aria-selected", String(ativo));
+    tab.tabIndex = ativo ? 0 : -1;
+  });
+  document.querySelectorAll("[data-mode-panel]").forEach(panel => {
+    panel.hidden = panel.dataset.modePanel !== modo;
+  });
+}
+document.querySelector(".painel-tabs")?.addEventListener("click", event => {
+  const tab = event.target.closest("[data-mode-tab]");
+  if (tab) setPainelModo(tab.dataset.modeTab);
+});
+
+
 /* ============================================================
    INICIALIZAÇÃO
 ============================================================ */
@@ -786,83 +847,25 @@ function aplicarTodasAsCores(){
 ============================================================ */
 
 function montarPaletasProntas(){
-
   paletasProntas.innerHTML = "";
-
-  PALETAS_PRONTAS.forEach(paleta=>{
-
+  PALETAS_PRONTAS.forEach(paleta => {
     const c = paleta.cores;
-
     const card = document.createElement("button");
-
     card.className = "paleta-pronta";
     card.type = "button";
-
-    card.style.setProperty(
-      "--mini-fundo-baixo",
-      c["fundo-baixo"]
-    );
-
-    card.style.setProperty(
-      "--mini-texto-cima",
-      c["texto-cima"]
-    );
-
-    card.style.setProperty(
-      "--mini-texto-baixo",
-      c["texto-baixo"]
-    );
-
-    card.style.setProperty(
-      "--mini-rino",
-      c["rino-preenchimento"]
-    );
-
-    card.style.setProperty(
-      "--mini-sombra",
-      c["rino-sombra"]
-    );
-
+    card.setAttribute("aria-label", "Aplicar " + paleta.nome);
+    const keys = ["fundo-cima","fundo-baixo","texto-cima","texto-baixo","rino-preenchimento","rino-sombra"];
     card.innerHTML = `
-      <div
-        class="mini-logo"
-        style="background:${c["fundo-cima"]};"
-      >
-        <div class="mini-topo">
-          <div class="mini-rino"></div>
-        </div>
-
-        <div class="mini-baixo"></div>
-      </div>
-
-      <div class="nome-paleta">
-        ${paleta.nome}
-      </div>
+      <span class="paleta-title">${paleta.nome}</span>
+      <span class="paleta-sub">Aplicar combinação</span>
+      <span class="palette-swatches" aria-hidden="true">${keys.map(key => `<i class="palette-swatch" style="background:${c[key] || "#ffffff"}"></i>`).join("")}</span>
     `;
-
-    card.addEventListener("click",()=>{
-
-      PARTES.forEach(p=>{
-        aplicarCorNaParte(
-          p.classe,
-          paleta.cores[p.classe]
-        );
-      });
-
+    card.addEventListener("click", () => {
+      PARTES.forEach(p => aplicarCorNaParte(p.classe, paleta.cores[p.classe]));
       montarChipsPartes();
-
-      if(selecionada){
-        definirCorAtual(
-          estadoCores[selecionada],
-          false
-        );
-      }
-
-      mostrarToast(
-        `${paleta.nome} aplicada!`
-      );
+      if (selecionada) definirCorAtual(estadoCores[selecionada], false);
+      mostrarToast(`${paleta.nome} aplicada!`);
     });
-
     paletasProntas.appendChild(card);
   });
 }
@@ -958,6 +961,7 @@ function vincularCliquesNoLogo(){
 }
 
 function selecionarParte(classe){
+  setPainelModo("ajustes");
 
   selecionada = classe;
 
