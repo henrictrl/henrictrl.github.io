@@ -3565,7 +3565,7 @@ window.PROJETOS = [
    "pt": "Identidade visual"
   },
   "filtro": "identidade",
-  "capa": "assets/projetos/ntaps/capa-revisada.svg",
+  "capa": "assets/projetos/ntaps/capa.webp",
   "dir": "assets/projetos/ntaps/",
   "telas": [
    {
@@ -5144,7 +5144,7 @@ window.PROJETOS = [
    "pt": "Mídias sociais"
   },
   "filtro": "editorial",
-  "capa": "assets/projetos/rp-40-anos/capa-revisada.svg",
+  "capa": "assets/projetos/rp-40-anos/capa.webp",
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
    {
@@ -5324,7 +5324,7 @@ window.PROJETOS = [
    "pt": "Editorial"
   },
   "filtro": "editorial",
-  "capa": "assets/projetos/prisma-proposta/capa-revisada.svg",
+  "capa": "assets/projetos/prisma-proposta/capa.webp",
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
    {
@@ -5687,7 +5687,7 @@ window.PROJETOS = [
    "pt": "Cartaz"
   },
   "filtro": "editorial",
-  "capa": "assets/projetos/festa-da-polenta/capa-revisada.svg",
+  "capa": "assets/projetos/festa-da-polenta/capa.webp",
   "dir": "assets/projetos/festa-da-polenta/",
   "telas": [
    {
@@ -5794,7 +5794,7 @@ window.PROJETOS = [
    "es": "Programación"
   },
   "filtro": "web",
-  "capa": "assets/projetos/fellipe-gualberto/capa-revisada.svg",
+  "capa": "assets/projetos/fellipe-gualberto/capa.webp",
   "dir": "assets/projetos/fellipe-gualberto/",
   "intro": {
    "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento: apresentação, matérias por editoria (Política, Mobilidade e Textos assinados), recortes de jornal em PDF e contato. HTML, CSS e JavaScript, publicado no GitHub Pages.",
@@ -6095,7 +6095,7 @@ window.PROJETOS = [
    "es": "Programación"
   },
   "filtro": "web",
-  "capa": "assets/projetos/pixelar/capa-revisada.svg",
+  "capa": "assets/projetos/pixelar/capa.webp",
   "dir": "assets/projetos/pixelar/",
   "intro": {
    "pt": "Editor de pixel art, dither, filmes analógicos e animações para fotos e vídeos, direto no navegador. Nada é enviado para servidor: tudo roda no aparelho (WebGL2 e WebCodecs). Estilos inspirados em obras de arte, texturas e exportação em imagem, vetor e vídeo.",
@@ -6273,7 +6273,7 @@ window.PROJETOS = [
    "es": "Programación"
   },
   "filtro": "web",
-  "capa": "assets/projetos/metaprojeto/capa-home.svg",
+  "capa": "assets/projetos/metaprojeto/capa.webp",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
    "pt": "Como este site foi construído: um arquivo HTML, sem framework, com os dados em JavaScript e animações feitas em canvas.",
@@ -6293,7 +6293,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/basement/capa.webp",
   "dir": "assets/projetos/basement/",
   "intro": {
@@ -6325,7 +6325,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/tesoura/capa.webp",
   "dir": "assets/projetos/tesoura/",
   "intro": {
@@ -6353,7 +6353,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/persona/capa.webp",
   "dir": "assets/projetos/persona/",
   "intro": {
@@ -6382,7 +6382,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/desvendando/capa.webp",
   "dir": "assets/projetos/desvendando/",
   "intro": {
@@ -6408,7 +6408,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/proec/capa.webp",
   "dir": "assets/projetos/proec/",
   "intro": {
@@ -6519,7 +6519,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/sollaris-instagram/capa.webp",
   "dir": "assets/projetos/sollaris-instagram/",
   "intro": {
@@ -6542,7 +6542,7 @@ window.PROJETOS = [
    "en": "Carousels and posts",
    "es": "Carruseles y posts"
   },
-  "filtro": "editorial",
+  "filtro": "conteudo",
   "capa": "assets/projetos/rd-cultural/capa.webp",
   "dir": "assets/projetos/rd-cultural/",
   "exp": "Rd Cultural",
@@ -6754,7 +6754,7 @@ window.PROJETOS = [
    "pt": "Organização de evento"
   },
   "filtro": "exploracoes",
-  "capa": "assets/projetos/encontro-direitos-humanos/capa-revisada.svg",
+  "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
   "dir": "assets/projetos/encontro-direitos-humanos/",
   "telas": [
    {
