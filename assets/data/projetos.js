@@ -2198,37 +2198,20 @@ window.PROJETOS = [
   "capa": "assets/projetos/rino/capa.webp",
   "dir": "assets/projetos/rino/",
   "intro": {
-   "pt": "Ferramenta web feita para o cliente da Rino comparar e aprovar as cores do logo.",
-   "en": "A web tool built for the Rino client to compare and approve the logo colours.",
-   "es": "Herramienta web hecha para que el cliente de Rino compare y apruebe los colores del logo."
+   "pt": "Um definidor de cores para explorar, comparar e aprovar combinações aplicadas diretamente ao logotipo. A interface reúne pré-visualização ao vivo, paletas sugeridas, controles de cor e exportação em PNG.",
+   "en": "A colour tool to explore, compare and approve combinations applied directly to the logo. The interface brings together live preview, suggested palettes, colour controls and PNG export.",
+   "es": "Una herramienta de color para explorar, comparar y aprobar combinaciones aplicadas directamente al logotipo. La interfaz reúne vista previa en vivo, paletas sugeridas, controles de color y exportación en PNG."
   },
   "telas": [],
   "web": {
    "url": "assets/web/rino/index.html",
    "dev": "mobile"
   },
-  "shots": [
-   {
-    "img": "site-tela-d.webp",
-    "d": "desktop"
-   },
-   {
-    "img": "site-tela-m1.webp",
-    "d": "mobile"
-   },
-   {
-    "img": "site-tela-m2.webp",
-    "d": "mobile"
-   },
-   {
-    "img": "site-tela-m3.webp",
-    "d": "mobile"
-   }
-  ],
+  "shots": [],
   "siteIntro": {
-   "pt": "Site para o cliente da Rino testar as cores do logo antes da aprovação: escolhe a parte do logo, aplica cores da paleta ou livres, confere o contraste, guarda combinações para comparar e baixa o PNG. HTML, CSS e JavaScript, sem dependências.",
-   "en": "A site for the Rino client to test the logo colours before approval: pick a part of the logo, apply palette or free colours, check contrast, save combinations to compare and download a PNG. HTML, CSS and JavaScript, no dependencies.",
-   "es": "Sitio para que el cliente de Rino pruebe los colores del logo antes de la aprobación: elige la parte del logo, aplica colores de la paleta o libres, revisa el contraste, guarda combinaciones para comparar y descarga el PNG. HTML, CSS y JavaScript, sin dependencias."
+   "pt": "A experiência começa com o logotipo sempre visível e alterna entre combinações prontas e edição detalhada. Cada alteração aparece imediatamente na marca; o resultado pode ser comparado e exportado em PNG.",
+   "en": "The experience keeps the logo visible and switches between ready-made combinations and detailed editing. Every change updates the mark immediately; the result can be compared and exported as a PNG.",
+   "es": "La experiencia mantiene visible el logotipo y alterna entre combinaciones prediseñadas y edición detallada. Cada cambio se aplica de inmediato; el resultado se puede comparar y exportar como PNG."
   },
   "rel": [
    "rino"
@@ -2672,17 +2655,6 @@ window.PROJETOS = [
     }
    },
    {
-    "img": "17",
-    "t": {
-     "pt": "Uso incorreto",
-     "en": "Misuse",
-     "es": "Uso incorrecto"
-    },
-    "d": {
-     "pt": ""
-    }
-   },
-   {
     "img": "18",
     "t": {
      "pt": "Cores",
@@ -2863,7 +2835,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 18,
+    "p": 17,
     "t": {
      "pt": "Cores",
      "en": "Colour",
@@ -2871,7 +2843,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 25,
+    "p": 24,
     "t": {
      "pt": "Tipografia",
      "en": "Typography",
@@ -2879,7 +2851,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 29,
+    "p": 28,
     "t": {
      "pt": "Aplicações",
      "en": "Applications",
