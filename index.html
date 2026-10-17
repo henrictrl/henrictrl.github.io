@@ -472,13 +472,16 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-card-by { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
 @media (prefers-reduced-motion: reduce) { .art-card { opacity: 1; transform: none; } }
 /* modal de leitura */
-.am-bar { display: flex; align-items: center; gap: 16px; padding: 12px 12px 12px 24px; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
+#art-modal-overlay { z-index: 1200; }
+.art-modal { position: relative; }
+.am-bar { position: sticky; top: 0; z-index: 12; background: var(--white); display: flex; align-items: center; gap: 16px; padding: 12px 12px 12px 24px; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
 .am-info { flex: 1; min-width: 0; }
 .am-site { font-size: 12px; color: var(--gray-400); }
 .am-title { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .am-ext { font-size: 13px; color: var(--gray-500); white-space: nowrap; padding: 8px 14px; border: 1px solid var(--gray-200); border-radius: var(--r); transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
 .am-ext:hover { color: var(--ink); border-color: var(--ink); }
 .am-links { display: flex; gap: 8px; }
+#am-close { position: relative; z-index: 13; flex: 0 0 auto; }
 .am-ext-alt { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .am-ext-alt:hover { color: var(--white); opacity: 0.85; }
 @media (max-width: 640px) { .am-bar { flex-wrap: wrap; } .am-info { flex-basis: calc(100% - 48px); } .am-links { order: 3; } .am-ext { order: 4; } }
@@ -1042,6 +1045,18 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 /* Artigos no modo Instagram: proporção de cada post (sem cortar o topo) */
 .art-grid.is-ig .art-card-media { aspect-ratio: var(--ar, 4/5); }
 .art-grid.is-ig { align-items: start; }
+
+
+/* Dashboard: mais variação cromática e alternância entre gráficos e exemplos de conteúdo */
+.ds-sample { padding: 22px; border: 1px solid color-mix(in srgb, var(--ac) 22%, var(--gray-200)); border-radius: calc(var(--r) * 1.5); }
+.ds-sample-a { background: linear-gradient(135deg, color-mix(in srgb, #2a9d8f 12%, var(--white)), color-mix(in srgb, var(--ac) 5%, var(--white))); }
+.ds-sample-b { background: linear-gradient(135deg, color-mix(in srgb, #e9c46a 18%, var(--white)), color-mix(in srgb, #f4a261 8%, var(--white))); }
+.ds-sample-c { background: linear-gradient(135deg, color-mix(in srgb, #8e6ccf 12%, var(--white)), color-mix(in srgb, #e76f51 7%, var(--white))); }
+.ds-post-examples { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; max-width: none; margin: 0; padding: 0; }
+.ds-post-examples .pc-media { box-shadow: 0 8px 24px -8px rgba(0,0,0,.18); }
+.ds-sample .ds-h { margin-bottom: 5px; }
+@media (max-width: 760px) { .ds-sample { padding: 16px; } .ds-post-examples { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; } }
+@media (max-width: 440px) { .ds-post-examples { grid-template-columns: 1fr; } }
 
 /* Dashboards (Projetos › Dashboards) v3: cada dashboard tem um acento (--ac); gráficos animam ao aparecer (.ds-anim.in) */
 .ds { --ac: #2a78d6; max-width: 1040px; margin: 0 auto; padding: 8px 24px 56px; }
@@ -3035,7 +3050,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['web', { pt: 'Site', en: 'Website', es: 'Sitio web' }], ['conteudo', { pt: 'Conteúdo e mídias sociais', en: 'Content & social media', es: 'Contenido y redes sociales' }], ['campanhas', { pt: 'Campanhas, eventos e fotografia', en: 'Campaigns, events & photography', es: 'Campañas, eventos y fotografía' }], ['estrategia', { pt: 'Estratégia, educação e pesquisa', en: 'Strategy, education & research', es: 'Estrategia, educación e investigación' }]];
+  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['programacao', { pt: 'Programação', en: 'Programming', es: 'Programación' }], ['midias', { pt: 'Mídias sociais', en: 'Social media', es: 'Redes sociales' }], ['midias-eventos', { pt: 'Mídias sociais e eventos', en: 'Social media & events', es: 'Redes sociales y eventos' }], ['eventos', { pt: 'Eventos', en: 'Events', es: 'Eventos' }], ['estrategia', { pt: 'Estratégia de marca', en: 'Brand strategy', es: 'Estrategia de marca' }], ['rebranding', { pt: 'Rebranding', en: 'Rebranding', es: 'Rebranding' }]];
 
   const ETIQUETA_LABELS = {"identidade-visual":{"pt":"Identidade visual","en":"Visual identity","es":"Identidad visual"},"logotipo":{"pt":"Logotipo","en":"Logo","es":"Logotipo"},"manual-marca":{"pt":"Manual de marca","en":"Brand manual","es":"Manual de marca"},"aplicacoes-marca":{"pt":"Aplicações de marca","en":"Brand applications","es":"Aplicaciones de marca"},"pecas-graficas":{"pt":"Peças gráficas","en":"Graphic materials","es":"Piezas gráficas"},"layouts-pecas":{"pt":"Layouts de peças","en":"Collateral layouts","es":"Diseños de piezas"},"mockups":{"pt":"Mockups","en":"Mockups","es":"Mockups"},"kit-impresso":{"pt":"Kit impresso","en":"Printed kit","es":"Kit impreso"},"ilustracao-vetorial":{"pt":"Ilustração vetorial","en":"Vector illustration","es":"Ilustración vectorial"},"producao-grafica":{"pt":"Produção gráfica","en":"Print production","es":"Producción gráfica"},"vs-code":{"pt":"VS Code","en":"VS Code","es":"VS Code"},"html":{"pt":"HTML","en":"HTML","es":"HTML"},"css":{"pt":"CSS","en":"CSS","es":"CSS"},"javascript":{"pt":"JavaScript","en":"JavaScript","es":"JavaScript"},"gestao-fornecedores":{"pt":"Gestão de fornecedores","en":"Vendor management","es":"Gestión de proveedores"},"logistica-producao":{"pt":"Logística de produção","en":"Production logistics","es":"Logística de producción"},"ferramenta-interativa":{"pt":"Ferramenta interativa","en":"Interactive tool","es":"Herramienta interactiva"},"catalogo-digital":{"pt":"Catálogo digital","en":"Digital catalog","es":"Catálogo digital"},"posts-carrosseis":{"pt":"Posts e carrosséis","en":"Posts & carousels","es":"Posts y carruseles"},"proposta-estrategica":{"pt":"Proposta estratégica","en":"Strategy proposal","es":"Propuesta estratégica"},"cartaz-folder":{"pt":"Cartaz e folder","en":"Poster & brochure","es":"Cartel y folleto"},"cobertura-fotografica":{"pt":"Cobertura fotográfica","en":"Photo coverage","es":"Cobertura fotográfica"},"organizacao-evento":{"pt":"Organização de eventos","en":"Event management","es":"Organización de eventos"},"analise-literaria":{"pt":"Análise literária","en":"Literary analysis","es":"Análisis literario"},"dashboard":{"pt":"Dashboard","en":"Dashboard","es":"Dashboard"},"direcao-arte":{"pt":"Direção de arte","en":"Art direction","es":"Dirección de arte"},"design-grafico":{"pt":"Design gráfico","en":"Graphic design","es":"Diseño gráfico"},"design-editorial":{"pt":"Design editorial","en":"Editorial design","es":"Diseño editorial"},"design-interface":{"pt":"Design de interface","en":"Interface design","es":"Diseño de interfaces"},"gestao-projetos":{"pt":"Gestão de projetos","en":"Project management","es":"Gestión de proyectos"},"visualizacao-dados":{"pt":"Visualização de dados","en":"Data visualization","es":"Visualización de datos"},"analise-dados":{"pt":"Análise de dados","en":"Data analysis","es":"Análisis de datos"},"credito-financas":{"pt":"Crédito e finanças","en":"Credit & finance","es":"Crédito y finanzas"},"moda-acessorios":{"pt":"Moda e acessórios","en":"Fashion & accessories","es":"Moda y accesorios"},"jornalismo-cultural":{"pt":"Jornalismo cultural","en":"Cultural journalism","es":"Periodismo cultural"},"direitos-humanos":{"pt":"Direitos humanos","en":"Human rights","es":"Derechos humanos"},"servicos-locais":{"pt":"Serviços locais","en":"Local services","es":"Servicios locales"},"desdobramento-marca":{"pt":"Desdobramentos de marca","en":"Brand extensions","es":"Aplicaciones de marca"},"tecnologia":{"pt":"Tecnologia","en":"Technology","es":"Tecnología"},"tatuagem":{"pt":"Tatuagem","en":"Tattoo","es":"Tatuaje"},"cliente":{"pt":"Cliente","en":"Client","es":"Cliente"},"internacional":{"pt":"Internacional","en":"International","es":"Internacional"},"idioma-ingles":{"pt":"Idioma inglês","en":"English-language","es":"Idioma inglés"},"b2b":{"pt":"B2B","en":"B2B","es":"B2B"},"varejo":{"pt":"Varejo","en":"Retail","es":"Comercio minorista"},"optica":{"pt":"Óptica","en":"Optical retail","es":"Óptica"},"beleza":{"pt":"Beleza","en":"Beauty","es":"Belleza"},"podcast":{"pt":"Podcast","en":"Podcast","es":"Pódcast"},"institucional":{"pt":"Institucional","en":"Institutional","es":"Institucional"},"educacao":{"pt":"Educação","en":"Education","es":"Educación"},"saude":{"pt":"Saúde","en":"Health","es":"Salud"},"esporte":{"pt":"Esporte","en":"Sports","es":"Deporte"},"cultura":{"pt":"Cultura","en":"Culture","es":"Cultura"},"musica":{"pt":"Música","en":"Music","es":"Música"},"consultoria":{"pt":"Consultoria","en":"Consulting","es":"Consultoría"},"entretenimento":{"pt":"Entretenimento","en":"Entertainment","es":"Entretenimiento"},"turismo":{"pt":"Turismo","en":"Tourism","es":"Turismo"},"literatura":{"pt":"Literatura","en":"Literature","es":"Literatura"},"dados":{"pt":"Dados","en":"Data","es":"Datos"},"arte-digital":{"pt":"Arte digital","en":"Digital art","es":"Arte digital"},"fotografia":{"pt":"Fotografia","en":"Photography","es":"Fotografía"},"evento":{"pt":"Evento","en":"Event","es":"Evento"},"campanha":{"pt":"Campanha","en":"Campaign","es":"Campaña"},"projeto-academico":{"pt":"Projeto acadêmico","en":"Academic project","es":"Proyecto académico"},"colaboracao":{"pt":"Colaboração","en":"Collaboration","es":"Colaboración"},"trabalho-recorrente":{"pt":"Trabalho recorrente","en":"Ongoing work","es":"Trabajo recurrente"},"rebranding":{"pt":"Redesign de marca","en":"Rebranding","es":"Rediseño de marca"},"ferramenta-propria":{"pt":"Ferramenta própria","en":"Own tool","es":"Herramienta propia"},"portfolio":{"pt":"Portfólio","en":"Portfolio","es":"Portafolio"},"grupo-pesquisa":{"pt":"Grupo de pesquisa","en":"Research group","es":"Grupo de investigación"},"competicao":{"pt":"Competição","en":"Competition","es":"Competición"},"estagio":{"pt":"Estágio","en":"Internship","es":"Prácticas"},"redacao":{"pt":"Redação","en":"Writing","es":"Redacción"},"social-media":{"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},"programacao":{"pt":"Programação","en":"Programming","es":"Programación"},"diagramacao":{"pt":"Diagramação","en":"Layout & typesetting","es":"Maquetación"},"ilustracao":{"pt":"Ilustração","en":"Illustration","es":"Ilustración"},"redes-sociais":{"pt":"Redes sociais","en":"Social media","es":"Redes sociales"},"site":{"pt":"Site","en":"Website","es":"Sitio web"},"editorial":{"pt":"Editorial","en":"Editorial","es":"Editorial"},"folder":{"pt":"Folder","en":"Brochure","es":"Folleto"},"embalagens":{"pt":"Embalagens","en":"Packaging","es":"Empaques"},"oficina":{"pt":"Oficina","en":"Workshop","es":"Taller"},"material-didatico":{"pt":"Material didático","en":"Learning materials","es":"Material didáctico"},"apresentacao":{"pt":"Apresentação","en":"Presentation","es":"Presentación"},"artigos":{"pt":"Artigos","en":"Articles","es":"Artículos"},"processamento-grafico":{"pt":"Processamento gráfico","en":"Graphics processing","es":"Procesamiento gráfico"}};
   Object.assign(ETIQUETA_LABELS, {
@@ -3057,13 +3072,35 @@ document.addEventListener('DOMContentLoaded', () => {
     "projeto-independente":{pt:"Projeto independente",en:"Independent project",es:"Proyecto independiente"},
     "projeto-ligado":{pt:"Projeto relacionado",en:"Related project",es:"Proyecto relacionado"},
     "stories-gifs":{pt:"Stories e GIFs",en:"Stories & GIFs",es:"Stories y GIF"},
-    "terceiro-setor":{pt:"Terceiro setor",en:"Nonprofit sector",es:"Tercer sector"}
-  });
+    "terceiro-setor":{pt:"Terceiro setor",en:"Nonprofit sector",es:"Tercer sector"},
+    "bolsista":{pt:"Bolsista",en:"Scholarship holder",es:"Becario/a"},
+    "jornalismo":{pt:"Jornalismo",en:"Journalism",es:"Periodismo"},
+    "ferramentas":{pt:"Ferramentas",en:"Tools",es:"Herramientas"},
+    "photoshop":{pt:"Photoshop",en:"Photoshop",es:"Photoshop"},
+    "illustrator":{pt:"Illustrator",en:"Illustrator",es:"Illustrator"},
+    "procreate":{pt:"Procreate",en:"Procreate",es:"Procreate"},
+    "adobe-fresco":{pt:"Adobe Fresco",en:"Adobe Fresco",es:"Adobe Fresco"},
+    "figma":{pt:"Figma",en:"Figma",es:"Figma"},
+    "affinity":{pt:"Affinity",en:"Affinity",es:"Affinity"},
+    "wordpress":{pt:"WordPress",en:"WordPress",es:"WordPress"},
+    "microsoft-word":{pt:"Microsoft Word",en:"Microsoft Word",es:"Microsoft Word"},
+    "google-docs":{pt:"Google Docs",en:"Google Docs",es:"Google Docs"},
+    "notion":{pt:"Notion",en:"Notion",es:"Notion"},
+    "trello":{pt:"Trello",en:"Trello",es:"Trello"},
+    "gmail":{pt:"Gmail",en:"Gmail",es:"Gmail"},
+    "substack":{pt:"Substack",en:"Substack",es:"Substack"},
+    "microsoft-office":{pt:"Microsoft Office",en:"Microsoft Office",es:"Microsoft Office"},
+    "premiere":{pt:"Premiere",en:"Premiere",es:"Premiere"},
+    "monday":{pt:"Monday",en:"Monday",es:"Monday"},
+    "meta-business-suite":{pt:"Meta Business Suite",en:"Meta Business Suite",es:"Meta Business Suite"},
+    "streamyard":{pt:"StreamYard",en:"StreamYard",es:"StreamYard"},
+    "canon-rebel-t7":{pt:"Canon Rebel T7",en:"Canon Rebel T7",es:"Canon Rebel T7"}
   const ETIQUETA_GRUPOS = {
     entrega:{pt:"Entrega",en:"Deliverables",es:"Entregas"},
     setor:{pt:"Setor",en:"Sector",es:"Sector"},
     contexto:{pt:"Contexto",en:"Context",es:"Contexto"},
-    competencias:{pt:"Competências",en:"Skills",es:"Competencias"}
+    competencias:{pt:"Competências",en:"Skills",es:"Competencias"},
+    ferramentas:{pt:"Ferramentas",en:"Tools",es:"Herramientas"}
   };
   const etiquetaNome = (id) => {
     if (ETIQUETA_LABELS[id]) return lx(ETIQUETA_LABELS[id]);
@@ -3073,13 +3110,13 @@ document.addEventListener('DOMContentLoaded', () => {
    const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjFiltro = 'all';
   let pjEtiqueta = null;
-  const naHome = (p) => p.slug !== 'rino-pecas' && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
+  const naHome = (p) => !['rino-pecas','sollaris-instagram','o-hobbit','dash-geral'].includes(p.slug) && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
     const dashboardCTA = document.getElementById('work-dashboard-cta');
     if (!grid) return;
-    const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit' && p.slug !== 'rino-pecas');
+    const displayedPJ = PJ.filter(p => !['o-hobbit','rino-pecas','sollaris-instagram','dash-geral'].includes(p.slug));
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
@@ -3097,7 +3134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ps = displayedPJ.filter(p => inF(p, k));
         return '<section class="pj-group"><h2 class="pj-group-title">' + lx(l) + '<small>' + ps.length + '</small></h2><div class="work-grid">' + ps.map(pjCard).join('') + '</div></section>';
       }).join('');
-    } else if (pjFiltro === 'conteudo') {
+    } else if (pjFiltro === 'midias') {
       grid.classList.remove('work-grid');
       grid.innerHTML = pgHTML();
     } else {
@@ -3340,7 +3377,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tint = (pct) => `color-mix(in srgb, var(--ac) ${pct}%, #f2f2f2)`;
   // colunas verticais animadas: [{ l, sub, v, d, tip, hi }]
   const vcols = (it) => { const mx = Math.max(...it.map(i => i.v), 1e-9);
-    return `<div class="ds-vc ds-anim" style="--n:${it.length}">${it.map((i, k) => `<div class="ds-vc-c"${i.tip ? ` data-tip="${i.tip}"` : ''}><span class="ds-vc-v">${i.d}</span><span class="ds-vc-t"><i class="ds-gy" style="height:${(i.v / mx * 100).toFixed(1)}%;--i:${k};background:${i.hi ? 'var(--ac)' : tint(38)}"></i></span><span class="ds-vc-l">${i.l}</span>${i.sub ? `<small>${i.sub}</small>` : ''}</div>`).join('')}</div>`; };
+    return `<div class="ds-vc ds-anim" style="--n:${it.length}">${it.map((i, k) => `<div class="ds-vc-c"${i.tip ? ` data-tip="${i.tip}"` : ''}><span class="ds-vc-v">${i.d}</span><span class="ds-vc-t"><i class="ds-gy" style="height:${(i.v / mx * 100).toFixed(1)}%;--i:${k};background:${i.hi ? PAL[k % PAL.length] : tint(38 + (k % 3) * 12)}"></i></span><span class="ds-vc-l">${i.l}</span>${i.sub ? `<small>${i.sub}</small>` : ''}</div>`).join('')}</div>`; };
   const dashHTML = (p) => {
     const D = p.dash, m = D.m || 'l', toc = [], AC = D.cor || '#2a78d6', ON = D.on || '#fff';
     const rows = POSTS.filter(x => D.users.includes(x.user) && ENG.posts[x.c]).map(x => { const [l, c] = ENG.posts[x.c]; return { x, l, c, v: m === 'c' ? c : (l || 0) + c }; }).sort((a, b) => a.x.d < b.x.d ? -1 : 1);
@@ -3359,6 +3396,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const R = (t, a, b) => lx(t).replace('{a}', a).replace('{b}', b);
     const FL = { post: DS_L.fPost, car: DS_L.fCar, reel: DS_L.fReel };
     const out = [];
+    const samplePosts = D.users.map(u => rows.filter(r => r.x.user === u).sort((a, b) => b.v - a.v)[0]?.x).filter(Boolean);
+    const sampleGroups = [samplePosts.slice(0, 3), samplePosts.slice(3, 6), samplePosts.slice(6, 9)];
+    const sampleSection = (id, title, desc, posts, variant) => posts.length
+      ? sec(id, title, lx(desc), `<div class="ds-post-examples pc-grid">${posts.map(x => pcCard(x)).join('')}</div>`, `ds-sample ds-sample-${variant}`)
+      : '';
     let taxa = D.users.length === 1 && seg ? TOT / rows.length / seg * 100 : null; if (taxa != null && taxa < 2) taxa = null; // taxa baixa não aparece
 
     // 1) HERO: total animado sobre a cor do dashboard + curva acumulada
@@ -3372,6 +3414,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ${m === 'l' ? `<span class="ds-hero-s">${num(L, { d: 0 })} ${lx(DS_L.kL)} · ${num(C, { d: 0 })} ${lx(DS_L.kC)}</span>` : `<span class="ds-hero-s">${lx(DS_L.oculto)}</span>`}</div>
         <svg class="ds-hero-g" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="ds-fade" d="${area}" fill="currentColor" opacity=".18"/><path class="ds-draw" pathLength="1" d="${line}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
         <div class="ds-chips">${chips.map(([v, l]) => `<span class="ds-chip">${v ? `<b>${v}</b> ` : ''}${l}</span>`).join('')}</div></div>`); }
+
+    if (sampleGroups[0].length) out.push(sampleSection('dk-b-ds-exemplos-1', T3('Exemplos de posts', 'Post examples', 'Ejemplos de publicaciones'), T3('Uma amostra do conteúdo publicado pelas contas analisadas.', 'A sample of content published by the accounts in this analysis.', 'Una muestra del contenido publicado por las cuentas analizadas.'), sampleGroups[0], 'a'));
 
     // 2) MAIS CURTIDOS (ranking com número na cor; miniatura ganha cor no hover)
     { const top = [...rows].sort((a, b) => b.v - a.v || b.c - a.c).slice(0, 5), mx = top[0] ? top[0].v : 1;
@@ -3410,6 +3454,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6) POR ANO (colunas, ano mais forte na cor)
     if (anos.length > 1) { const pk = Math.max(...anos.map(a => a.t)); out.push(sec('dk-b-ds-ano', DS_L.ano, lx(DS_L.anoD), vcols(anos.map(a => ({ l: a.k, sub: nP(a.n), v: a.t, hi: a.t === pk, d: `${nf(a.t)}<small>${nf(a.t / TOT * 100, dd(a.t / TOT * 100))}%</small>`, tip: `<b>${a.k}</b><br>${nf(a.t)} ${unid} · ${nP(a.n)}<br>${nf(a.a, dd(a.a))} ${lx(DS_L.pp)}` }))))); }
 
+    if (sampleGroups[1].length) out.push(sampleSection('dk-b-ds-exemplos-2', T3('Mais exemplos de posts', 'More post examples', 'Más ejemplos de publicaciones'), T3('Exemplos de outras contas para contextualizar os resultados.', 'Examples from other accounts to put the results in context.', 'Ejemplos de otras cuentas para contextualizar los resultados.'), sampleGroups[1], 'b'));
+
     // 7) PARTICIPAÇÃO: rosca + legenda (até 7 fatias + Outros)
     if (gs.length > 1) { const top = gs.slice(0, 7), rest = gs.slice(7), sl = top.map((g, i) => ({ l: esc(nome(g.rs[0])), t: g.t, n: g.n, c: PAL[i], hid: m === 'l' && g.rs.every(r => r.l == null) }));
       if (rest.length) sl.push({ l: lx(DS_L.outros), t: S(rest, g => g.t), n: S(rest, g => g.n), c: '#b2b2b2' });
@@ -3440,6 +3486,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m === 'l' && L && C) { const k = Math.max(1, Math.round(C / (L + C) * 100));
       out.push(sec('dk-b-ds-waf', DS_L.waf, lx(DS_L.wafD), `<div class="ds-waf-w ds-anim"><div class="ds-waf">${Array.from({ length: 100 }, (_, i) => `<i style="--i:${i};background:${i >= 100 - k ? '#111' : 'var(--ac)'}"></i>`).join('')}</div>
         <ul class="ds-leg"><li><i style="background:var(--ac)"></i><span>${lx(T3('Curtidas', 'Likes', 'Me gusta'))}<small>${nf(L)}</small></span><b>${100 - k}%</b></li><li><i style="background:#111"></i><span>${lx(T3('Comentários', 'Comments', 'Comentarios'))}<small>${nf(C)}</small></span><b>${k}%</b></li></ul></div>`)); }
+
+    if (sampleGroups[2].length) out.push(sampleSection('dk-b-ds-exemplos-3', T3('Outros conteúdos analisados', 'More analyzed content', 'Otros contenidos analizados'), T3('Publicações adicionais das contas incluídas no painel.', 'Additional posts from the accounts included in the dashboard.', 'Publicaciones adicionales de las cuentas incluidas en el panel.'), sampleGroups[2], 'c'));
 
     // 12) BEHANCE (visão geral): mosaico proporcional
     const B = ENG.behance;
@@ -3514,8 +3562,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const p = PJ_BY[slug]; if (!p) return false;
     dkP = p;
     document.getElementById('dk-name').textContent = p.titulo;
-    document.getElementById('dk-meta').textContent = lx(p.cat) + ' · ' + p.ano;
-    document.getElementById('dk-kicker').textContent = lx(p.cat) + ' · ' + p.ano;
+    const projectMeta = p.cat ? lx(p.cat) + (p.ano ? ' · ' + p.ano : '') : '';
+    document.getElementById('dk-meta').textContent = projectMeta;
+    document.getElementById('dk-kicker').textContent = projectMeta;
     document.getElementById('dk-title').textContent = p.titulo;
     document.getElementById('dk-intro').textContent = lx(p.intro || (p.telas[0] && p.telas[0].d));
     const tagWrap = document.getElementById('dk-tags');
@@ -3543,7 +3592,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
     if (p.html === 'meta') initMeta();
-    const navPJ = PJ.filter(item => item.slug !== 'rino-pecas');
+    const navPJ = PJ.filter(item => !['rino-pecas','sollaris-instagram','o-hobbit','dash-geral'].includes(item.slug));
     const navIndex = navPJ.indexOf(p);
     const nx = navIndex >= 0 ? navPJ[(navIndex + 1) % navPJ.length] : null;
     const nb = document.getElementById('dk-next'); nb.hidden = !nx || navPJ.length < 2;
