@@ -4338,11 +4338,16 @@ window.PROJETOS = [
   "titulo": "NUPE",
   "ano": "2024",
   "cat": {
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
+  },
+  "filtro": "identidade",
+  "badge": {
     "pt": "Rebranding",
     "en": "Rebranding",
     "es": "Rebranding"
   },
-  "filtro": "rebranding",
   "etiquetas": {
     "entrega": ["manual-marca","pecas-graficas"],
     "setor": [
@@ -6666,7 +6671,8 @@ window.PROJETOS = [
       "design-interface"
     ]
   },
-  "capa": "assets/projetos/metaprojeto/capa.webp",
+  "capa": "assets/projetos/metaprojeto/n01.webp",
+  "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
    "pt": "Como este site foi construído: um arquivo HTML, sem framework, com os dados em JavaScript e animações feitas em canvas.",
