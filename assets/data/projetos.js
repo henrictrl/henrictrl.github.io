@@ -2250,12 +2250,12 @@ window.PROJETOS = [
  {
   "slug": "rino-site",
   "marca": "rino",
-  "titulo": "Rino: definidor de cores",
+  "titulo": "Rino Cores",
   "ano": "2026",
   "cat": {
-    "pt": "Sites, ferramentas e produtos digitais",
-    "en": "Websites, tools & digital products",
-    "es": "Sitios, herramientas y productos digitales"
+    "pt": "Site",
+    "en": "Website",
+    "es": "Sitio web"
   },
   "filtro": "web",
   "etiquetas": {
@@ -2273,7 +2273,11 @@ window.PROJETOS = [
     ],
     "competencias": [
       "programacao",
-      "design-interface"
+      "design-interface",
+      "vs-code",
+      "html",
+      "css",
+      "javascript"
     ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
@@ -6171,9 +6175,9 @@ window.PROJETOS = [
   "titulo": "Fellipe Gualberto",
   "ano": "2026",
   "cat": {
-    "pt": "Sites, ferramentas e produtos digitais",
-    "en": "Websites, tools & digital products",
-    "es": "Sitios, herramientas y productos digitales"
+    "pt": "Site",
+    "en": "Website",
+    "es": "Sitio web"
   },
   "filtro": "web",
   "etiquetas": {
@@ -6353,9 +6357,9 @@ window.PROJETOS = [
   "titulo": "Nova Rio Branco",
   "ano": "2025",
   "cat": {
-    "pt": "Sites, ferramentas e produtos digitais",
-    "en": "Websites, tools & digital products",
-    "es": "Sitios, herramientas y productos digitales"
+    "pt": "Site",
+    "en": "Website",
+    "es": "Sitio web"
   },
   "filtro": "web",
   "etiquetas": {
@@ -6509,9 +6513,9 @@ window.PROJETOS = [
   "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
-    "pt": "Sites, ferramentas e produtos digitais",
-    "en": "Websites, tools & digital products",
-    "es": "Sitios, herramientas y productos digitales"
+    "pt": "Site",
+    "en": "Website",
+    "es": "Sitio web"
   },
   "filtro": "web",
   "etiquetas": {
@@ -6705,9 +6709,9 @@ window.PROJETOS = [
   "titulo": "Este portfólio",
   "ano": "2026",
   "cat": {
-    "pt": "Sites, ferramentas e produtos digitais",
-    "en": "Websites, tools & digital products",
-    "es": "Sitios, herramientas y productos digitales"
+    "pt": "Site",
+    "en": "Website",
+    "es": "Sitio web"
   },
   "filtro": "web",
   "etiquetas": {
