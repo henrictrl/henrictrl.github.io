@@ -3082,9 +3082,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('resize', syncLiveProjectPreviews);
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
-  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
-      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
-      <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
+
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
   const FILTROS = [['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['programacao', { pt: 'Programação', en: 'Programming', es: 'Programación' }], ['midias', { pt: 'Mídias sociais', en: 'Social media', es: 'Redes sociales' }], ['eventos', { pt: 'Eventos', en: 'Events', es: 'Eventos' }], ['estrategia', { pt: 'Estratégia de marca', en: 'Brand strategy', es: 'Estrategia de marca' }], ['rebranding', { pt: 'Rebranding', en: 'Rebranding', es: 'Rebranding' }]];
 
