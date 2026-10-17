@@ -22,7 +22,8 @@ window.PROJETOS = [
   "etiquetas": {
     "entrega": [
       "logotipo",
-      "manual-marca"
+      "pecas-graficas",
+      "aplicacoes-marca"
     ],
     "setor": [
       "tatuagem",
@@ -30,11 +31,13 @@ window.PROJETOS = [
     ],
     "contexto": [
       "cliente",
-      "internacional"
+      "internacional",
+      "idioma-ingles"
     ],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
+      "identidade-visual",
+      "ilustracao"
     ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
@@ -2267,7 +2270,6 @@ window.PROJETOS = [
     ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
-  "capaLive": "assets/web/rino/index.html",
   "dir": "assets/projetos/rino/",
   "intro": {
    "pt": "Um definidor de cores para explorar, comparar e aprovar combinações aplicadas diretamente ao logotipo. A interface reúne pré-visualização ao vivo, paletas sugeridas, controles de cor e exportação em PNG.",
