@@ -3490,10 +3490,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
   const dkScroll = document.getElementById('dk-scroll');
-  // Roteia a roda/trackpad no capture da página para o conteúdo do modal,
-  // mesmo quando o gesto começa sobre uma imagem, texto ou controle do projeto.
+  // Com o modal aberto, envia a roda/trackpad para a página inteira do projeto,
+  // sem depender do elemento que o navegador identifica sob o ponteiro.
   document.addEventListener('wheel', (e) => {
-    if (!dk.classList.contains('open') || !dk.contains(e.target) || e.ctrlKey) return;
+    if (!dk.classList.contains('open') || e.ctrlKey) return;
+    if (document.querySelector('.web-ov.open, .pv-ov.open, .lightbox-overlay.open')) return;
     if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
     const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? dkScroll.clientHeight : 1;
     const delta = e.deltaY * unit;
@@ -3501,6 +3502,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.cancelable) e.preventDefault();
     dkScroll.scrollTop += delta;
   }, { capture: true, passive: false });
+  // Touch vertical também é encaminhado pela página inteira; movimentos horizontais
+  // (carrosséis) e gestos com mais de um dedo continuam sob controle do navegador.
+  let dkTouch = null;
+  document.addEventListener('touchstart', (e) => {
+    if (!dk.classList.contains('open') || e.touches.length !== 1 || document.querySelector('.web-ov.open, .pv-ov.open, .lightbox-overlay.open')) { dkTouch = null; return; }
+    const t = e.touches[0];
+    dkTouch = { x: t.clientX, y: t.clientY, lastY: t.clientY, axis: null };
+  }, { capture: true, passive: true });
+  document.addEventListener('touchmove', (e) => {
+    if (!dkTouch || !dk.classList.contains('open') || e.touches.length !== 1) return;
+    const t = e.touches[0], dx = t.clientX - dkTouch.x, dy = t.clientY - dkTouch.y;
+    if (!dkTouch.axis && Math.hypot(dx, dy) > 6) dkTouch.axis = Math.abs(dy) >= Math.abs(dx) ? 'y' : 'x';
+    if (dkTouch.axis !== 'y') return;
+    if (e.cancelable) e.preventDefault();
+    dkScroll.scrollTop += dkTouch.lastY - t.clientY;
+    dkTouch.lastY = t.clientY;
+  }, { capture: true, passive: false });
+  const clearDkTouch = () => { dkTouch = null; };
+  document.addEventListener('touchend', clearDkTouch, { capture: true, passive: true });
+  document.addEventListener('touchcancel', clearDkTouch, { capture: true, passive: true });
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
