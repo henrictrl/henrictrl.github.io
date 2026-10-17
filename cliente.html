@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto — Henrique Marinhos</title>
+<meta name="description" content="Projeto de Henrique Marinhos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Mesmos tokens do index.html */
+:root { --ink:#111; --gray-400:#b2b2b2; --gray-500:#8c8c8c; --gray-100:#f5f5f5; --gray-200:#e5e5e5; --white:#fff; --ease:cubic-bezier(0.22,1,0.36,1); --gutter:48px; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--white); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
+a { color:inherit; text-decoration:none; }
+.top { display:flex; justify-content:space-between; align-items:center; padding:16px var(--gutter); max-width:calc(1024px + 2 * var(--gutter)); width:100%; margin:0 auto; }
+.brand { font-size:15px; font-weight:500; }
+.back { font-size:14px; color:var(--gray-400); transition:color .25s var(--ease); }
+.back:hover { color:var(--ink); }
+main { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:48px var(--gutter) 80px; gap:40px; }
+/* logo grande; surge com a mesma dissolução pontilhada do título do site */
+.logo { max-width:min(560px, 100%); max-height:42vh; width:auto; height:auto; display:block; }
+.logo-wrap { -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-size:100% 100%; mask-size:100% 100%; }
+.info { display:flex; flex-direction:column; align-items:center; gap:10px; max-width:52ch; }
+.name { font-size:22px; font-weight:500; letter-spacing:-0.01em; }
+.meta { font-size:13px; color:var(--gray-500); }
+.desc { font-size:15px; line-height:1.6; color:var(--gray-500); margin-top:6px; }
+.actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; font-size:14px; font-weight:500; border:1px solid var(--gray-200); transition:border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease); }
+.btn:hover { border-color:var(--ink); }
+.btn.primary { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.btn.primary:hover { opacity:.85; }
+[hidden] { display:none !important; }
+.notfound { color:var(--gray-500); font-size:15px; }
+@media (max-width: 767px) { :root { --gutter:24px; } .name { font-size:19px; } .logo { max-height:30vh; } }
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Henrique Marinhos</a>
+  <a class="back" href="index.html" id="back">← Voltar ao portfólio</a>
+</header>
+
+<main id="main">
+  <div class="logo-wrap" id="logo-wrap"><img class="logo" id="logo" alt=""></div>
+  <div class="info">
+    <h1 class="name" id="name"></h1>
+    <p class="meta" id="meta"></p>
+    <p class="desc" id="desc"></p>
+  </div>
+  <nav class="actions" aria-label="Links do projeto">
+    <a class="btn primary" id="btn-projeto">Ver projeto</a>
+    <a class="btn" id="btn-site" target="_blank" rel="noopener">Visitar site ↗</a>
+    <a class="btn" id="btn-instagram" target="_blank" rel="noopener">Instagram ↗</a>
+  </nav>
+</main>
+
+<script src="assets/data/clientes.js"></script>
+<script>
+(() => {
+  const slug = new URLSearchParams(location.search).get('c');
+  const c = (window.CLIENTES || {})[slug];
+  const $ = (id) => document.getElementById(id);
+  if (!c) { $('main').innerHTML = '<p class="notfound">Projeto não encontrado.</p>'; return; }
+
+  document.title = c.nome + ' — Henrique Marinhos';
+  $('logo').src = 'assets/logos/' + slug + '.webp';
+  $('logo').alt = c.nome;
+  $('name').textContent = c.nome;
+  const meta = [c.tipo, c.ano].filter(Boolean).join(' · ');
+  $('meta').textContent = meta; $('meta').hidden = !meta;
+  $('desc').textContent = c.descricao || ''; $('desc').hidden = !c.descricao;
+  // botões: só aparecem os que têm link
+  [['btn-projeto', c.projeto], ['btn-site', c.site], ['btn-instagram', c.instagram]].forEach(([id, url]) => {
+    if (url) $(id).href = url; else $(id).hidden = true;
+  });
+  // aberto em nova aba: "voltar" fecha a aba se possível
+  if (window.opener) $('back').addEventListener('click', (e) => { e.preventDefault(); window.close(); setTimeout(() => location.href = 'index.html', 150); });
+
+  // Dissolução pontilhada do logo (mesma linguagem do site)
+  const el = $('logo-wrap');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const B = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => (v + .5) / 64);
+  $('logo').addEventListener('load', () => {
+    const r = el.getBoundingClientRect(), C = 4, w = Math.ceil(r.width), h = Math.ceil(r.height);
+    if (!w || !h) return;
+    const gw = Math.ceil(w / C), gh = Math.ceil(h / C), cv = document.createElement('canvas'); cv.width = gw; cv.height = gh;
+    const cx = cv.getContext('2d'), img = cx.createImageData(gw, gh), d = new Uint32Array(img.data.buffer);
+    const frame = (p) => {
+      for (let j = 0; j < gh; j++) for (let i = 0; i < gw; i++) {
+        const th = (i / gw) * .45 + (j / gh) * .2 + B[(j & 7) * 8 + (i & 7)] * .35 + (Math.random() - .5) * .18;
+        d[j * gw + i] = p * 1.25 > th ? 0xff000000 : 0;
+      }
+      cx.putImageData(img, 0, 0);
+      const u = `url(${cv.toDataURL()})`; el.style.webkitMaskImage = u; el.style.maskImage = u;
+    };
+    // máscara em baixa resolução + image-rendering via tamanho exato de célula
+    el.style.webkitMaskSize = el.style.maskSize = `${gw * C}px ${gh * C}px`;
+    frame(0);
+    const t0 = performance.now(), dur = 1300;
+    const step = (now) => { const p = Math.min(1, (now - t0) / dur); if (p >= 1) { el.style.webkitMaskImage = el.style.maskImage = ''; return; } frame(p); requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }, { once: true });
+})();
+</script>
+</body>
+</html>
