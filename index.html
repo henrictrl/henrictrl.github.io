@@ -3490,16 +3490,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
   const dkScroll = document.getElementById('dk-scroll');
-  // Safari pode não encaminhar a roda/trackpad quando o ponteiro está sobre uma imagem de página.
-  // Encaminha a rolagem vertical para o scroller real do modal em todo o conteúdo do projeto.
-  dkScroll.addEventListener('wheel', (e) => {
-    if (!dk.classList.contains('open') || e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+  // Roteia a roda/trackpad no capture da página para o conteúdo do modal,
+  // mesmo quando o gesto começa sobre uma imagem, texto ou controle do projeto.
+  document.addEventListener('wheel', (e) => {
+    if (!dk.classList.contains('open') || !dk.contains(e.target) || e.ctrlKey) return;
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
     const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? dkScroll.clientHeight : 1;
     const delta = e.deltaY * unit;
     if (!delta) return;
-    e.preventDefault();
+    if (e.cancelable) e.preventDefault();
     dkScroll.scrollTop += delta;
-  }, { passive: false });
+  }, { capture: true, passive: false });
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
