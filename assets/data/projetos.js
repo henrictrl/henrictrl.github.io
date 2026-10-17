@@ -1364,28 +1364,16 @@ window.PROJETOS = [
   "titulo": "Rino: peças",
   "ano": "2026",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
-  "filtro": "campanhas",
+  "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "pecas-graficas",
-      "embalagens"
-    ],
-    "setor": [
-      "b2b",
-      "credito-financas"
-    ],
-    "contexto": [
-      "cliente",
-      "desdobramento-marca"
-    ],
-    "competencias": [
-      "design-grafico",
-      "direcao-arte"
-    ]
+    "entrega": ["pecas-graficas"],
+    "setor": ["b2b","credito-financas"],
+    "contexto": ["desdobramento-marca","projeto-ligado"],
+    "competencias": []
   },
   "capa": "assets/projetos/rino-pecas/capa.webp",
   "dir": "assets/projetos/rino-pecas/",
@@ -2253,11 +2241,11 @@ window.PROJETOS = [
   "titulo": "Rino Cores",
   "ano": "2026",
   "cat": {
-    "pt": "Site",
-    "en": "Website",
-    "es": "Sitio web"
+    "pt": "Programação",
+    "en": "Programming",
+    "es": "Programación"
   },
-  "filtro": "web",
+  "filtro": "programacao",
   "etiquetas": {
     "entrega": [
       "ferramenta-interativa",
@@ -2315,10 +2303,7 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "aplicacoes-marca"
-    ],
+    "entrega": ["logotipo","aplicacoes-marca","mockups"],
     "setor": [
       "varejo",
       "optica"
@@ -2329,7 +2314,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
+      "identidade-visual",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
@@ -2585,12 +2572,12 @@ window.PROJETOS = [
       "moda-acessorios",
       "beleza"
     ],
-    "contexto": [
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
+      "identidade-visual",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
@@ -2991,9 +2978,6 @@ window.PROJETOS = [
    }
   ],
   "posts": "sollaris",
-  "rel": [
-   "sollaris-instagram"
-  ],
   "destaque": true,
   "dash": {
    "users": [
@@ -3023,13 +3007,11 @@ window.PROJETOS = [
       "tecnologia",
       "podcast"
     ],
-    "contexto": [
-      "cliente",
-      "projeto-ligado"
-    ],
+    "contexto": ["projeto-ligado"],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
+      "identidade-visual",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
@@ -3203,21 +3185,17 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pecas-graficas"
-    ],
+    "entrega": ["identidade-visual","pecas-graficas","evento","posts-carrosseis"],
     "setor": [
       "institucional",
       "educacao"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "direcao-arte",
-      "design-grafico"
+      "design-grafico",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
@@ -3468,21 +3446,17 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pictogramas"
-    ],
+    "entrega": ["identidade-visual","pictogramas","sinalizacao","pecas-digitais","pecas-graficas","banners","medalhas"],
     "setor": [
       "institucional",
       "esporte"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "identidade-visual",
-      "design-grafico"
+      "design-grafico",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
@@ -3717,20 +3691,17 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "manual-marca"
-    ],
+    "entrega": ["identidade-visual","manual-marca","pecas-graficas","banners","plano-comunicacao"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "cliente"
-    ],
+    "contexto": ["bolsista"],
     "competencias": [
       "identidade-visual",
-      "direcao-arte"
+      "direcao-arte",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
@@ -3928,27 +3899,21 @@ window.PROJETOS = [
   "titulo": "CSUNESP",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+    "pt": "Estratégia de marca",
+    "en": "Brand strategy",
+    "es": "Estrategia de marca"
   },
-  "filtro": "identidade",
+  "filtro": "estrategia",
   "etiquetas": {
-    "entrega": [
-      "manual-marca",
-      "estrategia-marca"
-    ],
+    "entrega": ["manual-marca"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "projeto-academico",
-      "colaboracao"
-    ],
+    "contexto": ["estagio"],
     "competencias": [
-      "estrategia-marca",
-      "identidade-visual"
+      "identidade-visual",
+      "photoshop"
     ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
@@ -4170,22 +4135,13 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pecas-graficas"
-    ],
+    "entrega": ["identidade-visual","pecas-graficas","evento"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "direcao-arte"
-    ]
+    "contexto": ["bolsista"],
+    "competencias": ["direcao-arte"]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "dir": "assets/projetos/mostra-saude-mental/",
@@ -4379,7 +4335,7 @@ window.PROJETOS = [
  },
  {
   "slug": "nupe",
-  "titulo": "Nupe",
+  "titulo": "NUPE",
   "ano": "2024",
   "cat": {
     "pt": "Identidade visual",
@@ -4387,11 +4343,13 @@ window.PROJETOS = [
     "es": "Identidad visual"
   },
   "filtro": "identidade",
+  "badge": {
+    "pt": "Rebranding",
+    "en": "Rebranding",
+    "es": "Rebranding"
+  },
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "manual-marca"
-    ],
+    "entrega": ["manual-marca","pecas-graficas"],
     "setor": [
       "institucional",
       "cultura"
@@ -4399,10 +4357,7 @@ window.PROJETOS = [
     "contexto": [
       "cliente"
     ],
-    "competencias": [
-      "identidade-visual",
-      "direcao-arte"
-    ]
+    "competencias": ["direcao-arte"]
   },
   "capa": "assets/projetos/nupe/capa.webp",
   "dir": "assets/projetos/nupe/",
@@ -4694,22 +4649,13 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "posts-carrosseis"
-    ],
+    "entrega": ["pecas-graficas","posts-carrosseis","evento"],
     "setor": [
       "institucional",
       "cultura"
     ],
-    "contexto": [
-      "campanha",
-      "evento"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "social-media"
-    ]
+    "contexto": ["cliente"],
+    "competencias": ["social-media"]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
   "dir": "assets/projetos/ocupacao-unesp-negra/",
@@ -4839,10 +4785,7 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "manual-marca",
-      "editorial"
-    ],
+    "entrega": ["manual-marca","editorial","press-kit"],
     "setor": [
       "consultoria",
       "tecnologia"
@@ -4853,7 +4796,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "design-editorial",
-      "diagramacao"
+      "diagramacao",
+      "illustrator",
+      "photoshop"
     ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
@@ -5055,7 +5000,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "design-grafico"
+      "design-grafico",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
@@ -5304,27 +5251,23 @@ window.PROJETOS = [
   "titulo": "Setembro Amarelo 2022",
   "ano": "2022",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "campanhas",
+  "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "campanha",
-      "cartaz-folder"
-    ],
+    "entrega": ["identidade-visual","pecas-graficas","cartaz-folder","cracha","certificado","sinalizacao","posts-carrosseis"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "campanha",
-      "evento"
-    ],
+    "contexto": ["bolsista"],
     "competencias": [
       "design-grafico",
-      "social-media"
+      "social-media",
+      "photoshop",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
@@ -5446,28 +5389,21 @@ window.PROJETOS = [
   "slug": "rp-40-anos",
   "titulo": "RP 40 anos",
   "ano": "2022",
-  "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
-  },
-  "filtro": "conteudo",
+  "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
+  "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "stories-gifs"
-    ],
+    "entrega": ["posts-carrosseis","stories-gifs","pecas-graficas"],
     "setor": [
       "educacao",
       "cultura"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
+    "contexto": ["estagio"],
     "competencias": [
       "social-media",
-      "design-grafico"
+      "design-grafico",
+      "photoshop",
+      "illustrator",
+      "meta-business-suite"
     ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
@@ -5647,9 +5583,9 @@ window.PROJETOS = [
   "titulo": "Proposta Prisma",
   "ano": "2023",
   "cat": {
-    "pt": "Estratégia, educação e pesquisa",
-    "en": "Strategy, education & research",
-    "es": "Estrategia, educación e investigación"
+    "pt": "Estratégia de marca",
+    "en": "Brand strategy",
+    "es": "Estrategia de marca"
   },
   "filtro": "estrategia",
   "etiquetas": {
@@ -5666,8 +5602,9 @@ window.PROJETOS = [
       "competicao"
     ],
     "competencias": [
-      "estrategia-marca",
-      "diagramacao"
+      "diagramacao",
+      "illustrator",
+      "photoshop"
     ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
@@ -5925,27 +5862,25 @@ window.PROJETOS = [
   "titulo": "Inspirit Jiu Jitsu",
   "ano": "2026",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "campanhas",
+  "filtro": "eventos",
   "etiquetas": {
     "entrega": [
       "folder",
       "editorial"
     ],
-    "setor": [
-      "esporte",
-      "terceiro-setor"
-    ],
+    "setor": ["esporte"],
     "contexto": [
       "cliente",
       "internacional"
     ],
     "competencias": [
       "design-editorial",
-      "diagramacao"
+      "diagramacao",
+      "photoshop"
     ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
@@ -6050,11 +5985,11 @@ window.PROJETOS = [
   "titulo": "Festa da Polenta",
   "ano": "2026",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "campanhas",
+  "filtro": "eventos",
   "etiquetas": {
     "entrega": [
       "cartaz-folder",
@@ -6070,7 +6005,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "design-grafico",
-      "ilustracao"
+      "ilustracao",
+      "procreate",
+      "adobe-fresco",
+      "illustrator"
     ]
   },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
@@ -6175,26 +6113,27 @@ window.PROJETOS = [
   "titulo": "Fellipe Gualberto",
   "ano": "2026",
   "cat": {
-    "pt": "Site",
-    "en": "Website",
-    "es": "Sitio web"
+    "pt": "Programação",
+    "en": "Programming",
+    "es": "Programación"
   },
-  "filtro": "web",
+  "filtro": "programacao",
   "etiquetas": {
     "entrega": [
       "site",
       "portfolio-site"
     ],
-    "setor": [
-      "jornalismo-cultural",
-      "cultura"
-    ],
+    "setor": ["jornalismo"],
     "contexto": [
       "cliente"
     ],
     "competencias": [
       "programacao",
-      "design-interface"
+      "design-interface",
+      "vs-code",
+      "html",
+      "css",
+      "javascript"
     ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
@@ -6357,11 +6296,11 @@ window.PROJETOS = [
   "titulo": "Nova Rio Branco",
   "ano": "2025",
   "cat": {
-    "pt": "Site",
-    "en": "Website",
-    "es": "Sitio web"
+    "pt": "Programação",
+    "en": "Programming",
+    "es": "Programación"
   },
-  "filtro": "web",
+  "filtro": "programacao",
   "etiquetas": {
     "entrega": [
       "catalogo-digital",
@@ -6513,11 +6452,11 @@ window.PROJETOS = [
   "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
-    "pt": "Site",
-    "en": "Website",
-    "es": "Sitio web"
+    "pt": "Programação",
+    "en": "Programming",
+    "es": "Programación"
   },
-  "filtro": "web",
+  "filtro": "programacao",
   "etiquetas": {
     "entrega": [
       "ferramenta-interativa",
@@ -6709,11 +6648,11 @@ window.PROJETOS = [
   "titulo": "Este portfólio",
   "ano": "2026",
   "cat": {
-    "pt": "Site",
-    "en": "Website",
-    "es": "Sitio web"
+    "pt": "Programação",
+    "en": "Programming",
+    "es": "Programación"
   },
-  "filtro": "web",
+  "filtro": "programacao",
   "etiquetas": {
     "entrega": [
       "portfolio-site",
@@ -6732,7 +6671,8 @@ window.PROJETOS = [
       "design-interface"
     ]
   },
-  "capa": "assets/projetos/metaprojeto/capa.webp",
+  "capa": "assets/projetos/metaprojeto/n01.webp",
+  "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
    "pt": "Como este site foi construído: um arquivo HTML, sem framework, com os dados em JavaScript e animações feitas em canvas.",
@@ -6747,28 +6687,20 @@ window.PROJETOS = [
   "slug": "basement",
   "titulo": "Basement",
   "ano": "2026",
-  "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
-  },
-  "filtro": "conteudo",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "conteudo-recorrente"
-    ],
-    "setor": [
-      "b2b",
-      "legaltech"
-    ],
+    "entrega": ["posts-carrosseis","conteudo-recorrente","pecas-graficas"],
+    "setor": ["tecnologia","juridico"],
     "contexto": [
       "trabalho-recorrente",
       "cliente"
     ],
     "competencias": [
       "social-media",
-      "redacao"
+      "redacao",
+      "figma",
+      "affinity"
     ]
   },
   "capa": "assets/projetos/basement/capa.webp",
@@ -6798,27 +6730,28 @@ window.PROJETOS = [
   "titulo": "Tesoura com Ponta",
   "ano": "2025–2026",
   "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
+    "pt": "Mídias sociais",
+    "en": "Social media",
+    "es": "Redes sociales"
   },
-  "filtro": "conteudo",
+  "filtro": "midias",
   "etiquetas": {
     "entrega": [
       "posts-carrosseis",
       "artigos"
     ],
-    "setor": [
-      "cultura",
-      "jornalismo-cultural"
-    ],
+    "setor": ["jornalismo-cultural"],
     "contexto": [
       "trabalho-recorrente",
       "projeto-editorial"
     ],
     "competencias": [
       "redacao",
-      "social-media"
+      "social-media",
+      "wordpress",
+      "microsoft-word",
+      "google-docs",
+      "notion"
     ]
   },
   "capa": "assets/projetos/tesoura/capa.webp",
@@ -6844,11 +6777,11 @@ window.PROJETOS = [
   "titulo": "Persona",
   "ano": "2023–2026",
   "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
+    "pt": "Mídias sociais",
+    "en": "Social media",
+    "es": "Redes sociales"
   },
-  "filtro": "conteudo",
+  "filtro": "midias",
   "etiquetas": {
     "entrega": [
       "posts-carrosseis",
@@ -6864,7 +6797,14 @@ window.PROJETOS = [
     ],
     "competencias": [
       "redacao",
-      "social-media"
+      "social-media",
+      "photoshop",
+      "wordpress",
+      "microsoft-word",
+      "google-docs",
+      "notion",
+      "trello",
+      "gmail"
     ]
   },
   "capa": "assets/projetos/persona/capa.webp",
@@ -6891,11 +6831,11 @@ window.PROJETOS = [
   "titulo": "Desvendando o Pop",
   "ano": "2026",
   "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
+    "pt": "Mídias sociais",
+    "en": "Social media",
+    "es": "Redes sociales"
   },
-  "filtro": "conteudo",
+  "filtro": "midias",
   "etiquetas": {
     "entrega": [
       "posts-carrosseis",
@@ -6911,7 +6851,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "redacao",
-      "social-media"
+      "social-media",
+      "substack",
+      "google-docs"
     ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
@@ -6935,16 +6877,13 @@ window.PROJETOS = [
   "titulo": "PROEC Unesp",
   "ano": "2024",
   "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
+    "pt": "Mídias sociais",
+    "en": "Social media",
+    "es": "Redes sociales"
   },
-  "filtro": "conteudo",
+  "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "divulgacao-evento"
-    ],
+    "entrega": ["posts-carrosseis","divulgacao-evento"],
     "setor": [
       "institucional",
       "cultura"
@@ -6955,7 +6894,12 @@ window.PROJETOS = [
     ],
     "competencias": [
       "social-media",
-      "direcao-arte"
+      "direcao-arte",
+      "monday",
+      "photoshop",
+      "illustrator",
+      "premiere",
+      "microsoft-office"
     ]
   },
   "capa": "assets/projetos/proec/capa.webp",
@@ -7033,12 +6977,7 @@ window.PROJETOS = [
     }
    }
   ],
-  "rel": [
-   "congresso-extensao",
-   "interserv",
-   "nupe",
-   "ocupacao-unesp-negra"
-  ],
+  "rel": ["congresso-extensao","interserv","nupe","ocupacao-unesp-negra","copa-girlpower"],
   "dash": {
    "users": [
     "proec_unesp",
@@ -7064,11 +7003,11 @@ window.PROJETOS = [
   "titulo": "Sollaris · Instagram",
   "ano": "2023",
   "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
+    "pt": "Mídias sociais",
+    "en": "Social media",
+    "es": "Redes sociales"
   },
-  "filtro": "conteudo",
+  "filtro": "midias",
   "etiquetas": {
     "entrega": [
       "posts-carrosseis"
@@ -7103,28 +7042,24 @@ window.PROJETOS = [
   "slug": "rd-cultural",
   "titulo": "RD Cultural",
   "ano": "2023",
-  "cat": {
-    "pt": "Conteúdo e mídias sociais",
-    "en": "Content & social media",
-    "es": "Contenido y redes sociales"
-  },
-  "filtro": "conteudo",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "divulgacao-evento"
-    ],
+    "entrega": ["posts-carrosseis","divulgacao-evento","organizacao-evento","pecas-graficas"],
     "setor": [
       "entretenimento",
       "turismo"
     ],
-    "contexto": [
-      "trabalho-recorrente",
-      "estagio"
-    ],
+    "contexto": ["estagio"],
     "competencias": [
       "social-media",
-      "redacao"
+      "redacao",
+      "meta-business-suite",
+      "html",
+      "wordpress",
+      "photoshop",
+      "illustrator",
+      "notion"
     ]
   },
   "capa": "assets/projetos/rd-cultural/capa.webp",
@@ -7149,17 +7084,10 @@ window.PROJETOS = [
   "slug": "encantos-do-brasil",
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
-  "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
-  },
-  "filtro": "campanhas",
+  "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
+  "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "posts-carrosseis"
-    ],
+    "entrega": ["identidade-visual","posts-carrosseis"],
     "setor": [
       "musica",
       "cultura"
@@ -7170,7 +7098,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "social-media"
+      "social-media",
+      "streamyard",
+      "photoshop"
     ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
@@ -7350,11 +7280,11 @@ window.PROJETOS = [
   "titulo": "13º Encontro de Direitos Humanos",
   "ano": "2024",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "campanhas",
+  "filtro": "eventos",
   "etiquetas": {
     "entrega": [
       "fotografia",
@@ -7460,11 +7390,11 @@ window.PROJETOS = [
   "titulo": "Copa GirlPower",
   "ano": "2024",
   "cat": {
-    "pt": "Campanhas, eventos e fotografia",
-    "en": "Campaigns, events & photography",
-    "es": "Campañas, eventos y fotografía"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "campanhas",
+  "filtro": "eventos",
   "etiquetas": {
     "entrega": [
       "fotografia",
@@ -7480,7 +7410,8 @@ window.PROJETOS = [
     ],
     "competencias": [
       "fotografia",
-      "organizacao-evento"
+      "organizacao-evento",
+      "canon-rebel-t7"
     ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
@@ -7593,18 +7524,19 @@ window.PROJETOS = [
      "pt": "Ficha"
     }
    }
-  ]
+  ],
+  "rel": ["proec"]
  },
  {
   "slug": "oficina-gestao-projetos",
   "titulo": "Gestão de Projetos para Design",
   "ano": "2024",
   "cat": {
-    "pt": "Estratégia, educação e pesquisa",
-    "en": "Strategy, education & research",
-    "es": "Estrategia, educación e investigación"
+    "pt": "Eventos",
+    "en": "Events",
+    "es": "Eventos"
   },
-  "filtro": "estrategia",
+  "filtro": "eventos",
   "etiquetas": {
     "entrega": [
       "oficina",
@@ -7755,16 +7687,13 @@ window.PROJETOS = [
   "titulo": "O Hobbit: análise literária",
   "ano": "2022",
   "cat": {
-    "pt": "Estratégia, educação e pesquisa",
-    "en": "Strategy, education & research",
-    "es": "Estrategia, educación e investigación"
+    "pt": "Literária",
+    "en": "Literary",
+    "es": "Literaria"
   },
-  "filtro": "estrategia",
+  "filtro": "literaria",
   "etiquetas": {
-    "entrega": [
-      "analise-literaria",
-      "editorial"
-    ],
+    "entrega": ["analise-literaria","editorial"],
     "setor": [
       "literatura",
       "educacao"
@@ -7773,10 +7702,7 @@ window.PROJETOS = [
       "projeto-academico",
       "colaboracao"
     ],
-    "competencias": [
-      "redacao",
-      "analise-dados"
-    ]
+    "competencias": ["redacao","analise-literaria"]
   },
   "capa": "assets/projetos/o-hobbit/capa.webp",
   "dir": "assets/projetos/o-hobbit/",
@@ -7939,29 +7865,6 @@ window.PROJETOS = [
   "slug": "dash-geral",
   "titulo": "Visão geral",
   "ano": "2022–2026",
-  "cat": {
-   "pt": "Dashboard",
-   "en": "Dashboard",
-   "es": "Dashboard"
-  },
-  "filtro": "dashboards",
-  "etiquetas": {
-    "entrega": [
-      "dashboard"
-    ],
-    "setor": [
-      "dados",
-      "redes-sociais"
-    ],
-    "contexto": [
-      "portfolio",
-      "analise-transversal"
-    ],
-    "competencias": [
-      "analise-dados",
-      "visualizacao-dados"
-    ]
-  },
   "capa": "assets/projetos/dashboards/geral.svg",
   "dir": "assets/projetos/dashboards/",
   "intro": {
