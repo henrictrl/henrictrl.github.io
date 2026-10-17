@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
-  <title id="title">Rino — Definidor de cores</title>
-  <desc id="desc">Capa em azul-marinho e tons neutros para a ferramenta de definição de cores da Rino.</desc>
+  <title id="title">Rino Cores</title>
+  <desc id="desc">Capa em azul-marinho e tons neutros para a projeto Rino Cores.</desc>
   <rect width="1200" height="800" fill="#f1efec"/>
   <rect x="38" y="38" width="1124" height="724" rx="24" fill="#fff" stroke="#dce3e9" stroke-width="2"/>
   <path d="M62 38h1076a24 24 0 0 1 24 24v84H38V62a24 24 0 0 1 24-24Z" fill="#123458"/>
