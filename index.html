@@ -1439,40 +1439,47 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* A janela do projeto tem 3 faixas explícitas. Sem a linha do rodapé, o browser
-   criava uma faixa implícita e o espaço rolável ficava instável em páginas longas. */
+/* Painel de projeto: cabeçalho fixo + uma única área flexível de rolagem.
+   O rodapé pertence ao conteúdo do projeto, portanto não deve virar uma faixa
+   própria do painel. A altura zero anterior e a grade com uma faixa vazia deixavam
+   a área de rolagem inconsistente entre Safari, Chromium e telas redimensionadas. */
 .dk-ov {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "top" "scroll" "foot";
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   align-items: stretch;
+  width: 100%;
   height: 100vh;
   height: 100dvh;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
 }
-.dk-top { grid-area: top; min-width: 0; }
+.dk-top {
+  flex: 0 0 auto;
+  min-width: 0;
+}
 .dk-scroll {
-  grid-area: scroll;
-  display: block;
   position: relative;
-  flex: none;
+  display: block;
+  flex: 1 1 0;
   height: auto;
   min-height: 0;
   min-width: 0;
   width: 100%;
-  align-self: stretch;
+  max-height: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-y: auto;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
+  scrollbar-gutter: stable;
+  scroll-behavior: auto;
 }
-.dk-foot { grid-area: foot; min-width: 0; }
 .dk-body, #dk-imgs { min-width: 0; }
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-/* Evita mudanças tardias de altura causadas por content-visibility ao rolar cases longos. */
+/* Estabilidade de altura: imagens longas não entram/saem de content-visibility durante a rolagem. */
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 </style>
