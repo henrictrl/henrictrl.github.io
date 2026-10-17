@@ -1370,22 +1370,10 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "pecas-graficas",
-      "embalagens"
-    ],
-    "setor": [
-      "b2b",
-      "credito-financas"
-    ],
-    "contexto": [
-      "cliente",
-      "desdobramento-marca"
-    ],
-    "competencias": [
-      "design-grafico",
-      "direcao-arte"
-    ]
+    "entrega": ["pecas-graficas"],
+    "setor": ["b2b","credito-financas"],
+    "contexto": ["desdobramento-marca","projeto-ligado"],
+    "competencias": []
   },
   "capa": "assets/projetos/rino-pecas/capa.webp",
   "dir": "assets/projetos/rino-pecas/",
@@ -4347,7 +4335,7 @@ window.PROJETOS = [
  },
  {
   "slug": "nupe",
-  "titulo": "Nupe",
+  "titulo": "NUPE",
   "ano": "2024",
   "cat": {
     "pt": "Rebranding",
