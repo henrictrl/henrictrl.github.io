@@ -556,7 +556,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
 body.project-deck-open > header.floating-header { display: none !important; }
 /* O painel cobre também a área sob a navegação; seu cabeçalho interno reserva o espaço da barra fixa. */
-body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; overscroll-behavior: none; }
+body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: visible; overscroll-behavior: auto; }
 body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
 .dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
 .dk-ov.open { opacity: 1; pointer-events: auto; }
@@ -574,7 +574,7 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-toc a { font-size: 13px; line-height: 1.4; color: var(--gray-400); text-decoration: none; padding: 5px 0 5px 14px; border-left: 1px solid var(--gray-200); cursor: pointer; transition: color .2s, border-color .2s; }
 .dk-toc a:hover { color: var(--ink); }
 .dk-toc a.on { color: var(--ink); border-left-color: var(--ink); }
-.dk-scroll { position: relative; flex: 1 1 0%; height: 0; min-height: 0; width: 100%; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; touch-action: pan-y; }
+.dk-scroll { position: relative; flex: 1 1 0%; height: 0; min-height: 0; width: 100%; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; touch-action: pan-y; }
 .dk-head { max-width: 760px; margin: 0 auto; padding: 48px 24px 56px; text-align: center; }
 .dk-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: 0.04em; }
 .dk-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; }
@@ -1383,13 +1383,10 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 
 
 
-/* Revisão de teste 2026-10-17: filtros por categoria única, sem etiquetas clicáveis; rolagem interna mobile reforçada. */
-.dk-ov.open { height: 100vh; height: 100dvh; }
-.dk-scroll { scrollbar-gutter: stable; }
+/* Revisão de teste 2026-10-17: filtros por categoria única e etiquetas sem clique. */
 @media (max-width: 767px) {
   .dk-top { padding: 12px 16px; gap: 10px; }
   body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
-  .dk-scroll { flex: 1 1 0%; height: 0; min-height: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-y; }
   .dk-body { display: block; padding: 0 12px; }
   .dk-head { padding: 30px 16px 36px; }
 }
@@ -1439,58 +1436,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* Rolagem consistente em desktop e mobile: o painel é uma coluna fixa e
-   somente a área de conteúdo rola. Isso evita conflito entre body e modal. */
-.dk-ov {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-.dk-ov.open {
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-}
-.dk-top {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 auto;
-  min-width: 0;
-  background: var(--white);
-}
-.dk-scroll {
-  position: relative;
-  display: block;
-  flex: 1 1 auto;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-  height: auto;
-  max-height: none;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  scrollbar-gutter: stable;
-}
-.dk-body, #dk-imgs { min-width: 0; }
-/* Preserva a altura real de todas as imagens e o alcance da rolagem. */
+/* Safari: manter o overlay fixo fora do papel de área rolável.
+   #dk-scroll é o único contêiner com overflow vertical; o navegador processa
+   roda, trackpad e toque pelo mecanismo nativo. */
+#dk-imgs, .dk-body { min-width: 0; }
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-/* As páginas são imagens de tela cheia: elas não devem capturar o gesto de rolagem. */
+/* As imagens das páginas não capturam gestos; a rolagem permanece no #dk-scroll. */
 #dk-imgs > img { pointer-events: none; touch-action: pan-y; }
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 
-/* A apresentação usa o scroller de conteúdo (#dk-scroll), enquanto o overlay permanece fixo. */
+
 
 </style>
 </head>
@@ -3490,38 +3446,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
   const dkScroll = document.getElementById('dk-scroll');
-  // Com o modal aberto, envia a roda/trackpad para a página inteira do projeto,
-  // sem depender do elemento que o navegador identifica sob o ponteiro.
-  document.addEventListener('wheel', (e) => {
-    if (!dk.classList.contains('open') || e.ctrlKey) return;
-    if (document.querySelector('.web-ov.open, .pv-ov.open, .lightbox-overlay.open')) return;
-    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? dkScroll.clientHeight : 1;
-    const delta = e.deltaY * unit;
-    if (!delta) return;
-    if (e.cancelable) e.preventDefault();
-    dkScroll.scrollTop += delta;
-  }, { capture: true, passive: false });
-  // Touch vertical também é encaminhado pela página inteira; movimentos horizontais
-  // (carrosséis) e gestos com mais de um dedo continuam sob controle do navegador.
-  let dkTouch = null;
-  document.addEventListener('touchstart', (e) => {
-    if (!dk.classList.contains('open') || e.touches.length !== 1 || document.querySelector('.web-ov.open, .pv-ov.open, .lightbox-overlay.open')) { dkTouch = null; return; }
-    const t = e.touches[0];
-    dkTouch = { x: t.clientX, y: t.clientY, lastY: t.clientY, axis: null };
-  }, { capture: true, passive: true });
-  document.addEventListener('touchmove', (e) => {
-    if (!dkTouch || !dk.classList.contains('open') || e.touches.length !== 1) return;
-    const t = e.touches[0], dx = t.clientX - dkTouch.x, dy = t.clientY - dkTouch.y;
-    if (!dkTouch.axis && Math.hypot(dx, dy) > 6) dkTouch.axis = Math.abs(dy) >= Math.abs(dx) ? 'y' : 'x';
-    if (dkTouch.axis !== 'y') return;
-    if (e.cancelable) e.preventDefault();
-    dkScroll.scrollTop += dkTouch.lastY - t.clientY;
-    dkTouch.lastY = t.clientY;
-  }, { capture: true, passive: false });
-  const clearDkTouch = () => { dkTouch = null; };
-  document.addEventListener('touchend', clearDkTouch, { capture: true, passive: true });
-  document.addEventListener('touchcancel', clearDkTouch, { capture: true, passive: true });
+
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
@@ -4055,7 +3980,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHome();
   initTools();
   const mobileTopButton = document.getElementById('mobile-top-button');
-  const getProjectScroller = () => document.getElementById('dk')?.classList.contains('open') ? document.getElementById('dk') : null;
+  const getProjectScroller = () => dk.classList.contains('open') ? dkScroll : null;
   const updateMobileTopButton = () => {
     if (!mobileTopButton) return;
     const sc = getProjectScroller();
@@ -4075,7 +4000,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     window.addEventListener('scroll', updateMobileTopButton, { passive: true });
     window.addEventListener('resize', updateMobileTopButton);
-    document.getElementById('dk')?.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    dkScroll.addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
   fromHash(); // abre o projeto quando o link tem #projeto/<slug>
