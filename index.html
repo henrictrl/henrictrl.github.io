@@ -1371,6 +1371,18 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .free-tool a { display:inline-block; font-size:12px; margin-top:8px; text-decoration:underline; text-underline-offset:3px; }
 @media (max-width:600px) { .resource-modal { padding:18px; } .resource-modal-head h2 { font-size:21px; } .cv-actions-inner { align-items:center; justify-content:center; flex-direction:row; } }
 
+
+
+/* Revisão de teste 2026-10-17: filtros por categoria única, sem etiquetas clicáveis; rolagem interna mobile reforçada. */
+.dk-ov.open { height: 100vh; height: 100dvh; }
+.dk-scroll { scrollbar-gutter: stable; }
+@media (max-width: 767px) {
+  .dk-top { padding: 12px 16px; gap: 10px; }
+  body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
+  .dk-scroll { flex: 1 1 0%; height: 0; min-height: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-y; }
+  .dk-body { display: block; padding: 0 12px; }
+  .dk-head { padding: 30px 16px 36px; }
+}
 </style>
 </head>
 <body>
@@ -3867,13 +3879,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-/* Revisão de teste 2026-10-17: filtros por categoria única, sem etiquetas clicáveis; rolagem interna mobile reforçada. */
-.dk-ov.open { height: 100vh; height: 100dvh; }
-.dk-scroll { scrollbar-gutter: stable; }
-@media (max-width: 767px) {
-  .dk-top { padding: 12px 16px; gap: 10px; }
-  body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
-  .dk-scroll { flex: 1 1 0%; height: 0; min-height: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-y; }
-  .dk-body { display: block; padding: 0 12px; }
-  .dk-head { padding: 30px 16px 36px; }
-}
