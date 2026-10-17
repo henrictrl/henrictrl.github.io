@@ -5384,12 +5384,8 @@ window.PROJETOS = [
   "slug": "rp-40-anos",
   "titulo": "RP 40 anos",
   "ano": "2022",
-  "cat": {
-    "pt": "Mídias sociais e eventos",
-    "en": "Social media & events",
-    "es": "Redes sociales y eventos"
-  },
-  "filtro": "midias-eventos",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": ["midias","eventos"],
   "etiquetas": {
     "entrega": ["posts-carrosseis","stories-gifs","pecas-graficas"],
     "setor": [
@@ -6685,12 +6681,8 @@ window.PROJETOS = [
   "slug": "basement",
   "titulo": "Basement",
   "ano": "2026",
-  "cat": {
-    "pt": "Mídias sociais e eventos",
-    "en": "Social media & events",
-    "es": "Redes sociales y eventos"
-  },
-  "filtro": "midias-eventos",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": ["midias","eventos"],
   "etiquetas": {
     "entrega": ["posts-carrosseis","conteudo-recorrente","pecas-graficas"],
     "setor": ["tecnologia","juridico"],
@@ -7044,12 +7036,8 @@ window.PROJETOS = [
   "slug": "rd-cultural",
   "titulo": "RD Cultural",
   "ano": "2023",
-  "cat": {
-    "pt": "Mídias sociais e eventos",
-    "en": "Social media & events",
-    "es": "Redes sociales y eventos"
-  },
-  "filtro": "midias-eventos",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": ["midias","eventos"],
   "etiquetas": {
     "entrega": ["posts-carrosseis","divulgacao-evento","organizacao-evento","pecas-graficas"],
     "setor": [
@@ -7090,12 +7078,8 @@ window.PROJETOS = [
   "slug": "encantos-do-brasil",
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
-  "cat": {
-    "pt": "Mídias sociais e eventos",
-    "en": "Social media & events",
-    "es": "Redes sociales y eventos"
-  },
-  "filtro": "midias-eventos",
+  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "filtro": ["midias","eventos"],
   "etiquetas": {
     "entrega": ["identidade-visual","posts-carrosseis"],
     "setor": [
