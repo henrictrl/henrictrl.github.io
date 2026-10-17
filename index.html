@@ -1439,30 +1439,41 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* Grid com linha rolável de altura explícita: evita o colapso do flex+height:0 em Safari e navegadores móveis. */
+/* A janela do projeto tem 3 faixas explícitas. Sem a linha do rodapé, o browser
+   criava uma faixa implícita e o espaço rolável ficava instável em páginas longas. */
 .dk-ov {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "top" "scroll" "foot";
+  align-items: stretch;
   height: 100vh;
   height: 100dvh;
   min-height: 0;
+  overflow: hidden;
 }
-.dk-top { min-width: 0; }
+.dk-top { grid-area: top; min-width: 0; }
 .dk-scroll {
+  grid-area: scroll;
+  display: block;
+  position: relative;
   flex: none;
   height: auto;
   min-height: 0;
   min-width: 0;
   width: 100%;
+  align-self: stretch;
   overflow-x: hidden;
   overflow-y: auto;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  scrollbar-gutter: stable;
 }
+.dk-foot { grid-area: foot; min-width: 0; }
 .dk-body, #dk-imgs { min-width: 0; }
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
+/* Evita mudanças tardias de altura causadas por content-visibility ao rolar cases longos. */
+.dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 </style>
 </head>
@@ -3430,8 +3441,20 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closePosts(); });
   window.HM_POSTS = { openPosts, POSTS, POSTS_BY_ART, igPost, closePosts };
 
-  // Voltar ao topo: na página ou dentro do case aberto
-  document.addEventListener('click', (e) => { const b = e.target.closest('[data-top]'); if (!b) return; const sc = b.closest('.dk-scroll'); (sc || window).scrollTo({ top: 0, behavior: 'smooth' }); });
+  // Voltar ao topo: prioriza sempre a área do projeto quando o case está aberto.
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-top]');
+    if (!b) return;
+    const projectOpen = document.getElementById('dk')?.classList.contains('open');
+    const sc = b.closest('.dk-scroll') || (projectOpen ? document.getElementById('dk-scroll') : null);
+    if (sc) {
+      // Salto imediato é intencional: o smooth-scroll estava sendo interrompido em páginas longas.
+      sc.scrollTo({ top: 0, behavior: 'auto' });
+      sc.scrollTop = 0;
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
 
   /* --- Site embutido: celular dentro do computador (ou janela), com o site funcionando --- */
   const webOv = document.getElementById('web-ov'), webFrame = document.getElementById('web-frame'), webIframe = document.getElementById('web-iframe');
@@ -3740,6 +3763,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--project-header-height', Math.ceil(siteHeader.getBoundingClientRect().height) + 'px');
     }
     dk.classList.add('open'); document.body.style.overflow = 'hidden';
+    if (typeof updateMobileTopButton === 'function') updateMobileTopButton();
     try { history.replaceState(null, '', '#projeto/' + slug); } catch (e) {}
     return true;
   };
@@ -3761,14 +3785,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     toc.querySelectorAll('a').forEach(b => b.classList.toggle('on', b === cur));
   }, { passive: true });
-  const closeDeck = () => { dk.classList.remove('open'); document.body.classList.remove('project-deck-open'); document.documentElement.style.removeProperty('--project-header-height'); if (!webOv.classList.contains('open')) document.body.style.overflow = ''; document.getElementById('dk-imgs').innerHTML = ''; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} };
+  const closeDeck = () => {
+    dk.classList.remove('open');
+    document.body.classList.remove('project-deck-open');
+    document.documentElement.style.removeProperty('--project-header-height');
+    if (!webOv.classList.contains('open')) document.body.style.overflow = '';
+    document.getElementById('dk-imgs').innerHTML = '';
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+    if (typeof updateMobileTopButton === 'function') updateMobileTopButton();
+  };
   document.getElementById('dk-x').onclick = closeDeck;
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
     const sc = document.getElementById('dk-scroll'), el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
     const scRect = sc.getBoundingClientRect();
     const topInScroller = cap ? cap.getBoundingClientRect().top - scRect.top + sc.scrollTop - 8 : 0;
-    sc.scrollTo({ top: Math.max(0, topInScroller), behavior: 'smooth' }); });
+    const maxScroll = Math.max(0, sc.scrollHeight - sc.clientHeight);
+    const targetTop = Math.min(maxScroll, Math.max(0, topInScroller));
+    // Navegação previsível: evita que uma animação interrompida deixe o conteúdo entre páginas.
+    sc.scrollTo({ top: targetTop, behavior: 'auto' });
+    sc.scrollTop = targetTop;
+  });
   document.addEventListener('keydown', (e) => { if (dk.classList.contains('open') && e.key === 'Escape' && !webOv.classList.contains('open') && !pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closeDeck(); });
   onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = document.getElementById('dk-scroll').scrollTop; openDeck(dkP.slug); document.getElementById('dk-scroll').scrollTop = y; } });
   // link direto para um projeto: #projeto/<slug>
@@ -3968,8 +4005,29 @@ document.addEventListener('DOMContentLoaded', () => {
   initHome();
   initTools();
   const mobileTopButton = document.getElementById('mobile-top-button');
-  const updateMobileTopButton = () => { if (mobileTopButton) mobileTopButton.classList.toggle('is-visible', window.matchMedia('(max-width: 767px)').matches && window.scrollY > 480); };
-  if (mobileTopButton) { mobileTopButton.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'})); window.addEventListener('scroll', updateMobileTopButton, {passive:true}); window.addEventListener('resize', updateMobileTopButton); updateMobileTopButton(); }
+  const getProjectScroller = () => document.getElementById('dk')?.classList.contains('open') ? document.getElementById('dk-scroll') : null;
+  const updateMobileTopButton = () => {
+    if (!mobileTopButton) return;
+    const sc = getProjectScroller();
+    const currentY = sc ? sc.scrollTop : window.scrollY;
+    mobileTopButton.classList.toggle('is-visible', window.matchMedia('(max-width: 767px)').matches && currentY > 480);
+  };
+  if (mobileTopButton) {
+    mobileTopButton.addEventListener('click', () => {
+      const sc = getProjectScroller();
+      if (sc) {
+        sc.scrollTo({ top: 0, behavior: 'auto' });
+        sc.scrollTop = 0;
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      updateMobileTopButton();
+    });
+    window.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    window.addEventListener('resize', updateMobileTopButton);
+    document.getElementById('dk-scroll')?.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    updateMobileTopButton();
+  }
   fromHash(); // abre o projeto quando o link tem #projeto/<slug>
 });
 </script>
