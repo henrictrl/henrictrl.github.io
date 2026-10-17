@@ -1393,6 +1393,77 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .dk-body { display: block; padding: 0 12px; }
   .dk-head { padding: 30px 16px 36px; }
 }
+
+/* Correções definitivas de interação mobile e rolagem das páginas internas. */
+@media (max-width: 767px) {
+  /* Os botões podem ocupar mais de uma fila, mas cada rótulo fica sempre em uma linha. */
+  .pj-filter-main {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 6px;
+  }
+  .pj-filter-main .art-filter {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    white-space: nowrap !important;
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+    text-align: center;
+    padding: 7px 9px;
+  }
+
+  /* Alinha retrato, título e texto às mesmas margens laterais no celular. */
+  .hero-grid { align-items: stretch; }
+  .hero-text { width: 100%; min-width: 0; }
+  .portrait-wrap {
+    --foto-w: 100%;
+    width: 100%;
+    align-items: stretch;
+    padding-top: 8px;
+  }
+  .hero-portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    touch-action: none;
+  }
+  .portrait-layer { object-fit: contain; }
+  .portrait-hint { width: 100%; text-align: center; }
+}
+
+/* Grid com linha rolável de altura explícita: evita o colapso do flex+height:0 em Safari e navegadores móveis. */
+.dk-ov {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+}
+.dk-top { min-width: 0; }
+.dk-scroll {
+  flex: none;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
+}
+.dk-body, #dk-imgs { min-width: 0; }
+#dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
+
 </style>
 </head>
 <body>
@@ -2820,18 +2891,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const farCorner = () => Math.max(Math.hypot(s.x, s.y), Math.hypot(W - s.x, s.y), Math.hypot(s.x, H - s.y), Math.hypot(W - s.x, H - s.y));
     const videoReady = () => video.readyState >= 2 && video.videoWidth > 0;
 
-    // object-fit: cover replicado no canvas → mesmo enquadramento da foto
-    const drawCover = (c, src, sw0, sh0, cw, ch) => {
-      const ir = sw0 / sh0, cr = cw / ch;
-      let sw = sw0, sh = sh0, sx = 0, sy = 0;
-      if (ir > cr) { sw = sh * cr; sx = (sw0 - sw) / 2; } else { sh = sw / cr; sy = (sh0 - sh) / 2; }
-      c.drawImage(src, sx, sy, sw, sh, 0, 0, cw, ch);
+    // object-fit: contain no canvas: preserva a imagem inteira e deixa o fundo branco aparecer quando necessário.
+    const drawContain = (c, src, sw0, sh0, cw, ch) => {
+      if (!sw0 || !sh0 || !cw || !ch) return;
+      const scale = Math.min(cw / sw0, ch / sh0);
+      const dw = sw0 * scale, dh = sh0 * scale;
+      c.drawImage(src, 0, 0, sw0, sh0, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (s.r < 1 || !videoReady()) return;
-      drawCover(ctx, video, video.videoWidth, video.videoHeight, canvas.width, canvas.height);
+      drawContain(ctx, video, video.videoWidth, video.videoHeight, canvas.width, canvas.height);
       // borda pontilhada: larga no hover (45% do raio), mais estreita na expansão do clique (frente de onda visível)
       const inner = s.r * (s.locked || s.anim ? 0.8 : 0.55), band = s.r - inner;
       if (inner >= farCorner()) return; // vídeo cobre a foto inteira: sem máscara
@@ -3681,8 +3752,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // seção atual do sumário pela rolagem
   document.getElementById('dk-scroll').addEventListener('scroll', () => {
     const sc = document.getElementById('dk-scroll'), toc = document.getElementById('dk-toc'); if (toc.hidden) return;
+    const scRect = sc.getBoundingClientRect();
     const y = sc.scrollTop + sc.clientHeight * 0.45; let cur = null;
-    toc.querySelectorAll('a').forEach(b => { const el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t); if (!el || el.offsetTop <= y) cur = b; });
+    toc.querySelectorAll('a').forEach(b => {
+      const el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
+      const topInScroller = el ? el.getBoundingClientRect().top - scRect.top + sc.scrollTop : 0;
+      if (!el || topInScroller <= y) cur = b;
+    });
     toc.querySelectorAll('a').forEach(b => b.classList.toggle('on', b === cur));
   }, { passive: true });
   const closeDeck = () => { dk.classList.remove('open'); document.body.classList.remove('project-deck-open'); document.documentElement.style.removeProperty('--project-header-height'); if (!webOv.classList.contains('open')) document.body.style.overflow = ''; document.getElementById('dk-imgs').innerHTML = ''; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} };
@@ -3690,7 +3766,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
     const sc = document.getElementById('dk-scroll'), el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
-    sc.scrollTo({ top: cap ? cap.offsetTop - 8 : 0, behavior: 'smooth' }); });
+    const scRect = sc.getBoundingClientRect();
+    const topInScroller = cap ? cap.getBoundingClientRect().top - scRect.top + sc.scrollTop - 8 : 0;
+    sc.scrollTo({ top: Math.max(0, topInScroller), behavior: 'smooth' }); });
   document.addEventListener('keydown', (e) => { if (dk.classList.contains('open') && e.key === 'Escape' && !webOv.classList.contains('open') && !pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closeDeck(); });
   onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = document.getElementById('dk-scroll').scrollTop; openDeck(dkP.slug); document.getElementById('dk-scroll').scrollTop = y; } });
   // link direto para um projeto: #projeto/<slug>
@@ -3802,8 +3880,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reserva uma faixa abaixo dos links e ancora a nuvem no canto inferior esquerdo.
         G = { x: Math.max(R + 12, Math.min(66, W * 0.2)), y: H - R - 52 };
       } else if (!solto(G.x, G.y)) { let best = null, bd = 1e9; for (let y = R; y < H - R; y += st) for (let x = R; x < W - R; x += st) if (solto(x, y)) { const d = Math.hypot(x - G.x, y - G.y); if (d < bd) { bd = d; best = { x, y }; } } if (best) G = best; }
-      const mobile = matchMedia('(max-width: 767px)').matches;
-      els.forEach(el => { el.style.display = ''; });
+      // Não remover o display:none dos ícones que excedem a capacidade da área.
+      // Se forem reexibidos sem posições físicas, ficam empilhados no canto superior do rodapé.
     };
     measure();
     const B = [];
