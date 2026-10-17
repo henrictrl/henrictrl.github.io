@@ -1287,6 +1287,40 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @keyframes hrfade { from { opacity: .6; } to { opacity: 1; } }
 @media (max-width: 767px) { .hr-card { width: 220px; } .hr-rows { gap: 12px; } }
 
+/* Catálogo de projetos: etiquetas combináveis, visual leve e sem categorias híbridas */
+.pj-filters { display:flex; flex-direction:column; align-items:stretch; gap:10px; margin:0 0 24px; }
+.pj-filter-main, .pj-filter-extra-chips { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:6px; }
+.pj-filter-main .art-filter, .pj-filter-extra-chips .art-filter { font-size:12px; padding:7px 11px; }
+.pj-more-toggle { display:inline-flex; align-items:center; gap:7px; }
+.pj-more-toggle span { font-size:15px; line-height:1; }
+.pj-clear-tags { border:0; background:transparent; color:var(--gray-500); font:inherit; font-size:12px; text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:6px 2px; }
+.pj-filter-extra { border:1px solid var(--gray-200); border-radius:var(--r); padding:12px; background:var(--white); }
+.pj-filter-extra[hidden] { display:none; }
+.pj-filter-hint { color:var(--gray-400); font-size:11px; margin:0 0 10px; }
+.pj-tag-count { color:var(--gray-400); font-size:10px; margin-left:6px; }
+.pj-filter-extra .art-filter[aria-pressed="true"] .pj-tag-count { color:rgba(255,255,255,.7); }
+.pj-results-line { grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; color:var(--gray-400); font-size:12px; margin:0 0 2px; }
+.pj-active-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.pj-active-chip, .work-card-chip { display:inline-flex; align-items:center; border:1px solid var(--gray-200); border-radius:3px; color:var(--gray-500); font-size:10px; line-height:1.3; padding:3px 6px; }
+.work-card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
+.work-card-chip { font-size:10px; padding:3px 5px; }
+.work-card-title { margin-bottom:0; }
+.pj-empty { grid-column:1/-1; color:var(--gray-500); font-size:13px; padding:22px 0; }
+@media (max-width:600px) { .pj-filter-main { gap:5px; } .pj-filter-main .art-filter, .pj-filter-extra-chips .art-filter { font-size:11px; padding:7px 9px; } .pj-results-line { align-items:flex-start; } }
+/* Ordenação dos posts por botões, sem seletor */
+.pg-sort-buttons { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; width:100%; margin-top:4px; }
+.pg-sort-buttons .art-filter { font-size:11px; padding:6px 9px; }
+.pg-bar { flex-wrap:wrap; }
+.pg-sort-label { color:var(--gray-400); font-size:11px; margin-right:2px; }
+@media (max-width:600px) { .pg-sort-buttons { justify-content:flex-start; } }
+/* Voltar ao topo no mobile */
+.mobile-top-button { display:none; }
+@media (max-width:767px) {
+ .mobile-top-button { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:1500; width:38px; height:38px; border:1px solid rgba(20,20,20,.14); border-radius:50%; background:rgba(255,255,255,.88); color:var(--ink); box-shadow:0 3px 14px rgba(0,0,0,.08); align-items:center; justify-content:center; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+ .mobile-top-button.is-visible { display:flex; opacity:1; visibility:visible; pointer-events:auto; }
+ .mobile-top-button svg { width:17px; height:17px; display:block; }
+}
+
 /* Revisão de portfólio — outubro de 2026 */
 /* Home cards match Projects in width, columns, ratio and spacing. */
 .home-featured-grid { display:grid !important; grid-template-columns:1fr; gap:32px 16px !important; overflow:visible !important; width:100%; margin:0 !important; padding:0 !important; }
@@ -1627,6 +1661,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span> <a href="#projeto/metaprojeto" data-pj="metaprojeto" data-i18n="credit.link">Como este site foi feito →</a></span>
   </div>
 </footer>
+
+<button type="button" class="mobile-top-button" id="mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 
 <!-- Documentos e ferramentas: modais preparados para receber os arquivos -->
 <div class="resource-modal-overlay" id="resource-modal-overlay" hidden>
@@ -3050,7 +3086,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['programacao', { pt: 'Programação', en: 'Programming', es: 'Programación' }], ['midias', { pt: 'Mídias sociais', en: 'Social media', es: 'Redes sociales' }], ['midias-eventos', { pt: 'Mídias sociais e eventos', en: 'Social media & events', es: 'Redes sociales y eventos' }], ['eventos', { pt: 'Eventos', en: 'Events', es: 'Eventos' }], ['estrategia', { pt: 'Estratégia de marca', en: 'Brand strategy', es: 'Estrategia de marca' }], ['rebranding', { pt: 'Rebranding', en: 'Rebranding', es: 'Rebranding' }]];
+  const FILTROS = [['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['programacao', { pt: 'Programação', en: 'Programming', es: 'Programación' }], ['midias', { pt: 'Mídias sociais', en: 'Social media', es: 'Redes sociales' }], ['eventos', { pt: 'Eventos', en: 'Events', es: 'Eventos' }], ['estrategia', { pt: 'Estratégia de marca', en: 'Brand strategy', es: 'Estrategia de marca' }], ['rebranding', { pt: 'Rebranding', en: 'Rebranding', es: 'Rebranding' }]];
 
   const ETIQUETA_LABELS = {"identidade-visual":{"pt":"Identidade visual","en":"Visual identity","es":"Identidad visual"},"logotipo":{"pt":"Logotipo","en":"Logo","es":"Logotipo"},"manual-marca":{"pt":"Manual de marca","en":"Brand manual","es":"Manual de marca"},"aplicacoes-marca":{"pt":"Aplicações de marca","en":"Brand applications","es":"Aplicaciones de marca"},"pecas-graficas":{"pt":"Peças gráficas","en":"Graphic materials","es":"Piezas gráficas"},"layouts-pecas":{"pt":"Layouts de peças","en":"Collateral layouts","es":"Diseños de piezas"},"mockups":{"pt":"Mockups","en":"Mockups","es":"Mockups"},"kit-impresso":{"pt":"Kit impresso","en":"Printed kit","es":"Kit impreso"},"ilustracao-vetorial":{"pt":"Ilustração vetorial","en":"Vector illustration","es":"Ilustración vectorial"},"producao-grafica":{"pt":"Produção gráfica","en":"Print production","es":"Producción gráfica"},"vs-code":{"pt":"VS Code","en":"VS Code","es":"VS Code"},"html":{"pt":"HTML","en":"HTML","es":"HTML"},"css":{"pt":"CSS","en":"CSS","es":"CSS"},"javascript":{"pt":"JavaScript","en":"JavaScript","es":"JavaScript"},"gestao-fornecedores":{"pt":"Gestão de fornecedores","en":"Vendor management","es":"Gestión de proveedores"},"logistica-producao":{"pt":"Logística de produção","en":"Production logistics","es":"Logística de producción"},"ferramenta-interativa":{"pt":"Ferramenta interativa","en":"Interactive tool","es":"Herramienta interactiva"},"catalogo-digital":{"pt":"Catálogo digital","en":"Digital catalog","es":"Catálogo digital"},"posts-carrosseis":{"pt":"Posts e carrosséis","en":"Posts & carousels","es":"Posts y carruseles"},"proposta-estrategica":{"pt":"Proposta estratégica","en":"Strategy proposal","es":"Propuesta estratégica"},"cartaz-folder":{"pt":"Cartaz e folder","en":"Poster & brochure","es":"Cartel y folleto"},"cobertura-fotografica":{"pt":"Cobertura fotográfica","en":"Photo coverage","es":"Cobertura fotográfica"},"organizacao-evento":{"pt":"Organização de eventos","en":"Event management","es":"Organización de eventos"},"analise-literaria":{"pt":"Análise literária","en":"Literary analysis","es":"Análisis literario"},"dashboard":{"pt":"Dashboard","en":"Dashboard","es":"Dashboard"},"direcao-arte":{"pt":"Direção de arte","en":"Art direction","es":"Dirección de arte"},"design-grafico":{"pt":"Design gráfico","en":"Graphic design","es":"Diseño gráfico"},"design-editorial":{"pt":"Design editorial","en":"Editorial design","es":"Diseño editorial"},"design-interface":{"pt":"Design de interface","en":"Interface design","es":"Diseño de interfaces"},"gestao-projetos":{"pt":"Gestão de projetos","en":"Project management","es":"Gestión de proyectos"},"visualizacao-dados":{"pt":"Visualização de dados","en":"Data visualization","es":"Visualización de datos"},"analise-dados":{"pt":"Análise de dados","en":"Data analysis","es":"Análisis de datos"},"credito-financas":{"pt":"Crédito e finanças","en":"Credit & finance","es":"Crédito y finanzas"},"moda-acessorios":{"pt":"Moda e acessórios","en":"Fashion & accessories","es":"Moda y accesorios"},"jornalismo-cultural":{"pt":"Jornalismo cultural","en":"Cultural journalism","es":"Periodismo cultural"},"direitos-humanos":{"pt":"Direitos humanos","en":"Human rights","es":"Derechos humanos"},"servicos-locais":{"pt":"Serviços locais","en":"Local services","es":"Servicios locales"},"desdobramento-marca":{"pt":"Desdobramentos de marca","en":"Brand extensions","es":"Aplicaciones de marca"},"tecnologia":{"pt":"Tecnologia","en":"Technology","es":"Tecnología"},"tatuagem":{"pt":"Tatuagem","en":"Tattoo","es":"Tatuaje"},"cliente":{"pt":"Cliente","en":"Client","es":"Cliente"},"internacional":{"pt":"Internacional","en":"International","es":"Internacional"},"idioma-ingles":{"pt":"Idioma inglês","en":"English-language","es":"Idioma inglés"},"b2b":{"pt":"B2B","en":"B2B","es":"B2B"},"varejo":{"pt":"Varejo","en":"Retail","es":"Comercio minorista"},"optica":{"pt":"Óptica","en":"Optical retail","es":"Óptica"},"beleza":{"pt":"Beleza","en":"Beauty","es":"Belleza"},"podcast":{"pt":"Podcast","en":"Podcast","es":"Pódcast"},"institucional":{"pt":"Institucional","en":"Institutional","es":"Institucional"},"educacao":{"pt":"Educação","en":"Education","es":"Educación"},"saude":{"pt":"Saúde","en":"Health","es":"Salud"},"esporte":{"pt":"Esporte","en":"Sports","es":"Deporte"},"cultura":{"pt":"Cultura","en":"Culture","es":"Cultura"},"musica":{"pt":"Música","en":"Music","es":"Música"},"consultoria":{"pt":"Consultoria","en":"Consulting","es":"Consultoría"},"entretenimento":{"pt":"Entretenimento","en":"Entertainment","es":"Entretenimiento"},"turismo":{"pt":"Turismo","en":"Tourism","es":"Turismo"},"literatura":{"pt":"Literatura","en":"Literature","es":"Literatura"},"dados":{"pt":"Dados","en":"Data","es":"Datos"},"arte-digital":{"pt":"Arte digital","en":"Digital art","es":"Arte digital"},"fotografia":{"pt":"Fotografia","en":"Photography","es":"Fotografía"},"evento":{"pt":"Evento","en":"Event","es":"Evento"},"campanha":{"pt":"Campanha","en":"Campaign","es":"Campaña"},"projeto-academico":{"pt":"Projeto acadêmico","en":"Academic project","es":"Proyecto académico"},"colaboracao":{"pt":"Colaboração","en":"Collaboration","es":"Colaboración"},"trabalho-recorrente":{"pt":"Trabalho recorrente","en":"Ongoing work","es":"Trabajo recurrente"},"rebranding":{"pt":"Redesign de marca","en":"Rebranding","es":"Rediseño de marca"},"ferramenta-propria":{"pt":"Ferramenta própria","en":"Own tool","es":"Herramienta propia"},"portfolio":{"pt":"Portfólio","en":"Portfolio","es":"Portafolio"},"grupo-pesquisa":{"pt":"Grupo de pesquisa","en":"Research group","es":"Grupo de investigación"},"competicao":{"pt":"Competição","en":"Competition","es":"Competición"},"estagio":{"pt":"Estágio","en":"Internship","es":"Prácticas"},"redacao":{"pt":"Redação","en":"Writing","es":"Redacción"},"social-media":{"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},"programacao":{"pt":"Programação","en":"Programming","es":"Programación"},"diagramacao":{"pt":"Diagramação","en":"Layout & typesetting","es":"Maquetación"},"ilustracao":{"pt":"Ilustração","en":"Illustration","es":"Ilustración"},"redes-sociais":{"pt":"Redes sociais","en":"Social media","es":"Redes sociales"},"site":{"pt":"Site","en":"Website","es":"Sitio web"},"editorial":{"pt":"Editorial","en":"Editorial","es":"Editorial"},"folder":{"pt":"Folder","en":"Brochure","es":"Folleto"},"embalagens":{"pt":"Embalagens","en":"Packaging","es":"Empaques"},"oficina":{"pt":"Oficina","en":"Workshop","es":"Taller"},"material-didatico":{"pt":"Material didático","en":"Learning materials","es":"Material didáctico"},"apresentacao":{"pt":"Apresentação","en":"Presentation","es":"Presentación"},"artigos":{"pt":"Artigos","en":"Articles","es":"Artículos"},"processamento-grafico":{"pt":"Processamento gráfico","en":"Graphics processing","es":"Procesamiento gráfico"}};
   Object.assign(ETIQUETA_LABELS, {
@@ -3116,42 +3152,60 @@ document.addEventListener('DOMContentLoaded', () => {
     return words;
   };
    const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
-  let pjFiltro = 'all';
+  let pjSelectedTags = new Set();
+  let pjMoreTagsOpen = false;
   let pjEtiqueta = null;
   const naHome = (p) => !['rino-pecas','sollaris-instagram','o-hobbit','dash-geral'].includes(p.slug) && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
+  const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
+  const projectFilterTags = (p) => {
+    const base = [].concat(p.filtro || []).filter(Boolean).flatMap(k => k === 'midias-eventos' ? ['midias','eventos'] : [k]);
+    const metadata = ['entrega','setor','contexto'].flatMap(g => p.etiquetas && Array.isArray(p.etiquetas[g]) ? p.etiquetas[g] : []);
+    return [...new Set([...base, ...metadata])];
+  };
+  const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
+  const projectCardTags = (p) => {
+    const base = [].concat(p.filtro || []).flatMap(k => k === 'midias-eventos' ? ['midias','eventos'] : [k]);
+    return [...new Set([...base, ...(p.etiquetas && p.etiquetas.entrega || []).slice(0,2), ...(p.etiquetas && p.etiquetas.setor || []).slice(0,1)])].slice(0,3);
+  };
+  const pjCard = (p) => {
+    const tags = projectCardTags(p);
+    return `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
+      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
+      <p class="work-card-title">${p.titulo}</p><div class="work-card-tags">${tags.map(tag => `<span class="work-card-chip">${esc(projectTagLabel(tag))}</span>`).join('')}</div></a>`;
+  };
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
     const dashboardCTA = document.getElementById('work-dashboard-cta');
-    if (!grid) return;
+    if (!grid || !bar) return;
     const displayedPJ = PJ.filter(p => !['o-hobbit','rino-pecas','sollaris-instagram','dash-geral'].includes(p.slug));
-    const inF = (p, k) => [].concat(p.filtro).includes(k);
-    const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
-    bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (!pjEtiqueta && k === pjFiltro) + '">' + lx(l) + '</button>').join('') + (pjEtiqueta ? '<button type="button" class="art-filter" data-clear-pj-tag>' + lx({pt:'Limpar etiqueta',en:'Clear tag',es:'Quitar etiqueta'}) + ' ×</button>' : '');
-    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
-      ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>'
-      : '';
-    if (pjEtiqueta) {
-      const correspondentes = displayedPJ.filter(p => Object.values(p.etiquetas || {}).some(lista => Array.isArray(lista) && lista.includes(pjEtiqueta)));
-      grid.classList.add('work-grid');
-      grid.innerHTML = '<div class="pj-tag-result"><span>' + lx({pt:'Projetos com a etiqueta',en:'Projects tagged',es:'Proyectos con la etiqueta'}) + ' <strong>' + esc(etiquetaNome(pjEtiqueta)) + '</strong> · ' + correspondentes.length + '</span></div>' + correspondentes.map(pjCard).join('');
-    } else if (pjFiltro === 'all') {
-      grid.classList.remove('work-grid');
-      grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => {
-        const ps = displayedPJ.filter(p => inF(p, k));
-        return '<section class="pj-group"><h2 class="pj-group-title">' + lx(l) + '<small>' + ps.length + '</small></h2><div class="work-grid">' + ps.map(pjCard).join('') + '</div></section>';
-      }).join('');
-    } else if (pjFiltro === 'midias') {
-      grid.classList.remove('work-grid');
-      grid.innerHTML = pgHTML();
-    } else {
-      grid.classList.add('work-grid');
-      grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join('');
-    }
+    const counts = new Map();
+    displayedPJ.forEach(p => projectFilterTags(p).forEach(tag => counts.set(tag,(counts.get(tag)||0)+1)));
+    const quickTags = FILTROS.filter(([key]) => counts.has(key));
+    const extraTags = [...counts.keys()].filter(key => !quickTags.some(([quick]) => quick === key)).sort((a,b) => projectTagLabel(a).localeCompare(projectTagLabel(b)));
+    const allButton = `<button type="button" class="art-filter pj-tag-filter" data-tag-filter="all" aria-pressed="${pjSelectedTags.size===0}">${lx({pt:'Todos',en:'All',es:'Todos'})}</button>`;
+    const quickButtons = quickTags.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-tag-filter="${key}" aria-pressed="${pjSelectedTags.has(key)}">${lx(label)}</button>`).join('');
+    const moreButton = extraTags.length ? `<button type="button" class="art-filter pj-more-toggle" data-more-tags aria-expanded="${pjMoreTagsOpen}">${lx({pt:'Mais etiquetas',en:'More tags',es:'Más etiquetas'})} <span aria-hidden="true">${pjMoreTagsOpen?'−':'+'}</span></button>` : '';
+    const clearButton = pjSelectedTags.size ? `<button type="button" class="pj-clear-tags" data-clear-pj-tags>${lx({pt:'Limpar filtros',en:'Clear filters',es:'Limpiar filtros'})}</button>` : '';
+    const extraButtons = extraTags.map(key => `<button type="button" class="art-filter" data-tag-filter="${esc(key)}" aria-pressed="${pjSelectedTags.has(key)}">${esc(projectTagLabel(key))}<span class="pj-tag-count">${counts.get(key)}</span></button>`).join('');
+    bar.hidden = false;
+    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por etiqueta',en:'Filter projects by tag',es:'Filtrar proyectos por etiqueta'})}">${allButton}${quickButtons}${moreButton}${clearButton}</div><div class="pj-filter-extra" ${pjMoreTagsOpen?'':'hidden'}><p class="pj-filter-hint">${lx({pt:'Combine etiquetas para refinar os resultados.',en:'Combine tags to refine the results.',es:'Combina etiquetas para refinar los resultados.'})}</p><div class="pj-filter-extra-chips">${extraButtons}</div></div>`;
+    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
+    const matches = displayedPJ.filter(p => [...pjSelectedTags].every(tag => projectFilterTags(p).includes(tag)));
+    const active = [...pjSelectedTags].map(projectTagLabel);
+    const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span>${active.length ? `<span class="pj-active-tags">${active.map(n=>`<span class="pj-active-chip">${esc(n)}</span>`).join('')}</span>` : ''}</div>`;
+    grid.classList.add('work-grid');
+    grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto combina com essas etiquetas. Remova uma etiqueta para ampliar os resultados.',en:'No projects match these tags. Remove a tag to broaden the results.',es:'Ningún proyecto coincide con estas etiquetas. Quita una para ampliar los resultados.'})}</p>`);
     requestAnimationFrame(observeLiveProjectPreviews);
   };
-  document.getElementById('pj-filters').addEventListener('click', (e) => { if (e.target.closest('[data-clear-pj-tag]')) { pjEtiqueta = null; pjFiltro = 'all'; renderPJ(); return; } const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; pjEtiqueta = null; renderPJ(); });
+  document.getElementById('pj-filters').addEventListener('click', (e) => {
+    if (e.target.closest('[data-clear-pj-tags]')) { pjSelectedTags.clear(); pjEtiqueta=null; renderPJ(); return; }
+    if (e.target.closest('[data-more-tags]')) { pjMoreTagsOpen=!pjMoreTagsOpen; renderPJ(); return; }
+    const b=e.target.closest('[data-tag-filter]'); if(!b)return;
+    const key=b.dataset.tagFilter;
+    if(key==='all') pjSelectedTags.clear(); else if(pjSelectedTags.has(key))pjSelectedTags.delete(key);else pjSelectedTags.add(key);
+    pjEtiqueta=null; renderPJ();
+  });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
      5 colunas; filtros por organização (conta) e ordenação por interações, data, organização ou projeto. */
@@ -3176,7 +3230,7 @@ document.addEventListener('DOMContentLoaded', () => {
       o: (a, b) => pgOrgName(pgOrgKey(a.user)).localeCompare(pgOrgName(pgOrgKey(b.user))) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
     ps = ps.slice().sort(by[pgOrd]);
     const chips = `<button class="art-filter" data-org="all" aria-pressed="${pgOrg === 'all'}">${lx(PG_L.todas)} <span>${POSTS.length}</span></button>` + ol.map(([u, n]) => `<button class="art-filter" data-org="${u}" aria-pressed="${pgOrg === u}">${esc(pgOrgName(u))} <span>${n}</span></button>`).join('');
-    const sel = `<label class="pg-sort"><span>${lx(PG_L.ord)}</span><select id="pg-ord">${[['i', PG_L.oI], ['n', PG_L.oN], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<option value="${k}"${k === pgOrd ? ' selected' : ''}>${lx(l)}</option>`).join('')}</select></label>`;
+    const sel = `<div class="pg-sort-buttons" role="group" aria-label="${lx(PG_L.ord)}"><span class="pg-sort-label">${lx(PG_L.ord)}:</span>${[['n', PG_L.oN], ['i', PG_L.oI], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-pg-ord="${k}" aria-pressed="${k === pgOrd}">${lx(l)}</button>`).join('')}</div>`;
     const tile = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c];
       return `<button type="button" class="pg-t" data-pgc="${x.c}"><img src="${igImg(x, 0)}" alt="" loading="lazy" decoding="async">${x.n > 1 ? `<span class="art-ig-count">${PG_ICO}${x.n}</span>` : ''}
         <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>${esc(pgOrgName(pgOrgKey(x.user)))} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `♥ ${nf(e[0])} · ` : ''}💬 ${nf(e[1])}</span>` : ''}</span></button>`; };
@@ -3184,6 +3238,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('work-case-grid').addEventListener('click', (e) => {
     const o = e.target.closest('[data-org]'); if (o) { pgOrg = o.dataset.org; renderPJ(); return; }
+    const ord = e.target.closest('[data-pg-ord]'); if (ord) { pgOrd = ord.dataset.pgOrd; renderPJ(); return; }
     const t = e.target.closest('[data-pgc]'); if (t && POST_BY[t.dataset.pgc]) openPosts([POST_BY[t.dataset.pgc]]);
   });
   document.getElementById('work-case-grid').addEventListener('change', (e) => { if (e.target.id === 'pg-ord') { pgOrd = e.target.value; renderPJ(); } });
@@ -3634,7 +3689,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('dk-x').onclick = closeDeck;
   document.getElementById('dk-tags').addEventListener('click', (e) => {
     const b = e.target.closest('[data-pj-tag]'); if (!b) return;
-    pjEtiqueta = b.dataset.pjTag; pjFiltro = 'all';
+    pjSelectedTags.clear(); pjSelectedTags.add(b.dataset.pjTag); pjEtiqueta = b.dataset.pjTag;
     closeDeck();
     const route = document.querySelector('[data-route="work"]');
     if (route) route.click(); else renderPJ();
@@ -3838,6 +3893,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortrait();
   initHome();
   initTools();
+  const mobileTopButton = document.getElementById('mobile-top-button');
+  const updateMobileTopButton = () => { if (mobileTopButton) mobileTopButton.classList.toggle('is-visible', window.matchMedia('(max-width: 767px)').matches && window.scrollY > 480); };
+  if (mobileTopButton) { mobileTopButton.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'})); window.addEventListener('scroll', updateMobileTopButton, {passive:true}); window.addEventListener('resize', updateMobileTopButton); updateMobileTopButton(); }
   fromHash(); // abre o projeto quando o link tem #projeto/<slug>
 });
 </script>
