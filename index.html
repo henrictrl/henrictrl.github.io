@@ -3154,7 +3154,6 @@ document.addEventListener('DOMContentLoaded', () => {
    const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjSelectedCategory = 'all';
   let pjEtiqueta = null;
-  const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
