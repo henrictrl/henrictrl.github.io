@@ -14,9 +14,9 @@ window.PROJETOS = [
   "titulo": "Classic Tattoo PCH",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -603,15 +603,18 @@ window.PROJETOS = [
   "titulo": "Rino",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
     "entrega": [
       "logotipo",
-      "manual-marca"
+      "manual-marca",
+      "layouts-pecas",
+      "mockups",
+      "kit-impresso"
     ],
     "setor": [
       "b2b",
@@ -621,8 +624,12 @@ window.PROJETOS = [
       "cliente"
     ],
     "competencias": [
+      "identidade-visual",
+      "ilustracao-vetorial",
       "direcao-arte",
-      "identidade-visual"
+      "producao-grafica",
+      "gestao-fornecedores",
+      "logistica-producao"
     ]
   },
   "capa": "assets/projetos/rino/capa.webp",
@@ -2298,9 +2305,9 @@ window.PROJETOS = [
   "titulo": "Óptica Leopoldina",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -2560,9 +2567,9 @@ window.PROJETOS = [
   "titulo": "Sollaris",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -2999,9 +3006,9 @@ window.PROJETOS = [
   "titulo": "Equity 360",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -3186,9 +3193,9 @@ window.PROJETOS = [
   "titulo": "Congresso de Extensão Universitária",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -3451,9 +3458,9 @@ window.PROJETOS = [
   "titulo": "InterServ 2023/2024",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -3700,9 +3707,9 @@ window.PROJETOS = [
   "titulo": "NTAPS",
   "ano": "2022",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -3917,9 +3924,9 @@ window.PROJETOS = [
   "titulo": "CSUNESP",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -4153,9 +4160,9 @@ window.PROJETOS = [
   "titulo": "Mostra de Saúde Mental",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -4371,9 +4378,9 @@ window.PROJETOS = [
   "titulo": "Nupe",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -4677,9 +4684,9 @@ window.PROJETOS = [
   "titulo": "Ocupação Unesp Negra",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -4822,9 +4829,9 @@ window.PROJETOS = [
   "titulo": "Prisma Consultoria",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
@@ -5025,9 +5032,9 @@ window.PROJETOS = [
   "titulo": "C Minds",
   "ano": "2022",
   "cat": {
-    "pt": "Identidade de marca",
-    "en": "Brand identity",
-    "es": "Identidad de marca"
+    "pt": "Identidade visual",
+    "en": "Visual identity",
+    "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
