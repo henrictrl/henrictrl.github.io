@@ -556,7 +556,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
 body.project-deck-open > header.floating-header { display: none !important; }
 /* O painel cobre também a área sob a navegação; seu cabeçalho interno reserva o espaço da barra fixa. */
-body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; }
+body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; overscroll-behavior: none; }
 body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
 .dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
 .dk-ov.open { opacity: 1; pointer-events: auto; }
