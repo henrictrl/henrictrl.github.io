@@ -2315,10 +2315,7 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "aplicacoes-marca"
-    ],
+    "entrega": ["logotipo","aplicacoes-marca","mockups"],
     "setor": [
       "varejo",
       "optica"
@@ -2587,9 +2584,7 @@ window.PROJETOS = [
       "moda-acessorios",
       "beleza"
     ],
-    "contexto": [
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "direcao-arte",
       "identidade-visual",
@@ -3024,10 +3019,7 @@ window.PROJETOS = [
       "tecnologia",
       "podcast"
     ],
-    "contexto": [
-      "cliente",
-      "projeto-ligado"
-    ],
+    "contexto": ["projeto-ligado"],
     "competencias": [
       "direcao-arte",
       "identidade-visual",
@@ -3205,18 +3197,12 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pecas-graficas"
-    ],
+    "entrega": ["identidade-visual","pecas-graficas","evento","posts-carrosseis"],
     "setor": [
       "institucional",
       "educacao"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "direcao-arte",
       "design-grafico",
@@ -3472,18 +3458,12 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pictogramas"
-    ],
+    "entrega": ["identidade-visual","pictogramas","sinalizacao","pecas-digitais","pecas-graficas","banners","medalhas"],
     "setor": [
       "institucional",
       "esporte"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
+    "contexto": ["projeto-academico"],
     "competencias": [
       "identidade-visual",
       "design-grafico",
@@ -3723,17 +3703,12 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "manual-marca"
-    ],
+    "entrega": ["identidade-visual","manual-marca","pecas-graficas","banners","plano-comunicacao"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "cliente"
-    ],
+    "contexto": ["bolsista"],
     "competencias": [
       "identidade-visual",
       "direcao-arte",
@@ -4172,24 +4147,13 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "pecas-graficas"
-    ],
+    "entrega": ["identidade-visual","pecas-graficas","evento"],
     "setor": [
       "institucional",
       "saude"
     ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "direcao-arte",
-      "photoshop",
-      "illustrator"
-    ]
+    "contexto": ["bolsista"],
+    "competencias": ["direcao-arte"]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "dir": "assets/projetos/mostra-saude-mental/",
@@ -4392,10 +4356,7 @@ window.PROJETOS = [
   },
   "filtro": "rebranding",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "manual-marca"
-    ],
+    "entrega": ["manual-marca","pecas-graficas"],
     "setor": [
       "institucional",
       "cultura"
@@ -4403,11 +4364,7 @@ window.PROJETOS = [
     "contexto": [
       "cliente"
     ],
-    "competencias": [
-      "identidade-visual",
-      "direcao-arte",
-      "photoshop"
-    ]
+    "competencias": ["direcao-arte"]
   },
   "capa": "assets/projetos/nupe/capa.webp",
   "dir": "assets/projetos/nupe/",
@@ -4699,24 +4656,13 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "posts-carrosseis"
-    ],
+    "entrega": ["pecas-graficas","posts-carrosseis","evento"],
     "setor": [
       "institucional",
       "cultura"
     ],
-    "contexto": [
-      "campanha",
-      "evento"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "social-media",
-      "photoshop",
-      "illustrator"
-    ]
+    "contexto": ["cliente"],
+    "competencias": ["social-media"]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
   "dir": "assets/projetos/ocupacao-unesp-negra/",
@@ -4846,10 +4792,7 @@ window.PROJETOS = [
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "manual-marca",
-      "editorial"
-    ],
+    "entrega": ["manual-marca","editorial","press-kit"],
     "setor": [
       "consultoria",
       "tecnologia"
@@ -5321,7 +5264,7 @@ window.PROJETOS = [
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": ["identidade-visual","pecas-graficas","cartaz-folder","posts-carrosseis"],
+    "entrega": ["identidade-visual","pecas-graficas","cartaz-folder","cracha","certificado","sinalizacao","posts-carrosseis"],
     "setor": [
       "institucional",
       "saude"
@@ -6762,10 +6705,7 @@ window.PROJETOS = [
   "filtro": "midias-eventos",
   "etiquetas": {
     "entrega": ["posts-carrosseis","conteudo-recorrente","pecas-graficas"],
-    "setor": [
-      "b2b",
-      "legaltech"
-    ],
+    "setor": ["tecnologia","juridico"],
     "contexto": [
       "trabalho-recorrente",
       "cliente"
@@ -6814,10 +6754,7 @@ window.PROJETOS = [
       "posts-carrosseis",
       "artigos"
     ],
-    "setor": [
-      "cultura",
-      "jornalismo-cultural"
-    ],
+    "setor": ["jornalismo-cultural"],
     "contexto": [
       "trabalho-recorrente",
       "projeto-editorial"
@@ -6960,10 +6897,7 @@ window.PROJETOS = [
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "divulgacao-evento"
-    ],
+    "entrega": ["posts-carrosseis","divulgacao-evento"],
     "setor": [
       "institucional",
       "cultura"
@@ -7175,10 +7109,7 @@ window.PROJETOS = [
   },
   "filtro": "midias-eventos",
   "etiquetas": {
-    "entrega": [
-      "identidade-visual",
-      "posts-carrosseis"
-    ],
+    "entrega": ["identidade-visual","posts-carrosseis"],
     "setor": [
       "musica",
       "cultura"
