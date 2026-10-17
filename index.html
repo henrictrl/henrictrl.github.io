@@ -331,6 +331,11 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.5s var(--ease);
 }
+.work-card-live-preview .work-card-media { isolation: isolate; }
+.work-card-live-preview .work-card-media iframe {
+  position: absolute; top: 0; left: 0; width: 1200px; height: 800px;
+  border: 0; display: block; transform-origin: top left; pointer-events: none;
+}
 .work-card:hover .work-card-media img { transform: scale(1.02); }
 .work-card-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
 .work-card-tag { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
@@ -571,11 +576,33 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: 0.04em; }
 .dk-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; }
 .dk-intro { font-size: 15px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
+.dk-tags { max-width: 760px; margin: 18px auto 0; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; }
+.dk-tags[hidden] { display: none !important; }
+.dk-tag-group { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; }
+.dk-tag-group-label { color: var(--gray-400); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.dk-tag { display: inline-flex; align-items: center; min-height: 25px; padding: 5px 8px; border: 1px solid var(--gray-200); border-radius: 999px; background: #fff; color: var(--gray-500); font: inherit; font-size: 11px; line-height: 1.2; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
+.dk-tag:hover, .dk-tag:focus-visible { border-color: var(--ink); color: var(--ink); background: #f8f9fa; }
+.pj-tag-result { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 8px; padding: 12px 14px; border: 1px solid var(--gray-200); border-radius: var(--r); font-size: 13px; color: var(--gray-500); }
+.pj-tag-result strong { color: var(--ink); font-weight: 600; }
+.pj-tag-result .art-filter { margin: 0; }
 .dk-link { display: inline-block; margin-top: 18px; font-size: 13px; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .dk-link[hidden], .dk-btn[hidden], .dk-toc[hidden] { display: none; }
 .dk-body.no-toc { grid-template-columns: minmax(0, 1fr); max-width: 1400px; }
 .dk-imgs { min-width: 0; }
 .dk-imgs > img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--gray-100); content-visibility: auto; contain-intrinsic-size: auto 600px; } /* só as páginas da apresentação */
+
+/* Grade adaptável de miniaturas — Rino: peças */
+.rino-pecas-gallery { padding: 0 0 48px; }
+.rino-pecas-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 12px; }
+.rino-piece { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; min-width: 0; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.rino-piece-thumb { display: block; aspect-ratio: 16/9; overflow: hidden; background: var(--gray-100); }
+.rino-piece-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .25s var(--ease); }
+.rino-piece:hover .rino-piece-thumb img { transform: scale(1.025); }
+.rino-piece:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+.rino-piece-title { display: block; font-size: 12px; line-height: 1.35; color: var(--gray-500); }
+@media (max-width: 1199px) { .rino-pecas-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 899px) { .rino-pecas-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; } }
+@media (max-width: 559px) { .rino-pecas-gallery { padding: 0 12px 32px; } .rino-pecas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 8px; } .rino-piece-title { font-size: 11px; } }
 .dk-cap { max-width: 620px; margin: 0 auto; padding: 40px 24px; text-align: center; }
 .dk-cap h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
 .dk-cap p { font-size: 14px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
@@ -583,7 +610,11 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-next { font: inherit; font-size: 15px; background: none; border: 0; cursor: pointer; color: var(--ink); padding: 0; }
 .dk-next span { color: var(--gray-400); font-size: 12px; display: block; margin-bottom: 4px; text-align: left; }
 @media (max-width: 767px) {
-  .dk-top { padding: 12px 16px; }
+  .dk-tags { margin: 12px auto 0; padding: 0 18px; gap: 7px 10px; }
+   .dk-tag-group { gap: 4px; }
+   .dk-tag-group-label { font-size: 8px; }
+   .dk-tag { min-height: 24px; padding: 5px 7px; font-size: 10px; }
+   .dk-top { padding: 12px 16px; }
   body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
   .dk-meta { display: none; }
   .dk-body { display: block; padding: 0; }
@@ -601,8 +632,8 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .cv-item.has-case:hover .cv-name span:first-child { text-decoration-color: var(--ink); }
 
 /* --- Currículo (página Sobre) --- */
-.cv-first { padding-top: 32px; }
-@media (min-width: 768px) { .cv-first { padding-top: 72px; } }
+.cv-first { padding-top: 16px; }
+@media (min-width: 768px) { .cv-first { padding-top: 36px; } }
 /* Experiência: título em cima e duas colunas (freelas | resto) na largura toda */
 @media (min-width: 768px) {
   .section-grid.cv-wide { flex-direction: column; width: 100%; gap: 32px; }
@@ -746,7 +777,7 @@ a.cv-link:hover { text-decoration: underline; text-underline-offset: 3px; text-d
 
 /* --- Lightbox --- */
 .lightbox-overlay {
-  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.96);
+  position: fixed; inset: 0; z-index: 700; background: rgba(0,0,0,0.96);
   display: flex; align-items: center; justify-content: center; opacity: 0;
   pointer-events: none; transition: opacity 0.3s var(--ease);
 }
@@ -848,6 +879,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @media (max-width: 480px) { .dk-link + .dk-try { margin-left: 0; display: flex; margin: 18px auto 0; } }
 .dk-try[hidden] { display: none; }
 .dk-block { padding: 8px 0 56px; }
+
+/* Rino Cores: apresentação editorial e demonstração funcional */
+.rino-case-block{padding:6px 0 28px!important}
+.rino-case-intro{max-width:1340px;margin:0 auto;padding:4px 18px 14px;text-align:left}
+.rino-case-eyebrow{margin:0 0 5px;color:var(--gray-400);font-size:11px;font-weight:700;letter-spacing:.12em}
+.rino-case-description{max-width:860px;margin:0;color:var(--gray-500);font-size:15px;line-height:1.55;text-wrap:pretty}
+.rino-case-frame{width:calc(100% - 36px);max-width:1340px;height:min(72vh,720px);min-height:460px;margin:0 auto;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;background:#f4f6f8;box-shadow:0 16px 44px -30px rgba(0,0,0,.2)}
+.rino-case-frame iframe{display:block;width:100%;height:100%;border:0;background:#f4f6f8}
+@media(max-width:767px){.rino-case-intro{padding:4px 16px 12px}.rino-case-description{font-size:14px;line-height:1.5}.rino-case-frame{width:calc(100% - 20px);height:min(66svh,620px);min-height:400px;border-radius:9px}}
+
+.pc-block + .ds { margin-top: 26px; padding-top: 30px; border-top: 1px solid var(--gray-200); }
 .dk-block-title { max-width: 620px; margin: 0 auto; padding: 24px 24px 28px; text-align: center; font-size: 15px; font-weight: 500; }
 .dk-block-title span { display: block; font-size: 13px; font-weight: 400; color: var(--gray-500); margin-top: 6px; }
 /* capturas: janela de navegador e celulares */
@@ -902,16 +944,21 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .ig-links { justify-content: flex-start; padding: 0 16px; }
 }
 /* modal do post */
-.pv-ov { position: fixed; inset: 0; z-index: 420; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+.pv-ov { position: fixed; inset: 0; z-index: 620; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
 .pv-ov.open { opacity: 1; pointer-events: auto; }
 .pv-x { position: absolute; top: 14px; right: 18px; z-index: 2; }
 .pv-scroll { position: absolute; inset: 0; overflow-y: auto; padding-top: 64px; overscroll-behavior: contain; }
 @media (max-width: 767px) { .pv-scroll { padding-top: 56px; } .pv-x { top: 10px; right: 10px; } }
 
 /* ---------- Site embutido ---------- */
-.web-ov { position: fixed; inset: 0; z-index: 430; background: rgba(17,17,17,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+.web-ov { position: fixed; inset: 0; z-index: 900; background: rgba(17,17,17,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
 .web-ov.open { opacity: 1; pointer-events: auto; }
-.web-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 12px 24px; color: #fff; }
+.web-bar { position: relative; z-index: 3; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 12px 24px; color: #fff; }
+.web-name { min-width: 0; max-width: 55vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.web-close { display: inline-flex; align-items: center; justify-content: center; width: auto; height: auto; gap: 7px; min-height: 42px; padding: 8px 13px; border: 1px solid rgba(255,255,255,.38); border-radius: 9px; background: #fff; color: #182331 !important; font: inherit; font-size: 12px; font-weight: 650; white-space: nowrap; }
+.web-close:hover { background: #f1efec; }
+.web-close svg { width: 17px; height: 17px; flex: none; }
+.web-close span { font-size: 12px; }
 .web-name { font-size: 14px; font-weight: 500; }
 .web-acts { display: flex; align-items: center; gap: 10px; }
 .web-acts .dk-x { color: #fff; }
@@ -923,9 +970,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 /* celular dentro do computador */
 .web-frame { position: relative; background: #0b0b0b; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
 .web-frame iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
-.web-frame.mobile { height: min(100%, 860px); aspect-ratio: 390/844; border-radius: 44px; padding: 12px; }
-.web-frame.mobile iframe { border-radius: 33px; }
-.web-frame.mobile .web-notch { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 14px; background: #0b0b0b; z-index: 2; pointer-events: none; }
+.web-frame.mobile { display: flex; flex-direction: column; height: min(100%, 860px); aspect-ratio: 390/844; border-radius: 44px; padding: 44px 12px 12px; overflow: hidden; }
+.web-frame.mobile iframe { flex: 1; min-height: 0; height: auto; border-radius: 33px; }
+.web-frame.mobile .web-notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 14px; background: #0b0b0b; z-index: 2; pointer-events: none; }
 .web-frame.desktop { width: min(100%, 1360px); height: 100%; border-radius: 10px; padding: 30px 0 0; background: #e9e9e9; }
 .web-frame.desktop::before { content: ''; position: absolute; top: 11px; left: 14px; width: 44px; height: 8px; background: radial-gradient(circle at 4px 4px, #bbb 4px, transparent 4.5px) 0 0/16px 8px repeat-x; }
 .web-frame.desktop iframe { border-radius: 0 0 10px 10px; }
@@ -1181,8 +1228,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 /* botão Veja os números: usa a mesma aparência dos filtros de categoria */
 .pj-dash-btn { text-decoration: none; margin-left: 0; }
 /* grade de todos os posts */
-.pg-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-bottom: 14px; }
-.pg-orgs { display: flex; flex-wrap: wrap; gap: 6px; }
+.pg-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 20px; margin-bottom: 14px; }
+.pg-orgs { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; gap: 6px; }
+.pg-sort { margin-inline: auto; }
 .pg-orgs .art-filter span, .pc-filter .art-filter span { color: var(--gray-400); font-size: 11px; }
 .pg-sort { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-500); }
 .pg-sort select { font: inherit; color: var(--ink, #111); padding: 7px 28px 7px 10px; border: 1px solid var(--gray-200); border-radius: var(--r); background: #fff; }
@@ -1191,6 +1239,15 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @media (min-width: 640px) { .pg-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 900px) { .pg-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; } }
+/* Resultados com poucos posts ficam maiores e centralizados, sem esticar até ocupar toda a tela. */
+.pg-grid[data-count="1"] { grid-template-columns: minmax(0, 340px); justify-content: center; }
+.pg-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 260px)); justify-content: center; }
+@media (max-width: 639px) {
+  .pg-grid[data-count="1"] { grid-template-columns: minmax(0, 100%); }
+  .pg-grid[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) { .pg-grid[data-count="3"] { grid-template-columns: repeat(3, minmax(0, 250px)); justify-content: center; } }
+@media (min-width: 1100px) { .pg-grid[data-count="4"] { grid-template-columns: repeat(4, minmax(0, 220px)); justify-content: center; } }
 .pg-t { position: relative; display: block; padding: 0; border: 0; background: var(--gray-100); border-radius: var(--r); overflow: hidden; cursor: pointer; aspect-ratio: 4/5; text-align: left; font: inherit; }
 .pg-t img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s var(--ease); }
 .pg-t:hover img, .pg-t:focus-visible img { transform: scale(1.04); }
@@ -1228,8 +1285,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .work-dashboard-cta { margin-top:22px; }
 .work-dashboard-cta .pj-dash-btn { margin-left:0; }
 .top-before-contact { display:flex; justify-content:center; padding:28px var(--gutter) 24px; background:var(--white); }
-.cv-actions { padding-top:32px; padding-bottom:0; }
-@media (min-width:768px) { .cv-actions { padding-top:72px; } }
+.cv-actions { padding-top:16px; padding-bottom:0; }
+@media (min-width:768px) { .cv-actions { padding-top:36px; } }
 .cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
 .resource-action { display:inline-flex; align-items:center; gap:12px; border:1px solid var(--gray-200); border-radius:var(--r); padding:11px 15px; background:var(--white); color:var(--ink); font:inherit; font-size:13px; cursor:pointer; transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease); }
 .resource-action:hover { border-color:var(--ink); }
@@ -1268,6 +1325,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 </style>
 </head>
 <body>
+
 
 <header class="top-header">
   <div class="header-inner">
@@ -1540,7 +1598,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="tools-float" id="tools-float" aria-hidden="true"></div>
   <div class="footer-inner">
     <div>
-      <h2 class="footer-headline" data-i18n="footer.headline">Contato</h2>
+      <h2 class="footer-headline" data-i18n="footer.headline">Vamos trabalhar juntos?</h2>
     </div>
     <nav class="footer-socials" aria-label="Redes e contatos">
       <a href="mailto:henriquemarinhos@icloud.com" class="footer-social">E-mail</a>
@@ -1648,7 +1706,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="dk-top"><div><span class="dk-name" id="dk-name"></span><span class="dk-meta" id="dk-meta"></span></div>
     <div class="dk-acts"><button class="dk-x" id="dk-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>
   <div class="dk-scroll" id="dk-scroll">
-    <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
+    <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><div class="dk-tags" id="dk-tags" aria-label="Etiquetas do projeto" hidden></div><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
     <div class="dk-body"><nav class="dk-toc" id="dk-toc" aria-label="Sumário"></nav><div class="dk-imgs" id="dk-imgs"></div></div>
     <footer class="dk-foot"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button><button class="dk-next" id="dk-next"></button></footer>
   </div>
@@ -1678,7 +1736,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   <div class="web-bar"><span class="web-name" id="web-name"></span>
     <div class="web-acts"><div class="web-dev" role="group"><button type="button" data-dev="mobile" data-i18n="web.mobile">Celular</button><button type="button" data-dev="desktop" data-i18n="web.desktop">Computador</button></div>
       <a class="web-open" id="web-open" target="_blank" rel="noopener" data-i18n="web.open">Abrir em nova aba</a>
-      <button class="dk-x" id="web-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>
+      <button class="dk-x web-close" id="web-x" aria-label="Fechar teste"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span data-i18n="web.close">Fechar teste</span></button></div></div>
   <div class="web-stage" id="web-stage"><div class="web-frame" id="web-frame"><div class="web-notch"></div><iframe id="web-iframe" title="Site" loading="lazy"></iframe></div></div>
 </div>
 
@@ -1782,14 +1840,14 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'am.loading': 'Loading…', 'am.translating': 'Translating…',
       'am.note': 'Machine translation from Portuguese.', 'am.original': 'Read the original',
       'dk.pdf': 'Download PDF', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
-      'footer.headline': 'Contact',
+      'footer.headline': "Let's work together?",
       'pm.live': 'See it live', 'pm.context': 'Context', 'pm.solution': 'Solution', 'pm.did': 'What I did', 'pm.tools': 'Tools',
       'lightbox.hint': 'Scroll to zoom · drag to move',
       'sm.eyebrow': 'Service', 'sm.included': "What's included", 'sm.process': 'How I work', 'sm.related': 'Related projects', 'sm.cta': 'Request a quote',
       'cm.project': 'See project', 'cm.site': 'Visit site',
       'aboutp.lang': 'Languages', 'aboutp.free': 'Free tools', 'aboutp.free.empty': '[Coming soon: the free alternatives I use instead of paid software.]',
       'credit.text': 'Site designed and developed by Henrique Marinhos.', 'credit.link': 'How this site was made →',
-      'web.mobile': 'Phone', 'web.desktop': 'Desktop', 'web.open': 'Open in a new tab',
+      'web.mobile': 'Phone', 'web.desktop': 'Desktop', 'web.open': 'Open in a new tab', 'web.close': 'Close test',
       'top': 'Back to top ↑', 'f.car': 'Carousels', 'am.mode': 'Reading mode', 'am.text': 'Text', 'am.seepost': 'See post', 'am.seetext': 'See text',
       'doc.desc': 'Portfolio of Henrique Marinhos, designer focused on brand creation, editorial design, web design and B2B communication strategies.'
     },
@@ -1817,14 +1875,14 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'am.loading': 'Cargando…', 'am.translating': 'Traduciendo…',
       'am.note': 'Traducción automática del portugués.', 'am.original': 'Leer el original',
       'dk.pdf': 'Descargar PDF', 'aboutp.photo': 'Foto de perfil', 'aboutp.exp': 'Experiencia', 'aboutp.edu': 'Formación', 'aboutp.extra': 'Actividades complementarias', 'aboutp.skills': 'Habilidades técnicas', 'art.grid': 'Ver en cuadrícula',
-      'footer.headline': 'Contacto',
+      'footer.headline': '¿Trabajamos juntos?',
       'pm.live': 'Ver en vivo', 'pm.context': 'Contexto', 'pm.solution': 'Solución', 'pm.did': 'Lo que hice', 'pm.tools': 'Herramientas',
       'lightbox.hint': 'Desplaza para hacer zoom · arrastra para mover',
       'sm.eyebrow': 'Servicio', 'sm.included': 'Qué incluye', 'sm.process': 'Cómo trabajo', 'sm.related': 'Proyectos relacionados', 'sm.cta': 'Solicitar presupuesto',
       'cm.project': 'Ver proyecto', 'cm.site': 'Visitar sitio',
       'aboutp.lang': 'Idiomas', 'aboutp.free': 'Herramientas gratuitas', 'aboutp.free.empty': '[Próximamente: las alternativas gratuitas que uso en lugar de los programas pagos.]',
       'credit.text': 'Sitio diseñado y desarrollado por Henrique Marinhos.', 'credit.link': 'Cómo se hizo este sitio →',
-      'web.mobile': 'Celular', 'web.desktop': 'Computadora', 'web.open': 'Abrir en otra pestaña',
+      'web.mobile': 'Celular', 'web.desktop': 'Computadora', 'web.open': 'Abrir en otra pestaña', 'web.close': 'Cerrar prueba',
       'top': 'Volver arriba ↑', 'f.car': 'Carruseles', 'am.mode': 'Modo de lectura', 'am.text': 'Texto', 'am.seepost': 'Ver post', 'am.seetext': 'Ver texto',
       'doc.desc': 'Portafolio de Henrique Marinhos, diseñador enfocado en creación de marcas, diseño editorial, diseño web y estrategias de comunicación B2B.'
     }
@@ -2959,28 +3017,81 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Projetos: cards + apresentação (deck) --- */
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
+  // Mantém a prévia real do editor em viewport desktop e escala o iframe para o card.
+  const syncLiveProjectPreviews = () => document.querySelectorAll('.work-card-live-preview .work-card-media').forEach(media => {
+    const frame = media.querySelector('iframe'); if (!frame) return;
+    const scale = Math.min(media.clientWidth / 1200, media.clientHeight / 800);
+    frame.style.transform = `scale(${scale})`;
+  });
+  const livePreviewResize = new ResizeObserver(syncLiveProjectPreviews);
+  const observeLiveProjectPreviews = () => {
+    livePreviewResize.disconnect();
+    document.querySelectorAll('.work-card-live-preview .work-card-media').forEach(media => livePreviewResize.observe(media));
+    syncLiveProjectPreviews();
+  };
+  window.addEventListener('resize', syncLiveProjectPreviews);
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
-  const pjCard = (p) => `<a class="work-card" href="#projeto/${p.slug}" data-pj="${p.slug}">
-      <div class="work-card-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div>
+  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
+      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800">`}</div>
       <p class="work-card-title">${p.titulo}</p><p class="work-card-tag">${lx(p.cat)} — ${p.ano}</p></a>`;
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['editorial', { pt: 'Campanhas e editorial', en: 'Campaigns and editorial', es: 'Campañas y editorial' }], ['web', { pt: 'Programação', en: 'Web development', es: 'Programación' }], ['conteudo', { pt: 'Carrosséis e posts', en: 'Carousels and posts', es: 'Carruseles y posts' }], ['exploracoes', { pt: 'Explorações', en: 'Explorations', es: 'Exploraciones' }]];   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
+  const FILTROS = [['all', { pt: 'Todos', en: 'All', es: 'Todos' }], ['identidade', { pt: 'Identidade de marca', en: 'Brand identity', es: 'Identidad de marca' }], ['web', { pt: 'Sites, ferramentas e produtos digitais', en: 'Websites, tools & digital products', es: 'Sitios, herramientas y productos digitales' }], ['conteudo', { pt: 'Conteúdo e mídias sociais', en: 'Content & social media', es: 'Contenido y redes sociales' }], ['campanhas', { pt: 'Campanhas, eventos e fotografia', en: 'Campaigns, events & photography', es: 'Campañas, eventos y fotografía' }], ['estrategia', { pt: 'Estratégia, educação e pesquisa', en: 'Strategy, education & research', es: 'Estrategia, educación e investigación' }]];
+
+  const ETIQUETA_LABELS = {"identidade-visual":{"pt":"Identidade visual","en":"Visual identity","es":"Identidad visual"},"logotipo":{"pt":"Logotipo","en":"Logo","es":"Logotipo"},"manual-marca":{"pt":"Manual de marca","en":"Brand manual","es":"Manual de marca"},"aplicacoes-marca":{"pt":"Aplicações de marca","en":"Brand applications","es":"Aplicaciones de marca"},"pecas-graficas":{"pt":"Peças gráficas","en":"Graphic materials","es":"Piezas gráficas"},"ferramenta-interativa":{"pt":"Ferramenta interativa","en":"Interactive tool","es":"Herramienta interactiva"},"catalogo-digital":{"pt":"Catálogo digital","en":"Digital catalog","es":"Catálogo digital"},"posts-carrosseis":{"pt":"Posts e carrosséis","en":"Posts & carousels","es":"Posts y carruseles"},"proposta-estrategica":{"pt":"Proposta estratégica","en":"Strategy proposal","es":"Propuesta estratégica"},"cartaz-folder":{"pt":"Cartaz e folder","en":"Poster & brochure","es":"Cartel y folleto"},"cobertura-fotografica":{"pt":"Cobertura fotográfica","en":"Photo coverage","es":"Cobertura fotográfica"},"organizacao-evento":{"pt":"Organização de eventos","en":"Event management","es":"Organización de eventos"},"analise-literaria":{"pt":"Análise literária","en":"Literary analysis","es":"Análisis literario"},"dashboard":{"pt":"Dashboard","en":"Dashboard","es":"Dashboard"},"direcao-arte":{"pt":"Direção de arte","en":"Art direction","es":"Dirección de arte"},"design-grafico":{"pt":"Design gráfico","en":"Graphic design","es":"Diseño gráfico"},"design-editorial":{"pt":"Design editorial","en":"Editorial design","es":"Diseño editorial"},"design-interface":{"pt":"Design de interface","en":"Interface design","es":"Diseño de interfaces"},"gestao-projetos":{"pt":"Gestão de projetos","en":"Project management","es":"Gestión de proyectos"},"visualizacao-dados":{"pt":"Visualização de dados","en":"Data visualization","es":"Visualización de datos"},"analise-dados":{"pt":"Análise de dados","en":"Data analysis","es":"Análisis de datos"},"credito-financas":{"pt":"Crédito e finanças","en":"Credit & finance","es":"Crédito y finanzas"},"moda-acessorios":{"pt":"Moda e acessórios","en":"Fashion & accessories","es":"Moda y accesorios"},"jornalismo-cultural":{"pt":"Jornalismo cultural","en":"Cultural journalism","es":"Periodismo cultural"},"direitos-humanos":{"pt":"Direitos humanos","en":"Human rights","es":"Derechos humanos"},"servicos-locais":{"pt":"Serviços locais","en":"Local services","es":"Servicios locales"},"desdobramento-marca":{"pt":"Desdobramentos de marca","en":"Brand extensions","es":"Aplicaciones de marca"},"tecnologia":{"pt":"Tecnologia","en":"Technology","es":"Tecnología"},"tatuagem":{"pt":"Tatuagem","en":"Tattoo","es":"Tatuaje"},"cliente":{"pt":"Cliente","en":"Client","es":"Cliente"},"internacional":{"pt":"Internacional","en":"International","es":"Internacional"},"b2b":{"pt":"B2B","en":"B2B","es":"B2B"},"varejo":{"pt":"Varejo","en":"Retail","es":"Comercio minorista"},"optica":{"pt":"Óptica","en":"Optical retail","es":"Óptica"},"beleza":{"pt":"Beleza","en":"Beauty","es":"Belleza"},"podcast":{"pt":"Podcast","en":"Podcast","es":"Pódcast"},"institucional":{"pt":"Institucional","en":"Institutional","es":"Institucional"},"educacao":{"pt":"Educação","en":"Education","es":"Educación"},"saude":{"pt":"Saúde","en":"Health","es":"Salud"},"esporte":{"pt":"Esporte","en":"Sports","es":"Deporte"},"cultura":{"pt":"Cultura","en":"Culture","es":"Cultura"},"musica":{"pt":"Música","en":"Music","es":"Música"},"consultoria":{"pt":"Consultoria","en":"Consulting","es":"Consultoría"},"entretenimento":{"pt":"Entretenimento","en":"Entertainment","es":"Entretenimiento"},"turismo":{"pt":"Turismo","en":"Tourism","es":"Turismo"},"literatura":{"pt":"Literatura","en":"Literature","es":"Literatura"},"dados":{"pt":"Dados","en":"Data","es":"Datos"},"arte-digital":{"pt":"Arte digital","en":"Digital art","es":"Arte digital"},"fotografia":{"pt":"Fotografia","en":"Photography","es":"Fotografía"},"evento":{"pt":"Evento","en":"Event","es":"Evento"},"campanha":{"pt":"Campanha","en":"Campaign","es":"Campaña"},"projeto-academico":{"pt":"Projeto acadêmico","en":"Academic project","es":"Proyecto académico"},"colaboracao":{"pt":"Colaboração","en":"Collaboration","es":"Colaboración"},"trabalho-recorrente":{"pt":"Trabalho recorrente","en":"Ongoing work","es":"Trabajo recurrente"},"rebranding":{"pt":"Redesign de marca","en":"Rebranding","es":"Rediseño de marca"},"ferramenta-propria":{"pt":"Ferramenta própria","en":"Own tool","es":"Herramienta propia"},"portfolio":{"pt":"Portfólio","en":"Portfolio","es":"Portafolio"},"grupo-pesquisa":{"pt":"Grupo de pesquisa","en":"Research group","es":"Grupo de investigación"},"competicao":{"pt":"Competição","en":"Competition","es":"Competición"},"estagio":{"pt":"Estágio","en":"Internship","es":"Prácticas"},"redacao":{"pt":"Redação","en":"Writing","es":"Redacción"},"social-media":{"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},"programacao":{"pt":"Programação","en":"Programming","es":"Programación"},"diagramacao":{"pt":"Diagramação","en":"Layout & typesetting","es":"Maquetación"},"ilustracao":{"pt":"Ilustração","en":"Illustration","es":"Ilustración"},"redes-sociais":{"pt":"Redes sociais","en":"Social media","es":"Redes sociales"},"site":{"pt":"Site","en":"Website","es":"Sitio web"},"editorial":{"pt":"Editorial","en":"Editorial","es":"Editorial"},"folder":{"pt":"Folder","en":"Brochure","es":"Folleto"},"embalagens":{"pt":"Embalagens","en":"Packaging","es":"Empaques"},"oficina":{"pt":"Oficina","en":"Workshop","es":"Taller"},"material-didatico":{"pt":"Material didático","en":"Learning materials","es":"Material didáctico"},"apresentacao":{"pt":"Apresentação","en":"Presentation","es":"Presentación"},"artigos":{"pt":"Artigos","en":"Articles","es":"Artículos"},"processamento-grafico":{"pt":"Processamento gráfico","en":"Graphics processing","es":"Procesamiento gráfico"}};
+  Object.assign(ETIQUETA_LABELS, {
+    "analise-transversal":{pt:"Análise transversal",en:"Cross-project analysis",es:"Análisis transversal"},
+    "comunicacao":{pt:"Comunicação",en:"Communications",es:"Comunicación"},
+    "conteudo-editorial":{pt:"Conteúdo editorial",en:"Editorial content",es:"Contenido editorial"},
+    "conteudo-recorrente":{pt:"Conteúdo recorrente",en:"Ongoing content",es:"Contenido recurrente"},
+    "design":{pt:"Design",en:"Design",es:"Diseño"},
+    "divulgacao-evento":{pt:"Divulgação de evento",en:"Event promotion",es:"Difusión de eventos"},
+    "estrategia-marca":{pt:"Estratégia de marca",en:"Brand strategy",es:"Estrategia de marca"},
+    "exportacao":{pt:"Exportação",en:"Export",es:"Exportación"},
+    "exportacao-png":{pt:"Exportação em PNG",en:"PNG export",es:"Exportación PNG"},
+    "ferramenta-comercial":{pt:"Ferramenta comercial",en:"Sales tool",es:"Herramienta comercial"},
+    "legaltech":{pt:"Legaltech",en:"Legal tech",es:"Legaltech"},
+    "pictogramas":{pt:"Pictogramas",en:"Pictograms",es:"Pictogramas"},
+    "portfolio-site":{pt:"Portfólio digital",en:"Digital portfolio",es:"Portafolio digital"},
+    "processo":{pt:"Processo de criação",en:"Creative process",es:"Proceso creativo"},
+    "projeto-editorial":{pt:"Projeto editorial",en:"Editorial project",es:"Proyecto editorial"},
+    "projeto-independente":{pt:"Projeto independente",en:"Independent project",es:"Proyecto independiente"},
+    "projeto-ligado":{pt:"Projeto relacionado",en:"Related project",es:"Proyecto relacionado"},
+    "stories-gifs":{pt:"Stories e GIFs",en:"Stories & GIFs",es:"Stories y GIF"},
+    "terceiro-setor":{pt:"Terceiro setor",en:"Nonprofit sector",es:"Tercer sector"}
+  });
+  const ETIQUETA_GRUPOS = {
+    entrega:{pt:"Entrega",en:"Deliverables",es:"Entregas"},
+    setor:{pt:"Setor",en:"Sector",es:"Sector"},
+    contexto:{pt:"Contexto",en:"Context",es:"Contexto"},
+    competencias:{pt:"Competências",en:"Skills",es:"Competencias"}
+  };
+  const etiquetaNome = (id) => {
+    if (ETIQUETA_LABELS[id]) return lx(ETIQUETA_LABELS[id]);
+    const words = id.replace(/-/g," ").split(" ").map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
+    return words;
+  };
+   const DASH_BTN = { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' };
   let pjFiltro = 'all';
-  const naHome = (p) => ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
+  let pjEtiqueta = null;
+  const naHome = (p) => p.slug !== 'rino-pecas' && ![].concat(p.filtro).includes('dashboards') && (p.telas && p.telas.length || p.posts || p.postGroups || p.web);
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
     const dashboardCTA = document.getElementById('work-dashboard-cta');
     if (!grid) return;
-    const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit');
+    const displayedPJ = PJ.filter(p => p.slug !== 'o-hobbit' && p.slug !== 'rino-pecas');
     const inF = (p, k) => [].concat(p.filtro).includes(k);
     const usados = FILTROS.filter(([k]) => k === 'all' || displayedPJ.some(p => inF(p, k)));
     bar.hidden = usados.length < 3;
-    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (k === pjFiltro) + '">' + lx(l) + '</button>').join('');
+    bar.innerHTML = usados.map(([k, l]) => '<button class="art-filter" data-k="' + k + '" aria-pressed="' + (!pjEtiqueta && k === pjFiltro) + '">' + lx(l) + '</button>').join('') + (pjEtiqueta ? '<button type="button" class="art-filter" data-clear-pj-tag>' + lx({pt:'Limpar etiqueta',en:'Clear tag',es:'Quitar etiqueta'}) + ' ×</button>' : '');
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral']
       ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>'
       : '';
-    if (pjFiltro === 'all') {
+    if (pjEtiqueta) {
+      const correspondentes = displayedPJ.filter(p => Object.values(p.etiquetas || {}).some(lista => Array.isArray(lista) && lista.includes(pjEtiqueta)));
+      grid.classList.add('work-grid');
+      grid.innerHTML = '<div class="pj-tag-result"><span>' + lx({pt:'Projetos com a etiqueta',en:'Projects tagged',es:'Proyectos con la etiqueta'}) + ' <strong>' + esc(etiquetaNome(pjEtiqueta)) + '</strong> · ' + correspondentes.length + '</span></div>' + correspondentes.map(pjCard).join('');
+    } else if (pjFiltro === 'all') {
       grid.classList.remove('work-grid');
       grid.innerHTML = usados.filter(([k]) => k !== 'all').map(([k, l]) => {
         const ps = displayedPJ.filter(p => inF(p, k));
@@ -2993,32 +3104,38 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.classList.add('work-grid');
       grid.innerHTML = displayedPJ.filter(p => inF(p, pjFiltro)).map(pjCard).join('');
     }
-  };;
-  document.getElementById('pj-filters').addEventListener('click', (e) => { const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; renderPJ(); });
+    requestAnimationFrame(observeLiveProjectPreviews);
+  };
+  document.getElementById('pj-filters').addEventListener('click', (e) => { if (e.target.closest('[data-clear-pj-tag]')) { pjEtiqueta = null; pjFiltro = 'all'; renderPJ(); return; } const b = e.target.closest('.art-filter'); if (!b) return; pjFiltro = b.dataset.k; pjEtiqueta = null; renderPJ(); });
 
   /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
      5 colunas; filtros por organização (conta) e ordenação por interações, data, organização ou projeto. */
   const PG_L = { org: { pt: 'Organização', en: 'Organization', es: 'Organización' }, todas: { pt: 'Todas', en: 'All', es: 'Todas' }, ord: { pt: 'Ordenar', en: 'Sort', es: 'Ordenar' },
     oI: { pt: 'Mais interações', en: 'Most interactions', es: 'Más interacciones' }, oN: { pt: 'Mais recentes', en: 'Newest', es: 'Más recientes' }, oV: { pt: 'Mais antigos', en: 'Oldest', es: 'Más antiguos' },
     oO: { pt: 'Organização (A–Z)', en: 'Organization (A–Z)', es: 'Organización (A–Z)' }, oP: { pt: 'Projeto (A–Z)', en: 'Project (A–Z)', es: 'Proyecto (A–Z)' }, n: { pt: 'posts', en: 'posts', es: 'posts' } };
-  let pgOrg = 'all', pgOrd = 'i';
+  let pgOrg = 'all', pgOrd = 'n';
   const PG_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
   const pgProj = (() => { const m = {}; PJ.forEach(p => { if (p.posts) m[p.posts] = m[p.posts] || p.titulo; (p.postGroups || []).forEach(g => { m[g.g] = g.t || p.titulo; }); }); return (g) => lx(m[g]) || g; })();
-  const pgOrgName = (u) => ((window.ENGAJAMENTO || {}).contas || {})[u]?.n || u;
+  const pgOrgKey = (u) => {
+    if (u === 'personaunesp' || u === 'rpunesp') return 'persona';
+    if (u === 'proec_unesp' || u === 'cac.unesp.rioclaro') return 'unesp';
+    return u;
+  };
+  const pgOrgName = (u) => ({ persona: 'Persona', unesp: 'Unesp' }[u] || ((window.ENGAJAMENTO || {}).contas || {})[u]?.n || u);
   const pgInt = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c]; return e ? (e[0] || 0) + e[1] : 0; };
   const pgHTML = () => {
-    const orgs = {}; POSTS.forEach(x => orgs[x.user] = (orgs[x.user] || 0) + 1);
-    const ol = Object.entries(orgs).sort((a, b) => b[1] - a[1]);
-    let ps = POSTS.filter(x => pgOrg === 'all' || x.user === pgOrg);
+    const orgs = {}; POSTS.forEach(x => { const k = pgOrgKey(x.user); orgs[k] = (orgs[k] || 0) + 1; });
+    const ol = Object.entries(orgs).sort((a, b) => b[1] - a[1] || pgOrgName(a[0]).localeCompare(pgOrgName(b[0])));
+    let ps = POSTS.filter(x => pgOrg === 'all' || pgOrgKey(x.user) === pgOrg);
     const by = { i: (a, b) => pgInt(b) - pgInt(a), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
-      o: (a, b) => pgOrgName(a.user).localeCompare(pgOrgName(b.user)) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
+      o: (a, b) => pgOrgName(pgOrgKey(a.user)).localeCompare(pgOrgName(pgOrgKey(b.user))) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
     ps = ps.slice().sort(by[pgOrd]);
     const chips = `<button class="art-filter" data-org="all" aria-pressed="${pgOrg === 'all'}">${lx(PG_L.todas)} <span>${POSTS.length}</span></button>` + ol.map(([u, n]) => `<button class="art-filter" data-org="${u}" aria-pressed="${pgOrg === u}">${esc(pgOrgName(u))} <span>${n}</span></button>`).join('');
     const sel = `<label class="pg-sort"><span>${lx(PG_L.ord)}</span><select id="pg-ord">${[['i', PG_L.oI], ['n', PG_L.oN], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<option value="${k}"${k === pgOrd ? ' selected' : ''}>${lx(l)}</option>`).join('')}</select></label>`;
     const tile = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c];
       return `<button type="button" class="pg-t" data-pgc="${x.c}"><img src="${igImg(x, 0)}" alt="" loading="lazy" decoding="async">${x.n > 1 ? `<span class="art-ig-count">${PG_ICO}${x.n}</span>` : ''}
-        <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>@${esc(x.user)} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `♥ ${nf(e[0])} · ` : ''}💬 ${nf(e[1])}</span>` : ''}</span></button>`; };
-    return `<div class="pg-bar"><div class="pg-orgs" role="group" aria-label="${lx(PG_L.org)}">${chips}</div>${sel}</div><p class="pg-n">${ps.length} ${lx(PG_L.n)}</p><div class="pg-grid">${ps.map(tile).join('')}</div>`;
+        <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>${esc(pgOrgName(pgOrgKey(x.user)))} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `♥ ${nf(e[0])} · ` : ''}💬 ${nf(e[1])}</span>` : ''}</span></button>`; };
+    return `<div class="pg-bar"><div class="pg-orgs" role="group" aria-label="${lx(PG_L.org)}">${chips}</div>${sel}</div><p class="pg-n">${ps.length} ${lx(PG_L.n)}</p><div class="pg-grid" data-count="${ps.length}">${ps.map(tile).join('')}</div>`;
   };
   document.getElementById('work-case-grid').addEventListener('click', (e) => {
     const o = e.target.closest('[data-org]'); if (o) { pgOrg = o.dataset.org; renderPJ(); return; }
@@ -3357,14 +3474,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const deckBlocks = (p) => {
     const out = [], toc = [];
-    if (p.shots && p.shots.length) {
+    if (p.slug === "rino-site") {
+      const RC = {
+        eyebrow: {pt:"FERRAMENTA INTERATIVA",en:"INTERACTIVE TOOL",es:"HERRAMIENTA INTERACTIVA"},
+        desc: {pt:"Uma ferramenta para experimentar as cores da identidade Rino: aplique paletas, ajuste cada elemento e compare o resultado no próprio logotipo.",en:"A tool to experiment with the Rino identity colours: apply palettes, adjust each element and compare the result on the logo itself.",es:"Una herramienta para experimentar con los colores de la identidad Rino: aplica paletas, ajusta cada elemento y compara el resultado en el propio logotipo."}
+      };
+      out.push("<section class=\"dk-block rino-case-block\" id=\"dk-b-rino-case\">" +
+        "<div class=\"rino-case-intro\"><div><p class=\"rino-case-eyebrow\">" + lx(RC.eyebrow) + "</p><p class=\"rino-case-description\">" + lx(RC.desc) + "</p></div></div>" +
+        "<div class=\"rino-case-frame\"><iframe src=\"" + p.web.url + "\" title=\"" + esc(p.titulo) + " — ferramenta interativa\" loading=\"lazy\"></iframe></div></section>");
+      toc.push(["dk-b-rino-case", {pt:"Ferramenta interativa",en:"Interactive tool",es:"Herramienta interactiva"}]);
+    }
+    if (p.shots && p.shots.length && p.slug !== "rino-site") {
       const desk = p.shots.filter(s => s.d !== 'mobile'), mob = p.shots.filter(s => s.d === 'mobile');
       out.push(`<section class="dk-block" id="dk-b-shots"><h3 class="dk-block-title">${lx(p.siteIntro ? DK_L.site : DK_L.shotsT)}${p.siteIntro ? `<span>${lx(p.siteIntro)}</span>` : ''}${p.siteIntro && p.web ? `<br><button class="dk-try" type="button" data-web="${p.slug}">${TRY_ICO}${lx(DK_L.try)}</button>` : ''}</h3>${desk.map(s => `<div class="shot-desk${s.d === 'pagina' ? ' shot-page' : ''}"><img src="${p.dir}${s.img}" alt="" loading="lazy" decoding="async"></div>`).join('')}${mob.length ? `<div class="shot-phones">${mob.map(s => `<div class="shot-phone"><img src="${p.dir}${s.img}" alt="" loading="lazy" decoding="async"></div>`).join('')}</div>` : ''}</section>`);
       toc.push(['dk-b-shots', p.siteIntro ? DK_L.site : DK_L.telas]);
     }
     if (p.galeria && p.slug !== 'pixelar') { out.push(`<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">${lx(DK_L.gal)}</h3><div class="dk-gal">${p.galeria.map(g => `<img src="${p.dir}${g}" alt="" loading="lazy" decoding="async" onclick="openLightbox('${p.dir}${g}')">`).join('')}</div></section>`); toc.push(['dk-b-gal', DK_L.gal]); }
     if (p.html === 'meta') { out.push(`<section class="dk-block" id="dk-b-meta">${metaHTML()}</section>`); toc.push(['dk-b-meta', DK_L.meta]); }
-    if (p.dash) { const ds = dashHTML(p); out.push(ds.html); toc.push(...ds.toc); }
+    // As análises entram após os grupos de posts e carrosséis.
     // posts: carrossel = várias imagens SEM texto publicado; o resto (imagem única ou ligado a um artigo) = post
     const kind = (x) => x.n > 1 && !x.art ? 'car' : 'post';
     const grupos = p.postGroups || (p.posts ? [{ g: p.posts }] : []);
@@ -3380,6 +3507,7 @@ document.addEventListener('DOMContentLoaded', () => {
       out.push(`<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">${lx(DK_L.posts)}<span>${todos.length}${lx(DK_L.nPosts)}</span></h3>${filtro}${corpo}</section>`);
       if (!grupos.some(g => g.t)) toc.push(['dk-b-posts-all', DK_L.posts]);
     }
+    if (p.dash) { const ds = dashHTML(p); out.push(ds.html); toc.push(...ds.toc); }
     return { html: out.join(''), toc };
   };
   const openDeck = (slug) => {
@@ -3390,6 +3518,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dk-kicker').textContent = lx(p.cat) + ' · ' + p.ano;
     document.getElementById('dk-title').textContent = p.titulo;
     document.getElementById('dk-intro').textContent = lx(p.intro || (p.telas[0] && p.telas[0].d));
+    const tagWrap = document.getElementById('dk-tags');
+    const tagGroups = Object.entries(p.etiquetas || {}).filter(([,ids]) => Array.isArray(ids) && ids.length);
+    tagWrap.hidden = !tagGroups.length;
+    tagWrap.innerHTML = tagGroups.map(([grupo,ids]) => '<div class="dk-tag-group"><span class="dk-tag-group-label">' + lx(ETIQUETA_GRUPOS[grupo] || {pt:grupo,en:grupo,es:grupo}) + '</span>' + ids.map(id => '<button type="button" class="dk-tag" data-pj-tag="' + esc(id) + '">' + esc(etiquetaNome(id)) + '</button>').join('') + '</div>').join('');
     const lk = document.getElementById('dk-link'); lk.hidden = !p.link;
     if (p.link) { lk.href = p.link; lk.textContent = p.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/(index\.html)?$/, ''); }
     // botão "Testar o site" (abre o site rodando num celular/janela)
@@ -3398,19 +3530,25 @@ document.addEventListener('DOMContentLoaded', () => {
     tb.hidden = !p.web; tb.innerHTML = TRY_ICO + lx(DK_L.try);
     // telas (páginas da apresentação) empilhadas; legenda entre imagens só onde há descrição
     const blocks = deckBlocks(p);
-    document.getElementById('dk-imgs').innerHTML = p.telas.map((t, k) => {
-      const d = k > 0 ? lx(t.d) : '';
-      return (d ? `<div class="dk-cap"><h3>${lx(t.t)}</h3><p>${d}</p></div>` : '') + `<img id="dk-p${k + 1}" src="${p.dir}${t.img}.webp" alt="${lx(t.t)}" width="2048" height="1152" decoding="async"${k > 1 ? ' loading="lazy"' : ''}>`;
-    }).join('') + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
+    const telasHTML = p.slug === 'rino-pecas'
+      ? `<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">${p.telas.map((t, k) => `<button class="rino-piece" id="dk-p${k + 1}" type="button" aria-label="Abrir ${esc(lx(t.t))}" title="${esc(lx(t.t))}" onclick="openLightbox('${p.dir}${t.img}.webp')"><span class="rino-piece-thumb"><img src="${p.dir}${t.img}-t.webp" alt="${esc(lx(t.t))}" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">${esc(lx(t.t))}</span></button>`).join('')}</div></section>`
+      : p.telas.map((t, k) => {
+          const d = k > 0 ? lx(t.d) : '';
+          return (d ? `<div class="dk-cap"><h3>${lx(t.t)}</h3><p>${d}</p></div>` : '') + `<img id="dk-p${k + 1}" src="${p.dir}${t.img}.webp" alt="${lx(t.t)}" width="2048" height="1152" decoding="async"${k > 1 ? ' loading="lazy"' : ''}>`;
+        }).join('');
+    document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
     // sumário: seções das telas + blocos; a seção visível fica marcada
     const toc = document.getElementById('dk-toc'), sc = document.getElementById('dk-scroll');
     const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
     if (p.html === 'meta') initMeta();
-    const nx = PJ[(PJ.indexOf(p) + 1) % PJ.length];
-    const nb = document.getElementById('dk-next'); nb.hidden = PJ.length < 2;
-    nb.innerHTML = `<span>${lx(NEXT_L)}</span>${nx.titulo} →`; nb.onclick = () => openDeck(nx.slug);
+    const navPJ = PJ.filter(item => item.slug !== 'rino-pecas');
+    const navIndex = navPJ.indexOf(p);
+    const nx = navIndex >= 0 ? navPJ[(navIndex + 1) % navPJ.length] : null;
+    const nb = document.getElementById('dk-next'); nb.hidden = !nx || navPJ.length < 2;
+    nb.innerHTML = nx ? `<span>${lx(NEXT_L)}</span>${nx.titulo} →` : '';
+    nb.onclick = nx ? () => openDeck(nx.slug) : null;
     sc.scrollTop = 0;
     dsInit();
     const siteHeader = document.querySelector('header.top-header');
@@ -3437,6 +3575,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   const closeDeck = () => { dk.classList.remove('open'); document.body.classList.remove('project-deck-open'); document.documentElement.style.removeProperty('--project-header-height'); if (!webOv.classList.contains('open')) document.body.style.overflow = ''; document.getElementById('dk-imgs').innerHTML = ''; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} };
   document.getElementById('dk-x').onclick = closeDeck;
+  document.getElementById('dk-tags').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-pj-tag]'); if (!b) return;
+    pjEtiqueta = b.dataset.pjTag; pjFiltro = 'all';
+    closeDeck();
+    const route = document.querySelector('[data-route="work"]');
+    if (route) route.click(); else renderPJ();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      renderPJ();
+      document.getElementById('work-case-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+  });
+
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
     const sc = document.getElementById('dk-scroll'), el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
