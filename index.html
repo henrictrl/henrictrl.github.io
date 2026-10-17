@@ -722,7 +722,7 @@ a.cv-link:hover { text-decoration: underline; text-underline-offset: 3px; text-d
 
 .pm-content { padding: 32px 16px 60px; }
 @media (min-width: 768px) { .pm-content { padding: 48px 16px 80px; } }
-.pm-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+ .pm-tags { display: none !important; }
 .pm-tags span {
   font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
   padding: 4px 10px; border-radius: var(--r); background: var(--gray-100); color: var(--gray-500);
@@ -1287,7 +1287,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @keyframes hrfade { from { opacity: .6; } to { opacity: 1; } }
 @media (max-width: 767px) { .hr-card { width: 220px; } .hr-rows { gap: 12px; } }
 
-/* Catálogo de projetos: etiquetas combináveis, visual leve e sem categorias híbridas */
+/* Catálogo de projetos: filtros simples por uma categoria de cada vez */
 .pj-filters { display:flex; flex-direction:column; align-items:stretch; gap:10px; margin:0 0 24px; }
 .pj-filter-main { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
 .pj-filter-main .art-filter { font-size:12px; padding:7px 11px; }
@@ -2685,7 +2685,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dots.innerHTML = imgs.map((_, i) => `<span class="pm-dot${i === 0 ? ' active' : ''}"></span>`).join('');
     
     document.getElementById('pm-title').textContent = p.titulo;
-    document.getElementById('pm-tags').innerHTML = (p.categorias || []).map(c => `<span>${c}</span>`).join('');
+    const legacyTags = document.getElementById('pm-tags');
+    legacyTags.innerHTML = '';
+    legacyTags.hidden = true;
     document.getElementById('pm-scroll').scrollTop = 0;
     tr.style.transform = `translateX(0)`;
   };
