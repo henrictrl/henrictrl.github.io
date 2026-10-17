@@ -1439,51 +1439,52 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* Rolagem única do projeto: o próprio painel é a área rolável.
-   Assim não há um scroller interno concorrendo com o bloqueio de rolagem do body. */
+/* Rolagem consistente em desktop e mobile: o painel é uma coluna fixa e
+   somente a área de conteúdo rola. Isso evita conflito entre body e modal. */
 .dk-ov {
   position: fixed;
   inset: 0;
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   min-width: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  scrollbar-gutter: stable;
-  scroll-behavior: auto;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 .dk-ov.open {
   height: 100vh;
   height: 100dvh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 .dk-top {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 2;
+  flex: 0 0 auto;
   min-width: 0;
   background: var(--white);
 }
 .dk-scroll {
   position: relative;
   display: block;
+  flex: 1 1 auto;
   width: 100%;
   min-width: 0;
+  min-height: 0;
   height: auto;
   max-height: none;
-  overflow: visible;
-  overscroll-behavior: auto;
-  touch-action: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
 }
 .dk-body, #dk-imgs { min-width: 0; }
+/* Preserva a altura real de todas as imagens e o alcance da rolagem. */
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-/* As imagens permanecem no fluxo para preservar a altura real e o alcance da rolagem. */
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 </style>
@@ -3456,8 +3457,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-top]');
     if (!b) return;
-    const projectOpen = document.getElementById('dk')?.classList.contains('open');
-    const sc = projectOpen ? document.getElementById('dk') : b.closest('.dk-scroll');
+    const projectOpen = dk.classList.contains('open');
+    const sc = projectOpen ? dkScroll : b.closest('.dk-scroll');
     if (sc) {
       // Salto imediato é intencional: o smooth-scroll estava sendo interrompido em páginas longas.
       sc.scrollTo({ top: 0, behavior: 'auto' });
@@ -3483,6 +3484,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
+  const dkScroll = document.getElementById('dk-scroll');
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
@@ -3755,7 +3757,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
     // sumário: seções das telas + blocos; a seção visível fica marcada
-    const toc = document.getElementById('dk-toc'), sc = dk;
+    const toc = document.getElementById('dk-toc'), sc = dkScroll;
     const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
@@ -3785,8 +3787,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-web]'); if (b && PJ_BY[b.dataset.web]) openWeb(PJ_BY[b.dataset.web]); });
   // seção atual do sumário pela rolagem
-  document.getElementById('dk').addEventListener('scroll', () => {
-    const sc = dk, toc = document.getElementById('dk-toc'); if (toc.hidden) return;
+  dkScroll.addEventListener('scroll', () => {
+    const sc = dkScroll, toc = document.getElementById('dk-toc'); if (toc.hidden) return;
     const scRect = sc.getBoundingClientRect();
     const y = sc.scrollTop + sc.clientHeight * 0.45; let cur = null;
     toc.querySelectorAll('a').forEach(b => {
@@ -3807,7 +3809,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('dk-x').onclick = closeDeck;
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
-    const sc = dk, el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
+    const sc = dkScroll, el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
     const scRect = sc.getBoundingClientRect();
     const topInScroller = cap ? cap.getBoundingClientRect().top - scRect.top + sc.scrollTop - 8 : 0;
@@ -3818,7 +3820,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sc.scrollTop = targetTop;
   });
   document.addEventListener('keydown', (e) => { if (dk.classList.contains('open') && e.key === 'Escape' && !webOv.classList.contains('open') && !pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closeDeck(); });
-  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = dk.scrollTop; openDeck(dkP.slug); dk.scrollTop = y; } });
+  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = dkScroll.scrollTop; openDeck(dkP.slug); dkScroll.scrollTop = y; } });
   // link direto para um projeto: #projeto/<slug>
   const fromHash = () => { const m = location.hash.match(/^#projeto\/([\w-]+)/); if (m && PJ_BY[m[1]]) openDeck(m[1]); };
   window.addEventListener('hashchange', fromHash);
