@@ -555,12 +555,12 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 /* Durante um projeto, a navegação principal continua acessível acima da apresentação. */
 body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
 body.project-deck-open > header.floating-header { display: none !important; }
-/* O painel cobre também a área sob a navegação; seu cabeçalho interno reserva o espaço da barra fixa. */
-body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: visible; overscroll-behavior: auto; }
+/* O modal é a própria área rolável; o cabeçalho permanece preso ao topo. */
+body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; }
 body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
-.dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
-.dk-ov.open { opacity: 1; pointer-events: auto; }
-.dk-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 32px; }
+.dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: block; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
+.dk-ov.open { opacity: 1; pointer-events: auto; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.dk-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 32px; background: var(--white); }
 .dk-name { font-size: 15px; font-weight: 500; }
 .dk-meta { font-size: 13px; color: var(--gray-500); margin-left: 10px; }
 .dk-acts { display: flex; align-items: center; gap: 18px; }
@@ -570,11 +570,11 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-x svg { width: 20px; height: 20px; }
 /* página do projeto estilo Behance: cabeçalho + todas as páginas empilhadas na vertical */
 .dk-body { max-width: 1600px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 40px; align-items: start; }
-.dk-toc { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 2px; padding-top: 4px; }
+.dk-toc { position: sticky; top: calc(var(--project-header-height, 72px) + 92px); display: flex; flex-direction: column; gap: 2px; padding-top: 4px; }
 .dk-toc a { font-size: 13px; line-height: 1.4; color: var(--gray-400); text-decoration: none; padding: 5px 0 5px 14px; border-left: 1px solid var(--gray-200); cursor: pointer; transition: color .2s, border-color .2s; }
 .dk-toc a:hover { color: var(--ink); }
 .dk-toc a.on { color: var(--ink); border-left-color: var(--ink); }
-.dk-scroll { position: relative; flex: 1 1 0%; height: 0; min-height: 0; width: 100%; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; touch-action: pan-y; }
+.dk-content { width: 100%; min-width: 0; }
 .dk-head { max-width: 760px; margin: 0 auto; padding: 48px 24px 56px; text-align: center; }
 .dk-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: 0.04em; }
 .dk-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; }
@@ -1387,6 +1387,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 @media (max-width: 767px) {
   .dk-top { padding: 12px 16px; gap: 10px; }
   body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
+  .dk-toc { top: calc(var(--project-header-height, 56px) + 80px); }
   .dk-body { display: block; padding: 0 12px; }
   .dk-head { padding: 30px 16px 36px; }
 }
@@ -1436,12 +1437,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* Safari: manter o overlay fixo fora do papel de área rolável.
-   #dk-scroll é o único contêiner com overflow vertical; o navegador processa
-   roda, trackpad e toque pelo mecanismo nativo. */
+/* O diálogo recebe roda, trackpad e toque; as imagens não interceptam gestos. */
 #dk-imgs, .dk-body { min-width: 0; }
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-/* As imagens das páginas não capturam gestos; a rolagem permanece no #dk-scroll. */
 #dk-imgs > img { pointer-events: none; touch-action: pan-y; }
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
@@ -1833,7 +1831,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 <div class="dk-ov" id="dk" role="dialog" aria-modal="true" aria-labelledby="dk-name">
   <div class="dk-top"><div><span class="dk-name" id="dk-name"></span><span class="dk-meta" id="dk-meta"></span></div>
     <div class="dk-acts"><button class="dk-x" id="dk-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div></div>
-  <div class="dk-scroll" id="dk-scroll">
+  <div class="dk-content" id="dk-content">
     <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><div class="dk-tags" id="dk-tags" aria-label="Etiquetas do projeto" hidden></div><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
     <div class="dk-body"><nav class="dk-toc" id="dk-toc" aria-label="Sumário"></nav><div class="dk-imgs" id="dk-imgs"></div></div>
     <footer class="dk-foot"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button><button class="dk-next" id="dk-next"></button></footer>
@@ -3419,7 +3417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const b = e.target.closest('[data-top]');
     if (!b) return;
     const projectOpen = dk.classList.contains('open');
-    const sc = projectOpen ? dkScroll : b.closest('.dk-scroll');
+    const sc = projectOpen ? dkScroller : null;
     if (sc) {
       // Salto imediato é intencional: o smooth-scroll estava sendo interrompido em páginas longas.
       sc.scrollTo({ top: 0, behavior: 'auto' });
@@ -3445,7 +3443,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
-  const dkScroll = document.getElementById('dk-scroll');
+  const dkScroller = dk;
 
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
@@ -3719,7 +3717,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
     // sumário: seções das telas + blocos; a seção visível fica marcada
-    const toc = document.getElementById('dk-toc'), sc = dkScroll;
+    const toc = document.getElementById('dk-toc'), sc = dkScroller;
     const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
@@ -3749,8 +3747,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-web]'); if (b && PJ_BY[b.dataset.web]) openWeb(PJ_BY[b.dataset.web]); });
   // seção atual do sumário pela rolagem
-  dkScroll.addEventListener('scroll', () => {
-    const sc = dkScroll, toc = document.getElementById('dk-toc'); if (toc.hidden) return;
+  dkScroller.addEventListener('scroll', () => {
+    const sc = dkScroller, toc = document.getElementById('dk-toc'); if (toc.hidden) return;
     const scRect = sc.getBoundingClientRect();
     const y = sc.scrollTop + sc.clientHeight * 0.45; let cur = null;
     toc.querySelectorAll('a').forEach(b => {
@@ -3771,7 +3769,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('dk-x').onclick = closeDeck;
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
-    const sc = dkScroll, el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
+    const sc = dkScroller, el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
     const scRect = sc.getBoundingClientRect();
     const topInScroller = cap ? cap.getBoundingClientRect().top - scRect.top + sc.scrollTop - 8 : 0;
@@ -3782,7 +3780,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sc.scrollTop = targetTop;
   });
   document.addEventListener('keydown', (e) => { if (dk.classList.contains('open') && e.key === 'Escape' && !webOv.classList.contains('open') && !pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closeDeck(); });
-  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = dkScroll.scrollTop; openDeck(dkP.slug); dkScroll.scrollTop = y; } });
+  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = dkScroller.scrollTop; openDeck(dkP.slug); dkScroller.scrollTop = y; } });
   // link direto para um projeto: #projeto/<slug>
   const fromHash = () => { const m = location.hash.match(/^#projeto\/([\w-]+)/); if (m && PJ_BY[m[1]]) openDeck(m[1]); };
   window.addEventListener('hashchange', fromHash);
@@ -3980,7 +3978,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHome();
   initTools();
   const mobileTopButton = document.getElementById('mobile-top-button');
-  const getProjectScroller = () => dk.classList.contains('open') ? dkScroll : null;
+  const getProjectScroller = () => dk.classList.contains('open') ? dkScroller : null;
   const updateMobileTopButton = () => {
     if (!mobileTopButton) return;
     const sc = getProjectScroller();
@@ -4000,7 +3998,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     window.addEventListener('scroll', updateMobileTopButton, { passive: true });
     window.addEventListener('resize', updateMobileTopButton);
-    dkScroll.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    dkScroller.addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
   fromHash(); // abre o projeto quando o link tem #projeto/<slug>
