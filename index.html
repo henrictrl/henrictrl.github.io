@@ -947,9 +947,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .ig-links { justify-content: flex-start; padding: 0 16px; }
 }
 /* modal do post */
-.pv-ov { position: fixed; inset: 0; z-index: 620; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+.pv-ov { position: fixed; inset: 0; z-index: 1400; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
 .pv-ov.open { opacity: 1; pointer-events: auto; }
-.pv-x { position: absolute; top: 14px; right: 18px; z-index: 2; }
+.pv-x { position: absolute; top: 14px; right: 18px; z-index: 1401; }
 .pv-scroll { position: absolute; inset: 0; overflow-y: auto; padding-top: 64px; overscroll-behavior: contain; }
 @media (max-width: 767px) { .pv-scroll { padding-top: 56px; } .pv-x { top: 10px; right: 10px; } }
 
@@ -3405,7 +3405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const FL = { post: DS_L.fPost, car: DS_L.fCar, reel: DS_L.fReel };
     const out = [];
     const samplePosts = D.users.map(u => rows.filter(r => r.x.user === u).sort((a, b) => b.v - a.v)[0]?.x).filter(Boolean);
-    const sampleGroups = [samplePosts.slice(0, 3), samplePosts.slice(3, 6), samplePosts.slice(6, 9)];
+    const sampleGroups = [samplePosts.slice(0, 3), samplePosts.slice(3, 6), samplePosts.slice(6, 10)];
     const sampleSection = (id, title, desc, posts, variant) => posts.length
       ? sec(id, title, lx(desc), `<div class="ds-post-examples pc-grid">${posts.map(x => pcCard(x)).join('')}</div>`, `ds-sample ds-sample-${variant}`)
       : '';
