@@ -493,7 +493,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .am-loading span { position: relative; font-size: 13px; color: var(--gray-500); background: var(--white); padding: 8px 14px; border-radius: var(--r); }
 .am-stage.loaded .am-loading { display: none; }
 /* leitor traduzido (EN/ES) */
-.am-reader { position: absolute; inset: 0; overflow-y: auto; background: var(--white); }
+.am-reader { position: absolute; inset: 0; overflow-y: auto; background: var(--white); -webkit-overflow-scrolling: touch; }
 .am-reader[hidden] { display: none; }
 .am-article { max-width: 680px; margin: 0 auto; padding: 36px 24px 80px; font-size: 17px; line-height: 1.7; color: var(--ink); }
 .am-article h1 { font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; margin: 8px 0 28px; }
@@ -694,7 +694,7 @@ a.cv-link:hover { text-decoration: underline; text-underline-offset: 3px; text-d
 .pm-close svg, .pm-nav-btn svg { width: 18px; height: 18px; }
 .pm-nav-arrows { display: flex; gap: 6px; }
 
-.pm-scroll { flex: 1; overflow-y: auto; }
+.pm-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
 .pm-gallery { position: relative; aspect-ratio: 16/9; background: var(--gray-100); overflow: hidden; }
 .pm-gallery-track { display: flex; height: 100%; transition: transform 0.45s var(--ease); }
