@@ -556,7 +556,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
 body.project-deck-open > header.floating-header { display: none !important; }
 /* O painel cobre também a área sob a navegação; seu cabeçalho interno reserva o espaço da barra fixa. */
-body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; }
+body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; }
 body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
 .dk-ov { position: fixed; inset: 0; z-index: 400; background: var(--white); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s var(--ease); }
 .dk-ov.open { opacity: 1; pointer-events: auto; }
@@ -1439,47 +1439,51 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
   .portrait-hint { width: 100%; text-align: center; }
 }
 
-/* Painel de projeto: cabeçalho fixo + uma única área flexível de rolagem.
-   O rodapé pertence ao conteúdo do projeto, portanto não deve virar uma faixa
-   própria do painel. A altura zero anterior e a grade com uma faixa vazia deixavam
-   a área de rolagem inconsistente entre Safari, Chromium e telas redimensionadas. */
+/* Rolagem única do projeto: o próprio painel é a área rolável.
+   Assim não há um scroller interno concorrendo com o bloqueio de rolagem do body. */
 .dk-ov {
   position: fixed;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: block;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-}
-.dk-top {
-  flex: 0 0 auto;
-  min-width: 0;
-}
-.dk-scroll {
-  position: relative;
-  display: block;
-  flex: 1 1 0;
-  height: auto;
-  min-height: 0;
-  min-width: 0;
-  width: 100%;
-  max-height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
   scrollbar-gutter: stable;
   scroll-behavior: auto;
 }
+.dk-ov.open {
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.dk-top {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  min-width: 0;
+  background: var(--white);
+}
+.dk-scroll {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  overscroll-behavior: auto;
+  touch-action: auto;
+}
 .dk-body, #dk-imgs { min-width: 0; }
 #dk-imgs img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-/* Estabilidade de altura: imagens longas não entram/saem de content-visibility durante a rolagem. */
+/* As imagens permanecem no fluxo para preservar a altura real e o alcance da rolagem. */
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 </style>
@@ -3453,7 +3457,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const b = e.target.closest('[data-top]');
     if (!b) return;
     const projectOpen = document.getElementById('dk')?.classList.contains('open');
-    const sc = b.closest('.dk-scroll') || (projectOpen ? document.getElementById('dk-scroll') : null);
+    const sc = projectOpen ? document.getElementById('dk') : b.closest('.dk-scroll');
     if (sc) {
       // Salto imediato é intencional: o smooth-scroll estava sendo interrompido em páginas longas.
       sc.scrollTo({ top: 0, behavior: 'auto' });
@@ -3672,7 +3676,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const els = document.querySelectorAll('#dk-imgs .ds-anim'); if (!els.length) return;
     if (dsIO) dsIO.disconnect();
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-    dsIO = new IntersectionObserver((es) => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.ds-num').forEach(dsCount); dsIO.unobserve(e.target); }), { root: document.getElementById('dk-scroll'), threshold: 0.2 });
+    dsIO = new IntersectionObserver((es) => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.ds-num').forEach(dsCount); dsIO.unobserve(e.target); }), { root: document.getElementById('dk'), threshold: 0.2 });
     els.forEach(e => dsIO.observe(e));
   };
   // tooltip único dos dashboards + clique abre o post
@@ -3683,7 +3687,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('pointermove', (e) => { if (dsTip.classList.contains('on')) dsMove(e); });
   document.addEventListener('pointerout', (e) => { const t = e.target.closest('.ds [data-tip]'); if (t && !t.contains(e.relatedTarget)) dsTip.classList.remove('on'); });
   document.addEventListener('click', (e) => { const b = e.target.closest('.ds [data-post]'); if (!b || !POST_BY[b.dataset.post]) return; dsTip.classList.remove('on'); openPosts([POST_BY[b.dataset.post]]); });
-  document.getElementById('dk-scroll').addEventListener('scroll', () => dsTip.classList.remove('on'), { passive: true });
+  document.getElementById('dk').addEventListener('scroll', () => dsTip.classList.remove('on'), { passive: true });
 
   const deckBlocks = (p) => {
     const out = [], toc = [];
@@ -3751,7 +3755,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
     // sumário: seções das telas + blocos; a seção visível fica marcada
-    const toc = document.getElementById('dk-toc'), sc = document.getElementById('dk-scroll');
+    const toc = document.getElementById('dk-toc'), sc = dk;
     const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
     toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
     toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
@@ -3781,8 +3785,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-web]'); if (b && PJ_BY[b.dataset.web]) openWeb(PJ_BY[b.dataset.web]); });
   // seção atual do sumário pela rolagem
-  document.getElementById('dk-scroll').addEventListener('scroll', () => {
-    const sc = document.getElementById('dk-scroll'), toc = document.getElementById('dk-toc'); if (toc.hidden) return;
+  document.getElementById('dk').addEventListener('scroll', () => {
+    const sc = dk, toc = document.getElementById('dk-toc'); if (toc.hidden) return;
     const scRect = sc.getBoundingClientRect();
     const y = sc.scrollTop + sc.clientHeight * 0.45; let cur = null;
     toc.querySelectorAll('a').forEach(b => {
@@ -3803,7 +3807,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('dk-x').onclick = closeDeck;
   document.getElementById('dk-toc').addEventListener('click', (e) => { const b = e.target.closest('a'); if (!b) return; e.preventDefault();
-    const sc = document.getElementById('dk-scroll'), el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
+    const sc = dk, el = b.dataset.t === 'dk-top0' ? null : document.getElementById(b.dataset.t);
     const cap = el?.previousElementSibling?.classList.contains('dk-cap') ? el.previousElementSibling : el; // inclui a legenda da página, se houver
     const scRect = sc.getBoundingClientRect();
     const topInScroller = cap ? cap.getBoundingClientRect().top - scRect.top + sc.scrollTop - 8 : 0;
@@ -3814,7 +3818,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sc.scrollTop = targetTop;
   });
   document.addEventListener('keydown', (e) => { if (dk.classList.contains('open') && e.key === 'Escape' && !webOv.classList.contains('open') && !pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closeDeck(); });
-  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = document.getElementById('dk-scroll').scrollTop; openDeck(dkP.slug); document.getElementById('dk-scroll').scrollTop = y; } });
+  onLang(() => { renderPJ(); if (dk.classList.contains('open')) { const y = dk.scrollTop; openDeck(dkP.slug); dk.scrollTop = y; } });
   // link direto para um projeto: #projeto/<slug>
   const fromHash = () => { const m = location.hash.match(/^#projeto\/([\w-]+)/); if (m && PJ_BY[m[1]]) openDeck(m[1]); };
   window.addEventListener('hashchange', fromHash);
@@ -4012,7 +4016,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHome();
   initTools();
   const mobileTopButton = document.getElementById('mobile-top-button');
-  const getProjectScroller = () => document.getElementById('dk')?.classList.contains('open') ? document.getElementById('dk-scroll') : null;
+  const getProjectScroller = () => document.getElementById('dk')?.classList.contains('open') ? document.getElementById('dk') : null;
   const updateMobileTopButton = () => {
     if (!mobileTopButton) return;
     const sc = getProjectScroller();
@@ -4032,7 +4036,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     window.addEventListener('scroll', updateMobileTopButton, { passive: true });
     window.addEventListener('resize', updateMobileTopButton);
-    document.getElementById('dk-scroll')?.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    document.getElementById('dk')?.addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
   fromHash(); // abre o projeto quando o link tem #projeto/<slug>
