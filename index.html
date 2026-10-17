@@ -1488,37 +1488,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .dk-imgs > img { content-visibility: visible; contain-intrinsic-size: none; }
 
 
-/* Safari fallback: a janela do projeto inteira é o único scroller.
-   O scroller interno é neutralizado para não competir com o contêiner fixo. */
-.dk-ov {
-  display: block !important;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  touch-action: pan-y;
-}
-.dk-ov.open {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-body.project-deck-open .dk-ov.open {
-  display: block !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-.dk-scroll {
-  display: block !important;
-  position: relative;
-  flex: none !important;
-  width: 100%;
-  height: auto !important;
-  min-height: 0;
-  max-height: none;
-  overflow: visible !important;
-  touch-action: auto;
-}
+/* A apresentação usa o scroller de conteúdo (#dk-scroll), enquanto o overlay permanece fixo. */
 
 </style>
 </head>
@@ -3517,8 +3487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Apresentação do projeto (deck): telas + blocos (site, capturas, galeria, posts, html, relacionados) --- */
   const dk = document.getElementById('dk');
-  /* Um único contêiner de rolagem para evitar o bug de nested scrolling no Safari. */
-  const dkScroll = dk;
+  const dkScroll = document.getElementById('dk-scroll');
   let dkP = null;
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
