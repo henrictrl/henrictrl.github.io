@@ -2278,8 +2278,7 @@ window.PROJETOS = [
       "html",
       "css",
       "javascript"
-    ],
-    "ferramentas": ["vs-code","html","css","javascript"]
+    ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
   "dir": "assets/projetos/rino/",
@@ -2330,9 +2329,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "identidade-visual",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
   "dir": "assets/projetos/optica-leopoldina/",
@@ -2592,9 +2592,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "identidade-visual",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
   "dir": "assets/projetos/sollaris/",
@@ -3029,9 +3030,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "direcao-arte",
-      "identidade-visual"
-    ],
-    "ferramentas": ["illustrator"]
+      "identidade-visual",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
   "dir": "assets/projetos/equity360/",
@@ -3218,9 +3219,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "direcao-arte",
-      "design-grafico"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "design-grafico",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
   "dir": "assets/projetos/congresso-extensao/",
@@ -3484,9 +3486,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "design-grafico"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "design-grafico",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
   "dir": "assets/projetos/interserv/",
@@ -3733,9 +3736,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "direcao-arte"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "direcao-arte",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
   "dir": "assets/projetos/ntaps/",
@@ -3944,8 +3948,10 @@ window.PROJETOS = [
       "saude"
     ],
     "contexto": ["estagio"],
-    "competencias": ["identidade-visual"],
-    "ferramentas": ["photoshop"]
+    "competencias": [
+      "identidade-visual",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
   "dir": "assets/projetos/csunesp/",
@@ -4180,9 +4186,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "direcao-arte"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "direcao-arte",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "dir": "assets/projetos/mostra-saude-mental/",
@@ -4398,9 +4405,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "direcao-arte"
-    ],
-    "ferramentas": ["photoshop"]
+      "direcao-arte",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/nupe/capa.webp",
   "dir": "assets/projetos/nupe/",
@@ -4706,9 +4713,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "social-media"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "social-media",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
   "dir": "assets/projetos/ocupacao-unesp-negra/",
@@ -4852,9 +4860,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "design-editorial",
-      "diagramacao"
-    ],
-    "ferramentas": ["illustrator","photoshop"]
+      "diagramacao",
+      "illustrator",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
   "dir": "assets/projetos/prisma-brandbook/",
@@ -5055,9 +5064,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "design-grafico"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "design-grafico",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
   "dir": "assets/projetos/cminds/",
@@ -5319,9 +5329,10 @@ window.PROJETOS = [
     "contexto": ["bolsista"],
     "competencias": [
       "design-grafico",
-      "social-media"
-    ],
-    "ferramentas": ["photoshop","illustrator"]
+      "social-media",
+      "photoshop",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
   "dir": "assets/projetos/setembro-amarelo/",
@@ -5455,8 +5466,13 @@ window.PROJETOS = [
       "cultura"
     ],
     "contexto": ["estagio"],
-    "competencias": ["social-media","design-grafico"],
-    "ferramentas": ["photoshop","illustrator","meta-business-suite"]
+    "competencias": [
+      "social-media",
+      "design-grafico",
+      "photoshop",
+      "illustrator",
+      "meta-business-suite"
+    ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
   "dir": "assets/projetos/rp-40-anos/",
@@ -5653,8 +5669,11 @@ window.PROJETOS = [
       "projeto-academico",
       "competicao"
     ],
-    "competencias": ["diagramacao"],
-    "ferramentas": ["illustrator","photoshop"]
+    "competencias": [
+      "diagramacao",
+      "illustrator",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
   "dir": "assets/projetos/prisma-proposta/",
@@ -5928,9 +5947,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "design-editorial",
-      "diagramacao"
-    ],
-    "ferramentas": ["photoshop"]
+      "diagramacao",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
   "dir": "assets/projetos/inspirit/",
@@ -6054,9 +6073,11 @@ window.PROJETOS = [
     ],
     "competencias": [
       "design-grafico",
-      "ilustracao"
-    ],
-    "ferramentas": ["procreate","adobe-fresco","illustrator"]
+      "ilustracao",
+      "procreate",
+      "adobe-fresco",
+      "illustrator"
+    ]
   },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
   "dir": "assets/projetos/festa-da-polenta/",
@@ -6176,9 +6197,12 @@ window.PROJETOS = [
     ],
     "competencias": [
       "programacao",
-      "design-interface"
-    ],
-    "ferramentas": ["vs-code","html","css","javascript"]
+      "design-interface",
+      "vs-code",
+      "html",
+      "css",
+      "javascript"
+    ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
   "dir": "assets/projetos/fellipe-gualberto/",
@@ -6748,9 +6772,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "social-media",
-      "redacao"
-    ],
-    "ferramentas": ["figma","affinity"]
+      "redacao",
+      "figma",
+      "affinity"
+    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
   "dir": "assets/projetos/basement/",
@@ -6799,9 +6824,12 @@ window.PROJETOS = [
     ],
     "competencias": [
       "redacao",
-      "social-media"
-    ],
-    "ferramentas": ["wordpress","microsoft-word","google-docs","notion"]
+      "social-media",
+      "wordpress",
+      "microsoft-word",
+      "google-docs",
+      "notion"
+    ]
   },
   "capa": "assets/projetos/tesoura/capa.webp",
   "dir": "assets/projetos/tesoura/",
@@ -6846,9 +6874,15 @@ window.PROJETOS = [
     ],
     "competencias": [
       "redacao",
-      "social-media"
-    ],
-    "ferramentas": ["photoshop","wordpress","microsoft-word","google-docs","notion","trello","gmail"]
+      "social-media",
+      "photoshop",
+      "wordpress",
+      "microsoft-word",
+      "google-docs",
+      "notion",
+      "trello",
+      "gmail"
+    ]
   },
   "capa": "assets/projetos/persona/capa.webp",
   "dir": "assets/projetos/persona/",
@@ -6894,9 +6928,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "redacao",
-      "social-media"
-    ],
-    "ferramentas": ["substack","google-docs"]
+      "social-media",
+      "substack",
+      "google-docs"
+    ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
   "dir": "assets/projetos/desvendando/",
@@ -6939,9 +6974,13 @@ window.PROJETOS = [
     ],
     "competencias": [
       "social-media",
-      "direcao-arte"
-    ],
-    "ferramentas": ["monday","photoshop","illustrator","premiere","microsoft-office"]
+      "direcao-arte",
+      "monday",
+      "photoshop",
+      "illustrator",
+      "premiere",
+      "microsoft-office"
+    ]
   },
   "capa": "assets/projetos/proec/capa.webp",
   "dir": "assets/projetos/proec/",
@@ -7018,7 +7057,7 @@ window.PROJETOS = [
     }
    }
   ],
-  "rel": ["copa-girlpower"],
+  "rel": ["congresso-extensao","interserv","nupe","ocupacao-unesp-negra","copa-girlpower"],
   "dash": {
    "users": [
     "proec_unesp",
@@ -7098,9 +7137,14 @@ window.PROJETOS = [
     "contexto": ["estagio"],
     "competencias": [
       "social-media",
-      "redacao"
-    ],
-    "ferramentas": ["meta-business-suite","html","wordpress","photoshop","illustrator","notion"]
+      "redacao",
+      "meta-business-suite",
+      "html",
+      "wordpress",
+      "photoshop",
+      "illustrator",
+      "notion"
+    ]
   },
   "capa": "assets/projetos/rd-cultural/capa.webp",
   "dir": "assets/projetos/rd-cultural/",
@@ -7145,9 +7189,10 @@ window.PROJETOS = [
     ],
     "competencias": [
       "identidade-visual",
-      "social-media"
-    ],
-    "ferramentas": ["streamyard","photoshop"]
+      "social-media",
+      "streamyard",
+      "photoshop"
+    ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
   "dir": "assets/projetos/encantos-do-brasil/",
@@ -7456,9 +7501,9 @@ window.PROJETOS = [
     ],
     "competencias": [
       "fotografia",
-      "organizacao-evento"
-    ],
-    "ferramentas": ["canon-rebel-t7"]
+      "organizacao-evento",
+      "canon-rebel-t7"
+    ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
   "dir": "assets/projetos/copa-girlpower/",
@@ -7570,7 +7615,8 @@ window.PROJETOS = [
      "pt": "Ficha"
     }
    }
-  ]
+  ],
+  "rel": ["proec"]
  },
  {
   "slug": "oficina-gestao-projetos",
