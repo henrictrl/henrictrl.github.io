@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rino: peças — Henrique Marinhos</title>
+<meta name="robots" content="index,follow">
+</head>
+<body>
+<p>Carregando projeto…</p>
+<script>
+(async function () {
+  try {
+    var response = await fetch('/projeto.html', { cache: 'no-cache' });
+    if (!response.ok) throw new Error('Não foi possível carregar a página do projeto.');
+    var html = await response.text();
+    html = html.replace('<head>', '<head>\\n<base href="/">');
+    html = html.replace('var slug = params.get("slug") || "";', 'var slug = params.get("slug") || "rino-pecas";');
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (error) {
+    document.body.textContent = 'Não foi possível carregar este projeto. Volte ao portfólio e tente novamente.';
+  }
+})();
+</script>
+</body>
+</html>
