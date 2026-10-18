@@ -108,6 +108,8 @@
   }
   var POST_BY=Object.create(null);
   POSTS.forEach(function(p){POST_BY[p.c]=p;});
+  var PROJECT_ROUTE_ALIASES = {"rino-site":"rino-cores","o-hobbit":"hobbit","metaprojeto":"portfolio","dash-geral":"visao-geral"};
+  function cleanProjectUrl(projectSlug) { return "/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/"; }
   var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
   var main=document.getElementById("dk"), heading=document.getElementById("project-title");
   var kicker=document.getElementById("project-kicker"), meta=document.getElementById("project-meta");
@@ -537,7 +539,7 @@
     if(project.rel&&project.rel.length){
       var related=project.rel.map(function(relatedSlug){
         var item=PROJECTS.find(function(candidate){return candidate.slug===relatedSlug;}); if(!item)return "";
-        return '<a class="work-card" href="projeto.html?slug='+encodeURIComponent(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p><p class="work-card-tag">'+esc(lx(item.cat||item.badge||""))+'</p></a>';
+        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p><p class="work-card-tag">'+esc(lx(item.cat||item.badge||""))+'</p></a>';
       }).join("");
       if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
     }
@@ -550,7 +552,7 @@
     var navigationProjects=PROJECTS;
     var navIndex=navigationProjects.findIndex(function(item){return item.slug===project.slug;});
     var next=navIndex>=0?navigationProjects[(navIndex+1)%navigationProjects.length]:null;
-    if(next&&navigationProjects.length>1){nextLink.href="projeto.html?slug="+encodeURIComponent(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
+    if(next&&navigationProjects.length>1){nextLink.href=cleanProjectUrl(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
     else nextLink.hidden=true;
     renderLanguageControls();
     bindProjectInteractions();
