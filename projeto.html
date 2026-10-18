@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261018-review2">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261018-review3">
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
@@ -52,9 +52,9 @@
   <div class="lightbox-stage"><img class="lightbox-img" id="project-lightbox-img" alt=""></div>
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
-<script src="assets/data/projetos.js?v=20261018-review2"></script>
-<script src="assets/data/posts.js?v=20261018-review2"></script>
-<script src="assets/data/engajamento.js?v=20261018-review2"></script>
+<script src="assets/data/projetos.js?v=20261018-review3"></script>
+<script src="assets/data/posts.js?v=20261018-review3"></script>
+<script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
 
 (function () {
@@ -353,6 +353,7 @@
   };
 
 
+  let dsIO = null;
   const dsInit = () => {
     const els = document.querySelectorAll('#project-visuals .ds-anim');
     if (!els.length) return;
@@ -366,7 +367,7 @@
       entry.target.classList.add('in');
       entry.target.querySelectorAll('.ds-num').forEach(dsCount);
       dsIO.unobserve(entry.target);
-    }), { root: null, threshold: 0.2 });
+    }), { root: null, threshold: 0 });
     els.forEach(e => dsIO.observe(e));
   };
   const dsTip = document.createElement('div');
@@ -545,7 +546,7 @@
     toc.innerHTML=tocItems.map(function(item,index){return '<a href="#'+esc(item[0])+'" data-t="'+esc(item[0])+'"'+(index?"":' class="on"')+'>'+esc(lx(item[1]))+'</a>';}).join("");
     toc.hidden=tocItems.length<2;
     toc.parentNode.classList.toggle("no-toc",toc.hidden);
-    var navigationProjects=PROJECTS.filter(function(item){return ["rino-pecas","sollaris-instagram","o-hobbit","dash-geral"].indexOf(item.slug)<0;});
+    var navigationProjects=PROJECTS;
     var navIndex=navigationProjects.findIndex(function(item){return item.slug===project.slug;});
     var next=navIndex>=0?navigationProjects[(navIndex+1)%navigationProjects.length]:null;
     if(next&&navigationProjects.length>1){nextLink.href="projeto.html?slug="+encodeURIComponent(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
@@ -559,6 +560,7 @@
       var filter=event.target.closest("[data-pk]");
       if(filter){
         var wrap=filter.closest(".pc-block");
+        if(!wrap)return;
         wrap.querySelectorAll("[data-pk]").forEach(function(button){button.setAttribute("aria-pressed",String(button===filter));});
         wrap.querySelectorAll(".pc").forEach(function(card){card.hidden=filter.dataset.pk!=="all"&&card.dataset.kind!==filter.dataset.pk;});
         wrap.querySelectorAll(".pc-group").forEach(function(group){group.hidden=!group.querySelector(".pc:not([hidden])");});
