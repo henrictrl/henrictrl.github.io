@@ -1450,10 +1450,10 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 
 /* Revisão tipográfica — alinhamento central consistente em todo o portfólio */
 body { text-align: center; }
-body :is(div, section, article, header, footer, nav, p, h1, h2, h3, h4, h5, h6, li, dt, dd, td, th, figcaption, blockquote, label, summary, caption, span, a, button, small, strong, em, b, i) {
+body div, body section, body article, body header, body footer, body nav, body p, body h1, body h2, body h3, body h4, body h5, body h6, body li, body dt, body dd, body td, body th, body figcaption, body blockquote, body label, body summary, body caption, body span, body a, body button, body small, body strong, body em, body b, body i {
   text-align: center !important;
 }
-body :is(h1, h2, h3, h4, h5, h6) { text-wrap: balance; }
+body h1, body h2, body h3, body h4, body h5, body h6 { text-wrap: balance; }
 body p { text-wrap: pretty; text-align-last: center !important; }
 
 /* Centralizar também os blocos — não só as linhas do texto. */
@@ -1470,7 +1470,7 @@ body .pg-i { align-items: center !important; }
 body .ds-table { margin-inline: auto; }
 
 /* Textos corridos: largura confortável, centralizados e com quebras naturais. */
-body :is(.hero-sub, .work-intro > p:not(.section-label), .service-desc, .about-info-text p, .pm-block-text, .sm-desc, .dk-intro, .dk-cap p, .pc-group-head p, .pc-cap, .rino-case-description, .meta-note p, .meta-end p, .resource-modal-desc, .free-tool p, .ds-d) {
+body .hero-sub, body .work-intro > p:not(.section-label), body .service-desc, body .about-info-text p, body .pm-block-text, body .sm-desc, body .dk-intro, body .dk-cap p, body .pc-group-head p, body .pc-cap, body .rino-case-description, body .meta-note p, body .meta-end p, body .resource-modal-desc, body .free-tool p, body .ds-d {
   margin-inline: auto;
   text-align: center !important;
   text-wrap: pretty;
