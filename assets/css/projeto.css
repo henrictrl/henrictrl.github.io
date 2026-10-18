@@ -1593,3 +1593,40 @@ body.project-page .pc-grid { justify-items:stretch; }
 @media (prefers-reduced-motion: reduce) {
   .mobile-top-button { transition: none; }
 }
+
+
+/* Revisão tipográfica — alinhamento central consistente em todo o portfólio */
+body { text-align: center; }
+body :is(div, section, article, header, footer, nav, p, h1, h2, h3, h4, h5, h6, li, dt, dd, td, th, figcaption, blockquote, label, summary, caption, span, a, button, small, strong, em, b, i) {
+  text-align: center !important;
+}
+body :is(h1, h2, h3, h4, h5, h6) { text-wrap: balance; }
+body p { text-wrap: pretty; text-align-last: center !important; }
+
+/* Centralizar também os blocos — não só as linhas do texto. */
+body .hero-text { align-items: center !important; text-align: center !important; }
+body .section-grid { align-items: center !important; }
+body .work-intro { align-items: center !important; text-align: center !important; }
+body .service-card { align-items: center !important; }
+body .rino-piece { align-items: center !important; }
+body .footer-socials { align-items: center !important; text-align: center !important; }
+body .pc-links { justify-content: center !important; flex-wrap: wrap; }
+body .dk-foot { justify-content: center !important; }
+body .dk-toc a { border-left: 0 !important; padding-left: 0 !important; }
+body .pg-i { align-items: center !important; }
+body .ds-table { margin-inline: auto; }
+
+/* Textos corridos: largura confortável, centralizados e com quebras naturais. */
+body :is(.hero-sub, .work-intro > p:not(.section-label), .service-desc, .about-info-text p, .pm-block-text, .sm-desc, .dk-intro, .dk-cap p, .pc-group-head p, .pc-cap, .rino-case-description, .meta-note p, .meta-end p, .resource-modal-desc, .free-tool p, .ds-d) {
+  margin-inline: auto;
+  text-align: center !important;
+  text-wrap: pretty;
+}
+body .meta-note { margin-inline: auto; }
+body .rino-case-intro { text-align: center !important; }
+body .dk-next span { text-align: center !important; }
+body .ds-tc { text-align: center !important; }
+body .ds-table th,
+body .ds-table td,
+body .ds-table th:first-child,
+body .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
