@@ -3728,7 +3728,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const openDeck = (slug) => {
     if (!PJ_BY[slug]) return false;
-    window.location.assign('projeto.html?slug=' + encodeURIComponent(slug));
+    window.location.assign(cleanProjectUrl(slug));
     return true;
   };
   window.addEventListener('resize', () => {
