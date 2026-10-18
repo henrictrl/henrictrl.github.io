@@ -3178,6 +3178,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setHdr(); window.addEventListener('resize', setHdr);
 
   /* --- Projetos: cards + apresentação (deck) --- */
+  const PROJECT_ROUTE_ALIASES = {"rino-site":"rino-cores","o-hobbit":"hobbit","metaprojeto":"portfolio","dash-geral":"visao-geral"};
+  const cleanProjectUrl = (slug) => '/projetos/' + (PROJECT_ROUTE_ALIASES[slug] || slug) + '/';
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
   // Mantém a prévia real do editor em viewport desktop e escala o iframe para o card.
@@ -3266,7 +3268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pjEtiqueta = null;
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
-  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="projeto.html?slug=${p.slug}" data-pj="${p.slug}">
+  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   const renderPJ = () => {
@@ -3338,7 +3340,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderHomeRows = () => {
     const home = document.getElementById('work-grid'); if (!home) return;
     const ps = HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean);
-    const card = (p) => `<a class="hr-card" href="projeto.html?slug=${p.slug}" data-pj="${p.slug}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`;
+    const card = (p) => `<a class="hr-card" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`;
     home.className = 'hr-rows home-featured-grid';
     home.innerHTML = ps.map(card).join('');
   };
