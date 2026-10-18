@@ -3325,7 +3325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sel = `<div class="pg-sort-buttons" role="group" aria-label="${lx(PG_L.ord)}"><span class="pg-sort-label">${lx(PG_L.ord)}:</span>${[['n', PG_L.oN], ['i', PG_L.oI], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-pg-ord="${k}" aria-pressed="${k === pgOrd}">${lx(l)}</button>`).join('')}</div>`;
     const tile = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c];
       return `<button type="button" class="pg-t" data-pgc="${x.c}"><img src="${igImg(x, 0)}" alt="" loading="lazy" decoding="async">${x.n > 1 ? `<span class="art-ig-count">${PG_ICO}${x.n}</span>` : ''}
-        <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>${esc(pgOrgName(pgOrgKey(x.user)))} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `♥ ${nf(e[0])} · ` : ''}💬 ${nf(e[1])}</span>` : ''}</span></button>`; };
+        <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>${esc(pgOrgName(pgOrgKey(x.user)))} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `${nf(e[0])} curtidas · ` : ''} ${nf(e[1])} comentários</span>` : ''}</span></button>`; };
     return `<div class="pg-bar"><div class="pg-orgs" role="group" aria-label="${lx(PG_L.org)}">${chips}</div>${sel}</div><p class="pg-n">${ps.length} ${lx(PG_L.n)}</p><div class="pg-grid" data-count="${ps.length}">${ps.map(tile).join('')}</div>`;
   };
   document.getElementById('work-case-grid').addEventListener('click', (e) => {
