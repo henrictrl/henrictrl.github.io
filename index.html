@@ -1448,41 +1448,38 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 
 
 
-/* Revisão tipográfica — alinhamento central consistente em todo o portfólio */
-body { text-align: center; }
-body div, body section, body article, body header, body footer, body nav, body p, body h1, body h2, body h3, body h4, body h5, body h6, body li, body dt, body dd, body td, body th, body figcaption, body blockquote, body label, body summary, body caption, body span, body a, body button, body small, body strong, body em, body b, body i {
+/* Centralização restrita ao conteúdo do visualizador de projetos na página inicial.
+   O restante do portfólio mantém os alinhamentos próprios de cada seção. */
+.dk-ov { text-align: center; }
+.dk-ov :is(div, section, article, header, footer, nav, p, h1, h2, h3, h4, h5, h6, li, dt, dd, td, th, figcaption, blockquote, label, summary, caption, span, a, button, small, strong, em, b, i) {
   text-align: center !important;
 }
-body h1, body h2, body h3, body h4, body h5, body h6 { text-wrap: balance; }
-body p { text-wrap: pretty; text-align-last: center !important; }
-
-/* Centralizar também os blocos — não só as linhas do texto. */
-body .hero-text { align-items: center !important; text-align: center !important; }
-body .section-grid { align-items: center !important; }
-body .work-intro { align-items: center !important; text-align: center !important; }
-body .service-card { align-items: center !important; }
-body .rino-piece { align-items: center !important; }
-body .footer-socials { align-items: center !important; text-align: center !important; }
-body .pc-links { justify-content: center !important; flex-wrap: wrap; }
-body .dk-foot { justify-content: center !important; }
-body .dk-toc a { border-left: 0 !important; padding-left: 0 !important; }
-body .pg-i { align-items: center !important; }
-body .ds-table { margin-inline: auto; }
-
-/* Textos corridos: largura confortável, centralizados e com quebras naturais. */
-body .hero-sub, body .work-intro > p:not(.section-label), body .service-desc, body .about-info-text p, body .pm-block-text, body .sm-desc, body .dk-intro, body .dk-cap p, body .pc-group-head p, body .pc-cap, body .rino-case-description, body .meta-note p, body .meta-end p, body .resource-modal-desc, body .free-tool p, body .ds-d {
+.dk-ov :is(h1, h2, h3, h4, h5, h6) { text-wrap: balance; }
+.dk-ov p { text-wrap: pretty; text-align-last: center !important; }
+.dk-ov .hero-text { align-items: center !important; text-align: center !important; }
+.dk-ov .section-grid { align-items: center !important; }
+.dk-ov .work-intro { align-items: center !important; text-align: center !important; }
+.dk-ov .service-card { align-items: center !important; }
+.dk-ov .rino-piece { align-items: center !important; }
+.dk-ov .footer-socials { align-items: center !important; text-align: center !important; }
+.dk-ov .pc-links { justify-content: center !important; flex-wrap: wrap; }
+.dk-ov .dk-foot { justify-content: center !important; }
+.dk-ov .dk-toc a { border-left: 0 !important; padding-left: 0 !important; }
+.dk-ov .pg-i { align-items: center !important; }
+.dk-ov .ds-table { margin-inline: auto; }
+.dk-ov :is(.hero-sub, .work-intro > p:not(.section-label), .service-desc, .about-info-text p, .pm-block-text, .sm-desc, .dk-intro, .dk-cap p, .pc-group-head p, .pc-cap, .rino-case-description, .meta-note p, .meta-end p, .resource-modal-desc, .free-tool p, .ds-d) {
   margin-inline: auto;
   text-align: center !important;
   text-wrap: pretty;
 }
-body .meta-note { margin-inline: auto; }
-body .rino-case-intro { text-align: center !important; }
-body .dk-next span { text-align: center !important; }
-body .ds-tc { text-align: center !important; }
-body .ds-table th,
-body .ds-table td,
-body .ds-table th:first-child,
-body .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
+.dk-ov .meta-note { margin-inline: auto; }
+.dk-ov .rino-case-intro { text-align: center !important; }
+.dk-ov .dk-next span { text-align: center !important; }
+.dk-ov .ds-tc { text-align: center !important; }
+.dk-ov .ds-table th,
+.dk-ov .ds-table td,
+.dk-ov .ds-table th:first-child,
+.dk-ov .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
 
 </style>
 </head>
