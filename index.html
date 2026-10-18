@@ -3284,7 +3284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = categories.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-category-filter="${key}" aria-pressed="${pjSelectedCategory === key}">${lx(label)}</button>`).join('');
     bar.hidden = false;
     bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div>`;
-    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="projeto.html?slug=dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
+    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="' + cleanProjectUrl('dash-geral') + '" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     grid.classList.add('work-grid');
