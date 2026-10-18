@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261017-page">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261018-review2">
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
@@ -52,9 +52,9 @@
   <div class="lightbox-stage"><img class="lightbox-img" id="project-lightbox-img" alt=""></div>
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
-<script src="assets/data/projetos.js?v=20261017-page"></script>
-<script src="assets/data/posts.js?v=20261017-page"></script>
-<script src="assets/data/engajamento.js?v=20261017-page"></script>
+<script src="assets/data/projetos.js?v=20261018-review2"></script>
+<script src="assets/data/posts.js?v=20261018-review2"></script>
+<script src="assets/data/engajamento.js?v=20261018-review2"></script>
 <script>
 
 (function () {
@@ -172,6 +172,14 @@
     if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
     return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+textLabel(" posts"," posts"," posts")+'</span></h3>'+filter+groupsHTML+'</section>';
   }
+
+
+  const MESES = {
+    pt: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'],
+    en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    es: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic']
+  };
+  const pcCard = postCard;
 
   const ENG = window.ENGAJAMENTO || { posts: {}, contas: {} };
   const T3 = (pt, en, es) => ({ pt, en, es });
@@ -344,6 +352,132 @@
     return { html: `<section class="dk-block ds" id="dk-b-ds" style="--ac:${AC};--on:${ON}">${out.join('')}</section>`, toc };
   };
 
+
+  const dsInit = () => {
+    const els = document.querySelectorAll('#project-visuals .ds-anim');
+    if (!els.length) return;
+    if (dsIO) dsIO.disconnect();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      els.forEach(e => e.classList.add('in'));
+      return;
+    }
+    dsIO = new IntersectionObserver((entries) => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in');
+      entry.target.querySelectorAll('.ds-num').forEach(dsCount);
+      dsIO.unobserve(entry.target);
+    }), { root: null, threshold: 0.2 });
+    els.forEach(e => dsIO.observe(e));
+  };
+  const dsTip = document.createElement('div');
+  dsTip.className = 'ds-tip';
+  dsTip.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(dsTip);
+  const dsMove = (e) => {
+    const w = dsTip.offsetWidth, h = dsTip.offsetHeight;
+    let x = e.clientX + 14, y = e.clientY - h - 12;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+    if (y < 8) y = e.clientY + 18;
+    dsTip.style.left = x + 'px';
+    dsTip.style.top = y + 'px';
+  };
+  document.addEventListener('pointerover', (e) => {
+    const t = e.target.closest('.ds [data-tip]');
+    if (!t || e.pointerType === 'touch') return;
+    dsTip.innerHTML = t.dataset.tip;
+    dsTip.classList.add('on');
+    dsMove(e);
+  });
+  document.addEventListener('pointermove', (e) => {
+    if (dsTip.classList.contains('on')) dsMove(e);
+  });
+  document.addEventListener('pointerout', (e) => {
+    const t = e.target.closest('.ds [data-tip]');
+    if (t && !t.contains(e.relatedTarget)) dsTip.classList.remove('on');
+  });
+  window.addEventListener('scroll', () => dsTip.classList.remove('on'), { passive: true });
+
+
+  const META_L = {
+    n: [
+      { g: { pt: 'Início', en: 'Home', es: 'Inicio' }, t: { pt: 'Retrato e apresentação', en: 'Portrait and intro', es: 'Retrato y presentación' }, img: 'n01.webp',
+        p: { pt: ['Por cima, a foto colorida; por baixo, um vídeo em loop feito no Pixelar.', 'O cursor abre um círculo com borda pontilhada (matriz Bayer 8×8, redesenhada em canvas a cada quadro). O clique espalha o vídeo pela foto inteira.'],
+             en: ['On top, the colour photo; underneath, a looping video made in Pixelar.', 'The cursor opens a circle with a dotted edge (8×8 Bayer matrix, redrawn on canvas every frame). A click spreads the video over the whole photo.'],
+             es: ['Arriba, la foto a color; debajo, un video en loop hecho en Pixelar.', 'El cursor abre un círculo con borde punteado (matriz Bayer 8×8, redibujada en canvas en cada cuadro). El clic extiende el video por toda la foto.'] } },
+      { t: { pt: 'Serviços e faixa de logos', en: 'Services and logo strip', es: 'Servicios y franja de logos' }, img: 'n02.webp',
+        p: { pt: ['Os ícones de serviço são desenhados em pixel numa grade 12×12, no mesmo pontilhado do retrato.', 'A faixa de logos anda em JavaScript: desacelera no hover, aceita arrastar e volta ao começo sem emenda. Cada logo tem altura própria para todos pesarem igual; o clique abre o case.'],
+             en: ['The service icons are drawn in pixels on a 12×12 grid, in the same dithering as the portrait.', 'The logo strip runs in JavaScript: it slows down on hover, can be dragged and loops seamlessly. Each logo has its own height so they all weigh the same; a click opens the case study.'],
+             es: ['Los íconos de servicio están dibujados en píxel en una cuadrícula de 12×12, con el mismo punteado del retrato.', 'La franja de logos se mueve en JavaScript: frena en el hover, se puede arrastrar y vuelve al inicio sin corte. Cada logo tiene su propia altura para que todos pesen igual; el clic abre el caso.'] } },
+      { t: { pt: 'Trabalhos em destaque', en: 'Featured work', es: 'Trabajos destacados' }, img: 'n03.webp',
+        p: { pt: ['Cards em grade de três colunas, com capa minimalista: logo pequeno no centro, fundo sólido.', 'Os destaques saem da mesma lista dos projetos; basta marcar um item como destaque.'],
+             en: ['Cards in a three-column grid with minimal covers: a small centred logo on a solid background.', 'Featured items come from the same project list; marking an item as featured is enough.'],
+             es: ['Tarjetas en cuadrícula de tres columnas, con portada minimalista: logo pequeño al centro, fondo sólido.', 'Los destacados salen de la misma lista de proyectos; basta marcar un ítem como destacado.'] } },
+      { g: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, t: { pt: 'Filtros por tipo', en: 'Filters by type', es: 'Filtros por tipo' }, img: 'n04.webp',
+        p: { pt: ['Identidade visual, campanhas, programação, carrosséis e posts, dashboards e explorações.', 'Estrutura, estilo e lógica ficam no index.html; projetos, artigos, posts e ferramentas ficam em listas .js separadas. Projeto novo é um item a mais na lista.'],
+             en: ['Visual identity, campaigns, web development, carousels and posts, dashboards and explorations.', 'Structure, style and logic live in index.html; projects, articles, posts and tools are separate .js lists. A new project is one more item in the list.'],
+             es: ['Identidad visual, campañas, programación, carruseles y posts, dashboards y exploraciones.', 'Estructura, estilo y lógica están en index.html; proyectos, artículos, posts y herramientas son listas .js aparte. Un proyecto nuevo es un ítem más en la lista.'] } },
+      { t: { pt: 'Case vertical', en: 'Vertical case study', es: 'Caso vertical' }, img: 'n05.webp',
+        p: { pt: ['Cada apresentação em PDF vira uma sequência de imagens em alta resolução: uma página corrida, como no Behance.', 'O sumário à esquerda acompanha a rolagem e leva direto a cada seção.'],
+             en: ['Each PDF presentation becomes a sequence of high-resolution images: one long page, as on Behance.', 'The table of contents on the left follows the scroll and jumps to each section.'],
+             es: ['Cada presentación en PDF se convierte en una secuencia de imágenes en alta resolución: una página continua, como en Behance.', 'El sumario a la izquierda sigue el desplazamiento y lleva directo a cada sección.'] } },
+      { t: { pt: 'Posts e carrosséis', en: 'Posts and carousels', es: 'Posts y carruseles' }, img: 'n06.webp',
+        p: { pt: ['Mais de cem posts baixados com legenda e data, em WebP, hospedados no próprio site, sem o embed do Instagram.', 'A partir de quatro posts, a grade usa quatro por linha; cada card abre a galeria completa.'],
+             en: ['Over a hundred posts downloaded with caption and date, in WebP, hosted on the site itself, without Instagram’s embed.', 'From four posts up, the grid shows four per row; each card opens the full gallery.'],
+             es: ['Más de cien posts descargados con leyenda y fecha, en WebP, alojados en el propio sitio, sin el embed de Instagram.', 'Desde cuatro posts, la cuadrícula muestra cuatro por fila; cada tarjeta abre la galería completa.'] } },
+      { t: { pt: 'Sites funcionando', en: 'Live sites', es: 'Sitios funcionando' }, img: 'n07.webp',
+        p: { pt: ['Os projetos de programação abrem rodando dentro de um celular desenhado na tela, ou numa janela de computador.', 'O site da Rino dá para testar ali mesmo: trocar cores, guardar combinações e baixar o logo.'],
+             en: ['Web projects open running inside a phone drawn on screen, or in a desktop window.', 'The Rino site can be tried right there: change colours, save combinations and download the logo.'],
+             es: ['Los proyectos de programación se abren funcionando dentro de un celular dibujado en pantalla, o en una ventana de computadora.', 'El sitio de Rino se puede probar ahí mismo: cambiar colores, guardar combinaciones y descargar el logo.'] } },
+      { t: { pt: 'Dashboards', en: 'Dashboards', es: 'Dashboards' }, img: 'n08.webp',
+        p: { pt: ['Curtidas e comentários de 152 posts em dez contas, somados por ano, mês, conta, formato e dia da semana.', 'Gráficos desenhados em SVG, sem biblioteca, animados quando entram na tela. Os mais curtidos abrem o post.'],
+             en: ['Likes and comments from 152 posts across ten accounts, summed by year, month, account, format and weekday.', 'Charts drawn in SVG, no library, animated as they scroll into view. The most liked open the post.'],
+             es: ['Me gusta y comentarios de 152 posts en diez cuentas, sumados por año, mes, cuenta, formato y día de la semana.', 'Gráficos dibujados en SVG, sin biblioteca, animados al entrar en pantalla. Los más gustados abren el post.'] } },
+      { g: { pt: 'Artigos', en: 'Articles', es: 'Artículos' }, t: { pt: 'Leitor de artigos', en: 'Article reader', es: 'Lector de artículos' }, img: 'n09.webp',
+        p: { pt: ['Os textos vêm da API do WordPress do Persona e do Tesoura com Ponta e abrem num leitor próprio; um botão alterna entre o texto e o post.', 'Em inglês e espanhol a tradução é automática, com glossário para nomes próprios e títulos de obras.'],
+             en: ['Texts come from the WordPress API of Persona and Tesoura com Ponta and open in a custom reader; a switch toggles between the text and the post.', 'In English and Spanish the translation is automatic, with a glossary for proper names and work titles.'],
+             es: ['Los textos vienen de la API de WordPress de Persona y de Tesoura com Ponta y se abren en un lector propio; un botón alterna entre el texto y el post.', 'En inglés y español la traducción es automática, con glosario para nombres propios y títulos de obras.'] } },
+      { g: { pt: 'Sobre', en: 'About', es: 'Sobre mí' }, t: { pt: 'Currículo', en: 'Résumé', es: 'Currículum' }, img: 'n10.webp',
+        p: { pt: ['Experiência e formação em duas colunas, com o logo de cada empresa ou instituição.', 'Os mesmos dados alimentam as três versões de idioma.'],
+             en: ['Experience and education in two columns, with each company’s or institution’s logo.', 'The same data feeds all three language versions.'],
+             es: ['Experiencia y formación en dos columnas, con el logo de cada empresa o institución.', 'Los mismos datos alimentan las tres versiones de idioma.'] } },
+      { g: { pt: 'Contato', en: 'Contact', es: 'Contacto' }, t: { pt: 'Ícones com gravidade', en: 'Icons with gravity', es: 'Íconos con gravedad' }, img: 'n11.webp',
+        p: { pt: ['As ferramentas que uso caem do topo da área quando o rodapé entra na tela, quicam no chão e rolam até parar.', 'Colidem entre si e com os textos, fogem do cursor (ou do dedo) e são empurradas pela rolagem da página.'],
+             en: ['The tools I use fall from the top of the area when the footer comes into view, bounce on the floor and roll to a stop.', 'They collide with each other and with the text, escape the cursor (or finger) and get pushed by page scrolling.'],
+             es: ['Las herramientas que uso caen desde arriba cuando el pie de página entra en pantalla, rebotan en el suelo y ruedan hasta detenerse.', 'Chocan entre sí y con los textos, huyen del cursor (o del dedo) y el desplazamiento de la página las empuja.'] } },
+      { g: { pt: 'Celular', en: 'Phone', es: 'Celular' }, t: { pt: 'No celular', en: 'On the phone', es: 'En el celular' }, img: ['n12a.webp', 'n12b.webp'],
+        p: { pt: ['Tudo vira uma coluna: o menu recolhe num botão e o retrato passa para baixo do título.', 'Nos cases, o sumário fica no topo e as imagens ocupam a largura toda.'],
+             en: ['Everything becomes one column: the menu collapses into a button and the portrait moves below the title.', 'In case studies, the table of contents sits at the top and images take the full width.'],
+             es: ['Todo pasa a una columna: el menú se recoge en un botón y el retrato baja debajo del título.', 'En los casos, el sumario queda arriba y las imágenes ocupan todo el ancho.'] } }
+    ],
+    fim: { pt: ['Três idiomas (PT, EN, ES), imagens em WebP com carregamento sob demanda e nenhuma biblioteca externa além das fontes.', 'Cada mudança foi testada em computador e celular antes de subir, numa cópia de trabalho separada do site no ar.'],
+           en: ['Three languages (PT, EN, ES), WebP images loaded on demand and no external library besides the fonts.', 'Every change was tested on desktop and phone before going live, in a working copy kept apart from the live site.'],
+           es: ['Tres idiomas (PT, EN, ES), imágenes en WebP con carga bajo demanda y ninguna biblioteca externa además de las fuentes.', 'Cada cambio se probó en computadora y celular antes de publicarse, en una copia de trabajo separada del sitio en línea.'] },
+    stack: ['HTML', 'CSS', 'JavaScript', 'Canvas', 'SVG', 'WebGL', 'WordPress API', 'GitHub Pages', 'PT · EN · ES']
+  };
+  const metaHTML = () => {
+    const L = (o) => lx(o), D = 'assets/projetos/metaprojeto/';
+    const shot = (img) => Array.isArray(img)
+      ? `<div class="meta-shot meta-phones">${img.map(s => `<img src="${D}${s}" alt="" loading="lazy" decoding="async">`).join('')}</div>`
+      : `<div class="meta-shot"><img src="${D}${img}" alt="" loading="lazy" decoding="async" width="1600" height="1000"></div>`;
+    return `<div class="meta" id="meta">
+      <div class="meta-stack">${META_L.stack.map(s => `<span>${s}</span>`).join('')}</div>
+      ${META_L.n.map((n) => `${n.g ? `<h3 class="meta-g">${L(n.g)}</h3>` : ''}<div class="meta-row">
+        ${shot(n.img)}
+        <div class="meta-note"><h3><span class="meta-hl">${L(n.t)}</span></h3>${(n.p[LANG] || n.p.pt).map(t => `<p>${t}</p>`).join('')}</div>
+      </div>`).join('')}
+      <div class="meta-end">${(META_L.fim[LANG] || META_L.fim.pt).map(t => `<p>${t}</p>`).join('')}</div>
+    </div>`;
+  };
+  let handLoaded = false;
+  const initMeta = () => {
+    if (handLoaded) return; handLoaded = true;
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap'; document.head.appendChild(l);
+  };
+  /* --- Contato: ícones das ferramentas flutuando em torno de um centro gravitacional ---
+     Em telas estreitas, a atração suave leva a nuvem para uma faixa reservada no canto inferior esquerdo.
+     Colidem entre si e com os textos, fogem do cursor/dedo e podem ser arrastados (um por vez) e arremessados.
+     O laço dorme quando tudo está parado e acorda com cursor, rolagem ou arraste (economia de CPU). */
+
   function buildProject(project) {
     var blocks=[], contentToc=[], mainScreens=project.telas||[];
     var introText=lx(project.intro||(mainScreens[0]&&mainScreens[0].d));
@@ -388,9 +522,8 @@
       addTocBlock(contentToc,"dk-b-gal",siteCopy.gallery);
     }
     if(project.html==="meta"){
-      blocks.push('<section class="dk-block" id="dk-b-meta"><h3 class="dk-block-title">'+esc(lx(siteCopy.build))+'</h3><p class="pm-block-text">'+esc(lx(project.intro))+'</p><p class="pm-block-text">'+
-        esc(textLabel("Construído em um arquivo HTML, com dados em JavaScript e animações em canvas, sem framework.","Built in a single HTML file, with JavaScript data and canvas animations, without a framework.","Construido en un único archivo HTML, con datos en JavaScript y animaciones en canvas, sin framework."))+
-        '</p><div class="pm-pills"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div></section>');
+      initMeta();
+      blocks.push(metaHTML());
       addTocBlock(contentToc,"dk-b-meta",siteCopy.build);
     }
     var postHTML=buildPosts(project,contentToc); if(postHTML)blocks.push(postHTML);
@@ -407,6 +540,7 @@
       if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
     }
     visuals.innerHTML=blocks.join("");
+    dsInit();
     var tocItems=(project.secoes||[]).map(function(section){return [section.p===1?"dk-top0":"dk-p"+section.p,section.t];}).concat(contentToc);
     toc.innerHTML=tocItems.map(function(item,index){return '<a href="#'+esc(item[0])+'" data-t="'+esc(item[0])+'"'+(index?"":' class="on"')+'>'+esc(lx(item[1]))+'</a>';}).join("");
     toc.hidden=tocItems.length<2;
