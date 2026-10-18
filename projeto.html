@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto — Henrique Marinhos</title>
+<meta name="description" content="Projeto de Henrique Marinhos.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" href="assets/img/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261017-page">
+</head>
+<body class="project-page">
+<main id="dk" class="dk-ov open" aria-labelledby="project-title">
+  <div class="dk-top">
+    <div class="detail-topcopy">
+      <a class="dk-name" href="index.html#trabalhos" id="project-back">Projetos</a>
+      <span class="dk-meta" id="project-meta"></span>
+    </div>
+    <div class="detail-actions">
+      <div class="detail-lang" id="project-lang" role="group" aria-label="Idioma / Language"></div>
+      <a class="dk-x detail-back" href="index.html#trabalhos" aria-label="Voltar aos projetos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+    </div>
+  </div>
+  <div id="project-content-root" class="dk-content">
+    <header class="dk-head" id="project-top">
+      <p class="dk-kicker" id="project-kicker"></p>
+      <h1 class="dk-title" id="project-title"></h1>
+      <p class="dk-intro" id="project-intro"></p>
+      <div class="detail-subnav"><a id="project-external-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a></div>
+    </header>
+    <div class="dk-body">
+      <nav class="dk-toc" id="project-toc" aria-label="Sumário do projeto" hidden></nav>
+      <div class="dk-imgs" id="project-visuals"></div>
+    </div>
+    <footer class="dk-foot">
+      <button class="to-top" type="button" data-project-top>Voltar ao topo ↑</button>
+      <a class="dk-next" id="project-next" href="#" hidden></a>
+    </footer>
+  </div>
+  <section id="project-not-found" class="dk-head" hidden>
+    <h1 class="dk-title" id="project-not-found-title"></h1>
+    <p class="dk-intro">Este endereço não corresponde a um projeto publicado.</p>
+    <a class="dk-link" href="index.html#trabalhos">Voltar aos projetos</a>
+  </section>
+</main>
+<div class="lightbox-overlay" id="project-lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+  <button class="lightbox-close" id="project-lightbox-close" type="button" aria-label="Fechar imagem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
+  <div class="lightbox-stage"><img class="lightbox-img" id="project-lightbox-img" alt=""></div>
+  <div class="lightbox-zoom-hint">Esc · Fechar</div>
+</div>
+<script src="assets/data/projetos.js?v=20261017-page"></script>
+<script src="assets/data/posts.js?v=20261017-page"></script>
+<script src="assets/data/engajamento.js?v=20261017-page"></script>
+<script>
+
+(function () {
+  "use strict";
+  var params = new URLSearchParams(location.search);
+  var slug = params.get("slug") || "";
+  var PROJECTS = window.PROJETOS || [];
+  var POSTS = window.POSTS || [];
+  var LANG_NAMES = {pt:"Português",en:"English",es:"Español"};
+  function readLanguage() {
+    try { var saved = localStorage.getItem("hm-lang"); if (saved && ["pt","en","es"].indexOf(saved)>=0) return saved; } catch(e) {}
+    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "pt"];
+    for (var i=0;i<langs.length;i++) {
+      var v=String(langs[i]).toLowerCase();
+      if (/^pt/.test(v)) return "pt";
+      if (/^es/.test(v)) return "es";
+      if (/^en/.test(v)) return "en";
+    }
+    return "pt";
+  }
+  var LANG = readLanguage();
+  function lx(value) {
+    if (value == null) return "";
+    if (typeof value === "string" || typeof value === "number") return String(value);
+    if (Array.isArray(value)) return value;
+    return value[LANG] != null ? value[LANG] : (value.pt != null ? value.pt : (value.en != null ? value.en : (value.es != null ? value.es : "")));
+  }
+  function esc(value) {
+    return String(value == null ? "" : value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+  function textLabel(pt,en,es) { return ({pt:pt,en:en,es:es})[LANG]; }
+  function fmtData(iso) {
+    if (!iso || /^\d{4}$/.test(iso)) return iso || "";
+    var bits=iso.split("-");
+    var months={pt:["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"],en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],es:["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"]};
+    var month=months[LANG][Number(bits[1])-1];
+    return LANG==="en" ? month+" "+Number(bits[2])+", "+bits[0] : Number(bits[2])+" "+month+" "+bits[0];
+  }
+  function igImg(post,index) { return "assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0")+".webp"; }
+  function igUrl(post) { return "https://www.instagram.com/"+(post.reel?"reel":"p")+"/"+post.c+"/"; }
+  var postGroupNames={};
+  PROJECTS.forEach(function(p) {
+    if (p.posts) postGroupNames[p.posts]=postGroupNames[p.posts]||p.titulo;
+    (p.postGroups||[]).forEach(function(g) { postGroupNames[g.g]=g.t||p.titulo; });
+  });
+  function pgProj(group) { return lx(postGroupNames[group]) || group; }
+  function pgOrgName(user) {
+    var map={persona:"Persona",unesp:"Unesp"}, data=(window.ENGAJAMENTO||{}).contas||{};
+    return map[user] || (data[user]&&data[user].n) || user;
+  }
+  var POST_BY=Object.create(null);
+  POSTS.forEach(function(p){POST_BY[p.c]=p;});
+  var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
+  var main=document.getElementById("dk"), heading=document.getElementById("project-title");
+  var kicker=document.getElementById("project-kicker"), meta=document.getElementById("project-meta");
+  var intro=document.getElementById("project-intro"), visuals=document.getElementById("project-visuals");
+  var toc=document.getElementById("project-toc"), langHost=document.getElementById("project-lang");
+  var nextLink=document.getElementById("project-next");
+  var siteCopy={
+    back:{pt:"Todos os projetos",en:"All projects",es:"Todos los proyectos"},
+    try:{pt:"Abrir ferramenta interativa",en:"Open interactive tool",es:"Abrir herramienta interactiva"},
+    screens:{pt:"Capturas de tela",en:"Screenshots",es:"Capturas de pantalla"},
+    gallery:{pt:"Imagens feitas no Pixelar",en:"Images made with Pixelar",es:"Imágenes hechas con Pixelar"},
+    posts:{pt:"Posts e carrosséis",en:"Posts and carousels",es:"Posts y carruseles"},
+    related:{pt:"Projetos relacionados",en:"Related projects",es:"Proyectos relacionados"},
+    build:{pt:"Construção",en:"How it was built",es:"Construcción"},
+    notFound:{pt:"Projeto não encontrado",en:"Project not found",es:"Proyecto no encontrado"},
+    notFoundText:{pt:"Este endereço não corresponde a um projeto publicado.",en:"This address does not match a published project.",es:"Esta dirección no corresponde a un proyecto publicado."},
+    top:{pt:"Voltar ao topo ↑",en:"Back to top ↑",es:"Volver arriba ↑"},
+    next:{pt:"Próximo projeto",en:"Next project",es:"Siguiente proyecto"},
+    open:{pt:"Abrir site em nova aba ↗",en:"Open website in a new tab ↗",es:"Abrir sitio en una pestaña nueva ↗"}
+  };
+  function renderLanguageControls() {
+    document.getElementById("project-back").textContent=lx(siteCopy.back);
+    langHost.innerHTML=["pt","en","es"].map(function(code){
+      return '<button type="button" data-lang="'+code+'" lang="'+code+'" aria-pressed="'+(code===LANG)+'" aria-label="'+LANG_NAMES[code]+'">'+code.toUpperCase()+'</button>';
+    }).join("");
+    langHost.querySelectorAll("[data-lang]").forEach(function(button){
+      button.addEventListener("click",function(){
+        var nextLang=button.dataset.lang; if(nextLang===LANG)return;
+        try{localStorage.setItem("hm-lang",nextLang);}catch(e){}
+        location.reload();
+      });
+    });
+  }
+  function postCard(post) {
+    var n=Number(post.n)||1, cap=String(post.cap||"").trim(), longCap=cap.length>140, ar=(1/(Number(post.r)||1)).toFixed(4);
+    var imgs=Array.from({length:n},function(_,i){
+      var src=igImg(post,i), image='<img src="'+esc(src)+'" alt="" loading="lazy" decoding="async" data-full="'+esc(src)+'">';
+      return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
+    }).join("");
+    return '<article class="pc" data-code="'+esc(post.c)+'" data-kind="'+(n>1&&!post.art?"car":"post")+'"><div class="pc-media" style="--ar:'+ar+'"><div class="pc-track">'+imgs+'</div>'+
+      (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
+      '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
+      (cap?'<p class="pc-cap'+(longCap?' clamp':'')+'">'+esc(cap)+'</p>'+(longCap?'<button class="ig-more" type="button">'+esc(textLabel("ver mais","more","ver más"))+'</button>':""):"")+
+      '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+' ↗</a>'+
+      (post.art?'<a href="'+esc(post.art)+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ler o texto","Read the text","Leer el texto"))+'</a>':"")+'</div></div></article>';
+  }
+  function addTocBlock(list,id,label){list.push([id,label]);}
+  function buildPosts(p,contentToc) {
+    var groups=p.postGroups||(p.posts?[{g:p.posts}]:[]);
+    var all=groups.reduce(function(arr,group){return arr.concat(POSTS.filter(function(post){return post.g===group.g;}));},[]);
+    if(!all.length)return "";
+    var postsCount=all.length, carouselCount=all.filter(function(post){return post.n>1&&!post.art;}).length, singleCount=postsCount-carouselCount;
+    var filter=carouselCount&&singleCount?'<div class="pc-filter" role="group" aria-label="'+esc(textLabel("Filtrar publicações","Filter posts","Filtrar publicaciones"))+'">'+
+      '<button type="button" class="art-filter" data-pk="all" aria-pressed="true">'+esc(textLabel("Todos","All","Todos"))+' <span>'+postsCount+'</span></button>'+
+      '<button type="button" class="art-filter" data-pk="post" aria-pressed="false">'+esc(textLabel("Posts","Posts","Posts"))+' <span>'+singleCount+'</span></button>'+
+      '<button type="button" class="art-filter" data-pk="car" aria-pressed="false">'+esc(textLabel("Carrosséis","Carousels","Carruseles"))+' <span>'+carouselCount+'</span></button></div>':"";
+    var groupsHTML=groups.map(function(group,i){
+      var items=POSTS.filter(function(post){return post.g===group.g;}); if(!items.length)return "";
+      var id="dk-b-posts"+(group.t?"-"+i:""); if(group.t)addTocBlock(contentToc,id,group.t);
+      return '<div class="pc-group" id="'+id+'">'+(group.t?'<div class="pc-group-head"><h4>'+esc(lx(group.t))+'</h4>'+(group.d?'<p>'+esc(lx(group.d))+'</p>':"")+'</div>':"")+
+        '<div class="pc-grid'+(items.length>=4?' pc-4':'')+'">'+items.map(postCard).join("")+'</div></div>';
+    }).join("");
+    if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
+    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+textLabel(" posts"," posts"," posts")+'</span></h3>'+filter+groupsHTML+'</section>';
+  }
+
+  const ENG = window.ENGAJAMENTO || { posts: {}, contas: {} };
+  const T3 = (pt, en, es) => ({ pt, en, es });
+  const PAL = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#6250d6', '#e34948']; // categórica validada (ordem fixa)
+  const DS_L = {
+    kInt: T3('Interações', 'Interactions', 'Interacciones'), kL: T3('curtidas', 'likes', 'me gusta'), kC: T3('comentários', 'comments', 'comentarios'),
+    kPosts: T3('posts', 'posts', 'posts'), kContas: T3('contas', 'accounts', 'cuentas'), kMeses: T3('meses', 'months', 'meses'),
+    kTaxa: T3('dos seguidores por post', 'of followers per post', 'de los seguidores por post'),
+    resumo: T3('Resumo', 'Summary', 'Resumen'), topL: T3('Mais curtidos', 'Most liked', 'Con más me gusta'), topC: T3('Mais comentados', 'Most commented', 'Más comentados'),
+    topD: T3('Clique para abrir o post.', 'Click to open the post.', 'Haz clic para abrir el post.'),
+    cmp: T3('Comparações', 'Comparisons', 'Comparaciones'),
+    tempo: T3('Ao longo do tempo', 'Over time', 'A lo largo del tiempo'), tempoD: T3('Interações somadas mês a mês e, abaixo, quanto entrou em cada mês.', 'Interactions added up month by month and, below, how many came in each month.', 'Interacciones sumadas mes a mes y, debajo, cuántas entraron cada mes.'),
+    mapa: T3('Mapa de publicação', 'Posting map', 'Mapa de publicación'), mapaD: T3('Cada quadrado é um mês; quanto mais forte, mais interações.', 'Each square is a month; the stronger, the more interactions.', 'Cada cuadrado es un mes; cuanto más fuerte, más interacciones.'),
+    menos: T3('menos', 'less', 'menos'), mais: T3('mais', 'more', 'más'),
+    ano: T3('Por ano', 'By year', 'Por año'), anoD: T3('Total de interações por ano e a parte de cada um.', 'Total interactions per year and each one’s share.', 'Total de interacciones por año y la parte de cada uno.'),
+    partU: T3('Participação por conta', 'Share by account', 'Participación por cuenta'), partG: T3('Participação por projeto', 'Share by project', 'Participación por proyecto'),
+    partD: T3('Parte de cada um no total de interações.', 'Each one’s share of total interactions.', 'La parte de cada uno en el total de interacciones.'),
+    bolhas: T3('Volume e resposta', 'Volume and response', 'Volumen y respuesta'), bolhasD: T3('Posts publicados (horizontal) e interações por post (vertical, escala log). O tamanho é o total.', 'Posts published (horizontal) and interactions per post (vertical, log scale). Size is the total.', 'Posts publicados (horizontal) e interacciones por post (vertical, escala log). El tamaño es el total.'),
+    tab: T3('Contas', 'Accounts', 'Cuentas'), tabD: T3('Taxa = interações por post ÷ seguidores de hoje.', 'Rate = interactions per post ÷ current followers.', 'Tasa = interacciones por post ÷ seguidores actuales.'),
+    cConta: T3('Conta', 'Account', 'Cuenta'), cPosts: T3('Posts', 'Posts', 'Posts'), cInt: T3('Interações', 'Interactions', 'Interacciones'), cPart: T3('Parte', 'Share', 'Parte'), cPP: T3('Por post', 'Per post', 'Por post'), cSeg: T3('Seguidores', 'Followers', 'Seguidores'), cTaxa: T3('Taxa', 'Rate', 'Tasa'),
+    fmt: T3('Por formato', 'By format', 'Por formato'), fmtD: T3('Interações por post em cada formato.', 'Interactions per post in each format.', 'Interacciones por post en cada formato.'),
+    fPost: T3('Imagem única', 'Single image', 'Imagen única'), fCar: T3('Carrossel', 'Carousel', 'Carrusel'), fReel: T3('Vídeo', 'Video', 'Video'),
+    sem: T3('Por dia da semana', 'By weekday', 'Por día de la semana'), semD: T3('Interações por post conforme o dia da publicação.', 'Interactions per post by publishing day.', 'Interacciones por post según el día de publicación.'),
+    dias: T3(['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb']),
+    diasF: T3(['domingos', 'segundas', 'terças', 'quartas', 'quintas', 'sextas', 'sábados'], ['Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays'], ['domingos', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábados']),
+    waf: T3('Curtidas e comentários', 'Likes and comments', 'Me gusta y comentarios'), wafD: T3('Cada quadrado é 1% das interações.', 'Each square is 1% of interactions.', 'Cada cuadrado es el 1% de las interacciones.'),
+    beh: T3('Behance', 'Behance', 'Behance'), behD: T3('Visualizações por projeto publicado no Behance; a área de cada bloco é proporcional.', 'Views per project published on Behance; each block’s area is proportional.', 'Visualizaciones por proyecto publicado en Behance; el área de cada bloque es proporcional.'),
+    bV: T3('visualizações', 'views', 'visualizaciones'), bA: T3('apreciações', 'appreciations', 'valoraciones'), bP: T3('projetos', 'projects', 'proyectos'), outros: T3('Outros', 'Others', 'Otros'),
+    n1: T3(' post', ' post', ' post'), nN: T3(' posts', ' posts', ' posts'), mes: T3('no mês', 'that month', 'en el mes'), acum: T3('acumulado', 'cumulative', 'acumulado'), pp: T3('por post', 'per post', 'por post'),
+    oculto: T3('curtidas ocultas: só comentários', 'likes hidden: comments only', 'me gusta ocultos: solo comentarios'),
+    sFmt: T3('interações por post em {a} do que em {b}', 'interactions per post in {a} than in {b}', 'interacciones por post en {a} que en {b}'),
+    sAno: T3('interações por post em {b} em relação a {a}', 'interactions per post in {b} compared with {a}', 'interacciones por post en {b} respecto a {a}'),
+    sCom: T3('comentários a cada 100 curtidas', 'comments for every 100 likes', 'comentarios por cada 100 me gusta'),
+    sTop: T3('das interações vêm de {a}', 'of interactions come from {a}', 'de las interacciones vienen de {a}'),
+    sPico: T3('das interações em {a}, o ano mais forte', 'of interactions in {a}, the strongest year', 'de las interacciones en {a}, el año más fuerte'),
+    sDia: T3('interações por post às {a}, acima da média', 'interactions per post on {a}, above average', 'interacciones por post los {a}, por encima del promedio'),
+    sBeh: T3('das visualizações do Behance vêm de {a}', 'of Behance views come from {a}', 'de las visualizaciones de Behance vienen de {a}'),
+    nota: T3(['Fonte: números públicos do Instagram e do Behance, coletados em {d}.', 'Seguidores são os de hoje, não os da data de cada post. Alcance e impressões só aparecem no painel de cada conta e ficam de fora.'],
+             ['Source: public Instagram and Behance counts, collected on {d}.', 'Followers are today’s, not those on each post’s date. Reach and impressions only show in each account’s dashboard and are left out.'],
+             ['Fuente: números públicos de Instagram y Behance, recogidos el {d}.', 'Los seguidores son los de hoy, no los de la fecha de cada post. El alcance y las impresiones solo aparecen en el panel de cada cuenta y quedan fuera.']) };
+  const nf = (n, d = 0) => n == null ? '—' : n.toLocaleString(LANG === 'en' ? 'en-US' : LANG === 'es' ? 'es-ES' : 'pt-BR', { maximumFractionDigits: d });
+  const dd = (x) => x < 10 ? 1 : 0;
+  // número animado: texto final já no HTML (sem JS continua certo); conta de 0 ao valor quando aparece
+  const num = (v, { d = dd(v), pre = '', suf = '' } = {}) => `<span class="ds-num" data-n="${v}" data-d="${d}" data-pre="${pre}" data-suf="${suf}">${pre}${nf(v, d)}${suf}</span>`;
+  const dsFmt = (x) => x.reel ? 'reel' : x.n > 1 ? 'car' : 'post';
+  const mesLbl = (ym) => { const [y, m] = ym.split('-'); return MESES[LANG][m - 1] + ' ' + y; };
+  const tint = (pct) => `color-mix(in srgb, var(--ac) ${pct}%, #f2f2f2)`;
+  // colunas verticais animadas: [{ l, sub, v, d, tip, hi }]
+  const vcols = (it) => { const mx = Math.max(...it.map(i => i.v), 1e-9);
+    return `<div class="ds-vc ds-anim" style="--n:${it.length}">${it.map((i, k) => `<div class="ds-vc-c"${i.tip ? ` data-tip="${i.tip}"` : ''}><span class="ds-vc-v">${i.d}</span><span class="ds-vc-t"><i class="ds-gy" style="height:${(i.v / mx * 100).toFixed(1)}%;--i:${k};background:${i.hi ? PAL[k % PAL.length] : tint(38 + (k % 3) * 12)}"></i></span><span class="ds-vc-l">${i.l}</span>${i.sub ? `<small>${i.sub}</small>` : ''}</div>`).join('')}</div>`; };
+  const dashHTML = (p) => {
+    const D = p.dash, m = D.m || 'l', toc = [], AC = D.cor || '#2a78d6', ON = D.on || '#fff';
+    const rows = POSTS.filter(x => D.users.includes(x.user) && ENG.posts[x.c]).map(x => { const [l, c] = ENG.posts[x.c]; return { x, l, c, v: m === 'c' ? c : (l || 0) + c }; }).sort((a, b) => a.x.d < b.x.d ? -1 : 1);
+    if (!rows.length) return { html: '', toc };
+    const S = (a, f) => a.reduce((s, r) => s + f(r), 0), TOT = S(rows, r => r.v), L = S(rows, r => r.l || 0), C = S(rows, r => r.c), AVG = TOT / rows.length;
+    const nP = (n) => n + lx(n > 1 ? DS_L.nN : DS_L.n1), unid = (m === 'c' ? lx(DS_L.kC) : lx(DS_L.kInt).toLowerCase());
+    const nome = (r) => D.por === 'g' ? ((D.nomes || {})[r.x.g] || r.x.v) : ((ENG.contas[r.x.user] || {}).n || r.x.user);
+    const grp = (key) => { const g = {}; rows.forEach(r => { const k = key(r); (g[k] = g[k] || []).push(r); }); return Object.entries(g).map(([k, rs]) => ({ k, rs, n: rs.length, t: S(rs, r => r.v), a: S(rs, r => r.v) / rs.length })); };
+    const sec = (id, t, d, body, cls = '') => { toc.push([id, t]); return `<div class="ds-sec ${cls}" id="${id}"><h3 class="ds-h">${lx(t)}</h3>${d ? `<p class="ds-d">${d}</p>` : ''}${body}</div>`; };
+    const seg = D.users.reduce((s, u) => s + ((ENG.contas[u] || {}).seg || 0), 0);
+    const ms = [], m0 = rows[0].x.d.slice(0, 7), m1 = rows[rows.length - 1].x.d.slice(0, 7);
+    for (let [y, mm] = m0.split('-').map(Number); `${y}-${String(mm).padStart(2, '0')}` <= m1; mm === 12 ? (y++, mm = 1) : mm++) ms.push(`${y}-${String(mm).padStart(2, '0')}`);
+    const porMes = ms.map(k => S(rows.filter(r => r.x.d.startsWith(k)), r => r.v)); let acc = 0; const cum = porMes.map(v => acc += v);
+    const areaPath = (W, H, pad = 6) => { const n = ms.length, pts = cum.map((v, i) => [(n > 1 ? i / (n - 1) * W : W / 2).toFixed(1), (H - v / TOT * (H - pad)).toFixed(1)]);
+      const line = 'M' + pts.map(q => q.join(',')).join('L'); return { line, area: line + `L${W},${H}L0,${H}Z` }; };
+    const R = (t, a, b) => lx(t).replace('{a}', a).replace('{b}', b);
+    const FL = { post: DS_L.fPost, car: DS_L.fCar, reel: DS_L.fReel };
+    const out = [];
+    const samplePosts = D.users.map(u => rows.filter(r => r.x.user === u).sort((a, b) => b.v - a.v)[0]?.x).filter(Boolean);
+    const sampleGroups = [samplePosts.slice(0, 3), samplePosts.slice(3, 6), samplePosts.slice(6, 10)];
+    const sampleSection = (id, title, desc, posts, variant) => posts.length
+      ? sec(id, title, lx(desc), `<div class="ds-post-examples pc-grid">${posts.map(x => pcCard(x)).join('')}</div>`, `ds-sample ds-sample-${variant}`)
+      : '';
+    let taxa = D.users.length === 1 && seg ? TOT / rows.length / seg * 100 : null; if (taxa != null && taxa < 2) taxa = null; // taxa baixa não aparece
+
+    // 1) HERO: total animado sobre a cor do dashboard + curva acumulada
+    { const { line, area } = areaPath(400, 120, 4), nC = new Set(rows.map(r => r.x.user)).size;
+      const chips = [[num(rows.length), lx(DS_L.kPosts)], D.users.length > 1 ? [num(nC), lx(DS_L.kContas)] : [num(ms.length), ms.length === 1 ? lx(T3('mês', 'month', 'mes')) : lx(DS_L.kMeses)]];
+      if (taxa != null) chips.push([num(taxa, { suf: '%' }), lx(DS_L.kTaxa)]);
+      chips.push(['', `${mesLbl(ms[0])} → ${mesLbl(ms[ms.length - 1])}`]);
+      toc.push(['dk-b-ds-kpi', DS_L.resumo]);
+      out.push(`<div class="ds-hero ds-anim" id="dk-b-ds-kpi" style="--on:${ON}">
+        <div class="ds-hero-t"><span class="ds-hero-k">${lx(m === 'c' ? T3('Comentários', 'Comments', 'Comentarios') : DS_L.kInt)}</span><b class="ds-hero-n">${num(TOT, { d: 0 })}</b>
+          ${m === 'l' ? `<span class="ds-hero-s">${num(L, { d: 0 })} ${lx(DS_L.kL)} · ${num(C, { d: 0 })} ${lx(DS_L.kC)}</span>` : `<span class="ds-hero-s">${lx(DS_L.oculto)}</span>`}</div>
+        <svg class="ds-hero-g" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="ds-fade" d="${area}" fill="currentColor" opacity=".18"/><path class="ds-draw" pathLength="1" d="${line}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <div class="ds-chips">${chips.map(([v, l]) => `<span class="ds-chip">${v ? `<b>${v}</b> ` : ''}${l}</span>`).join('')}</div></div>`); }
+
+    // Seções de exemplos de posts removidas a pedido; o dashboard mantém os gráficos e indicadores.
+
+    // 2) MAIS CURTIDOS (ranking com número na cor; miniatura ganha cor no hover)
+    { const top = [...rows].sort((a, b) => b.v - a.v || b.c - a.c).slice(0, 5), mx = top[0] ? top[0].v : 1;
+      if (top.length > 2) out.push(sec('dk-b-ds-top', m === 'c' ? DS_L.topC : DS_L.topL, lx(DS_L.topD), `<div class="ds-top ds-anim">${top.map((r, k) => `<button type="button" class="ds-tc ds-up" style="--i:${k}" data-post="${r.x.c}"><span class="ds-rank">${k + 1}</span><img src="${igImg(r.x, 0)}" alt="" loading="lazy" decoding="async"><b>${num(r.v, { d: 0 })}</b><span class="ds-tc-bar"><i class="ds-gx" style="width:${(r.v / mx * 100).toFixed(1)}%;--i:${k}"></i></span><span>${unid}${m === 'l' ? ` · ${nf(r.l || 0)} ${lx(DS_L.kL)}` : ''}</span><span>@${esc(r.x.user)} — ${fmtData(r.x.d)}</span></button>`).join('')}</div>`)); }
+
+    // 3) COMPARAÇÕES (só altas e participações; sem quedas)
+    const fs = grp(r => dsFmt(r.x)).filter(f => f.n >= 2), anos = grp(r => r.x.d.slice(0, 4)).sort((a, b) => a.k < b.k ? -1 : 1);
+    const gs = D.por ? grp(r => D.por === 'g' ? r.x.g : r.x.user).sort((a, b) => b.t - a.t) : [];
+    const wd = Array.from({ length: 7 }, (_, i) => { const rs = rows.filter(r => new Date(r.x.d + 'T12:00').getDay() === i); return { i, n: rs.length, a: rs.length ? S(rs, r => r.v) / rs.length : 0 }; });
+    const cm = [];
+    if (fs.length > 1) { const s = fs.slice().sort((a, b) => b.a - a.a), hi = s[0], lo = s[s.length - 1]; if (hi.a > lo.a) cm.push([num((hi.a / lo.a - 1) * 100, { pre: '+', suf: '%', d: 0 }), R(DS_L.sFmt, lx(FL[hi.k]).toLowerCase(), lx(FL[lo.k]).toLowerCase()), '↑']); }
+    { const ok = anos.filter(a => a.n >= 3); let best = null; ok.forEach((a, i) => ok.slice(i + 1).forEach(b => { const g = (b.a / a.a - 1) * 100; if (g > 0 && (!best || g > best[0])) best = [g, a.k, b.k]; }));
+      if (best) cm.push([num(best[0], { pre: '+', suf: '%', d: 0 }), R(DS_L.sAno, best[1], best[2]), '↑']); }
+    if (gs.length > 1) cm.push([num(gs[0].t / TOT * 100, { suf: '%' }), R(DS_L.sTop, esc(nome(gs[0].rs[0]))), '%']);
+    else if (anos.length > 1) { const pk = anos.slice().sort((a, b) => b.t - a.t)[0]; cm.push([num(pk.t / TOT * 100, { suf: '%' }), R(DS_L.sPico, pk.k), '%']); }
+    { const ok = wd.filter(w => w.n >= 3).sort((a, b) => b.a - a.a)[0]; if (ok && ok.a > AVG * 1.05) cm.push([num((ok.a / AVG - 1) * 100, { pre: '+', suf: '%', d: 0 }), R(DS_L.sDia, lx(DS_L.diasF)[ok.i]), '★']); }
+    if (m === 'l' && L) cm.push([num(S(rows.filter(r => r.l != null), r => r.c) / L * 100, { d: 1 }), lx(DS_L.sCom), '✎']);
+    if (cm.length) out.push(sec('dk-b-ds-cmp', DS_L.cmp, '', `<div class="ds-cmp ds-anim">${cm.slice(0, 4).map(([v, t, ic], k) => `<div class="ds-cmp-i ds-up" style="--i:${k}"><span class="ds-cmp-ic" aria-hidden="true">${ic}</span><b>${v}</b><span>${t}</span></div>`).join('')}</div>`));
+
+    // 4) AO LONGO DO TEMPO: área acumulada (gradiente) + colunas mensais
+    if (ms.length > 1) { const { line, area } = areaPath(1000, 240, 8), gid = 'dsg-' + p.slug, mxM = Math.max(...porMes, 1);
+      out.push(sec('dk-b-ds-tempo', DS_L.tempo, lx(DS_L.tempoD), `<div class="ds-anim"><div class="ds-area-wrap"><span class="ds-ax" style="top:0">${nf(TOT)}</span><span class="ds-ax" style="top:226px">0</span>
+        <div class="ds-area"><svg viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${AC}" stop-opacity=".45"/><stop offset="1" stop-color="${AC}" stop-opacity=".02"/></linearGradient></defs><path class="ds-fade" d="${area}" fill="url(#${gid})"/><path class="ds-draw" pathLength="1" d="${line}" fill="none" stroke="${AC}" stroke-width="3" stroke-linejoin="round"/></svg>
+        <div class="ds-area-hit">${ms.map((k, i) => `<span data-tip="<b>${mesLbl(k)}</b><br>${nf(porMes[i])} ${unid} ${lx(DS_L.mes)}<br>${nf(cum[i])} ${lx(DS_L.acum)}" style="--y:${(cum[i] / TOT * 100).toFixed(2)}%"></span>`).join('')}</div></div></div>
+        <div class="ds-mbar">${porMes.map((v, i) => `<span data-tip="<b>${mesLbl(ms[i])}</b><br>${nf(v)} ${unid}"><i class="ds-gy" style="height:${(v / mxM * 100).toFixed(1)}%;--i:${Math.min(i, 40)}"></i></span>`).join('')}</div>
+        <div class="ds-tl-dates"><span>${mesLbl(ms[0])}</span><span>${mesLbl(ms[Math.floor((ms.length - 1) / 2)])}</span><span>${mesLbl(ms[ms.length - 1])}</span></div></div>`)); }
+
+    // 5) MAPA DE PUBLICAÇÃO (heatmap ano × mês)
+    { const ys = [...new Set(ms.map(k => k.slice(0, 4)))], mx = Math.max(...porMes, 1), byM = Object.fromEntries(ms.map((k, i) => [k, porMes[i]]));
+      const nPm = Object.fromEntries(ms.map(k => [k, rows.filter(r => r.x.d.startsWith(k)).length]));
+      if (ms.length > 2) out.push(sec('dk-b-ds-mapa', DS_L.mapa, lx(DS_L.mapaD), `<div class="ds-heat ds-anim"><span></span>${MESES[LANG].map(x => `<span class="ds-heat-m">${x.slice(0, 3)}</span>`).join('')}
+        ${ys.map(y => `<span class="ds-heat-y">${y}</span>${Array.from({ length: 12 }, (_, i) => { const k = `${y}-${String(i + 1).padStart(2, '0')}`, v = byM[k];
+          return v == null ? '<i class="ds-heat-c off"></i>' : `<i class="ds-heat-c" style="--i:${i};background:${v ? tint(Math.round(18 + 82 * Math.sqrt(v / mx))) : '#ececec'}" data-tip="<b>${mesLbl(k)}</b><br>${nf(v)} ${unid} · ${nP(nPm[k])}"></i>`; }).join('')}`).join('')}
+        </div><div class="ds-heat-leg"><span>${lx(DS_L.menos)}</span>${[18, 40, 62, 84, 100].map(q => `<i style="background:${tint(q)}"></i>`).join('')}<span>${lx(DS_L.mais)}</span></div>`)); }
+
+    // 6) POR ANO (colunas, ano mais forte na cor)
+    if (anos.length > 1) { const pk = Math.max(...anos.map(a => a.t)); out.push(sec('dk-b-ds-ano', DS_L.ano, lx(DS_L.anoD), vcols(anos.map(a => ({ l: a.k, sub: nP(a.n), v: a.t, hi: a.t === pk, d: `${nf(a.t)}<small>${nf(a.t / TOT * 100, dd(a.t / TOT * 100))}%</small>`, tip: `<b>${a.k}</b><br>${nf(a.t)} ${unid} · ${nP(a.n)}<br>${nf(a.a, dd(a.a))} ${lx(DS_L.pp)}` }))))); }
+
+    // Sem blocos de exemplos adicionais: foco nos dados e comparações.
+
+    // 7) PARTICIPAÇÃO: rosca + legenda (até 7 fatias + Outros)
+    if (gs.length > 1) { const top = gs.slice(0, 7), rest = gs.slice(7), sl = top.map((g, i) => ({ l: esc(nome(g.rs[0])), t: g.t, n: g.n, c: PAL[i], hid: m === 'l' && g.rs.every(r => r.l == null) }));
+      if (rest.length) sl.push({ l: lx(DS_L.outros), t: S(rest, g => g.t), n: S(rest, g => g.n), c: '#b2b2b2' });
+      const Rr = 70, Cc = 2 * Math.PI * Rr; let off = 0;
+      const segs = sl.map((s, i) => { const len = Math.max(0, s.t / TOT * Cc - (sl.length > 1 ? 2 : 0)), o = off; off += s.t / TOT * Cc;
+        return `<circle class="ds-seg" r="${Rr}" cx="90" cy="90" fill="none" stroke="${s.c}" stroke-width="26" style="--len:${len.toFixed(2)};--rest:${(Cc - len).toFixed(2)};--C:${Cc.toFixed(2)};stroke-dashoffset:${(-o).toFixed(2)};--i:${i}" data-tip="<b>${s.l}</b><br>${nf(s.t / TOT * 100, 1)}% · ${nf(s.t)} ${unid}"></circle>`; }).join('');
+      out.push(sec('dk-b-ds-part', D.por === 'g' ? DS_L.partG : DS_L.partU, lx(DS_L.partD), `<div class="ds-donut-w ds-anim"><div class="ds-donut"><svg viewBox="0 0 180 180">${segs}</svg><div class="ds-donut-c"><b>${num(gs.length, { d: 0 })}</b><span>${lx(D.por === 'g' ? T3('projetos', 'projects', 'proyectos') : DS_L.kContas)}</span></div></div>
+        <ul class="ds-leg">${sl.map((s, i) => `<li class="ds-up" style="--i:${i}"><i style="background:${s.c}"></i><span>${s.l}<small>${nP(s.n)}${s.hid ? ' · ' + lx(DS_L.oculto) : ''}</small></span><b>${nf(s.t / TOT * 100, dd(s.t / TOT * 100))}%</b></li>`).join('')}</ul></div>`)); }
+
+    // 8) BOLHAS (visão geral): posts × interações por post (log), tamanho = total
+    if (D.tabela && gs.length > 2) { const mxN = Math.max(...gs.map(g => g.n)), lmin = Math.log10(Math.max(1, Math.min(...gs.map(g => g.a)))) - .15, lmax = Math.log10(Math.max(...gs.map(g => g.a))) + .15, mxT = Math.max(...gs.map(g => g.t));
+      out.push(sec('dk-b-ds-bolhas', DS_L.bolhas, lx(DS_L.bolhasD), `<div class="ds-bub ds-anim">${gs.map((g, i) => { const x = 6 + g.n / mxN * 86, y = 8 + (Math.log10(Math.max(1, g.a)) - lmin) / (lmax - lmin) * 80, sz = 16 + 64 * Math.sqrt(g.t / mxT);
+        return `<span class="ds-bub-i" style="left:${x.toFixed(1)}%;bottom:${y.toFixed(1)}%;--s:${sz.toFixed(0)}px;--c:${i < 7 ? PAL[i] : '#b2b2b2'};--i:${i}"${x > 60 ? ' data-l="1"' : ''} data-tip="<b>${esc(nome(g.rs[0]))}</b><br>${nP(g.n)} · ${nf(g.a, dd(g.a))} ${lx(DS_L.pp)}<br>${nf(g.t)} ${unid}"><i></i><em>${esc(nome(g.rs[0]))}</em></span>`; }).join('')}
+        <span class="ds-bub-ax x">${lx(DS_L.kPosts)} →</span><span class="ds-bub-ax y">${lx(DS_L.pp)} ↑</span></div>`)); }
+
+    // 9) TABELA (visão geral)
+    if (D.tabela) { const us = D.users.map(u => { const rs = rows.filter(r => r.x.user === u), c = ENG.contas[u] || {}, t = S(rs, r => r.v);
+        return { u, c, n: rs.length, t, pp: rs.length ? t / rs.length : 0, tx: rs.length && c.seg ? t / rs.length / c.seg * 100 : null, hid: rs.every(r => r.l == null) }; }).filter(o => o.n).sort((a, b) => b.t - a.t);
+      out.push(sec('dk-b-ds-tab', DS_L.tab, lx(DS_L.tabD), `<div class="ds-tw"><table class="ds-table"><thead><tr><th>${lx(DS_L.cConta)}</th><th>${lx(DS_L.cPosts)}</th><th>${lx(DS_L.cInt)}</th><th>${lx(DS_L.cPart)}</th><th>${lx(DS_L.cPP)}</th><th>${lx(DS_L.cSeg)}</th><th>${lx(DS_L.cTaxa)}</th></tr></thead><tbody>${us.map((o, i) => `<tr><td><i class="ds-sw" style="background:${i < 7 ? PAL[i] : '#b2b2b2'}"></i>${esc(o.c.n || o.u)}<br><small>@${esc(o.u)}${o.hid ? ' · ' + lx(DS_L.oculto) : ''}</small></td><td>${o.n}</td><td>${nf(o.t)}</td><td><span class="ds-tbar"><i style="width:${(o.t / us[0].t * 100).toFixed(1)}%;background:${i < 7 ? PAL[i] : '#b2b2b2'}"></i></span>${nf(o.t / TOT * 100, dd(o.t / TOT * 100))}%</td><td>${nf(o.pp, dd(o.pp))}</td><td>${nf(o.c.seg)}</td><td>${o.tx == null || o.tx < 2 ? '' : nf(o.tx, dd(o.tx)) + '%'}</td></tr>`).join('')}</tbody></table></div>`)); }
+
+    // 10) FORMATO e DIA DA SEMANA lado a lado (colunas)
+    { const cols = [];
+      if (fs.length > 1) { const mx = Math.max(...fs.map(f => f.a)); cols.push(sec('dk-b-ds-fmt', DS_L.fmt, lx(DS_L.fmtD), vcols(['car', 'reel', 'post'].map(k => fs.find(f => f.k === k)).filter(Boolean).map(f => ({ l: lx(FL[f.k]), sub: nP(f.n), v: f.a, hi: f.a === mx, d: nf(f.a, dd(f.a)), tip: `<b>${lx(FL[f.k])}</b><br>${nf(f.a, dd(f.a))} ${lx(DS_L.pp)} · ${nP(f.n)}` }))))); }
+      const wk = wd.filter(w => w.n); if (wk.length > 2) { const mx = Math.max(...wk.map(w => w.a)); cols.push(sec('dk-b-ds-sem', DS_L.sem, lx(DS_L.semD), vcols([1, 2, 3, 4, 5, 6, 0].map(i => wd[i]).map(w => ({ l: lx(DS_L.dias)[w.i], sub: w.n ? nP(w.n) : '', v: w.a, hi: w.a === mx, d: w.n ? nf(w.a, dd(w.a)) : '', tip: w.n ? `<b>${lx(DS_L.diasF)[w.i]}</b><br>${nf(w.a, dd(w.a))} ${lx(DS_L.pp)} · ${nP(w.n)}` : '' }))))); }
+      if (cols.length) out.push(`<div class="ds-cols">${cols.join('')}</div>`); }
+
+    // 11) WAFFLE curtidas × comentários
+    if (m === 'l' && L && C) { const k = Math.max(1, Math.round(C / (L + C) * 100));
+      out.push(sec('dk-b-ds-waf', DS_L.waf, lx(DS_L.wafD), `<div class="ds-waf-w ds-anim"><div class="ds-waf">${Array.from({ length: 100 }, (_, i) => `<i style="--i:${i};background:${i >= 100 - k ? '#111' : 'var(--ac)'}"></i>`).join('')}</div>
+        <ul class="ds-leg"><li><i style="background:var(--ac)"></i><span>${lx(T3('Curtidas', 'Likes', 'Me gusta'))}<small>${nf(L)}</small></span><b>${100 - k}%</b></li><li><i style="background:#111"></i><span>${lx(T3('Comentários', 'Comments', 'Comentarios'))}<small>${nf(C)}</small></span><b>${k}%</b></li></ul></div>`)); }
+
+    if (sampleGroups[2].length) out.push(sampleSection('dk-b-ds-exemplos-3', T3('Outros conteúdos analisados', 'More analyzed content', 'Otros contenidos analizados'), T3('Publicações adicionais das contas incluídas no painel.', 'Additional posts from the accounts included in the dashboard.', 'Publicaciones adicionales de las cuentas incluidas en el panel.'), sampleGroups[2], 'c'));
+
+    // 12) BEHANCE (visão geral): mosaico proporcional
+    const B = ENG.behance;
+    if (D.behance && B && B.projetos) { const bv = S(B.projetos, b => b[1]), ba = S(B.projetos, b => b[2]), bs = B.projetos.slice().sort((a, b) => b[1] - a[1]);
+      out.push(sec('dk-b-ds-beh', DS_L.beh, lx(DS_L.behD), `<div class="ds-behk"><span><b>${num(bv, { d: 0 })}</b> ${lx(DS_L.bV)}</span><span><b>${num(ba, { d: 0 })}</b> ${lx(DS_L.bA)}</span><span><b>${num(bs.length, { d: 0 })}</b> ${lx(DS_L.bP)}</span><span><b>${num(bs[0][1] / bv * 100, { suf: '%', d: 0 })}</b> ${R(DS_L.sBeh, esc(bs[0][0]))}</span></div>
+        <div class="ds-tree ds-anim">${bs.map((b, i) => `<span class="ds-up" style="--i:${i};flex:${b[1]} 1 ${Math.max(9, b[1] / bv * 160).toFixed(1)}%;background:${PAL[i % 8]}${[0, 2, 3, 4].includes(i % 8) ? ';color:#111' : ''}" data-tip="<b>${esc(b[0])}</b><br>${nf(b[1])} ${lx(DS_L.bV)} · ${nf(b[2])} ${lx(DS_L.bA)}"><b>${nf(b[1] / bv * 100, dd(b[1] / bv * 100))}%</b><em>${esc(b[0])}</em></span>`).join('')}</div>`)); }
+
+    const [n1, n2] = lx(DS_L.nota);
+    out.push(`<p class="ds-note">${n1.replace('{d}', fmtData(ENG.coletado || '2026-10-15'))}<br>${n2}</p>`);
+    return { html: `<section class="dk-block ds" id="dk-b-ds" style="--ac:${AC};--on:${ON}">${out.join('')}</section>`, toc };
+  };
+
+  function buildProject(project) {
+    var blocks=[], contentToc=[], mainScreens=project.telas||[];
+    var introText=lx(project.intro||(mainScreens[0]&&mainScreens[0].d));
+    heading.textContent=project.titulo;
+    kicker.textContent=project.cat?lx(project.cat):textLabel("Portfólio","Portfolio","Portafolio");
+    meta.textContent=project.cat?lx(project.cat)+(project.ano?" · "+project.ano:""):(project.ano||"");
+    intro.textContent=introText;
+    document.title=project.titulo+" — Henrique Marinhos";
+    document.documentElement.lang=LANG==="pt"?"pt-br":LANG;
+    document.querySelector('meta[name="description"]').setAttribute("content",introText||(project.titulo+" — projeto de Henrique Marinhos."));
+    var external=document.getElementById("project-external-link");
+    if(project.link){external.hidden=false;external.href=project.link;external.textContent=project.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/(index\.html)?$/,"");}
+    else external.hidden=true;
+    var screenHTML="";
+    if(project.slug==="rino-pecas"){
+      screenHTML='<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">'+mainScreens.map(function(screen){
+        return '<button class="rino-piece" type="button" data-lightbox="'+esc(project.dir+screen.img+".webp")+'" aria-label="'+esc(textLabel("Abrir imagem","Open image","Abrir imagen")+": "+lx(screen.t))+'" title="'+esc(lx(screen.t))+'"><span class="rino-piece-thumb"><img src="'+esc(project.dir+screen.img+"-t.webp")+'" alt="'+esc(lx(screen.t))+'" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">'+esc(lx(screen.t))+'</span></button>';
+      }).join("")+'</div></section>';
+    }else{
+      screenHTML=mainScreens.map(function(screen,index){
+        var caption=index>0&&lx(screen.d)?'<div class="dk-cap"><h3>'+esc(lx(screen.t))+'</h3><p>'+esc(lx(screen.d))+'</p></div>':"";
+        return caption+'<img id="dk-p'+(index+1)+'" src="'+esc(project.dir+screen.img+".webp")+'" alt="'+esc(lx(screen.t))+'" width="2048" height="1152" decoding="async"'+(index>1?' loading="lazy"':"")+'>';
+      }).join("");
+    }
+    blocks.push(screenHTML);
+    if(project.slug==="rino-site"&&project.web){
+      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p><p class="rino-case-description">'+esc(lx(project.intro))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
+      addTocBlock(contentToc,"dk-b-rino-case",{pt:"Ferramenta interativa",en:"Interactive tool",es:"Herramienta interactiva"});
+    }
+    if(project.shots&&project.shots.length&&project.slug!=="rino-site"){
+      var desktopShots=project.shots.filter(function(s){return s.d!=="mobile";}), mobileShots=project.shots.filter(function(s){return s.d==="mobile";});
+      blocks.push('<section class="dk-block" id="dk-b-shots"><h3 class="dk-block-title">'+esc(lx(siteCopy.screens))+(project.siteIntro?'<span>'+esc(lx(project.siteIntro))+'</span>':"")+
+        (project.web?'<br><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.open))+'</a>':"")+'</h3>'+
+        desktopShots.map(function(shot){return '<div class="shot-desk'+(shot.d==="pagina"?' shot-page':'')+'"><img src="'+esc(project.dir+shot.img)+'" alt="" loading="lazy" decoding="async"></div>';}).join("")+
+        (mobileShots.length?'<div class="shot-phones">'+mobileShots.map(function(shot){return '<div class="shot-phone"><img src="'+esc(project.dir+shot.img)+'" alt="" loading="lazy" decoding="async"></div>';}).join("")+'</div>':"")+'</section>');
+      addTocBlock(contentToc,"dk-b-shots",siteCopy.screens);
+    }
+    if(project.galeria&&project.galeria.length&&project.slug!=="pixelar"){
+      blocks.push('<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">'+esc(lx(siteCopy.gallery))+'</h3><div class="dk-gal">'+project.galeria.map(function(item){
+        return '<button type="button" class="detail-gallery-item" data-lightbox="'+esc(project.dir+item)+'" aria-label="'+esc(textLabel("Ampliar imagem","Enlarge image","Ampliar imagen"))+'"><img src="'+esc(project.dir+item)+'" alt="" loading="lazy" decoding="async"></button>';
+      }).join("")+'</div></section>');
+      addTocBlock(contentToc,"dk-b-gal",siteCopy.gallery);
+    }
+    if(project.html==="meta"){
+      blocks.push('<section class="dk-block" id="dk-b-meta"><h3 class="dk-block-title">'+esc(lx(siteCopy.build))+'</h3><p class="pm-block-text">'+esc(lx(project.intro))+'</p><p class="pm-block-text">'+
+        esc(textLabel("Construído em um arquivo HTML, com dados em JavaScript e animações em canvas, sem framework.","Built in a single HTML file, with JavaScript data and canvas animations, without a framework.","Construido en un único archivo HTML, con datos en JavaScript y animaciones en canvas, sin framework."))+
+        '</p><div class="pm-pills"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div></section>');
+      addTocBlock(contentToc,"dk-b-meta",siteCopy.build);
+    }
+    var postHTML=buildPosts(project,contentToc); if(postHTML)blocks.push(postHTML);
+    if(project.dash){
+      var dashboard=dashHTML(project);
+      if(dashboard&&dashboard.html)blocks.push(dashboard.html);
+      if(dashboard&&dashboard.toc)contentToc=contentToc.concat(dashboard.toc);
+    }
+    if(project.rel&&project.rel.length){
+      var related=project.rel.map(function(relatedSlug){
+        var item=PROJECTS.find(function(candidate){return candidate.slug===relatedSlug;}); if(!item)return "";
+        return '<a class="work-card" href="projeto.html?slug='+encodeURIComponent(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p><p class="work-card-tag">'+esc(lx(item.cat||item.badge||""))+'</p></a>';
+      }).join("");
+      if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
+    }
+    visuals.innerHTML=blocks.join("");
+    var tocItems=(project.secoes||[]).map(function(section){return [section.p===1?"dk-top0":"dk-p"+section.p,section.t];}).concat(contentToc);
+    toc.innerHTML=tocItems.map(function(item,index){return '<a href="#'+esc(item[0])+'" data-t="'+esc(item[0])+'"'+(index?"":' class="on"')+'>'+esc(lx(item[1]))+'</a>';}).join("");
+    toc.hidden=tocItems.length<2;
+    toc.parentNode.classList.toggle("no-toc",toc.hidden);
+    var navigationProjects=PROJECTS.filter(function(item){return ["rino-pecas","sollaris-instagram","o-hobbit","dash-geral"].indexOf(item.slug)<0;});
+    var navIndex=navigationProjects.findIndex(function(item){return item.slug===project.slug;});
+    var next=navIndex>=0?navigationProjects[(navIndex+1)%navigationProjects.length]:null;
+    if(next&&navigationProjects.length>1){nextLink.href="projeto.html?slug="+encodeURIComponent(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
+    else nextLink.hidden=true;
+    renderLanguageControls();
+    bindProjectInteractions();
+    requestAnimationFrame(function(){var target=document.getElementById("project-top");if(target)target.scrollIntoView({behavior:"auto",block:"start"});updateToc();});
+  }
+  function bindProjectInteractions(){
+    visuals.addEventListener("click",function(event){
+      var filter=event.target.closest("[data-pk]");
+      if(filter){
+        var wrap=filter.closest(".pc-block");
+        wrap.querySelectorAll("[data-pk]").forEach(function(button){button.setAttribute("aria-pressed",String(button===filter));});
+        wrap.querySelectorAll(".pc").forEach(function(card){card.hidden=filter.dataset.pk!=="all"&&card.dataset.kind!==filter.dataset.pk;});
+        wrap.querySelectorAll(".pc-group").forEach(function(group){group.hidden=!group.querySelector(".pc:not([hidden])");});
+        return;
+      }
+      var navButton=event.target.closest(".pc-nav");
+      if(navButton){var track=navButton.parentNode.querySelector(".pc-track");if(track)track.scrollBy({left:(navButton.classList.contains("pc-next")?1:-1)*track.clientWidth,behavior:"smooth"});return;}
+      var more=event.target.closest(".ig-more");
+      if(more){var caption=more.previousElementSibling,on=caption.classList.toggle("clamp");more.textContent=lx(on?textLabel("ver mais","more","ver más"):textLabel("ver menos","less","ver menos"));return;}
+      var rinoPiece=event.target.closest(".rino-piece");
+      if(rinoPiece){openLightbox(rinoPiece.dataset.lightbox,rinoPiece.querySelector("img")?.alt||"");return;}
+      var galleryButton=event.target.closest(".detail-gallery-item, .dk-gal button");
+      if(galleryButton){openLightbox(galleryButton.dataset.lightbox,galleryButton.querySelector("img")?.alt||"");return;}
+      var postImage=event.target.closest(".pc-track img");
+      if(postImage&&!postImage.closest("a.ig-reel")){openLightbox(postImage.dataset.full||postImage.src,postImage.alt||"");return;}
+      var dashboardPost=event.target.closest(".ds [data-post]");
+      if(dashboardPost){var post=POST_BY[dashboardPost.dataset.post];if(post)window.open(igUrl(post),"_blank","noopener,noreferrer");}
+    });
+    visuals.querySelectorAll(".pc-track").forEach(function(track){
+      function updateCarousel(){
+        var card=track.closest(".pc"),i=Math.round(track.scrollLeft/Math.max(1,track.clientWidth));
+        var dots=card&&card.querySelector(".pc-dots");
+        if(dots)Array.from(dots.children).forEach(function(dot,index){dot.classList.toggle("on",index===i);});
+        var prev=card&&card.querySelector(".pc-prev"),next=card&&card.querySelector(".pc-next");
+        if(prev)prev.disabled=i<=0;if(next)next.disabled=i>=track.children.length-1;
+        var count=card&&card.querySelector(".pc-count");if(count)count.textContent=(i+1)+"/"+track.children.length;
+      }
+      track.addEventListener("scroll",updateCarousel,{passive:true});updateCarousel();
+    });
+  }
+  function updateToc(){
+    if(!toc||toc.hidden)return;
+    var active=null;
+    toc.querySelectorAll("a").forEach(function(link){
+      var target=document.getElementById(link.dataset.t);
+      if(!target&&link.dataset.t==="dk-top0")target=document.getElementById("project-top");
+      if(target&&target.getBoundingClientRect().top<=180)active=link;
+    });
+    toc.querySelectorAll("a").forEach(function(link){link.classList.toggle("on",link===active);});
+  }
+  function openLightbox(src,alt){
+    var overlay=document.getElementById("project-lightbox"),img=document.getElementById("project-lightbox-img");
+    img.src=src;img.alt=alt||"";overlay.classList.add("open");document.body.style.overflow="hidden";document.getElementById("project-lightbox-close").focus();
+  }
+  function closeLightbox(){
+    var overlay=document.getElementById("project-lightbox");
+    if(!overlay.classList.contains("open"))return;
+    overlay.classList.remove("open");document.body.style.overflow="";document.getElementById("project-lightbox-img").src="";
+  }
+  document.getElementById("project-lightbox-close").addEventListener("click",closeLightbox);
+  document.getElementById("project-lightbox").addEventListener("click",function(event){
+    if(event.target.id==="project-lightbox"||event.target.classList.contains("lightbox-stage"))closeLightbox();
+  });
+  document.addEventListener("keydown",function(event){if(event.key==="Escape")closeLightbox();});
+  document.addEventListener("click",function(event){
+    var backTop=event.target.closest("[data-project-top]");
+    if(backTop){event.preventDefault();window.scrollTo({top:0,behavior:"smooth"});}
+    var navLink=event.target.closest("#project-toc a[data-t]");
+    if(navLink){
+      event.preventDefault();
+      var target=document.getElementById(navLink.dataset.t);
+      if(navLink.dataset.t==="dk-top0")target=document.getElementById("project-top");
+      if(target){var top=target.getBoundingClientRect().top+window.scrollY-92;window.scrollTo({top:Math.max(0,top),behavior:"smooth"});}
+    }
+  });
+  window.addEventListener("scroll",updateToc,{passive:true});
+  if(!currentProject){
+    heading.textContent=lx(siteCopy.notFound);
+    document.getElementById("project-not-found-title").textContent=lx(siteCopy.notFound);
+    kicker.textContent="404";intro.textContent=lx(siteCopy.notFoundText);
+    document.getElementById("project-not-found").hidden=false;
+    document.getElementById("project-content-root").hidden=true;
+    document.title=lx(siteCopy.notFound)+" — Henrique Marinhos";
+    renderLanguageControls();
+  }else buildProject(currentProject);
+})();
+
+</script>
+</body>
+</html>

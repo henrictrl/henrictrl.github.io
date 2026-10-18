@@ -3231,7 +3231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pjEtiqueta = null;
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
-  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="#projeto/${p.slug}" data-pj="${p.slug}">
+  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="projeto.html?slug=${p.slug}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   const renderPJ = () => {
@@ -3247,7 +3247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = categories.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-category-filter="${key}" aria-pressed="${pjSelectedCategory === key}">${lx(label)}</button>`).join('');
     bar.hidden = false;
     bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div>`;
-    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="#projeto/dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
+    if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="projeto.html?slug=dash-geral" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     grid.classList.add('work-grid');
@@ -3303,7 +3303,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderHomeRows = () => {
     const home = document.getElementById('work-grid'); if (!home) return;
     const ps = HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean);
-    const card = (p) => `<a class="hr-card" href="#projeto/${p.slug}" data-pj="${p.slug}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`;
+    const card = (p) => `<a class="hr-card" href="projeto.html?slug=${p.slug}" data-pj="${p.slug}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`;
     home.className = 'hr-rows home-featured-grid';
     home.innerHTML = ps.map(card).join('');
   };
@@ -3690,54 +3690,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return { html: out.join(''), toc };
   };
   const openDeck = (slug) => {
-    const p = PJ_BY[slug]; if (!p) return false;
-    dkP = p;
-    document.getElementById('dk-name').textContent = p.titulo;
-    const projectMeta = p.cat ? lx(p.cat) + (p.ano ? ' · ' + p.ano : '') : '';
-    document.getElementById('dk-meta').textContent = projectMeta;
-    document.getElementById('dk-kicker').textContent = projectMeta;
-    document.getElementById('dk-title').textContent = p.titulo;
-    document.getElementById('dk-intro').textContent = lx(p.intro || (p.telas[0] && p.telas[0].d));
-    const tagWrap = document.getElementById('dk-tags');
-    tagWrap.hidden = true;
-    tagWrap.innerHTML = '';
-    const lk = document.getElementById('dk-link'); lk.hidden = !p.link;
-    if (p.link) { lk.href = p.link; lk.textContent = p.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/(index\.html)?$/, ''); }
-    // botão "Testar o site" (abre o site rodando num celular/janela)
-    let tb = document.getElementById('dk-try');
-    if (!tb) { tb = document.createElement('button'); tb.id = 'dk-try'; tb.type = 'button'; tb.className = 'dk-try'; document.querySelector('.dk-head').appendChild(tb); tb.onclick = () => dkP && dkP.web && openWeb(dkP); }
-    tb.hidden = !p.web; tb.innerHTML = TRY_ICO + lx(DK_L.try);
-    // telas (páginas da apresentação) empilhadas; legenda entre imagens só onde há descrição
-    const blocks = deckBlocks(p);
-    const telasHTML = p.slug === 'rino-pecas'
-      ? `<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">${p.telas.map((t, k) => `<button class="rino-piece" id="dk-p${k + 1}" type="button" aria-label="Abrir ${esc(lx(t.t))}" title="${esc(lx(t.t))}" onclick="openLightbox('${p.dir}${t.img}.webp')"><span class="rino-piece-thumb"><img src="${p.dir}${t.img}-t.webp" alt="${esc(lx(t.t))}" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">${esc(lx(t.t))}</span></button>`).join('')}</div></section>`
-      : p.telas.map((t, k) => {
-          const d = k > 0 ? lx(t.d) : '';
-          return (d ? `<div class="dk-cap"><h3>${lx(t.t)}</h3><p>${d}</p></div>` : '') + `<img id="dk-p${k + 1}" src="${p.dir}${t.img}.webp" alt="${lx(t.t)}" width="2048" height="1152" decoding="async"${k > 1 ? ' loading="lazy"' : ''}>`;
-        }).join('');
-    document.getElementById('dk-imgs').innerHTML = telasHTML + blocks.html + (p.rel && p.rel.length ? `<div class="dk-rel"><p>${lx(DK_L.rel)}</p><div class="work-grid">${p.rel.map(s => PJ_BY[s]).filter(Boolean).map(pjCard).join('')}</div></div>` : '');
-    // sumário: seções das telas + blocos; a seção visível fica marcada
-    const toc = document.getElementById('dk-toc'), sc = dkScroller;
-    const itens = (p.secoes || []).map(s => [s.p === 1 ? 'dk-top0' : 'dk-p' + s.p, s.t]).concat(blocks.toc);
-    toc.innerHTML = itens.map(([id, t], i) => `<a href="#" data-t="${id}"${i ? '' : ' class="on"'}>${lx(t)}</a>`).join('');
-    toc.hidden = itens.length < 2; toc.parentNode.classList.toggle('no-toc', toc.hidden);
-    if (p.html === 'meta') initMeta();
-    const navPJ = PJ.filter(item => !['rino-pecas','sollaris-instagram','o-hobbit','dash-geral'].includes(item.slug));
-    const navIndex = navPJ.indexOf(p);
-    const nx = navIndex >= 0 ? navPJ[(navIndex + 1) % navPJ.length] : null;
-    const nb = document.getElementById('dk-next'); nb.hidden = !nx || navPJ.length < 2;
-    nb.innerHTML = nx ? `<span>${lx(NEXT_L)}</span>${nx.titulo} →` : '';
-    nb.onclick = nx ? () => openDeck(nx.slug) : null;
-    sc.scrollTop = 0;
-    dsInit();
-    const siteHeader = document.querySelector('header.top-header');
-    if (siteHeader) {
-      document.body.classList.add('project-deck-open');
-      document.documentElement.style.setProperty('--project-header-height', Math.ceil(siteHeader.getBoundingClientRect().height) + 'px');
-    }
-    dk.classList.add('open'); document.body.style.overflow = 'hidden';
-    if (typeof updateMobileTopButton === 'function') updateMobileTopButton();
-    try { history.replaceState(null, '', '#projeto/' + slug); } catch (e) {}
+    if (!PJ_BY[slug]) return false;
+    window.location.assign('projeto.html?slug=' + encodeURIComponent(slug));
     return true;
   };
   window.addEventListener('resize', () => {
@@ -4001,7 +3955,14 @@ document.addEventListener('DOMContentLoaded', () => {
     dkScroller.addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
-  fromHash(); // abre o projeto quando o link tem #projeto/<slug>
+  const routeFromHash = {
+    '#home': ['home', 'inicio'],
+    '#sobre': ['about', 'sobre'],
+    '#trabalhos': ['work', 'trabalhos'],
+    '#artigos': ['articles', 'artigos']
+  }[location.hash];
+  if (routeFromHash) showRoute(routeFromHash[0], routeFromHash[1]);
+  fromHash(); // compatibilidade com links antigos; encaminha o case para projeto.html
 });
 </script>
 </body>
