@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261018-review3">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261018-review4">
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
@@ -52,6 +52,7 @@
   <div class="lightbox-stage"><img class="lightbox-img" id="project-lightbox-img" alt=""></div>
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
+<button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 <script src="assets/data/projetos.js?v=20261018-review3"></script>
 <script src="assets/data/posts.js?v=20261018-review3"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
@@ -627,6 +628,23 @@
     }
   });
   window.addEventListener("scroll",updateToc,{passive:true});
+  const mobileTopButton = document.getElementById("project-mobile-top-button");
+  const updateMobileTopButton = () => {
+    if (!mobileTopButton) return;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    mobileTopButton.classList.toggle("is-visible", mobile && window.scrollY > 480);
+    mobileTopButton.setAttribute("aria-label", lx(siteCopy.top).replace(" ↑", ""));
+    mobileTopButton.setAttribute("title", lx(siteCopy.top).replace(" ↑", ""));
+  };
+  if (mobileTopButton) {
+    mobileTopButton.addEventListener("click", () => {
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      window.scrollTo({ top: 0, behavior });
+    });
+    window.addEventListener("scroll", updateMobileTopButton, { passive: true });
+    window.addEventListener("resize", updateMobileTopButton);
+    updateMobileTopButton();
+  }
   if(!currentProject){
     heading.textContent=lx(siteCopy.notFound);
     document.getElementById("project-not-found-title").textContent=lx(siteCopy.notFound);
