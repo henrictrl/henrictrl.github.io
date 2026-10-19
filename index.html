@@ -3187,9 +3187,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const endDrag = (e) => {
       if (!drag || (e.pointerId !== undefined && e.pointerId !== drag.id)) return;
-      const moved = drag.moved; drag = null; track.classList.remove('is-dragging');
+      const moved = drag.moved, dragVelocity = drag.fingerV;
+      drag = null; track.classList.remove('is-dragging');
       justDragged = moved;
-      const dragVelocity = drag.fingerV;
       if (e.pointerType === 'mouse' && hoverEl) target = 0;   // continua parado se o mouse está em cima
       else if (mobile && e.pointerType !== 'mouse' && moved) {
         target = 0; v = 0;
