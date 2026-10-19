@@ -38,6 +38,7 @@
     </div>
     <footer class="dk-foot">
       <button class="to-top" type="button" data-project-top>Voltar ao topo ↑</button>
+      <div class="project-share-wrap"><button class="project-share" id="project-share" type="button">Compartilhar projeto</button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       <a class="dk-next" id="project-next" href="#" hidden></a>
     </footer>
   </div>
@@ -618,6 +619,35 @@
     if(event.target.id==="project-lightbox"||event.target.classList.contains("lightbox-stage"))closeLightbox();
   });
   document.addEventListener("keydown",function(event){if(event.key==="Escape")closeLightbox();});
+  var shareButton = document.getElementById("project-share");
+  var shareFeedback = document.getElementById("project-share-feedback");
+  if (shareButton) shareButton.addEventListener("click", async function () {
+    var shareUrl = window.location.origin + cleanProjectUrl(slug || (currentProject && currentProject.slug) || "");
+    var shareTitle = heading ? heading.textContent.trim() : document.title;
+    var shareText = intro ? intro.textContent.trim() : "";
+    if (shareFeedback) shareFeedback.textContent = "";
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        if (shareFeedback) shareFeedback.textContent = textLabel("Compartilhamento aberto.", "Share sheet opened.", "Compartir abierto.");
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        var copyField = document.createElement("textarea");
+        copyField.value = shareUrl; copyField.setAttribute("readonly", "");
+        copyField.style.position = "fixed"; copyField.style.opacity = "0";
+        document.body.appendChild(copyField); copyField.select();
+        var copied = document.execCommand("copy"); copyField.remove();
+        if (!copied) throw new Error("copy failed");
+      }
+      if (shareFeedback) shareFeedback.textContent = textLabel("Link copiado.", "Link copied.", "Enlace copiado.");
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+      if (shareFeedback) shareFeedback.textContent = textLabel("Não foi possível compartilhar. Copie o endereço do navegador.", "Could not share. Copy the browser address.", "No se pudo compartir. Copia la dirección del navegador.");
+    }
+  });
   document.addEventListener("click",function(event){
     var backTop=event.target.closest("[data-project-top]");
     if(backTop){event.preventDefault();window.scrollTo({top:0,behavior:"smooth"});}
