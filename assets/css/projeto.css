@@ -1630,3 +1630,57 @@ body.project-page .ds-table th,
 body.project-page .ds-table td,
 body.project-page .ds-table th:first-child,
 body.project-page .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
+
+
+/* Ajuste de alinhamento solicitado — páginas individuais de projeto (19/10/2026). */
+/* O sumário mantém a leitura alinhada à esquerda, mesmo com os estilos herdados de centralização. */
+body.project-page #project-toc,
+body.project-page #project-toc a {
+  text-align: left !important;
+}
+body.project-page #project-toc a {
+  border-left: 1px solid var(--gray-200) !important;
+  border-bottom: 0 !important;
+  padding-left: 14px !important;
+}
+body.project-page #project-toc a.on {
+  border-left-color: var(--ink) !important;
+}
+/* Navegação inferior: topo centralizado e próximo projeto no limite direito do conteúdo. */
+body.project-page .dk-foot {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  justify-content: initial !important;
+}
+body.project-page .dk-foot .to-top {
+  grid-column: 2;
+  justify-self: center;
+  text-align: center !important;
+}
+body.project-page .dk-foot .dk-next {
+  grid-column: 3;
+  justify-self: end;
+  text-align: right !important;
+  white-space: normal;
+}
+body.project-page .dk-foot .dk-next span {
+  text-align: right !important;
+}
+/* A seção de projetos relacionados volta a começar pela margem esquerda. */
+body.project-page .dk-rel,
+body.project-page .dk-rel > p {
+  text-align: left !important;
+}
+body.project-page .dk-rel .work-grid {
+  justify-content: start !important;
+}
+@media (max-width: 767px) {
+  body.project-page .dk-foot {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding-inline: 18px;
+  }
+  body.project-page .dk-foot .dk-next {
+    max-width: 100%;
+  }
+}
