@@ -2897,7 +2897,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = box.querySelector('.portrait-reveal');
     const ctx = canvas.getContext('2d');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const mobile = matchMedia('(hover: none)').matches;
+    const mobile = matchMedia('(max-width: 767px)').matches;
     const saveData = !!(navigator.connection && navigator.connection.saveData);
     let CELL = 2; // "pixel" da máscara em px CSS; recalculado no resize (~50 células na largura)
     const BAYER = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
@@ -2989,14 +2989,8 @@ document.addEventListener('DOMContentLoaded', () => {
       maskData = mctx.createImageData(gw, gh);
       mask32 = new Uint32Array(maskData.data.buffer);
       if (s.locked) s.r = s.tr = fullR();
-      /* No celular, o retrato já começa com o vídeo pixelado cobrindo a foto.
-         No desktop, mantém a imagem colorida estática até a interação. */
-      if (mobile && !s.locked) {
-        s.locked = true;
-        s.x = s.tx = W / 2; s.y = s.ty = H / 2;
-        s.r = s.tr = fullR();
-        box.setAttribute('aria-pressed', 'true');
-      }
+      /* O retrato começa colorido e estático em todas as telas.
+         No mobile, a animação automática é iniciada separadamente após 2 segundos. */
       draw();
       if (mobile && inView) kick();
     };
@@ -3076,6 +3070,14 @@ document.addEventListener('DOMContentLoaded', () => {
     new IntersectionObserver(([en]) => { inView = en.isIntersecting; inView && (s.r >= 1 || s.tr > 0) ? kick() : syncVideo(); }, { threshold: 0.15 }).observe(box);
     document.addEventListener('visibilitychange', () => { !document.hidden && s.r >= 1 ? kick() : syncVideo(); });
     new ResizeObserver(resize).observe(box);
+
+    // Somente no mobile: mantém a foto colorida por 2 segundos e então
+    // dispara a mesma expansão que acontece ao tocar na foto.
+    if (mobile) {
+      setTimeout(() => {
+        if (!s.locked && W > 0 && H > 0) toggle(W / 2, H / 2);
+      }, 2000);
+    }
 
     // Pré-carrega o vídeo quando o navegador estiver ocioso (evita espera no 1º hover)
     if (!saveData) ('requestIdleCallback' in window) ? requestIdleCallback(ensureVideo, { timeout: 3000 }) : setTimeout(ensureVideo, 2000);
