@@ -379,8 +379,13 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
-.marquee-track { display: flex; width: max-content; align-items: center; will-change: transform; cursor: grab; touch-action: pan-y; user-select: none; }
+.marquee-track { display: flex; width: max-content; align-items: center; will-change: transform; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+@media (hover: none) { .marquee-track { touch-action: none; } }
+.marquee-track *, .marquee-track img, .marquee-track a { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
 .marquee-track.is-dragging { cursor: grabbing; }
+.marquee-track.is-dragging, .marquee-track.is-dragging * { cursor: grabbing; }
+.marquee-list { -webkit-user-select: none; user-select: none; }
+.marquee-link { -webkit-user-select: none; user-select: none; }
 .marquee-list { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
 /* espaço como margem (não gap): as duas listas têm largura idêntica → loop sem emenda */
 .marquee-logo { position: relative; flex: none; margin-right: 104px; display: flex; align-items: center; padding: 14px 0 22px; }
@@ -405,7 +410,10 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   font-size: 11px; color: var(--gray-500); white-space: nowrap; pointer-events: none;
   opacity: 0; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
-@media (hover: none) { .marquee-logo.is-middle .marquee-name { opacity: 1; transform: translate(-50%, 0); } }
+/* Em telas sensíveis ao toque, não exibe o nome que acompanha o logo central. */
+@media (hover: none), (max-width: 767px) {
+  .marquee-logo .marquee-name { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+}
 
 /* --- Internal Pages (Work / About) --- */
 .work-page-hero { padding: 16px var(--gutter) 48px; }
@@ -2889,6 +2897,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = box.querySelector('.portrait-reveal');
     const ctx = canvas.getContext('2d');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobile = matchMedia('(hover: none)').matches;
     const saveData = !!(navigator.connection && navigator.connection.saveData);
     let CELL = 2; // "pixel" da máscara em px CSS; recalculado no resize (~50 células na largura)
     const BAYER = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
@@ -2941,7 +2950,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vídeo: carrega sob demanda; toca só enquanto o holofote existe e a foto está visível
     const ensureVideo = () => {
-      if (saveData || video.src) return;
+      if ((saveData && !mobile) || video.src) return;
       video.src = video.dataset.src;
       video.load();
     };
@@ -2980,7 +2989,16 @@ document.addEventListener('DOMContentLoaded', () => {
       maskData = mctx.createImageData(gw, gh);
       mask32 = new Uint32Array(maskData.data.buffer);
       if (s.locked) s.r = s.tr = fullR();
+      /* No celular, o retrato já começa com o vídeo pixelado cobrindo a foto.
+         No desktop, mantém a imagem colorida estática até a interação. */
+      if (mobile && !s.locked) {
+        s.locked = true;
+        s.x = s.tx = W / 2; s.y = s.ty = H / 2;
+        s.r = s.tr = fullR();
+        box.setAttribute('aria-pressed', 'true');
+      }
       draw();
+      if (mobile && inView) kick();
     };
 
     const pos = (e) => { const r = box.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
@@ -3077,6 +3095,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const SPEED = reduce ? 0 : 38;        // px/s em velocidade normal
     let x = 0, v = SPEED, target = SPEED, half = 0, last = 0, raf = 0, inView = false;
     let offsets = [], center = 0, zone = 0, hoverEl = null, drag = null, resumeT = 0;
+    const mobile = matchMedia('(hover: none)').matches;
+    let mobileFling = 0, touchScrollY = 0;
 
     const measure = () => {
       half = lists[0].getBoundingClientRect().width;   // largura de uma lista = ponto de emenda
@@ -3097,7 +3117,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!drag) {
         if (resumeT && now > resumeT) { target = hoverEl ? 0 : SPEED; resumeT = 0; }
         v += (target - v) * Math.min(1, dt * 3);   // aceleração/frenagem suave (~1s)
-        x += v * dt; wrap();
+        if (mobile && Math.abs(mobileFling) > 8) {
+          x += mobileFling * dt;
+          mobileFling *= Math.exp(-2.4 * dt); // inércia suave após soltar o dedo
+        } else {
+          mobileFling = 0;
+          x += v * dt;
+        }
+        wrap();
       }
       paint();
       raf = inView ? requestAnimationFrame(tick) : 0;
@@ -3134,21 +3161,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Arrastar (mouse ou dedo): move a faixa; ao soltar, retoma o movimento
     track.addEventListener('pointerdown', (e) => {
-      drag = { sx: e.clientX, x0: x, moved: false, id: e.pointerId };
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      /* Evita seleção de texto/arraste nativo de imagens durante o gesto. */
+      if (e.pointerType === 'mouse' && e.cancelable) e.preventDefault();
+      drag = { sx: e.clientX, sy: e.clientY, x0: x, moved: false, axis: null, id: e.pointerId, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), fingerV: 0 };
+      mobileFling = 0;
       track.classList.add('is-dragging');
     });
     window.addEventListener('pointermove', (e) => {
       if (!drag || e.pointerId !== drag.id) return;
-      const dx = e.clientX - drag.sx;
-      if (Math.abs(dx) > 4) drag.moved = true;
-      x = drag.x0 - dx; wrap();
+      const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+      if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) drag.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+      if (mobile && drag.axis === 'y') {
+        /* Gesto vertical: mantém a rolagem normal da página e não move a faixa. */
+        const dyStep = e.clientY - drag.lastY;
+        if (dyStep) window.scrollBy(0, -dyStep);
+        drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now();
+        return;
+      }
+      if (drag.axis === 'y') return;
+      const now = performance.now(), elapsed = Math.max(1, now - drag.lastT);
+      drag.fingerV = (e.clientX - drag.lastX) / elapsed * 1000;
+      drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = now;
+      if (Math.abs(dx) > 4) {
+        drag.moved = true;
+        if (e.cancelable) e.preventDefault();
+        /* Proteção extra contra seleção iniciada antes do gesto ser reconhecido. */
+        if (window.getSelection) { const sel = window.getSelection(); if (sel && sel.rangeCount) sel.removeAllRanges(); }
+      }
+      x = drag.x0 - dx;
+      /* O deslocamento sempre é reduzido ao comprimento de uma lista duplicada:
+         a faixa nunca chega ao fim e emenda continuamente no início. */
+      wrap();
+      track.style.transform = `translate3d(${-x}px,0,0)`;
     });
     const endDrag = (e) => {
       if (!drag || (e.pointerId !== undefined && e.pointerId !== drag.id)) return;
-      const moved = drag.moved; drag = null; track.classList.remove('is-dragging');
+      const moved = drag.moved, dragVelocity = drag.fingerV;
+      drag = null; track.classList.remove('is-dragging');
       justDragged = moved;
       if (e.pointerType === 'mouse' && hoverEl) target = 0;   // continua parado se o mouse está em cima
-      else { target = 0; v = 0; resumeT = performance.now() + (moved ? 1200 : 2000); } // toque: pausa curta e retoma
+      else if (mobile && e.pointerType !== 'mouse' && moved) {
+        target = 0; v = 0;
+        mobileFling = Math.max(-1500, Math.min(1500, -dragVelocity));
+        resumeT = performance.now() + 1500;
+      } else { target = 0; v = 0; resumeT = performance.now() + (moved ? 1200 : 2000); }
     };
     window.addEventListener('pointerup', endDrag);
     window.addEventListener('pointercancel', endDrag);
