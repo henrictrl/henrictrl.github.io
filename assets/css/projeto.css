@@ -1646,6 +1646,12 @@ body.project-page #project-toc a {
 body.project-page #project-toc a.on {
   border-left-color: var(--ink) !important;
 }
+/* Compartilhamento ao lado esquerdo da navegação inferior do projeto. */
+body.project-page .project-share-wrap { grid-column:1; justify-self:start; display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-width:0; }
+body.project-page .project-share { border:0; padding:0; background:transparent; color:var(--gray-400); font:inherit; font-size:13px; cursor:pointer; text-align:left !important; }
+body.project-page .project-share:hover { color:var(--ink); }
+body.project-page .project-share:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+body.project-page .project-share-feedback { color:var(--gray-500); font-size:11px; text-align:left !important; }
 /* Navegação inferior: topo centralizado e próximo projeto no limite direito do conteúdo. */
 body.project-page .dk-foot {
   display: grid !important;
@@ -1676,6 +1682,10 @@ body.project-page .dk-rel .work-grid {
   justify-content: start !important;
 }
 @media (max-width: 767px) {
+  /* O botão flutuante já faz essa função no celular. */
+  body.project-page .dk-foot .to-top { display:none !important; }
+  body.project-page .dk-foot .project-share-wrap { grid-column:1; align-items:flex-start; }
+  body.project-page .dk-foot .project-share { font-size:12px; }
   body.project-page .dk-foot {
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     padding-inline: 18px;
