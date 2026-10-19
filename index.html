@@ -380,6 +380,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
 .marquee-track { display: flex; width: max-content; align-items: center; will-change: transform; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+@media (hover: none) { .marquee-track { touch-action: none; } }
 .marquee-track *, .marquee-track img, .marquee-track a { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
 .marquee-track.is-dragging { cursor: grabbing; }
 .marquee-track.is-dragging, .marquee-track.is-dragging * { cursor: grabbing; }
@@ -3095,7 +3096,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let x = 0, v = SPEED, target = SPEED, half = 0, last = 0, raf = 0, inView = false;
     let offsets = [], center = 0, zone = 0, hoverEl = null, drag = null, resumeT = 0;
     const mobile = matchMedia('(hover: none)').matches;
-    let mobileFling = 0;
+    let mobileFling = 0, touchScrollY = 0;
 
     const measure = () => {
       half = lists[0].getBoundingClientRect().width;   // largura de uma lista = ponto de emenda
@@ -3163,19 +3164,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       /* Evita seleção de texto/arraste nativo de imagens durante o gesto. */
       if (e.pointerType === 'mouse' && e.cancelable) e.preventDefault();
-      drag = { sx: e.clientX, x0: x, moved: false, id: e.pointerId, lastX: e.clientX, lastT: performance.now(), fingerV: 0 };
+      drag = { sx: e.clientX, sy: e.clientY, x0: x, moved: false, axis: null, id: e.pointerId, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), fingerV: 0 };
       mobileFling = 0;
       track.classList.add('is-dragging');
     });
     window.addEventListener('pointermove', (e) => {
       if (!drag || e.pointerId !== drag.id) return;
-      const dx = e.clientX - drag.sx;
+      const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+      if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) drag.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+      if (mobile && drag.axis === 'y') {
+        /* Gesto vertical: mantém a rolagem normal da página e não move a faixa. */
+        const dyStep = e.clientY - drag.lastY;
+        if (dyStep) window.scrollBy(0, -dyStep);
+        drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now();
+        return;
+      }
+      if (drag.axis === 'y') return;
       const now = performance.now(), elapsed = Math.max(1, now - drag.lastT);
       drag.fingerV = (e.clientX - drag.lastX) / elapsed * 1000;
-      drag.lastX = e.clientX; drag.lastT = now;
+      drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = now;
       if (Math.abs(dx) > 4) {
         drag.moved = true;
-        if (e.pointerType === 'mouse' && e.cancelable) e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         /* Proteção extra contra seleção iniciada antes do gesto ser reconhecido. */
         if (window.getSelection) { const sel = window.getSelection(); if (sel && sel.rangeCount) sel.removeAllRanges(); }
       }
