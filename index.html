@@ -1698,7 +1698,7 @@ body.home-route .top-header .brand-location,
   mix-blend-mode:screen;
   transform:translateX(-55%);
 }
-.glint-target.glint-active::after { animation:uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+.glint-target.glint-active::after { animation:uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes uv-sweep {
   0% { opacity:0; transform:translateX(-55%); }
   12% { opacity:1; }
@@ -1707,9 +1707,9 @@ body.home-route .top-header .brand-location,
 }
 #view-about #cv-download-btn.glint-active::after,
 #view-about #certificates-btn.glint-active::after,
-#view-about #free-tools-btn.glint-active::after { animation-duration:6.8s; }
+#view-about #free-tools-btn.glint-active::after { animation-duration:15s; }
 /* SVG não aceita a camada ::after: a estrela conserva cor, tamanho e formato e recebe um reflexo breve, sem escala nem brilho dourado novo. */
-.glint-target.art-star.glint-active { animation:star-uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+.glint-target.art-star.glint-active { animation:star-uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes star-uv-sweep {
   0%,100% { filter:none; }
   45%,55% { filter:brightness(1.45) drop-shadow(0 0 3px rgba(255,255,255,.8)); }
@@ -2231,7 +2231,7 @@ body.home-route .top-header .brand-location,
 
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/artigos.js"></script>
-<script src="assets/data/projetos.js?v=20261017-categorias"></script>
+<script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
 <script src="assets/data/posts.js"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -2813,7 +2813,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
     const CARR = ((window.HM_POSTS || {}).POSTS || []).filter(x => x.lot === 'L1');
     const ORD = { 'Tesoura com Ponta': 0, 'Persona': 1 };
-    CARR.sort((a, b) => (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
+    CARR.sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
     const capTitle = (x) => { const t = (x.cap || '').split(/\n/).map(l => l.trim()).filter(l => l && !/^[\p{P}\p{S}\s]+$/u.test(l))[0] || x.v; return t.length > 90 ? t.slice(0, 88).replace(/\s+\S*$/, '') + '…' : t; };
     bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
       `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === artFilter}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
