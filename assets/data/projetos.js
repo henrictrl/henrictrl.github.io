@@ -5406,7 +5406,9 @@ window.PROJETOS = [
   "slug": "rp-40-anos",
   "servicos_relacionados": ["identidade","social"],
   "titulo": "RP 40 anos",
-  "link": "https://www.instagram.com/p/Cj_j-axOC3k/?img_index=1",
+  "postGroups": [
+    {"g":"rp-40-anos","t":{"pt":"Carrossel dos 40 anos","en":"40th anniversary carousel","es":"Carrusel de los 40 años"},"d":{"pt":"Publicação comemorativa do projeto no Instagram.","en":"The project’s anniversary Instagram post.","es":"Publicación conmemorativa del proyecto en Instagram."}}
+  ],
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
   "filtro": "eventos",
