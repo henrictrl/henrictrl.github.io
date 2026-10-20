@@ -362,10 +362,10 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .service-icon { display: block; width: 32px; height: 32px; fill: var(--gray-400); transition: fill 0.25s var(--ease); }
 @media (min-width: 640px) { .service-icon { width: 42px; height: 42px; } }
 .service-card:hover .service-icon, .service-card:focus-visible .service-icon { fill: var(--svc, var(--ink)); }
-/* título sempre em 1 linha: tamanho acompanha a largura do cartão (o mais longo, 'Redação e copywriting', ≈ 11em) */
+/* Títulos de serviço em duas linhas, com quebra natural nos três idiomas. */
 .service-card { container-type: inline-size; }
-.service-title { font-size: 14px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; text-wrap: balance; }
-@media (min-width: 640px) { .service-title { font-size: min(19.5px, calc(100cqi / 11.3)); white-space: nowrap; } }
+.service-title { font-size: 14px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; text-wrap: balance; max-width: 11ch; min-height: 2.6em; white-space: normal !important; overflow-wrap: normal; }
+@media (min-width: 640px) { .service-title { font-size: clamp(14px, 1.35vw, 18px); } }
 .service-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-top: 8px; }
 @media (min-width: 640px) {
   .service-desc { font-size: 15px; line-height: 1.55; margin-top: 12px; }
@@ -475,7 +475,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 .art-card:hover .art-card-media img { transform: scale(1.03); }
 .art-card-meta { font-size: 12px; color: var(--gray-400); margin-bottom: 4px; }
-.art-star { display: inline-block; margin-right: 4px; vertical-align: -0.5px; fill: #F2C230; } /* destaque discreto */
+.art-star { display: inline-block; margin-right: 4px; vertical-align: -0.5px; fill: none !important; stroke: currentColor; stroke-width: 1.4; } /* estrela neutra, sem preenchimento amarelo */
 .art-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 .art-card-by { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
 @media (prefers-reduced-motion: reduce) { .art-card { opacity: 1; transform: none; } }
@@ -1509,8 +1509,9 @@ body.home-route .top-header .brand-location,
   animation: silver-sunlight 11s ease-in-out infinite;
 }
 @keyframes silver-sunlight {
-  0%, 74%, 100% { background-position: 100% 0; }
-  12%, 28% { background-position: 0% 0; }
+  0%, 76%, 100% { background-position: 100% 0; }
+  10% { background-position: 0% 0; }
+  22% { background-position: 100% 0; }
 }
 /* Na área Sobre, o brilho fica restrito aos três recursos solicitados. */
 #view-about #cv-download-btn,
@@ -1519,8 +1520,8 @@ body.home-route .top-header .brand-location,
   animation: resource-glint 11s ease-in-out infinite;
 }
 @keyframes resource-glint {
-  0%, 74%, 100% { text-shadow: none; }
-  12%, 28% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
+  0%, 76%, 100% { text-shadow: none; }
+  10%, 20% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
 }
 /* Estrelinha de destaque dos artigos: brilho discreto, em intervalos longos. */
 .art-card .art-star {
@@ -1529,7 +1530,7 @@ body.home-route .top-header .brand-location,
 }
 @keyframes article-star-glint {
   0%, 78%, 100% { filter: drop-shadow(0 0 0 rgba(242,194,48,0)); transform: scale(1); }
-  10%, 24% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
+  10%, 20% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
 }
 
 /* Ajustes globais de margem e leitura em telas menores. */
@@ -1575,6 +1576,169 @@ body.home-route .top-header .brand-location,
   .art-card .art-star { animation:none; }
   .home-featured-grid.home-page-enter { animation:none; }
 }
+
+
+/* Brilho acionado por contexto: varredura única, lenta e sem movimento de retorno. */
+.hero-headline .dim,
+body.home-route .top-header .brand-location,
+#view-home .about-more-link,
+.contact-footer .footer-social {
+  color: var(--gray-400);
+  background: none;
+  animation: none;
+  -webkit-text-fill-color: currentColor;
+}
+#view-about #cv-download-btn,
+#view-about #certificates-btn,
+#view-about #free-tools-btn { animation: none; text-shadow: none; }
+.art-card .art-star { animation: none; filter: none; transform: none; }
+
+#view-home .section-body > .about-more-link {
+  display: table;
+  margin: 16px 0 0;
+  text-align: left;
+}
+.home-work-more { display:flex; justify-content:flex-start; margin:24px 0 0; }
+.home-work-more .section-link {
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  margin:0;
+  padding:8px 14px;
+  border:1px solid var(--gray-200);
+  border-radius:4px;
+  color:var(--gray-500);
+  background:transparent;
+  font-size:13px;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+
+.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
+  color:transparent;
+  background-image:linear-gradient(105deg, #8a8a8a 0%, #b0b0b0 42%, #fff 50%, #b0b0b0 58%, #8a8a8a 100%);
+  background-size:250% 100%;
+  background-position:-150% 0;
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:silver-sunlight 2.8s linear 1 both;
+}
+@keyframes silver-sunlight {
+  from { background-position:-150% 0; }
+  to { background-position:150% 0; }
+}
+#view-about #cv-download-btn.glint-active,
+#view-about #certificates-btn.glint-active,
+#view-about #free-tools-btn.glint-active {
+  animation:resource-glint 1.8s ease-out 1 both;
+}
+@keyframes resource-glint {
+  0%,100% { text-shadow:none; }
+  45% { text-shadow:0 0 8px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
+}
+.art-card .art-star.glint-active {
+  animation:article-star-glint 1.8s ease-out 1 both;
+}
+@keyframes article-star-glint {
+  0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); }
+  45% { filter:drop-shadow(0 0 4px rgba(242,194,48,.8)); transform:scale(1.14); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-headline .dim,
+  body.home-route .top-header .brand-location,
+  #view-home .about-more-link,
+  .contact-footer .footer-social,
+  #view-about #cv-download-btn,
+  #view-about #certificates-btn,
+  #view-about #free-tools-btn,
+  .art-card .art-star {
+    animation:none !important;
+    background:none !important;
+    color:var(--gray-500) !important;
+    -webkit-text-fill-color:currentColor !important;
+    text-shadow:none !important;
+    filter:none !important;
+    transform:none !important;
+  }
+}
+
+/* Ajustes finais: um único brilho lento e paginação com ação na mesma linha. */
+.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:26px; }
+.home-pagination-row .home-pagination { flex:0 1 auto; justify-content:center; flex-wrap:wrap; margin-top:0; }
+.home-pagination-row .home-work-more { display:flex; flex:0 0 auto; align-items:center; margin:0; }
+.home-pagination-row .home-work-more .section-link {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:36px; min-height:36px; padding:0 10px; margin:0;
+  border:1px solid var(--gray-200); border-radius:4px;
+  color:var(--gray-500); background:transparent; font-size:12px;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.home-pagination-row .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+/* Reflexo UV: uma faixa ampla passa sobre o cinza sem substituir a cor das letras. */
+.glint-target { position:relative; }
+.glint-target::after {
+  content:""; position:absolute; z-index:2; pointer-events:none;
+  inset:-30% -85%; opacity:0;
+  /* Um único feixe largo, com halo difuso, como luz refletida em verniz UV. */
+  background:linear-gradient(105deg,
+    transparent 12%,
+    rgba(255,255,255,.025) 25%,
+    rgba(255,255,255,.07) 34%,
+    rgba(255,255,255,.18) 41%,
+    rgba(255,255,255,.38) 46%,
+    rgba(255,255,255,.78) 49%,
+    rgba(255,255,255,.95) 50%,
+    rgba(255,255,255,.78) 51%,
+    rgba(255,255,255,.38) 54%,
+    rgba(255,255,255,.18) 59%,
+    rgba(255,255,255,.07) 66%,
+    rgba(255,255,255,.025) 75%,
+    transparent 88%);
+  mix-blend-mode:screen;
+  transform:translateX(-55%);
+}
+.glint-target.glint-active::after { animation:uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+@keyframes uv-sweep {
+  0% { opacity:0; transform:translateX(-55%); }
+  12% { opacity:1; }
+  82% { opacity:1; }
+  100% { opacity:0; transform:translateX(55%); }
+}
+#view-about #cv-download-btn.glint-active::after,
+#view-about #certificates-btn.glint-active::after,
+#view-about #free-tools-btn.glint-active::after { animation-duration:6.8s; }
+/* SVG não aceita a camada ::after: a estrela conserva cor, tamanho e formato e recebe um reflexo breve, sem escala nem brilho dourado novo. */
+.glint-target.art-star.glint-active { animation:star-uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+@keyframes star-uv-sweep {
+  0%,100% { filter:none; }
+  45%,55% { filter:brightness(1.45) drop-shadow(0 0 3px rgba(255,255,255,.8)); }
+}
+@media (prefers-reduced-motion: reduce) {
+ .glint-target::after { display:none !important; }
+}
+</style>
+<style>
+
+/* Serviços: títulos e descrições resilientes às diferenças de comprimento entre idiomas. */
+.services-grid { align-items: stretch; }
+.service-card { min-width: 0; height: 100%; align-items: flex-start; }
+.service-card > div { min-width: 0; width: 100%; }
+.service-title { font-size: clamp(13px, 1.15vw, 16px); line-height: 1.3; letter-spacing: -0.015em; white-space: normal !important; text-wrap: balance; overflow-wrap: normal; max-width: 11ch; min-height: 2.6em; }
+.service-desc { margin-top: 9px; font-size: clamp(12px, .98vw, 14px); line-height: 1.6; overflow-wrap: break-word; hyphens: auto; }
+@media (max-width: 639px) {
+  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .service-card { padding: 12px; gap: 12px; }
+  .service-title { font-size: 13px; min-height: 0; }
+  .service-desc { font-size: 12px; line-height: 1.55; }
+}
+@media (min-width: 640px) {
+  .service-card { padding: clamp(14px, 1.8vw, 20px); gap: 18px; }
+  .service-title { min-height: 2.6em; }
+}
+#art-filters .art-star.glint-active, .art-card .art-star.glint-active { animation:article-star-glint 2.8s ease-in-out 1 both; }
+@media (max-width: 639px) { .glance-options { grid-template-columns:1fr; } .glance-option { padding:16px; } }
+@media (prefers-reduced-motion: reduce) { .glance-demo.is-preview,.glance-demo.is-preview::after { animation:none !important; } }
 
 </style>
 </head>
@@ -1658,7 +1822,7 @@ body.home-route .top-header .brand-location,
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
           <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
           <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
-          <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link" data-i18n="about.more">Saiba mais</a>
+          <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
         </div>
       </div>
     </section>
@@ -1757,9 +1921,11 @@ body.home-route .top-header .brand-location,
         <div class="home-projects-viewport">
           <div class="work-grid home-featured-grid" id="work-grid"></div>
         </div>
-        <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
-        <div class="home-work-more">
-          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more">
+            <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
+          </div>
         </div>
       </div>
     </section>
@@ -2316,6 +2482,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (route === 'about') renderAboutPage();
     if (route === 'articles') renderArticlesPage();
     refreshReveal(document.getElementById('view-' + route));
+    window.dispatchEvent(new CustomEvent('portfolio:route-enter', { detail: { route } }));
   };
 
   document.querySelectorAll('[data-route]').forEach(link => {
@@ -2631,7 +2798,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const GRID_ICO = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="5" height="6" rx="1"/><rect x="9" y="3.5" width="5" height="6" rx="1"/><rect x="2" y="9.5" width="5" height="5" rx="1"/><rect x="9" y="11.5" width="5" height="3" rx="1"/></svg>';
     const setGrid = (on) => { artGrid = on; grid.classList.toggle('is-compact', on); const b = bar.querySelector('.art-view'); if (b) b.setAttribute('aria-pressed', on); try { localStorage.setItem('hm-artgrid', on ? '1' : '0'); } catch (e) {} };
     const MINI_STAR = '<svg class="art-star" viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const STAR = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
+    const STAR = '<svg class="art-star" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
     const LINHAS = [[['all', i18n('f.all', 'Todos')], ['fav', STAR, i18n('f.fav', 'Favoritos')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
                     [['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]];
     // modo de leitura: Texto (crítica) ou Instagram (posts ligados ao texto); lembrado entre visitas
@@ -4191,5 +4358,60 @@ document.addEventListener('DOMContentLoaded', () => {
   fromHash(); // compatibilidade com links antigos; encaminha o case para projeto.html
 });
 </script>
+
+<script>
+/* Brilho contextual: um único glance lento ao entrar na página; interação/visibilidade para itens secundários. */
+(() => {
+  const selector = '#view-home .hero-headline .dim, body.home-route .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-work .work-page-title, #view-articles .art-title, #view-articles .art-star, #art-filters .art-star';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const lastPlayed = new WeakMap();
+  const cooldown = 20000;
+  const play = (el) => {
+    if (!el || !el.isConnected) return;
+    if (el.matches('.brand-location') && !document.body.classList.contains('home-route')) return;
+    /* O reflexo só é executado sobre elementos cinza; a estrela é exceção intencional e mantém seu amarelo original. */
+    if (!el.matches('.art-star')) {
+      const rgb = getComputedStyle(el).color.match(/\d+/g);
+      if (!rgb || Math.max(+rgb[0], +rgb[1], +rgb[2]) - Math.min(+rgb[0], +rgb[1], +rgb[2]) > 12 ||
+          (+rgb[0] + +rgb[1] + +rgb[2]) / 3 > 220 || (+rgb[0] + +rgb[1] + +rgb[2]) / 3 < 90) return;
+    }
+    const now = Date.now();
+    if (now - (lastPlayed.get(el) || 0) < cooldown) return;
+    lastPlayed.set(el, now);
+    el.classList.remove('glint-active');
+    void el.offsetWidth;
+    el.classList.add('glint-target', 'glint-active');
+    const clear = () => el.classList.remove('glint-active');
+    el.addEventListener('animationend', clear, { once: true });
+    window.setTimeout(clear, 5200);
+  };
+  const observed = new WeakSet();
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) play(entry.target); });
+  }, { threshold: 0.55 });
+  const scan = (root) => {
+    if (root.nodeType === 1 && root.matches(selector) && !observed.has(root)) {
+      observed.add(root); root.classList.add('glint-target'); observer.observe(root);
+    }
+    if (root.querySelectorAll) root.querySelectorAll(selector).forEach(el => {
+      if (observed.has(el)) return;
+      observed.add(el); el.classList.add('glint-target'); observer.observe(el);
+    });
+  };
+  scan(document);
+  new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+    if (node.nodeType === 1) scan(node);
+  }))).observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('pointerover', event => {
+    const el = event.target.closest(selector);
+    if (el && !el.contains(event.relatedTarget)) play(el);
+  });
+  document.addEventListener('focusin', event => {
+    const el = event.target.closest(selector);
+    if (el) play(el);
+  });
+})();
+</script>
+
 </body>
 </html>
