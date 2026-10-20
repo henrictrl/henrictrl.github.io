@@ -1509,8 +1509,9 @@ body.home-route .top-header .brand-location,
   animation: silver-sunlight 11s ease-in-out infinite;
 }
 @keyframes silver-sunlight {
-  0%, 74%, 100% { background-position: 100% 0; }
-  12%, 28% { background-position: 0% 0; }
+  0%, 76%, 100% { background-position: 100% 0; }
+  10% { background-position: 0% 0; }
+  22% { background-position: 100% 0; }
 }
 /* Na área Sobre, o brilho fica restrito aos três recursos solicitados. */
 #view-about #cv-download-btn,
@@ -1519,8 +1520,8 @@ body.home-route .top-header .brand-location,
   animation: resource-glint 11s ease-in-out infinite;
 }
 @keyframes resource-glint {
-  0%, 74%, 100% { text-shadow: none; }
-  12%, 28% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
+  0%, 76%, 100% { text-shadow: none; }
+  10%, 20% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
 }
 /* Estrelinha de destaque dos artigos: brilho discreto, em intervalos longos. */
 .art-card .art-star {
@@ -1529,7 +1530,7 @@ body.home-route .top-header .brand-location,
 }
 @keyframes article-star-glint {
   0%, 78%, 100% { filter: drop-shadow(0 0 0 rgba(242,194,48,0)); transform: scale(1); }
-  10%, 24% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
+  10%, 20% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
 }
 
 /* Ajustes globais de margem e leitura em telas menores. */
