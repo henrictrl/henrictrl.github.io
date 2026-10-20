@@ -97,7 +97,7 @@
     var month=months[LANG][Number(bits[1])-1];
     return LANG==="en" ? month+" "+Number(bits[2])+", "+bits[0] : Number(bits[2])+" "+month+" "+bits[0];
   }
-  function igImg(post,index) { return "assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0")+".webp"; }
+  function igImg(post,index) { return post.cover && index===0 ? post.cover : "assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0")+".webp"; }
   function igUrl(post) { return "https://www.instagram.com/"+(post.reel?"reel":"p")+"/"+post.c+"/"; }
   var postGroupNames={};
   PROJECTS.forEach(function(p) {
@@ -153,10 +153,12 @@
   }
   function postCard(post) {
     var n=Number(post.n)||1, cap=String(post.cap||"").trim(), longCap=cap.length>140, ar=(1/(Number(post.r)||1)).toFixed(4);
-    var imgs=Array.from({length:n},function(_,i){
-      var src=igImg(post,i), image='<img src="'+esc(src)+'" alt="" loading="lazy" decoding="async" data-full="'+esc(src)+'">';
-      return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
-    }).join("");
+    var imgs=post.embed
+      ? '<iframe src="https://www.instagram.com/p/'+esc(post.c)+'/embed/" title="'+esc(cap||"Instagram carousel")+'" loading="lazy" allowtransparency="true" frameborder="0" scrolling="no" style="width:100%;height:640px;border:0;background:#fff"></iframe>'
+      : Array.from({length:n},function(_,i){
+        var src=igImg(post,i), image='<img src="'+esc(src)+'" alt="" loading="lazy" decoding="async" data-full="'+esc(src)+'">';
+        return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
+      }).join("");
     return '<article class="pc" data-code="'+esc(post.c)+'" data-kind="'+(n>1&&!post.art?"car":"post")+'"><div class="pc-media" style="--ar:'+ar+'"><div class="pc-track">'+imgs+'</div>'+
       (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
       '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
