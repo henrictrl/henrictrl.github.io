@@ -1489,6 +1489,55 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .dk-ov .ds-table th:first-child,
 .dk-ov .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
 
+
+/* CTA após a seleção de projetos: mais visível sem competir com os cards. */
+.home-work-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 5vw, 56px);
+}
+.work-more-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 15px 24px;
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  background: var(--ink);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.work-more-link::after { content: "↗"; font-size: 16px; line-height: 1; transition: transform 0.25s var(--ease); }
+.work-more-link:hover { background: transparent; color: var(--ink); }
+.work-more-link:hover::after { transform: translate(2px, -2px); }
+
+/* Reflexo de luz nos trechos cinza dos títulos: brilho breve, com pausas longas. */
+.hero-like .dim,
+.work-page-title .dim,
+.art-title .dim {
+  color: transparent;
+  background-image: linear-gradient(108deg, #929292 0%, #b2b2b2 36%, #f6f6f6 49%, #b2b2b2 60%, #929292 100%);
+  background-size: 240% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: silver-sunlight 8.5s ease-in-out infinite;
+}
+@keyframes silver-sunlight {
+  0%, 58% { background-position: 100% 0; }
+  82%, 100% { background-position: -100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-like .dim,
+  .work-page-title .dim,
+  .art-title .dim { animation: none; color: var(--gray-400); background: none; -webkit-text-fill-color: currentColor; }
+  .work-more-link, .work-more-link::after { transition: none; }
+}
+
 </style>
 </head>
 <body>
@@ -1591,7 +1640,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
           <div class="service-card" data-service-id="social" role="button" tabindex="0">
             <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM5 1h1v1h-1zM6 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM1 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM6 11h1v1h-1z"/></svg>
             <div>
-              <p class="service-title" data-i18n="svc.social.t">Estratégia de marca</p>
+              <p class="service-title" data-i18n="svc.social.t">Conteúdo e redes sociais</p>
               <p class="service-desc" data-i18n="svc.social.d">Planejamento visual e criação de peças gráficas para redes, campanhas e apresentações.</p>
             </div>
           </div>
@@ -1605,8 +1654,8 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
           <div class="service-card" data-service-id="landing" role="button" tabindex="0">
             <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM7 0h1v1h-1zM8 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM1 1h1v1h-1zM3 1h1v1h-1zM5 1h1v1h-1zM10 1h1v1h-1zM1 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM10 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1z"/></svg>
             <div>
-              <p class="service-title" data-i18n="svc.landing.t">Landing pages</p>
-              <p class="service-desc" data-i18n="svc.landing.d">Páginas de apresentação ou de venda feitas sob medida, leves e rápidas, sem depender de plataformas prontas.</p>
+              <p class="service-title" data-i18n="svc.landing.t">Sites e interfaces</p>
+              <p class="service-desc" data-i18n="svc.landing.d">Sites, catálogos e ferramentas web sob medida, com foco em clareza, leveza e desempenho.</p>
             </div>
           </div>
         </div>
@@ -1666,9 +1715,11 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
         <div class="work-intro reveal">
           <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
           <p style="font-size:14px; color:var(--gray-500); max-width:60ch; line-height:1.6;">Identidades visuais, projetos editoriais e interfaces desenvolvidos com intenção e clareza.</p>
-          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
         </div>
         <div class="work-grid" id="work-grid"></div>
+        <div class="home-work-more">
+          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="work-more-link" data-i18n="work.all">Ver mais</a>
+        </div>
       </div>
     </section>
   </div>
@@ -1996,9 +2047,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
       'services.title': 'Services',
       'svc.identidade.t': 'Visual identity', 'svc.identidade.d': 'Logo, palette, typography and the pieces that take the brand into the world: business cards, stationery, packaging and event print.',
-      'svc.social.t': 'Brand strategy', 'svc.social.d': 'Visual planning and graphic design for social media, campaigns and presentations.',
+      'svc.social.t': 'Social content', 'svc.social.d': 'Visual planning and graphic assets for social media, campaigns and presentations.',
       'svc.redacao.t': 'Copywriting', 'svc.redacao.d': 'Copy for websites, social media, campaigns and presentations, with the brand voice defined and kept consistent across all of them.',
-      'svc.landing.t': 'Landing pages', 'svc.landing.d': 'Custom presentation or sales pages, light and fast, without relying on ready-made platforms.',
+      'svc.landing.t': 'Websites and interfaces', 'svc.landing.d': 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
       'work.label': 'Projects', 'work.all': 'See more', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
       'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
       'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
@@ -2031,9 +2082,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
       'services.title': 'Servicios',
       'svc.identidade.t': 'Identidad visual', 'svc.identidade.d': 'Logotipo, paleta, tipografía y las piezas que llevan la marca al mundo: tarjetas, papelería, empaques e impresos para eventos.',
-      'svc.social.t': 'Estrategia de marca', 'svc.social.d': 'Planificación visual y creación de piezas gráficas para redes, campañas y presentaciones.',
+      'svc.social.t': 'Contenido y redes sociales', 'svc.social.d': 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.',
       'svc.redacao.t': 'Redacción y copy', 'svc.redacao.d': 'Textos para sitios web, redes, campañas y presentaciones, con la voz de la marca definida y mantenida en todos ellos.',
-      'svc.landing.t': 'Landing pages', 'svc.landing.d': 'Páginas de presentación o de venta hechas a medida, ligeras y rápidas, sin depender de plataformas prediseñadas.',
+      'svc.landing.t': 'Sitios web e interfaces', 'svc.landing.d': 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.',
       'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
       'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
       'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
@@ -2137,48 +2188,59 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentProjectIndex = -1;
   let currentGalleryIndex = 0;
 
-  const PROJECTS_ORDER = ['exemplo-identidade-visual', 'exemplo-app-mobile', 'exemplo-site-institucional'];
-  const PROJECTS_BY_ID = {
-    'exemplo-identidade-visual': {
-      id: 'exemplo-identidade-visual',
-      titulo: '[Projeto Exemplo — Identidade Visual]',
-      subtitulo: '[Rebranding completo para uma marca de bairro]',
-      categorias: ['[Branding]', '[Identidade Visual]'],
-      servicos_relacionados: ['identidade'],
-      cliente: '[Cliente Exemplo Ltda.]', ano: '[2026]', capa: '', galeria: ['', '', ''],
-      contexto: '[Texto de exemplo]', solucao: '[Texto de exemplo]',
-      responsabilidades: ['[Pesquisa de marca]', '[Criação de identidade visual]', '[Aplicações]'],
-      ferramentas: ['[Illustrator]', '[Photoshop]', '[Figma]'], link_externo: ''
-    },
-    'exemplo-app-mobile': {
-      id: 'exemplo-app-mobile',
-      titulo: '[Projeto Exemplo — App Mobile]',
-      subtitulo: '[Aplicativo de gestão de tarefas]',
-      categorias: ['[App]', '[UI/UX]'],
-      servicos_relacionados: ['landing'],
-      cliente: '[Projeto pessoal]', ano: '[2025]', capa: '', galeria: ['', '', '', ''],
-      contexto: '[Texto de exemplo]', solucao: '[Texto de exemplo]',
-      responsabilidades: ['[Design de interface]', '[Prototipação]', '[Front-end]'],
-      ferramentas: ['[Figma]', '[React]', '[JavaScript]'], link_externo: ''
-    },
-    'exemplo-site-institucional': {
-      id: 'exemplo-site-institucional',
-      titulo: '[Projeto Exemplo — Site Institucional]',
-      subtitulo: '[Redesenho completo do site]',
-      categorias: ['[Website]', '[Webflow]'],
-      servicos_relacionados: ['landing', 'redacao'],
-      cliente: '[Cliente Exemplo]', ano: '[2026]', capa: '', galeria: ['', ''],
-      contexto: '[Texto de exemplo]', solucao: '', responsabilidades: [],
-      ferramentas: ['[Webflow]', '[Figma]'], link_externo: ''
-    }
-  };
+  // Os cards de serviço reutilizam o catálogo real de projetos (assets/data/projetos.js).
+  const PROJECTS_ORDER = (window.PROJETOS || []).map(p => p.slug).filter(Boolean);
+  const PROJECTS_BY_ID = Object.fromEntries((window.PROJETOS || []).filter(p => p.slug).map(p => [p.slug, {
+    id: p.slug,
+    titulo: p.titulo,
+    subtitulo: p.cat && p.cat.pt || '',
+    categorias: [p.cat && p.cat.pt || ''].filter(Boolean),
+    servicos_relacionados: p.servicos_relacionados || [],
+    cliente: p.marca || '',
+    ano: p.ano || '',
+    capa: p.capa || '',
+    galeria: [p.capa].filter(Boolean),
+    contexto: p.telas && p.telas[0] && p.telas[0].d && p.telas[0].d.pt || '',
+    solucao: '',
+    responsabilidades: [],
+    ferramentas: [],
+    link_externo: p.link || ''
+  }]));
 
-  // Conteúdo das janelas de serviço: a definir. Campos vazios ficam ocultos.
+  // Descrições das janelas de serviço; os projetos relacionados vêm do catálogo real.
   const SERVICE_CONTENT = {
-    identidade: { titulo: 'Identidade visual', desc: '', incluso: [], processo: [] },
-    social: { titulo: 'Estratégia de marca', desc: '', incluso: [], processo: [] },
-    redacao: { titulo: 'Redação e copywriting', desc: '', incluso: [], processo: [] },
-    landing: { titulo: 'Landing pages', desc: '', incluso: [], processo: [] }
+    identidade: {
+      titulo: 'Identidade visual',
+      desc: {
+        pt: 'Construção de identidades visuais consistentes, do logotipo às aplicações da marca.',
+        en: 'Visual identities built to stay consistent, from the logo to real-world brand applications.',
+        es: 'Identidades visuales coherentes, desde el logotipo hasta las aplicaciones de marca.'
+      }, incluso: [], processo: []
+    },
+    social: {
+      titulo: 'Conteúdo e redes sociais',
+      desc: {
+        pt: 'Planejamento visual e criação de peças gráficas para redes, campanhas e apresentações.',
+        en: 'Visual planning and graphic assets for social media, campaigns and presentations.',
+        es: 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.'
+      }, incluso: [], processo: []
+    },
+    redacao: {
+      titulo: 'Redação e copywriting',
+      desc: {
+        pt: 'Textos para sites, redes, campanhas e apresentações, com uma voz consistente e adequada ao contexto.',
+        en: 'Writing for websites, social media, campaigns and presentations, with a consistent voice suited to the context.',
+        es: 'Textos para sitios web, redes, campañas y presentaciones, con una voz coherente y adecuada al contexto.'
+      }, incluso: [], processo: []
+    },
+    landing: {
+      titulo: 'Sites e interfaces',
+      desc: {
+        pt: 'Sites, catálogos e ferramentas web sob medida, com foco em clareza, leveza e desempenho.',
+        en: 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
+        es: 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.'
+      }, incluso: [], processo: []
+    }
   };
 
   /* --- Animations & Observers --- */
@@ -2269,15 +2331,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   /* --- Rendering Data --- */
-  const getProjectsList = () => PROJECTS_ORDER.map(id => PROJECTS_BY_ID[id]).filter(Boolean);
+  const getProjectsList = () => (window.PROJETOS || []).filter(p => Array.isArray(p.servicos_relacionados) && p.servicos_relacionados.length);
 
   const buildWorkCard = (project) => {
-    const card = document.createElement('a'); card.className = 'work-card'; card.href = '#';
-    const tag = (project.categorias && project.categorias[0]) || '';
+    const card = document.createElement('a');
+    card.className = 'work-card';
+    card.href = project.slug ? cleanProjectUrl(project.slug) : '#';
+    const tag = lx(project.cat) || (project.categorias && project.categorias[0]) || '';
     card.innerHTML = `
-      <div class="work-card-media">${project.capa ? `<img src="${project.capa}" alt="">` : 'Imagem'}</div>
+      <div class="work-card-media">${project.capa ? `<img src="${project.capa}" alt="" loading="lazy" decoding="async">` : ''}</div>
       <p class="work-card-title">${project.titulo}</p><p class="work-card-tag">${tag}</p>`;
-    card.addEventListener('click', (e) => { e.preventDefault(); openProjectModal(project.id); });
     return card;
   };
 
@@ -2829,7 +2892,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const s = SERVICE_CONTENT[card.dataset.serviceId]; if (!s) return;
       document.getElementById('sm-eyebrow').textContent = i18n('sm.eyebrow', 'Serviço');
       document.getElementById('sm-title').textContent = card.querySelector('.service-title').textContent; // já no idioma atual
-      const desc = document.getElementById('sm-desc'); desc.textContent = s.desc; desc.hidden = !s.desc;
+      const desc = document.getElementById('sm-desc'); desc.textContent = lx(s.desc); desc.hidden = !lx(s.desc);
       // listas "O que está incluso" / "Como trabalho"; bloco some se a lista estiver vazia
       [['sm-incluso', 'sm-block-incluso', s.incluso], ['sm-processo', 'sm-block-processo', s.processo]].forEach(([listId, blockId, items]) => {
         const list = document.getElementById(listId); list.innerHTML = '';

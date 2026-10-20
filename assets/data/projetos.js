@@ -9,6 +9,7 @@
 window.PROJETOS = [
  {
   "slug": "classic-tattoo",
+  "servicos_relacionados": ["identidade"],
   "marca": "classic-tattoo",
   "exp": "t.pr consulting",
   "titulo": "Classic Tattoo PCH",
@@ -598,6 +599,7 @@ window.PROJETOS = [
  },
  {
   "slug": "rino",
+  "servicos_relacionados": ["identidade"],
   "marca": "rino",
   "exp": null,
   "titulo": "Rino",
@@ -1360,6 +1362,7 @@ window.PROJETOS = [
  },
  {
   "slug": "rino-pecas",
+  "servicos_relacionados": ["identidade"],
   "marca": "rino",
   "titulo": "Rino: peças",
   "ano": "2026",
@@ -2237,6 +2240,7 @@ window.PROJETOS = [
  },
  {
   "slug": "rino-site",
+  "servicos_relacionados": ["landing"],
   "marca": "rino",
   "titulo": "Rino Cores",
   "ano": "2026",
@@ -2292,6 +2296,7 @@ window.PROJETOS = [
  },
  {
   "slug": "optica-leopoldina",
+  "servicos_relacionados": ["identidade"],
   "marca": "optica-leopoldina",
   "exp": null,
   "titulo": "Óptica Leopoldina",
@@ -2554,6 +2559,7 @@ window.PROJETOS = [
  },
  {
   "slug": "sollaris",
+  "servicos_relacionados": ["identidade"],
   "marca": "sollaria",
   "titulo": "Sollaris",
   "ano": "2023",
@@ -2990,6 +2996,7 @@ window.PROJETOS = [
  },
  {
   "slug": "equity360",
+  "servicos_relacionados": ["identidade"],
   "marca": "equity360",
   "titulo": "Equity 360",
   "ano": "2026",
@@ -3176,6 +3183,7 @@ window.PROJETOS = [
  },
  {
   "slug": "congresso-extensao",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Congresso de Extensão Universitária",
   "ano": "2024",
   "cat": {
@@ -3437,6 +3445,7 @@ window.PROJETOS = [
  },
  {
   "slug": "interserv",
+  "servicos_relacionados": ["identidade"],
   "titulo": "InterServ 2023/2024",
   "ano": "2024",
   "cat": {
@@ -3682,6 +3691,7 @@ window.PROJETOS = [
  },
  {
   "slug": "ntaps",
+  "servicos_relacionados": ["identidade"],
   "titulo": "NTAPS",
   "ano": "2022",
   "cat": {
@@ -3896,6 +3906,7 @@ window.PROJETOS = [
  },
  {
   "slug": "csunesp",
+  "servicos_relacionados": ["identidade"],
   "titulo": "CSUNESP",
   "ano": "2023",
   "cat": {
@@ -4126,6 +4137,7 @@ window.PROJETOS = [
  },
  {
   "slug": "mostra-saude-mental",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Mostra de Saúde Mental",
   "ano": "2023",
   "cat": {
@@ -4335,6 +4347,7 @@ window.PROJETOS = [
  },
  {
   "slug": "nupe",
+  "servicos_relacionados": ["identidade"],
   "titulo": "NUPE",
   "ano": "2024",
   "cat": {
@@ -4640,6 +4653,7 @@ window.PROJETOS = [
  },
  {
   "slug": "ocupacao-unesp-negra",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Ocupação Unesp Negra",
   "ano": "2024",
   "cat": {
@@ -4776,6 +4790,7 @@ window.PROJETOS = [
  },
  {
   "slug": "prisma-brandbook",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Prisma Consultoria",
   "ano": "2023",
   "cat": {
@@ -4978,6 +4993,7 @@ window.PROJETOS = [
  },
  {
   "slug": "cminds",
+  "servicos_relacionados": ["identidade"],
   "titulo": "C Minds",
   "ano": "2022",
   "cat": {
@@ -5248,6 +5264,7 @@ window.PROJETOS = [
  },
  {
   "slug": "setembro-amarelo",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Setembro Amarelo 2022",
   "ano": "2022",
   "cat": {
@@ -5387,6 +5404,7 @@ window.PROJETOS = [
  },
  {
   "slug": "rp-40-anos",
+  "servicos_relacionados": ["identidade","social"],
   "titulo": "RP 40 anos",
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
@@ -5580,6 +5598,7 @@ window.PROJETOS = [
  },
  {
   "slug": "prisma-proposta",
+  "servicos_relacionados": ["redacao"],
   "titulo": "Proposta Prisma",
   "ano": "2023",
   "cat": {
@@ -5859,6 +5878,7 @@ window.PROJETOS = [
  },
  {
   "slug": "inspirit",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Inspirit Jiu Jitsu",
   "ano": "2026",
   "cat": {
@@ -5982,6 +6002,7 @@ window.PROJETOS = [
  },
  {
   "slug": "festa-da-polenta",
+  "servicos_relacionados": ["identidade"],
   "titulo": "Festa da Polenta",
   "ano": "2026",
   "cat": {
@@ -6110,6 +6131,7 @@ window.PROJETOS = [
  },
  {
   "slug": "fellipe-gualberto",
+  "servicos_relacionados": ["landing"],
   "titulo": "Fellipe Gualberto",
   "ano": "2026",
   "cat": {
@@ -6293,6 +6315,7 @@ window.PROJETOS = [
  },
  {
   "slug": "nova-rio-branco",
+  "servicos_relacionados": ["landing"],
   "titulo": "Nova Rio Branco",
   "ano": "2025",
   "cat": {
@@ -6449,6 +6472,7 @@ window.PROJETOS = [
  },
  {
   "slug": "pixelar",
+  "servicos_relacionados": ["landing"],
   "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
@@ -6645,6 +6669,7 @@ window.PROJETOS = [
  },
  {
   "slug": "metaprojeto",
+  "servicos_relacionados": ["landing"],
   "titulo": "Este portfólio",
   "ano": "2026",
   "cat": {
@@ -6685,6 +6710,7 @@ window.PROJETOS = [
  },
  {
   "slug": "basement",
+  "servicos_relacionados": ["social","redacao"],
   "titulo": "Basement",
   "ano": "2026",
   "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
@@ -6719,6 +6745,7 @@ window.PROJETOS = [
  },
  {
   "slug": "tesoura",
+  "servicos_relacionados": ["social","redacao"],
   "titulo": "Tesoura com Ponta",
   "ano": "2025–2026",
   "cat": {
@@ -6766,6 +6793,7 @@ window.PROJETOS = [
  },
  {
   "slug": "persona",
+  "servicos_relacionados": ["social","redacao"],
   "titulo": "Persona",
   "ano": "2023–2026",
   "cat": {
@@ -6820,6 +6848,7 @@ window.PROJETOS = [
  },
  {
   "slug": "desvendando",
+  "servicos_relacionados": ["social","redacao"],
   "titulo": "Desvendando o Pop",
   "ano": "2026",
   "cat": {
@@ -6860,6 +6889,7 @@ window.PROJETOS = [
  },
  {
   "slug": "proec",
+  "servicos_relacionados": ["social"],
   "marca": [
    "congresso-extensao",
    "interserv",
@@ -6992,6 +7022,7 @@ window.PROJETOS = [
  },
  {
   "slug": "sollaris-instagram",
+  "servicos_relacionados": ["social"],
   "titulo": "Sollaris · Instagram",
   "ano": "2023",
   "cat": {
@@ -7032,6 +7063,7 @@ window.PROJETOS = [
  },
  {
   "slug": "rd-cultural",
+  "servicos_relacionados": ["social","redacao"],
   "titulo": "RD Cultural",
   "ano": "2023",
   "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
@@ -7074,6 +7106,7 @@ window.PROJETOS = [
  },
  {
   "slug": "encantos-do-brasil",
+  "servicos_relacionados": ["identidade"],
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
@@ -7269,6 +7302,7 @@ window.PROJETOS = [
  },
  {
   "slug": "encontro-direitos-humanos",
+  "servicos_relacionados": [],
   "titulo": "13º Encontro de Direitos Humanos",
   "ano": "2024",
   "cat": {
@@ -7379,6 +7413,7 @@ window.PROJETOS = [
  },
  {
   "slug": "copa-girlpower",
+  "servicos_relacionados": [],
   "titulo": "Copa GirlPower",
   "ano": "2024",
   "cat": {
@@ -7521,6 +7556,7 @@ window.PROJETOS = [
  },
  {
   "slug": "oficina-gestao-projetos",
+  "servicos_relacionados": [],
   "titulo": "Gestão de Projetos para Design",
   "ano": "2024",
   "cat": {
@@ -7676,6 +7712,7 @@ window.PROJETOS = [
  },
  {
   "slug": "o-hobbit",
+  "servicos_relacionados": [],
   "titulo": "O Hobbit: análise literária",
   "ano": "2022",
   "cat": {
@@ -7855,6 +7892,7 @@ window.PROJETOS = [
  },
  {
   "slug": "dash-geral",
+  "servicos_relacionados": [],
   "titulo": "Visão geral",
   "ano": "2022–2026",
   "capa": "assets/projetos/dashboards/geral.svg",
