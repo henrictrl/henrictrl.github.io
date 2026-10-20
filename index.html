@@ -1703,8 +1703,12 @@ body.home-route .top-header .brand-location,
 #view-about #cv-download-btn.glint-active::after,
 #view-about #certificates-btn.glint-active::after,
 #view-about #free-tools-btn.glint-active::after { animation-duration:6.8s; }
-/* A estrela conserva preenchimento, tamanho e formato; só recebe a mesma faixa de luz. */
-.glint-target.art-star { isolation:isolate; }
+/* SVG não aceita a camada ::after: a estrela conserva cor, tamanho e formato e recebe um reflexo breve, sem escala nem brilho dourado novo. */
+.glint-target.art-star.glint-active { animation:star-uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+@keyframes star-uv-sweep {
+  0%,100% { filter:none; }
+  38%,62% { filter:brightness(1.55) drop-shadow(0 0 2px rgba(255,255,255,.75)); }
+}
 @media (prefers-reduced-motion: reduce) {
  .glint-target::after { display:none !important; }
 }
