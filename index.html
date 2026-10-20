@@ -1497,7 +1497,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 
 /* Brilho localizado: passagem suave, pausa longa e sem salto no reinício. */
 .hero-headline .dim,
-#view-home .brand-location,
+body.home-route .top-header .brand-location,
 #view-home .section-link,
 .contact-footer .footer-social {
   color: transparent;
@@ -1578,7 +1578,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 
 </style>
 </head>
-<body>
+<body class="home-route">
 
 
 <header class="top-header">
@@ -2306,6 +2306,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Routing --- */
   const showRoute = (route, navId) => {
+    document.body.classList.toggle('home-route', route === 'home');
     ROUTES.forEach(r => document.getElementById('view-' + r).style.display = (r === route) ? 'block' : 'none');
     if (navId) {
       document.querySelectorAll('[data-nav-id]').forEach(a => a.classList.toggle('current', a.dataset.navId === navId));
