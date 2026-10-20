@@ -1772,7 +1772,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
       <a href="https://www.linkedin.com/in/henrique-marinhos/" class="footer-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://wa.me/5514991394590" class="footer-social" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
-      <a href="https://substack.com/@henrictrl" class="footer-social" target="_blank" rel="noopener noreferrer">Substack</a>
+      <a href="https://www.behance.net/henriquemarinhos" class="footer-social" target="_blank" rel="noopener noreferrer">Behance</a>
     </nav>
   </div>
   <!-- créditos -->
@@ -3922,7 +3922,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const box = document.getElementById('tools-float'), foot = document.getElementById('contato');
     const LIST = window.FERRAMENTAS || []; if (!box || !LIST.length) return;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    box.innerHTML = LIST.map(t => `<div class="tool-ic" title="${t.n}">${t.svg}</div>`).join('');
+    box.innerHTML = LIST.map(t => t.url ? `<a class="tool-ic tool-ic-link" data-url="${t.url}" href="${t.url}" target="_blank" rel="noopener noreferrer" title="${t.n}" aria-label="${t.n}">${t.svg}</a>` : `<div class="tool-ic" title="${t.n}">${t.svg}</div>`).join('');
     const els = [...box.children];
     let W = 0, H = 0, S = 46, R = 23, obst = [], G = { x: 0, y: 0 };
     const GAP = matchMedia('(max-width: 767px)').matches ? 5 : 3;
@@ -3961,7 +3961,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (drag) { const now = performance.now(), dtm = Math.max(8, now - drag.t) / 1000; drag.b.vx = (x - drag.ox - drag.b.x) / dtm; drag.b.vy = (y - drag.oy - drag.b.y) / dtm; drag.b.x = x - drag.ox; drag.b.y = y - drag.oy; drag.t = now; }
       if (inView) wake(); }, { passive: true });
     // arrastar: o ícone recebe o ponteiro (os demais seguem ignorando cliques)
-    els.forEach((el, i) => { el.style.pointerEvents = 'auto'; el.style.cursor = 'grab'; el.style.touchAction = 'none';
+    els.forEach((el, i) => { el.style.pointerEvents = 'auto'; el.style.cursor = el.dataset.url ? 'pointer' : 'grab'; el.style.touchAction = el.dataset.url ? 'auto' : 'none';
+      if (el.tagName === 'A') return; // Letterboxd abre o perfil ao clicar; os outros ícones continuam apenas decorativos/arrastáveis.
       el.addEventListener('pointerdown', (e) => { if (drag) return; e.preventDefault(); const [x, y] = local(e.clientX, e.clientY); const b = B[i];
         drag = { b, ox: x - b.x, oy: y - b.y, t: performance.now(), id: e.pointerId }; b.vx = b.vy = 0; el.style.cursor = 'grabbing'; el.style.zIndex = 2; try { el.setPointerCapture(e.pointerId); } catch (_) {} wake(); });
       const up = () => { if (!drag || drag.b.el !== el) return; const v = Math.hypot(drag.b.vx, drag.b.vy), mx = 900; if (v > mx) { drag.b.vx *= mx / v; drag.b.vy *= mx / v; } el.style.cursor = 'grab'; el.style.zIndex = ''; drag = null; wake(); };
