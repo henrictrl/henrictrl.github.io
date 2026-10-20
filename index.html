@@ -1662,6 +1662,41 @@ body.home-route .top-header .brand-location,
     transform:none !important;
   }
 }
+
+/* Ajustes finais: um único brilho lento e paginação com ação na mesma linha. */
+.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:26px; }
+.home-pagination-row .home-pagination { flex:0 1 auto; justify-content:center; flex-wrap:wrap; margin-top:0; }
+.home-pagination-row .home-work-more { display:flex; flex:0 0 auto; align-items:center; margin:0; }
+.home-pagination-row .home-work-more .section-link {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:36px; min-height:36px; padding:0 10px; margin:0;
+  border:1px solid var(--gray-200); border-radius:4px;
+  color:var(--gray-500); background:transparent; font-size:12px;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.home-pagination-row .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
+  color:transparent; background-image:linear-gradient(105deg,#8a8a8a 0%,#b0b0b0 42%,#fff 50%,#b0b0b0 58%,#8a8a8a 100%);
+  background-size:250% 100%; background-position:-150% 0; background-clip:text;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  animation:silver-sunlight 4.8s ease-in-out 1 both;
+}
+@keyframes silver-sunlight { from { background-position:-150% 0; } to { background-position:150% 0; } }
+#view-about #cv-download-btn.glint-active,
+#view-about #certificates-btn.glint-active,
+#view-about #free-tools-btn.glint-active { animation:resource-glint 4.8s ease-out 1 both; }
+@keyframes resource-glint { 0%,100% { text-shadow:none; } 45% { text-shadow:0 0 9px rgba(255,255,255,.95),0 0 2px rgba(17,17,17,.18); } }
+.art-card .art-star.glint-active { animation:article-star-glint 4.8s ease-out 1 both; }
+@keyframes article-star-glint { 0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); } 45% { filter:drop-shadow(0 0 4px rgba(242,194,48,.8)); transform:scale(1.14); } }
+@media (max-width: 600px) {
+ .home-pagination-row { gap:6px; }
+ .home-pagination-row .home-pagination { gap:4px; }
+ .home-pagination-row .home-page-number { min-width:30px; min-height:34px; padding-inline:5px; }
+ .home-pagination-row .home-work-more .section-link { min-width:30px; min-height:34px; padding-inline:7px; font-size:11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .glint-target, .glint-target.glint-active { animation:none !important; background:none !important; color:var(--gray-500) !important; -webkit-text-fill-color:currentColor !important; text-shadow:none !important; filter:none !important; transform:none !important; }
+}
 </style>
 </head>
 <body class="home-route">
@@ -1843,10 +1878,12 @@ body.home-route .top-header .brand-location,
         <div class="home-projects-viewport">
           <div class="work-grid home-featured-grid" id="work-grid"></div>
         </div>
-        <div class="home-work-more">
-          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more">
+            <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
+          </div>
         </div>
-        <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
       </div>
     </section>
   </div>
@@ -2402,6 +2439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (route === 'about') renderAboutPage();
     if (route === 'articles') renderArticlesPage();
     refreshReveal(document.getElementById('view-' + route));
+    window.dispatchEvent(new CustomEvent('portfolio:route-enter', { detail: { route } }));
   };
 
   document.querySelectorAll('[data-route]').forEach(link => {
@@ -4279,14 +4317,12 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-/* Efeitos de brilho: ativação por entrada na tela, foco ou intenção de interação.
-   Cada passagem é única e tem intervalo mínimo para não competir com a leitura. */
+/* Brilho contextual: um único glance lento ao entrar na página; interação/visibilidade para itens secundários. */
 (() => {
-  const selector = '.hero-headline .dim, .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-articles .art-star';
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducedMotion) return;
+  const selector = '.hero-headline .dim, .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-work .work-page-title .dim, #view-articles .art-title .dim, #view-articles .art-star';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const lastPlayed = new WeakMap();
-  const cooldown = 12000;
+  const cooldown = 20000;
   const play = (el) => {
     if (!el || !el.isConnected) return;
     if (el.matches('.brand-location') && !document.body.classList.contains('home-route')) return;
@@ -4294,30 +4330,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (now - (lastPlayed.get(el) || 0) < cooldown) return;
     lastPlayed.set(el, now);
     el.classList.remove('glint-active');
-    void el.getBoundingClientRect().width;
+    void el.offsetWidth;
     el.classList.add('glint-target', 'glint-active');
     const clear = () => el.classList.remove('glint-active');
     el.addEventListener('animationend', clear, { once: true });
-    window.setTimeout(clear, 3200);
+    window.setTimeout(clear, 5200);
   };
+  const observed = new WeakSet();
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) play(entry.target);
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) play(entry.target); });
   }, { threshold: 0.55 });
   const scan = (root) => {
-    if (root.nodeType === 1 && root.matches(selector) && !root.dataset.glintObserved) {
-      root.dataset.glintObserved = '1';
-      root.classList.add('glint-target');
-      observer.observe(root);
+    if (root.nodeType === 1 && root.matches(selector) && !observed.has(root)) {
+      observed.add(root); root.classList.add('glint-target'); observer.observe(root);
     }
     if (root.querySelectorAll) root.querySelectorAll(selector).forEach(el => {
-      if (el.dataset.glintObserved) return;
-      el.dataset.glintObserved = '1';
-      el.classList.add('glint-target');
-      observer.observe(el);
+      if (observed.has(el)) return;
+      observed.add(el); el.classList.add('glint-target'); observer.observe(el);
     });
   };
+  const enterTargets = {
+    home: '.hero-headline .dim',
+    work: '#view-work .work-page-title .dim',
+    articles: '#view-articles .art-title .dim',
+    about: '#view-about #cv-download-btn'
+  };
+  window.addEventListener('portfolio:route-enter', event => {
+    const target = document.querySelector(enterTargets[event.detail?.route] || '');
+    if (target) requestAnimationFrame(() => play(target));
+  });
   scan(document);
   new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
     if (node.nodeType === 1) scan(node);
