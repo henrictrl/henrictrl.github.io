@@ -1698,7 +1698,7 @@ body.home-route .top-header .brand-location,
   mix-blend-mode:screen;
   transform:translateX(-55%);
 }
-.glint-target.glint-active::after { animation:uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+.glint-target.glint-active::after { animation:uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes uv-sweep {
   0% { opacity:0; transform:translateX(-55%); }
   12% { opacity:1; }
@@ -1707,9 +1707,9 @@ body.home-route .top-header .brand-location,
 }
 #view-about #cv-download-btn.glint-active::after,
 #view-about #certificates-btn.glint-active::after,
-#view-about #free-tools-btn.glint-active::after { animation-duration:6.8s; }
+#view-about #free-tools-btn.glint-active::after { animation-duration:15s; }
 /* SVG não aceita a camada ::after: a estrela conserva cor, tamanho e formato e recebe um reflexo breve, sem escala nem brilho dourado novo. */
-.glint-target.art-star.glint-active { animation:star-uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+.glint-target.art-star.glint-active { animation:star-uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes star-uv-sweep {
   0%,100% { filter:none; }
   45%,55% { filter:brightness(1.45) drop-shadow(0 0 3px rgba(255,255,255,.8)); }
