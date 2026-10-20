@@ -1698,3 +1698,29 @@ body.project-page .dk-rel .work-grid {
     max-width: 100%;
   }
 }
+
+/* Bandeiras compactas, no tamanho usado pelo seletor da página inicial. */
+body.project-page .detail-lang { gap:8px; }
+body.project-page .detail-lang button { width:21px; height:15px; border-radius:3px; }
+body.project-page .dk-toc-share {
+  grid-column:1; min-width:0; position:sticky;
+  top:calc(var(--project-header-height, 72px) + 92px);
+  display:flex; flex-direction:column; align-items:stretch; gap:18px;
+}
+body.project-page .dk-toc-share .dk-toc { position:static; top:auto; }
+body.project-page .dk-toc-share .project-share-wrap {
+  display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-width:0;
+}
+body.project-page .dk-toc-share .project-share {
+  display:inline-flex; align-items:center; justify-content:flex-start; gap:7px;
+  border:0; padding:0; background:transparent; color:var(--gray-400);
+  font:inherit; font-size:12px; cursor:pointer; text-align:left !important;
+}
+body.project-page .dk-toc-share .project-share svg { width:15px; height:15px; flex:0 0 auto; }
+body.project-page .dk-toc-share .project-share:hover { color:var(--ink); }
+body.project-page .dk-toc-share .project-share-feedback { font-size:11px; color:var(--gray-500); text-align:left !important; }
+@media (max-width: 760px) {
+  body.project-page .dk-body { display:flex; flex-direction:column; gap:22px; }
+  body.project-page .dk-toc-share { position:static; width:100%; }
+  body.project-page .dk-toc-share .dk-toc { position:static; }
+}
