@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261020-flags">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261020-share-row">
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
@@ -33,12 +33,14 @@
       <div class="detail-subnav"><a id="project-external-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a></div>
     </header>
     <div class="dk-body">
-      <nav class="dk-toc" id="project-toc" aria-label="Sumário do projeto" hidden></nav>
+      <div class="dk-toc-share">
+        <nav class="dk-toc" id="project-toc" aria-label="Sumário do projeto" hidden></nav>
+        <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
+      </div>
       <div class="dk-imgs" id="project-visuals"></div>
     </div>
     <footer class="dk-foot">
       <button class="to-top" type="button" data-project-top>Voltar ao topo ↑</button>
-      <div class="project-share-wrap"><button class="project-share" id="project-share" type="button">Compartilhar projeto</button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       <a class="dk-next" id="project-next" href="#" hidden></a>
     </footer>
   </div>
