@@ -1355,8 +1355,9 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .cv-actions { padding-top:16px; padding-bottom:0; }
 @media (min-width:768px) { .cv-actions { padding-top:36px; } }
 .cv-actions-inner { max-width:1024px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
-.resource-action { display:inline-flex; align-items:center; gap:12px; border:1px solid var(--gray-200); border-radius:var(--r); padding:11px 15px; background:var(--white); color:var(--ink); font:inherit; font-size:13px; cursor:pointer; transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease); }
-.resource-action:hover { border-color:var(--ink); }
+.resource-action { display:inline-flex; align-items:center; gap:8px; border:0; border-radius:0; padding:0; background:transparent; color:var(--gray-500); font:inherit; font-size:13px; font-weight:500; cursor:pointer; text-align:left; transition:color .2s var(--ease); }
+.resource-action:hover { color:var(--ink); }
+.section-heading .resource-inline { margin-top:5px; gap:6px; }
 .resource-action-primary { background:var(--ink); border-color:var(--ink); color:var(--white); font-size:14px; font-weight:500; padding:13px 18px; }
 .resource-action-primary:hover { background:#333; }
 .cv-document-note { color:var(--gray-500); font-size:12px; }
@@ -1494,31 +1495,41 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .home-work-more { display:flex; justify-content:flex-start; margin-top:24px; }
 .home-work-more .section-link { margin-top:0; }
 
-/* Reflexo de luz: mais nítido e recorrente, preservando a leitura do cinza. */
-.hero-like .dim,
-.work-page-title .dim,
-.art-title .dim,
-.brand-location,
-.section-label,
-.section-link,
-.work-card-tag,
-.hr-c,
-.main-nav a:not(.current),
-.services-title,
-.pj-results-line,
-.pj-filter-hint,
-.pj-tag-count {
+/* Brilho localizado: passagem suave, pausa longa e sem salto no reinício. */
+.hero-headline .dim,
+#view-home .brand-location,
+#view-home .section-link,
+.contact-footer .footer-social {
   color: transparent;
-  background-image: linear-gradient(108deg, #777777 0%, #a0a0a0 31%, #ffffff 48%, #a0a0a0 63%, #777777 100%);
-  background-size: 240% 100%;
+  background-image: linear-gradient(105deg, #8a8a8a 0%, #b0b0b0 42%, #ffffff 50%, #b0b0b0 58%, #8a8a8a 100%);
+  background-size: 320% 100%;
   background-position: 100% 0;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: silver-sunlight 3.6s ease-in-out infinite;
+  animation: silver-sunlight 11s ease-in-out infinite;
 }
 @keyframes silver-sunlight {
-  0%, 34% { background-position: 100% 0; }
-  70%, 100% { background-position: -100% 0; }
+  0%, 74%, 100% { background-position: 100% 0; }
+  12%, 28% { background-position: 0% 0; }
+}
+/* Na área Sobre, o brilho fica restrito aos três recursos solicitados. */
+#view-about #cv-download-btn,
+#view-about #certificates-btn,
+#view-about #free-tools-btn {
+  animation: resource-glint 11s ease-in-out infinite;
+}
+@keyframes resource-glint {
+  0%, 74%, 100% { text-shadow: none; }
+  12%, 28% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
+}
+/* Estrelinha de destaque dos artigos: brilho discreto, em intervalos longos. */
+.art-card .art-star {
+  transform-origin: center;
+  animation: article-star-glint 9s ease-in-out infinite;
+}
+@keyframes article-star-glint {
+  0%, 78%, 100% { filter: drop-shadow(0 0 0 rgba(242,194,48,0)); transform: scale(1); }
+  10%, 24% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
 }
 
 /* Ajustes globais de margem e leitura em telas menores. */
@@ -1556,11 +1567,12 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .home-page-number:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
 .home-page-number:disabled { opacity:.35; cursor:default; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-like .dim, .work-page-title .dim, .art-title .dim,
-  .brand-location, .section-label, .section-link, .work-card-tag, .hr-c,
-  .main-nav a:not(.current), .services-title, .pj-results-line, .pj-filter-hint, .pj-tag-count {
+  .hero-headline .dim, #view-home .brand-location, #view-home .section-link,
+  .contact-footer .footer-social {
     animation:none; color:var(--gray-500); background:none; -webkit-text-fill-color:currentColor;
   }
+  #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn,
+  .art-card .art-star { animation:none; }
   .home-featured-grid.home-page-enter { animation:none; }
 }
 
@@ -2794,9 +2806,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Idiomas: texto no formato pedido; bandeiras em SVG (BR, EUA, Espanha)
   const FLAG_US = '<svg viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true"><rect width="19" height="10" fill="#B22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3C3B6E"/></svg>';
   const IDIOMAS = [
-    { f: () => FLAGS.pt(), t: { pt: 'Português - Nativo', en: 'Portuguese - Native', es: 'Portugués - Nativo' } },
-    { f: () => FLAG_US, t: { pt: 'Inglês B2 First | Level C1 (Cambridge University Press & Assessment)', en: 'English B2 First | Level C1 (Cambridge University Press & Assessment)', es: 'Inglés B2 First | Level C1 (Cambridge University Press & Assessment)' } },
-    { f: () => FLAGS.es(), t: { pt: 'Espanhol Intermediário', en: 'Spanish — Intermediate', es: 'Español intermedio' } }
+    { f: () => FLAGS.pt(), t: { pt: 'Português — Nativo', en: 'Portuguese — Native', es: 'Portugués — Nativo' } },
+    { f: () => FLAG_US, t: { pt: 'Inglês B2 First | Level C1', en: 'English B2 First | Level C1', es: 'Inglés B2 First | Level C1' }, desc: { pt: 'Cambridge University Press & Assessment', en: 'Cambridge University Press & Assessment', es: 'Cambridge University Press & Assessment' } },
+    { f: () => FLAGS.es(), t: { pt: 'Espanhol Intermediário', en: 'Spanish — Intermediate', es: 'Español intermedio' }, desc: { pt: 'CNA Bauru · 2024–2026', en: 'CNA Bauru · 2024–2026', es: 'CNA Bauru · 2024–2026' } }
   ];
   // Ferramentas gratuitas: alternativas aos programas pagos. Formato: { n: 'Nome', svg: '<svg…>' } (logos em assets/data/ferramentas.js servem de modelo)
   // Edite esta lista por categoria conforme as alternativas realmente usadas; a seleção está em teste.
@@ -2861,7 +2873,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !freeToolsOverlay.hidden) closeFreeTools(); });
   const renderAboutPage = () => {
     const lg = document.getElementById('cv-lang');
-    if (lg) lg.innerHTML = IDIOMAS.map(i => `<div class="cv-item lang-item reveal"><div class="cv-head"><div class="cv-logo" aria-hidden="true">${i.f()}</div><div class="cv-main"><p class="cv-name" style="font-weight:400">${tx(i.t)}</p></div></div></div>`).join('');
+    if (lg) lg.innerHTML = IDIOMAS.map(i => `<div class="cv-item lang-item reveal"><div class="cv-head"><div class="cv-logo" aria-hidden="true">${i.f()}</div><div class="cv-main"><p class="cv-name" style="font-weight:400">${tx(i.t)}</p>${i.desc ? `<p class="cv-desc">${tx(i.desc)}</p>` : ''}</div></div></div>`).join('');
     const fg = document.getElementById('cv-free');
     if (fg) { fg.innerHTML = FERRAMENTAS_GRATUITAS.map(f => `<div class="free-item">${f.svg}<span>${f.n}</span></div>`).join(''); document.getElementById('cv-free-empty').hidden = FERRAMENTAS_GRATUITAS.length > 0; }
     ['exp', 'edu', 'extra', 'skills'].forEach(k => {
