@@ -56,8 +56,8 @@
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261018-review3"></script>
-<script src="assets/data/posts.js?v=20261018-review3"></script>
+<script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
+<script src="assets/data/posts.js?v=20261020-rp40-post"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
 
@@ -154,7 +154,7 @@
   function postCard(post) {
     var n=Number(post.n)||1, cap=String(post.cap||"").trim(), longCap=cap.length>140, ar=(1/(Number(post.r)||1)).toFixed(4);
     var imgs=post.embed
-      ? '<iframe src="https://www.instagram.com/p/'+esc(post.c)+'/embed/" title="'+esc(cap||"Instagram carousel")+'" loading="lazy" allowtransparency="true" frameborder="0" scrolling="no" style="width:100%;height:640px;border:0;background:#fff"></iframe>'
+      ? '<iframe src="https://www.instagram.com/p/'+esc(post.c)+'/embed/" title="'+esc(cap||"Instagram carousel")+'" loading="lazy" allowtransparency="true" frameborder="0" scrolling="no" style="display:block;flex:0 0 100%;min-width:100%;width:100%;height:640px;border:0;background:#fff"></iframe>'
       : Array.from({length:n},function(_,i){
         var src=igImg(post,i), image='<img src="'+esc(src)+'" alt="" loading="lazy" decoding="async" data-full="'+esc(src)+'">';
         return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
