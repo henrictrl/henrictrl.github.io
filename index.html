@@ -475,7 +475,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 .art-card:hover .art-card-media img { transform: scale(1.03); }
 .art-card-meta { font-size: 12px; color: var(--gray-400); margin-bottom: 4px; }
-.art-star { display: inline-block; margin-right: 4px; vertical-align: -0.5px; fill: #F2C230; } /* destaque discreto */
+.art-star { display: inline-block; margin-right: 4px; vertical-align: -0.5px; fill: none !important; stroke: currentColor; stroke-width: 1.4; } /* estrela neutra, sem preenchimento amarelo */
 .art-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 .art-card-by { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
 @media (prefers-reduced-motion: reduce) { .art-card { opacity: 1; transform: none; } }
@@ -1679,26 +1679,31 @@ body.home-route .top-header .brand-location,
 .glint-target { position:relative; }
 .glint-target::after {
   content:""; position:absolute; z-index:2; pointer-events:none;
-  inset:-18% -55%; opacity:0;
+  inset:-30% -85%; opacity:0;
+  /* Um único feixe largo, com halo difuso, como luz refletida em verniz UV. */
   background:linear-gradient(105deg,
-    transparent 28%,
-    rgba(255,255,255,.05) 36%,
-    rgba(255,255,255,.18) 42%,
-    rgba(255,255,255,.48) 47%,
-    rgba(255,255,255,.82) 50%,
-    rgba(255,255,255,.48) 53%,
-    rgba(255,255,255,.18) 58%,
-    rgba(255,255,255,.05) 64%,
-    transparent 72%);
+    transparent 12%,
+    rgba(255,255,255,.025) 25%,
+    rgba(255,255,255,.07) 34%,
+    rgba(255,255,255,.18) 41%,
+    rgba(255,255,255,.38) 46%,
+    rgba(255,255,255,.78) 49%,
+    rgba(255,255,255,.95) 50%,
+    rgba(255,255,255,.78) 51%,
+    rgba(255,255,255,.38) 54%,
+    rgba(255,255,255,.18) 59%,
+    rgba(255,255,255,.07) 66%,
+    rgba(255,255,255,.025) 75%,
+    transparent 88%);
   mix-blend-mode:screen;
-  transform:translateX(-42%);
+  transform:translateX(-55%);
 }
 .glint-target.glint-active::after { animation:uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes uv-sweep {
-  0% { opacity:0; transform:translateX(-42%); }
+  0% { opacity:0; transform:translateX(-55%); }
   12% { opacity:1; }
   82% { opacity:1; }
-  100% { opacity:0; transform:translateX(42%); }
+  100% { opacity:0; transform:translateX(55%); }
 }
 #view-about #cv-download-btn.glint-active::after,
 #view-about #certificates-btn.glint-active::after,
@@ -1707,7 +1712,7 @@ body.home-route .top-header .brand-location,
 .glint-target.art-star.glint-active { animation:star-uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
 @keyframes star-uv-sweep {
   0%,100% { filter:none; }
-  38%,62% { filter:brightness(1.55) drop-shadow(0 0 2px rgba(255,255,255,.75)); }
+  45%,55% { filter:brightness(1.45) drop-shadow(0 0 3px rgba(255,255,255,.8)); }
 }
 @media (prefers-reduced-motion: reduce) {
  .glint-target::after { display:none !important; }
