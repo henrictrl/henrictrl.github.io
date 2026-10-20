@@ -1675,19 +1675,44 @@ body.home-route .top-header .brand-location,
   transition:color .2s var(--ease), border-color .2s var(--ease);
 }
 .home-pagination-row .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
-.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
-  color:transparent; background-image:linear-gradient(105deg,#8a8a8a 0%,#b0b0b0 42%,#fff 50%,#b0b0b0 58%,#8a8a8a 100%);
-  background-size:250% 100%; background-position:-150% 0; background-clip:text;
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  animation:silver-sunlight 4.8s ease-in-out 1 both;
+/* Efeito UV: faixa larga de luz, sobre o elemento inteiro, com passagem lenta e sem apagar o texto. */
+.glint-target:not(.art-star) { position:relative; isolation:isolate; }
+.glint-target:not(.art-star)::after {
+  content:""; position:absolute; z-index:2; pointer-events:none;
+  inset:-18% -55%; opacity:0;
+  background:linear-gradient(105deg,
+    transparent 30%,
+    rgba(255,255,255,.06) 37%,
+    rgba(255,255,255,.22) 43%,
+    rgba(255,255,255,.62) 48%,
+    rgba(255,255,255,.92) 50%,
+    rgba(255,255,255,.62) 52%,
+    rgba(255,255,255,.22) 57%,
+    rgba(255,255,255,.06) 63%,
+    transparent 70%);
+  mix-blend-mode:screen;
+  transform:translateX(-42%);
 }
-@keyframes silver-sunlight { from { background-position:-150% 0; } to { background-position:150% 0; } }
-#view-about #cv-download-btn.glint-active,
-#view-about #certificates-btn.glint-active,
-#view-about #free-tools-btn.glint-active { animation:resource-glint 4.8s ease-out 1 both; }
-@keyframes resource-glint { 0%,100% { text-shadow:none; } 45% { text-shadow:0 0 9px rgba(255,255,255,.95),0 0 2px rgba(17,17,17,.18); } }
-.art-card .art-star.glint-active { animation:article-star-glint 4.8s ease-out 1 both; }
-@keyframes article-star-glint { 0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); } 45% { filter:drop-shadow(0 0 4px rgba(242,194,48,.8)); transform:scale(1.14); } }
+.glint-target.glint-active:not(.art-star)::after { animation:uv-sweep 6.8s cubic-bezier(.22,.61,.36,1) 1 both; }
+@keyframes uv-sweep {
+  0% { opacity:0; transform:translateX(-42%); }
+  12% { opacity:1; }
+  82% { opacity:1; }
+  100% { opacity:0; transform:translateX(42%); }
+}
+#view-about #cv-download-btn.glint-active::after,
+#view-about #certificates-btn.glint-active::after,
+#view-about #free-tools-btn.glint-active::after { animation-duration:6.8s; }
+#view-articles .art-star.glint-active, #art-filters .art-star.glint-active {
+  animation:article-star-glint 3.2s ease-in-out 1 both;
+}
+@keyframes article-star-glint {
+  0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); }
+  45%,65% { filter:drop-shadow(0 0 5px rgba(242,194,48,.95)); transform:scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glint-target::after { display:none !important; }
+}
 @media (max-width: 600px) {
  .home-pagination-row { gap:6px; }
  .home-pagination-row .home-pagination { gap:4px; }
@@ -1716,28 +1741,6 @@ body.home-route .top-header .brand-location,
   .service-card { padding: clamp(14px, 1.8vw, 20px); gap: 18px; }
   .service-title { min-height: 2.6em; }
 }
-/* Glance playground — quatro opções com movimento por área, não por palavra. */
-.glance-playground { max-width: 1024px; margin: 56px auto 32px; padding: 24px 16px 30px; border-top: 1px solid var(--gray-200); }
-.glance-playground-head { display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
-.glance-playground h2 { font-size:14px; font-weight:500; }
-.glance-playground-intro { color:var(--gray-500); font-size:12px; }
-.glance-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-.glance-option { min-width:0; position:relative; padding:20px; border:1px solid var(--gray-200); border-radius:var(--r); overflow:hidden; background:var(--white); }
-.glance-option-label { display:block; margin-bottom:18px; color:var(--gray-400); font-size:11px; }
-.glance-demo { display:block; position:relative; width:100%; min-height:46px; font-size:clamp(17px,2.2vw,24px); font-weight:500; letter-spacing:-.04em; line-height:1.2; }
-.glance-demo::after { content:""; position:absolute; inset:-8px -12px; pointer-events:none; opacity:0; }
-.glance-demo--sweep::after { background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.92) 47%,rgba(190,190,190,.72) 51%,transparent 68%); transform:translateX(-120%); mix-blend-mode:screen; }
-.glance-demo--sweep.is-preview::after { opacity:1; animation:demo-sweep 3.4s ease-in-out 1 both; }
-.glance-demo--glow.is-preview { animation:demo-glow 3.2s ease-in-out 1 both; }
-.glance-demo--shine.is-preview { animation:demo-shine 3.4s ease-in-out 1 both; }
-.glance-demo--underline::after { inset:auto 0 -8px; height:2px; background:linear-gradient(90deg,transparent,#b6b6b6,#fff,#b6b6b6,transparent); transform:scaleX(0); transform-origin:left; }
-.glance-demo--underline.is-preview::after { opacity:1; animation:demo-underline 3.4s ease-in-out 1 both; }
-.glance-preview-btn { margin-top:18px; padding:7px 11px; border:1px solid var(--gray-200); border-radius:4px; background:transparent; color:var(--gray-500); font:inherit; font-size:11px; cursor:pointer; }
-.glance-preview-btn:hover,.glance-preview-btn:focus-visible { border-color:var(--ink); color:var(--ink); }
-@keyframes demo-sweep { 0%{transform:translateX(-120%);opacity:0} 18%{opacity:1} 82%{opacity:1} 100%{transform:translateX(120%);opacity:0} }
-@keyframes demo-glow { 0%,100%{filter:none;text-shadow:none} 35%,70%{filter:drop-shadow(0 0 3px rgba(255,255,255,.95));text-shadow:0 0 1px #777,0 0 8px rgba(160,160,160,.48)} }
-@keyframes demo-shine { 0%,100%{filter:brightness(1)} 35%,70%{filter:brightness(1.5) drop-shadow(0 0 5px rgba(220,220,220,.9))} }
-@keyframes demo-underline { 0%{transform:scaleX(0);opacity:0} 20%,80%{opacity:1} 100%{transform:scaleX(1);opacity:0} }
 #art-filters .art-star.glint-active, .art-card .art-star.glint-active { animation:article-star-glint 2.8s ease-in-out 1 both; }
 @media (max-width: 639px) { .glance-options { grid-template-columns:1fr; } .glance-option { padding:16px; } }
 @media (prefers-reduced-motion: reduce) { .glance-demo.is-preview,.glance-demo.is-preview::after { animation:none !important; } }
@@ -4364,7 +4367,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 /* Brilho contextual: um único glance lento ao entrar na página; interação/visibilidade para itens secundários. */
 (() => {
-  const selector = '#view-articles .art-star, #art-filters .art-star';
+  const selector = '#view-home .hero-headline, body.home-route .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-work .work-page-title, #view-articles .art-title, #view-articles .art-star, #art-filters .art-star';
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const lastPlayed = new WeakMap();
   const cooldown = 20000;
@@ -4406,48 +4409,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const el = event.target.closest(selector);
     if (el) play(el);
   });
-})();
-</script>
-
-<section class="glance-playground" id="glance-playground" aria-labelledby="glance-playground-title">
-  <div class="glance-playground-head">
-    <h2 id="glance-playground-title">Teste de glance</h2>
-    <p class="glance-playground-intro">Quatro opções para comparar — clique em “Testar” em cada uma.</p>
-  </div>
-  <div class="glance-options">
-    <article class="glance-option">
-      <span class="glance-option-label">01 · Faixa de luz</span>
-      <span class="glance-demo glance-demo--sweep">Design com intenção.</span>
-      <button class="glance-preview-btn" type="button" data-glance-preview="sweep">Testar</button>
-    </article>
-    <article class="glance-option">
-      <span class="glance-option-label">02 · Halo suave</span>
-      <span class="glance-demo glance-demo--glow">Design com intenção.</span>
-      <button class="glance-preview-btn" type="button" data-glance-preview="glow">Testar</button>
-    </article>
-    <article class="glance-option">
-      <span class="glance-option-label">03 · Reflexo luminoso</span>
-      <span class="glance-demo glance-demo--shine">Design com intenção.</span>
-      <button class="glance-preview-btn" type="button" data-glance-preview="shine">Testar</button>
-    </article>
-    <article class="glance-option">
-      <span class="glance-option-label">04 · Linha de luz</span>
-      <span class="glance-demo glance-demo--underline">Design com intenção.</span>
-      <button class="glance-preview-btn" type="button" data-glance-preview="underline">Testar</button>
-    </article>
-  </div>
-</section>
-<script>
-(() => {
-  const demos = [...document.querySelectorAll('.glance-demo')];
-  document.querySelectorAll('[data-glance-preview]').forEach(button => button.addEventListener('click', () => {
-    const type = button.dataset.glancePreview;
-    const demo = demos.find(el => el.classList.contains('glance-demo--' + type));
-    if (!demo) return;
-    demos.forEach(el => { el.classList.remove('is-preview'); void el.offsetWidth; });
-    demo.classList.add('is-preview');
-    window.setTimeout(() => demo.classList.remove('is-preview'), 3700);
-  }));
 })();
 </script>
 
