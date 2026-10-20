@@ -6715,15 +6715,7 @@ window.PROJETOS = [
   "rel": [
    "equity360"
   ],
-  "exp": "Basement",
-  "dash": {
-   "users": [
-    "basement_cc"
-   ],
-   "m": "l",
-   "cor": "#eda100",
-   "on": "#111111"
-  }
+  "exp": "Basement"
  },
  {
   "slug": "tesoura",
