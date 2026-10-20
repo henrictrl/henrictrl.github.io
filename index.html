@@ -2813,7 +2813,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
     const CARR = ((window.HM_POSTS || {}).POSTS || []).filter(x => x.lot === 'L1');
     const ORD = { 'Tesoura com Ponta': 0, 'Persona': 1 };
-    CARR.sort((a, b) => (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
+    CARR.sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
     const capTitle = (x) => { const t = (x.cap || '').split(/\n/).map(l => l.trim()).filter(l => l && !/^[\p{P}\p{S}\s]+$/u.test(l))[0] || x.v; return t.length > 90 ? t.slice(0, 88).replace(/\s+\S*$/, '') + '…' : t; };
     bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
       `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === artFilter}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
