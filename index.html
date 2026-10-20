@@ -1490,52 +1490,77 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .dk-ov .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
 
 
-/* CTA após a seleção de projetos: mais visível sem competir com os cards. */
-.home-work-more {
-  display: flex;
-  justify-content: center;
-  margin-top: clamp(28px, 5vw, 56px);
-}
-.work-more-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 15px 24px;
-  border: 1px solid var(--ink);
-  border-radius: var(--r);
-  background: var(--ink);
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
-}
-.work-more-link::after { content: "↗"; font-size: 16px; line-height: 1; transition: transform 0.25s var(--ease); }
-.work-more-link:hover { background: transparent; color: var(--ink); }
-.work-more-link:hover::after { transform: translate(2px, -2px); }
+/* "Ver mais" volta a ser um link discreto, sem botão preenchido. */
+.home-work-more { display:flex; justify-content:flex-start; margin-top:24px; }
+.home-work-more .section-link { margin-top:0; }
 
-/* Reflexo de luz nos trechos cinza dos títulos: brilho breve, com pausas longas. */
+/* Reflexo de luz: mais nítido e recorrente, preservando a leitura do cinza. */
 .hero-like .dim,
 .work-page-title .dim,
-.art-title .dim {
+.art-title .dim,
+.brand-location,
+.section-label,
+.section-link,
+.work-card-tag,
+.hr-c,
+.main-nav a:not(.current),
+.services-title,
+.pj-results-line,
+.pj-filter-hint,
+.pj-tag-count {
   color: transparent;
-  background-image: linear-gradient(108deg, #929292 0%, #b2b2b2 36%, #f6f6f6 49%, #b2b2b2 60%, #929292 100%);
+  background-image: linear-gradient(108deg, #777777 0%, #a0a0a0 31%, #ffffff 48%, #a0a0a0 63%, #777777 100%);
   background-size: 240% 100%;
   background-position: 100% 0;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: silver-sunlight 8.5s ease-in-out infinite;
+  animation: silver-sunlight 3.6s ease-in-out infinite;
 }
 @keyframes silver-sunlight {
-  0%, 58% { background-position: 100% 0; }
-  82%, 100% { background-position: -100% 0; }
+  0%, 34% { background-position: 100% 0; }
+  70%, 100% { background-position: -100% 0; }
 }
+
+/* Ajustes globais de margem e leitura em telas menores. */
+@media (max-width: 767px) {
+  :root { --gutter: clamp(20px, 5.5vw, 28px); --space-y: 42px; }
+  .section-block { padding-inline: var(--gutter); }
+  .work-page-hero { padding: 24px var(--gutter) 32px; }
+  .work-intro { margin-bottom: 20px; }
+  .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 10px; }
+  .work-card-media { aspect-ratio: 4 / 5; margin-bottom: 8px; }
+  .home-featured-grid .work-card-media { aspect-ratio: 3 / 2; }
+  .work-card-title { font-size: 13px; line-height: 1.35; }
+  .work-card-tag { font-size: 11px; }
+  .home-projects-viewport { overflow: hidden; }
+  .home-pagination { gap: 5px; margin-top: 22px; }
+  .home-page-number { min-width: 34px; min-height: 34px; }
+}
+.home-projects-viewport { overflow:hidden; }
+.home-featured-grid { width:100%; }
+.home-featured-grid.home-page-enter { animation: home-page-slide .32s var(--ease) both; }
+@keyframes home-page-slide {
+  from { opacity:.45; transform:translateX(var(--home-slide-from, 18px)); }
+  to { opacity:1; transform:translateX(0); }
+}
+.home-pagination { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:7px; margin-top:26px; }
+.home-page-number {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:36px; min-height:36px; padding:0 8px;
+  border:1px solid var(--gray-200); border-radius:4px; background:var(--white);
+  color:var(--gray-500); font:inherit; font-size:12px; cursor:pointer;
+  transition:background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.home-page-number:hover, .home-page-number[aria-current="page"] { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.home-page-number:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+.home-page-number:disabled { opacity:.35; cursor:default; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-like .dim,
-  .work-page-title .dim,
-  .art-title .dim { animation: none; color: var(--gray-400); background: none; -webkit-text-fill-color: currentColor; }
-  .work-more-link, .work-more-link::after { transition: none; }
+  .hero-like .dim, .work-page-title .dim, .art-title .dim,
+  .brand-location, .section-label, .section-link, .work-card-tag, .hr-c,
+  .main-nav a:not(.current), .services-title, .pj-results-line, .pj-filter-hint, .pj-tag-count {
+    animation:none; color:var(--gray-500); background:none; -webkit-text-fill-color:currentColor;
+  }
+  .home-featured-grid.home-page-enter { animation:none; }
 }
 
 </style>
@@ -1716,9 +1741,12 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
           <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
           <p style="font-size:14px; color:var(--gray-500); max-width:60ch; line-height:1.6;">Identidades visuais, projetos editoriais e interfaces desenvolvidos com intenção e clareza.</p>
         </div>
-        <div class="work-grid" id="work-grid"></div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
         <div class="home-work-more">
-          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="work-more-link" data-i18n="work.all">Ver mais</a>
+          <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
         </div>
       </div>
     </section>
@@ -3456,15 +3484,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('work-case-grid').addEventListener('change', (e) => { if (e.target.id === 'pg-ord') { pgOrd = e.target.value; renderPJ(); } });
 
-  /* --- Página inicial: projetos em duas faixas que rolam na horizontal (sentidos opostos) ---
-     Hover estilo "Netflix": o card cresce e passa pelas primeiras páginas do case. Para quando o mouse está em cima. */
+  /* --- Página inicial: catálogo em páginas numeradas, seis projetos por página --- */
   const HOME_FEATURED = ['sollaris', 'rino', 'pixelar', 'optica-leopoldina', 'classic-tattoo', 'equity360'];
-  const renderHomeRows = () => {
-    const home = document.getElementById('work-grid'); if (!home) return;
-    const ps = HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean);
-    const card = (p) => `<a class="hr-card" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}"><div class="hr-media"><img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"></div><div class="hr-info"><p class="hr-t">${p.titulo}</p><p class="hr-c">${lx(p.cat)} — ${p.ano}</p></div></a>`;
-    home.className = 'hr-rows home-featured-grid';
-    home.innerHTML = ps.map(card).join('');
+  const HOME_EXCLUDED = ['o-hobbit','rino-pecas','sollaris-instagram','dash-geral'];
+  const HOME_PROJECTS = [
+    ...HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean),
+    ...PJ.filter(p => !HOME_FEATURED.includes(p.slug) && !HOME_EXCLUDED.includes(p.slug))
+  ];
+  let homePage = 0;
+  const renderHomeRows = (direction = 1) => {
+    const home = document.getElementById('work-grid');
+    const pager = document.getElementById('home-pagination');
+    if (!home || !pager) return;
+    const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
+    home.className = 'work-grid home-featured-grid';
+    home.style.setProperty('--home-slide-from', direction < 0 ? '-18px' : '18px');
+    home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
+    home.classList.remove('home-page-enter');
+    void home.offsetWidth;
+    home.classList.add('home-page-enter');
+    pager.innerHTML = `
+      <button type="button" class="home-page-number" data-home-page="${homePage - 1}" aria-label="${lx({pt:'Página anterior',en:'Previous page',es:'Página anterior'})}" ${homePage === 0 ? 'disabled' : ''}>‹</button>
+      ${Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-number" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}>${i + 1}</button>`).join('')}
+      <button type="button" class="home-page-number" data-home-page="${homePage + 1}" aria-label="${lx({pt:'Próxima página',en:'Next page',es:'Página siguiente'})}" ${homePage >= pageCount - 1 ? 'disabled' : ''}>›</button>`;
+    pager.onclick = (e) => {
+      const button = e.target.closest('[data-home-page]');
+      if (!button || button.disabled) return;
+      const next = Number(button.dataset.homePage);
+      if (!Number.isFinite(next) || next < 0 || next >= pageCount || next === homePage) return;
+      const direction = next > homePage ? 1 : -1;
+      homePage = next;
+      renderHomeRows(direction);
+    };
+    requestAnimationFrame(observeLiveProjectPreviews);
   };
   let hrInit = false;
   const initHomeRows = () => {
