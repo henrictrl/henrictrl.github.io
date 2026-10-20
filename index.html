@@ -1675,6 +1675,12 @@ body.home-route .top-header .brand-location,
   transition:color .2s var(--ease), border-color .2s var(--ease);
 }
 .home-pagination-row .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+/* Neutraliza a antiga técnica de texto transparente; a luz agora é uma camada sobreposta. */
+.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
+  color:inherit !important; background-image:none !important; background-clip:border-box !important;
+  -webkit-background-clip:border-box !important; -webkit-text-fill-color:currentColor !important;
+  text-shadow:none;
+}
 /* Efeito UV: faixa larga de luz, sobre o elemento inteiro, com passagem lenta e sem apagar o texto. */
 .glint-target:not(.art-star) { position:relative; isolation:isolate; }
 .glint-target:not(.art-star)::after {
