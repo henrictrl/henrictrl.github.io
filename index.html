@@ -1577,6 +1577,91 @@ body.home-route .top-header .brand-location,
   .home-featured-grid.home-page-enter { animation:none; }
 }
 
+
+/* Brilho acionado por contexto: varredura única, lenta e sem movimento de retorno. */
+.hero-headline .dim,
+body.home-route .top-header .brand-location,
+#view-home .about-more-link,
+.contact-footer .footer-social {
+  color: var(--gray-400);
+  background: none;
+  animation: none;
+  -webkit-text-fill-color: currentColor;
+}
+#view-about #cv-download-btn,
+#view-about #certificates-btn,
+#view-about #free-tools-btn { animation: none; text-shadow: none; }
+.art-card .art-star { animation: none; filter: none; transform: none; }
+
+#view-home .section-body > .about-more-link {
+  display: table;
+  margin: 16px 0 0;
+  text-align: left;
+}
+.home-work-more { display:flex; justify-content:flex-start; margin:24px 0 0; }
+.home-work-more .section-link {
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  margin:0;
+  padding:8px 14px;
+  border:1px solid var(--gray-200);
+  border-radius:4px;
+  color:var(--gray-500);
+  background:transparent;
+  font-size:13px;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+
+.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
+  color:transparent;
+  background-image:linear-gradient(105deg, #8a8a8a 0%, #b0b0b0 42%, #fff 50%, #b0b0b0 58%, #8a8a8a 100%);
+  background-size:250% 100%;
+  background-position:-150% 0;
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:silver-sunlight 2.8s linear 1 both;
+}
+@keyframes silver-sunlight {
+  from { background-position:-150% 0; }
+  to { background-position:150% 0; }
+}
+#view-about #cv-download-btn.glint-active,
+#view-about #certificates-btn.glint-active,
+#view-about #free-tools-btn.glint-active {
+  animation:resource-glint 1.8s ease-out 1 both;
+}
+@keyframes resource-glint {
+  0%,100% { text-shadow:none; }
+  45% { text-shadow:0 0 8px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
+}
+.art-card .art-star.glint-active {
+  animation:article-star-glint 1.8s ease-out 1 both;
+}
+@keyframes article-star-glint {
+  0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); }
+  45% { filter:drop-shadow(0 0 4px rgba(242,194,48,.8)); transform:scale(1.14); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-headline .dim,
+  body.home-route .top-header .brand-location,
+  #view-home .about-more-link,
+  .contact-footer .footer-social,
+  #view-about #cv-download-btn,
+  #view-about #certificates-btn,
+  #view-about #free-tools-btn,
+  .art-card .art-star {
+    animation:none !important;
+    background:none !important;
+    color:var(--gray-500) !important;
+    -webkit-text-fill-color:currentColor !important;
+    text-shadow:none !important;
+    filter:none !important;
+    transform:none !important;
+  }
+}
 </style>
 </head>
 <body class="home-route">
@@ -1659,7 +1744,7 @@ body.home-route .top-header .brand-location,
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
           <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
           <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
-          <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link" data-i18n="about.more">Saiba mais</a>
+          <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
         </div>
       </div>
     </section>
@@ -1758,10 +1843,10 @@ body.home-route .top-header .brand-location,
         <div class="home-projects-viewport">
           <div class="work-grid home-featured-grid" id="work-grid"></div>
         </div>
-        <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
         <div class="home-work-more">
           <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
         </div>
+        <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
       </div>
     </section>
   </div>
@@ -4191,6 +4276,61 @@ document.addEventListener('DOMContentLoaded', () => {
   if (routeFromHash) showRoute(routeFromHash[0], routeFromHash[1]);
   fromHash(); // compatibilidade com links antigos; encaminha o case para projeto.html
 });
+</script>
+
+<script>
+/* Efeitos de brilho: ativação por entrada na tela, foco ou intenção de interação.
+   Cada passagem é única e tem intervalo mínimo para não competir com a leitura. */
+(() => {
+  const selector = '.hero-headline .dim, .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-articles .art-star';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) return;
+  const lastPlayed = new WeakMap();
+  const cooldown = 12000;
+  const play = (el) => {
+    if (!el || !el.isConnected) return;
+    if (el.matches('.brand-location') && !document.body.classList.contains('home-route')) return;
+    const now = Date.now();
+    if (now - (lastPlayed.get(el) || 0) < cooldown) return;
+    lastPlayed.set(el, now);
+    el.classList.remove('glint-active');
+    void el.getBoundingClientRect().width;
+    el.classList.add('glint-target', 'glint-active');
+    const clear = () => el.classList.remove('glint-active');
+    el.addEventListener('animationend', clear, { once: true });
+    window.setTimeout(clear, 3200);
+  };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) play(entry.target);
+    });
+  }, { threshold: 0.55 });
+  const scan = (root) => {
+    if (root.nodeType === 1 && root.matches(selector) && !root.dataset.glintObserved) {
+      root.dataset.glintObserved = '1';
+      root.classList.add('glint-target');
+      observer.observe(root);
+    }
+    if (root.querySelectorAll) root.querySelectorAll(selector).forEach(el => {
+      if (el.dataset.glintObserved) return;
+      el.dataset.glintObserved = '1';
+      el.classList.add('glint-target');
+      observer.observe(el);
+    });
+  };
+  scan(document);
+  new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+    if (node.nodeType === 1) scan(node);
+  }))).observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('pointerover', event => {
+    const el = event.target.closest(selector);
+    if (el && !el.contains(event.relatedTarget)) play(el);
+  });
+  document.addEventListener('focusin', event => {
+    const el = event.target.closest(selector);
+    if (el) play(el);
+  });
+})();
 </script>
 </body>
 </html>
