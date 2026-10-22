@@ -2568,7 +2568,7 @@ window.PROJETOS = [
     "en": "Visual identity",
     "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": ["identidade", "midias"],
   "etiquetas": {
     "entrega": [
       "logotipo",
@@ -3191,7 +3191,7 @@ window.PROJETOS = [
     "en": "Visual identity",
     "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": ["identidade", "midias"],
   "etiquetas": {
     "entrega": ["identidade-visual","pecas-graficas","evento","posts-carrosseis"],
     "setor": [
@@ -5411,7 +5411,7 @@ window.PROJETOS = [
   ],
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
-  "filtro": "eventos",
+  "filtro": ["eventos", "midias"],
   "etiquetas": {
     "entrega": ["posts-carrosseis","stories-gifs","pecas-graficas"],
     "setor": [
@@ -7113,7 +7113,7 @@ window.PROJETOS = [
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
-  "filtro": "eventos",
+  "filtro": ["eventos", "midias"],
   "etiquetas": {
     "entrega": ["identidade-visual","posts-carrosseis"],
     "setor": [
