@@ -366,6 +366,9 @@
   };
 
 
+  // contador animado dos números do dashboard (mesma função do index.html)
+  const dsCount = (el) => { const n = +el.dataset.n, d = +el.dataset.d, pre = el.dataset.pre || '', suf = el.dataset.suf || '', t0 = performance.now(), T = 1100;
+    const step = (t) => { const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = pre + nf(n * e, k < 1 ? (d ? d : 0) : d) + suf; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
   let dsIO = null;
   const dsInit = () => {
     const els = document.querySelectorAll('#project-visuals .ds-anim');
