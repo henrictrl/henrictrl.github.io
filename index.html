@@ -1447,13 +1447,10 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 #work-case-grid[data-cols="4"] { gap: 24px 12px; } #work-case-grid[data-cols="5"] { gap: 20px 10px; }
 #work-case-grid[data-cols="4"] .work-card-title, #work-case-grid[data-cols="5"] .work-card-title { font-size: 12px; }
 #work-case-grid[data-cols="5"] .work-card-tag { display: none; }
-.work-card-meta { margin-top: 3px; font-size: 12px; line-height: 1.4; color: var(--gray-400); }
-.work-card-meta span { display: block; }
-#work-case-grid[data-cols="5"] .work-card-meta, #work-case-grid[data-cols="4"] .work-card-meta span:nth-child(2) { display: none; }
 .pj-cols { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--gray-400); font-size: 12px; }
 .pj-cols .art-filter { min-width: 34px; justify-content: center; padding: 7px 0; font-size: 12px; }
 @media (min-width: 768px) { .pj-cols button[data-cols="1"] { display: none; } }
-@media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag, #work-case-grid[data-cols="3"] .work-card-meta span:nth-child(2) { display: none; } #work-case-grid[data-cols="3"] .work-card-meta { font-size: 10.5px; } }
+@media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag }
 /* =====================================================================
    Home · projetos em destaque: paginação e "Ver mais"
    ===================================================================== */
@@ -3461,16 +3458,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let pjEtiqueta = null;
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
-  // linha de dados sob o card: ano + até 3 entregas; nunca repete a classificação (categoria/filtros)
-  const PJ_SKIP = new Set(['identidade-visual', 'social-media', 'programacao', 'rebranding']);
-  const pjMeta = (p) => {
-    const cls = new Set([].concat(p.cat ? Object.values(p.cat) : [], FILTROS.flatMap(([, l]) => Object.values(l))).map(x => String(x).toLowerCase()));
-    const ent = ((p.etiquetas || {}).entrega || []).filter(k => !PJ_SKIP.has(k) && !(k === 'posts-carrosseis' && [].concat(p.filtro || []).includes('midias'))).map(etiquetaNome).filter(n => !cls.has(String(n).toLowerCase())).slice(0, 3);
-    return `<p class="work-card-meta">${[p.ano, ent.join(' · ')].filter(Boolean).map(t => `<span>${t}</span>`).join('')}</p>`;
-  };
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
-      <p class="work-card-title">${p.titulo}</p>${pjMeta(p)}${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
+      <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   // quantidade de colunas da grade de projetos (lembrada; celular 1–3, desktop 2–5)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
