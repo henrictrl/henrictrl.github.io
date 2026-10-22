@@ -1449,6 +1449,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 #work-case-grid[data-cols="5"] .work-card-tag { display: none; }
 .pj-cols { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--gray-400); font-size: 12px; }
 .pj-cols .art-filter { min-width: 34px; justify-content: center; padding: 7px 0; font-size: 12px; }
+@media (min-width: 768px) { .pj-cols button[data-cols="1"] { display: none; } }
 @media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag { display: none; } }
 /* =====================================================================
    Home · projetos em destaque: paginação e "Ver mais"
@@ -3460,10 +3461,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
-  // quantidade de colunas da grade de projetos (lembrada; celular 2–3, desktop 2–5)
+  // quantidade de colunas da grade de projetos (lembrada; celular 1–3, desktop 2–5)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
-  const getCols = () => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} const n = +o[colsKey()]; const max = mqMob.matches ? 3 : 5; return n >= 2 && n <= max ? n : (mqMob.matches ? 2 : 3); };
+  const getCols = () => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} const n = +o[colsKey()]; const max = mqMob.matches ? 3 : 5; return n >= (mqMob.matches ? 1 : 2) && n <= max ? n : (mqMob.matches ? 2 : 3); };
   const setCols = (n) => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} o[colsKey()] = n; try { localStorage.setItem('hm-wcols', JSON.stringify(o)); } catch (e) {} };
   const applyCols = (grid) => { const n = getCols(); grid.style.setProperty('--wcols', n); grid.dataset.cols = n; document.querySelectorAll('.pj-cols button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.cols === n)); };
   const COLS_L = { pt: 'Colunas', en: 'Columns', es: 'Columnas' };
@@ -3480,7 +3481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const allButton = `<button type="button" class="art-filter pj-tag-filter" data-category-filter="all" aria-pressed="${pjSelectedCategory === 'all'}">${lx({pt:'Todos',en:'All',es:'Todos'})}</button>`;
     const categoryButtons = categories.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-category-filter="${key}" aria-pressed="${pjSelectedCategory === key}">${lx(label)}</button>`).join('');
     bar.hidden = false;
-    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div><div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${[2,3,4,5].map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
+    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div><div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${[1,2,3,4,5].map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="' + cleanProjectUrl('dash-geral') + '" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
