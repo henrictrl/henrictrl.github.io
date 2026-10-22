@@ -527,6 +527,11 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .am-article img { width: 100%; height: auto; } /* largura do texto */
 .am-article .instagram-media, .am-article .twitter-tweet { margin: 0 auto 18px !important; font-style: normal; border-left: 0; padding-left: 0; }
 .ig-embed { display: block; border: 0; background: #fff; }
+.am-igone { max-width: 540px; margin: 0 auto; padding: 24px 0 48px; }
+.am-stage .am-igone .ig-embed { position: static; inset: auto; width: 100%; height: auto; opacity: 1; border: 1px solid var(--gray-200); border-radius: var(--r); } /* anula o iframe absoluto do .am-stage */
+.am-igone-link { display: block; text-align: center; margin-top: 14px; font-size: 13px; color: var(--gray-500); }
+.am-igone-link:hover { color: var(--ink); }
+@media (max-width: 640px) { .am-igone { padding: 12px 12px 40px; } }
 .ig-strip .ig-embed { width: 100%; max-width: 540px; margin-inline: auto; height: auto; }
 .pc-track .ig-embed { height: 100%; }
 .am-article .am-kicker { font-size: 12px; color: var(--gray-400); margin-bottom: 6px; }
@@ -1437,6 +1442,14 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .dk-ov .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
 
 
+/* Página Projetos · densidade da grade */
+#work-case-grid.work-grid { grid-template-columns: repeat(var(--wcols, 3), minmax(0, 1fr)); }
+#work-case-grid[data-cols="4"] { gap: 24px 12px; } #work-case-grid[data-cols="5"] { gap: 20px 10px; }
+#work-case-grid[data-cols="4"] .work-card-title, #work-case-grid[data-cols="5"] .work-card-title { font-size: 12px; }
+#work-case-grid[data-cols="5"] .work-card-tag { display: none; }
+.pj-cols { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--gray-400); font-size: 12px; }
+.pj-cols .art-filter { min-width: 34px; justify-content: center; padding: 7px 0; font-size: 12px; }
+@media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag { display: none; } }
 /* =====================================================================
    Home · projetos em destaque: paginação e "Ver mais"
    ===================================================================== */
@@ -1481,7 +1494,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   .work-page-hero { padding:24px var(--gutter) 32px; }
   .work-intro { margin-bottom:20px; }
   .work-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 12px; }
-  .work-card-media { aspect-ratio:4 / 5; margin-bottom:8px; }
+  .work-card-media { aspect-ratio:3 / 2; margin-bottom:8px; }
   .home-featured-grid { row-gap:10px; }
   .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
   .work-card-title { font-size:13px; line-height:1.35; }
@@ -2577,11 +2590,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (igm) {
       const post = (window.POSTS || []).find(x => x.c === igm[1]), link = `https://www.instagram.com/p/${igm[1]}/`;
       amFrame.hidden = true; amFrame.src = 'about:blank';
-      amReader.innerHTML = `<article class="am-article"><p class="am-kicker">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h1>${esc(artTitle(a))}</h1><p class="am-byline">${esc(a.a)} · ${esc(a.site)}</p>
-        <blockquote class="instagram-media" data-instgrm-permalink="${link}?utm_source=ig_embed" data-instgrm-version="14" data-instgrm-captioned style="background:#fff;border:0;margin:0 auto;max-width:540px;min-width:280px;padding:0;width:100%"><a href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a></blockquote>
-        ${post && post.cap ? `<p class="am-note">${esc(post.cap.split('\n\n')[0])}</p>` : ''}</article>`;
+      amReader.innerHTML = `<div class="am-igone">${window.HM_POSTS.igEmbed(post || { c: igm[1], r: 1.25, cap: artTitle(a) })}<a class="am-igone-link" href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a></div>`;
       amReader.hidden = false; amReader.scrollTop = 0; amStage.classList.add('loaded');
-      hydrateEmbeds(amReader);
       return;
     }
     if (!wp) { showFrame(a.u); return; }
@@ -2667,7 +2677,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
         const pp = PBA[a.u], ig = artMode === 'ig' && pp;
         const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="assets/posts/${pp[0].c}/01.webp" alt="" loading="lazy" decoding="async">`
-          : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${a.imgPath || ('assets/artigos/' + a.img)}" alt="" loading="lazy" decoding="async"${a.fit ? ` style="object-fit:${a.fit}"` : ''}>`;
+          : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${a.imgPath || ('assets/artigos/' + a.img)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
         return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
           <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
@@ -3450,6 +3460,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
+  // quantidade de colunas da grade de projetos (lembrada; celular 2–3, desktop 2–5)
+  const mqMob = window.matchMedia('(max-width:767px)');
+  const colsKey = () => mqMob.matches ? 'm' : 'd';
+  const getCols = () => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} const n = +o[colsKey()]; const max = mqMob.matches ? 3 : 5; return n >= 2 && n <= max ? n : (mqMob.matches ? 2 : 3); };
+  const setCols = (n) => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} o[colsKey()] = n; try { localStorage.setItem('hm-wcols', JSON.stringify(o)); } catch (e) {} };
+  const applyCols = (grid) => { const n = getCols(); grid.style.setProperty('--wcols', n); grid.dataset.cols = n; document.querySelectorAll('.pj-cols button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.cols === n)); };
+  const COLS_L = { pt: 'Colunas', en: 'Columns', es: 'Columnas' };
+  mqMob.addEventListener('change', () => { const g = document.getElementById('work-case-grid'); if (g) applyCols(g); });
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
@@ -3462,15 +3480,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const allButton = `<button type="button" class="art-filter pj-tag-filter" data-category-filter="all" aria-pressed="${pjSelectedCategory === 'all'}">${lx({pt:'Todos',en:'All',es:'Todos'})}</button>`;
     const categoryButtons = categories.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-category-filter="${key}" aria-pressed="${pjSelectedCategory === key}">${lx(label)}</button>`).join('');
     bar.hidden = false;
-    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div>`;
+    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div><div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${[2,3,4,5].map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="' + cleanProjectUrl('dash-geral') + '" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     grid.classList.add('work-grid');
+    applyCols(grid);
     grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
     requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.getElementById('pj-filters').addEventListener('click', (e) => {
+    const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); applyCols(document.getElementById('work-case-grid')); return; }
     const b = e.target.closest('[data-category-filter]'); if (!b) return;
     pjSelectedCategory = b.dataset.categoryFilter;
     pjEtiqueta = null;
@@ -3563,7 +3583,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
   const igImg = (x, i) => x.cover && i === 0 ? x.cover : `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}.webp`;
   // carrossel com vídeo: embed oficial do Instagram (altura = proporção do post + cabeçalho/rodapé do embed)
-  const igEmbed = (x) => `<iframe class="ig-embed" src="https://www.instagram.com/p/${x.c}/embed/" title="${esc((x.cap || 'Instagram').slice(0, 80))}" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" style="aspect-ratio:1 / ${((Number(x.r) || 1.25) + 0.26).toFixed(3)}"></iframe>`;
+  const igEmbed = (x) => `<iframe class="ig-embed" src="https://www.instagram.com/p/${x.c}/embed/" title="${esc((x.cap || 'Instagram').slice(0, 80))}" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" style="aspect-ratio:1 / ${((Number(x.er || x.r) || 1.25) + 0.26).toFixed(3)}"></iframe>`;
+  // o embed informa a própria altura (MEASURE); ajusta o iframe correspondente
+  window.addEventListener('message', (ev) => {
+    if (!/instagram\.com$/.test(new URL(ev.origin).hostname)) return;
+    let d = ev.data; try { if (typeof d === 'string') d = JSON.parse(d); } catch (_) { return; }
+    const h = d && d.type === 'MEASURE' && d.details && d.details.height; if (!h) return;
+    document.querySelectorAll('iframe.ig-embed').forEach(f => { if (f.contentWindow === ev.source && !f.closest('.pc-track')) { f.style.aspectRatio = 'auto'; f.style.height = Math.ceil(h) + 'px'; } });
+  });
   const igPost = (x, opts = {}) => {
     const n = x.n, ar = (1 / x.r).toFixed(4), cap = (x.cap || '').trim(), longo = cap.length > 240;
     const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => {
@@ -3622,7 +3649,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closePosts = () => { if (!pvOv.classList.contains('open')) return; pvOv.classList.remove('open'); if (!dk.classList.contains('open') && !amOverlay.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!pvOv.classList.contains('open')) pvScroll.innerHTML = ''; }, 350); };
   document.getElementById('pv-x').onclick = closePosts;
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closePosts(); });
-  window.HM_POSTS = { openPosts, POSTS, POSTS_BY_ART, igPost, closePosts };
+  window.HM_POSTS = { openPosts, POSTS, POSTS_BY_ART, igPost, igEmbed, closePosts };
 
   // Voltar ao topo: prioriza sempre a área do projeto quando o case está aberto.
   document.addEventListener('click', (e) => {
