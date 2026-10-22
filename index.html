@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- LCP: retrato P&B carrega primeiro -->
+<!-- LCP: o retrato é a primeira imagem a carregar -->
 <link rel="preload" as="image" href="assets/img/retrato-cor.webp" fetchpriority="high">
 <script>document.documentElement.classList.add('js');</script>
 
@@ -526,6 +526,9 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .am-article .am-cover img { width: 100%; max-height: none; }
 .am-article img { width: 100%; height: auto; } /* largura do texto */
 .am-article .instagram-media, .am-article .twitter-tweet { margin: 0 auto 18px !important; font-style: normal; border-left: 0; padding-left: 0; }
+.ig-embed { display: block; border: 0; background: #fff; }
+.ig-strip .ig-embed { width: 100%; max-width: 540px; margin-inline: auto; height: auto; }
+.pc-track .ig-embed { height: 100%; }
 .am-article .am-kicker { font-size: 12px; color: var(--gray-400); margin-bottom: 6px; }
 .am-article .am-byline { font-size: 13px; color: var(--gray-400); margin: -16px 0 28px; }
 .am-article table { width: 100%; border-collapse: collapse; font-size: 15px; } .am-article td, .am-article th { border-bottom: 1px solid var(--gray-200); padding: 6px 8px; text-align: left; }
@@ -548,16 +551,6 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 }
 .exploration-item:hover img { transform: scale(1.02); }
 
-.about-hero-section { padding: 16px var(--gutter) 0; }
-@media (min-width: 768px) { .about-hero-section { padding: 56px var(--gutter) 0; } }
-.about-hero-portrait {
-  aspect-ratio: 3/4; border-radius: var(--r); overflow: hidden; background: var(--gray-100);
-  display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 13px;
-}
-@media (min-width: 768px) { .about-hero-portrait { aspect-ratio: 2/1; } }
-
-.about-info-text p { font-size: 15px; line-height: 1.65; color: var(--gray-500); max-width: 60ch; }
-
 /* --- Apresentação dos projetos (deck) ---
    Desktop e celular: cabeçalho do projeto e todas as páginas empilhadas (rolagem vertical, estilo Behance). */
 /* Durante um projeto, a navegação principal continua acessível acima da apresentação. */
@@ -572,8 +565,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-name { font-size: 15px; font-weight: 500; }
 .dk-meta { font-size: 13px; color: var(--gray-500); margin-left: 10px; }
 .dk-acts { display: flex; align-items: center; gap: 18px; }
-.dk-btn { font: inherit; font-size: 13px; color: var(--ink); border: 1px solid var(--gray-200); border-radius: var(--r); padding: 7px 12px; background: none; cursor: pointer; white-space: nowrap; transition: border-color 0.2s var(--ease); }
-.dk-btn:hover { border-color: var(--ink); }
 .dk-x { width: 32px; height: 32px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--ink); }
 .dk-x svg { width: 20px; height: 20px; }
 /* página do projeto estilo Behance: cabeçalho + todas as páginas empilhadas na vertical */
@@ -589,8 +580,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-intro { font-size: 15px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
 .dk-tags { max-width: 760px; margin: 18px auto 0; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; }
 .dk-tags[hidden] { display: none !important; }
-.dk-tag-group { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; }
-.dk-tag-group-label { color: var(--gray-400); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .dk-tag { display: inline-flex; align-items: center; min-height: 25px; padding: 5px 8px; border: 1px solid var(--gray-200); border-radius: 999px; background: #fff; color: var(--gray-500); font: inherit; font-size: 11px; line-height: 1.2; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
 .dk-tag:hover, .dk-tag:focus-visible { border-color: var(--ink); color: var(--ink); background: #f8f9fa; }
 .pj-tag-result { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 8px; padding: 12px 14px; border: 1px solid var(--gray-200); border-radius: var(--r); font-size: 13px; color: var(--gray-500); }
@@ -622,8 +611,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-next span { color: var(--gray-400); font-size: 12px; display: block; margin-bottom: 4px; text-align: left; }
 @media (max-width: 767px) {
   .dk-tags { margin: 12px auto 0; padding: 0 18px; gap: 7px 10px; }
-   .dk-tag-group { gap: 4px; }
-   .dk-tag-group-label { font-size: 8px; }
    .dk-tag { min-height: 24px; padding: 5px 7px; font-size: 10px; }
    .dk-top { padding: 12px 16px; }
   body.project-deck-open .dk-top { padding-top: calc(12px + var(--project-header-height, 56px)); }
@@ -663,8 +650,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .cv-item:hover .cv-logo img, .cv-logo:focus-visible img { filter: none; opacity: 1; }
 .cv-logo.txt { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); transition: color 0.3s var(--ease); }
 .cv-item:hover .cv-logo.txt { color: var(--ink); }
-a.cv-link { color: inherit; text-decoration: none; transition: color 0.25s var(--ease); }
-a.cv-link:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .cv-main { flex: 1; min-width: 0; }
 .cv-name { font-size: 15px; font-weight: 500; line-height: 1.35; }
 .cv-name { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
@@ -841,27 +826,13 @@ footer.contact-footer { background: var(--gray-100); padding: 40px var(--gutter)
 .work-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 .work-card-tag { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
 
-/* Página Projetos: grupos (Identidade visual · Programação · Carrosséis e posts) */
-.pj-group + .pj-group { margin-top: 64px; }
-.pj-group-title { font-size: 18px; font-weight: 500; color: var(--gray-400); letter-spacing: -0.01em; margin-bottom: 20px; display: flex; align-items: baseline; gap: 10px; }
-.pj-group-title small { font-size: 12px; font-weight: 400; color: var(--gray-400); }
-@media (min-width: 768px) { .pj-group + .pj-group { margin-top: 88px; } }
-
 /* Rank My App: logos das contas no meio do texto, pequenos e em cinza (cor no hover do item) */
 .cv-clients { display: inline-flex; align-items: center; gap: 10px; vertical-align: middle; margin: 0 2px; }
-.cv-clients img { height: var(--h, 12px); width: auto; }
-.cv-item:hover .cv-clients img { filter: none; opacity: 1; }
 
 /* Idiomas */
 .lang-item .cv-head { align-items: center; }
 .lang-item .cv-logo svg { width: 28px; height: 20px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
 .lang-item:hover .cv-logo svg { filter: none; opacity: 1; }
-/* Ferramentas gratuitas (grade de logos) */
-.free-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 18px 10px; }
-.free-grid:empty { display: none; }
-.free-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; color: var(--gray-500); text-align: center; }
-.free-item svg { width: 34px; height: 34px; }
-.free-empty[hidden] { display: none; }
 
 /* Contato: maior, com os ícones das ferramentas flutuando atrás do texto */
 footer.contact-footer { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 0 var(--gutter) !important; --fpad: 40px; }
@@ -1284,40 +1255,17 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pg-i b { font-size: 12px; font-weight: 600; }
 .pg-t:hover .pg-i, .pg-t:focus-visible .pg-i { opacity: 1; }
 @media (hover: none) { .pg-i { opacity: 1; } }
-/* página inicial: duas faixas de projetos rolando */
-.hr-rows { display: flex; flex-direction: column; gap: 34px; margin: 0 calc(50% - 50vw); padding: 28px 0; overflow: hidden; }
-.hr-row { overflow: visible; touch-action: pan-y; cursor: grab; user-select: none; }
-.hr-track { display: flex; gap: 16px; width: max-content; will-change: transform; padding: 0 8px; }
-.hr-card { position: relative; flex: none; width: 300px; text-decoration: none; color: inherit; transition: transform .35s var(--ease), z-index 0s .35s; z-index: 0; -webkit-user-drag: none; }
-.hr-media { aspect-ratio: 3/2; border-radius: var(--r); overflow: hidden; background: var(--gray-100); box-shadow: 0 0 0 rgba(0,0,0,0); transition: box-shadow .35s var(--ease); }
-.hr-media img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
-.hr-info { padding: 10px 2px 0; }
-.hr-t { font-size: 14px; font-weight: 500; } .hr-c { font-size: 12px; color: var(--gray-500); }
-@media (hover: hover) {
-  .hr-card.pv { transform: scale(1.24); z-index: 3; transition: transform .35s var(--ease), z-index 0s; }
-  .hr-card.pv .hr-media { box-shadow: 0 22px 44px -18px rgba(0,0,0,.45); }
-  .hr-card.pv .hr-media img { object-fit: cover; animation: hrfade .45s var(--ease); }
-}
-@keyframes hrfade { from { opacity: .6; } to { opacity: 1; } }
-@media (max-width: 767px) { .hr-card { width: 220px; } .hr-rows { gap: 12px; } }
 
 /* Catálogo de projetos: filtros simples por uma categoria de cada vez */
 .pj-filters { display:flex; flex-direction:column; align-items:stretch; gap:10px; margin:0 0 24px; }
 .pj-filter-main { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
 .pj-filter-main .art-filter { font-size:12px; padding:7px 11px; }
-.pj-more-toggle { display:inline-flex; align-items:center; gap:7px; }
-.pj-more-toggle span { font-size:15px; line-height:1; }
-.pj-clear-tags { border:0; background:transparent; color:var(--gray-500); font:inherit; font-size:12px; text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:6px 2px; }
 .pj-filter-extra { border:1px solid var(--gray-200); border-radius:var(--r); padding:12px; background:var(--white); }
 .pj-filter-extra[hidden] { display:none; }
 .pj-filter-hint { color:var(--gray-400); font-size:11px; margin:0 0 10px; }
 .pj-tag-count { color:var(--gray-400); font-size:10px; margin-left:6px; }
 .pj-filter-extra .art-filter[aria-pressed="true"] .pj-tag-count { color:rgba(255,255,255,.7); }
 .pj-results-line { grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; color:var(--gray-400); font-size:12px; margin:0 0 2px; }
-.pj-active-tags { display:flex; flex-wrap:wrap; gap:5px; }
-.pj-active-chip, .work-card-chip { display:inline-flex; align-items:center; border:1px solid var(--gray-200); border-radius:3px; color:var(--gray-500); font-size:10px; line-height:1.3; padding:3px 6px; }
-.work-card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
-.work-card-chip { font-size:10px; padding:3px 5px; }
 .work-card-title { margin-bottom:0; }
 .pj-empty { grid-column:1/-1; color:var(--gray-500); font-size:13px; padding:22px 0; }
 @media (max-width:600px) {
@@ -1339,16 +1287,6 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
  .mobile-top-button svg { width:17px; height:17px; display:block; }
 }
 
-/* Revisão de portfólio — outubro de 2026 */
-/* Home cards match Projects in width, columns, ratio and spacing. */
-.home-featured-grid { display:grid !important; grid-template-columns:1fr; gap:32px 16px !important; overflow:visible !important; width:100%; margin:0 !important; padding:0 !important; }
-.home-featured-grid .hr-card { width:auto !important; min-width:0; }
-.home-featured-grid .hr-media { aspect-ratio:3/2; border-radius:var(--r); overflow:hidden; margin-bottom:12px; box-shadow:0 6px 18px -6px rgba(0,0,0,0.14), 0 1px 3px rgba(0,0,0,0.05); }
-.home-featured-grid .hr-info { padding:0; }
-.home-featured-grid .hr-t { font-size:15px; font-weight:500; line-height:1.35; letter-spacing:-0.01em; }
-.home-featured-grid .hr-c { font-size:12px; color:var(--gray-400); margin-top:4px; }
-@media (min-width:640px) { .home-featured-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 16px !important; } }
-@media (min-width:900px) { .home-featured-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:40px 20px !important; } }
 .work-dashboard-cta { margin-top:22px; }
 .work-dashboard-cta .pj-dash-btn { margin-left:0; }
 .top-before-contact { display:flex; justify-content:center; padding:26px var(--gutter); background:var(--white); }
@@ -1358,9 +1296,6 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .resource-action { display:inline-flex; align-items:center; gap:8px; border:0; border-radius:0; padding:0; background:transparent; color:var(--gray-500); font:inherit; font-size:13px; font-weight:500; cursor:pointer; text-align:left; transition:color .2s var(--ease); }
 .resource-action:hover { color:var(--ink); }
 .section-heading .resource-inline { margin-top:5px; gap:6px; }
-.resource-action-primary { background:var(--ink); border-color:var(--ink); color:var(--white); font-size:14px; font-weight:500; padding:13px 18px; }
-.resource-action-primary:hover { background:#333; }
-.cv-document-note { color:var(--gray-500); font-size:12px; }
 .resource-inline { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
 .section-heading { display:flex; flex-direction:column; align-items:flex-start; gap:12px; width:100%; }
 .section-heading .resource-inline { margin:8px 0 0; max-width:280px; }
@@ -1381,13 +1316,29 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .resource-card { display:flex; flex-direction:column; gap:9px; min-width:0; color:var(--ink); font-size:13px; }
 .resource-card img { width:100%; aspect-ratio:4/3; object-fit:contain; background:var(--gray-100); border-radius:var(--r); }
 .resource-card .resource-pdf { display:flex; align-items:center; justify-content:center; aspect-ratio:4/3; background:var(--gray-100); border-radius:var(--r); font-size:13px; color:var(--gray-500); }
-.free-tools-categories { display:grid; gap:22px; }
-.free-tools-category h3 { font-size:15px; font-weight:500; margin-bottom:10px; }
-.free-tools-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
-.free-tool { border:1px solid var(--gray-200); border-radius:var(--r); padding:12px; }
-.free-tool strong { display:block; font-size:14px; font-weight:500; margin-bottom:4px; }
-.free-tool p { font-size:12px; color:var(--gray-500); line-height:1.5; }
-.free-tool a { display:inline-block; font-size:12px; margin-top:8px; text-decoration:underline; text-underline-offset:3px; }
+.resource-modal-wide { width:min(820px,100%); }
+.free-tools-categories { display:grid; gap:28px; }
+.free-tools-category h3 { font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--gray-500); margin-bottom:10px; }
+.ft-list { list-style:none; display:grid; gap:10px; }
+.ft-row { display:grid; grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr); align-items:center; column-gap:10px; row-gap:8px; border:1px solid var(--gray-200); border-radius:var(--r); padding:12px; }
+.ft-side { display:flex; align-items:center; gap:12px; min-width:0; color:var(--ink); }
+.ft-side > span:not(.ft-logos) { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.ft-logos { display:flex; flex:none; align-items:center; }
+.ft-logos img { width:40px; height:40px; object-fit:contain; flex:none; }
+.ft-logos.is-multi { gap:4px; }
+.ft-logos.is-multi img { width:26px; height:26px; }
+.ft-name { font-size:14px; font-weight:500; line-height:1.25; }
+.ft-tag { font-size:11px; color:var(--gray-500); letter-spacing:.02em; }
+.ft-free .ft-tag { color:var(--ink); }
+.ft-arrow { text-align:center; color:var(--gray-400); font-size:15px; }
+a.ft-side { text-decoration:none; }
+a.ft-side:hover .ft-name { text-decoration:underline; text-underline-offset:3px; }
+a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; border-radius:6px; }
+.ft-note { grid-column:1 / -1; font-size:12px; line-height:1.55; color:var(--gray-500); }
+@media (max-width:600px) {
+  .ft-row { grid-template-columns:1fr; }
+  .ft-arrow { transform:rotate(90deg); justify-self:start; margin-left:13px; line-height:1; }
+}
 @media (max-width:600px) { .resource-modal { padding:18px; } .resource-modal-head h2 { font-size:21px; } .cv-actions-inner { align-items:center; justify-content:center; flex-direction:row; } }
 
 
@@ -1476,11 +1427,6 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .dk-ov .dk-toc a { border-left: 0 !important; padding-left: 0 !important; }
 .dk-ov .pg-i { align-items: center !important; }
 .dk-ov .ds-table { margin-inline: auto; }
-.dk-ov :is(.hero-sub, .work-intro > p:not(.section-label), .service-desc, .about-info-text p, .pm-block-text, .sm-desc, .dk-intro, .dk-cap p, .pc-group-head p, .pc-cap, .rino-case-description, .meta-note p, .meta-end p, .resource-modal-desc, .free-tool p, .ds-d) {
-  margin-inline: auto;
-  text-align: center !important;
-  text-wrap: pretty;
-}
 .dk-ov .meta-note { margin-inline: auto; }
 .dk-ov .rino-case-intro { text-align: center !important; }
 .dk-ov .dk-next span { text-align: center !important; }
@@ -1491,231 +1437,100 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .dk-ov .ds-table td:first-child { text-align: center !important; padding-left: 8px; }
 
 
-/* "Ver mais" volta a ser um link discreto, sem botão preenchido. */
-.home-work-more { display:flex; justify-content:flex-start; margin-top:24px; }
-.home-work-more .section-link { margin-top:0; }
-
-/* Brilho localizado: passagem suave, pausa longa e sem salto no reinício. */
-.hero-headline .dim,
-body.home-route .top-header .brand-location,
-#view-home .section-link,
-.contact-footer .footer-social {
-  color: transparent;
-  background-image: linear-gradient(105deg, #8a8a8a 0%, #b0b0b0 42%, #ffffff 50%, #b0b0b0 58%, #8a8a8a 100%);
-  background-size: 320% 100%;
-  background-position: 100% 0;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: silver-sunlight 11s ease-in-out infinite;
-}
-@keyframes silver-sunlight {
-  0%, 76%, 100% { background-position: 100% 0; }
-  10% { background-position: 0% 0; }
-  22% { background-position: 100% 0; }
-}
-/* Na área Sobre, o brilho fica restrito aos três recursos solicitados. */
-#view-about #cv-download-btn,
-#view-about #certificates-btn,
-#view-about #free-tools-btn {
-  animation: resource-glint 11s ease-in-out infinite;
-}
-@keyframes resource-glint {
-  0%, 76%, 100% { text-shadow: none; }
-  10%, 20% { text-shadow: 0 0 9px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
-}
-/* Estrelinha de destaque dos artigos: brilho discreto, em intervalos longos. */
-.art-card .art-star {
-  transform-origin: center;
-  animation: article-star-glint 9s ease-in-out infinite;
-}
-@keyframes article-star-glint {
-  0%, 78%, 100% { filter: drop-shadow(0 0 0 rgba(242,194,48,0)); transform: scale(1); }
-  10%, 20% { filter: drop-shadow(0 0 4px rgba(242,194,48,.7)); transform: scale(1.12); }
-}
-
-/* Ajustes globais de margem e leitura em telas menores. */
-@media (max-width: 767px) {
-  :root { --gutter: clamp(20px, 5.5vw, 28px); --space-y: 42px; }
-  .section-block { padding-inline: var(--gutter); }
-  .work-page-hero { padding: 24px var(--gutter) 32px; }
-  .work-intro { margin-bottom: 20px; }
-  .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 10px; }
-  .work-card-media { aspect-ratio: 4 / 5; margin-bottom: 8px; }
-  .home-featured-grid .work-card-media { aspect-ratio: 3 / 2; }
-  .work-card-title { font-size: 13px; line-height: 1.35; }
-  .work-card-tag { font-size: 11px; }
-  .home-projects-viewport { overflow: hidden; }
-  .home-pagination { gap: 5px; margin-top: 22px; }
-  .home-page-number { min-width: 34px; min-height: 34px; }
-}
+/* =====================================================================
+   Home · projetos em destaque: paginação e "Ver mais"
+   ===================================================================== */
 .home-projects-viewport { overflow:hidden; }
 .home-featured-grid { width:100%; }
 .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
-.home-featured-grid.home-page-enter { animation: home-page-slide .32s var(--ease) both; }
+.home-featured-grid.home-page-enter { animation:home-page-slide .32s var(--ease) both; }
 @keyframes home-page-slide {
   from { opacity:.45; transform:translateX(var(--home-slide-from, 18px)); }
-  to { opacity:1; transform:translateX(0); }
+  to   { opacity:1;   transform:translateX(0); }
 }
-.home-pagination { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:7px; margin-top:26px; }
+.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:28px; }
+.home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-number {
   display:inline-flex; align-items:center; justify-content:center;
   min-width:36px; min-height:36px; padding:0 8px;
   border:1px solid var(--gray-200); border-radius:4px; background:var(--white);
-  color:var(--gray-500); font:inherit; font-size:12px; cursor:pointer;
+  color:var(--gray-500); font:inherit; font-size:12px; line-height:1; cursor:pointer;
   transition:background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
 }
-.home-page-number:hover, .home-page-number[aria-current="page"] { background:var(--ink); color:var(--white); border-color:var(--ink); }
+.home-page-number:hover,
+.home-page-number[aria-current="page"] { background:var(--ink); color:var(--white); border-color:var(--ink); }
 .home-page-number:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
 .home-page-number:disabled { opacity:.35; cursor:default; }
-@media (prefers-reduced-motion: reduce) {
-  .hero-headline .dim, #view-home .brand-location, #view-home .section-link,
-  .contact-footer .footer-social {
-    animation:none; color:var(--gray-500); background:none; -webkit-text-fill-color:currentColor;
-  }
-  #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn,
-  .art-card .art-star { animation:none; }
-  .home-featured-grid.home-page-enter { animation:none; }
-}
-
-
-/* Brilho acionado por contexto: varredura única, lenta e sem movimento de retorno. */
-.hero-headline .dim,
-body.home-route .top-header .brand-location,
-#view-home .about-more-link,
-.contact-footer .footer-social {
-  color: var(--gray-400);
-  background: none;
-  animation: none;
-  -webkit-text-fill-color: currentColor;
-}
-#view-about #cv-download-btn,
-#view-about #certificates-btn,
-#view-about #free-tools-btn { animation: none; text-shadow: none; }
-.art-card .art-star { animation: none; filter: none; transform: none; }
-
-#view-home .section-body > .about-more-link {
-  display: table;
-  margin: 16px 0 0;
-  text-align: left;
-}
-.home-work-more { display:flex; justify-content:flex-start; margin:24px 0 0; }
+.home-work-more { display:flex; margin:0; }
 .home-work-more .section-link {
-  display:inline-flex;
-  align-items:center;
-  min-height:38px;
-  margin:0;
-  padding:8px 14px;
-  border:1px solid var(--gray-200);
-  border-radius:4px;
-  color:var(--gray-500);
-  background:transparent;
-  font-size:13px;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:36px; padding:0 14px; margin:0;
+  border:1px solid var(--gray-200); border-radius:4px; background:transparent;
+  color:var(--gray-500); font-size:12px; white-space:nowrap;
   transition:color .2s var(--ease), border-color .2s var(--ease);
 }
 .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
+#view-home .section-body > .about-more-link { display:table; margin:16px 0 0; text-align:left; }
 
-.glint-target.glint-active:not(.art-star):not(#cv-download-btn):not(#certificates-btn):not(#free-tools-btn) {
-  color:transparent;
-  background-image:linear-gradient(105deg, #8a8a8a 0%, #b0b0b0 42%, #fff 50%, #b0b0b0 58%, #8a8a8a 100%);
-  background-size:250% 100%;
-  background-position:-150% 0;
-  background-clip:text;
-  -webkit-background-clip:text;
+/* =====================================================================
+   Celular (≤ 767px): margens, grade de projetos e paginação
+   ===================================================================== */
+@media (max-width: 767px) {
+  :root { --gutter:clamp(20px, 5.5vw, 28px); --space-y:42px; }
+  .section-block { padding-inline:var(--gutter); }
+  .work-page-hero { padding:24px var(--gutter) 32px; }
+  .work-intro { margin-bottom:20px; }
+  .work-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 12px; }
+  .work-card-media { aspect-ratio:4 / 5; margin-bottom:8px; }
+  .home-featured-grid { row-gap:10px; }
+  .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
+  .work-card-title { font-size:13px; line-height:1.35; }
+  .work-card-tag { font-size:11px; }
+  /* paginação: uma única linha de botões que se ajusta à largura; "Ver mais" logo abaixo, centralizado */
+  .home-pagination-row { flex-direction:column; gap:14px; margin-top:24px; }
+  .home-pagination { width:100%; max-width:360px; gap:5px; }
+  .home-page-number { flex:1 1 0; min-width:0; max-width:44px; min-height:40px; padding:0; }
+  .home-work-more { width:100%; max-width:360px; }
+  .home-work-more .section-link { width:100%; min-height:44px; font-size:13px; }
+}
+
+/* =====================================================================
+   Brilho ("glance"): luz larga e lenta que atravessa o texto cinza
+   - JS (fim do arquivo) define --glint-base (cor original) e --glint-ms (duração)
+   - só usa background-clip:text; a cor do elemento nunca muda, então não há salto no fim
+   ===================================================================== */
+.glint-target.glint-active:not(.art-star) {
+  background-image:linear-gradient(100deg,
+    var(--glint-base) 0%,
+    var(--glint-base) 30%,
+    color-mix(in srgb, var(--glint-base) 78%, #fff) 38%,
+    color-mix(in srgb, var(--glint-base) 40%, #fff) 45%,
+    color-mix(in srgb, var(--glint-base) 22%, #fff) 50%,
+    color-mix(in srgb, var(--glint-base) 40%, #fff) 55%,
+    color-mix(in srgb, var(--glint-base) 78%, #fff) 62%,
+    var(--glint-base) 70%,
+    var(--glint-base) 100%);
+  background-color:transparent;
+  background-size:260% 100%;
+  background-position:100% 0;
+  background-repeat:no-repeat;
+  -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:silver-sunlight 2.8s linear 1 both;
+  animation:glint-sweep var(--glint-ms, 4800ms) cubic-bezier(.45,.05,.35,1) 1 both;
 }
-@keyframes silver-sunlight {
-  from { background-position:-150% 0; }
-  to { background-position:150% 0; }
+@keyframes glint-sweep {
+  from { background-position:100% 0; }
+  to   { background-position:0% 0; }
 }
-#view-about #cv-download-btn.glint-active,
-#view-about #certificates-btn.glint-active,
-#view-about #free-tools-btn.glint-active {
-  animation:resource-glint 1.8s ease-out 1 both;
-}
-@keyframes resource-glint {
-  0%,100% { text-shadow:none; }
-  45% { text-shadow:0 0 8px rgba(255,255,255,.95), 0 0 2px rgba(17,17,17,.18); }
-}
-.art-card .art-star.glint-active {
-  animation:article-star-glint 1.8s ease-out 1 both;
-}
-@keyframes article-star-glint {
-  0%,100% { filter:drop-shadow(0 0 0 rgba(242,194,48,0)); transform:scale(1); }
-  45% { filter:drop-shadow(0 0 4px rgba(242,194,48,.8)); transform:scale(1.14); }
+/* estrelas (SVG): pulso de opacidade, sem cor nova e sem escala */
+.art-star.glint-active { animation:glint-star var(--glint-ms, 4800ms) ease-in-out 1 both; }
+@keyframes glint-star {
+  0%, 100% { opacity:1; }
+  50%      { opacity:.3; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-headline .dim,
-  body.home-route .top-header .brand-location,
-  #view-home .about-more-link,
-  .contact-footer .footer-social,
-  #view-about #cv-download-btn,
-  #view-about #certificates-btn,
-  #view-about #free-tools-btn,
-  .art-card .art-star {
-    animation:none !important;
-    background:none !important;
-    color:var(--gray-500) !important;
-    -webkit-text-fill-color:currentColor !important;
-    text-shadow:none !important;
-    filter:none !important;
-    transform:none !important;
-  }
-}
-
-/* Ajustes finais: um único brilho lento e paginação com ação na mesma linha. */
-.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:26px; }
-.home-pagination-row .home-pagination { flex:0 1 auto; justify-content:center; flex-wrap:wrap; margin-top:0; }
-.home-pagination-row .home-work-more { display:flex; flex:0 0 auto; align-items:center; margin:0; }
-.home-pagination-row .home-work-more .section-link {
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:36px; min-height:36px; padding:0 10px; margin:0;
-  border:1px solid var(--gray-200); border-radius:4px;
-  color:var(--gray-500); background:transparent; font-size:12px;
-  transition:color .2s var(--ease), border-color .2s var(--ease);
-}
-.home-pagination-row .home-work-more .section-link:hover { color:var(--ink); border-color:var(--ink); }
-/* Reflexo UV: uma faixa ampla passa sobre o cinza sem substituir a cor das letras. */
-.glint-target { position:relative; }
-.glint-target::after {
-  content:""; position:absolute; z-index:2; pointer-events:none;
-  inset:-30% -85%; opacity:0;
-  /* Um único feixe largo, com halo difuso, como luz refletida em verniz UV. */
-  background:linear-gradient(105deg,
-    transparent 12%,
-    rgba(255,255,255,.025) 25%,
-    rgba(255,255,255,.07) 34%,
-    rgba(255,255,255,.18) 41%,
-    rgba(255,255,255,.38) 46%,
-    rgba(255,255,255,.78) 49%,
-    rgba(255,255,255,.95) 50%,
-    rgba(255,255,255,.78) 51%,
-    rgba(255,255,255,.38) 54%,
-    rgba(255,255,255,.18) 59%,
-    rgba(255,255,255,.07) 66%,
-    rgba(255,255,255,.025) 75%,
-    transparent 88%);
-  mix-blend-mode:screen;
-  transform:translateX(-55%);
-}
-.glint-target.glint-active::after { animation:uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
-@keyframes uv-sweep {
-  0% { opacity:0; transform:translateX(-55%); }
-  12% { opacity:1; }
-  82% { opacity:1; }
-  100% { opacity:0; transform:translateX(55%); }
-}
-#view-about #cv-download-btn.glint-active::after,
-#view-about #certificates-btn.glint-active::after,
-#view-about #free-tools-btn.glint-active::after { animation-duration:15s; }
-/* SVG não aceita a camada ::after: a estrela conserva cor, tamanho e formato e recebe um reflexo breve, sem escala nem brilho dourado novo. */
-.glint-target.art-star.glint-active { animation:star-uv-sweep 15s cubic-bezier(.22,.61,.36,1) 1 both; }
-@keyframes star-uv-sweep {
-  0%,100% { filter:none; }
-  35%,65% { filter:brightness(1.35) drop-shadow(0 0 3px rgba(255,255,255,.65)); }
-}
-@media (prefers-reduced-motion: reduce) {
- .glint-target::after { display:none !important; }
+  .home-featured-grid.home-page-enter { animation:none; }
+  .glint-target.glint-active, .art-star.glint-active { animation:none !important; background-image:none !important; -webkit-text-fill-color:currentColor !important; }
 }
 </style>
 <style>
@@ -1736,9 +1551,6 @@ body.home-route .top-header .brand-location,
   .service-card { padding: clamp(14px, 1.8vw, 20px); gap: 18px; }
   .service-title { min-height: 2.6em; }
 }
-#art-filters .art-star.glint-active, .art-card .art-star.glint-active { animation:article-star-glint 2.8s ease-in-out 1 both; }
-@media (max-width: 639px) { .glance-options { grid-template-columns:1fr; } .glance-option { padding:16px; } }
-@media (prefers-reduced-motion: reduce) { .glance-demo.is-preview,.glance-demo.is-preview::after { animation:none !important; } }
 
 </style>
 </head>
@@ -1871,7 +1683,7 @@ body.home-route .top-header .brand-location,
         <ul class="marquee-list" aria-label="Clientes e projetos">
           <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="cliente.html?c=optica-leopoldina" draggable="false"><img src="assets/logos/optica-leopoldina.webp" alt="Óptica Leopoldina" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
           <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="cliente.html?c=mostra-saude-mental" draggable="false"><img src="assets/logos/mostra-saude-mental.svg" alt="Mostra de Saúde Mental da Unesp" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="cliente.html?c=sollaria" draggable="false"><img src="assets/logos/sollaris.svg" alt="Sollaris" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
+          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="cliente.html?c=sollaris" draggable="false"><img src="assets/logos/sollaris.svg" alt="Sollaris" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
           <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="cliente.html?c=ntaps" draggable="false"><img src="assets/logos/ntaps.webp" alt="NTAPS — Núcleo Técnico de Atenção Psicossocial" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
           <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="cliente.html?c=rino" draggable="false"><img src="assets/logos/rino-logo.webp" alt="Rino" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
           <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="cliente.html?c=classic-tattoo" draggable="false"><img src="assets/logos/classic-tattoo.webp" alt="Classic Tattoo" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
@@ -1891,7 +1703,7 @@ body.home-route .top-header .brand-location,
         <ul class="marquee-list" aria-hidden="true">
           <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="cliente.html?c=optica-leopoldina" draggable="false" tabindex="-1"><img src="assets/logos/optica-leopoldina.webp" alt="" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
           <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="cliente.html?c=mostra-saude-mental" draggable="false" tabindex="-1"><img src="assets/logos/mostra-saude-mental.svg" alt="" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="cliente.html?c=sollaria" draggable="false" tabindex="-1"><img src="assets/logos/sollaris.svg" alt="" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
+          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="cliente.html?c=sollaris" draggable="false" tabindex="-1"><img src="assets/logos/sollaris.svg" alt="" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
           <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="cliente.html?c=ntaps" draggable="false" tabindex="-1"><img src="assets/logos/ntaps.webp" alt="" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
           <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="cliente.html?c=rino" draggable="false" tabindex="-1"><img src="assets/logos/rino-logo.webp" alt="" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
           <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="cliente.html?c=classic-tattoo" draggable="false" tabindex="-1"><img src="assets/logos/classic-tattoo.webp" alt="" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
@@ -1965,7 +1777,7 @@ body.home-route .top-header .brand-location,
   <div id="view-about" style="display:none;">
     <section class="cv-actions section-block" aria-label="Currículo">
       <div class="cv-actions-inner">
-        <button type="button" class="art-filter" id="cv-download-btn">Baixar currículo</button>
+        <a class="art-filter" id="cv-download-btn" href="assets/docs/Curriculo-Henrique-Marinhos.pdf" download="Curriculo - Henrique Marinhos.pdf" data-i18n="cv.download">Baixar currículo</a>
       </div>
     </section>
     <!-- conteúdo = currículo (dados em CV, no script) -->
@@ -2040,25 +1852,24 @@ body.home-route .top-header .brand-location,
 
 <button type="button" class="mobile-top-button" id="mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 
-<!-- Documentos e ferramentas: modais preparados para receber os arquivos -->
+<!-- Certificados (galeria) e Ferramentas gratuitas (comparativo pago × gratuito) -->
 <div class="resource-modal-overlay" id="resource-modal-overlay" hidden>
   <section class="resource-modal" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
     <header class="resource-modal-head">
-      <div><p class="resource-modal-eyebrow">Documentos</p><h2 id="resource-modal-title">Currículo</h2></div>
+      <div><p class="resource-modal-eyebrow" data-i18n="aboutp.edu">Formação</p><h2 id="resource-modal-title" data-i18n="cert.title">Certificados</h2></div>
       <button type="button" class="resource-modal-close" data-close-resource aria-label="Fechar">×</button>
     </header>
-    <p class="resource-modal-desc" id="resource-modal-desc"></p>
     <div class="resource-gallery" id="resource-gallery"></div>
     <p class="resource-empty" id="resource-empty"></p>
   </section>
 </div>
 <div class="resource-modal-overlay" id="free-tools-modal-overlay" hidden>
-  <section class="resource-modal" role="dialog" aria-modal="true" aria-labelledby="free-tools-modal-title">
+  <section class="resource-modal resource-modal-wide" role="dialog" aria-modal="true" aria-labelledby="free-tools-modal-title">
     <header class="resource-modal-head">
-      <div><p class="resource-modal-eyebrow">Em teste</p><h2 id="free-tools-modal-title">Ferramentas gratuitas</h2></div>
+      <div><p class="resource-modal-eyebrow" data-i18n="ft.eyebrow">Pago × gratuito</p><h2 id="free-tools-modal-title" data-i18n="ft.title">Ferramentas gratuitas</h2></div>
       <button type="button" class="resource-modal-close" data-close-tools aria-label="Fechar">×</button>
     </header>
-    <p class="resource-modal-desc">Lista inicial de alternativas para experimentar; conteúdo em atualização contínua. Ajuste os itens conforme as ferramentas que você realmente usa.</p>
+    <p class="resource-modal-desc" data-i18n="ft.desc">Programas que tenho no computador e que são gratuitos, comparados ao software pago que substituem.</p>
     <div class="free-tools-categories" id="free-tools-categories"></div>
   </section>
 </div>
@@ -2124,7 +1935,7 @@ body.home-route .top-header .brand-location,
   </button>
   <div class="lightbox-zoom-hint" id="lightbox-zoom-hint" data-i18n="lightbox.hint">Role para dar zoom · arraste para mover</div>
   <div class="lightbox-stage" id="lightbox-stage">
-    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <img class="lightbox-img" id="lightbox-img" alt="">
   </div>
 </div>
 
@@ -2266,7 +2077,7 @@ body.home-route .top-header .brand-location,
       'am.open': 'Open on site', 'am.book': 'Open book', 'am.link.Repositório Unesp': 'Unesp repository',
       'am.loading': 'Loading…', 'am.translating': 'Translating…',
       'am.note': 'Machine translation from Portuguese.', 'am.original': 'Read the original',
-      'dk.pdf': 'Download PDF', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
+      'dk.pdf': 'Download PDF', 'cv.download': 'Download résumé', 'cert.title': 'Certificates', 'ft.title': 'Free tools', 'ft.eyebrow': 'Paid vs. free', 'ft.paid': 'Paid', 'ft.free': 'Free', 'ft.desc': 'Programs I have on my computer that are free, compared with the paid software they stand in for.', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
       'footer.headline': "Let's work together?",
       'pm.live': 'See it live', 'pm.context': 'Context', 'pm.solution': 'Solution', 'pm.did': 'What I did', 'pm.tools': 'Tools',
       'lightbox.hint': 'Scroll to zoom · drag to move',
@@ -2301,7 +2112,7 @@ body.home-route .top-header .brand-location,
       'am.open': 'Abrir en el sitio', 'am.book': 'Abrir libro', 'am.link.Repositório Unesp': 'Repositorio Unesp',
       'am.loading': 'Cargando…', 'am.translating': 'Traduciendo…',
       'am.note': 'Traducción automática del portugués.', 'am.original': 'Leer el original',
-      'dk.pdf': 'Descargar PDF', 'aboutp.photo': 'Foto de perfil', 'aboutp.exp': 'Experiencia', 'aboutp.edu': 'Formación', 'aboutp.extra': 'Actividades complementarias', 'aboutp.skills': 'Habilidades técnicas', 'art.grid': 'Ver en cuadrícula',
+      'dk.pdf': 'Descargar PDF', 'cv.download': 'Descargar currículum', 'cert.title': 'Certificados', 'ft.title': 'Herramientas gratuitas', 'ft.eyebrow': 'De pago vs. gratis', 'ft.paid': 'De pago', 'ft.free': 'Gratis', 'ft.desc': 'Programas que tengo en mi computadora y son gratuitos, comparados con el software de pago que reemplazan.', 'aboutp.photo': 'Foto de perfil', 'aboutp.exp': 'Experiencia', 'aboutp.edu': 'Formación', 'aboutp.extra': 'Actividades complementarias', 'aboutp.skills': 'Habilidades técnicas', 'art.grid': 'Ver en cuadrícula',
       'footer.headline': '¿Trabajamos juntos?',
       'pm.live': 'Ver en vivo', 'pm.context': 'Contexto', 'pm.solution': 'Solución', 'pm.did': 'Lo que hice', 'pm.tools': 'Herramientas',
       'lightbox.hint': 'Desplaza para hacer zoom · arrastra para mover',
@@ -2580,7 +2391,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cachePut = (k, v) => { memCache.set(k, v); try { localStorage.setItem('hm-rd:' + k, v); } catch (e) { try { Object.keys(localStorage).filter(x => x.startsWith('hm-rd:')).forEach(x => localStorage.removeItem(x)); } catch (e2) {} } };
   const inflight = new Map();
   const once = (k, fn) => { if (!inflight.has(k)) inflight.set(k, fn().finally(() => inflight.delete(k))); return inflight.get(k); };
-  const RD_VER = 'v5';
+  const RD_VER = 'v6';
 
   // 1) HTML bruto do WordPress
   const fetchWP = (u) => once('wp:' + u, async () => {
@@ -2591,7 +2402,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = cleanWP(j[0].content.rendered);
     // capa (imagem destacada do post — no Tesoura com Ponta ela não está no corpo do texto); evita repetir se já for a 1ª imagem
     const fm = j[0]._embedded && j[0]._embedded['wp:featuredmedia'] && j[0]._embedded['wp:featuredmedia'][0];
-    const cover = fm && fm.source_url ? ((fm.media_details && fm.media_details.sizes && (fm.media_details.sizes.large || fm.media_details.sizes.medium_large || {}).source_url) || fm.source_url) : '';
+    const sz = fm && fm.media_details && fm.media_details.sizes;
+    const cover = fm && fm.source_url ? (((sz && (sz.large || sz.medium_large || {}).source_url) || fm.source_url)).replace(/^http:\/\//, 'https://') : '';
     const base = (x) => (x || '').split('/').pop().replace(/-\d+x\d+(?=\.)/, '').replace(/\.[a-z]+$/i, '').replace(/-scaled$/, '');
     const firstImg = (html.match(/<img[^>]+src="([^"]+)"/) || [])[1];
     if (cover && base(cover) !== base(firstImg)) html = `<figure class="am-cover"><img src="${cover}" alt="" decoding="async"></figure>` + html;
@@ -2602,6 +2414,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const INLINE = /^(A|EM|I|STRONG|B|U|S|SUB|SUP|BR|CODE|MARK|SMALL|SPAN|IMG)$/;
   const cleanWP = (raw) => {
     const box = document.createElement('div'); box.innerHTML = raw;
+    // o WordPress do Persona entrega http:// (conteúdo misto, bloqueado em https): sobe tudo para https
+    box.querySelectorAll('img, iframe, source').forEach(el => ['src', 'srcset'].forEach(at => {
+      const v = el.getAttribute(at); if (v) el.setAttribute(at, v.replace(/(^|[\s,])http:\/\//g, '$1https://'));
+    }));
     // posts do Instagram / tweets: guardados intactos (o script oficial deles monta o card)
     const embeds = [];
     box.querySelectorAll('blockquote.instagram-media, blockquote.twitter-tweet').forEach(b => { const ph = document.createElement('x-embed'); ph.setAttribute('data-k', embeds.length); embeds.push(b.outerHTML); b.replaceWith(ph); });
@@ -2746,7 +2562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('am-ext-l').textContent = a.ext ? i18n('am.book', a.ext) : i18n('am.open', 'Abrir no site');
     // botões extras (ex.: repositório da Unesp no TCC)
     document.getElementById('am-links').innerHTML = (a.links || []).map(l => `<a class="am-ext am-ext-alt" href="${l.u}" target="_blank" rel="noopener">${i18n('am.link.' + l.l, l.l)}</a>`).join('');
-    document.getElementById('am-cover').src = 'assets/artigos/' + a.img;
+    document.getElementById('am-cover').src = a.imgPath || ('assets/artigos/' + a.img);
     amStage.classList.remove('loaded');
     amLoadL.textContent = translated ? i18n('am.translating', 'Traduzindo…') : i18n('am.loading', 'Carregando texto…');
     amOverlay.classList.add('open'); document.body.style.overflow = 'hidden';
@@ -2756,6 +2572,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const swLabel = () => { sw.textContent = amIg.hidden ? i18n('am.seepost', 'Ver post') : i18n('am.seetext', 'Ver texto'); };
     swLabel();
     sw.onclick = () => { if (amIg.hidden) { amIg.innerHTML = pp.map(x => window.HM_POSTS.igPost(x, { noArt: true })).join(''); amIg.hidden = false; amIg.scrollTop = 0; } else { amIg.hidden = true; amIg.innerHTML = ''; } swLabel(); };
+    // artigo que é um post do Instagram: carrossel completo (com vídeos) pelo embed oficial
+    const igm = a.u.match(/instagram\.com\/(?:p|reel)\/([\w-]+)/);
+    if (igm) {
+      const post = (window.POSTS || []).find(x => x.c === igm[1]), link = `https://www.instagram.com/p/${igm[1]}/`;
+      amFrame.hidden = true; amFrame.src = 'about:blank';
+      amReader.innerHTML = `<article class="am-article"><p class="am-kicker">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h1>${esc(artTitle(a))}</h1><p class="am-byline">${esc(a.a)} · ${esc(a.site)}</p>
+        <blockquote class="instagram-media" data-instgrm-permalink="${link}?utm_source=ig_embed" data-instgrm-version="14" data-instgrm-captioned style="background:#fff;border:0;margin:0 auto;max-width:540px;min-width:280px;padding:0;width:100%"><a href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a></blockquote>
+        ${post && post.cap ? `<p class="am-note">${esc(post.cap.split('\n\n')[0])}</p>` : ''}</article>`;
+      amReader.hidden = false; amReader.scrollTop = 0; amStage.classList.add('loaded');
+      hydrateEmbeds(amReader);
+      return;
+    }
     if (!wp) { showFrame(a.u); return; }
     amFrame.hidden = true; amFrame.src = 'about:blank'; amReader.hidden = true;
     const by = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : a.a.replace(' e ', i18n('art.and', ' e '));
@@ -2978,72 +2806,92 @@ document.addEventListener('DOMContentLoaded', () => {
     { f: () => FLAG_US, t: { pt: 'Inglês B2 First | Level C1', en: 'English B2 First | Level C1', es: 'Inglés B2 First | Level C1' }, desc: { pt: 'Cambridge University Press & Assessment', en: 'Cambridge University Press & Assessment', es: 'Cambridge University Press & Assessment' } },
     { f: () => FLAGS.es(), t: { pt: 'Espanhol Intermediário', en: 'Spanish — Intermediate', es: 'Español intermedio' }, desc: { pt: 'CNA Bauru · 2024–2026', en: 'CNA Bauru · 2024–2026', es: 'CNA Bauru · 2024–2026' } }
   ];
-  // Ferramentas gratuitas: alternativas aos programas pagos. Formato: { n: 'Nome', svg: '<svg…>' } (logos em assets/data/ferramentas.js servem de modelo)
-  // Edite esta lista por categoria conforme as alternativas realmente usadas; a seleção está em teste.
+  // Ferramentas gratuitas: programas gratuitos instalados no computador × software pago que substituem.
+  // Ícones em assets/ferramentas/. "pago" aceita vários programas (ex.: Photoshop + Illustrator + InDesign).
+  const FT = 'assets/ferramentas/';
   const FERRAMENTAS_GRATUITAS = [
-    { categoria: 'Design vetorial', itens: [
-      { nome: 'Inkscape', substitui: 'Illustrator', url: 'https://inkscape.org/' },
-      { nome: 'Penpot', substitui: 'Figma (interfaces e protótipos)', url: 'https://penpot.app/' }
+    { categoria: { pt: 'Imagem e design', en: 'Image and design', es: 'Imagen y diseño' }, itens: [
+      { pago: [['Adobe Photoshop', 'photoshop.svg']], gratis: ['PhotoCraft', 'photocraft.webp', 'https://getartcraft.com/apps/photocraft'],
+        nota: { pt: 'Edição e retoque de imagens. Código aberto, sem assinatura.', en: 'Image editing and retouching. Open source, no subscription.', es: 'Edición y retoque de imágenes. Código abierto, sin suscripción.' } },
+      { pago: [['Adobe Illustrator', 'illustrator.svg']], gratis: ['VectorCraft', 'vectorcraft.webp', 'https://getartcraft.com/apps/vectorcraft'],
+        nota: { pt: 'Ilustração e logotipos em vetor.', en: 'Vector illustration and logos.', es: 'Ilustración y logotipos vectoriales.' } },
+      { pago: [['Adobe InDesign', 'indesign.svg']], gratis: ['DesignCraft', 'designcraft.webp', 'https://getartcraft.com/apps/designcraft'],
+        nota: { pt: 'Diagramação de peças e documentos.', en: 'Layout for pieces and documents.', es: 'Maquetación de piezas y documentos.' } },
+      { pago: [['Adobe Lightroom', 'lightroom.svg']], gratis: ['LightCraft', 'lightcraft.webp', 'https://getartcraft.com/apps/lightcraft'],
+        nota: { pt: 'Revelação e organização de fotografias.', en: 'Photo development and organization.', es: 'Revelado y organización de fotografías.' } },
+      { pago: [['Adobe XD', 'xd.svg']], gratis: ['FigCraft', 'figcraft.webp', 'https://getartcraft.com/apps/figcraft'],
+        nota: { pt: 'Design e protótipo de interfaces, com auto layout e componentes.', en: 'Interface design and prototyping, with auto layout and components.', es: 'Diseño y prototipo de interfaces, con auto layout y componentes.' } },
+      { pago: [['Adobe Photoshop', 'photoshop.svg'], ['Adobe Illustrator', 'illustrator.svg'], ['Adobe InDesign', 'indesign.svg']], gratis: ['Affinity', 'affinity.webp', 'https://www.affinity.studio/'], rotulo: 'Photoshop · Illustrator · InDesign',
+        nota: { pt: 'Imagem, vetor e layout num só aplicativo. Gratuito com conta Canva; os recursos de IA exigem plano pago.', en: 'Image, vector and layout in a single app. Free with a Canva account; AI features need a paid plan.', es: 'Imagen, vector y maquetación en una sola app. Gratis con cuenta de Canva; las funciones de IA exigen plan de pago.' } }
     ]},
-    { categoria: 'Imagem e pintura', itens: [
-      { nome: 'GIMP', substitui: 'Photoshop (edição de imagens)', url: 'https://www.gimp.org/' },
-      { nome: 'Krita', substitui: 'Photoshop (pintura digital)', url: 'https://krita.org/' }
+    { categoria: { pt: 'Vídeo e áudio', en: 'Video and audio', es: 'Video y audio' }, itens: [
+      { pago: [['Adobe Premiere Pro', 'premiere.svg']], gratis: ['FilmCraft', 'filmcraft.webp', 'https://getartcraft.com/apps/filmcraft'],
+        nota: { pt: 'Edição de vídeo em linha do tempo.', en: 'Timeline video editing.', es: 'Edición de video en línea de tiempo.' } },
+      { pago: [['Adobe Premiere Pro', 'premiere.svg']], gratis: ['iMovie', 'imovie.webp', 'https://www.apple.com/br/imovie/'],
+        nota: { pt: 'Edições rápidas e simples, no ecossistema Apple.', en: 'Quick, simple edits in the Apple ecosystem.', es: 'Ediciones rápidas y simples en el ecosistema Apple.' } },
+      { pago: [['Adobe After Effects', 'after-effects.svg']], gratis: ['EffectCraft', 'effectcraft.webp', 'https://getartcraft.com/apps/effectcraft'],
+        nota: { pt: 'Motion graphics e efeitos visuais.', en: 'Motion graphics and visual effects.', es: 'Motion graphics y efectos visuales.' } },
+      { pago: [['Adobe Audition', 'audition.svg']], gratis: ['SoundCraft', 'soundcraft.webp', 'https://getartcraft.com/apps/soundcraft'],
+        nota: { pt: 'Gravação e edição de áudio.', en: 'Audio recording and editing.', es: 'Grabación y edición de audio.' } }
     ]},
-    { categoria: 'Editorial e publicação', itens: [
-      { nome: 'Scribus', substitui: 'InDesign (diagramação)', url: 'https://www.scribus.net/' }
-    ]},
-    { categoria: 'Vídeo e 3D', itens: [
-      { nome: 'DaVinci Resolve', substitui: 'Premiere Pro (versão gratuita disponível)', url: 'https://www.blackmagicdesign.com/products/davinciresolve' },
-      { nome: 'Blender', substitui: 'Ferramentas de modelagem e animação 3D', url: 'https://www.blender.org/' }
+    { categoria: { pt: 'Documentos e escritório', en: 'Documents and office', es: 'Documentos y oficina' }, itens: [
+      { pago: [['Microsoft Word', 'word.svg']], gratis: ['WordCraft', 'wordcraft.webp', 'https://getartcraft.com/apps/wordcraft'],
+        nota: { pt: 'Processador de texto.', en: 'Word processor.', es: 'Procesador de texto.' } },
+      { pago: [['Microsoft Excel', 'excel.svg']], gratis: ['GridCraft', 'gridcraft.webp', 'https://getartcraft.com/apps/gridcraft'],
+        nota: { pt: 'Planilhas e cálculos.', en: 'Spreadsheets and calculations.', es: 'Hojas de cálculo y cálculos.' } },
+      { pago: [['Microsoft PowerPoint', 'powerpoint.svg']], gratis: ['DeckCraft', 'deckcraft.webp', 'https://getartcraft.com/apps/deckcraft'],
+        nota: { pt: 'Apresentações de slides.', en: 'Slide presentations.', es: 'Presentaciones de diapositivas.' } },
+      { pago: [['Adobe Acrobat', 'acrobat.svg']], gratis: ['PdfCraft', 'pdfcraft.webp', 'https://getartcraft.com/apps/pdfcraft'],
+        nota: { pt: 'Leitura, edição e assinatura de PDF.', en: 'PDF reading, editing and signing.', es: 'Lectura, edición y firma de PDF.' } }
     ]}
   ];
   // Ao receber os documentos, acrescente objetos {titulo, tipo:'image'|'pdf', src} aqui.
   const CERTIFICADOS = [];
+  const escT = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const resourceOverlay = document.getElementById('resource-modal-overlay');
-  const resourceTitle = document.getElementById('resource-modal-title');
-  const resourceDesc = document.getElementById('resource-modal-desc');
   const resourceGallery = document.getElementById('resource-gallery');
   const resourceEmpty = document.getElementById('resource-empty');
-  const openResourceModal = (kind) => {
-    const isCV = kind === 'cv';
-    resourceTitle.textContent = isCV ? 'Baixar Currículo' : 'Certificados';
-    resourceDesc.textContent = isCV
-      ? 'O PDF do currículo será disponibilizado aqui assim que o documento for enviado.'
-      : 'Galeria preparada para certificados e comprovantes em imagem ou PDF.';
-    resourceGallery.innerHTML = '';
-    const items = isCV ? [] : CERTIFICADOS;
-    resourceEmpty.hidden = items.length > 0;
-    resourceEmpty.textContent = isCV ? 'Documento em breve.' : 'Os certificados serão adicionados quando os documentos forem enviados.';
-    resourceGallery.innerHTML = items.map(item => {
-      const href = item.src;
-      const media = item.tipo === 'image'
-        ? `<img src="${href}" alt="">`
-        : '<span class="resource-pdf">Documento PDF ↗</span>';
-      return `<a class="resource-card" href="${href}" target="_blank" rel="noopener noreferrer">${media}<span>${item.titulo}</span></a>`;
+  const lockScroll = (on) => { document.body.style.overflow = on ? 'hidden' : ''; };
+  const openCertificates = () => {
+    resourceEmpty.hidden = CERTIFICADOS.length > 0;
+    resourceEmpty.textContent = 'Os certificados serão adicionados quando os documentos forem enviados.';
+    resourceGallery.innerHTML = CERTIFICADOS.map(item => {
+      const media = item.tipo === 'image' ? `<img src="${escT(item.src)}" alt="">` : '<span class="resource-pdf">Documento PDF ↗</span>';
+      return `<a class="resource-card" href="${escT(item.src)}" target="_blank" rel="noopener noreferrer">${media}<span>${escT(item.titulo)}</span></a>`;
     }).join('');
-    resourceOverlay.hidden = false;
-    document.body.style.overflow = 'hidden';
+    resourceOverlay.hidden = false; lockScroll(true);
     resourceOverlay.querySelector('button')?.focus();
   };
-  const closeResourceModal = () => { resourceOverlay.hidden = true; document.body.style.overflow = ''; };
-  document.getElementById('cv-download-btn')?.addEventListener('click', () => openResourceModal('cv'));
-  document.getElementById('certificates-btn')?.addEventListener('click', () => openResourceModal('certificados'));
+  const closeResourceModal = () => { resourceOverlay.hidden = true; lockScroll(false); };
+  document.getElementById('certificates-btn')?.addEventListener('click', openCertificates);
   resourceOverlay.querySelectorAll('[data-close-resource]').forEach(b => b.addEventListener('click', closeResourceModal));
   resourceOverlay.addEventListener('click', e => { if (e.target === resourceOverlay) closeResourceModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !resourceOverlay.hidden) closeResourceModal(); });
+
+  /* Ferramentas gratuitas: comparativo pago → gratuito */
   const freeToolsOverlay = document.getElementById('free-tools-modal-overlay');
   const freeToolsCategories = document.getElementById('free-tools-categories');
-  freeToolsCategories.innerHTML = FERRAMENTAS_GRATUITAS.map(cat => `<section class="free-tools-category"><h3>${cat.categoria}</h3><div class="free-tools-list">${cat.itens.map(tool => `<article class="free-tool"><strong>${tool.nome}</strong><p>Alternativa a: ${tool.substitui}</p><a href="${tool.url}" target="_blank" rel="noopener noreferrer">Site oficial ↗</a></article>`).join('')}</div></section>`).join('');
-  const closeFreeTools = () => { freeToolsOverlay.hidden = true; document.body.style.overflow = ''; };
-  document.getElementById('free-tools-btn')?.addEventListener('click', () => { freeToolsOverlay.hidden = false; document.body.style.overflow = 'hidden'; freeToolsOverlay.querySelector('button')?.focus(); });
+  const renderFreeTools = () => {
+    freeToolsCategories.innerHTML = FERRAMENTAS_GRATUITAS.map(cat => `
+      <section class="free-tools-category"><h3>${escT(tx(cat.categoria))}</h3>
+        <ul class="ft-list">${cat.itens.map(it => {
+          const [nome, img, url] = it.gratis, multi = it.pago.length > 1;
+          return `<li class="ft-row">
+            <div class="ft-side ft-paid"><span class="ft-logos${multi ? ' is-multi' : ''}">${it.pago.map(([n, f]) => `<img src="${FT}${f}" alt="" width="40" height="40" loading="lazy" decoding="async">`).join('')}</span>
+              <span><strong class="ft-name">${escT(it.rotulo || it.pago.map(x => x[0]).join(' · '))}</strong><span class="ft-tag">${escT(i18n('ft.paid', 'Pago'))}</span></span></div>
+            <span class="ft-arrow" aria-hidden="true">→</span>
+            <a class="ft-side ft-free" href="${url}" target="_blank" rel="noopener noreferrer"><span class="ft-logos"><img src="${FT}${img}" alt="" width="40" height="40" loading="lazy" decoding="async"></span>
+              <span><strong class="ft-name">${escT(nome)} ↗</strong><span class="ft-tag">${escT(i18n('ft.free', 'Gratuito'))}</span></span></a>
+            <p class="ft-note">${escT(tx(it.nota))}</p></li>`; }).join('')}</ul></section>`).join('');
+  };
+  const closeFreeTools = () => { freeToolsOverlay.hidden = true; lockScroll(false); };
+  document.getElementById('free-tools-btn')?.addEventListener('click', () => { renderFreeTools(); freeToolsOverlay.hidden = false; lockScroll(true); freeToolsOverlay.querySelector('button')?.focus(); });
   freeToolsOverlay.querySelectorAll('[data-close-tools]').forEach(b => b.addEventListener('click', closeFreeTools));
   freeToolsOverlay.addEventListener('click', e => { if (e.target === freeToolsOverlay) closeFreeTools(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !freeToolsOverlay.hidden) closeFreeTools(); });
   const renderAboutPage = () => {
     const lg = document.getElementById('cv-lang');
     if (lg) lg.innerHTML = IDIOMAS.map(i => `<div class="cv-item lang-item reveal"><div class="cv-head"><div class="cv-logo" aria-hidden="true">${i.f()}</div><div class="cv-main"><p class="cv-name" style="font-weight:400">${tx(i.t)}</p>${i.desc ? `<p class="cv-desc">${tx(i.desc)}</p>` : ''}</div></div></div>`).join('');
-    const fg = document.getElementById('cv-free');
-    if (fg) { fg.innerHTML = FERRAMENTAS_GRATUITAS.map(f => `<div class="free-item">${f.svg}<span>${f.n}</span></div>`).join(''); document.getElementById('cv-free-empty').hidden = FERRAMENTAS_GRATUITAS.length > 0; }
     ['exp', 'edu', 'extra', 'skills'].forEach(k => {
       const el = document.getElementById('cv-' + k); if (!el) return;
       // experiência: 4 freelas mais recentes numa coluna, o resto na outra
@@ -3699,36 +3547,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     requestAnimationFrame(observeLiveProjectPreviews);
   };
-  let hrInit = false;
-  const initHomeRows = () => {
-    const rows = [...document.querySelectorAll('.hr-row')]; if (!rows.length) return;
-    const st = rows.map(r => ({ r, tr: r.querySelector('.hr-track'), x: 0, dir: +r.dataset.dir, hover: false, drag: null, w: 0 }));
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    st.forEach(s => { s.w = s.tr.scrollWidth / 2; if (s.dir < 0) s.x = -s.w / 2;
-      s.r.addEventListener('pointerenter', () => s.hover = true); s.r.addEventListener('pointerleave', () => { s.hover = false; s.drag = null; });
-      s.r.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { s.x -= e.deltaX; e.preventDefault(); } }, { passive: false });
-      s.r.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button) return; s.drag = { x0: e.clientX, sx: s.x, moved: false }; });
-      s.r.addEventListener('pointermove', (e) => { if (!s.drag) return; const dx = e.clientX - s.drag.x0; if (Math.abs(dx) > 5) s.drag.moved = true; s.x = s.drag.sx + dx; });
-      s.r.addEventListener('pointerup', () => { setTimeout(() => s.drag = null, 0); });
-      s.r.addEventListener('click', (e) => { if (s.drag && s.drag.moved) { e.preventDefault(); e.stopPropagation(); } }, true); });
-    let inView = false, raf = 0, last = 0;
-    const tick = (now) => { const dt = Math.min(0.05, (now - last) / 1000); last = now;
-      st.forEach(s => { if (!s.hover && !s.drag && !reduce) s.x -= s.dir * 28 * dt; if (s.x <= -s.w) s.x += s.w; if (s.x > 0) s.x -= s.w; s.tr.style.transform = `translate3d(${s.x.toFixed(1)}px,0,0)`; });
-      raf = inView ? requestAnimationFrame(tick) : 0; };
-    new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView && !raf) { last = performance.now(); raf = requestAnimationFrame(tick); } }).observe(rows[0].parentNode);
-    window.addEventListener('resize', () => st.forEach(s => s.w = s.tr.scrollWidth / 2));
-    if (hrInit) return; hrInit = true;
-    // preview: troca as imagens do card enquanto o mouse está em cima
-    let pvT = 0, pvEl = null;
-    document.addEventListener('pointerover', (e) => { const c = e.target.closest('.hr-card'); if (c === pvEl) return;
-      if (pvEl) { clearInterval(pvT); pvEl.classList.remove('pv'); const im = pvEl.querySelector('.hr-media img'); im.src = im.dataset.cap || im.src; }
-      pvEl = c; if (!c || matchMedia('(hover: none)').matches) return;
-      const im = c.querySelector('.hr-media img'), list = (c.dataset.pv || '').split('|').filter(Boolean); im.dataset.cap = im.dataset.cap || im.getAttribute('src');
-      c.classList.add('pv'); if (!list.length) return;
-      list.forEach(u => { const i = new Image(); i.src = u + '-t.webp'; });
-      let k = 0; pvT = setInterval(() => { const u = list[k++ % list.length]; const pre = new Image(); pre.onload = () => { if (pvEl === c) im.src = pre.src; }; pre.src = u + '.webp'; }, 1100);
-    });
-  };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
     e.preventDefault(); openDeck(c.dataset.pj);
@@ -3743,17 +3561,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const IG_L = { ver: { pt: 'Ver no Instagram', en: 'View on Instagram', es: 'Ver en Instagram' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
-  const igImg = (x, i) => `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}.webp`;
+  const igImg = (x, i) => x.cover && i === 0 ? x.cover : `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}.webp`;
+  // carrossel com vídeo: embed oficial do Instagram (altura = proporção do post + cabeçalho/rodapé do embed)
+  const igEmbed = (x) => `<iframe class="ig-embed" src="https://www.instagram.com/p/${x.c}/embed/" title="${esc((x.cap || 'Instagram').slice(0, 80))}" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" style="aspect-ratio:1 / ${((Number(x.r) || 1.25) + 0.26).toFixed(3)}"></iframe>`;
   const igPost = (x, opts = {}) => {
     const n = x.n, ar = (1 / x.r).toFixed(4), cap = (x.cap || '').trim(), longo = cap.length > 240;
-    const imgs = Array.from({ length: n }, (_, i) => {
+    const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => {
       const im = `<img src="${igImg(x, i)}" alt="" loading="lazy" decoding="async" style="--ar:${ar}" data-full="${igImg(x, i)}">`;
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
     const art = x.art && !opts.noArt ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
     return `<article class="ig-post" data-code="${x.c}">
       <header class="ig-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
-      <div class="ig-strip${n === 1 ? ' one' : ''}">${imgs}</div>
-      ${n > 1 ? `<div class="ig-dots" aria-hidden="true">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div>` : ''}
+      <div class="ig-strip${n === 1 || x.embed ? ' one' : ''}">${imgs}</div>
+      ${n > 1 && !x.embed ? `<div class="ig-dots" aria-hidden="true">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div>` : ''}
       ${cap ? `<p class="ig-cap${longo ? ' clamp' : ''}">${esc(cap)}</p>${longo ? `<button class="ig-more" type="button">${lx(IG_L.mais)}</button>` : ''}` : ''}
       <div class="ig-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
     </article>`;
@@ -3762,12 +3582,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const ARR = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const pcCard = (x) => {
     const n = x.n, cap = (x.cap || '').trim(), longo = cap.length > 140;
-    const imgs = Array.from({ length: n }, (_, i) => { const im = `<img src="${igImg(x, i)}" alt="" loading="lazy" decoding="async" data-full="${igImg(x, i)}">`;
+    const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => { const im = `<img src="${igImg(x, i)}" alt="" loading="lazy" decoding="async" data-full="${igImg(x, i)}">`;
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
     const art = x.art ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
     return `<article class="pc" data-code="${x.c}">
-      <div class="pc-media" style="--ar:${(1 / x.r).toFixed(4)}"><div class="pc-track">${imgs}</div>
-        ${n > 1 ? `<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="Próxima">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : ''}</div>
+      <div class="pc-media" style="--ar:${x.embed ? (1 / ((Number(x.r) || 1.25) + 0.26)).toFixed(4) : (1 / x.r).toFixed(4)}"><div class="pc-track">${imgs}</div>
+        ${n > 1 && !x.embed ? `<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="Próxima">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : ''}</div>
       <div class="pc-body"><p class="pc-meta">@${esc(x.user)} — ${fmtData(x.d)}</p>${cap ? `<p class="pc-cap${longo ? ' clamp' : ''}">${esc(cap)}</p>${longo ? `<button class="ig-more" type="button">${lx(IG_L.mais)}</button>` : ''}` : ''}
         <div class="pc-links"><a href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a>${art ? `<a href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div></div>
     </article>`;
@@ -4360,56 +4180,56 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-/* Brilho contextual: um único glance lento ao entrar na página; interação/visibilidade para itens secundários. */
+/* Brilho ("glance"): uma passagem larga e lenta de luz sobre o texto cinza.
+   Dispara ao entrar na tela, ao passar o mouse e ao focar; o CSS está em "Brilho" (bloco de estilos acima). */
 (() => {
-  const selector = '#view-home .hero-headline .dim, body.home-route .top-header .brand-location, #view-home .about-more-link, .contact-footer .footer-social, #view-about #cv-download-btn, #view-about #certificates-btn, #view-about #free-tools-btn, #view-work .work-page-title, #view-articles .art-title, #view-articles .art-star, #art-filters .art-star';
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const GLINT_MS = 4800;      // duração da passagem
+  const COOLDOWN = 30000;     // intervalo mínimo entre passagens no mesmo elemento
+  const selector = [
+    '#view-home .hero-headline .dim', 'body.home-route .top-header .brand-location', '#view-home .about-more-link',
+    '.contact-footer .footer-social', '#view-about #cv-download-btn', '#view-about #certificates-btn', '#view-about #free-tools-btn',
+    '#view-work .work-page-title .dim', '#view-articles .art-title .dim', '#view-articles .art-star', '#art-filters .art-star'
+  ].join(', ');
   const lastPlayed = new WeakMap();
-  const cooldown = 20000;
+  const isGray = (rgb) => {
+    const [r, g, b] = rgb, avg = (r + g + b) / 3;
+    return Math.max(r, g, b) - Math.min(r, g, b) <= 12 && avg >= 90 && avg <= 220;
+  };
   const play = (el) => {
     if (!el || !el.isConnected) return;
     if (el.matches('.brand-location') && !document.body.classList.contains('home-route')) return;
-    /* O reflexo só é executado sobre elementos cinza; a estrela é exceção intencional e mantém seu amarelo original. */
-    if (!el.matches('.art-star')) {
-      const rgb = getComputedStyle(el).color.match(/\d+/g);
-      if (!rgb || Math.max(+rgb[0], +rgb[1], +rgb[2]) - Math.min(+rgb[0], +rgb[1], +rgb[2]) > 12 ||
-          (+rgb[0] + +rgb[1] + +rgb[2]) / 3 > 220 || (+rgb[0] + +rgb[1] + +rgb[2]) / 3 < 90) return;
-    }
     const now = Date.now();
-    if (now - (lastPlayed.get(el) || 0) < cooldown) return;
+    if (now - (lastPlayed.get(el) || 0) < COOLDOWN) return;
+    const isStar = el.matches('.art-star');
+    if (!isStar) {
+      const color = getComputedStyle(el).color, rgb = (color.match(/\d+/g) || []).slice(0, 3).map(Number);
+      if (rgb.length < 3 || !isGray(rgb)) return;
+      el.style.setProperty('--glint-base', color);
+    }
     lastPlayed.set(el, now);
+    el.style.setProperty('--glint-ms', GLINT_MS + 'ms');
     el.classList.remove('glint-active');
     void el.offsetWidth;
     el.classList.add('glint-target', 'glint-active');
     const clear = () => el.classList.remove('glint-active');
     el.addEventListener('animationend', clear, { once: true });
-    window.setTimeout(clear, 5200);
+    setTimeout(clear, GLINT_MS + 400);
   };
   const observed = new WeakSet();
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) play(entry.target); });
   }, { threshold: 0.55 });
+  const watch = (el) => { if (observed.has(el)) return; observed.add(el); el.classList.add('glint-target'); observer.observe(el); };
   const scan = (root) => {
-    if (root.nodeType === 1 && root.matches(selector) && !observed.has(root)) {
-      observed.add(root); root.classList.add('glint-target'); observer.observe(root);
-    }
-    if (root.querySelectorAll) root.querySelectorAll(selector).forEach(el => {
-      if (observed.has(el)) return;
-      observed.add(el); el.classList.add('glint-target'); observer.observe(el);
-    });
+    if (root.nodeType !== 1) return;
+    if (root.matches(selector)) watch(root);
+    root.querySelectorAll(selector).forEach(watch);
   };
-  scan(document);
-  new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
-    if (node.nodeType === 1) scan(node);
-  }))).observe(document.body, { childList: true, subtree: true });
-  document.addEventListener('pointerover', event => {
-    const el = event.target.closest(selector);
-    if (el && !el.contains(event.relatedTarget)) play(el);
-  });
-  document.addEventListener('focusin', event => {
-    const el = event.target.closest(selector);
-    if (el) play(el);
-  });
+  scan(document.body);
+  new MutationObserver(records => records.forEach(rec => rec.addedNodes.forEach(scan))).observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('pointerover', e => { const el = e.target.closest && e.target.closest(selector); if (el && !el.contains(e.relatedTarget)) play(el); });
+  document.addEventListener('focusin', e => { const el = e.target.closest && e.target.closest(selector); if (el) play(el); });
 })();
 </script>
 

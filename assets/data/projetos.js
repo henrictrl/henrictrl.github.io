@@ -2560,7 +2560,7 @@ window.PROJETOS = [
  {
   "slug": "sollaris",
   "servicos_relacionados": ["identidade"],
-  "marca": "sollaria",
+  "marca": "sollaris",
   "titulo": "Sollaris",
   "ano": "2023",
   "cat": {

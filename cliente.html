@@ -60,13 +60,14 @@ main { flex:1; display:flex; flex-direction:column; align-items:center; justify-
 <script src="assets/data/clientes.js"></script>
 <script>
 (() => {
-  const slug = new URLSearchParams(location.search).get('c');
+  const raw = new URLSearchParams(location.search).get('c');
+  const slug = (window.CLIENTES_ALIAS || {})[raw] || raw;   // aceita slugs antigos (ex.: sollaria)
   const c = (window.CLIENTES || {})[slug];
   const $ = (id) => document.getElementById(id);
   if (!c) { $('main').innerHTML = '<p class="notfound">Projeto não encontrado.</p>'; return; }
 
   document.title = c.nome + ' — Henrique Marinhos';
-  $('logo').src = 'assets/logos/' + slug + '.webp';
+  $('logo').src = c.logo || ('assets/logos/' + slug + '.webp');
   $('logo').alt = c.nome;
   $('name').textContent = c.nome;
   const meta = [c.tipo, c.ano].filter(Boolean).join(' · ');
