@@ -11,20 +11,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261020-share-row">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-header-menu">
+<style>
+/* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
+   Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
+body.project-page > header.top-header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-100); }
+body.project-page > header.top-header.menu-open { background: var(--white); }
+body.project-page .project-brand { display: block; color: var(--ink); text-decoration: none; }
+body.project-page .project-brand .brand-name, body.project-page .project-brand .brand-location { display: block; }
+body.project-page .project-brand .brand-location { color: var(--gray-400); }
+body.project-page .project-brand:focus-visible, body.project-page .main-nav a:focus-visible,
+body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+</style>
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
-  <div class="dk-top">
-    <div class="detail-topcopy">
-      <a class="dk-name" href="index.html#trabalhos" id="project-back">Projetos</a>
-      <span class="dk-meta" id="project-meta"></span>
+<header class="top-header" id="project-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a class="project-brand" href="index.html">
+        <span class="brand-name">Henrique Marinhos</span>
+        <span class="brand-location">— São Paulo, Brasil</span>
+      </a>
     </div>
-    <div class="detail-actions">
-      <div class="detail-lang" id="project-lang" role="group" aria-label="Idioma / Language"></div>
-      <a class="dk-x detail-back" href="index.html#trabalhos" aria-label="Voltar aos projetos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <!-- botão hambúrguer (só no celular) -->
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span></button>
+    <!-- no celular é o painel do menu; no desktop, links no centro e idiomas à direita -->
+    <div class="nav-row" id="nav-panel">
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html" data-nav="home">Início</a>
+        <a href="index.html#sobre" data-nav="about">Sobre</a>
+        <a href="index.html#trabalhos" data-nav="work" class="current" aria-current="page">Projetos</a>
+        <a href="index.html#artigos" data-nav="articles">Artigos</a>
+        <a href="index.html#contato" data-nav="contact">Contato</a>
+      </nav>
+      <div class="lang-switch" id="project-lang" role="group" aria-label="Idioma / Language"></div>
     </div>
   </div>
+</header>
+<main id="dk" class="dk-ov open" aria-labelledby="project-title">
   <div id="project-content-root" class="dk-content">
     <header class="dk-head" id="project-top">
       <p class="dk-kicker" id="project-kicker"></p>
@@ -115,10 +140,30 @@
   function cleanProjectUrl(projectSlug) { return "/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/"; }
   var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
   var main=document.getElementById("dk"), heading=document.getElementById("project-title");
-  var kicker=document.getElementById("project-kicker"), meta=document.getElementById("project-meta");
+  var kicker=document.getElementById("project-kicker");
   var intro=document.getElementById("project-intro"), visuals=document.getElementById("project-visuals");
   var toc=document.getElementById("project-toc"), langHost=document.getElementById("project-lang");
   var nextLink=document.getElementById("project-next");
+  /* --- Cabeçalho: hambúrguer no celular, links centrais no desktop --- */
+  var siteHeader=document.getElementById("project-header"), navToggle=document.getElementById("nav-toggle");
+  function setMenu(open) {
+    siteHeader.classList.toggle("menu-open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? textLabel("Fechar menu","Close menu","Cerrar menú") : textLabel("Abrir menu","Open menu","Abrir menú"));
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  navToggle.addEventListener("click", function () { setMenu(!siteHeader.classList.contains("menu-open")); });
+  siteHeader.querySelectorAll(".main-nav a").forEach(function (link) { link.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("keydown", function (event) { if (event.key === "Escape" && siteHeader.classList.contains("menu-open")) setMenu(false); });
+  matchMedia("(min-width: 768px)").addEventListener("change", function (event) { if (event.matches) setMenu(false); });
+  /* altura real do cabeçalho → --hdr-h (painel do menu) e --project-header-height (sumário e âncoras) */
+  function setHdr() {
+    var h = siteHeader.offsetHeight + "px";
+    document.documentElement.style.setProperty("--hdr-h", h);
+    document.documentElement.style.setProperty("--project-header-height", h);
+  }
+  setHdr();
+  window.addEventListener("resize", setHdr);
   var siteCopy={
     back:{pt:"Todos os projetos",en:"All projects",es:"Todos los proyectos"},
     try:{pt:"Abrir ferramenta interativa",en:"Open interactive tool",es:"Abrir herramienta interactiva"},
@@ -134,14 +179,25 @@
     open:{pt:"Abrir site em nova aba ↗",en:"Open website in a new tab ↗",es:"Abrir sitio en una pestaña nueva ↗"}
   };
   function renderLanguageControls() {
-    document.getElementById("project-back").textContent=lx(siteCopy.back);
+    var NAV_L={
+      home:{pt:"Início",en:"Home",es:"Inicio"},
+      about:{pt:"Sobre",en:"About",es:"Sobre mí"},
+      work:{pt:"Projetos",en:"Projects",es:"Proyectos"},
+      articles:{pt:"Artigos",en:"Articles",es:"Artículos"},
+      contact:{pt:"Contato",en:"Contact",es:"Contacto"}
+    };
+    siteHeader.querySelectorAll("[data-nav]").forEach(function (link) {
+      var v=NAV_L[link.dataset.nav];
+      link.textContent=textLabel(v.pt,v.en,v.es);
+    });
+    setMenu(siteHeader.classList.contains("menu-open"));
     var flags = {
       pt: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#009C3B"/><path d="M10.5 1.6 19.3 7.5 10.5 13.4 1.7 7.5z" fill="#FFDF00"/><circle cx="10.5" cy="7.5" r="3.4" fill="#002776"/><path d="M7.3 6.8c2.1-.6 4.4-.3 6.3.9" stroke="#fff" stroke-width=".55" fill="none"/></svg>',
       en: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#012169"/><path d="M0 0 21 15M21 0 0 15" stroke="#fff" stroke-width="3.6"/><path d="M0 0 21 15M21 0 0 15" stroke="#C8102E" stroke-width="1.5"/><path d="M10.5 0v15M0 7.5h21" stroke="#fff" stroke-width="5"/><path d="M10.5 0v15M0 7.5h21" stroke="#C8102E" stroke-width="2.7"/></svg>',
       es: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#AA151B"/><rect y="3.75" width="21" height="7.5" fill="#F1BF00"/></svg>'
     };
     langHost.innerHTML=["pt","en","es"].map(function(code){
-      return '<button type="button" data-lang="'+code+'" lang="'+code+'" aria-pressed="'+(code===LANG)+'" aria-label="'+LANG_NAMES[code]+'" title="'+LANG_NAMES[code]+'">'+flags[code]+'</button>';
+      return '<button type="button" class="lang-btn" data-lang="'+code+'" lang="'+code+'" aria-pressed="'+(code===LANG)+'" aria-label="'+LANG_NAMES[code]+'" title="'+LANG_NAMES[code]+'">'+flags[code]+'</button>';
     }).join("");
     langHost.querySelectorAll("[data-lang]").forEach(function(button){
       button.addEventListener("click",function(){
@@ -499,8 +555,7 @@
     var blocks=[], contentToc=[], mainScreens=project.telas||[];
     var introText=lx(project.intro||(mainScreens[0]&&mainScreens[0].d));
     heading.textContent=project.titulo;
-    kicker.textContent=project.cat?lx(project.cat):textLabel("Portfólio","Portfolio","Portafolio");
-    meta.textContent=project.cat?lx(project.cat)+(project.ano?" · "+project.ano:""):(project.ano||"");
+    kicker.textContent=(project.cat?lx(project.cat):textLabel("Portfólio","Portfolio","Portafolio"))+(project.ano?" · "+project.ano:"");
     intro.textContent=introText;
     document.title=project.titulo+" — Henrique Marinhos";
     document.documentElement.lang=LANG==="pt"?"pt-br":LANG;
