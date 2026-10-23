@@ -1736,3 +1736,18 @@ body.project-page .dk-toc-share .project-share-feedback { font-size:11px; color:
     flex: 0 0 auto; /* impede que o flex da linha comprima o botão */
   }
 }
+
+/* Compartilhar projeto: centralizado logo abaixo da descrição */
+body.project-page .dk-head .project-share-wrap {
+  grid-column: auto; justify-self: center; display: flex; flex-direction: column;
+  align-items: center; gap: 6px; margin-top: 20px; min-width: 0;
+}
+body.project-page .dk-head .project-share {
+  display: inline-flex; align-items: center; gap: 7px; border: 0; padding: 0;
+  background: transparent; color: var(--gray-400); font: inherit; font-size: 13px;
+  cursor: pointer; text-align: center !important;
+}
+body.project-page .dk-head .project-share svg { width: 15px; height: 15px; flex: 0 0 auto; }
+body.project-page .dk-head .project-share:hover { color: var(--ink); }
+body.project-page .dk-head .project-share:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+body.project-page .dk-head .project-share-feedback { font-size: 11px; color: var(--gray-500); text-align: center !important; }

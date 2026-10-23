@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-header-menu">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-share-center">
 <style>
 /* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
    Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
@@ -55,12 +55,12 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       <p class="dk-kicker" id="project-kicker"></p>
       <h1 class="dk-title" id="project-title"></h1>
       <p class="dk-intro" id="project-intro"></p>
+      <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       <div class="detail-subnav"><a id="project-external-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a></div>
     </header>
     <div class="dk-body">
       <div class="dk-toc-share">
         <nav class="dk-toc" id="project-toc" aria-label="Sumário do projeto" hidden></nav>
-        <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       </div>
       <div class="dk-imgs" id="project-visuals"></div>
     </div>
@@ -690,12 +690,10 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   var shareFeedback = document.getElementById("project-share-feedback");
   if (shareButton) shareButton.addEventListener("click", async function () {
     var shareUrl = window.location.origin + cleanProjectUrl(slug || (currentProject && currentProject.slug) || "");
-    var shareTitle = heading ? heading.textContent.trim() : document.title;
-    var shareText = intro ? intro.textContent.trim() : "";
     if (shareFeedback) shareFeedback.textContent = "";
     try {
       if (navigator.share) {
-        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        await navigator.share({ url: shareUrl });
         if (shareFeedback) shareFeedback.textContent = textLabel("Compartilhamento aberto.", "Share sheet opened.", "Compartir abierto.");
         return;
       }
