@@ -240,6 +240,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   object-fit: cover; display: block; pointer-events: none; user-select: none;
 }
 .portrait-video { opacity: 0; } /* fonte de frames do canvas; nunca aparece direto */
+.hero-portrait.is-bw-start .portrait-base { visibility: hidden; } /* mobile: sem foto colorida até o 1º toque */
 .portrait-reveal { image-rendering: pixelated; }
 /* Legenda abaixo da foto (dentro dela cobriria o rosto nesse tamanho) */
 .portrait-hint {
@@ -3132,6 +3133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let creditTimer = null;
     const toggle = (x, y) => {
+      box.classList.remove('is-bw-start'); // 1º toque no mobile revela a foto colorida
       const hint = box.parentElement && box.parentElement.querySelector('.portrait-hint');
       if (hint) {
         clearTimeout(creditTimer);
@@ -3204,12 +3206,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('visibilitychange', () => { !document.hidden && s.r >= 1 ? kick() : syncVideo(); });
     new ResizeObserver(resize).observe(box);
 
-    // Somente no mobile: mantém a foto colorida por 2 segundos e então
-    // dispara a mesma expansão que acontece ao tocar na foto.
+    // Somente no mobile: abre direto no vídeo em P&B (tela cheia, sem foto colorida).
+    // A foto colorida só aparece quando o usuário alterna (toque), via toggle().
     if (mobile) {
-      setTimeout(() => {
-        if (!s.locked && W > 0 && H > 0) toggle(W / 2, H / 2);
-      }, 2000);
+      s.locked = true;
+      box.classList.add('is-bw-start');
+      box.setAttribute('aria-pressed', 'true');
     }
 
     // Pré-carrega o vídeo quando o navegador estiver ocioso (evita espera no 1º hover)
