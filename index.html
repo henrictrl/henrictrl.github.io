@@ -760,23 +760,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 }
 
 
-/* --- Modal de cliente --- */
-.client-modal { max-width: 720px; height: auto; max-height: 90vh; }
-.cm-body { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px; padding: 24px 32px 48px; overflow-y: auto; }
-.cm-logo-wrap { display: flex; justify-content: center; align-items: center; width: 100%; } /* centraliza logos largos (img menor que a largura natural) */
-.cm-logo { display: block; width: auto; height: auto; max-width: min(460px, 100%); max-height: 36vh; }
-.cm-info { display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 52ch; }
-.cm-name { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
-.cm-meta { font-size: 13px; color: var(--gray-500); }
-.cm-desc { font-size: 15px; line-height: 1.6; color: var(--gray-500); margin-top: 4px; }
-.cm-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.cm-btn { display: inline-flex; padding: 12px 22px; border-radius: var(--r); font-size: 14px; font-weight: 500; border: 1px solid var(--gray-200); transition: border-color 0.25s var(--ease), opacity 0.25s var(--ease); }
-.cm-btn:hover { border-color: var(--ink); }
-.cm-btn.primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
-.cm-btn.primary:hover { opacity: 0.85; }
-.cm-body [hidden] { display: none !important; }
-@media (max-width: 640px) { .client-modal { height: auto; max-height: 100vh; } .cm-body { padding: 16px 20px 40px; } .cm-name { font-size: 19px; } .cm-logo { max-height: 28vh; } }
-
 /* --- Lightbox --- */
 .lightbox-overlay {
   position: fixed; inset: 0; z-index: 700; background: rgba(0,0,0,0.96);
@@ -2001,30 +1984,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   <div class="pv-scroll" id="pv-scroll"></div>
 </div>
 
-<!-- Modal de cliente (aberto ao clicar num logo da faixa). Dados em assets/data/clientes.js -->
-<div class="project-modal-overlay" id="client-modal-overlay">
-  <div class="project-modal client-modal" role="dialog" aria-modal="true" aria-labelledby="cm-name">
-    <div class="pm-topbar">
-      <button class="pm-close" id="cm-close-btn" aria-label="Fechar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="cm-body">
-      <div class="cm-logo-wrap" id="cm-logo-wrap"><img class="cm-logo" id="cm-logo" alt=""></div>
-      <div class="cm-info">
-        <h2 class="cm-name" id="cm-name"></h2>
-        <p class="cm-meta" id="cm-meta"></p>
-        <p class="cm-desc" id="cm-desc"></p>
-      </div>
-      <nav class="cm-actions" aria-label="Links do projeto">
-        <a class="cm-btn primary" id="cm-projeto" data-i18n="cm.project">Ver projeto</a>
-        <a class="cm-btn" id="cm-site" target="_blank" rel="noopener" data-i18n="cm.site">Visitar site</a>
-        <a class="cm-btn" id="cm-instagram" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-    </div>
-  </div>
-</div>
-
 <div class="project-modal-overlay" id="service-modal-overlay">
   <div class="project-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="sm-title">
     <div class="pm-topbar">
@@ -2099,7 +2058,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'pm.live': 'See it live', 'pm.context': 'Context', 'pm.solution': 'Solution', 'pm.did': 'What I did', 'pm.tools': 'Tools',
       'lightbox.hint': 'Scroll to zoom · drag to move',
       'sm.eyebrow': 'Service', 'sm.included': "What's included", 'sm.process': 'How I work', 'sm.related': 'Related projects', 'sm.cta': 'Request a quote',
-      'cm.project': 'See project', 'cm.site': 'Visit site',
       'aboutp.lang': 'Languages', 'aboutp.free': 'Free tools', 'aboutp.free.empty': '[Coming soon: the free alternatives I use instead of paid software.]',
       'credit.text': 'Site designed and developed by Henrique Marinhos.', 'credit.link': 'How this site was made →',
       'web.mobile': 'Phone', 'web.desktop': 'Desktop', 'web.open': 'Open in a new tab', 'web.close': 'Close test',
@@ -2134,7 +2092,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'pm.live': 'Ver en vivo', 'pm.context': 'Contexto', 'pm.solution': 'Solución', 'pm.did': 'Lo que hice', 'pm.tools': 'Herramientas',
       'lightbox.hint': 'Desplaza para hacer zoom · arrastra para mover',
       'sm.eyebrow': 'Servicio', 'sm.included': 'Qué incluye', 'sm.process': 'Cómo trabajo', 'sm.related': 'Proyectos relacionados', 'sm.cta': 'Solicitar presupuesto',
-      'cm.project': 'Ver proyecto', 'cm.site': 'Visitar sitio',
       'aboutp.lang': 'Idiomas', 'aboutp.free': 'Herramientas gratuitas', 'aboutp.free.empty': '[Próximamente: las alternativas gratuitas que uso en lugar de los programas pagos.]',
       'credit.text': 'Sitio diseñado y desarrollado por Henrique Marinhos.', 'credit.link': 'Cómo se hizo este sitio →',
       'web.mobile': 'Celular', 'web.desktop': 'Computadora', 'web.open': 'Abrir en otra pestaña', 'web.close': 'Cerrar prueba',
@@ -2989,33 +2946,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('lightbox-close-btn').onclick = () => { lbOverlay.classList.remove('open'); document.body.style.overflow = pmOverlay.classList.contains('open') ? 'hidden' : ''; };
 
-
-  /* --- Modal de cliente: abre ao clicar num logo da faixa --- */
-  const cmOverlay = document.getElementById('client-modal-overlay');
-  const openClientModal = (slug) => {
-    const c = (window.CLIENTES || {})[slug]; if (!c) return;
-    const $ = (id) => document.getElementById(id);
-    const logo = $('cm-logo'), wrap = $('cm-logo-wrap');
-    // usa o mesmo arquivo do logo da faixa (svg quando houver = nítido no tamanho grande)
-    logo.src = document.querySelector(`.marquee-link[href$="c=${slug}"] img`)?.getAttribute('src') || 'assets/logos/' + slug + '.webp'; logo.alt = c.nome;
-    $('cm-name').textContent = c.nome;
-    const meta = [c.tipo, c.ano].filter(Boolean).join(' · ');
-    $('cm-meta').textContent = meta; $('cm-meta').hidden = !meta;
-    $('cm-desc').textContent = c.descricao || ''; $('cm-desc').hidden = !c.descricao;
-    [['cm-projeto', c.projeto], ['cm-site', c.site], ['cm-instagram', c.instagram]].forEach(([id, url]) => {
-      const a = $(id); if (url) { a.href = url; a.hidden = false; } else { a.removeAttribute('href'); a.hidden = true; }
-    });
-    cmOverlay.classList.add('open'); document.body.style.overflow = 'hidden';
-  };
-  const closeClientModal = () => { cmOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-  document.getElementById('cm-close-btn').onclick = closeClientModal;
-  // "Ver projeto" com âncora interna: fecha o modal e rola até a seção
-  document.getElementById('cm-projeto').addEventListener('click', (e) => {
-    const href = e.currentTarget.getAttribute('href') || '';
-    if (href.includes('#')) { e.preventDefault(); closeClientModal(); document.getElementById(href.split('#')[1])?.scrollIntoView({ behavior: 'smooth' }); }
-  });
-  cmOverlay.addEventListener('click', (e) => { if (e.target === cmOverlay) closeClientModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && cmOverlay.classList.contains('open')) closeClientModal(); });
 
   [pmOverlay, smOverlay, lbOverlay].forEach(ov => ov.addEventListener('click', e => { if (e.target === ov) ov.querySelector('.pm-close, .lightbox-close').click(); }));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') [lbOverlay, pmOverlay, smOverlay].find(o => o.classList.contains('open'))?.querySelector('button').click(); });
