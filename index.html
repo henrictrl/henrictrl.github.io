@@ -240,7 +240,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   object-fit: cover; display: block; pointer-events: none; user-select: none;
 }
 .portrait-video { opacity: 0; } /* fonte de frames do canvas; nunca aparece direto */
-.hero-portrait.is-bw-start .portrait-base { visibility: hidden; } /* mobile: sem foto colorida até o 1º toque */
+.hero-portrait.is-bw-start .portrait-base { filter: grayscale(1); } /* mobile: foto em P&B enquanto o vídeo não carrega (Safari), nunca colorida até o 1º toque */
 .portrait-reveal { image-rendering: pixelated; }
 /* Legenda abaixo da foto (dentro dela cobriria o rosto nesse tamanho) */
 .portrait-hint {
