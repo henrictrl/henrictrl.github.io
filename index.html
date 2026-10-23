@@ -754,6 +754,85 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 }
 .sm-cta-btn:hover { opacity: 0.85; }
 
+/* --- Modal de serviço: fluxo, entregas, condições, exemplos --- */
+.pm-scroll { min-height: 0; overscroll-behavior: contain; touch-action: pan-y; } /* rolagem própria no celular */
+.project-modal-overlay { overscroll-behavior: contain; }
+body.sm-locked { position: fixed; left: 0; right: 0; width: 100%; overflow: hidden; } /* iOS ignora overflow:hidden no body */
+@media (max-width: 640px) {
+  .project-modal { height: 100vh; }
+  .client-modal { max-height: 100vh; }
+}
+@supports (height: 100dvh) { /* 100vh passa da área visível no celular (barra do navegador) */
+  @media (max-width: 640px) { .project-modal { height: 100dvh; } .client-modal { max-height: 100dvh; } }
+}
+.service-modal { --svc: var(--ink); }
+.service-modal[data-svc="identidade"] { --svc: #F72C2B; }
+.service-modal[data-svc="social"]     { --svc: #FFC700; }
+.service-modal[data-svc="redacao"]    { --svc: #1D3DF5; }
+.service-modal[data-svc="landing"]    { --svc: #13A03F; }
+.sm-wrap { container-type: inline-size; padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+.sm-wrap .sm-desc { text-wrap: pretty; margin-bottom: 36px; }
+.sm-sec { margin-bottom: 40px; }
+.sm-sec > .pm-block-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.sm-sec > .pm-block-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+/* fluxo: vertical no celular, horizontal quando há largura */
+.sm-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.sm-step { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 14px; padding-bottom: 22px; }
+.sm-step:last-child { padding-bottom: 0; }
+.sm-step::before { content: ''; position: absolute; left: 17px; top: 40px; bottom: 4px; width: 1px; background: var(--gray-200); }
+.sm-step:last-child::before { display: none; }
+.sm-n { grid-row: span 2; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ink); background: var(--white);
+  display: grid; place-items: center; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; position: relative; }
+.sm-n::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--svc); opacity: .55; } /* anel na cor do serviço */
+.sm-step h3 { font-size: 15px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; padding-top: 8px; }
+.sm-step p { font-size: 13.5px; line-height: 1.55; color: var(--gray-500); margin-top: 3px; text-wrap: pretty; }
+@container (min-width: 640px) {
+  .sm-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 18px; }
+  .sm-step { display: block; padding-bottom: 0; }
+  .sm-step::before { left: 46px; right: -9px; top: 17px; bottom: auto; width: auto; height: 1px; }
+  .sm-n { margin-bottom: 14px; }
+  .sm-step h3 { padding-top: 0; }
+}
+
+/* entregas: lista expansível, uma por vez fica aberta */
+.sm-deliv { border-top: 1px solid var(--gray-200); }
+.sm-item { border-bottom: 1px solid var(--gray-200); }
+.sm-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 0; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; }
+.sm-item summary::-webkit-details-marker { display: none; }
+.sm-item summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+.sm-item summary::after { content: ''; flex: none; width: 9px; height: 9px; border-right: 1.5px solid var(--gray-400); border-bottom: 1.5px solid var(--gray-400);
+  transform: rotate(45deg) translateY(-2px); transition: transform .3s var(--ease); }
+.sm-item[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.sm-item-body { padding: 0 0 20px; display: grid; gap: 14px; }
+.sm-item-d { font-size: 14px; line-height: 1.65; color: var(--gray-500); max-width: 62ch; text-wrap: pretty; }
+.sm-k { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 7px; }
+.sm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sm-chips span { font-size: 12px; line-height: 1; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 999px; color: var(--ink); }
+.sm-item-a { font-size: 13.5px; line-height: 1.6; color: var(--ink); text-wrap: pretty; }
+
+/* condições */
+.sm-terms { display: grid; gap: 8px; }
+@container (min-width: 560px) { .sm-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sm-term { border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; border-top: 2px solid var(--svc); }
+.sm-term strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.sm-term p { font-size: 13px; line-height: 1.55; color: var(--gray-500); text-wrap: pretty; }
+
+/* exemplos (2 cards, mesmo padrão dos Artigos) */
+.sm-wrap .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sm-wrap .work-card-tag { display: none; } /* card só com capa e título */
+@container (min-width: 640px) { .sm-wrap .work-grid { max-width: 520px; } }
+
+/* contato */
+.sm-cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.sm-cta-row .sm-cta-btn { text-align: center; }
+.sm-cta-btn.alt { background: transparent; color: var(--ink); border: 1px solid var(--gray-200); }
+.sm-cta-btn.alt:hover { border-color: var(--ink); opacity: 1; }
+@media (max-width: 640px) { .sm-cta-row { flex-direction: column; } .sm-cta-row .sm-cta-btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .sm-item summary::after { transition: none; } }
+
+
 @media (max-width: 640px) {
   .project-modal-overlay { padding: 0; }
   .project-modal { height: 100vh; max-width: 100%; border-radius: 0; }
@@ -1985,31 +2064,24 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </div>
 
 <div class="project-modal-overlay" id="service-modal-overlay">
-  <div class="project-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="sm-title">
+  <div class="project-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="sm-title" data-svc="">
     <div class="pm-topbar">
       <button class="pm-close" id="sm-close-btn" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="pm-scroll">
-      <div class="pm-content max-w" style="padding-top:40px;">
+    <div class="pm-scroll" id="sm-scroll">
+      <div class="pm-content max-w sm-wrap" style="padding-top:24px;">
         <p class="pm-block-label" id="sm-eyebrow">Serviço</p>
         <h2 class="pm-title" id="sm-title"></h2>
         <p class="sm-desc" id="sm-desc"></p>
-        <div class="pm-block" id="sm-block-incluso">
-          <p class="pm-block-label" data-i18n="sm.included">O que está incluso</p>
-          <ul class="pm-list" id="sm-incluso"></ul>
-        </div>
-        <div class="pm-block" id="sm-block-processo">
-          <p class="pm-block-label" data-i18n="sm.process">Como trabalho</p>
-          <ol class="pm-list pm-list-numbered" id="sm-processo"></ol>
-        </div>
-        <div class="pm-block">
-          <p class="pm-block-label" data-i18n="sm.related">Projetos relacionados</p>
-          <div class="work-grid" id="sm-related-projects"></div>
-        </div>
-        <div class="sm-cta-wrap">
-          <a href="#contato" class="sm-cta-btn" id="sm-cta-btn" data-i18n="sm.cta">Solicitar orçamento</a>
+        <section class="sm-sec"><p class="pm-block-label" id="sm-l-fluxo"></p><ol class="sm-flow" id="sm-flow"></ol></section>
+        <section class="sm-sec"><p class="pm-block-label" id="sm-l-entregas"></p><div class="sm-deliv" id="sm-deliv"></div></section>
+        <section class="sm-sec"><p class="pm-block-label" id="sm-l-condicoes"></p><div class="sm-terms" id="sm-terms"></div></section>
+        <section class="sm-sec" id="sm-sec-exemplos"><p class="pm-block-label" id="sm-l-exemplos"></p><div class="work-grid" id="sm-related-projects"></div></section>
+        <div class="sm-cta-row">
+          <a class="sm-cta-btn" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a>
+          <a class="sm-cta-btn alt" id="sm-cta-mail"></a>
         </div>
       </div>
     </div>
@@ -2017,6 +2089,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </div>
 
 <script src="assets/data/clientes.js"></script>
+<script src="assets/data/servicos.js?v=20261023"></script>
 <script src="assets/data/artigos.js"></script>
 <script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
 <script src="assets/data/posts.js"></script>
@@ -2200,40 +2273,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }]));
 
   // Descrições das janelas de serviço; os projetos relacionados vêm do catálogo real.
-  const SERVICE_CONTENT = {
-    identidade: {
-      titulo: 'Identidade visual',
-      desc: {
-        pt: 'Construção de identidades visuais consistentes, do logotipo às aplicações da marca.',
-        en: 'Visual identities built to stay consistent, from the logo to real-world brand applications.',
-        es: 'Identidades visuales coherentes, desde el logotipo hasta las aplicaciones de marca.'
-      }, incluso: [], processo: []
-    },
-    social: {
-      titulo: 'Conteúdo e redes sociais',
-      desc: {
-        pt: 'Planejamento visual e criação de peças gráficas para redes, campanhas e apresentações.',
-        en: 'Visual planning and graphic assets for social media, campaigns and presentations.',
-        es: 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.'
-      }, incluso: [], processo: []
-    },
-    redacao: {
-      titulo: 'Redação e copywriting',
-      desc: {
-        pt: 'Textos para sites, redes, campanhas e apresentações, com uma voz consistente e adequada ao contexto.',
-        en: 'Writing for websites, social media, campaigns and presentations, with a consistent voice suited to the context.',
-        es: 'Textos para sitios web, redes, campañas y presentaciones, con una voz coherente y adecuada al contexto.'
-      }, incluso: [], processo: []
-    },
-    landing: {
-      titulo: 'Sites e interfaces',
-      desc: {
-        pt: 'Sites, catálogos e ferramentas web sob medida, com foco em clareza, leveza e desempenho.',
-        en: 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
-        es: 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.'
-      }, incluso: [], processo: []
-    }
-  };
 
   /* --- Animations & Observers --- */
   /* Dissolução pontilhada (mesma linguagem do vídeo do retrato): máscara em células de CELL px,
@@ -2915,30 +2954,81 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('pm-gallery-prev').onclick = () => navGallery(currentGalleryIndex - 1);
   document.getElementById('pm-gallery-next').onclick = () => navGallery(currentGalleryIndex + 1);
 
+  /* --- Modal de serviço: conteúdo vem de assets/data/servicos.js --- */
+  let smScrollY = 0;
+  const smLock = (on) => { // trava a página por baixo (iOS ignora overflow:hidden no body)
+    const b = document.body;
+    if (on) { smScrollY = window.scrollY; b.style.top = `-${smScrollY}px`; b.classList.add('sm-locked'); }
+    else { b.classList.remove('sm-locked'); b.style.top = ''; window.scrollTo(0, smScrollY); }
+  };
+  const smClose = () => { smOverlay.classList.remove('open'); smLock(false); document.body.style.overflow = ''; };
+  const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
   document.querySelectorAll('[data-service-id]').forEach(card => {
     card.onclick = () => {
-      const s = SERVICE_CONTENT[card.dataset.serviceId]; if (!s) return;
-      document.getElementById('sm-eyebrow').textContent = i18n('sm.eyebrow', 'Serviço');
-      document.getElementById('sm-title').textContent = card.querySelector('.service-title').textContent; // já no idioma atual
-      const desc = document.getElementById('sm-desc'); desc.textContent = lx(s.desc); desc.hidden = !lx(s.desc);
-      // listas "O que está incluso" / "Como trabalho"; bloco some se a lista estiver vazia
-      [['sm-incluso', 'sm-block-incluso', s.incluso], ['sm-processo', 'sm-block-processo', s.processo]].forEach(([listId, blockId, items]) => {
-        const list = document.getElementById(listId); list.innerHTML = '';
-        (items || []).forEach(t => { const li = document.createElement('li'); li.textContent = t; list.appendChild(li); });
-        document.getElementById(blockId).hidden = !(items && items.length);
+      const id = card.dataset.serviceId, S = window.SERVICOS, s = S && S.itens[id]; if (!s) return;
+      const U = S.ui, $ = (x) => document.getElementById(x);
+      const title = card.querySelector('.service-title').textContent; // já no idioma atual
+      smOverlay.querySelector('.service-modal').dataset.svc = id; // cor do serviço
+      $('sm-eyebrow').textContent = lx(U.eyebrow);
+      $('sm-title').textContent = title;
+      $('sm-desc').textContent = lx(s.desc);
+      $('sm-l-fluxo').textContent = lx(U.fluxo);
+      $('sm-l-entregas').textContent = lx(U.entregas);
+      $('sm-l-condicoes').textContent = lx(U.condicoes);
+      $('sm-l-exemplos').textContent = lx(U.exemplos);
+
+      // fluxo: 5 etapas numeradas
+      const flow = $('sm-flow'); flow.innerHTML = '';
+      S.etapas.forEach((et, i) => {
+        const li = smEl('li', 'sm-step');
+        li.append(smEl('span', 'sm-n', String(i + 1).padStart(2, '0')), smEl('h3', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
+        flow.appendChild(li);
       });
-      
-      const relGrid = document.getElementById('sm-related-projects'); relGrid.innerHTML = '';
-      getProjectsList().filter(p => (p.servicos_relacionados || []).includes(card.dataset.serviceId)).forEach(p => relGrid.appendChild(buildWorkCard(p)));
-      relGrid.parentElement.hidden = !relGrid.children.length; // sem projetos ligados → esconde o bloco
-      
-      smOverlay.classList.add('open'); document.body.style.overflow = 'hidden';
+
+      // entregas: uma aberta por vez (a primeira abre junto com o modal)
+      const dl = $('sm-deliv'); dl.innerHTML = '';
+      s.entregas.forEach((it, i) => {
+        const det = smEl('details', 'sm-item'); if (i === 0) det.open = true;
+        det.appendChild(smEl('summary', '', lx(it.t)));
+        const body = smEl('div', 'sm-item-body');
+        body.appendChild(smEl('p', 'sm-item-d', lx(it.d)));
+        if (it.f && it.f.length) {
+          const w = smEl('div'); w.appendChild(smEl('span', 'sm-k', lx(U.arquivos)));
+          const ch = smEl('div', 'sm-chips'); it.f.forEach(f => ch.appendChild(smEl('span', '', f))); w.appendChild(ch); body.appendChild(w);
+        }
+        if (it.a) { const w = smEl('div'); w.appendChild(smEl('span', 'sm-k', lx(U.usos))); w.appendChild(smEl('p', 'sm-item-a', lx(it.a))); body.appendChild(w); }
+        det.appendChild(body);
+        det.addEventListener('toggle', () => { if (det.open) dl.querySelectorAll('details[open]').forEach(o => { if (o !== det) o.open = false; }); });
+        dl.appendChild(det);
+      });
+
+      // condições (iguais nos 4 serviços)
+      const tm = $('sm-terms'); tm.innerHTML = '';
+      [[U.prazo, U.prazoD], [U.revisoes, U.revisoesD], [U.valores, U.valoresD]].forEach(([k, v]) => {
+        const d = smEl('div', 'sm-term'); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
+      });
+
+      // exemplos: 2 projetos, cards iguais aos de Artigos
+      const rel = $('sm-related-projects'); rel.innerHTML = '';
+      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) rel.appendChild(buildWorkCard(p)); });
+      $('sm-sec-exemplos').hidden = !rel.children.length;
+
+      // contato (sem preço: orçamento)
+      const msg = `${lx(U.waMsg)} ${title}.`;
+      const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(msg)}`; wa.textContent = lx(U.wa);
+      const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.textContent = lx(U.mail);
+
+      $('sm-scroll').scrollTop = 0;
+      smOverlay.classList.add('open'); smLock(true);
     };
     card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } }; // acessível por teclado
   });
-  
-  document.getElementById('sm-close-btn').onclick = () => { smOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-  document.getElementById('sm-cta-btn').onclick = () => { smOverlay.classList.remove('open'); document.body.style.overflow = ''; };
+
+  document.getElementById('sm-close-btn').onclick = smClose;
+  smOverlay.addEventListener('click', (e) => { if (e.target === smOverlay) smClose(); });
+  document.getElementById('sm-cta-wa').addEventListener('click', () => setTimeout(smClose, 0));
+  document.getElementById('sm-cta-mail').addEventListener('click', () => setTimeout(smClose, 0));
 
   window.openLightbox = (src) => {
     document.getElementById('lightbox-img').src = src;
