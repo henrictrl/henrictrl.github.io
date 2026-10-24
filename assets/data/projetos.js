@@ -7587,7 +7587,11 @@ window.PROJETOS = [
      "pt": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, evento do NTAPS na Unesp Bauru em 28 e 29 de setembro de 2022. Identidade do evento, faixa, placas de sala, crachás, folders, certificado e posts.",
      "en": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, an NTAPS event for Yellow September (suicide prevention month) at Unesp Bauru, September 28–29, 2022. Event identity, banner, room signs, badges, folders, certificate and posts.",
      "es": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, evento del NTAPS por el Septiembre Amarillo (mes de prevención del suicidio) en la Unesp Bauru, 28 y 29 de septiembre de 2022. Identidad del evento, pancarta, placas de sala, credenciales, folletos, certificado y posts."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -7600,7 +7604,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -7639,7 +7647,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -7652,7 +7664,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
