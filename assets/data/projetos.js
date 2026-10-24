@@ -9439,19 +9439,35 @@ window.PROJETOS = [
   "shots": [
    {
     "img": "pagina-d.webp",
-    "d": "pagina"
+    "d": "pagina",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "tela-m1.webp",
-    "d": "mobile"
+    "d": "mobile",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "tela-m2.webp",
-    "d": "mobile"
+    "d": "mobile",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "tela-m3.webp",
-    "d": "mobile"
+    "d": "mobile",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "link": "https://fellipegualberto.github.io/portfolio/index.html",
@@ -9961,11 +9977,19 @@ window.PROJETOS = [
   "shots": [
    {
     "img": "tela-d.webp",
-    "d": "desktop"
+    "d": "desktop",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "tela-m.webp",
-    "d": "mobile"
+    "d": "mobile",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "galeria": [
