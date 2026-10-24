@@ -239,8 +239,16 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; display: block; pointer-events: none; user-select: none;
 }
-.portrait-video { opacity: 0; } /* fonte de frames do canvas; nunca aparece direto */
-.hero-portrait.is-bw-start .portrait-base { filter: grayscale(1); } /* mobile: foto em P&B enquanto o vídeo não carrega (Safari), nunca colorida até o 1º toque */
+/* Camadas: vídeo (0) sob a foto (1) sob o canvas (2). O vídeo fica opaco, coberto pela foto:
+   iOS bloqueia autoplay de vídeo invisível (opacity 0), mas não de vídeo coberto. */
+.hero-portrait { isolation: isolate; }
+.portrait-video { z-index: 0; background: #fff; }
+.portrait-base { z-index: 1; }
+.portrait-reveal { z-index: 2; }
+/* Mobile com vídeo tocando de fato: foto sai, vídeo aparece direto (sem canvas, qualidade nativa).
+   Se o vídeo não tocar, nada muda: a foto colorida segue visível como fallback. */
+.hero-portrait.is-direct .portrait-base { opacity: 0; }
+.hero-portrait.is-fade .portrait-base { transition: opacity 0.35s var(--ease); }
 .portrait-reveal { image-rendering: pixelated; }
 /* Legenda abaixo da foto (dentro dela cobriria o rosto nesse tamanho) */
 .portrait-hint {
@@ -3245,8 +3253,22 @@ document.addEventListener('DOMContentLoaded', () => {
       c.drawImage(src, 0, 0, sw0, sh0, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     };
 
+    // Mobile: vídeo inteiro e parado no lugar (sem animação de raio) → mostra o <video> direto se estiver tocando
+    let playing = false;
+    const mobileFull = () => mobile && s.locked && !s.anim;
+    const direct = () => mobileFull() && playing;
+    let fadeTimer = null;
+    const updateDirect = (fade) => {
+      const on = direct();
+      if (on === box.classList.contains('is-direct')) return;
+      if (on && fade) { box.classList.add('is-fade'); clearTimeout(fadeTimer); fadeTimer = setTimeout(() => box.classList.remove('is-fade'), 400); }
+      else box.classList.remove('is-fade'); // demais trocas instantâneas: o canvas já mostra o mesmo frame
+      box.classList.toggle('is-direct', on);
+    };
+
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (mobileFull()) return; // tocando: <video> direto; parado/bloqueado: foto colorida (nunca frame estático)
       if (s.r < 1 || !videoReady()) return;
       drawContain(ctx, video, video.videoWidth, video.videoHeight, canvas.width, canvas.height);
       // borda pontilhada: larga no hover (45% do raio), mais estreita na expansão do clique (frente de onda visível)
@@ -3271,7 +3293,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Vídeo: carrega sob demanda; toca só enquanto o holofote existe e a foto está visível
     const ensureVideo = () => {
       if ((saveData && !mobile) || video.src) return;
-      video.muted = true; // Safari só libera autoplay com mudo definido via propriedade
+      video.muted = true; video.defaultMuted = true; // Safari só libera autoplay com mudo definido via propriedade
+      video.playsInline = true;
+      if (mobile) { video.autoplay = true; video.preload = 'auto'; }
       video.src = video.dataset.src;
       video.load();
     };
@@ -3294,7 +3318,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Retoma sempre que o vídeo ficar pronto ou for pausado pelo navegador enquanto deveria tocar
     video.addEventListener('canplay', syncVideo);
     video.addEventListener('loadeddata', syncVideo);
-    video.addEventListener('pause', () => { if (wantVideo() && !document.hidden) setTimeout(syncVideo, 100); });
+    video.addEventListener('pause', () => { playing = false; updateDirect(); if (wantVideo() && !document.hidden) setTimeout(syncVideo, 100); });
+    video.addEventListener('playing', () => { playing = true; playRetries = 0; updateDirect(true); }); // fade só quando sai da foto
+    ['emptied', 'error', 'ended'].forEach(ev => video.addEventListener(ev, () => { playing = false; updateDirect(); }));
+
+    if (mobile) {
+      // Autoplay bloqueado (ex.: modo Pouca Energia do iOS): o 1º toque em qualquer lugar da página dá play
+      const unlock = () => { if (wantVideo() && video.paused) { ensureVideo(); video.play().catch(() => {}); } };
+      ['touchend', 'click'].forEach(ev => document.addEventListener(ev, unlock, { capture: true, passive: true }));
+      video.addEventListener('playing', () => ['touchend', 'click'].forEach(ev => document.removeEventListener(ev, unlock, { capture: true })), { once: true });
+      // Watchdog: se o tempo do vídeo parar de andar enquanto deveria tocar, volta à foto e tenta de novo
+      let lastT = -1;
+      setInterval(() => {
+        if (!wantVideo()) { lastT = -1; return; }
+        const t = video.currentTime;
+        if (playing && t === lastT) { playing = false; updateDirect(); }
+        else if (!playing && !video.paused && lastT >= 0 && t !== lastT) { playing = true; updateDirect(true); }
+        if (!playing || video.paused) { playRetries = 0; syncVideo(); }
+        lastT = t;
+      }, 1000);
+    }
 
     const tick = () => {
       const k = reduce ? 1 : 0.16, kr = reduce ? 1 : 0.12;
@@ -3307,8 +3350,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const settled = !s.anim && Math.abs(s.tx - s.x) < 0.3 && Math.abs(s.ty - s.y) < 0.3 && Math.abs(s.tr - s.r) < 0.5;
       if (settled) { s.x = s.tx; s.y = s.ty; s.r = s.tr; }
       draw();
-      // continua enquanto houver vídeo visível (cada frame do vídeo precisa ser redesenhado)
-      if (settled && (s.r < 1 || !inView || document.hidden)) { raf = 0; syncVideo(); return; }
+      updateDirect();
+      // continua enquanto houver vídeo no canvas (cada frame precisa ser redesenhado); mobile inteiro dispensa o canvas
+      if (settled && (s.r < 1 || !inView || document.hidden || mobileFull())) { raf = 0; syncVideo(); return; }
       raf = requestAnimationFrame(tick);
     };
     const kick = () => { syncVideo(); if (!raf) raf = requestAnimationFrame(tick); };
@@ -3335,7 +3379,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let creditTimer = null;
     const toggle = (x, y) => {
-      box.classList.remove('is-bw-start'); // 1º toque no mobile revela a foto colorida
+      // Mobile com autoplay bloqueado: o toque dá play em vez de alternar (a foto colorida já está visível)
+      if (mobile && s.locked && !playing && !s.anim) { ensureVideo(); video.play().catch(() => {}); return; }
       const hint = box.parentElement && box.parentElement.querySelector('.portrait-hint');
       if (hint) {
         clearTimeout(creditTimer);
@@ -3408,16 +3453,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('visibilitychange', () => { !document.hidden && s.r >= 1 ? kick() : syncVideo(); });
     new ResizeObserver(resize).observe(box);
 
-    // Somente no mobile: abre direto no vídeo em P&B (tela cheia, sem foto colorida).
-    // A foto colorida só aparece quando o usuário alterna (toque), via toggle().
+    // Somente no mobile: abre direto no vídeo tocando na foto inteira.
+    // Até o 1º frame tocar (ou se o autoplay for bloqueado), a foto colorida fica visível.
     if (mobile) {
       s.locked = true;
-      box.classList.add('is-bw-start');
       box.setAttribute('aria-pressed', 'true');
+      ensureVideo(); // acima da dobra: carrega já, sem esperar ocioso
+      syncVideo();
     }
 
     // Pré-carrega o vídeo quando o navegador estiver ocioso (evita espera no 1º hover)
-    if (!saveData) ('requestIdleCallback' in window) ? requestIdleCallback(ensureVideo, { timeout: 3000 }) : setTimeout(ensureVideo, 2000);
+    if (!saveData && !mobile) ('requestIdleCallback' in window) ? requestIdleCallback(ensureVideo, { timeout: 3000 }) : setTimeout(ensureVideo, 2000);
   };
 
 
