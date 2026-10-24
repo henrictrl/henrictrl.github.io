@@ -10048,7 +10048,11 @@ window.PROJETOS = [
      "pt": "Brandbook e planejamento do EmCantos do Brasil, evento online de música brasileira em 10 de março de 2022 (disciplina Gestão de Eventos, Unesp Bauru). Identidade visual de Pedro Nakamura; apresentei a transmissão, fiz peças durante o evento e esta apresentação.",
      "en": "Brandbook and planning for EmCantos do Brasil, an online Brazilian music event on March 10, 2022 (Event Management course, Unesp Bauru). Visual identity by Pedro Nakamura; I hosted the livestream, made pieces during the event and this presentation.",
      "es": "Brandbook y planificación de EmCantos do Brasil, evento en línea de música brasileña el 10 de marzo de 2022 (asignatura Gestión de Eventos, Unesp Bauru). Identidad visual de Pedro Nakamura; presenté la transmisión, hice piezas durante el evento y esta presentación."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -10061,7 +10065,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -10074,7 +10082,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -10087,7 +10099,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -10100,7 +10116,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -10113,7 +10133,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -10126,7 +10150,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -10139,7 +10167,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -10152,7 +10184,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "10",
@@ -10165,7 +10201,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "posts": "encantos",
