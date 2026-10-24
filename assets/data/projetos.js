@@ -7755,7 +7755,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -7768,7 +7772,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -7807,7 +7815,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
@@ -7951,7 +7963,11 @@ window.PROJETOS = [
      "pt": "Proposta de consultoria em Relações Públicas da Prisma para startups de tecnologia: diagnóstico, níveis de serviço (Ouro, Platina e Diamante), reconhecimento, roadmap e indicadores. 1º lugar na competição RPMaker.",
      "en": "Prisma’s Public Relations consulting proposal for tech startups: assessment, service tiers (Gold, Platinum and Diamond), recognition, roadmap and KPIs. 1st place in the RPMaker competition.",
      "es": "Propuesta de consultoría en Relaciones Públicas de Prisma para startups de tecnología: diagnóstico, niveles de servicio (Oro, Platino y Diamante), reconocimiento, roadmap e indicadores. 1.er lugar en la competencia RPMaker."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -8146,7 +8162,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
@@ -8341,7 +8361,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -8354,7 +8378,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -8367,7 +8395,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -8380,7 +8412,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -8393,7 +8429,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
