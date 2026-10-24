@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa-mob">
 <style>
 /* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
    Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
@@ -567,7 +567,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     else external.hidden=true;
     // capa do card (mesma imagem, proporção 3:2 e enquadramento) logo abaixo da descrição
     var cover=document.getElementById("project-cover"), coverMedia=document.getElementById("project-cover-media");
-    if(project.capa){
+    if(project.capa&&matchMedia("(max-width:767px)").matches){ // só no celular (evita baixar a imagem no desktop)
       coverMedia.innerHTML='<img src="'+esc(project.capa)+'" alt="" width="1200" height="800" decoding="async" fetchpriority="high"'+(project.capaPosicao?' style="object-position:'+esc(project.capaPosicao)+'"':"")+'>'+
         (project.slug==="rino-site"?'<img class="rino-cover-logo" src="/assets/projetos/rino/rino-mascote.svg" alt="" decoding="async">':"");
       cover.hidden=false;
