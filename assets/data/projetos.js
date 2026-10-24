@@ -10728,7 +10728,11 @@ window.PROJETOS = [
      "pt": "Oficina prática de gestão de projetos para design, ministrada com Costanza Guerriero: cinco briefings fictícios, ciclo de quatro semanas, kanban e fluxograma.",
      "en": "Hands-on project management workshop for design, taught with Costanza Guerriero: five fictional briefs, a four-week cycle, kanban and flowchart.",
      "es": "Taller práctico de gestión de proyectos para diseño, impartido con Costanza Guerriero: cinco briefings ficticios, ciclo de cuatro semanas, kanban y diagrama de flujo."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -10741,7 +10745,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "t": {
@@ -10754,7 +10762,11 @@ window.PROJETOS = [
      "en": "",
      "es": ""
     },
-    "img": "03"
+    "img": "03",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -10767,7 +10779,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -10780,7 +10796,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -10793,7 +10813,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -10806,7 +10830,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -10819,7 +10847,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
