@@ -7821,7 +7821,11 @@ window.PROJETOS = [
      "pt": "Perfil @rpunesp criado para os 40 anos do curso de Relações Públicas da Unesp Bauru (28/11 a 01/12/2022). Identidade da Inky Design. Design das peças, stories e GIFs por Henrique Marinhos; textos, organização das informações e mídias sociais durante o evento por Costanza Guerriero.",
      "en": "The @rpunesp profile, created for the 40th anniversary of the Public Relations program at Unesp Bauru (Nov 28 to Dec 1, 2022). Identity by Inky Design. Pieces, stories and GIFs designed by Henrique Marinhos; copy, information structure and social media during the event by Costanza Guerriero.",
      "es": "Perfil @rpunesp creado para los 40 años de la carrera de Relaciones Públicas de la Unesp Bauru (28/11 al 01/12/2022). Identidad de Inky Design. Diseño de piezas, stories y GIF por Henrique Marinhos; textos, organización de la información y redes sociales durante el evento por Costanza Guerriero."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -7847,7 +7851,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -7860,7 +7868,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -7873,7 +7885,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -7946,7 +7962,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "11",
