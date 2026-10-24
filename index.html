@@ -1568,7 +1568,62 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .pj-cols { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--gray-400); font-size: 12px; }
 .pj-cols .art-filter { min-width: 34px; justify-content: center; padding: 7px 0; font-size: 12px; }
 @media (min-width: 768px) { .pj-cols button[data-cols="1"] { display: none; } }
-@media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag }
+@media (max-width: 767px) { .pj-cols button[data-cols="4"], .pj-cols button[data-cols="5"] { display: none; } #work-case-grid[data-cols="3"] .work-card-title { font-size: 11.5px; } #work-case-grid[data-cols="3"] .work-card-tag { display: none; } }
+/* =====================================================================
+   Projetos · Mídias sociais: projetos viram filtros e a grade mostra os posts
+   ===================================================================== */
+.sg-projs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding-top: 12px; border-top: 1px solid var(--gray-100); }
+.sg-projs .art-filter { font-size: 12px; padding: 6px 10px; }
+.sg-projs .art-filter span { color: var(--gray-400); font-size: 10.5px; margin-left: 2px; }
+.sg-projs .art-filter[aria-pressed="true"] span { color: rgba(255,255,255,.7); }
+.pj-filters { flex-wrap: nowrap; } /* coluna única: sem wrap, a linha não cresce com os chips roláveis */
+.pj-filters > .sg-projs, .pj-filters > .sg-tools { align-self: stretch; min-width: 0; }
+.sg-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 22px; }
+.sg-sort { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; color: var(--gray-400); font-size: 12px; }
+.sg-sort .art-filter { font-size: 11.5px; padding: 6px 9px; }
+#work-case-grid.sg-mode { display: block; }
+.sg-line { justify-content: space-between; margin-bottom: 12px; }
+.sg-proj-link { color: var(--ink); font-size: 12px; text-decoration: none; border-bottom: 1px solid var(--gray-200); padding-bottom: 1px; }
+.sg-proj-link:hover, .sg-proj-link:focus-visible { border-color: var(--ink); }
+.sg-grid { display: grid; grid-template-columns: repeat(var(--wcols, 2), minmax(0, 1fr)); gap: 18px 10px; }
+#work-case-grid[data-cols="5"] .sg-grid, #work-case-grid[data-cols="6"] .sg-grid { gap: 14px 8px; }
+.sg-t { min-width: 0; }
+.sg-media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--r); overflow: hidden; background: var(--gray-100); }
+.sg-track { display: flex; width: 100%; height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: zoom-in; -webkit-overflow-scrolling: touch; }
+.sg-track::-webkit-scrollbar { display: none; }
+.sg-track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; display: block; scroll-snap-align: start; scroll-snap-stop: always; user-select: none; -webkit-user-drag: none; }
+.sg-badge { position: absolute; top: 7px; right: 7px; display: inline-flex; align-items: center; gap: 3px; padding: 3px 7px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font-size: 10.5px; line-height: 1.2; font-variant-numeric: tabular-nums; pointer-events: none; }
+.sg-badge svg { width: 12px; height: 12px; }
+.sg-badge b { font-weight: 500; }
+.sg-nav, .sg-open { position: absolute; display: grid; place-items: center; border: 0; padding: 0; cursor: pointer; color: var(--ink); background: rgba(255,255,255,.94); box-shadow: 0 1px 4px rgba(0,0,0,.2); opacity: 0; transition: opacity .2s var(--ease); }
+.sg-nav { top: 50%; width: 30px; height: 30px; margin-top: -15px; border-radius: 50%; }
+.sg-prev { left: 7px; } .sg-next { right: 7px; }
+.sg-nav svg { width: 14px; height: 14px; }
+.sg-nav:disabled { visibility: hidden; }
+.sg-open { left: 7px; bottom: 7px; width: 28px; height: 28px; border-radius: var(--r); }
+.sg-open svg { width: 14px; height: 14px; }
+.sg-t:hover .sg-nav, .sg-t:hover .sg-open, .sg-nav:focus-visible, .sg-open:focus-visible { opacity: 1; }
+.sg-nav:focus-visible, .sg-open:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (hover: none) { .sg-nav, .sg-open { display: none; } }
+.sg-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 7px 0 0; font-size: 12px; line-height: 1.3; }
+.sg-meta span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.sg-meta time { flex: none; color: var(--gray-400); font-size: 11px; }
+#work-case-grid[data-cols="5"] .sg-meta, #work-case-grid[data-cols="6"] .sg-meta { font-size: 11px; }
+#work-case-grid[data-cols="6"] .sg-meta time { display: none; }
+#work-case-grid[data-cols="6"] .sg-nav { width: 26px; height: 26px; margin-top: -13px; }
+@media (max-width: 767px) {
+  .pj-cols button[data-cols="6"] { display: none; }
+  .sg-projs { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter, 20px) * -1); padding-inline: var(--gutter, 20px); }
+  .sg-projs::-webkit-scrollbar { display: none; }
+  .sg-tools { flex-direction: column; gap: 10px; }
+  .sg-line { justify-content: center; }
+  #work-case-grid[data-cols="3"] .sg-grid { gap: 12px 6px; }
+  #work-case-grid[data-cols="3"] .sg-meta { font-size: 10.5px; }
+  #work-case-grid[data-cols="3"] .sg-meta time { display: none; }
+  #work-case-grid[data-cols="3"] .sg-badge { top: 4px; right: 4px; padding: 2px 5px; font-size: 9.5px; }
+  #work-case-grid[data-cols="3"] .sg-badge svg { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .sg-nav, .sg-open { transition: none; } .sg-track { scroll-behavior: auto; } }
 /* =====================================================================
    Home · projetos em destaque: paginação e "Ver mais"
    ===================================================================== */
@@ -2144,8 +2199,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js"></script>
-<script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
-<script src="assets/data/posts.js"></script>
+<script src="assets/data/projetos.js?v=20261023-midias"></script>
+<script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
 <script src="assets/data/glossario.js" defer></script>
@@ -3612,14 +3667,85 @@ document.addEventListener('DOMContentLoaded', () => {
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
-  // quantidade de colunas da grade de projetos (lembrada; celular 1–3, desktop 2–5)
+  // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
-  const getCols = () => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} const n = +o[colsKey()]; const max = mqMob.matches ? 3 : 5; return n >= (mqMob.matches ? 1 : 2) && n <= max ? n : (mqMob.matches ? 2 : 3); };
-  const setCols = (n) => { let o = {}; try { o = JSON.parse(localStorage.getItem('hm-wcols') || '{}'); } catch (e) {} o[colsKey()] = n; try { localStorage.setItem('hm-wcols', JSON.stringify(o)); } catch (e) {} };
+  const COLS_CFG = { pj: { key: 'hm-wcols', def: [2, 3], max: 5 }, sg: { key: 'hm-scols', def: [2, 4], max: 6 } };
+  const colsMode = () => pjSelectedCategory === 'midias' ? 'sg' : 'pj';
+  const colsMax = () => mqMob.matches ? 3 : COLS_CFG[colsMode()].max;
+  const readCols = () => { try { return JSON.parse(localStorage.getItem(COLS_CFG[colsMode()].key) || '{}') || {}; } catch (e) { return {}; } };
+  const getCols = () => { const n = +readCols()[colsKey()], c = COLS_CFG[colsMode()]; return n >= (mqMob.matches ? 1 : 2) && n <= colsMax() ? n : c.def[mqMob.matches ? 0 : 1]; };
+  const setCols = (n) => { const o = readCols(); o[colsKey()] = n; try { localStorage.setItem(COLS_CFG[colsMode()].key, JSON.stringify(o)); } catch (e) {} };
   const applyCols = (grid) => { const n = getCols(); grid.style.setProperty('--wcols', n); grid.dataset.cols = n; document.querySelectorAll('.pj-cols button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.cols === n)); };
   const COLS_L = { pt: 'Colunas', en: 'Columns', es: 'Columnas' };
+  const colsHTML = () => `<div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${Array.from({ length: COLS_CFG[colsMode()].max }, (_, i) => i + 1).map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
   mqMob.addEventListener('change', () => { const g = document.getElementById('work-case-grid'); if (g) applyCols(g); });
+
+  /* --- Mídias sociais: os projetos da categoria viram filtros e a grade mostra direto os posts e carrosséis ---
+     Relevância (padrão): destaques primeiro; depois a posição do post entre os da própria conta (curtidas + comentários,
+     ou só comentários quando a conta oculta curtidas), para contas grandes e pequenas dividirem o topo; empate → mais recente. */
+  const SG_L = {
+    proj: { pt: 'Filtrar por projeto', en: 'Filter by project', es: 'Filtrar por proyecto' }, todos: { pt: 'Todos', en: 'All', es: 'Todos' },
+    ord: { pt: 'Ordenar', en: 'Sort', es: 'Ordenar' }, oR: { pt: 'Relevância', en: 'Relevance', es: 'Relevancia' },
+    oN: { pt: 'Mais recentes', en: 'Newest', es: 'Más recientes' }, oV: { pt: 'Mais antigos', en: 'Oldest', es: 'Más antiguos' }, oP: { pt: 'Projeto (A–Z)', en: 'Project (A–Z)', es: 'Proyecto (A–Z)' },
+    pub: { pt: ['publicação', 'publicações'], en: ['post', 'posts'], es: ['publicación', 'publicaciones'] },
+    car: { pt: ['carrossel', 'carrosséis'], en: ['carousel', 'carousels'], es: ['carrusel', 'carruseles'] },
+    ver: { pt: 'Ver o projeto', en: 'View the project', es: 'Ver el proyecto' }, abrir: { pt: 'Abrir publicação', en: 'Open post', es: 'Abrir publicación' },
+    ant: { pt: 'Imagem anterior', en: 'Previous image', es: 'Imagen anterior' }, prox: { pt: 'Próxima imagem', en: 'Next image', es: 'Imagen siguiente' }
+  };
+  const plural = (o, n) => lx(o)[n === 1 ? 0 : 1];
+  let sgProj = 'all', sgOrd = 'r', SG_SCORE = null;
+  const SG_ICO_CAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
+  const SG_ICO_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  const SG_ICO_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+  // projetos da categoria e seus posts (mais específico primeiro: um post do Congresso fica com o Congresso, não com a PROEC)
+  const sgProjects = (list) => list.filter(p => [].concat(p.filtro || []).includes('midias'))
+    .map(p => { const gs = p.postGroups ? p.postGroups.map(g => g.g) : (p.posts ? [p.posts] : []); return { p, gs, items: POSTS.filter(x => gs.includes(x.g)) }; })
+    .filter(o => o.items.length);
+  const sgScore = (x) => {
+    if (!SG_SCORE) {
+      SG_SCORE = {}; const E = (window.ENGAJAMENTO || {}).posts || {}, acc = {};
+      POSTS.forEach(p => { if (E[p.c]) (acc[p.user] = acc[p.user] || []).push(p); });
+      Object.values(acc).forEach(a => {
+        const soC = a.some(p => E[p.c][0] == null), v = (p) => soC ? E[p.c][1] : (E[p.c][0] || 0) + E[p.c][1];
+        a.sort((m, n) => v(m) - v(n)).forEach((p, i) => { SG_SCORE[p.c] = a.length > 1 ? i / (a.length - 1) : .5; });
+      });
+    }
+    return (x.featured ? 2 : 0) + (SG_SCORE[x.c] != null ? SG_SCORE[x.c] : .4);
+  };
+  const sgTile = (x, label) => {
+    const n = Math.max(1, +x.n || 1), many = n > 1;
+    // só a 1ª imagem carrega de início; as demais entram quando o card recebe o ponteiro, foco ou toque
+    const slides = Array.from({ length: n }, (_, i) => `<img ${i ? 'data-src' : 'src'}="${igImg(x, i)}" alt="" ${i ? '' : 'loading="lazy" '}decoding="async" draggable="false">`).join('');
+    const badge = x.reel ? `<span class="sg-badge">${SG_ICO_PLAY}</span>` : many ? `<span class="sg-badge">${SG_ICO_CAR}<span><b>1</b>/${n}</span></span>` : '';
+    const nav = many ? `<button type="button" class="sg-nav sg-prev" aria-label="${lx(SG_L.ant)}" disabled>${ARR('M15 18l-6-6 6-6')}</button><button type="button" class="sg-nav sg-next" aria-label="${lx(SG_L.prox)}">${ARR('M9 18l6-6-6-6')}</button>` : '';
+    return `<article class="sg-t" data-sgc="${x.c}">
+      <div class="sg-media"><div class="sg-track">${slides}</div>${badge}${nav}
+        <button type="button" class="sg-open" data-sg-open aria-label="${esc(lx(SG_L.abrir) + ': ' + label + ', ' + fmtData(x.d))}">${SG_ICO_OPEN}</button></div>
+      <p class="sg-meta"><span>${esc(label)}</span><time datetime="${x.d}">${fmtData(x.d)}</time></p>
+    </article>`;
+  };
+  const sgView = (list) => {
+    const projs = sgProjects(list);
+    if (sgProj !== 'all' && !projs.some(o => o.p.slug === sgProj)) sgProj = 'all';
+    const owner = {}; projs.slice().sort((a, b) => a.gs.length - b.gs.length).forEach(o => o.gs.forEach(g => { if (!owner[g]) owner[g] = o.p.titulo; }));
+    const pool = sgProj === 'all' ? [...new Map(projs.flatMap(o => o.items).map(x => [x.c, x])).values()] : projs.find(o => o.p.slug === sgProj).items.slice();
+    const by = { r: (a, b) => sgScore(b) - sgScore(a) || (a.d < b.d ? 1 : -1), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
+      p: (a, b) => String(owner[a.g] || '').localeCompare(String(owner[b.g] || ''), LANG) || (a.d < b.d ? 1 : -1) };
+    const items = pool.sort(by[sgOrd]);
+    const nCar = items.filter(x => x.n > 1).length;
+    const chips = `<button type="button" class="art-filter" data-sg-proj="all" aria-pressed="${sgProj === 'all'}">${lx(SG_L.todos)} <span>${new Set(projs.flatMap(o => o.items.map(x => x.c))).size}</span></button>` +
+      projs.slice().sort((a, b) => b.items.length - a.items.length || a.p.titulo.localeCompare(b.p.titulo, LANG))
+        .map(o => `<button type="button" class="art-filter" data-sg-proj="${o.p.slug}" aria-pressed="${sgProj === o.p.slug}">${esc(o.p.titulo)} <span>${o.items.length}</span></button>`).join('');
+    const sorts = [['r', SG_L.oR], ['n', SG_L.oN], ['v', SG_L.oV], ['p', SG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-sg-ord="${k}" aria-pressed="${sgOrd === k}">${lx(l)}</button>`).join('');
+    const controls = `<div class="sg-projs" role="group" aria-label="${lx(SG_L.proj)}">${chips}</div>
+      <div class="sg-tools"><div class="sg-sort" role="group" aria-label="${lx(SG_L.ord)}"><span>${lx(SG_L.ord)}</span>${sorts}</div>${colsHTML()}</div>`;
+    const cur = sgProj !== 'all' ? PJ_BY[sgProj] : null;
+    const summary = `<p class="pj-results-line sg-line"><span>${items.length} ${plural(SG_L.pub, items.length)}${nCar ? ` · ${nCar} ${plural(SG_L.car, nCar)}` : ''}</span>${cur ? `<a class="sg-proj-link" href="${cleanProjectUrl(cur.slug)}" data-pj="${cur.slug}">${lx(SG_L.ver)} ${esc(cur.titulo)} →</a>` : ''}</p>`;
+    const label = (x) => sgProj === 'all' ? (owner[x.g] || x.v) : '@' + x.user;
+    return { controls, grid: summary + `<div class="sg-grid">${items.map(x => sgTile(x, label(x))).join('')}</div>` };
+  };
+
   const renderPJ = () => {
     renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
@@ -3629,61 +3755,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const counts = new Map();
     displayedPJ.forEach(p => [].concat(p.filtro || []).filter(Boolean).forEach(category => counts.set(category, (counts.get(category) || 0) + 1)));
     const categories = FILTROS.filter(([key]) => counts.has(key));
+    if (pjSelectedCategory !== 'all' && !counts.has(pjSelectedCategory)) pjSelectedCategory = 'all';
+    const social = pjSelectedCategory === 'midias';
     const allButton = `<button type="button" class="art-filter pj-tag-filter" data-category-filter="all" aria-pressed="${pjSelectedCategory === 'all'}">${lx({pt:'Todos',en:'All',es:'Todos'})}</button>`;
     const categoryButtons = categories.map(([key,label]) => `<button type="button" class="art-filter pj-tag-filter" data-category-filter="${key}" aria-pressed="${pjSelectedCategory === key}">${lx(label)}</button>`).join('');
+    const main = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div>`;
     bar.hidden = false;
-    bar.innerHTML = `<div class="pj-filter-main" role="group" aria-label="${lx({pt:'Filtrar projetos por categoria',en:'Filter projects by category',es:'Filtrar proyectos por categoría'})}">${allButton}${categoryButtons}</div><div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${[1,2,3,4,5].map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
     if (dashboardCTA) dashboardCTA.innerHTML = PJ_BY['dash-geral'] ? '<a class="art-filter pj-dash-btn" href="' + cleanProjectUrl('dash-geral') + '" data-pj="dash-geral">' + lx(DASH_BTN) + '</a>' : '';
+    grid.classList.toggle('work-grid', !social);
+    grid.classList.toggle('sg-mode', social);
+    if (social) {
+      const v = sgView(displayedPJ);
+      bar.innerHTML = main + v.controls;
+      applyCols(grid);
+      grid.innerHTML = v.grid;
+      return;
+    }
+    bar.innerHTML = main + colsHTML();
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
-    grid.classList.add('work-grid');
     applyCols(grid);
     grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
     requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.getElementById('pj-filters').addEventListener('click', (e) => {
     const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); applyCols(document.getElementById('work-case-grid')); return; }
+    const sp = e.target.closest('[data-sg-proj]'); if (sp) { sgProj = sp.dataset.sgProj; renderPJ(); return; }
+    const so = e.target.closest('[data-sg-ord]'); if (so) { sgOrd = so.dataset.sgOrd; renderPJ(); return; }
     const b = e.target.closest('[data-category-filter]'); if (!b) return;
+    if (b.dataset.categoryFilter !== pjSelectedCategory) sgProj = 'all';
     pjSelectedCategory = b.dataset.categoryFilter;
     pjEtiqueta = null;
     renderPJ();
   });
-
-  /* --- Grade de todos os posts e carrosséis (filtro "Carrosséis e posts") ---
-     5 colunas; filtros por organização (conta) e ordenação por interações, data, organização ou projeto. */
-  const PG_L = { org: { pt: 'Organização', en: 'Organization', es: 'Organización' }, todas: { pt: 'Todas', en: 'All', es: 'Todas' }, ord: { pt: 'Ordenar', en: 'Sort', es: 'Ordenar' },
-    oI: { pt: 'Mais interações', en: 'Most interactions', es: 'Más interacciones' }, oN: { pt: 'Mais recentes', en: 'Newest', es: 'Más recientes' }, oV: { pt: 'Mais antigos', en: 'Oldest', es: 'Más antiguos' },
-    oO: { pt: 'Organização (A–Z)', en: 'Organization (A–Z)', es: 'Organización (A–Z)' }, oP: { pt: 'Projeto (A–Z)', en: 'Project (A–Z)', es: 'Proyecto (A–Z)' }, n: { pt: 'posts', en: 'posts', es: 'posts' } };
-  let pgOrg = 'all', pgOrd = 'n';
-  const PG_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
-  const pgProj = (() => { const m = {}; PJ.forEach(p => { if (p.posts) m[p.posts] = m[p.posts] || p.titulo; (p.postGroups || []).forEach(g => { m[g.g] = g.t || p.titulo; }); }); return (g) => lx(m[g]) || g; })();
-  const pgOrgKey = (u) => {
-    if (u === 'personaunesp' || u === 'rpunesp') return 'persona';
-    if (u === 'proec_unesp' || u === 'cac.unesp.rioclaro') return 'unesp';
-    return u;
-  };
-  const pgOrgName = (u) => ({ persona: 'Persona', unesp: 'Unesp' }[u] || ((window.ENGAJAMENTO || {}).contas || {})[u]?.n || u);
-  const pgInt = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c]; return e ? (e[0] || 0) + e[1] : 0; };
-  const pgHTML = () => {
-    const orgs = {}; POSTS.forEach(x => { const k = pgOrgKey(x.user); orgs[k] = (orgs[k] || 0) + 1; });
-    const ol = Object.entries(orgs).sort((a, b) => b[1] - a[1] || pgOrgName(a[0]).localeCompare(pgOrgName(b[0])));
-    let ps = POSTS.filter(x => pgOrg === 'all' || pgOrgKey(x.user) === pgOrg);
-    const by = { i: (a, b) => pgInt(b) - pgInt(a), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
-      o: (a, b) => pgOrgName(pgOrgKey(a.user)).localeCompare(pgOrgName(pgOrgKey(b.user))) || (a.d < b.d ? 1 : -1), p: (a, b) => pgProj(a.g).localeCompare(pgProj(b.g)) || (a.d < b.d ? 1 : -1) };
-    ps = ps.slice().sort(by[pgOrd]);
-    const chips = `<button class="art-filter" data-org="all" aria-pressed="${pgOrg === 'all'}">${lx(PG_L.todas)} <span>${POSTS.length}</span></button>` + ol.map(([u, n]) => `<button class="art-filter" data-org="${u}" aria-pressed="${pgOrg === u}">${esc(pgOrgName(u))} <span>${n}</span></button>`).join('');
-    const sel = `<div class="pg-sort-buttons" role="group" aria-label="${lx(PG_L.ord)}"><span class="pg-sort-label">${lx(PG_L.ord)}:</span>${[['n', PG_L.oN], ['i', PG_L.oI], ['v', PG_L.oV], ['o', PG_L.oO], ['p', PG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-pg-ord="${k}" aria-pressed="${k === pgOrd}">${lx(l)}</button>`).join('')}</div>`;
-    const tile = (x) => { const e = ((window.ENGAJAMENTO || {}).posts || {})[x.c];
-      return `<button type="button" class="pg-t" data-pgc="${x.c}"><img src="${igImg(x, 0)}" alt="" loading="lazy" decoding="async">${x.n > 1 ? `<span class="art-ig-count">${PG_ICO}${x.n}</span>` : ''}
-        <span class="pg-i"><b>${esc(pgProj(x.g))}</b><span>${esc(pgOrgName(pgOrgKey(x.user)))} · ${fmtData(x.d)}</span>${e ? `<span class="pg-e">${e[0] != null ? `${nf(e[0])} curtidas · ` : ''} ${nf(e[1])} comentários</span>` : ''}</span></button>`; };
-    return `<div class="pg-bar"><div class="pg-orgs" role="group" aria-label="${lx(PG_L.org)}">${chips}</div>${sel}</div><p class="pg-n">${ps.length} ${lx(PG_L.n)}</p><div class="pg-grid" data-count="${ps.length}">${ps.map(tile).join('')}</div>`;
-  };
-  document.getElementById('work-case-grid').addEventListener('click', (e) => {
-    const o = e.target.closest('[data-org]'); if (o) { pgOrg = o.dataset.org; renderPJ(); return; }
-    const ord = e.target.closest('[data-pg-ord]'); if (ord) { pgOrd = ord.dataset.pgOrd; renderPJ(); return; }
-    const t = e.target.closest('[data-pgc]'); if (t && POST_BY[t.dataset.pgc]) openPosts([POST_BY[t.dataset.pgc]]);
+  // grade de mídias sociais: setas, contador, carregamento das demais imagens e abertura do post completo (legenda + links)
+  const wcg = document.getElementById('work-case-grid');
+  const sgHydrate = (t) => { if (!t || t.dataset.h) return; t.dataset.h = '1'; t.querySelectorAll('img[data-src]').forEach(i => { i.src = i.dataset.src; i.removeAttribute('data-src'); }); };
+  ['pointerover', 'focusin', 'touchstart'].forEach(ev => wcg.addEventListener(ev, (e) => { if (e.target.closest) sgHydrate(e.target.closest('.sg-t')); }, { passive: true }));
+  wcg.addEventListener('click', (e) => {
+    const nav = e.target.closest('.sg-nav');
+    if (nav) { const tr = nav.parentNode.querySelector('.sg-track'); sgHydrate(nav.closest('.sg-t')); tr.scrollBy({ left: (nav.classList.contains('sg-next') ? 1 : -1) * tr.clientWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); return; }
+    const op = e.target.closest('[data-sg-open], .sg-track'); if (!op) return;
+    const x = POST_BY[op.closest('.sg-t').dataset.sgc]; if (x) openPosts([x]);
   });
-  document.getElementById('work-case-grid').addEventListener('change', (e) => { if (e.target.id === 'pg-ord') { pgOrd = e.target.value; renderPJ(); } });
+  wcg.addEventListener('scroll', (e) => {
+    const tr = e.target; if (!tr.classList || !tr.classList.contains('sg-track')) return;
+    const m = tr.parentNode, n = tr.children.length, i = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth));
+    const c = m.querySelector('.sg-badge b'); if (c) c.textContent = i + 1;
+    const pv = m.querySelector('.sg-prev'), nx = m.querySelector('.sg-next'); if (pv) pv.disabled = i === 0; if (nx) nx.disabled = i >= n - 1;
+  }, true);
 
   /* --- Página inicial: catálogo em páginas numeradas, seis projetos por página --- */
   const HOME_FEATURED = ['sollaris', 'rino', 'pixelar', 'optica-leopoldina', 'classic-tattoo', 'equity360'];

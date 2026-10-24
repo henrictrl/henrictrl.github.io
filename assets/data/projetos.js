@@ -5407,7 +5407,7 @@ window.PROJETOS = [
   "servicos_relacionados": ["identidade","social"],
   "titulo": "RP 40 anos",
   "postGroups": [
-    {"g":"rp-40-anos","t":{"pt":"Carrossel dos 40 anos","en":"40th anniversary carousel","es":"Carrusel de los 40 años"},"d":{"pt":"Publicação comemorativa do projeto no Instagram.","en":"The project’s anniversary Instagram post.","es":"Publicación conmemorativa del proyecto en Instagram."}}
+    {"g":"rp-40-anos","t":{"pt":"Carrossel dos 40 anos","en":"40th anniversary carousel","es":"Carrusel de los 40 años"},"d":{"pt":"Linha do tempo do curso, de 1974 a 2022, em 8 cards no perfil @rpunesp.","en":"The course timeline, from 1974 to 2022, in 8 cards on the @rpunesp profile.","es":"Línea de tiempo de la carrera, de 1974 a 2022, en 8 tarjetas en el perfil @rpunesp."}}
   ],
   "ano": "2022",
   "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},

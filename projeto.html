@@ -81,8 +81,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
-<script src="assets/data/posts.js?v=20261020-rp40-post"></script>
+<script src="assets/data/projetos.js?v=20261023-midias"></script>
+<script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
 
@@ -239,7 +239,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
         '<div class="pc-grid'+(items.length>=4?' pc-4':'')+'">'+items.map(postCard).join("")+'</div></div>';
     }).join("");
     if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
-    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+textLabel(" posts"," posts"," posts")+'</span></h3>'+filter+groupsHTML+'</section>';
+    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+(postsCount===1?textLabel(" publicação"," post"," publicación"):textLabel(" posts"," posts"," posts"))+'</span></h3>'+filter+groupsHTML+'</section>';
   }
 
 
