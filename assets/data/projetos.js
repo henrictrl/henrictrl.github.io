@@ -754,7 +754,11 @@ window.PROJETOS = [
      "pt": "Identidade visual e manual de marca para empresa de crédito B2B (antecipações, financiamentos e empréstimos), atuante desde 2019. Manual de 50 páginas, setembro de 2026.",
      "en": "Visual identity and brand manual for a B2B credit company (receivables advances, financing and loans), active since 2019. 50-page manual, September 2026.",
      "es": "Identidad visual y manual de marca para una empresa de crédito B2B (anticipos, financiamientos y préstamos), activa desde 2019. Manual de 50 páginas, septiembre de 2026."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -767,7 +771,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -780,7 +788,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -793,7 +805,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -806,7 +822,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -819,7 +839,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -832,7 +856,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -858,7 +886,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "10",
@@ -871,7 +903,11 @@ window.PROJETOS = [
      "pt": "Silhueta inscrita em grade de 9X por 20X (razão 20:9), com três pontos de ancoragem: chifre, dorso e cauda.",
      "en": "Silhouette inscribed in a 9X by 20X grid (20:9 ratio), with three anchor points: horn, back and tail.",
      "es": "Silueta inscrita en una retícula de 9X por 20X (razón 20:9), con tres puntos de anclaje: cuerno, lomo y cola."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "11",
@@ -884,7 +920,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "12",
@@ -897,7 +937,11 @@ window.PROJETOS = [
      "pt": "Módulo de traço definido pela haste do “I”; espaçamento ajustado opticamente entre 1,0 e 1,5 módulo.",
      "en": "Stroke module defined by the stem of the “I”; spacing optically adjusted between 1.0 and 1.5 modules.",
      "es": "Módulo de trazo definido por el asta de la “I”; espaciado ajustado ópticamente entre 1,0 y 1,5 módulos."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "13",
@@ -910,7 +954,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "14",
@@ -923,7 +971,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "15",
@@ -936,7 +988,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "16",
@@ -949,7 +1005,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "17",
@@ -962,7 +1022,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "18",
@@ -975,7 +1039,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "19",
@@ -988,7 +1056,11 @@ window.PROJETOS = [
      "pt": "Display, títulos e legendas.",
      "en": "Display, headings and captions.",
      "es": "Display, títulos y leyendas."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "20",
@@ -1001,7 +1073,11 @@ window.PROJETOS = [
      "pt": "Subtítulos e textos.",
      "en": "Subheadings and text.",
      "es": "Subtítulos y textos."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "21",
@@ -1014,7 +1090,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "22",
@@ -1027,7 +1107,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "23",
@@ -1040,7 +1124,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "24",
@@ -1053,7 +1141,11 @@ window.PROJETOS = [
      "pt": "Off-white (46%) e Azul Rino (30%) sustentam a identidade; as demais cores são apoio.",
      "en": "Off-white (46%) and Rino Blue (30%) carry the identity; the other colors support it.",
      "es": "Off-white (46%) y Azul Rino (30%) sostienen la identidad; los demás colores son de apoyo."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "25",
@@ -1066,7 +1158,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "26",
@@ -1079,7 +1175,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "27",
@@ -1092,7 +1192,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "28",
@@ -1105,7 +1209,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "29",
@@ -1118,7 +1226,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "30",
@@ -1131,7 +1243,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "31",
@@ -1144,7 +1260,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "32",
@@ -1157,7 +1277,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "33",
@@ -1170,7 +1294,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "34",
@@ -1183,7 +1311,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "35",
@@ -1196,7 +1328,11 @@ window.PROJETOS = [
      "pt": "Grade de 24 × 24, traço de 1,5, sem preenchimento. Mínimo de 4 mm impresso e 16 px em tela.",
      "en": "24 × 24 grid, 1.5 stroke, no fill. Minimum 4 mm in print and 16 px on screen.",
      "es": "Retícula de 24 × 24, trazo de 1,5, sin relleno. Mínimo de 4 mm impreso y 16 px en pantalla."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "36",
@@ -1209,7 +1345,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "37",
@@ -1222,7 +1362,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "38",
@@ -1235,7 +1379,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "39",
@@ -1248,7 +1396,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "40",
@@ -1261,7 +1413,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "41",
@@ -1274,7 +1430,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "42",
@@ -1287,7 +1447,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "43",
@@ -1300,7 +1464,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "44",
@@ -1326,7 +1494,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "46",
@@ -1339,7 +1511,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "47",
@@ -1352,7 +1528,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "48",
@@ -1365,7 +1545,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "49",
@@ -1378,7 +1562,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "50",
@@ -2836,7 +3024,11 @@ window.PROJETOS = [
      "pt": "Logotipo para ótica de bairro na Vila Leopoldina, São Paulo. Entrega de outubro de 2026.",
      "en": "Logo for a neighborhood optician in Vila Leopoldina, São Paulo. October 2026 delivery.",
      "es": "Logotipo para una óptica de barrio en Vila Leopoldina, São Paulo. Entrega de octubre de 2026."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -2849,7 +3041,11 @@ window.PROJETOS = [
      "pt": "O óculos entra girado a 90°: as lentes são o “Ó” de óptica e o “O” de Leopoldina, a ponte liga as duas linhas e as hastes viram o acento.",
      "en": "The glasses are rotated 90°: the lenses are the “Ó” of óptica and the “O” of Leopoldina, the bridge links both lines and the temples become the accent.",
      "es": "Las gafas giran 90°: los lentes son la “Ó” de óptica y la “O” de Leopoldina, el puente une las dos líneas y las varillas se vuelven el acento."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -2862,7 +3058,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -2875,7 +3075,11 @@ window.PROJETOS = [
      "pt": "Thin para grandes formatos, Regular para o dia a dia e Bold para reduções e superfícies difíceis.",
      "en": "Thin for large formats, Regular for everyday use and Bold for small sizes and difficult surfaces.",
      "es": "Thin para grandes formatos, Regular para el día a día y Bold para reducciones y superficies difíciles."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -2888,7 +3092,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -2901,7 +3109,11 @@ window.PROJETOS = [
      "pt": "Óptica, símbolo e Leopoldina na mesma linha, com o símbolo centrado na altura-x.",
      "en": "Óptica, symbol and Leopoldina on one line, with the symbol centered on the x-height.",
      "es": "Óptica, símbolo y Leopoldina en la misma línea, con el símbolo centrado en la altura x."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -2914,7 +3126,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -2927,7 +3143,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -2940,7 +3160,11 @@ window.PROJETOS = [
      "pt": "Amarelo Daylily (PANTONE 15-0956 TCX), verde Mountain View (19-5918 TCX) e off-white Gardenia (11-0604 TCX).",
      "en": "Daylily yellow (PANTONE 15-0956 TCX), Mountain View green (19-5918 TCX) and Gardenia off-white (11-0604 TCX).",
      "es": "Amarillo Daylily (PANTONE 15-0956 TCX), verde Mountain View (19-5918 TCX) y off-white Gardenia (11-0604 TCX)."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "10",
@@ -2953,7 +3177,11 @@ window.PROJETOS = [
      "pt": "x = altura-x de Leopoldina, igual ao diâmetro da lente.",
      "en": "x = x-height of Leopoldina, equal to the lens diameter.",
      "es": "x = altura x de Leopoldina, igual al diámetro del lente."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "11",
@@ -2966,7 +3194,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "12",
@@ -2979,7 +3211,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "13",
@@ -3118,7 +3354,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -3144,7 +3384,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -3157,7 +3401,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -3170,7 +3418,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -3183,7 +3435,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
