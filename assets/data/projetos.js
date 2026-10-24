@@ -9235,7 +9235,11 @@ window.PROJETOS = [
      "pt": "Editor de pixel art, dither, filme analógico e animação para fotos e vídeos, no navegador. Tudo roda no aparelho (WebGL2 e WebCodecs): 88 estilos, 55 filmes e câmeras, 52 efeitos e exportação em imagem, SVG, vídeo e GIF.",
      "en": "A pixel art, dithering, analog film and animation editor for photos and videos, in the browser. Everything runs on the device (WebGL2 and WebCodecs): 88 styles, 55 films and cameras, 52 effects and export as image, SVG, video and GIF.",
      "es": "Editor de pixel art, dither, película analógica y animación para fotos y videos, en el navegador. Todo corre en el dispositivo (WebGL2 y WebCodecs): 88 estilos, 55 películas y cámaras, 52 efectos y exportación en imagen, SVG, video y GIF."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -9248,7 +9252,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -9261,7 +9269,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -9274,7 +9286,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -9287,7 +9303,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -9300,7 +9320,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -9313,7 +9337,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -9326,7 +9354,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -9339,7 +9371,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "web": {
