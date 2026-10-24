@@ -10968,7 +10968,11 @@ window.PROJETOS = [
      "pt": "Microanálise do capítulo 12 de O Hobbit, de J. R. R. Tolkien, com Pedro Nakamura, na disciplina Prática de Leitura e de Análise do Texto Literário (RP, Unesp Bauru).",
      "en": "Micro-analysis of chapter 12 of The Hobbit, by J. R. R. Tolkien, with Pedro Nakamura, for the Literary Text Reading and Analysis course (PR, Unesp Bauru).",
      "es": "Microanálisis del capítulo 12 de El hobbit, de J. R. R. Tolkien, con Pedro Nakamura, en la asignatura Práctica de Lectura y Análisis del Texto Literario (RR. PP., Unesp Bauru)."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -10981,7 +10985,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -10994,7 +11002,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -11007,7 +11019,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -11020,7 +11036,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
