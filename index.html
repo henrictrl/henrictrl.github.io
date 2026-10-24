@@ -754,93 +754,108 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 }
 .sm-cta-btn:hover { opacity: 0.85; }
 
-/* --- Modal de serviço: o próprio overlay é a área rolável (um único scroller, como o deck de projeto) --- */
-#service-modal-overlay { display: block; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 4vh 16px; }
-#service-modal-overlay .service-modal { display: block; height: auto; max-height: none; margin: 0 auto; overflow: visible; }
-#service-modal-overlay .pm-topbar { position: sticky; top: 0; z-index: 3; background: var(--white); border-radius: var(--r) var(--r) 0 0; }
-#service-modal-overlay .pm-scroll { overflow: visible; flex: none; }
-@media (max-width: 640px) {
-  #service-modal-overlay { padding: 0; }
-  #service-modal-overlay .service-modal { min-height: 100%; border-radius: 0; }
-  #service-modal-overlay .pm-topbar { border-radius: 0; }
-}
+/* --- Serviço em formato "cardápio" ---
+   Safari: nada de modal fixo com rolagem interna. A folha entra no fluxo da página e o resto do site
+   é escondido enquanto ela está aberta; quem rola é o próprio documento (rolagem nativa). */
 @media (max-width: 640px) { .project-modal { height: 100vh; } .client-modal { max-height: 100vh; } }
 @supports (height: 100dvh) { @media (max-width: 640px) { .project-modal { height: 100dvh; } .client-modal { max-height: 100dvh; } } }
-
-body:has(#service-modal-overlay.open) .mobile-top-button { display: none !important; } /* botão da página não aparece sobre o modal */
-.service-modal { --svc: var(--ink); }
-.service-modal[data-svc="identidade"] { --svc: #F72C2B; }
-.service-modal[data-svc="social"]     { --svc: #FFC700; }
-.service-modal[data-svc="redacao"]    { --svc: #1D3DF5; }
-.service-modal[data-svc="landing"]    { --svc: #13A03F; }
-.sm-wrap { container-type: inline-size; padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
-.sm-head-ic { display: block; width: 40px; height: 40px; margin-bottom: 18px; }
-.sm-head-ic svg { width: 100%; height: 100%; fill: var(--svc); display: block; }
-.sm-wrap .sm-desc { text-wrap: pretty; margin-bottom: 36px; }
-.sm-sec { margin-bottom: 40px; }
-.sm-sec > .pm-block-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-.sm-sec > .pm-block-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
-
-/* ícones e números em pixel (grade 12x12 e dígitos 3x5, mesma linguagem dos ícones de serviço) */
+.sv { display: none; }
+body.sv-open > *:not(.sv):not(script) { display: none !important; }
+body.sv-open .sv { display: block; }
+.sv { --svc: var(--ink); --on: #fff; background: var(--white); min-height: 100vh; overflow-x: clip; }
+.sv-in { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
 .px { display: block; shape-rendering: crispEdges; }
-.sm-ic { width: 44px; height: 44px; border-radius: var(--r); background: color-mix(in srgb, var(--svc) 16%, #fff); display: grid; place-items: center; position: relative; z-index: 1; }
-.sm-ic .px { width: 24px; height: 24px; fill: var(--ink); }
-.sm-num { height: 10px; width: 14px; fill: var(--gray-400); margin: 3px 0 7px; }
 
-/* fluxo: vertical no celular, horizontal quando há largura; linha pontilhada em "pixels" */
-.sm-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-.sm-step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 16px; padding-bottom: 24px; }
-.sm-step > .sm-ic { grid-row: span 3; }
-.sm-step:last-child { padding-bottom: 0; }
-.sm-step::before { content: ''; position: absolute; left: 21px; width: 2px; top: 52px; bottom: 8px;
-  background: repeating-linear-gradient(to bottom, var(--gray-400) 0 2px, transparent 2px 6px); opacity: .5; }
-.sm-step:last-child::before { display: none; }
-.sm-step h3 { font-size: 15px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
-.sm-step p { font-size: 13.5px; line-height: 1.55; color: var(--gray-500); margin-top: 3px; text-wrap: pretty; }
-@container (min-width: 640px) {
-  .sm-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 18px; }
-  .sm-step { display: block; padding-bottom: 0; }
-  .sm-step::before { left: 54px; right: -8px; top: 21px; bottom: auto; width: auto; height: 2px;
-    background: repeating-linear-gradient(to right, var(--gray-400) 0 2px, transparent 2px 6px); }
-  .sm-step > .sm-ic { margin-bottom: 12px; }
+/* barra fixa no topo (sticky funciona com a rolagem do documento) */
+.sv-bar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px var(--gutter); background: var(--white); border-bottom: 1px solid var(--gray-100); }
+.sv-bar-t { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.sv-bar-t i { width: 10px; height: 10px; background: var(--svc); flex: none; }
+.sv-x { width: 40px; height: 40px; border: 1px solid var(--gray-200); border-radius: 50%; background: var(--white); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .2s var(--ease); }
+.sv-x:hover, .sv-x:focus-visible { border-color: var(--ink); }
+.sv-x svg { width: 16px; height: 16px; }
+
+/* capa: cor cheia do serviço, título enorme, ícone em pixel gigante com sombra dura e confete de pixels */
+.sv-hero { position: relative; overflow: hidden; background: var(--svc); color: var(--on); }
+.sv-hero .sv-in { position: relative; z-index: 2; display: grid; gap: 28px; padding-top: clamp(48px, 9vw, 120px); padding-bottom: clamp(48px, 8vw, 110px); }
+@media (min-width: 900px) { .sv-hero .sv-in { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; } }
+.sv-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.sv-eyebrow::before { content: ''; width: 24px; height: 2px; background: currentColor; }
+.sv-title { font-size: clamp(46px, 11vw, 132px); font-weight: 500; letter-spacing: -0.045em; line-height: .92; margin: 18px 0 22px; text-wrap: balance; }
+.sv-desc { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.5; max-width: 34ch; text-wrap: pretty; }
+.sv-hero-ic { justify-self: start; width: clamp(120px, 26vw, 240px); aspect-ratio: 1; transform: rotate(-7deg); }
+@media (min-width: 900px) { .sv-hero-ic { justify-self: end; } }
+.sv-hero-ic svg { width: 100%; height: 100%; fill: var(--on); filter: drop-shadow(10px 10px 0 var(--sh)); }
+.sv-confetti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sv-confetti span { position: absolute; display: block; }
+
+/* títulos de seção */
+.sv-sec { padding: clamp(56px, 8vw, 104px) 0; }
+.sv-h { font-size: clamp(30px, 5.4vw, 60px); font-weight: 500; letter-spacing: -0.035em; line-height: 1; margin-bottom: clamp(28px, 4vw, 48px); display: flex; align-items: center; gap: 14px; }
+.sv-h::before { content: ''; flex: none; width: .32em; height: .32em; background: var(--svc); }
+
+/* fluxo: fichas coloridas em escada (desktop) e em zigue-zague (celular) */
+.sv-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.sv-step { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 20px 20px 22px; width: 88%; transform: rotate(var(--rot)); display: grid; gap: 10px; }
+.sv-step:nth-child(odd) { margin-right: auto; --rot: -1.4deg; }
+.sv-step:nth-child(even) { margin-left: auto; --rot: 1.4deg; }
+.sv-step-top { display: flex; align-items: center; justify-content: space-between; }
+.sv-num { height: 34px; width: auto; fill: currentColor; }
+.sv-step-ic { width: 34px; height: 34px; fill: currentColor; }
+.sv-step h4 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-top: 8px; }
+.sv-step p { font-size: 14px; line-height: 1.5; opacity: .88; text-wrap: pretty; }
+@media (min-width: 900px) {
+  .sv-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; gap: 14px; padding-bottom: 96px; }
+  .sv-step { width: auto; margin: calc(var(--i) * 24px) 0 0 !important; min-height: 280px; align-content: start; }
 }
 
-/* entregas: lista expansível, uma aberta por vez; mais/menos em pixel */
-.sm-deliv { border-top: 1px solid var(--gray-200); }
-.sm-item { border-bottom: 1px solid var(--gray-200); }
-.sm-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 16px 0; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; }
-.sm-item summary::-webkit-details-marker { display: none; }
-.sm-item summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
-.sm-pm { flex: none; width: 12px; height: 12px; fill: var(--gray-500); }
-.sm-item[open] .sm-pm .v { display: none; }
-.sm-item-body { padding: 0 0 20px; display: grid; gap: 14px; }
-.sm-item-d { font-size: 14px; line-height: 1.65; color: var(--gray-500); max-width: 62ch; text-wrap: pretty; }
-.sm-k { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 7px; }
-.sm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.sm-chips span { font-size: 12px; line-height: 1; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 999px; color: var(--ink); }
-.sm-item-a { font-size: 13.5px; line-height: 1.6; color: var(--ink); text-wrap: pretty; }
+/* cardápio: fundo preto, itens com pontilhado até o número, como preço */
+.sv-menu { background: var(--ink); color: #fff; padding: clamp(56px, 8vw, 104px) 0; }
+.sv-menu .sv-h { color: #fff; }
+.sv-mi { padding: 22px 0 24px; border-bottom: 1px solid rgba(255,255,255,.14); display: grid; gap: 12px; }
+.sv-mi:first-child { border-top: 1px solid rgba(255,255,255,.14); }
+.sv-mi-row { display: flex; align-items: baseline; gap: 12px; }
+.sv-mi-t { font-size: clamp(20px, 2.6vw, 30px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; }
+.sv-mi-lead { flex: 1; min-width: 24px; height: 3px; align-self: center; margin-top: .45em;
+  background: repeating-linear-gradient(to right, var(--svc) 0 3px, transparent 3px 8px); } /* pontilhado em "pixels" */
+.sv-mi-n { flex: none; height: 16px; width: auto; fill: var(--svc); }
+.sv-mi-d { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.72); max-width: 62ch; text-wrap: pretty; }
+.sv-mi-f { display: flex; flex-wrap: wrap; gap: 6px; }
+.sv-mi-f span { font-size: 11px; font-weight: 600; letter-spacing: .06em; line-height: 1; padding: 7px 10px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
+.sv-mi-a { font-size: 13.5px; line-height: 1.55; color: #fff; display: flex; gap: 10px; text-wrap: pretty; }
+.sv-mi-a::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: .45em; background: var(--svc); }
+@media (min-width: 900px) {
+  .sv-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
+  .sv-mi:nth-child(2) { border-top: 1px solid rgba(255,255,255,.14); }
+}
 
-/* condições */
-.sm-terms { display: grid; gap: 8px; }
-@container (min-width: 560px) { .sm-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.sm-term { border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; align-items: start; }
-.sm-term .sm-ic { width: 32px; height: 32px; grid-row: span 2; }
-.sm-term .sm-ic .px { width: 18px; height: 18px; }
-.sm-term strong { display: block; font-size: 14px; font-weight: 600; margin: 6px 0 4px; }
-.sm-term p { font-size: 13px; line-height: 1.55; color: var(--gray-500); text-wrap: pretty; }
+/* condições: três "etiquetas" em cores cheias */
+.sv-terms { display: grid; gap: 14px; }
+@media (min-width: 760px) { .sv-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sv-term { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 24px; display: grid; gap: 10px; transform: rotate(var(--rot, 0deg)); }
+.sv-term:nth-child(1) { --rot: -1deg; } .sv-term:nth-child(3) { --rot: 1deg; }
+.sv-term .px { width: 40px; height: 40px; fill: currentColor; }
+.sv-term strong { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; }
+.sv-term p { font-size: 14px; line-height: 1.55; text-wrap: pretty; }
 
-/* exemplos (2 cards: capa e título) */
-.sm-wrap .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.sm-wrap .work-card-tag { display: none; }
-@container (min-width: 640px) { .sm-wrap .work-grid { max-width: 520px; } }
+/* exemplos: capa e título */
+.sv .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
+.sv .work-card-tag { display: none; }
 
-/* contato */
-.sm-cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
-.sm-cta-row .sm-cta-btn { text-align: center; }
-.sm-cta-btn.alt { background: transparent; color: var(--ink); border: 1px solid var(--gray-200); }
-.sm-cta-btn.alt:hover { border-color: var(--ink); opacity: 1; }
-@media (max-width: 640px) { .sm-cta-row { flex-direction: column; } .sm-cta-row .sm-cta-btn { width: 100%; } }
+/* contato: centralizado, na linguagem do site */
+.sv-cta { border-top: 1px solid var(--gray-200); padding: clamp(56px, 8vw, 96px) 0 calc(clamp(56px, 8vw, 96px) + env(safe-area-inset-bottom, 0px)); text-align: center; }
+.sv-cta .px { width: 36px; height: 36px; fill: var(--svc); margin: 0 auto 18px; }
+.sv-cta-t { font-size: clamp(22px, 3vw, 32px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; max-width: 22ch; margin: 0 auto 28px; text-wrap: balance; }
+.sv-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.sv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px;
+  font-size: 14px; font-weight: 500; letter-spacing: -0.005em; border: 1px solid var(--ink); transition: background .25s var(--ease), color .25s var(--ease); }
+.sv-btn .px { width: 14px; height: 14px; fill: currentColor; margin: 0; }
+.sv-btn.solid { background: var(--ink); color: var(--white); }
+.sv-btn.solid:hover { background: transparent; color: var(--ink); }
+.sv-btn.line { background: transparent; color: var(--ink); }
+.sv-btn.line:hover { background: var(--ink); color: var(--white); }
+.sv-btn:focus-visible, .sv-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 480px) { .sv-cta-row { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; } }
 
 
 @media (max-width: 640px) {
@@ -2073,30 +2088,27 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   <div class="pv-scroll" id="pv-scroll"></div>
 </div>
 
-<div class="project-modal-overlay" id="service-modal-overlay">
-  <div class="project-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="sm-title" data-svc="">
-    <div class="pm-topbar">
-      <button class="pm-close" id="sm-close-btn" aria-label="Fechar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="pm-scroll" id="sm-scroll">
-      <div class="pm-content max-w sm-wrap" style="padding-top:24px;">
-        <span class="sm-head-ic" id="sm-head-ic" aria-hidden="true"></span>
-        <p class="pm-block-label" id="sm-eyebrow">Serviço</p>
-        <h2 class="pm-title" id="sm-title"></h2>
-        <p class="sm-desc" id="sm-desc"></p>
-        <section class="sm-sec"><p class="pm-block-label" id="sm-l-fluxo"></p><ol class="sm-flow" id="sm-flow"></ol></section>
-        <section class="sm-sec"><p class="pm-block-label" id="sm-l-entregas"></p><div class="sm-deliv" id="sm-deliv"></div></section>
-        <section class="sm-sec"><p class="pm-block-label" id="sm-l-condicoes"></p><div class="sm-terms" id="sm-terms"></div></section>
-        <section class="sm-sec" id="sm-sec-exemplos"><p class="pm-block-label" id="sm-l-exemplos"></p><div class="work-grid" id="sm-related-projects"></div></section>
-        <div class="sm-cta-row">
-          <a class="sm-cta-btn" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a>
-          <a class="sm-cta-btn alt" id="sm-cta-mail"></a>
-        </div>
-      </div>
-    </div>
+<div class="sv" id="service-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="sm-title">
+  <div class="sv-bar">
+    <span class="sv-bar-t"><i aria-hidden="true"></i><span id="sv-bar-t"></span></span>
+    <button class="sv-x" id="sm-close-btn" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
+  <header class="sv-hero">
+    <div class="sv-confetti" id="sv-confetti" aria-hidden="true"></div>
+    <div class="sv-in">
+      <div><p class="sv-eyebrow" id="sm-eyebrow"></p><h2 class="sv-title" id="sm-title"></h2><p class="sv-desc" id="sm-desc"></p></div>
+      <div class="sv-hero-ic" id="sm-head-ic" aria-hidden="true"></div>
+    </div>
+  </header>
+  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-fluxo"></h3><ol class="sv-flow" id="sm-flow"></ol></div></section>
+  <section class="sv-menu"><div class="sv-in"><h3 class="sv-h" id="sm-l-entregas"></h3><div class="sv-menu-list" id="sm-deliv"></div></div></section>
+  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-condicoes"></h3><div class="sv-terms" id="sm-terms"></div></div></section>
+  <section class="sv-sec" id="sm-sec-exemplos" style="padding-top:0"><div class="sv-in"><h3 class="sv-h" id="sm-l-exemplos"></h3><div class="work-grid" id="sm-related-projects"></div></div></section>
+  <footer class="sv-cta"><div class="sv-in">
+    <span id="sv-cta-ic"></span>
+    <p class="sv-cta-t" id="sv-cta-t"></p>
+    <div class="sv-cta-row"><a class="sv-btn solid" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a><a class="sv-btn line" id="sm-cta-mail"></a></div>
+  </div></footer>
 </div>
 
 <script src="assets/data/clientes.js"></script>
@@ -2976,7 +2988,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clock:    ['...######...','..#......#..','.#...##...#.','#....##....#','#....##....#','#....####..#','#.......#..#','#..........#','.#........#.','..#......#..','...######...','............'],
     mail:     ['............','############','##........##','#.#......#.#','#..#....#..#','#...#..#...#','#....##....#','#..........#','#..........#','############','............','............']
   };
-  const DIG = { 0: ['###','#.#','#.#','#.#','###'], 1: ['.#.','##.','.#.','.#.','###'], 2: ['###','..#','###','#..','###'], 3: ['###','..#','###','..#','###'], 4: ['#.#','#.#','###','..#','..#'], 5: ['###','#..','###','..#','###'] };
+  const DIG = { 0: ['###','#.#','#.#','#.#','###'], 1: ['.#.','##.','.#.','.#.','###'], 2: ['###','..#','###','#..','###'], 3: ['###','..#','###','..#','###'], 4: ['#.#','#.#','###','..#','..#'], 5: ['###','#..','###','..#','###'], 6: ['###','#..','###','#.#','###'], 7: ['###','..#','..#','..#','..#'], 8: ['###','#.#','###','#.#','###'], 9: ['###','#.#','###','..#','###'] };
   const pxSvg = (rows, cls) => {
     let d = ''; rows.forEach((r, y) => [...r].forEach((c, x) => { if (c === '#') d += `M${x} ${y}h1v1h-1z`; }));
     return `<svg class="px ${cls || ''}" viewBox="0 0 ${rows[0].length} ${rows.length}" aria-hidden="true" shape-rendering="crispEdges"><path d="${d}"/></svg>`;
@@ -2985,11 +2997,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const STEP_IC = ['briefing', 'refs', 'draft', 'rework', 'files'];
   const PM = '<svg class="sm-pm" viewBox="0 0 6 6" aria-hidden="true" shape-rendering="crispEdges"><path d="M0 2h6v2h-6z"/><path class="v" d="M2 0h2v6h-2z"/></svg>';
 
-  const smLock = (on) => { // trava só a página; o overlay rola sozinho
-    document.documentElement.style.overflow = on ? 'hidden' : '';
-    document.body.style.overflow = on ? 'hidden' : '';
+  // cores fortes do site; texto escuro ou branco conforme o contraste de cada uma
+  const SV_COL = { identidade: '#F72C2B', social: '#FFC700', redacao: '#1D3DF5', landing: '#13A03F' };
+  const SV_INK = '#111111';
+  const svOn = (c) => (c === '#1D3DF5' || c === SV_INK) ? '#fff' : '#111';
+  const svPaint = (el, c) => { el.style.setProperty('--bg', c); el.style.setProperty('--fg', svOn(c)); };
+  const pxBig = (n) => pxSvg(DIG[0].map((r, i) => r + '.' + DIG[n][i]), 'sv-num');
+  PX.chat = ['............','############','#..........#','#..........#','#..........#','#..........#','#..........#','############','.##.........','.#..........','............','............'];
+  let svY = 0, svCard = null;
+  const noSmooth = (fn) => { const h = document.documentElement, b = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; fn(); h.style.scrollBehavior = b; };
+  const smClose = () => {
+    if (!smOverlay.classList.contains('open')) return;
+    smOverlay.classList.remove('open'); document.body.classList.remove('sv-open');
+    noSmooth(() => window.scrollTo(0, svY));
+    if (svCard) svCard.focus({ preventScroll: true });
   };
-  const smClose = () => { smOverlay.classList.remove('open'); smLock(false); };
   const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 
   document.querySelectorAll('[data-service-id]').forEach(card => {
@@ -2997,68 +3019,79 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = card.dataset.serviceId, S = window.SERVICOS, s = S && S.itens[id]; if (!s) return;
       const U = S.ui, $ = (x) => document.getElementById(x);
       const title = card.querySelector('.service-title').textContent; // já no idioma atual
-      smOverlay.querySelector('.service-modal').dataset.svc = id; // cor do serviço
-      const hic = $('sm-head-ic'); hic.innerHTML = ''; const ci = card.querySelector('.service-icon'); if (ci) hic.appendChild(ci.cloneNode(true));
+      const c = SV_COL[id] || SV_INK, outras = Object.values(SV_COL).filter(x => x !== c);
+      smOverlay.style.setProperty('--svc', c); smOverlay.style.setProperty('--on', svOn(c)); smOverlay.style.setProperty('--sh', id === 'redacao' ? '#FFC700' : SV_INK);
+      $('sv-bar-t').textContent = title;
       $('sm-eyebrow').textContent = lx(U.eyebrow);
       $('sm-title').textContent = title;
       $('sm-desc').textContent = lx(s.desc);
-      $('sm-l-fluxo').textContent = lx(U.fluxo);
-      $('sm-l-entregas').textContent = lx(U.entregas);
-      $('sm-l-condicoes').textContent = lx(U.condicoes);
-      $('sm-l-exemplos').textContent = lx(U.exemplos);
+      const hic = $('sm-head-ic'); hic.innerHTML = ''; const ci = card.querySelector('.service-icon'); if (ci) { const k = ci.cloneNode(true); k.removeAttribute('class'); hic.appendChild(k); }
 
-      // fluxo: ícone em pixel + número em pixel + etapa
+      // confete de pixels na capa (posições fixas por serviço, cores das outras áreas)
+      const cf = $('sv-confetti'); cf.innerHTML = '';
+      let seed = [...id].reduce((a, ch) => a + ch.charCodeAt(0), 7);
+      const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+      for (let i = 0; i < 18; i++) {
+        const sp = document.createElement('span'), z = [8, 12, 16, 24][Math.floor(rnd() * 4)];
+        sp.style.cssText = `left:${(52 + rnd() * 45).toFixed(1)}%;top:${(rnd() * 92).toFixed(1)}%;width:${z}px;height:${z}px;background:${i % 5 === 4 ? svOn(c) : outras[i % outras.length]}`;
+        cf.appendChild(sp);
+      }
+
+      // fluxo: fichas coloridas (cor do serviço, depois as outras, por fim preto)
+      $('sm-l-fluxo').textContent = lx(U.fluxo);
+      const cores = [c, ...outras, SV_INK];
       const flow = $('sm-flow'); flow.innerHTML = '';
       S.etapas.forEach((et, i) => {
-        const li = smEl('li', 'sm-step');
-        const ic = smEl('span', 'sm-ic'); ic.innerHTML = pxSvg(PX[STEP_IC[i]]);
-        const num = smEl('span'); num.innerHTML = pxNum(i + 1); num.setAttribute('aria-label', String(i + 1));
-        li.append(ic, num, smEl('h3', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
+        const li = smEl('li', 'sv-step'); svPaint(li, cores[i]); li.style.setProperty('--i', i);
+        const top = smEl('div', 'sv-step-top'); top.innerHTML = pxBig(i + 1) + pxSvg(PX[STEP_IC[i]], 'sv-step-ic');
+        li.append(top, smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
         flow.appendChild(li);
       });
 
-      // entregas: uma aberta por vez (a primeira abre junto com o modal)
+      // cardápio de entregas: nome ...... nº, depois descrição, arquivos e onde usar
+      $('sm-l-entregas').textContent = lx(U.entregas);
       const dl = $('sm-deliv'); dl.innerHTML = '';
       s.entregas.forEach((it, i) => {
-        const det = smEl('details', 'sm-item'); if (i === 0) det.open = true;
-        const sum = smEl('summary'); sum.appendChild(smEl('span', '', lx(it.t))); sum.insertAdjacentHTML('beforeend', PM); det.appendChild(sum);
-        const body = smEl('div', 'sm-item-body');
-        body.appendChild(smEl('p', 'sm-item-d', lx(it.d)));
-        if (it.f && it.f.length) {
-          const w = smEl('div'); w.appendChild(smEl('span', 'sm-k', lx(U.arquivos)));
-          const ch = smEl('div', 'sm-chips'); it.f.forEach(f => ch.appendChild(smEl('span', '', f))); w.appendChild(ch); body.appendChild(w);
-        }
-        if (it.a) { const w = smEl('div'); w.appendChild(smEl('span', 'sm-k', lx(U.usos))); w.appendChild(smEl('p', 'sm-item-a', lx(it.a))); body.appendChild(w); }
-        det.appendChild(body);
-        det.addEventListener('toggle', () => { if (det.open) dl.querySelectorAll('details[open]').forEach(o => { if (o !== det) o.open = false; }); });
-        dl.appendChild(det);
+        const mi = smEl('article', 'sv-mi');
+        const row = smEl('div', 'sv-mi-row'); row.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('span', 'sv-mi-lead'));
+        row.insertAdjacentHTML('beforeend', pxSvg(DIG[0].map((r, k) => r + '.' + DIG[(i + 1) % 10][k]), 'sv-mi-n'));
+        mi.append(row, smEl('p', 'sv-mi-d', lx(it.d)));
+        if (it.f && it.f.length) { const f = smEl('div', 'sv-mi-f'); f.setAttribute('aria-label', lx(U.arquivos)); it.f.forEach(x => f.appendChild(smEl('span', '', x))); mi.appendChild(f); }
+        if (it.a) mi.appendChild(smEl('p', 'sv-mi-a', lx(it.a)));
+        dl.appendChild(mi);
       });
 
-      // condições (iguais nos 4 serviços)
+      // condições: etiquetas em cores cheias
+      $('sm-l-condicoes').textContent = lx(U.condicoes);
       const tm = $('sm-terms'); tm.innerHTML = '';
-      [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic]) => {
-        const d = smEl('div', 'sm-term'); const b = smEl('span', 'sm-ic'); b.innerHTML = pxSvg(PX[ic]);
-        d.append(b, smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
+      [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic], i) => {
+        const d = smEl('div', 'sv-term'); svPaint(d, [outras[0], SV_INK, outras[1]][i]);
+        d.innerHTML = pxSvg(PX[ic]); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
       });
 
       // exemplos: 2 projetos (capa e título)
+      $('sm-l-exemplos').textContent = lx(U.exemplos);
       const rel = $('sm-related-projects'); rel.innerHTML = '';
       (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) rel.appendChild(buildWorkCard(p)); });
       $('sm-sec-exemplos').hidden = !rel.children.length;
 
       // contato (sem preço: orçamento)
-      const msg = `${lx(U.waMsg)} ${title}.`;
-      const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(msg)}`; wa.textContent = lx(U.wa);
-      const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.textContent = lx(U.mail);
+      $('sv-cta-ic').innerHTML = pxSvg(PX.chat);
+      $('sv-cta-t').textContent = lx(U.valoresD);
+      const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(`${lx(U.waMsg)} ${title}.`)}`; wa.innerHTML = pxSvg(PX.chat); wa.appendChild(smEl('span', '', lx(U.wa)));
+      const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.innerHTML = pxSvg(PX.mail); ml.appendChild(smEl('span', '', lx(U.mail)));
 
-      smOverlay.classList.add('open'); smLock(true); smOverlay.scrollTop = 0;
+      // abre: esconde o site e sobe para o topo; a rolagem é a da própria página
+      if (!smOverlay.classList.contains('open')) svY = window.scrollY;
+      svCard = card;
+      smOverlay.classList.add('open'); document.body.classList.add('sv-open');
+      noSmooth(() => window.scrollTo(0, 0));
+      $('sm-close-btn').focus({ preventScroll: true });
     };
     card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } }; // acessível por teclado
   });
 
   document.getElementById('sm-close-btn').onclick = smClose;
-  smOverlay.addEventListener('click', (e) => { if (e.target === smOverlay) smClose(); });
-  document.getElementById('sm-cta-wa').addEventListener('click', () => setTimeout(smClose, 0));
   document.getElementById('sm-cta-mail').addEventListener('click', () => setTimeout(smClose, 0));
 
   window.openLightbox = (src) => {
@@ -3068,7 +3101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('lightbox-close-btn').onclick = () => { lbOverlay.classList.remove('open'); document.body.style.overflow = pmOverlay.classList.contains('open') ? 'hidden' : ''; };
 
 
-  [pmOverlay, smOverlay, lbOverlay].forEach(ov => ov.addEventListener('click', e => { if (e.target === ov) ov.querySelector('.pm-close, .lightbox-close').click(); }));
+  [pmOverlay, lbOverlay].forEach(ov => ov.addEventListener('click', e => { if (e.target === ov) ov.querySelector('.pm-close, .lightbox-close').click(); }));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') [lbOverlay, pmOverlay, smOverlay].find(o => o.classList.contains('open'))?.querySelector('button').click(); });
 
   /* --- Retrato interativo ---
