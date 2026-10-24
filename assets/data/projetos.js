@@ -5,41 +5,45 @@
    filtro: identidade | web (Programação) | conteudo (Carrosséis e posts) | dashboards | dashboards | dashboards | dashboards | dashboards; pode ser lista (aparece nos dois grupos) · destaque = aparece na home
    intro = texto do cabeçalho quando não há telas · web = {url, dev: mobile|desktop} abre o site num modal
    shots = capturas (desktop | mobile | pagina) · galeria = imagens soltas · posts = grupo em posts.js · postGroups = vários grupos com título (ex.: PROEC) · siteIntro = texto do bloco do site · html = bloco próprio · rel = projetos ligados
+   idiomasImg = ["en","es"] no projeto (ou numa tela/shot) indica que existem imagens traduzidas: NN.en.webp, NN-t.en.webp, NN.es.webp… (mesma pasta). Sem a lista, EN/ES usam a imagem em PT.
+   titulo pode ser texto ou {pt,en,es}; o resolvedor no fim do arquivo devolve sempre texto no idioma ativo.
    dash = dashboard de engajamento (dados em engajamento.js): users = contas · m = l (curtidas) | c (comentários) · por = user | g (quebra) · nomes = rótulos de g · tabela · linha = false esconde post a post */
 window.PROJETOS = [
  {
   "slug": "classic-tattoo",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "classic-tattoo",
   "exp": "t.pr consulting",
   "titulo": "Classic Tattoo PCH",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "pecas-graficas",
-      "aplicacoes-marca"
-    ],
-    "setor": [
-      "tatuagem",
-      "servicos-locais"
-    ],
-    "contexto": [
-      "cliente",
-      "internacional",
-      "idioma-ingles"
-    ],
-    "competencias": [
-      "direcao-arte",
-      "identidade-visual",
-      "ilustracao"
-    ]
+   "entrega": [
+    "logotipo",
+    "pecas-graficas",
+    "aplicacoes-marca"
+   ],
+   "setor": [
+    "tatuagem",
+    "servicos-locais"
+   ],
+   "contexto": [
+    "cliente",
+    "internacional",
+    "idioma-ingles"
+   ],
+   "competencias": [
+    "direcao-arte",
+    "identidade-visual",
+    "ilustracao"
+   ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
   "link": "https://www.classictattoopch.com",
@@ -56,7 +60,11 @@ window.PROJETOS = [
      "pt": "Identidade visual para estúdio de tatuagem em Torrance, Califórnia (EUA). Contratação via t.pr consulting, junho a julho de 2024. Três versões de símbolo até a aprovação.",
      "en": "Visual identity for a tattoo studio in Torrance, California (USA). Hired through t.pr consulting, June to July 2024. Three symbol versions until approval.",
      "es": "Identidad visual para un estudio de tatuajes en Torrance, California (EE. UU.). Contratación vía t.pr consulting, junio a julio de 2024. Tres versiones del símbolo hasta la aprobación."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -69,7 +77,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -82,7 +94,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -95,7 +111,11 @@ window.PROJETOS = [
      "pt": "Cabeça de tigre em gravura, com textura de impressão. Junho de 2024.",
      "en": "Tiger head as an engraving, with print texture. June 2024.",
      "es": "Cabeza de tigre en grabado, con textura de impresión. Junio de 2024."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -108,7 +128,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -121,7 +145,11 @@ window.PROJETOS = [
      "pt": "Tigre ilustrado de corpo inteiro: contorno preto, preenchimento vermelho. Julho de 2024.",
      "en": "Full-body illustrated tiger: black outline, red fill. July 2024.",
      "es": "Tigre ilustrado de cuerpo entero: contorno negro, relleno rojo. Julio de 2024."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -134,7 +162,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -147,7 +179,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -160,7 +196,11 @@ window.PROJETOS = [
      "pt": "Desenho de Stefano Guerriero, da Classic Tattoo PCH, adaptado para o digital: vetorização, remoção das rebarbas, cores chapadas e versões.",
      "en": "Drawing by Stefano Guerriero, of Classic Tattoo PCH, adapted for digital use: vectorization, burr removal, flat colors and versions.",
      "es": "Dibujo de Stefano Guerriero, de Classic Tattoo PCH, adaptado al digital: vectorización, eliminación de rebabas, colores planos y versiones."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "10",
@@ -186,7 +226,11 @@ window.PROJETOS = [
      "pt": "Módulo = 1/8 da altura do símbolo. Proporção 1,21 × 1.",
      "en": "Module = 1/8 of the symbol height. 1.21 × 1 ratio.",
      "es": "Módulo = 1/8 de la altura del símbolo. Proporción 1,21 × 1."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "12",
@@ -199,7 +243,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "13",
@@ -212,7 +260,11 @@ window.PROJETOS = [
      "pt": "Raven Hell Medium em duas linhas: “classic” em Mars Red, “tattoo” em Cloud Dancer ou Anthracite.",
      "en": "Raven Hell Medium in two lines: “classic” in Mars Red, “tattoo” in Cloud Dancer or Anthracite.",
      "es": "Raven Hell Medium en dos líneas: “classic” en Mars Red, “tattoo” en Cloud Dancer o Anthracite."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "14",
@@ -225,7 +277,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "15",
@@ -238,7 +294,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "16",
@@ -251,7 +311,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "17",
@@ -264,7 +328,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "18",
@@ -277,7 +345,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "19",
@@ -290,7 +362,11 @@ window.PROJETOS = [
      "pt": "Versão horizontal alternativa. Todas as versões de cor estão nos arquivos de entrega.",
      "en": "Alternative horizontal version. All color versions are in the delivery files.",
      "es": "Versión horizontal alternativa. Todas las versiones de color están en los archivos de entrega."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "20",
@@ -303,7 +379,11 @@ window.PROJETOS = [
      "pt": "x = 1/4 da altura do símbolo, com grade de apoio de módulo x/2.",
      "en": "x = 1/4 of the symbol height, with an x/2 support grid.",
      "es": "x = 1/4 de la altura del símbolo, con retícula de apoyo de módulo x/2."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "21",
@@ -316,7 +396,11 @@ window.PROJETOS = [
      "pt": "Cloud Dancer (PANTONE 11-4201 TCX), Mars Red (18-1655 TCX) e Anthracite (19-4007 TPX).",
      "en": "Cloud Dancer (PANTONE 11-4201 TCX), Mars Red (18-1655 TCX) and Anthracite (19-4007 TPX).",
      "es": "Cloud Dancer (PANTONE 11-4201 TCX), Mars Red (18-1655 TCX) y Anthracite (19-4007 TPX)."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "22",
@@ -329,7 +413,11 @@ window.PROJETOS = [
      "pt": "Raven Hell em seis pesos; Medium é o peso do logotipo.",
      "en": "Raven Hell in six weights; Medium is the logotype weight.",
      "es": "Raven Hell en seis pesos; Medium es el peso del logotipo."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "23",
@@ -342,7 +430,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "24",
@@ -355,7 +447,11 @@ window.PROJETOS = [
      "pt": "Raleway para textos, informações e interface.",
      "en": "Raleway for text, information and interface.",
      "es": "Raleway para textos, información e interfaz."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "25",
@@ -368,7 +464,11 @@ window.PROJETOS = [
      "pt": "Três riscos de garra em Mars Red, usados como marcador de seção no site e em adesivo.",
      "en": "Three claw marks in Mars Red, used as a section marker on the website and on a sticker.",
      "es": "Tres rasguños de garra en Mars Red, usados como marcador de sección en el sitio y en un adhesivo."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "26",
@@ -489,7 +589,11 @@ window.PROJETOS = [
      "en": "",
      "es": ""
     },
-    "link": true
+    "link": true,
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "35",
@@ -599,40 +703,42 @@ window.PROJETOS = [
  },
  {
   "slug": "rino",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "rino",
   "exp": null,
   "titulo": "Rino",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "manual-marca",
-      "layouts-pecas",
-      "mockups",
-      "kit-impresso"
-    ],
-    "setor": [
-      "b2b",
-      "credito-financas"
-    ],
-    "contexto": [
-      "cliente"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "ilustracao-vetorial",
-      "direcao-arte",
-      "producao-grafica",
-      "gestao-fornecedores",
-      "logistica-producao"
-    ]
+   "entrega": [
+    "logotipo",
+    "manual-marca",
+    "layouts-pecas",
+    "mockups",
+    "kit-impresso"
+   ],
+   "setor": [
+    "b2b",
+    "credito-financas"
+   ],
+   "contexto": [
+    "cliente"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "ilustracao-vetorial",
+    "direcao-arte",
+    "producao-grafica",
+    "gestao-fornecedores",
+    "logistica-producao"
+   ]
   },
   "capa": "assets/projetos/rino/capa.webp",
   "dir": "assets/projetos/rino/",
@@ -1362,21 +1468,35 @@ window.PROJETOS = [
  },
  {
   "slug": "rino-pecas",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "rino",
-  "titulo": "Rino: peças",
+  "titulo": {
+   "pt": "Rino: peças",
+   "en": "Rino: pieces",
+   "es": "Rino: piezas"
+  },
   "ano": "2026",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["pecas-graficas"],
-    "setor": ["b2b","credito-financas"],
-    "contexto": ["desdobramento-marca","projeto-ligado"],
-    "competencias": []
+   "entrega": [
+    "pecas-graficas"
+   ],
+   "setor": [
+    "b2b",
+    "credito-financas"
+   ],
+   "contexto": [
+    "desdobramento-marca",
+    "projeto-ligado"
+   ],
+   "competencias": []
   },
   "capa": "assets/projetos/rino-pecas/capa.webp",
   "dir": "assets/projetos/rino-pecas/",
@@ -1384,784 +1504,1132 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Estampa — padrão silhueta"
+     "pt": "Estampa — padrão silhueta",
+     "en": "Print — silhouette pattern",
+     "es": "Estampa — patrón silueta"
     },
     "d": {
-     "pt": "Peças desenvolvidas para a Rino a partir do manual de marca e entregues ao cliente: papelaria, crachás, carimbo, adesivos, pastas, embalagens, perfis de WhatsApp, sinalização e calendário 2027. Cada layout traz o formato final e o arquivo de produção."
+     "pt": "Peças desenvolvidas para a Rino a partir do manual de marca e entregues ao cliente: papelaria, crachás, carimbo, adesivos, pastas, embalagens, perfis de WhatsApp, sinalização e calendário 2027. Cada layout traz o formato final e o arquivo de produção.",
+     "en": "Pieces developed for Rino from the brand manual and delivered to the client: stationery, badges, stamp, stickers, folders, packaging, WhatsApp profiles, signage and a 2027 calendar. Each layout shows the final format and the production file.",
+     "es": "Piezas desarrolladas para Rino a partir del manual de marca y entregadas al cliente: papelería, credenciales, sello, adhesivos, carpetas, empaques, perfiles de WhatsApp, señalización y calendario 2027. Cada layout muestra el formato final y el archivo de producción."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Estampa — padrão tipográfico"
+     "pt": "Estampa — padrão tipográfico",
+     "en": "Print — typographic pattern",
+     "es": "Estampa — patrón tipográfico"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Estampa — padrão misto"
+     "pt": "Estampa — padrão misto",
+     "en": "Print — mixed pattern",
+     "es": "Estampa — patrón mixto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Pasta A4 — capa em degradê"
+     "pt": "Pasta A4 — capa em degradê",
+     "en": "A4 folder — gradient cover",
+     "es": "Carpeta A4 — portada en degradado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Cartão — frente em degradê"
+     "pt": "Cartão — frente em degradê",
+     "en": "Card — gradient front",
+     "es": "Tarjeta — frente en degradado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Adesivo em degradê"
+     "pt": "Adesivo em degradê",
+     "en": "Gradient sticker",
+     "es": "Adhesivo en degradado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Cartão de visitas — frente"
+     "pt": "Cartão de visitas — frente",
+     "en": "Business card — front",
+     "es": "Tarjeta de presentación — frente"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Cartão de visitas — verso"
+     "pt": "Cartão de visitas — verso",
+     "en": "Business card — back",
+     "es": "Tarjeta de presentación — reverso"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Boné Azul Rino — bordado"
+     "pt": "Boné Azul Rino — bordado",
+     "en": "Rino Blue cap — embroidery",
+     "es": "Gorra Azul Rino — bordado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Boné branco — bordado"
+     "pt": "Boné branco — bordado",
+     "en": "White cap — embroidery",
+     "es": "Gorra blanca — bordado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Ecobag branca — área de silk"
+     "pt": "Ecobag branca — área de silk",
+     "en": "White tote bag — screen-print area",
+     "es": "Ecobag blanca — área de serigrafía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Ecobag em degradê — área de silk"
+     "pt": "Ecobag em degradê — área de silk",
+     "en": "Gradient tote bag — screen-print area",
+     "es": "Ecobag en degradado — área de serigrafía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Caneca A · Degradê — volta completa"
+     "pt": "Caneca A · Degradê — volta completa",
+     "en": "Mug A · Gradient — full wrap",
+     "es": "Taza A · Degradado — vuelta completa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Caneca B · Minimal — volta completa"
+     "pt": "Caneca B · Minimal — volta completa",
+     "en": "Mug B · Minimal — full wrap",
+     "es": "Taza B · Minimal — vuelta completa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Caneca C · Padrão — volta completa"
+     "pt": "Caneca C · Padrão — volta completa",
+     "en": "Mug C · Pattern — full wrap",
+     "es": "Taza C · Patrón — vuelta completa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "16",
     "t": {
-     "pt": "Polo branca — bordado do peito"
+     "pt": "Polo branca — bordado do peito",
+     "en": "White polo — chest embroidery",
+     "es": "Polo blanca — bordado del pecho"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "17",
     "t": {
-     "pt": "Polo Azul Rino — bordado do peito"
+     "pt": "Polo Azul Rino — bordado do peito",
+     "en": "Rino Blue polo — chest embroidery",
+     "es": "Polo Azul Rino — bordado del pecho"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "18",
     "t": {
-     "pt": "Etiqueta da gola interna"
+     "pt": "Etiqueta da gola interna",
+     "en": "Inner neck label",
+     "es": "Etiqueta interna del cuello"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "19",
     "t": {
-     "pt": "Garrafa de alumínio — área de impressão"
+     "pt": "Garrafa de alumínio — área de impressão",
+     "en": "Aluminum bottle — print area",
+     "es": "Botella de aluminio — área de impresión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "20",
     "t": {
-     "pt": "Garrafa Azul Rino — área de impressão"
+     "pt": "Garrafa Azul Rino — área de impressão",
+     "en": "Rino Blue bottle — print area",
+     "es": "Botella Azul Rino — área de impresión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "21",
     "t": {
-     "pt": "Papel timbrado"
+     "pt": "Papel timbrado",
+     "en": "Letterhead",
+     "es": "Papel membretado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "22",
     "t": {
-     "pt": "Envelope DL"
+     "pt": "Envelope DL",
+     "en": "DL envelope",
+     "es": "Sobre DL"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "23",
     "t": {
-     "pt": "Bloco"
+     "pt": "Bloco",
+     "en": "Notepad",
+     "es": "Bloc de notas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "24",
     "t": {
-     "pt": "Carimbo automático"
+     "pt": "Carimbo automático",
+     "en": "Self-inking stamp",
+     "es": "Sello automático"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "25",
     "t": {
-     "pt": "Adesivo redondo"
+     "pt": "Adesivo redondo",
+     "en": "Round sticker",
+     "es": "Adhesivo redondo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "26",
     "t": {
-     "pt": "Crachá — frente"
+     "pt": "Crachá — frente",
+     "en": "Badge — front",
+     "es": "Credencial — frente"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "27",
     "t": {
-     "pt": "Crachá — verso"
+     "pt": "Crachá — verso",
+     "en": "Badge — back",
+     "es": "Credencial — reverso"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "28",
     "t": {
-     "pt": "Caneta branca — área de impressão"
+     "pt": "Caneta branca — área de impressão",
+     "en": "White pen — print area",
+     "es": "Bolígrafo blanco — área de impresión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "29",
     "t": {
-     "pt": "Caneta azul — área de impressão"
+     "pt": "Caneta azul — área de impressão",
+     "en": "Blue pen — print area",
+     "es": "Bolígrafo azul — área de impresión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "30",
     "t": {
-     "pt": "Perfil de WhatsApp A — silhueta e nome"
+     "pt": "Perfil de WhatsApp A — silhueta e nome",
+     "en": "WhatsApp profile A — silhouette and name",
+     "es": "Perfil de WhatsApp A — silueta y nombre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "31",
     "t": {
-     "pt": "Perfil de WhatsApp B — reduzido"
+     "pt": "Perfil de WhatsApp B — reduzido",
+     "en": "WhatsApp profile B — reduced",
+     "es": "Perfil de WhatsApp B — reducido"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "32",
     "t": {
-     "pt": "Perfil de WhatsApp C — logotipo com segmentos"
+     "pt": "Perfil de WhatsApp C — logotipo com segmentos",
+     "en": "WhatsApp profile C — logo with segments",
+     "es": "Perfil de WhatsApp C — logotipo con segmentos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "33",
     "t": {
-     "pt": "Pasta A4 — capa"
+     "pt": "Pasta A4 — capa",
+     "en": "A4 folder — front cover",
+     "es": "Carpeta A4 — portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "34",
     "t": {
-     "pt": "Pasta A4 — contracapa"
+     "pt": "Pasta A4 — contracapa",
+     "en": "A4 folder — back cover",
+     "es": "Carpeta A4 — contraportada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "35",
     "t": {
-     "pt": "Capa de documento"
+     "pt": "Capa de documento",
+     "en": "Document cover",
+     "es": "Portada de documento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "36",
     "t": {
-     "pt": "Envelope saco"
+     "pt": "Envelope saco",
+     "en": "Large envelope",
+     "es": "Sobre bolsa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "37",
     "t": {
-     "pt": "Etiqueta de remetente"
+     "pt": "Etiqueta de remetente",
+     "en": "Sender label",
+     "es": "Etiqueta de remitente"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "38",
     "t": {
-     "pt": "Cartão de mensagem — frente"
+     "pt": "Cartão de mensagem — frente",
+     "en": "Note card — front",
+     "es": "Tarjeta de mensaje — frente"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "39",
     "t": {
-     "pt": "Cartão de mensagem — verso"
+     "pt": "Cartão de mensagem — verso",
+     "en": "Note card — back",
+     "es": "Tarjeta de mensaje — reverso"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "40",
     "t": {
-     "pt": "Tag — frente"
+     "pt": "Tag — frente",
+     "en": "Tag — front",
+     "es": "Etiqueta colgante — frente"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "41",
     "t": {
-     "pt": "Tag — verso"
+     "pt": "Tag — verso",
+     "en": "Tag — back",
+     "es": "Etiqueta colgante — reverso"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "42",
     "t": {
-     "pt": "Marcador de página"
+     "pt": "Marcador de página",
+     "en": "Bookmark",
+     "es": "Separador de libro"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "43",
     "t": {
-     "pt": "Bloco adesivo"
+     "pt": "Bloco adesivo",
+     "en": "Sticky notes",
+     "es": "Notas adhesivas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "44",
     "t": {
-     "pt": "Bloco de recibo"
+     "pt": "Bloco de recibo",
+     "en": "Receipt book",
+     "es": "Talonario de recibos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "45",
     "t": {
-     "pt": "Mousepad"
+     "pt": "Mousepad",
+     "en": "Mousepad",
+     "es": "Mousepad"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "46",
     "t": {
-     "pt": "Porta-copos A"
+     "pt": "Porta-copos A",
+     "en": "Coaster A",
+     "es": "Posavasos A"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "47",
     "t": {
-     "pt": "Porta-copos B"
+     "pt": "Porta-copos B",
+     "en": "Coaster B",
+     "es": "Posavasos B"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "48",
     "t": {
-     "pt": "Placa de porta"
+     "pt": "Placa de porta",
+     "en": "Door sign",
+     "es": "Placa de puerta"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "49",
     "t": {
-     "pt": "Pin de lapela"
+     "pt": "Pin de lapela",
+     "en": "Lapel pin",
+     "es": "Pin de solapa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "50",
     "t": {
-     "pt": "Etiqueta de patrimônio"
+     "pt": "Etiqueta de patrimônio",
+     "en": "Asset tag",
+     "es": "Etiqueta de inventario"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "51",
     "t": {
-     "pt": "Fita adesiva — estampa"
+     "pt": "Fita adesiva — estampa",
+     "en": "Packing tape — print",
+     "es": "Cinta adhesiva — estampa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "52",
     "t": {
-     "pt": "Cordão de crachá — estampa"
+     "pt": "Cordão de crachá — estampa",
+     "en": "Lanyard — print",
+     "es": "Cordón de credencial — estampa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "53",
     "t": {
-     "pt": "Papel de presente A — estampa"
+     "pt": "Papel de presente A — estampa",
+     "en": "Gift wrap A — print",
+     "es": "Papel de regalo A — estampa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "54",
     "t": {
-     "pt": "Papel de presente B — estampa esmaecida"
+     "pt": "Papel de presente B — estampa esmaecida",
+     "en": "Gift wrap B — faded print",
+     "es": "Papel de regalo B — estampa atenuada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "55",
     "t": {
-     "pt": "Logo para nota fiscal"
+     "pt": "Logo para nota fiscal",
+     "en": "Logo for invoices",
+     "es": "Logo para factura"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "56",
     "t": {
-     "pt": "Garrafa Anoitecer — volta do corpo"
+     "pt": "Garrafa Anoitecer — volta do corpo",
+     "en": "Dusk bottle — body wrap",
+     "es": "Botella Anochecer — vuelta del cuerpo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "57",
     "t": {
-     "pt": "Garrafa Névoa — volta do corpo"
+     "pt": "Garrafa Névoa — volta do corpo",
+     "en": "Mist bottle — body wrap",
+     "es": "Botella Niebla — vuelta del cuerpo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "58",
     "t": {
-     "pt": "Ecobag Horizonte — face"
+     "pt": "Ecobag Horizonte — face",
+     "en": "Horizon tote bag — face",
+     "es": "Ecobag Horizonte — cara"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "59",
     "t": {
-     "pt": "Caderno — capa"
+     "pt": "Caderno — capa",
+     "en": "Notebook — cover",
+     "es": "Cuaderno — portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "60",
     "t": {
-     "pt": "Chaveiro em acrílico"
+     "pt": "Chaveiro em acrílico",
+     "en": "Acrylic keychain",
+     "es": "Llavero de acrílico"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "61",
     "t": {
-     "pt": "Proposta — capa"
+     "pt": "Proposta — capa",
+     "en": "Proposal — cover",
+     "es": "Propuesta — portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "62",
     "t": {
-     "pt": "Proposta — condições"
+     "pt": "Proposta — condições",
+     "en": "Proposal — terms",
+     "es": "Propuesta — condiciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "63",
     "t": {
-     "pt": "Proposta — aceite"
+     "pt": "Proposta — aceite",
+     "en": "Proposal — acceptance",
+     "es": "Propuesta — aceptación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "64",
     "t": {
-     "pt": "Assinatura de e-mail"
+     "pt": "Assinatura de e-mail",
+     "en": "Email signature",
+     "es": "Firma de correo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "65",
     "t": {
-     "pt": "Letreiro de fachada"
+     "pt": "Letreiro de fachada",
+     "en": "Storefront sign",
+     "es": "Letrero de fachada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "66",
     "t": {
-     "pt": "Placa interna — modelo"
+     "pt": "Placa interna — modelo",
+     "en": "Indoor sign — template",
+     "es": "Placa interna — modelo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "67",
     "t": {
-     "pt": "Camisa social — bordado do peito"
+     "pt": "Camisa social — bordado do peito",
+     "en": "Dress shirt — chest embroidery",
+     "es": "Camisa formal — bordado del pecho"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "68",
     "t": {
-     "pt": "Colete — bordado do peito"
+     "pt": "Colete — bordado do peito",
+     "en": "Vest — chest embroidery",
+     "es": "Chaleco — bordado del pecho"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "69",
     "t": {
-     "pt": "Crachá de visitante"
+     "pt": "Crachá de visitante",
+     "en": "Visitor badge",
+     "es": "Credencial de visitante"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "70",
     "t": {
-     "pt": "Kit de boas-vindas — tampa"
+     "pt": "Kit de boas-vindas — tampa",
+     "en": "Welcome kit — lid",
+     "es": "Kit de bienvenida — tapa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "71",
     "t": {
-     "pt": "Calendário 2027 · janeiro"
+     "pt": "Calendário 2027 · janeiro",
+     "en": "2027 calendar · January",
+     "es": "Calendario 2027 · enero"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "72",
     "t": {
-     "pt": "Calendário 2027 · fevereiro"
+     "pt": "Calendário 2027 · fevereiro",
+     "en": "2027 calendar · February",
+     "es": "Calendario 2027 · febrero"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "73",
     "t": {
-     "pt": "Calendário 2027 · março"
+     "pt": "Calendário 2027 · março",
+     "en": "2027 calendar · March",
+     "es": "Calendario 2027 · marzo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "74",
     "t": {
-     "pt": "Calendário 2027 · abril"
+     "pt": "Calendário 2027 · abril",
+     "en": "2027 calendar · April",
+     "es": "Calendario 2027 · abril"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "75",
     "t": {
-     "pt": "Calendário 2027 · maio"
+     "pt": "Calendário 2027 · maio",
+     "en": "2027 calendar · May",
+     "es": "Calendario 2027 · mayo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "76",
     "t": {
-     "pt": "Calendário 2027 · junho"
+     "pt": "Calendário 2027 · junho",
+     "en": "2027 calendar · June",
+     "es": "Calendario 2027 · junio"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "77",
     "t": {
-     "pt": "Calendário 2027 · julho"
+     "pt": "Calendário 2027 · julho",
+     "en": "2027 calendar · July",
+     "es": "Calendario 2027 · julio"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "78",
     "t": {
-     "pt": "Calendário 2027 · agosto"
+     "pt": "Calendário 2027 · agosto",
+     "en": "2027 calendar · August",
+     "es": "Calendario 2027 · agosto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "79",
     "t": {
-     "pt": "Calendário 2027 · setembro"
+     "pt": "Calendário 2027 · setembro",
+     "en": "2027 calendar · September",
+     "es": "Calendario 2027 · septiembre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "80",
     "t": {
-     "pt": "Calendário 2027 · outubro"
+     "pt": "Calendário 2027 · outubro",
+     "en": "2027 calendar · October",
+     "es": "Calendario 2027 · octubre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "81",
     "t": {
-     "pt": "Calendário 2027 · novembro"
+     "pt": "Calendário 2027 · novembro",
+     "en": "2027 calendar · November",
+     "es": "Calendario 2027 · noviembre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "82",
     "t": {
-     "pt": "Calendário 2027 · dezembro"
+     "pt": "Calendário 2027 · dezembro",
+     "en": "2027 calendar · December",
+     "es": "Calendario 2027 · diciembre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "83",
     "t": {
-     "pt": "Envelope DL com janela"
+     "pt": "Envelope DL com janela",
+     "en": "Window DL envelope",
+     "es": "Sobre DL con ventana"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "84",
     "t": {
-     "pt": "Carimbo Conferido"
+     "pt": "Carimbo Conferido",
+     "en": "“Checked” stamp",
+     "es": "Sello “Verificado”"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "85",
     "t": {
-     "pt": "Carimbo Cópia"
+     "pt": "Carimbo Cópia",
+     "en": "“Copy” stamp",
+     "es": "Sello “Copia”"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "86",
     "t": {
-     "pt": "Lacre adesivo"
+     "pt": "Lacre adesivo",
+     "en": "Seal sticker",
+     "es": "Sello adhesivo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "87",
     "t": {
-     "pt": "Etiqueta de caixa-arquivo"
+     "pt": "Etiqueta de caixa-arquivo",
+     "en": "Archive box label",
+     "es": "Etiqueta de caja de archivo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -2169,67 +2637,89 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Estampas"
+     "pt": "Estampas",
+     "en": "Prints",
+     "es": "Estampas"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Cartões e pasta"
+     "pt": "Cartões e pasta",
+     "en": "Cards and folder",
+     "es": "Tarjetas y carpeta"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Brindes e vestuário"
+     "pt": "Brindes e vestuário",
+     "en": "Merch and apparel",
+     "es": "Regalos y vestuario"
     }
    },
    {
     "p": 21,
     "t": {
-     "pt": "Papelaria"
+     "pt": "Papelaria",
+     "en": "Stationery",
+     "es": "Papelería"
     }
    },
    {
     "p": 30,
     "t": {
-     "pt": "WhatsApp"
+     "pt": "WhatsApp",
+     "en": "WhatsApp",
+     "es": "WhatsApp"
     }
    },
    {
     "p": 33,
     "t": {
-     "pt": "Documentos e envio"
+     "pt": "Documentos e envio",
+     "en": "Documents and mailing",
+     "es": "Documentos y envío"
     }
    },
    {
     "p": 45,
     "t": {
-     "pt": "Escritório e objetos"
+     "pt": "Escritório e objetos",
+     "en": "Office and objects",
+     "es": "Oficina y objetos"
     }
    },
    {
     "p": 61,
     "t": {
-     "pt": "Proposta e e-mail"
+     "pt": "Proposta e e-mail",
+     "en": "Proposal and email",
+     "es": "Propuesta y correo"
     }
    },
    {
     "p": 65,
     "t": {
-     "pt": "Fachada, uniforme e kit"
+     "pt": "Fachada, uniforme e kit",
+     "en": "Storefront, uniform and kit",
+     "es": "Fachada, uniforme y kit"
     }
    },
    {
     "p": 71,
     "t": {
-     "pt": "Calendário 2027"
+     "pt": "Calendário 2027",
+     "en": "2027 calendar",
+     "es": "Calendario 2027"
     }
    },
    {
     "p": 83,
     "t": {
-     "pt": "Arquivo e expedição"
+     "pt": "Arquivo e expedição",
+     "en": "Filing and shipping",
+     "es": "Archivo y expedición"
     }
    }
   ],
@@ -2240,37 +2730,39 @@ window.PROJETOS = [
  },
  {
   "slug": "rino-site",
-  "servicos_relacionados": ["landing"],
+  "servicos_relacionados": [
+   "landing"
+  ],
   "marca": "rino",
   "titulo": "Rino Cores",
   "ano": "2026",
   "cat": {
-    "pt": "Programação",
-    "en": "Programming",
-    "es": "Programación"
+   "pt": "Programação",
+   "en": "Programming",
+   "es": "Programación"
   },
   "filtro": "programacao",
   "etiquetas": {
-    "entrega": [
-      "ferramenta-interativa",
-      "site"
-    ],
-    "setor": [
-      "b2b",
-      "tecnologia"
-    ],
-    "contexto": [
-      "cliente",
-      "ferramenta-propria"
-    ],
-    "competencias": [
-      "programacao",
-      "design-interface",
-      "vs-code",
-      "html",
-      "css",
-      "javascript"
-    ]
+   "entrega": [
+    "ferramenta-interativa",
+    "site"
+   ],
+   "setor": [
+    "b2b",
+    "tecnologia"
+   ],
+   "contexto": [
+    "cliente",
+    "ferramenta-propria"
+   ],
+   "competencias": [
+    "programacao",
+    "design-interface",
+    "vs-code",
+    "html",
+    "css",
+    "javascript"
+   ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
   "dir": "assets/projetos/rino/",
@@ -2296,33 +2788,39 @@ window.PROJETOS = [
  },
  {
   "slug": "optica-leopoldina",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "optica-leopoldina",
   "exp": null,
   "titulo": "Óptica Leopoldina",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["logotipo","aplicacoes-marca","mockups"],
-    "setor": [
-      "varejo",
-      "optica"
-    ],
-    "contexto": [
-      "cliente",
-      "rebranding"
-    ],
-    "competencias": [
-      "direcao-arte",
-      "identidade-visual",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "logotipo",
+    "aplicacoes-marca",
+    "mockups"
+   ],
+   "setor": [
+    "varejo",
+    "optica"
+   ],
+   "contexto": [
+    "cliente",
+    "rebranding"
+   ],
+   "competencias": [
+    "direcao-arte",
+    "identidade-visual",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
   "dir": "assets/projetos/optica-leopoldina/",
@@ -2559,32 +3057,39 @@ window.PROJETOS = [
  },
  {
   "slug": "sollaris",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "sollaris",
   "titulo": "Sollaris",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
-  "filtro": ["identidade", "midias"],
+  "filtro": [
+   "identidade",
+   "midias"
+  ],
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "manual-marca"
-    ],
-    "setor": [
-      "moda-acessorios",
-      "beleza"
-    ],
-    "contexto": ["projeto-academico"],
-    "competencias": [
-      "direcao-arte",
-      "identidade-visual",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "logotipo",
+    "manual-marca"
+   ],
+   "setor": [
+    "moda-acessorios",
+    "beleza"
+   ],
+   "contexto": [
+    "projeto-academico"
+   ],
+   "competencias": [
+    "direcao-arte",
+    "identidade-visual",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
   "dir": "assets/projetos/sollaris/",
@@ -2610,7 +3115,9 @@ window.PROJETOS = [
      "es": "Sumario"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2621,7 +3128,9 @@ window.PROJETOS = [
      "es": "Historia"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2632,7 +3141,9 @@ window.PROJETOS = [
      "es": "Historia"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2643,7 +3154,9 @@ window.PROJETOS = [
      "es": "Visión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2654,7 +3167,9 @@ window.PROJETOS = [
      "es": "Misión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2665,7 +3180,9 @@ window.PROJETOS = [
      "es": "Valores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2676,7 +3193,9 @@ window.PROJETOS = [
      "es": "Logo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2687,7 +3206,9 @@ window.PROJETOS = [
      "es": "Introducción"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2698,7 +3219,9 @@ window.PROJETOS = [
      "es": "Construcción"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2709,7 +3232,9 @@ window.PROJETOS = [
      "es": "Logo primario"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2720,7 +3245,9 @@ window.PROJETOS = [
      "es": "Visión de los elementos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2731,7 +3258,9 @@ window.PROJETOS = [
      "es": "Versiones alternativas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2742,7 +3271,9 @@ window.PROJETOS = [
      "es": "Tamaño mínimo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2753,7 +3284,9 @@ window.PROJETOS = [
      "es": "Área de protección"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2764,7 +3297,9 @@ window.PROJETOS = [
      "es": "Logo y colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2775,10 +3310,12 @@ window.PROJETOS = [
      "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
-      {
+   {
     "img": "19",
     "t": {
      "pt": "Introdução",
@@ -2786,10 +3323,12 @@ window.PROJETOS = [
      "es": "Introducción"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
-{
+   {
     "img": "20",
     "t": {
      "pt": "Paleta principal",
@@ -2797,7 +3336,9 @@ window.PROJETOS = [
      "es": "Paleta principal"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2808,7 +3349,9 @@ window.PROJETOS = [
      "es": "Origen de los colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2819,7 +3362,9 @@ window.PROJETOS = [
      "es": "Origen de los colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2830,7 +3375,9 @@ window.PROJETOS = [
      "es": "Origen de los colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2841,7 +3388,9 @@ window.PROJETOS = [
      "es": "Proporción de uso"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2852,7 +3401,9 @@ window.PROJETOS = [
      "es": "Combinaciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2863,7 +3414,9 @@ window.PROJETOS = [
      "es": "Tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2874,7 +3427,9 @@ window.PROJETOS = [
      "es": "Fuente primaria"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2885,7 +3440,9 @@ window.PROJETOS = [
      "es": "Fuente secundaria"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2896,7 +3453,9 @@ window.PROJETOS = [
      "es": "Jerarquía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2907,7 +3466,9 @@ window.PROJETOS = [
      "es": "Aplicaciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2918,7 +3479,9 @@ window.PROJETOS = [
      "es": "Piezas de la colección"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
@@ -2929,7 +3492,9 @@ window.PROJETOS = [
      "es": "Gracias"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -2996,30 +3561,34 @@ window.PROJETOS = [
  },
  {
   "slug": "equity360",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "marca": "equity360",
   "titulo": "Equity 360",
   "ano": "2026",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo"
-    ],
-    "setor": [
-      "tecnologia",
-      "podcast"
-    ],
-    "contexto": ["projeto-ligado"],
-    "competencias": [
-      "direcao-arte",
-      "identidade-visual",
-      "illustrator"
-    ]
+   "entrega": [
+    "logotipo"
+   ],
+   "setor": [
+    "tecnologia",
+    "podcast"
+   ],
+   "contexto": [
+    "projeto-ligado"
+   ],
+   "competencias": [
+    "direcao-arte",
+    "identidade-visual",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
   "dir": "assets/projetos/equity360/",
@@ -3183,28 +3752,44 @@ window.PROJETOS = [
  },
  {
   "slug": "congresso-extensao",
-  "servicos_relacionados": ["identidade"],
-  "titulo": "Congresso de Extensão Universitária",
+  "servicos_relacionados": [
+   "identidade"
+  ],
+  "titulo": {
+   "pt": "Congresso de Extensão Universitária",
+   "en": "University Extension Congress",
+   "es": "Congreso de Extensión Universitaria"
+  },
   "ano": "2024",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
-  "filtro": ["identidade", "midias"],
+  "filtro": [
+   "identidade",
+   "midias"
+  ],
   "etiquetas": {
-    "entrega": ["identidade-visual","pecas-graficas","evento","posts-carrosseis"],
-    "setor": [
-      "institucional",
-      "educacao"
-    ],
-    "contexto": ["projeto-academico"],
-    "competencias": [
-      "direcao-arte",
-      "design-grafico",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "identidade-visual",
+    "pecas-graficas",
+    "evento",
+    "posts-carrosseis"
+   ],
+   "setor": [
+    "institucional",
+    "educacao"
+   ],
+   "contexto": [
+    "projeto-academico"
+   ],
+   "competencias": [
+    "direcao-arte",
+    "design-grafico",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
   "dir": "assets/projetos/congresso-extensao/",
@@ -3212,136 +3797,196 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Congresso de Extensão Universitária"
+     "pt": "Congresso de Extensão Universitária",
+     "en": "University Extension Congress",
+     "es": "Congreso de Extensión Universitaria"
     },
     "d": {
-     "pt": "Identidade visual do Congresso de Extensão Universitária da Unesp 2024, realizado pela PROEC: símbolo, assinaturas, cores, tipografia e peças físicas do evento (backdrop, crachá, kit, camiseta e banner de palco)."
+     "pt": "Identidade visual do Congresso de Extensão Universitária da Unesp 2024, realizado pela PROEC: símbolo, assinaturas, cores, tipografia e peças físicas do evento (backdrop, crachá, kit, camiseta e banner de palco).",
+     "en": "Visual identity for the 2024 Unesp University Extension Congress, run by PROEC: symbol, lockups, colors, typography and the event’s physical pieces (backdrop, badge, kit, T-shirt and stage banner).",
+     "es": "Identidad visual del Congreso de Extensión Universitaria de la Unesp 2024, organizado por la PROEC: símbolo, firmas, colores, tipografía y piezas físicas del evento (backdrop, credencial, kit, camiseta y banner de escenario)."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Assinatura"
+     "pt": "Assinatura",
+     "en": "Lockup",
+     "es": "Firma"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Versões"
+     "pt": "Versões",
+     "en": "Versions",
+     "es": "Versiones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Projeção"
+     "pt": "Projeção",
+     "en": "Projection",
+     "es": "Proyección"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Backdrop"
+     "pt": "Backdrop",
+     "en": "Backdrop",
+     "es": "Backdrop"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Crachá"
+     "pt": "Crachá",
+     "en": "Badge",
+     "es": "Credencial"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Kit do participante"
+     "pt": "Kit do participante",
+     "en": "Participant kit",
+     "es": "Kit del participante"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Camiseta"
+     "pt": "Camiseta",
+     "en": "T-shirt",
+     "es": "Camiseta"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Banner de palco"
+     "pt": "Banner de palco",
+     "en": "Stage banner",
+     "es": "Banner de escenario"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Registros"
+     "pt": "Registros",
+     "en": "Photos",
+     "es": "Registros"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -3349,91 +3994,121 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Congresso de Extensão Universitária"
+     "pt": "Congresso de Extensão Universitária",
+     "en": "University Extension Congress",
+     "es": "Congreso de Extensión Universitaria"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Assinatura"
+     "pt": "Assinatura",
+     "en": "Lockup",
+     "es": "Firma"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Versões"
+     "pt": "Versões",
+     "en": "Versions",
+     "es": "Versiones"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Projeção"
+     "pt": "Projeção",
+     "en": "Projection",
+     "es": "Proyección"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Backdrop"
+     "pt": "Backdrop",
+     "en": "Backdrop",
+     "es": "Backdrop"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Crachá"
+     "pt": "Crachá",
+     "en": "Badge",
+     "es": "Credencial"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Kit do participante"
+     "pt": "Kit do participante",
+     "en": "Participant kit",
+     "es": "Kit del participante"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Camiseta"
+     "pt": "Camiseta",
+     "en": "T-shirt",
+     "es": "Camiseta"
     }
    },
    {
     "p": 13,
     "t": {
-     "pt": "Banner de palco"
+     "pt": "Banner de palco",
+     "en": "Stage banner",
+     "es": "Banner de escenario"
     }
    },
    {
     "p": 14,
     "t": {
-     "pt": "Registros"
+     "pt": "Registros",
+     "en": "Photos",
+     "es": "Registros"
     }
    },
    {
     "p": 15,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -3445,28 +4120,40 @@ window.PROJETOS = [
  },
  {
   "slug": "interserv",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "InterServ 2023/2024",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["identidade-visual","pictogramas","sinalizacao","pecas-digitais","pecas-graficas","banners","medalhas"],
-    "setor": [
-      "institucional",
-      "esporte"
-    ],
-    "contexto": ["projeto-academico"],
-    "competencias": [
-      "identidade-visual",
-      "design-grafico",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "identidade-visual",
+    "pictogramas",
+    "sinalizacao",
+    "pecas-digitais",
+    "pecas-graficas",
+    "banners",
+    "medalhas"
+   ],
+   "setor": [
+    "institucional",
+    "esporte"
+   ],
+   "contexto": [
+    "projeto-academico"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "design-grafico",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
   "dir": "assets/projetos/interserv/",
@@ -3474,127 +4161,183 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "InterServ 2023/2024"
+     "pt": "InterServ 2023/2024",
+     "en": "InterServ 2023/2024",
+     "es": "InterServ 2023/2024"
     },
     "d": {
-     "pt": "Jogos de integração dos servidores da Unesp, de 18 a 20 de setembro de 2024 em São Pedro (SP). Logotipo, pictogramas das modalidades, sinalização, peças digitais e medalhas, para PROEC, Coafes e NUMIS."
+     "pt": "Jogos de integração dos servidores da Unesp, de 18 a 20 de setembro de 2024 em São Pedro (SP). Logotipo, pictogramas das modalidades, sinalização, peças digitais e medalhas, para PROEC, Coafes e NUMIS.",
+     "en": "Integration games for Unesp staff, September 18–20, 2024, in São Pedro (SP). Logo, sport pictograms, signage, digital pieces and medals, for PROEC, Coafes and NUMIS.",
+     "es": "Juegos de integración de los servidores de la Unesp, del 18 al 20 de septiembre de 2024 en São Pedro (SP). Logotipo, pictogramas de las modalidades, señalización, piezas digitales y medallas, para PROEC, Coafes y NUMIS."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Logotipo"
+     "pt": "Logotipo",
+     "en": "Logo",
+     "es": "Logotipo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Pictogramas"
+     "pt": "Pictogramas",
+     "en": "Pictograms",
+     "es": "Pictogramas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Composição das peças"
+     "pt": "Composição das peças",
+     "en": "Piece layout",
+     "es": "Composición de las piezas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Sinalização"
+     "pt": "Sinalização",
+     "en": "Signage",
+     "es": "Señalización"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Instagram"
+     "pt": "Instagram",
+     "en": "Instagram",
+     "es": "Instagram"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Premiação"
+     "pt": "Premiação",
+     "en": "Awards",
+     "es": "Premiación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Registros da premiação"
+     "pt": "Registros da premiação",
+     "en": "Award ceremony photos",
+     "es": "Registros de la premiación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "t": {
-     "pt": "No evento"
+     "pt": "No evento",
+     "en": "At the event",
+     "es": "En el evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     },
     "img": "13"
    },
    {
     "img": "14",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -3602,85 +4345,113 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "InterServ 2023/2024"
+     "pt": "InterServ 2023/2024",
+     "en": "InterServ 2023/2024",
+     "es": "InterServ 2023/2024"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Logotipo"
+     "pt": "Logotipo",
+     "en": "Logo",
+     "es": "Logotipo"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Pictogramas"
+     "pt": "Pictogramas",
+     "en": "Pictograms",
+     "es": "Pictogramas"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Composição das peças"
+     "pt": "Composição das peças",
+     "en": "Piece layout",
+     "es": "Composición de las piezas"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Sinalização"
+     "pt": "Sinalização",
+     "en": "Signage",
+     "es": "Señalización"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Instagram"
+     "pt": "Instagram",
+     "en": "Instagram",
+     "es": "Instagram"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Premiação"
+     "pt": "Premiação",
+     "en": "Awards",
+     "es": "Premiación"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Registros da premiação"
+     "pt": "Registros da premiação",
+     "en": "Award ceremony photos",
+     "es": "Registros de la premiación"
     }
    },
    {
     "p": 13,
     "t": {
-     "pt": "No evento"
+     "pt": "No evento",
+     "en": "At the event",
+     "es": "En el evento"
     }
    },
    {
     "p": 14,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -3691,28 +4462,38 @@ window.PROJETOS = [
  },
  {
   "slug": "ntaps",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "NTAPS",
   "ano": "2022",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["identidade-visual","manual-marca","pecas-graficas","banners","plano-comunicacao"],
-    "setor": [
-      "institucional",
-      "saude"
-    ],
-    "contexto": ["bolsista"],
-    "competencias": [
-      "identidade-visual",
-      "direcao-arte",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "identidade-visual",
+    "manual-marca",
+    "pecas-graficas",
+    "banners",
+    "plano-comunicacao"
+   ],
+   "setor": [
+    "institucional",
+    "saude"
+   ],
+   "contexto": [
+    "bolsista"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "direcao-arte",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
   "dir": "assets/projetos/ntaps/",
@@ -3720,109 +4501,157 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "NTAPS"
+     "pt": "NTAPS",
+     "en": "NTAPS",
+     "es": "NTAPS"
     },
     "d": {
-     "pt": "Revisão do logotipo e sistema visual do Núcleo Técnico de Atenção Psicossocial da Unesp Bauru. Símbolo original da Inky Design, vetorizado e redesenhado; cores, tipografia, grafismo, aplicações e plano de comunicação."
+     "pt": "Revisão do logotipo e sistema visual do Núcleo Técnico de Atenção Psicossocial da Unesp Bauru. Símbolo original da Inky Design, vetorizado e redesenhado; cores, tipografia, grafismo, aplicações e plano de comunicação.",
+     "en": "Logo and visual system revision for the Psychosocial Care Technical Unit (NTAPS) at Unesp Bauru. Original symbol by Inky Design, vectorized and redrawn; colors, typography, graphics, applications and communication plan.",
+     "es": "Revisión del logotipo y del sistema visual del Núcleo Técnico de Atención Psicosocial de la Unesp Bauru. Símbolo original de Inky Design, vectorizado y redibujado; colores, tipografía, grafismo, aplicaciones y plan de comunicación."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O que era e o que mudou"
+     "pt": "O que era e o que mudou",
+     "en": "What it was and what changed",
+     "es": "Qué era y qué cambió"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Assinaturas"
+     "pt": "Assinaturas",
+     "en": "Lockups",
+     "es": "Firmas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Versões de cor"
+     "pt": "Versões de cor",
+     "en": "Color versions",
+     "es": "Versiones de color"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Grafismo"
+     "pt": "Grafismo",
+     "en": "Graphic element",
+     "es": "Grafismo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Panfleto"
+     "pt": "Panfleto",
+     "en": "Flyer",
+     "es": "Folleto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Reorganização da comunicação"
+     "pt": "Reorganização da comunicação",
+     "en": "Communication reorganization",
+     "es": "Reorganización de la comunicación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -3830,73 +4659,97 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "NTAPS"
+     "pt": "NTAPS",
+     "en": "NTAPS",
+     "es": "NTAPS"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O que era e o que mudou"
+     "pt": "O que era e o que mudou",
+     "en": "What it was and what changed",
+     "es": "Qué era y qué cambió"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Assinaturas"
+     "pt": "Assinaturas",
+     "en": "Lockups",
+     "es": "Firmas"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Versões de cor"
+     "pt": "Versões de cor",
+     "en": "Color versions",
+     "es": "Versiones de color"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Grafismo"
+     "pt": "Grafismo",
+     "en": "Graphic element",
+     "es": "Grafismo"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Panfleto"
+     "pt": "Panfleto",
+     "en": "Flyer",
+     "es": "Folleto"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Reorganização da comunicação"
+     "pt": "Reorganização da comunicação",
+     "en": "Communication reorganization",
+     "es": "Reorganización de la comunicación"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -3906,26 +4759,32 @@ window.PROJETOS = [
  },
  {
   "slug": "csunesp",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "CSUNESP",
   "ano": "2023",
   "cat": {
-    "pt": "Estratégia de marca",
-    "en": "Brand strategy",
-    "es": "Estrategia de marca"
+   "pt": "Estratégia de marca",
+   "en": "Brand strategy",
+   "es": "Estrategia de marca"
   },
   "filtro": "estrategia",
   "etiquetas": {
-    "entrega": ["manual-marca"],
-    "setor": [
-      "institucional",
-      "saude"
-    ],
-    "contexto": ["estagio"],
-    "competencias": [
-      "identidade-visual",
-      "photoshop"
-    ]
+   "entrega": [
+    "manual-marca"
+   ],
+   "setor": [
+    "institucional",
+    "saude"
+   ],
+   "contexto": [
+    "estagio"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "photoshop"
+   ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
   "dir": "assets/projetos/csunesp/",
@@ -3933,163 +4792,235 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Manual de Marca"
+     "pt": "Manual de Marca",
+     "en": "Brand Manual",
+     "es": "Manual de Marca"
     },
     "d": {
-     "pt": "Manual de marca da Coordenadoria de Saúde da Unesp, com Mariana Andrade Rocha: estrutura, persona, atributos, personalidade, missão, objetivos, proposta de comunicação e aplicações."
+     "pt": "Manual de marca da Coordenadoria de Saúde da Unesp, com Mariana Andrade Rocha: estrutura, persona, atributos, personalidade, missão, objetivos, proposta de comunicação e aplicações.",
+     "en": "Brand manual for the Unesp Health Office (CSUNESP), with Mariana Andrade Rocha: structure, persona, attributes, personality, mission, goals, communication proposal and applications.",
+     "es": "Manual de marca de la Coordinación de Salud de la Unesp, con Mariana Andrade Rocha: estructura, persona, atributos, personalidad, misión, objetivos, propuesta de comunicación y aplicaciones."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Créditos"
+     "pt": "Créditos",
+     "en": "Credits",
+     "es": "Créditos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Sumário"
+     "pt": "Sumário",
+     "en": "Contents",
+     "es": "Sumario"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Apresentação"
+     "pt": "Apresentação",
+     "en": "Introduction",
+     "es": "Presentación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Organograma"
+     "pt": "Organograma",
+     "en": "Org chart",
+     "es": "Organigrama"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Equipe"
+     "pt": "Equipe",
+     "en": "Team",
+     "es": "Equipo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Persona"
+     "pt": "Persona",
+     "en": "Persona",
+     "es": "Persona"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Atributos"
+     "pt": "Atributos",
+     "en": "Attributes",
+     "es": "Atributos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Palavras-chave"
+     "pt": "Palavras-chave",
+     "en": "Keywords",
+     "es": "Palabras clave"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Personalidade"
+     "pt": "Personalidade",
+     "en": "Personality",
+     "es": "Personalidad"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Missão"
+     "pt": "Missão",
+     "en": "Mission",
+     "es": "Misión"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Figura representativa"
+     "pt": "Figura representativa",
+     "en": "Representative figure",
+     "es": "Figura representativa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Atividades"
+     "pt": "Atividades",
+     "en": "Activities",
+     "es": "Actividades"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Objetivos"
+     "pt": "Objetivos",
+     "en": "Goals",
+     "es": "Objetivos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Proposta de comunicação"
+     "pt": "Proposta de comunicação",
+     "en": "Communication proposal",
+     "es": "Propuesta de comunicación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "16",
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "17",
     "t": {
-     "pt": "Redes sociais"
+     "pt": "Redes sociais",
+     "en": "Social media",
+     "es": "Redes sociales"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "18",
     "t": {
-     "pt": "Referências"
+     "pt": "Referências",
+     "en": "References",
+     "es": "Referencias"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -4097,37 +5028,49 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Manual de Marca"
+     "pt": "Manual de Marca",
+     "en": "Brand Manual",
+     "es": "Manual de Marca"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Apresentação"
+     "pt": "Apresentação",
+     "en": "Introduction",
+     "es": "Presentación"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Persona"
+     "pt": "Persona",
+     "en": "Persona",
+     "es": "Persona"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Missão"
+     "pt": "Missão",
+     "en": "Mission",
+     "es": "Misión"
     }
    },
    {
     "p": 14,
     "t": {
-     "pt": "Objetivos"
+     "pt": "Objetivos",
+     "en": "Goals",
+     "es": "Objetivos"
     }
    },
    {
     "p": 16,
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     }
    }
   ],
@@ -4137,23 +5080,37 @@ window.PROJETOS = [
  },
  {
   "slug": "mostra-saude-mental",
-  "servicos_relacionados": ["identidade"],
-  "titulo": "Mostra de Saúde Mental",
+  "servicos_relacionados": [
+   "identidade"
+  ],
+  "titulo": {
+   "pt": "Mostra de Saúde Mental",
+   "en": "Mental Health Showcase",
+   "es": "Muestra de Salud Mental"
+  },
   "ano": "2023",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["identidade-visual","pecas-graficas","evento"],
-    "setor": [
-      "institucional",
-      "saude"
-    ],
-    "contexto": ["bolsista"],
-    "competencias": ["direcao-arte"]
+   "entrega": [
+    "identidade-visual",
+    "pecas-graficas",
+    "evento"
+   ],
+   "setor": [
+    "institucional",
+    "saude"
+   ],
+   "contexto": [
+    "bolsista"
+   ],
+   "competencias": [
+    "direcao-arte"
+   ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "dir": "assets/projetos/mostra-saude-mental/",
@@ -4161,109 +5118,157 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Mostra de Saúde Mental"
+     "pt": "Mostra de Saúde Mental",
+     "en": "Mental Health Showcase",
+     "es": "Muestra de Salud Mental"
     },
     "d": {
-     "pt": "I Mostra de Saúde Mental da Unesp, 28 e 29 de novembro de 2023, pela CSUNESP. Logotipo, versões, cores, padrão gráfico e peças do evento, com Mariana Andrade Rocha."
+     "pt": "I Mostra de Saúde Mental da Unesp, 28 e 29 de novembro de 2023, pela CSUNESP. Logotipo, versões, cores, padrão gráfico e peças do evento, com Mariana Andrade Rocha.",
+     "en": "1st Unesp Mental Health Showcase, November 28–29, 2023, by CSUNESP. Logo, versions, colors, graphic pattern and event pieces, with Mariana Andrade Rocha.",
+     "es": "I Muestra de Salud Mental de la Unesp, 28 y 29 de noviembre de 2023, por la CSUNESP. Logotipo, versiones, colores, patrón gráfico y piezas del evento, con Mariana Andrade Rocha."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Conceito"
+     "pt": "Conceito",
+     "en": "Concept",
+     "es": "Concepto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Nome e slogan"
+     "pt": "Nome e slogan",
+     "en": "Name and slogan",
+     "es": "Nombre y eslogan"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Logotipo e área de proteção"
+     "pt": "Logotipo e área de proteção",
+     "en": "Logo and clear space",
+     "es": "Logotipo y área de protección"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Versões"
+     "pt": "Versões",
+     "en": "Versions",
+     "es": "Versiones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Padrão gráfico"
+     "pt": "Padrão gráfico",
+     "en": "Graphic pattern",
+     "es": "Patrón gráfico"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Credenciamento"
+     "pt": "Credenciamento",
+     "en": "Check-in",
+     "es": "Acreditación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Guarda-chuvas"
+     "pt": "Guarda-chuvas",
+     "en": "Umbrellas",
+     "es": "Paraguas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Estratégia"
+     "pt": "Estratégia",
+     "en": "Strategy",
+     "es": "Estrategia"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -4271,73 +5276,97 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Mostra de Saúde Mental"
+     "pt": "Mostra de Saúde Mental",
+     "en": "Mental Health Showcase",
+     "es": "Muestra de Salud Mental"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Conceito"
+     "pt": "Conceito",
+     "en": "Concept",
+     "es": "Concepto"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Nome e slogan"
+     "pt": "Nome e slogan",
+     "en": "Name and slogan",
+     "es": "Nombre y eslogan"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Logotipo e área de proteção"
+     "pt": "Logotipo e área de proteção",
+     "en": "Logo and clear space",
+     "es": "Logotipo y área de protección"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Versões"
+     "pt": "Versões",
+     "en": "Versions",
+     "es": "Versiones"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Padrão gráfico"
+     "pt": "Padrão gráfico",
+     "en": "Graphic pattern",
+     "es": "Patrón gráfico"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Credenciamento"
+     "pt": "Credenciamento",
+     "en": "Check-in",
+     "es": "Acreditación"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Guarda-chuvas"
+     "pt": "Guarda-chuvas",
+     "en": "Umbrellas",
+     "es": "Paraguas"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Estratégia"
+     "pt": "Estratégia",
+     "en": "Strategy",
+     "es": "Estrategia"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -4347,30 +5376,37 @@ window.PROJETOS = [
  },
  {
   "slug": "nupe",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "NUPE",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "badge": {
-    "pt": "Rebranding",
-    "en": "Rebranding",
-    "es": "Rebranding"
+   "pt": "Rebranding",
+   "en": "Rebranding",
+   "es": "Rebranding"
   },
   "etiquetas": {
-    "entrega": ["manual-marca","pecas-graficas"],
-    "setor": [
-      "institucional",
-      "cultura"
-    ],
-    "contexto": [
-      "cliente"
-    ],
-    "competencias": ["direcao-arte"]
+   "entrega": [
+    "manual-marca",
+    "pecas-graficas"
+   ],
+   "setor": [
+    "institucional",
+    "cultura"
+   ],
+   "contexto": [
+    "cliente"
+   ],
+   "competencias": [
+    "direcao-arte"
+   ]
   },
   "capa": "assets/projetos/nupe/capa.webp",
   "dir": "assets/projetos/nupe/",
@@ -4378,226 +5414,326 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "capa"
+     "pt": "capa",
+     "en": "cover",
+     "es": "portada"
     },
     "d": {
-     "pt": "Redesenho da marca do Núcleo Negro da Unesp para Pesquisa e Extensão, na PROEC: símbolo vetorizado, versões, cores, usos proibidos, padrões e modelos de divulgação."
+     "pt": "Redesenho da marca do Núcleo Negro da Unesp para Pesquisa e Extensão, na PROEC: símbolo vetorizado, versões, cores, usos proibidos, padrões e modelos de divulgação.",
+     "en": "Brand redesign for the Unesp Black Center for Research and Extension (NUPE), at PROEC: vectorized symbol, versions, colors, prohibited uses, patterns and promotional templates.",
+     "es": "Rediseño de la marca del Núcleo Negro de la Unesp para Investigación y Extensión, en la PROEC: símbolo vectorizado, versiones, colores, usos prohibidos, patrones y modelos de difusión."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "apresentação"
+     "pt": "apresentação",
+     "en": "introduction",
+     "es": "presentación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Sobre o Nupe e seu logotipo"
+     "pt": "Sobre o Nupe e seu logotipo",
+     "en": "About NUPE and its logo",
+     "es": "Sobre el NUPE y su logotipo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Identidade do Nupe"
+     "pt": "Identidade do Nupe",
+     "en": "NUPE identity",
+     "es": "Identidad del NUPE"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Aplicações em produtos"
+     "pt": "Aplicações em produtos",
+     "en": "Product applications",
+     "es": "Aplicaciones en productos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Versões atualizadas do logotipo"
+     "pt": "Versões atualizadas do logotipo",
+     "en": "Updated logo versions",
+     "es": "Versiones actualizadas del logotipo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Símbolo"
+     "pt": "Símbolo",
+     "en": "Symbol",
+     "es": "Símbolo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Redesign vertical"
+     "pt": "Redesign vertical",
+     "en": "Vertical redesign",
+     "es": "Rediseño vertical"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Redesign horizontal"
+     "pt": "Redesign horizontal",
+     "en": "Horizontal redesign",
+     "es": "Rediseño horizontal"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Redesign simplificado"
+     "pt": "Redesign simplificado",
+     "en": "Simplified redesign",
+     "es": "Rediseño simplificado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Aplicação invertida"
+     "pt": "Aplicação invertida",
+     "en": "Reversed application",
+     "es": "Aplicación invertida"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Tipografia primária"
+     "pt": "Tipografia primária",
+     "en": "Primary typeface",
+     "es": "Tipografía primaria"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Tipografia secundária"
+     "pt": "Tipografia secundária",
+     "en": "Secondary typeface",
+     "es": "Tipografía secundaria"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Paleta principal"
+     "pt": "Paleta principal",
+     "en": "Primary palette",
+     "es": "Paleta principal"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Paleta auxiliar"
+     "pt": "Paleta auxiliar",
+     "en": "Secondary palette",
+     "es": "Paleta auxiliar"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "16",
     "t": {
-     "pt": "Combinações de cor"
+     "pt": "Combinações de cor",
+     "en": "Color combinations",
+     "es": "Combinaciones de color"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "17",
     "t": {
-     "pt": "Área de segurança"
+     "pt": "Área de segurança",
+     "en": "Clear space",
+     "es": "Área de seguridad"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "18",
     "t": {
-     "pt": "Área de segurança: aplicação"
+     "pt": "Área de segurança: aplicação",
+     "en": "Clear space: application",
+     "es": "Área de seguridad: aplicación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "19",
     "t": {
-     "pt": "Dimensionamento mínimo"
+     "pt": "Dimensionamento mínimo",
+     "en": "Minimum size",
+     "es": "Tamaño mínimo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "20",
     "t": {
-     "pt": "Tipos de arquivo"
+     "pt": "Tipos de arquivo",
+     "en": "File types",
+     "es": "Tipos de archivo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "21",
     "t": {
-     "pt": "Elementos"
+     "pt": "Elementos",
+     "en": "Elements",
+     "es": "Elementos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "22",
     "t": {
-     "pt": "Elementos: unidades"
+     "pt": "Elementos: unidades",
+     "en": "Elements: units",
+     "es": "Elementos: unidades"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "23",
     "t": {
-     "pt": "Elementos: faixas"
+     "pt": "Elementos: faixas",
+     "en": "Elements: bands",
+     "es": "Elementos: franjas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "24",
     "t": {
-     "pt": "Elementos: faixa dinâmica"
+     "pt": "Elementos: faixa dinâmica",
+     "en": "Elements: dynamic band",
+     "es": "Elementos: franja dinámica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "25",
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -4605,43 +5741,57 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Manual"
+     "pt": "Manual",
+     "en": "Manual",
+     "es": "Manual"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Símbolo e versões"
+     "pt": "Símbolo e versões",
+     "en": "Symbol and versions",
+     "es": "Símbolo y versiones"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     }
    },
    {
     "p": 14,
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     }
    },
    {
     "p": 17,
     "t": {
-     "pt": "Área e tamanhos"
+     "pt": "Área e tamanhos",
+     "en": "Clear space and sizes",
+     "es": "Área y tamaños"
     }
    },
    {
     "p": 21,
     "t": {
-     "pt": "Elementos"
+     "pt": "Elementos",
+     "en": "Elements",
+     "es": "Elementos"
     }
    },
    {
     "p": 25,
     "t": {
-     "pt": "Aplicações"
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
     }
    }
   ],
@@ -4653,23 +5803,33 @@ window.PROJETOS = [
  },
  {
   "slug": "ocupacao-unesp-negra",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "Ocupação Unesp Negra",
   "ano": "2024",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["pecas-graficas","posts-carrosseis","evento"],
-    "setor": [
-      "institucional",
-      "cultura"
-    ],
-    "contexto": ["cliente"],
-    "competencias": ["social-media"]
+   "entrega": [
+    "pecas-graficas",
+    "posts-carrosseis",
+    "evento"
+   ],
+   "setor": [
+    "institucional",
+    "cultura"
+   ],
+   "contexto": [
+    "cliente"
+   ],
+   "competencias": [
+    "social-media"
+   ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
   "dir": "assets/projetos/ocupacao-unesp-negra/",
@@ -4677,64 +5837,92 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Ocupação Unesp Negra"
+     "pt": "Ocupação Unesp Negra",
+     "en": "Ocupação Unesp Negra",
+     "es": "Ocupação Unesp Negra"
     },
     "d": {
-     "pt": "Identidade da Ocupação Unesp Negra, um mês de ações dos núcleos do Nupe em novembro de 2024: assinatura, roda de palavras, cores, tipografia e peças."
+     "pt": "Identidade da Ocupação Unesp Negra, um mês de ações dos núcleos do Nupe em novembro de 2024: assinatura, roda de palavras, cores, tipografia e peças.",
+     "en": "Identity for Ocupação Unesp Negra, a month of activities by NUPE’s centers in November 2024: lockup, word wheel, colors, typography and pieces.",
+     "es": "Identidad de la Ocupação Unesp Negra, un mes de acciones de los núcleos del NUPE en noviembre de 2024: firma, rueda de palabras, colores, tipografía y piezas."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O projeto"
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Assinatura"
+     "pt": "Assinatura",
+     "en": "Lockup",
+     "es": "Firma"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "A roda de palavras"
+     "pt": "A roda de palavras",
+     "en": "The word wheel",
+     "es": "La rueda de palabras"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Cores e tipografia"
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "t": {
-     "pt": "Programação"
+     "pt": "Programação",
+     "en": "Schedule",
+     "es": "Programación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     },
     "img": "06"
    },
    {
     "img": "07",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -4742,43 +5930,57 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Ocupação Unesp Negra"
+     "pt": "Ocupação Unesp Negra",
+     "en": "Ocupação Unesp Negra",
+     "es": "Ocupação Unesp Negra"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O projeto"
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Assinatura"
+     "pt": "Assinatura",
+     "en": "Lockup",
+     "es": "Firma"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "A roda de palavras"
+     "pt": "A roda de palavras",
+     "en": "The word wheel",
+     "es": "La rueda de palabras"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Cores e tipografia"
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Programação"
+     "pt": "Programação",
+     "en": "Schedule",
+     "es": "Programación"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -4790,31 +5992,37 @@ window.PROJETOS = [
  },
  {
   "slug": "prisma-brandbook",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "Prisma Consultoria",
   "ano": "2023",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": ["manual-marca","editorial","press-kit"],
-    "setor": [
-      "consultoria",
-      "tecnologia"
-    ],
-    "contexto": [
-      "projeto-academico",
-      "colaboracao"
-    ],
-    "competencias": [
-      "design-editorial",
-      "diagramacao",
-      "illustrator",
-      "photoshop"
-    ]
+   "entrega": [
+    "manual-marca",
+    "editorial",
+    "press-kit"
+   ],
+   "setor": [
+    "consultoria",
+    "tecnologia"
+   ],
+   "contexto": [
+    "projeto-academico",
+    "colaboracao"
+   ],
+   "competencias": [
+    "design-editorial",
+    "diagramacao",
+    "illustrator",
+    "photoshop"
+   ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
   "dir": "assets/projetos/prisma-brandbook/",
@@ -4822,100 +6030,144 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Brandbook Prisma"
+     "pt": "Brandbook Prisma",
+     "en": "Prisma Brandbook",
+     "es": "Brandbook Prisma"
     },
     "d": {
-     "pt": "Brandbook da Prisma, consultoria de Relações Públicas criada na disciplina Laboratório de RP II da Unesp Bauru. Design e diagramação com Pedro Nakamura. Páginas A4 em pares, como livro aberto."
+     "pt": "Brandbook da Prisma, consultoria de Relações Públicas criada na disciplina Laboratório de RP II da Unesp Bauru. Design e diagramação com Pedro Nakamura. Páginas A4 em pares, como livro aberto.",
+     "en": "Brandbook for Prisma, a Public Relations consultancy created in the PR Lab II course at Unesp Bauru. Design and layout with Pedro Nakamura. A4 pages in spreads, like an open book.",
+     "es": "Brandbook de Prisma, consultoría de Relaciones Públicas creada en la asignatura Laboratorio de RR. PP. II de la Unesp Bauru. Diseño y diagramación con Pedro Nakamura. Páginas A4 en pares, como libro abierto."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Capa"
+     "pt": "Capa",
+     "en": "Cover",
+     "es": "Portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Sobre nós e o que fazemos"
+     "pt": "Sobre nós e o que fazemos",
+     "en": "About us and what we do",
+     "es": "Sobre nosotros y lo que hacemos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Persona e valores"
+     "pt": "Persona e valores",
+     "en": "Persona and values",
+     "es": "Persona y valores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Naming e personalidade"
+     "pt": "Naming e personalidade",
+     "en": "Naming and personality",
+     "es": "Naming y personalidad"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Tom de voz e brand persona"
+     "pt": "Tom de voz e brand persona",
+     "en": "Tone of voice and brand persona",
+     "es": "Tono de voz y brand persona"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Moodboard e logomarca"
+     "pt": "Moodboard e logomarca",
+     "en": "Moodboard and logo",
+     "es": "Moodboard y logotipo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Formas e paleta"
+     "pt": "Formas e paleta",
+     "en": "Shapes and palette",
+     "es": "Formas y paleta"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Tipografia e press kit"
+     "pt": "Tipografia e press kit",
+     "en": "Typography and press kit",
+     "es": "Tipografía y press kit"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Contracapa"
+     "pt": "Contracapa",
+     "en": "Back cover",
+     "es": "Contraportada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -4923,67 +6175,89 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Brandbook Prisma"
+     "pt": "Brandbook Prisma",
+     "en": "Prisma Brandbook",
+     "es": "Brandbook Prisma"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Capa"
+     "pt": "Capa",
+     "en": "Cover",
+     "es": "Portada"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Sobre nós e o que fazemos"
+     "pt": "Sobre nós e o que fazemos",
+     "en": "About us and what we do",
+     "es": "Sobre nosotros y lo que hacemos"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Persona e valores"
+     "pt": "Persona e valores",
+     "en": "Persona and values",
+     "es": "Persona y valores"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Naming e personalidade"
+     "pt": "Naming e personalidade",
+     "en": "Naming and personality",
+     "es": "Naming y personalidad"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Tom de voz e brand persona"
+     "pt": "Tom de voz e brand persona",
+     "en": "Tone of voice and brand persona",
+     "es": "Tono de voz y brand persona"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Moodboard e logomarca"
+     "pt": "Moodboard e logomarca",
+     "en": "Moodboard and logo",
+     "es": "Moodboard y logotipo"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Formas e paleta"
+     "pt": "Formas e paleta",
+     "en": "Shapes and palette",
+     "es": "Formas y paleta"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Tipografia e press kit"
+     "pt": "Tipografia e press kit",
+     "en": "Typography and press kit",
+     "es": "Tipografía y press kit"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Contracapa"
+     "pt": "Contracapa",
+     "en": "Back cover",
+     "es": "Contraportada"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -4993,33 +6267,35 @@ window.PROJETOS = [
  },
  {
   "slug": "cminds",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "C Minds",
   "ano": "2022",
   "cat": {
-    "pt": "Identidade visual",
-    "en": "Visual identity",
-    "es": "Identidad visual"
+   "pt": "Identidade visual",
+   "en": "Visual identity",
+   "es": "Identidad visual"
   },
   "filtro": "identidade",
   "etiquetas": {
-    "entrega": [
-      "logotipo",
-      "manual-marca"
-    ],
-    "setor": [
-      "consultoria",
-      "comunicacao"
-    ],
-    "contexto": [
-      "projeto-academico"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "design-grafico",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "logotipo",
+    "manual-marca"
+   ],
+   "setor": [
+    "consultoria",
+    "comunicacao"
+   ],
+   "contexto": [
+    "projeto-academico"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "design-grafico",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
   "dir": "assets/projetos/cminds/",
@@ -5027,181 +6303,261 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "C Minds"
+     "pt": "C Minds",
+     "en": "C Minds",
+     "es": "C Minds"
     },
     "d": {
-     "pt": "C Minds, agência fictícia de Relações Públicas: trabalho integrado das disciplinas Comunicação Visual e Estética e Técnicas de RP (Unesp Bauru). Missão, valores, serviços, logotipo e manual de identidade."
+     "pt": "C Minds, agência fictícia de Relações Públicas: trabalho integrado das disciplinas Comunicação Visual e Estética e Técnicas de RP (Unesp Bauru). Missão, valores, serviços, logotipo e manual de identidade.",
+     "en": "C Minds, a fictional Public Relations agency: a joint project for the Visual Communication and Aesthetics and PR Techniques courses (Unesp Bauru). Mission, values, services, logo and identity manual.",
+     "es": "C Minds, agencia ficticia de Relaciones Públicas: trabajo integrado de las asignaturas Comunicación Visual y Estética y Técnicas de RR. PP. (Unesp Bauru). Misión, valores, servicios, logotipo y manual de identidad."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Abertura"
+     "pt": "Abertura",
+     "en": "Opening",
+     "es": "Apertura"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Sobre nós"
+     "pt": "Sobre nós",
+     "en": "About us",
+     "es": "Sobre nosotros"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Missão, visão e valores"
+     "pt": "Missão, visão e valores",
+     "en": "Mission, vision and values",
+     "es": "Misión, visión y valores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Nossos serviços"
+     "pt": "Nossos serviços",
+     "en": "Our services",
+     "es": "Nuestros servicios"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Manual de identidade visual"
+     "pt": "Manual de identidade visual",
+     "en": "Visual identity manual",
+     "es": "Manual de identidad visual"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "O logo"
+     "pt": "O logo",
+     "en": "The logo",
+     "es": "El logo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Construção do logo"
+     "pt": "Construção do logo",
+     "en": "Logo construction",
+     "es": "Construcción del logo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Variações do logo"
+     "pt": "Variações do logo",
+     "en": "Logo variations",
+     "es": "Variaciones del logo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Versões em cor"
+     "pt": "Versões em cor",
+     "en": "Color versions",
+     "es": "Versiones en color"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Usabilidade do logo"
+     "pt": "Usabilidade do logo",
+     "en": "Logo usage",
+     "es": "Usabilidad del logo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Área de segurança"
+     "pt": "Área de segurança",
+     "en": "Clear space",
+     "es": "Área de seguridad"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Tamanho mínimo"
+     "pt": "Tamanho mínimo",
+     "en": "Minimum size",
+     "es": "Tamaño mínimo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Usos incorretos"
+     "pt": "Usos incorretos",
+     "en": "Incorrect uses",
+     "es": "Usos incorrectos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "16",
     "t": {
-     "pt": "Sharnay Extrabold e Gotham"
+     "pt": "Sharnay Extrabold e Gotham",
+     "en": "Sharnay Extrabold and Gotham",
+     "es": "Sharnay Extrabold y Gotham"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "17",
     "t": {
-     "pt": "Paleta de cores"
+     "pt": "Paleta de cores",
+     "en": "Color palette",
+     "es": "Paleta de colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "18",
     "t": {
-     "pt": "Cores"
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "19",
     "t": {
-     "pt": "Encerramento"
+     "pt": "Encerramento",
+     "en": "Closing",
+     "es": "Cierre"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "20",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -5209,83 +6565,113 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "C Minds"
+     "pt": "C Minds",
+     "en": "C Minds",
+     "es": "C Minds"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Sobre nós"
+     "pt": "Sobre nós",
+     "en": "About us",
+     "es": "Sobre nosotros"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Manual de identidade visual"
+     "pt": "Manual de identidade visual",
+     "en": "Visual identity manual",
+     "es": "Manual de identidad visual"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "O logo"
+     "pt": "O logo",
+     "en": "The logo",
+     "es": "El logo"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Variações do logo"
+     "pt": "Variações do logo",
+     "en": "Logo variations",
+     "es": "Variaciones del logo"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Usabilidade do logo"
+     "pt": "Usabilidade do logo",
+     "en": "Logo usage",
+     "es": "Usabilidad del logo"
     }
    },
    {
     "p": 15,
     "t": {
-     "pt": "Tipografia"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     }
    },
    {
     "p": 17,
     "t": {
-     "pt": "Paleta de cores"
+     "pt": "Paleta de cores",
+     "en": "Color palette",
+     "es": "Paleta de colores"
     }
    },
    {
     "p": 20,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "setembro-amarelo",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "Setembro Amarelo 2022",
   "ano": "2022",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": ["identidade-visual","pecas-graficas","cartaz-folder","cracha","certificado","sinalizacao","posts-carrosseis"],
-    "setor": [
-      "institucional",
-      "saude"
-    ],
-    "contexto": ["bolsista"],
-    "competencias": [
-      "design-grafico",
-      "social-media",
-      "photoshop",
-      "illustrator"
-    ]
+   "entrega": [
+    "identidade-visual",
+    "pecas-graficas",
+    "cartaz-folder",
+    "cracha",
+    "certificado",
+    "sinalizacao",
+    "posts-carrosseis"
+   ],
+   "setor": [
+    "institucional",
+    "saude"
+   ],
+   "contexto": [
+    "bolsista"
+   ],
+   "competencias": [
+    "design-grafico",
+    "social-media",
+    "photoshop",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
   "dir": "assets/projetos/setembro-amarelo/",
@@ -5293,64 +6679,92 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Setembro Amarelo 2022"
+     "pt": "Setembro Amarelo 2022",
+     "en": "Setembro Amarelo 2022",
+     "es": "Setembro Amarelo 2022"
     },
     "d": {
-     "pt": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, evento do NTAPS na Unesp Bauru em 28 e 29 de setembro de 2022. Identidade do evento, faixa, placas de sala, crachás, folders, certificado e posts."
+     "pt": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, evento do NTAPS na Unesp Bauru em 28 e 29 de setembro de 2022. Identidade do evento, faixa, placas de sala, crachás, folders, certificado e posts.",
+     "en": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, an NTAPS event for Yellow September (suicide prevention month) at Unesp Bauru, September 28–29, 2022. Event identity, banner, room signs, badges, folders, certificate and posts.",
+     "es": "“Setembro Amarelo e produção de saúde: tecendo possibilidades”, evento del NTAPS por el Septiembre Amarillo (mes de prevención del suicidio) en la Unesp Bauru, 28 y 29 de septiembre de 2022. Identidad del evento, pancarta, placas de sala, credenciales, folletos, certificado y posts."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Programação e crachá"
+     "pt": "Programação e crachá",
+     "en": "Schedule and badge",
+     "es": "Programación y credencial"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Mesa de abertura e panfletos"
+     "pt": "Mesa de abertura e panfletos",
+     "en": "Opening panel and flyers",
+     "es": "Mesa de apertura y folletos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Banner na palestra"
+     "pt": "Banner na palestra",
+     "en": "Banner at the talk",
+     "es": "Banner en la charla"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Post e certificado"
+     "pt": "Post e certificado",
+     "en": "Post and certificate",
+     "es": "Post y certificado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Placa de entrada e banner"
+     "pt": "Placa de entrada e banner",
+     "en": "Entrance sign and banner",
+     "es": "Placa de entrada y banner"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -5358,43 +6772,57 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Setembro Amarelo 2022"
+     "pt": "Setembro Amarelo 2022",
+     "en": "Setembro Amarelo 2022",
+     "es": "Setembro Amarelo 2022"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Programação e crachá"
+     "pt": "Programação e crachá",
+     "en": "Schedule and badge",
+     "es": "Programación y credencial"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Mesa de abertura e panfletos"
+     "pt": "Mesa de abertura e panfletos",
+     "en": "Opening panel and flyers",
+     "es": "Mesa de apertura y folletos"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Banner na palestra"
+     "pt": "Banner na palestra",
+     "en": "Banner at the talk",
+     "es": "Banner en la charla"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Post e certificado"
+     "pt": "Post e certificado",
+     "en": "Post and certificate",
+     "es": "Post y certificado"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Placa de entrada e banner"
+     "pt": "Placa de entrada e banner",
+     "en": "Entrance sign and banner",
+     "es": "Placa de entrada y banner"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -5404,28 +6832,60 @@ window.PROJETOS = [
  },
  {
   "slug": "rp-40-anos",
-  "servicos_relacionados": ["identidade","social"],
-  "titulo": "RP 40 anos",
+  "servicos_relacionados": [
+   "identidade",
+   "social"
+  ],
+  "titulo": {
+   "pt": "RP 40 anos",
+   "en": "RP 40 anos",
+   "es": "RP 40 años"
+  },
   "postGroups": [
-    {"g":"rp-40-anos","t":{"pt":"Carrossel dos 40 anos","en":"40th anniversary carousel","es":"Carrusel de los 40 años"},"d":{"pt":"Linha do tempo do curso, de 1974 a 2022, em 8 cards no perfil @rpunesp.","en":"The course timeline, from 1974 to 2022, in 8 cards on the @rpunesp profile.","es":"Línea de tiempo de la carrera, de 1974 a 2022, en 8 tarjetas en el perfil @rpunesp."}}
+   {
+    "g": "rp-40-anos",
+    "t": {
+     "pt": "Carrossel dos 40 anos",
+     "en": "40th anniversary carousel",
+     "es": "Carrusel de los 40 años"
+    },
+    "d": {
+     "pt": "Linha do tempo do curso, de 1974 a 2022, em 8 cards no perfil @rpunesp.",
+     "en": "The course timeline, from 1974 to 2022, in 8 cards on the @rpunesp profile.",
+     "es": "Línea de tiempo de la carrera, de 1974 a 2022, en 8 tarjetas en el perfil @rpunesp."
+    }
+   }
   ],
   "ano": "2022",
-  "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
-  "filtro": ["eventos", "midias"],
+  "cat": {
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
+  },
+  "filtro": [
+   "eventos",
+   "midias"
+  ],
   "etiquetas": {
-    "entrega": ["posts-carrosseis","stories-gifs","pecas-graficas"],
-    "setor": [
-      "educacao",
-      "cultura"
-    ],
-    "contexto": ["estagio"],
-    "competencias": [
-      "social-media",
-      "design-grafico",
-      "photoshop",
-      "illustrator",
-      "meta-business-suite"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "stories-gifs",
+    "pecas-graficas"
+   ],
+   "setor": [
+    "educacao",
+    "cultura"
+   ],
+   "contexto": [
+    "estagio"
+   ],
+   "competencias": [
+    "social-media",
+    "design-grafico",
+    "photoshop",
+    "illustrator",
+    "meta-business-suite"
+   ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
   "dir": "assets/projetos/rp-40-anos/",
@@ -5433,100 +6893,144 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "RP 40 anos"
+     "pt": "RP 40 anos",
+     "en": "RP 40 anos",
+     "es": "RP 40 años"
     },
     "d": {
-     "pt": "Perfil @rpunesp criado para os 40 anos do curso de Relações Públicas da Unesp Bauru (28/11 a 01/12/2022). Identidade da Inky Design. Design das peças, stories e GIFs por Henrique Marinhos; textos, organização das informações e mídias sociais durante o evento por Costanza Guerriero."
+     "pt": "Perfil @rpunesp criado para os 40 anos do curso de Relações Públicas da Unesp Bauru (28/11 a 01/12/2022). Identidade da Inky Design. Design das peças, stories e GIFs por Henrique Marinhos; textos, organização das informações e mídias sociais durante o evento por Costanza Guerriero.",
+     "en": "The @rpunesp profile, created for the 40th anniversary of the Public Relations program at Unesp Bauru (Nov 28 to Dec 1, 2022). Identity by Inky Design. Pieces, stories and GIFs designed by Henrique Marinhos; copy, information structure and social media during the event by Costanza Guerriero.",
+     "es": "Perfil @rpunesp creado para los 40 años de la carrera de Relaciones Públicas de la Unesp Bauru (28/11 al 01/12/2022). Identidad de Inky Design. Diseño de piezas, stories y GIF por Henrique Marinhos; textos, organización de la información y redes sociales durante el evento por Costanza Guerriero."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "“RP é comunicação”"
+     "pt": "“RP é comunicação”",
+     "en": "“PR is communication”",
+     "es": "“RR. PP. es comunicación”"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Save the date"
+     "pt": "Save the date",
+     "en": "Save the date",
+     "es": "Save the date"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Depoimentos e RPresenta"
+     "pt": "Depoimentos e RPresenta",
+     "en": "Testimonials and RPresenta",
+     "es": "Testimonios y RPresenta"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Stories da programação"
+     "pt": "Stories da programação",
+     "en": "Schedule stories",
+     "es": "Stories de la programación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Programação"
+     "pt": "Programação",
+     "en": "Schedule",
+     "es": "Programación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Resultados"
+     "pt": "Resultados",
+     "en": "Results",
+     "es": "Resultados"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Quem foi alcançado"
+     "pt": "Quem foi alcançado",
+     "en": "Who was reached",
+     "es": "A quién se alcanzó"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "No ar"
+     "pt": "No ar",
+     "en": "Live",
+     "es": "Publicado"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Obrigado"
+     "pt": "Obrigado",
+     "en": "Thank you",
+     "es": "Gracias"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -5534,100 +7038,128 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "RP 40 anos"
+     "pt": "RP 40 anos",
+     "en": "RP 40 anos",
+     "es": "RP 40 años"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "“RP é comunicação”"
+     "pt": "“RP é comunicação”",
+     "en": "“PR is communication”",
+     "es": "“RR. PP. es comunicación”"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Save the date"
+     "pt": "Save the date",
+     "en": "Save the date",
+     "es": "Save the date"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Depoimentos e RPresenta"
+     "pt": "Depoimentos e RPresenta",
+     "en": "Testimonials and RPresenta",
+     "es": "Testimonios y RPresenta"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Stories da programação"
+     "pt": "Stories da programação",
+     "en": "Schedule stories",
+     "es": "Stories de la programación"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Programação"
+     "pt": "Programação",
+     "en": "Schedule",
+     "es": "Programación"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Resultados"
+     "pt": "Resultados",
+     "en": "Results",
+     "es": "Resultados"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Quem foi alcançado"
+     "pt": "Quem foi alcançado",
+     "en": "Who was reached",
+     "es": "A quién se alcanzó"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "No ar"
+     "pt": "No ar",
+     "en": "Live",
+     "es": "Publicado"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Obrigado"
+     "pt": "Obrigado",
+     "en": "Thank you",
+     "es": "Gracias"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "prisma-proposta",
-  "servicos_relacionados": ["redacao"],
-  "titulo": "Proposta Prisma",
+  "servicos_relacionados": [
+   "redacao"
+  ],
+  "titulo": {
+   "pt": "Proposta Prisma",
+   "en": "Prisma proposal",
+   "es": "Propuesta Prisma"
+  },
   "ano": "2023",
   "cat": {
-    "pt": "Estratégia de marca",
-    "en": "Brand strategy",
-    "es": "Estrategia de marca"
+   "pt": "Estratégia de marca",
+   "en": "Brand strategy",
+   "es": "Estrategia de marca"
   },
   "filtro": "estrategia",
   "etiquetas": {
-    "entrega": [
-      "proposta-estrategica",
-      "apresentacao"
-    ],
-    "setor": [
-      "consultoria",
-      "tecnologia"
-    ],
-    "contexto": [
-      "projeto-academico",
-      "competicao"
-    ],
-    "competencias": [
-      "diagramacao",
-      "illustrator",
-      "photoshop"
-    ]
+   "entrega": [
+    "proposta-estrategica",
+    "apresentacao"
+   ],
+   "setor": [
+    "consultoria",
+    "tecnologia"
+   ],
+   "contexto": [
+    "projeto-academico",
+    "competicao"
+   ],
+   "competencias": [
+    "diagramacao",
+    "illustrator",
+    "photoshop"
+   ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
   "dir": "assets/projetos/prisma-proposta/",
@@ -5635,145 +7167,209 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Proposta Prisma"
+     "pt": "Proposta Prisma",
+     "en": "Prisma proposal",
+     "es": "Propuesta Prisma"
     },
     "d": {
-     "pt": "Proposta de consultoria em Relações Públicas da Prisma para startups de tecnologia: diagnóstico, níveis de serviço (Ouro, Platina e Diamante), reconhecimento, roadmap e indicadores. 1º lugar na competição RPMaker."
+     "pt": "Proposta de consultoria em Relações Públicas da Prisma para startups de tecnologia: diagnóstico, níveis de serviço (Ouro, Platina e Diamante), reconhecimento, roadmap e indicadores. 1º lugar na competição RPMaker.",
+     "en": "Prisma’s Public Relations consulting proposal for tech startups: assessment, service tiers (Gold, Platinum and Diamond), recognition, roadmap and KPIs. 1st place in the RPMaker competition.",
+     "es": "Propuesta de consultoría en Relaciones Públicas de Prisma para startups de tecnología: diagnóstico, niveles de servicio (Oro, Platino y Diamante), reconocimiento, roadmap e indicadores. 1.er lugar en la competencia RPMaker."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Capa"
+     "pt": "Capa",
+     "en": "Cover",
+     "es": "Portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Sumário e quem somos"
+     "pt": "Sumário e quem somos",
+     "en": "Contents and who we are",
+     "es": "Sumario y quiénes somos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Etapas e processos"
+     "pt": "Etapas e processos",
+     "en": "Stages and processes",
+     "es": "Etapas y procesos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Diagnóstico"
+     "pt": "Diagnóstico",
+     "en": "Assessment",
+     "es": "Diagnóstico"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Upgrade"
+     "pt": "Upgrade",
+     "en": "Upgrade",
+     "es": "Upgrade"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Ouro"
+     "pt": "Ouro",
+     "en": "Gold",
+     "es": "Oro"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Platina"
+     "pt": "Platina",
+     "en": "Platinum",
+     "es": "Platino"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Categorias"
+     "pt": "Categorias",
+     "en": "Categories",
+     "es": "Categorías"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Diamante"
+     "pt": "Diamante",
+     "en": "Diamond",
+     "es": "Diamante"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Unlocked"
+     "pt": "Unlocked",
+     "en": "Unlocked",
+     "es": "Unlocked"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Programa de reconhecimento"
+     "pt": "Programa de reconhecimento",
+     "en": "Recognition program",
+     "es": "Programa de reconocimiento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "13",
     "t": {
-     "pt": "Roadmap e follow-up"
+     "pt": "Roadmap e follow-up",
+     "en": "Roadmap and follow-up",
+     "es": "Roadmap y seguimiento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "14",
     "t": {
-     "pt": "Key results"
+     "pt": "Key results",
+     "en": "Key results",
+     "es": "Key results"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "15",
     "t": {
-     "pt": "Contracapa"
+     "pt": "Contracapa",
+     "en": "Back cover",
+     "es": "Contraportada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "16",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -5781,97 +7377,129 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Proposta Prisma"
+     "pt": "Proposta Prisma",
+     "en": "Prisma proposal",
+     "es": "Propuesta Prisma"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Capa"
+     "pt": "Capa",
+     "en": "Cover",
+     "es": "Portada"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Sumário e quem somos"
+     "pt": "Sumário e quem somos",
+     "en": "Contents and who we are",
+     "es": "Sumario y quiénes somos"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Etapas e processos"
+     "pt": "Etapas e processos",
+     "en": "Stages and processes",
+     "es": "Etapas y procesos"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Diagnóstico"
+     "pt": "Diagnóstico",
+     "en": "Assessment",
+     "es": "Diagnóstico"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Upgrade"
+     "pt": "Upgrade",
+     "en": "Upgrade",
+     "es": "Upgrade"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Ouro"
+     "pt": "Ouro",
+     "en": "Gold",
+     "es": "Oro"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Platina"
+     "pt": "Platina",
+     "en": "Platinum",
+     "es": "Platino"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Categorias"
+     "pt": "Categorias",
+     "en": "Categories",
+     "es": "Categorías"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Diamante"
+     "pt": "Diamante",
+     "en": "Diamond",
+     "es": "Diamante"
     }
    },
    {
     "p": 11,
     "t": {
-     "pt": "Unlocked"
+     "pt": "Unlocked",
+     "en": "Unlocked",
+     "es": "Unlocked"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Programa de reconhecimento"
+     "pt": "Programa de reconhecimento",
+     "en": "Recognition program",
+     "es": "Programa de reconocimiento"
     }
    },
    {
     "p": 13,
     "t": {
-     "pt": "Roadmap e follow-up"
+     "pt": "Roadmap e follow-up",
+     "en": "Roadmap and follow-up",
+     "es": "Roadmap y seguimiento"
     }
    },
    {
     "p": 14,
     "t": {
-     "pt": "Key results"
+     "pt": "Key results",
+     "en": "Key results",
+     "es": "Key results"
     }
    },
    {
     "p": 15,
     "t": {
-     "pt": "Contracapa"
+     "pt": "Contracapa",
+     "en": "Back cover",
+     "es": "Contraportada"
     }
    },
    {
     "p": 16,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -5881,30 +7509,34 @@ window.PROJETOS = [
  },
  {
   "slug": "inspirit",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "Inspirit Jiu Jitsu",
   "ano": "2026",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "folder",
-      "editorial"
-    ],
-    "setor": ["esporte"],
-    "contexto": [
-      "cliente",
-      "internacional"
-    ],
-    "competencias": [
-      "design-editorial",
-      "diagramacao",
-      "photoshop"
-    ]
+   "entrega": [
+    "folder",
+    "editorial"
+   ],
+   "setor": [
+    "esporte"
+   ],
+   "contexto": [
+    "cliente",
+    "internacional"
+   ],
+   "competencias": [
+    "design-editorial",
+    "diagramacao",
+    "photoshop"
+   ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
   "dir": "assets/projetos/inspirit/",
@@ -5912,55 +7544,79 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Inspirit Jiu Jitsu"
+     "pt": "Inspirit Jiu Jitsu",
+     "en": "Inspirit Jiu Jitsu",
+     "es": "Inspirit Jiu Jitsu"
     },
     "d": {
-     "pt": "Folder sanfona para a Inspirit Jiu Jitsu Foundation (Redondo Beach, Califórnia), em inglês, nas versões A4 e US Letter."
+     "pt": "Folder sanfona para a Inspirit Jiu Jitsu Foundation (Redondo Beach, Califórnia), em inglês, nas versões A4 e US Letter.",
+     "en": "Accordion-fold brochure for the Inspirit Jiu Jitsu Foundation (Redondo Beach, California), in English, in A4 and US Letter versions.",
+     "es": "Folleto en acordeón para la Inspirit Jiu Jitsu Foundation (Redondo Beach, California), en inglés, en versiones A4 y US Letter."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O briefing"
+     "pt": "O briefing",
+     "en": "The brief",
+     "es": "El briefing"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Dobra e ordem dos painéis"
+     "pt": "Dobra e ordem dos painéis",
+     "en": "Fold and panel order",
+     "es": "Pliegue y orden de los paneles"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Cores, tipo e fotos"
+     "pt": "Cores, tipo e fotos",
+     "en": "Colors, type and photos",
+     "es": "Colores, tipografía y fotos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Versão US Letter"
+     "pt": "Versão US Letter",
+     "en": "US Letter version",
+     "es": "Versión US Letter"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -5968,72 +7624,86 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Inspirit Jiu Jitsu"
+     "pt": "Inspirit Jiu Jitsu",
+     "en": "Inspirit Jiu Jitsu",
+     "es": "Inspirit Jiu Jitsu"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O briefing"
+     "pt": "O briefing",
+     "en": "The brief",
+     "es": "El briefing"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Dobra e ordem dos painéis"
+     "pt": "Dobra e ordem dos painéis",
+     "en": "Fold and panel order",
+     "es": "Pliegue y orden de los paneles"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Cores, tipo e fotos"
+     "pt": "Cores, tipo e fotos",
+     "en": "Colors, type and photos",
+     "es": "Colores, tipografía y fotos"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Versão US Letter"
+     "pt": "Versão US Letter",
+     "en": "US Letter version",
+     "es": "Versión US Letter"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "festa-da-polenta",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "Festa da Polenta",
   "ano": "2026",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "cartaz-folder",
-      "ilustracao"
-    ],
-    "setor": [
-      "cultura",
-      "evento"
-    ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
-    "competencias": [
-      "design-grafico",
-      "ilustracao",
-      "procreate",
-      "adobe-fresco",
-      "illustrator"
-    ]
+   "entrega": [
+    "cartaz-folder",
+    "ilustracao"
+   ],
+   "setor": [
+    "cultura",
+    "evento"
+   ],
+   "contexto": [
+    "evento",
+    "cliente"
+   ],
+   "competencias": [
+    "design-grafico",
+    "ilustracao",
+    "procreate",
+    "adobe-fresco",
+    "illustrator"
+   ]
   },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
   "dir": "assets/projetos/festa-da-polenta/",
@@ -6041,55 +7711,79 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Festa da Polenta"
+     "pt": "Festa da Polenta",
+     "en": "Festa da Polenta",
+     "es": "Festa da Polenta"
     },
     "d": {
-     "pt": "Cartaz e folder da 29ª Festa da Polenta de Santa Olímpia, Piracicaba (SP). Estudo das peças da ilustração, ordem de leitura, cores e letras."
+     "pt": "Cartaz e folder da 29ª Festa da Polenta de Santa Olímpia, Piracicaba (SP). Estudo das peças da ilustração, ordem de leitura, cores e letras.",
+     "en": "Poster and brochure for the 29th Festa da Polenta (Polenta Festival) in Santa Olímpia, Piracicaba (SP). Study of the illustration elements, reading order, colors and lettering.",
+     "es": "Cartel y folleto de la 29.ª Festa da Polenta (Fiesta de la Polenta) de Santa Olímpia, Piracicaba (SP). Estudio de las piezas de la ilustración, orden de lectura, colores y letras."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Peças da ilustração"
+     "pt": "Peças da ilustração",
+     "en": "Illustration elements",
+     "es": "Piezas de la ilustración"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Ordem de leitura"
+     "pt": "Ordem de leitura",
+     "en": "Reading order",
+     "es": "Orden de lectura"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Cores e letras"
+     "pt": "Cores e letras",
+     "en": "Colors and lettering",
+     "es": "Colores y letras"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Folder"
+     "pt": "Folder",
+     "en": "Brochure",
+     "es": "Folleto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -6097,69 +7791,85 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Festa da Polenta"
+     "pt": "Festa da Polenta",
+     "en": "Festa da Polenta",
+     "es": "Festa da Polenta"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Peças da ilustração"
+     "pt": "Peças da ilustração",
+     "en": "Illustration elements",
+     "es": "Piezas de la ilustración"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Ordem de leitura"
+     "pt": "Ordem de leitura",
+     "en": "Reading order",
+     "es": "Orden de lectura"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Cores e letras"
+     "pt": "Cores e letras",
+     "en": "Colors and lettering",
+     "es": "Colores y letras"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Folder"
+     "pt": "Folder",
+     "en": "Brochure",
+     "es": "Folleto"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "fellipe-gualberto",
-  "servicos_relacionados": ["landing"],
+  "servicos_relacionados": [
+   "landing"
+  ],
   "titulo": "Fellipe Gualberto",
   "ano": "2026",
   "cat": {
-    "pt": "Programação",
-    "en": "Programming",
-    "es": "Programación"
+   "pt": "Programação",
+   "en": "Programming",
+   "es": "Programación"
   },
   "filtro": "programacao",
   "etiquetas": {
-    "entrega": [
-      "site",
-      "portfolio-site"
-    ],
-    "setor": ["jornalismo"],
-    "contexto": [
-      "cliente"
-    ],
-    "competencias": [
-      "programacao",
-      "design-interface",
-      "vs-code",
-      "html",
-      "css",
-      "javascript"
-    ]
+   "entrega": [
+    "site",
+    "portfolio-site"
+   ],
+   "setor": [
+    "jornalismo"
+   ],
+   "contexto": [
+    "cliente"
+   ],
+   "competencias": [
+    "programacao",
+    "design-interface",
+    "vs-code",
+    "html",
+    "css",
+    "javascript"
+   ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
   "dir": "assets/projetos/fellipe-gualberto/",
@@ -6172,73 +7882,105 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Fellipe Gualberto"
+     "pt": "Fellipe Gualberto",
+     "en": "Fellipe Gualberto",
+     "es": "Fellipe Gualberto"
     },
     "d": {
-     "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento em HTML, CSS e JavaScript, publicado no GitHub Pages."
+     "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento em HTML, CSS e JavaScript, publicado no GitHub Pages.",
+     "en": "Portfolio for journalist and researcher Fellipe Gualberto. Design and development in HTML, CSS and JavaScript, published on GitHub Pages.",
+     "es": "Portafolio del periodista e investigador Fellipe Gualberto. Diseño y desarrollo en HTML, CSS y JavaScript, publicado en GitHub Pages."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O projeto"
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Capa e Quem sou eu"
+     "pt": "Capa e Quem sou eu",
+     "en": "Cover and About me",
+     "es": "Portada y Quién soy"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Editorias"
+     "pt": "Editorias",
+     "en": "Sections",
+     "es": "Secciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Textos assinados"
+     "pt": "Textos assinados",
+     "en": "Bylined pieces",
+     "es": "Textos firmados"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Recortes"
+     "pt": "Recortes",
+     "en": "Clippings",
+     "es": "Recortes"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Celular"
+     "pt": "Celular",
+     "en": "Phone",
+     "es": "Celular"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -6269,81 +8011,99 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Fellipe Gualberto"
+     "pt": "Fellipe Gualberto",
+     "en": "Fellipe Gualberto",
+     "es": "Fellipe Gualberto"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O projeto"
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Capa e Quem sou eu"
+     "pt": "Capa e Quem sou eu",
+     "en": "Cover and About me",
+     "es": "Portada y Quién soy"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Editorias"
+     "pt": "Editorias",
+     "en": "Sections",
+     "es": "Secciones"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Textos assinados"
+     "pt": "Textos assinados",
+     "en": "Bylined pieces",
+     "es": "Textos firmados"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Recortes"
+     "pt": "Recortes",
+     "en": "Clippings",
+     "es": "Recortes"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Celular"
+     "pt": "Celular",
+     "en": "Phone",
+     "es": "Celular"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "nova-rio-branco",
-  "servicos_relacionados": ["landing"],
+  "servicos_relacionados": [
+   "landing"
+  ],
   "titulo": "Nova Rio Branco",
   "ano": "2025",
   "cat": {
-    "pt": "Programação",
-    "en": "Programming",
-    "es": "Programación"
+   "pt": "Programação",
+   "en": "Programming",
+   "es": "Programación"
   },
   "filtro": "programacao",
   "etiquetas": {
-    "entrega": [
-      "catalogo-digital",
-      "exportacao-png"
-    ],
-    "setor": [
-      "varejo",
-      "tecnologia"
-    ],
-    "contexto": [
-      "cliente",
-      "ferramenta-comercial"
-    ],
-    "competencias": [
-      "programacao",
-      "design-interface"
-    ]
+   "entrega": [
+    "catalogo-digital",
+    "exportacao-png"
+   ],
+   "setor": [
+    "varejo",
+    "tecnologia"
+   ],
+   "contexto": [
+    "cliente",
+    "ferramenta-comercial"
+   ],
+   "competencias": [
+    "programacao",
+    "design-interface"
+   ]
   },
   "capa": "assets/projetos/nova-rio-branco/capa.webp",
   "dir": "assets/projetos/nova-rio-branco/",
@@ -6351,73 +8111,105 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Nova Rio Branco"
+     "pt": "Nova Rio Branco",
+     "en": "Nova Rio Branco",
+     "es": "Nova Rio Branco"
     },
     "d": {
-     "pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp."
+     "pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp.",
+     "en": "Online catalog with quote requests for Nova Rio Branco, in Bauru. HTML, CSS and JavaScript, no framework: 1,113 items grouped into 394 cards, filters, search and a PDF quote sent via WhatsApp.",
+     "es": "Catálogo en línea con solicitud de presupuesto para Nova Rio Branco, de Bauru. HTML, CSS y JavaScript, sin framework: 1.113 ítems agrupados en 394 tarjetas, filtros, búsqueda y presupuesto en PDF con envío por WhatsApp."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Ponto de partida"
+     "pt": "Ponto de partida",
+     "en": "Starting point",
+     "es": "Punto de partida"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Uma lista de produtos"
+     "pt": "Uma lista de produtos",
+     "en": "A product list",
+     "es": "Una lista de productos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Variações agrupadas"
+     "pt": "Variações agrupadas",
+     "en": "Grouped variants",
+     "es": "Variantes agrupadas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Filtros e busca"
+     "pt": "Filtros e busca",
+     "en": "Filters and search",
+     "es": "Filtros y búsqueda"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Orçamento"
+     "pt": "Orçamento",
+     "en": "Quote",
+     "es": "Presupuesto"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "No celular"
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Site estático"
+     "pt": "Site estático",
+     "en": "Static site",
+     "es": "Sitio estático"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -6425,49 +8217,65 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Nova Rio Branco"
+     "pt": "Nova Rio Branco",
+     "en": "Nova Rio Branco",
+     "es": "Nova Rio Branco"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Ponto de partida"
+     "pt": "Ponto de partida",
+     "en": "Starting point",
+     "es": "Punto de partida"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Uma lista de produtos"
+     "pt": "Uma lista de produtos",
+     "en": "A product list",
+     "es": "Una lista de productos"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Variações agrupadas"
+     "pt": "Variações agrupadas",
+     "en": "Grouped variants",
+     "es": "Variantes agrupadas"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Filtros e busca"
+     "pt": "Filtros e busca",
+     "en": "Filters and search",
+     "es": "Filtros y búsqueda"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Orçamento"
+     "pt": "Orçamento",
+     "en": "Quote",
+     "es": "Presupuesto"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "No celular"
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Site estático"
+     "pt": "Site estático",
+     "en": "Static site",
+     "es": "Sitio estático"
     }
    }
   ],
@@ -6475,32 +8283,34 @@ window.PROJETOS = [
  },
  {
   "slug": "pixelar",
-  "servicos_relacionados": ["landing"],
+  "servicos_relacionados": [
+   "landing"
+  ],
   "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
-    "pt": "Programação",
-    "en": "Programming",
-    "es": "Programación"
+   "pt": "Programação",
+   "en": "Programming",
+   "es": "Programación"
   },
   "filtro": "programacao",
   "etiquetas": {
-    "entrega": [
-      "ferramenta-interativa",
-      "exportacao"
-    ],
-    "setor": [
-      "tecnologia",
-      "arte-digital"
-    ],
-    "contexto": [
-      "ferramenta-propria",
-      "projeto-independente"
-    ],
-    "competencias": [
-      "programacao",
-      "processamento-grafico"
-    ]
+   "entrega": [
+    "ferramenta-interativa",
+    "exportacao"
+   ],
+   "setor": [
+    "tecnologia",
+    "arte-digital"
+   ],
+   "contexto": [
+    "ferramenta-propria",
+    "projeto-independente"
+   ],
+   "competencias": [
+    "programacao",
+    "processamento-grafico"
+   ]
   },
   "capa": "assets/projetos/pixelar/capa.webp",
   "dir": "assets/projetos/pixelar/",
@@ -6513,82 +8323,118 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Pixelar"
+     "pt": "Pixelar",
+     "en": "Pixelar",
+     "es": "Pixelar"
     },
     "d": {
-     "pt": "Editor de pixel art, dither, filme analógico e animação para fotos e vídeos, no navegador. Tudo roda no aparelho (WebGL2 e WebCodecs): 88 estilos, 55 filmes e câmeras, 52 efeitos e exportação em imagem, SVG, vídeo e GIF."
+     "pt": "Editor de pixel art, dither, filme analógico e animação para fotos e vídeos, no navegador. Tudo roda no aparelho (WebGL2 e WebCodecs): 88 estilos, 55 filmes e câmeras, 52 efeitos e exportação em imagem, SVG, vídeo e GIF.",
+     "en": "A pixel art, dithering, analog film and animation editor for photos and videos, in the browser. Everything runs on the device (WebGL2 and WebCodecs): 88 styles, 55 films and cameras, 52 effects and export as image, SVG, video and GIF.",
+     "es": "Editor de pixel art, dither, película analógica y animación para fotos y videos, en el navegador. Todo corre en el dispositivo (WebGL2 y WebCodecs): 88 estilos, 55 películas y cámaras, 52 efectos y exportación en imagen, SVG, video y GIF."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O que é"
+     "pt": "O que é",
+     "en": "What it is",
+     "es": "Qué es"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Antes e depois"
+     "pt": "Antes e depois",
+     "en": "Before and after",
+     "es": "Antes y después"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Grupo, prato e flores"
+     "pt": "Grupo, prato e flores",
+     "en": "Group, dish and flowers",
+     "es": "Grupo, plato y flores"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Um rosto, três saídas"
+     "pt": "Um rosto, três saídas",
+     "en": "One face, three outputs",
+     "es": "Un rostro, tres salidas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Cor"
+     "pt": "Cor",
+     "en": "Color",
+     "es": "Color"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Filmes"
+     "pt": "Filmes",
+     "en": "Films",
+     "es": "Películas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Efeitos"
+     "pt": "Efeitos",
+     "en": "Effects",
+     "es": "Efectos"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -6623,81 +8469,103 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Pixelar"
+     "pt": "Pixelar",
+     "en": "Pixelar",
+     "es": "Pixelar"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O que é"
+     "pt": "O que é",
+     "en": "What it is",
+     "es": "Qué es"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Antes e depois"
+     "pt": "Antes e depois",
+     "en": "Before and after",
+     "es": "Antes y después"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Um rosto, três saídas"
+     "pt": "Um rosto, três saídas",
+     "en": "One face, three outputs",
+     "es": "Un rostro, tres salidas"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Cor"
+     "pt": "Cor",
+     "en": "Color",
+     "es": "Color"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Filmes"
+     "pt": "Filmes",
+     "en": "Films",
+     "es": "Películas"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Efeitos"
+     "pt": "Efeitos",
+     "en": "Effects",
+     "es": "Efectos"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ]
  },
  {
   "slug": "metaprojeto",
-  "servicos_relacionados": ["landing"],
-  "titulo": "Este portfólio",
+  "servicos_relacionados": [
+   "landing"
+  ],
+  "titulo": {
+   "pt": "Este portfólio",
+   "en": "This portfolio",
+   "es": "Este portafolio"
+  },
   "ano": "2026",
   "cat": {
-    "pt": "Programação",
-    "en": "Programming",
-    "es": "Programación"
+   "pt": "Programação",
+   "en": "Programming",
+   "es": "Programación"
   },
   "filtro": "programacao",
   "etiquetas": {
-    "entrega": [
-      "portfolio-site",
-      "processo"
-    ],
-    "setor": [
-      "design",
-      "tecnologia"
-    ],
-    "contexto": [
-      "portfolio",
-      "projeto-independente"
-    ],
-    "competencias": [
-      "programacao",
-      "design-interface"
-    ]
+   "entrega": [
+    "portfolio-site",
+    "processo"
+   ],
+   "setor": [
+    "design",
+    "tecnologia"
+   ],
+   "contexto": [
+    "portfolio",
+    "projeto-independente"
+   ],
+   "competencias": [
+    "programacao",
+    "design-interface"
+   ]
   },
   "capa": "assets/projetos/metaprojeto/n01.webp",
   "capaPosicao": "top",
@@ -6713,24 +8581,38 @@ window.PROJETOS = [
  },
  {
   "slug": "basement",
-  "servicos_relacionados": ["social","redacao"],
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
   "titulo": "Basement",
   "ano": "2026",
-  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "cat": {
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
+  },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": ["posts-carrosseis","conteudo-recorrente","pecas-graficas"],
-    "setor": ["tecnologia","juridico"],
-    "contexto": [
-      "trabalho-recorrente",
-      "cliente"
-    ],
-    "competencias": [
-      "social-media",
-      "redacao",
-      "figma",
-      "affinity"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "conteudo-recorrente",
+    "pecas-graficas"
+   ],
+   "setor": [
+    "tecnologia",
+    "juridico"
+   ],
+   "contexto": [
+    "trabalho-recorrente",
+    "cliente"
+   ],
+   "competencias": [
+    "social-media",
+    "redacao",
+    "figma",
+    "affinity"
+   ]
   },
   "capa": "assets/projetos/basement/capa.webp",
   "dir": "assets/projetos/basement/",
@@ -6748,33 +8630,38 @@ window.PROJETOS = [
  },
  {
   "slug": "tesoura",
-  "servicos_relacionados": ["social","redacao"],
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
   "titulo": "Tesoura com Ponta",
   "ano": "2025–2026",
   "cat": {
-    "pt": "Mídias sociais",
-    "en": "Social media",
-    "es": "Redes sociales"
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "artigos"
-    ],
-    "setor": ["jornalismo-cultural"],
-    "contexto": [
-      "trabalho-recorrente",
-      "projeto-editorial"
-    ],
-    "competencias": [
-      "redacao",
-      "social-media",
-      "wordpress",
-      "microsoft-word",
-      "google-docs",
-      "notion"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "artigos"
+   ],
+   "setor": [
+    "jornalismo-cultural"
+   ],
+   "contexto": [
+    "trabalho-recorrente",
+    "projeto-editorial"
+   ],
+   "competencias": [
+    "redacao",
+    "social-media",
+    "wordpress",
+    "microsoft-word",
+    "google-docs",
+    "notion"
+   ]
   },
   "capa": "assets/projetos/tesoura/capa.webp",
   "dir": "assets/projetos/tesoura/",
@@ -6796,39 +8683,42 @@ window.PROJETOS = [
  },
  {
   "slug": "persona",
-  "servicos_relacionados": ["social","redacao"],
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
   "titulo": "Persona",
   "ano": "2023–2026",
   "cat": {
-    "pt": "Mídias sociais",
-    "en": "Social media",
-    "es": "Redes sociales"
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "artigos"
-    ],
-    "setor": [
-      "cultura",
-      "educacao"
-    ],
-    "contexto": [
-      "grupo-pesquisa",
-      "trabalho-recorrente"
-    ],
-    "competencias": [
-      "redacao",
-      "social-media",
-      "photoshop",
-      "wordpress",
-      "microsoft-word",
-      "google-docs",
-      "notion",
-      "trello",
-      "gmail"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "artigos"
+   ],
+   "setor": [
+    "cultura",
+    "educacao"
+   ],
+   "contexto": [
+    "grupo-pesquisa",
+    "trabalho-recorrente"
+   ],
+   "competencias": [
+    "redacao",
+    "social-media",
+    "photoshop",
+    "wordpress",
+    "microsoft-word",
+    "google-docs",
+    "notion",
+    "trello",
+    "gmail"
+   ]
   },
   "capa": "assets/projetos/persona/capa.webp",
   "dir": "assets/projetos/persona/",
@@ -6851,34 +8741,37 @@ window.PROJETOS = [
  },
  {
   "slug": "desvendando",
-  "servicos_relacionados": ["social","redacao"],
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
   "titulo": "Desvendando o Pop",
   "ano": "2026",
   "cat": {
-    "pt": "Mídias sociais",
-    "en": "Social media",
-    "es": "Redes sociales"
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis",
-      "conteudo-editorial"
-    ],
-    "setor": [
-      "musica",
-      "entretenimento"
-    ],
-    "contexto": [
-      "trabalho-recorrente",
-      "projeto-independente"
-    ],
-    "competencias": [
-      "redacao",
-      "social-media",
-      "substack",
-      "google-docs"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "conteudo-editorial"
+   ],
+   "setor": [
+    "musica",
+    "entretenimento"
+   ],
+   "contexto": [
+    "trabalho-recorrente",
+    "projeto-independente"
+   ],
+   "competencias": [
+    "redacao",
+    "social-media",
+    "substack",
+    "google-docs"
+   ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
   "dir": "assets/projetos/desvendando/",
@@ -6892,7 +8785,9 @@ window.PROJETOS = [
  },
  {
   "slug": "proec",
-  "servicos_relacionados": ["social"],
+  "servicos_relacionados": [
+   "social"
+  ],
   "marca": [
    "congresso-extensao",
    "interserv",
@@ -6902,30 +8797,33 @@ window.PROJETOS = [
   "titulo": "PROEC Unesp",
   "ano": "2024",
   "cat": {
-    "pt": "Mídias sociais",
-    "en": "Social media",
-    "es": "Redes sociales"
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": ["posts-carrosseis","divulgacao-evento"],
-    "setor": [
-      "institucional",
-      "cultura"
-    ],
-    "contexto": [
-      "trabalho-recorrente",
-      "cliente"
-    ],
-    "competencias": [
-      "social-media",
-      "direcao-arte",
-      "monday",
-      "photoshop",
-      "illustrator",
-      "premiere",
-      "microsoft-office"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "divulgacao-evento"
+   ],
+   "setor": [
+    "institucional",
+    "cultura"
+   ],
+   "contexto": [
+    "trabalho-recorrente",
+    "cliente"
+   ],
+   "competencias": [
+    "social-media",
+    "direcao-arte",
+    "monday",
+    "photoshop",
+    "illustrator",
+    "premiere",
+    "microsoft-office"
+   ]
   },
   "capa": "assets/projetos/proec/capa.webp",
   "dir": "assets/projetos/proec/",
@@ -7002,7 +8900,13 @@ window.PROJETOS = [
     }
    }
   ],
-  "rel": ["congresso-extensao","interserv","nupe","ocupacao-unesp-negra","copa-girlpower"],
+  "rel": [
+   "congresso-extensao",
+   "interserv",
+   "nupe",
+   "ocupacao-unesp-negra",
+   "copa-girlpower"
+  ],
   "dash": {
    "users": [
     "proec_unesp",
@@ -7014,42 +8918,68 @@ window.PROJETOS = [
    "on": "#fff",
    "por": "g",
    "nomes": {
-    "congresso-extensao": "Congresso de Extensão",
-    "ocupacao-unesp-negra": "Ocupação Unesp Negra",
-    "interserv": "InterServ",
-    "educacao-politica": "Educação Política",
-    "mostra-cancao": "Mostra da Canção",
-    "persona": "TCC (RP Unesp)"
+    "congresso-extensao": {
+     "pt": "Congresso de Extensão",
+     "en": "Extension Congress",
+     "es": "Congreso de Extensión"
+    },
+    "ocupacao-unesp-negra": {
+     "pt": "Ocupação Unesp Negra",
+     "en": "Ocupação Unesp Negra",
+     "es": "Ocupação Unesp Negra"
+    },
+    "interserv": {
+     "pt": "InterServ",
+     "en": "InterServ",
+     "es": "InterServ"
+    },
+    "educacao-politica": {
+     "pt": "Educação Política",
+     "en": "Political Education",
+     "es": "Educación Política"
+    },
+    "mostra-cancao": {
+     "pt": "Mostra da Canção",
+     "en": "Mostra da Canção",
+     "es": "Mostra da Canção"
+    },
+    "persona": {
+     "pt": "TCC (RP Unesp)",
+     "en": "Final project (RP Unesp)",
+     "es": "Trabajo final (RP Unesp)"
+    }
    }
   }
  },
  {
   "slug": "sollaris-instagram",
-  "servicos_relacionados": ["social"],
+  "servicos_relacionados": [
+   "social"
+  ],
   "titulo": "Sollaris · Instagram",
   "ano": "2023",
   "cat": {
-    "pt": "Mídias sociais",
-    "en": "Social media",
-    "es": "Redes sociales"
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
   },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": [
-      "posts-carrosseis"
-    ],
-    "setor": [
-      "moda-acessorios",
-      "beleza"
-    ],
-    "contexto": [
-      "desdobramento-marca",
-      "cliente"
-    ],
-    "competencias": [
-      "social-media",
-      "direcao-arte"
-    ]
+   "entrega": [
+    "posts-carrosseis"
+   ],
+   "setor": [
+    "moda-acessorios",
+    "beleza"
+   ],
+   "contexto": [
+    "desdobramento-marca",
+    "cliente"
+   ],
+   "competencias": [
+    "social-media",
+    "direcao-arte"
+   ]
   },
   "capa": "assets/projetos/sollaris-instagram/capa.webp",
   "dir": "assets/projetos/sollaris-instagram/",
@@ -7066,34 +8996,50 @@ window.PROJETOS = [
  },
  {
   "slug": "rd-cultural",
-  "servicos_relacionados": ["social","redacao"],
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
   "titulo": "RD Cultural",
   "ano": "2023",
-  "cat": {"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},
+  "cat": {
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
+  },
   "filtro": "midias",
   "etiquetas": {
-    "entrega": ["posts-carrosseis","divulgacao-evento","organizacao-evento","pecas-graficas"],
-    "setor": [
-      "entretenimento",
-      "turismo"
-    ],
-    "contexto": ["estagio"],
-    "competencias": [
-      "social-media",
-      "redacao",
-      "meta-business-suite",
-      "html",
-      "wordpress",
-      "photoshop",
-      "illustrator",
-      "notion"
-    ]
+   "entrega": [
+    "posts-carrosseis",
+    "divulgacao-evento",
+    "organizacao-evento",
+    "pecas-graficas"
+   ],
+   "setor": [
+    "entretenimento",
+    "turismo"
+   ],
+   "contexto": [
+    "estagio"
+   ],
+   "competencias": [
+    "social-media",
+    "redacao",
+    "meta-business-suite",
+    "html",
+    "wordpress",
+    "photoshop",
+    "illustrator",
+    "notion"
+   ]
   },
   "capa": "assets/projetos/rd-cultural/capa.webp",
   "dir": "assets/projetos/rd-cultural/",
   "exp": "Rd Cultural",
   "intro": {
-   "pt": "Posts e carrosséis da RD Cultural, agência de excursões para shows e eventos de Bauru, feitos no estágio de comunicação, de fevereiro a julho de 2023."
+   "pt": "Posts e carrosséis da RD Cultural, agência de excursões para shows e eventos de Bauru, feitos no estágio de comunicação, de fevereiro a julho de 2023.",
+   "en": "Posts and carousels for RD Cultural, a Bauru agency running trips to concerts and events, made during my communications internship, February to July 2023.",
+   "es": "Posts y carruseles de RD Cultural, agencia de excursiones a shows y eventos de Bauru, hechos en la pasantía de comunicación, de febrero a julio de 2023."
   },
   "telas": [],
   "secoes": [],
@@ -7109,27 +9055,39 @@ window.PROJETOS = [
  },
  {
   "slug": "encantos-do-brasil",
-  "servicos_relacionados": ["identidade"],
+  "servicos_relacionados": [
+   "identidade"
+  ],
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
-  "cat": {"pt":"Eventos","en":"Events","es":"Eventos"},
-  "filtro": ["eventos", "midias"],
+  "cat": {
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
+  },
+  "filtro": [
+   "eventos",
+   "midias"
+  ],
   "etiquetas": {
-    "entrega": ["identidade-visual","posts-carrosseis"],
-    "setor": [
-      "musica",
-      "cultura"
-    ],
-    "contexto": [
-      "evento",
-      "projeto-academico"
-    ],
-    "competencias": [
-      "identidade-visual",
-      "social-media",
-      "streamyard",
-      "photoshop"
-    ]
+   "entrega": [
+    "identidade-visual",
+    "posts-carrosseis"
+   ],
+   "setor": [
+    "musica",
+    "cultura"
+   ],
+   "contexto": [
+    "evento",
+    "projeto-academico"
+   ],
+   "competencias": [
+    "identidade-visual",
+    "social-media",
+    "streamyard",
+    "photoshop"
+   ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
   "dir": "assets/projetos/encantos-do-brasil/",
@@ -7142,91 +9100,131 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "EmCantos do Brasil"
+     "pt": "EmCantos do Brasil",
+     "en": "EmCantos do Brasil",
+     "es": "EmCantos do Brasil"
     },
     "d": {
-     "pt": "Brandbook e planejamento do EmCantos do Brasil, evento online de música brasileira em 10 de março de 2022 (disciplina Gestão de Eventos, Unesp Bauru). Identidade visual de Pedro Nakamura; apresentei a transmissão, fiz peças durante o evento e esta apresentação."
+     "pt": "Brandbook e planejamento do EmCantos do Brasil, evento online de música brasileira em 10 de março de 2022 (disciplina Gestão de Eventos, Unesp Bauru). Identidade visual de Pedro Nakamura; apresentei a transmissão, fiz peças durante o evento e esta apresentação.",
+     "en": "Brandbook and planning for EmCantos do Brasil, an online Brazilian music event on March 10, 2022 (Event Management course, Unesp Bauru). Visual identity by Pedro Nakamura; I hosted the livestream, made pieces during the event and this presentation.",
+     "es": "Brandbook y planificación de EmCantos do Brasil, evento en línea de música brasileña el 10 de marzo de 2022 (asignatura Gestión de Eventos, Unesp Bauru). Identidad visual de Pedro Nakamura; presenté la transmisión, hice piezas durante el evento y esta presentación."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Quem fez"
+     "pt": "Quem fez",
+     "en": "Who made it",
+     "es": "Quién lo hizo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Marca"
+     "pt": "Marca",
+     "en": "Brand",
+     "es": "Marca"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Cores e tipografia"
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Cinco regiões, cinco artistas"
+     "pt": "Cinco regiões, cinco artistas",
+     "en": "Five regions, five artists",
+     "es": "Cinco regiones, cinco artistas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Carrosséis"
+     "pt": "Carrosséis",
+     "en": "Carousels",
+     "es": "Carruseles"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Transmissão ao vivo"
+     "pt": "Transmissão ao vivo",
+     "en": "Livestream",
+     "es": "Transmisión en vivo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Planejamento"
+     "pt": "Planejamento",
+     "en": "Planning",
+     "es": "Planificación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -7236,61 +9234,81 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "EmCantos do Brasil"
+     "pt": "EmCantos do Brasil",
+     "en": "EmCantos do Brasil",
+     "es": "EmCantos do Brasil"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Quem fez"
+     "pt": "Quem fez",
+     "en": "Who made it",
+     "es": "Quién lo hizo"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Marca"
+     "pt": "Marca",
+     "en": "Brand",
+     "es": "Marca"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Cores e tipografia"
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Cinco regiões, cinco artistas"
+     "pt": "Cinco regiões, cinco artistas",
+     "en": "Five regions, five artists",
+     "es": "Cinco regiones, cinco artistas"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Carrosséis"
+     "pt": "Carrosséis",
+     "en": "Carousels",
+     "es": "Carruseles"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Transmissão ao vivo"
+     "pt": "Transmissão ao vivo",
+     "en": "Livestream",
+     "es": "Transmisión en vivo"
     }
    },
    {
     "p": 9,
     "t": {
-     "pt": "Planejamento"
+     "pt": "Planejamento",
+     "en": "Planning",
+     "es": "Planificación"
     }
    },
    {
     "p": 10,
     "t": {
-     "pt": "Ficha técnica"
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
     }
    }
   ],
@@ -7306,31 +9324,35 @@ window.PROJETOS = [
  {
   "slug": "encontro-direitos-humanos",
   "servicos_relacionados": [],
-  "titulo": "13º Encontro de Direitos Humanos",
+  "titulo": {
+   "pt": "13º Encontro de Direitos Humanos",
+   "en": "13th Human Rights Meeting",
+   "es": "13.º Encuentro de Derechos Humanos"
+  },
   "ano": "2024",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "fotografia",
-      "organizacao-evento"
-    ],
-    "setor": [
-      "institucional",
-      "direitos-humanos"
-    ],
-    "contexto": [
-      "evento",
-      "cliente"
-    ],
-    "competencias": [
-      "organizacao-evento",
-      "fotografia"
-    ]
+   "entrega": [
+    "fotografia",
+    "organizacao-evento"
+   ],
+   "setor": [
+    "institucional",
+    "direitos-humanos"
+   ],
+   "contexto": [
+    "evento",
+    "cliente"
+   ],
+   "competencias": [
+    "organizacao-evento",
+    "fotografia"
+   ]
   },
   "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
   "dir": "assets/projetos/encontro-direitos-humanos/",
@@ -7338,46 +9360,66 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "13º Encontro de Direitos Humanos"
+     "pt": "13º Encontro de Direitos Humanos",
+     "en": "13th Human Rights Meeting",
+     "es": "13.º Encuentro de Derechos Humanos"
     },
     "d": {
-     "pt": "13º Encontro de Direitos Humanos da Unesp, do Observatório de Educação em Direitos Humanos (OEDH). Organização e apoio geral: credenciamento, logística, cerimonial e cobertura fotográfica."
+     "pt": "13º Encontro de Direitos Humanos da Unesp, do Observatório de Educação em Direitos Humanos (OEDH). Organização e apoio geral: credenciamento, logística, cerimonial e cobertura fotográfica.",
+     "en": "13th Unesp Human Rights Meeting, by the Human Rights Education Observatory (OEDH). Organization and general support: check-in, logistics, protocol and photo coverage.",
+     "es": "13.º Encuentro de Derechos Humanos de la Unesp, del Observatorio de Educación en Derechos Humanos (OEDH). Organización y apoyo general: acreditación, logística, ceremonial y cobertura fotográfica."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Minhas funções"
+     "pt": "Minhas funções",
+     "en": "My role",
+     "es": "Mis funciones"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "No encontro"
+     "pt": "No encontro",
+     "en": "At the meeting",
+     "es": "En el encuentro"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -7385,31 +9427,41 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "13º Encontro de Direitos Humanos"
+     "pt": "13º Encontro de Direitos Humanos",
+     "en": "13th Human Rights Meeting",
+     "es": "13.º Encuentro de Derechos Humanos"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "O evento"
+     "pt": "O evento",
+     "en": "The event",
+     "es": "El evento"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Minhas funções"
+     "pt": "Minhas funções",
+     "en": "My role",
+     "es": "Mis funciones"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "No encontro"
+     "pt": "No encontro",
+     "en": "At the meeting",
+     "es": "En el encuentro"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     }
    }
   ]
@@ -7420,29 +9472,29 @@ window.PROJETOS = [
   "titulo": "Copa GirlPower",
   "ano": "2024",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "fotografia",
-      "cobertura-fotografica"
-    ],
-    "setor": [
-      "esporte",
-      "educacao"
-    ],
-    "contexto": [
-      "evento",
-      "projeto-academico"
-    ],
-    "competencias": [
-      "fotografia",
-      "organizacao-evento",
-      "canon-rebel-t7"
-    ]
+   "entrega": [
+    "fotografia",
+    "cobertura-fotografica"
+   ],
+   "setor": [
+    "esporte",
+    "educacao"
+   ],
+   "contexto": [
+    "evento",
+    "projeto-academico"
+   ],
+   "competencias": [
+    "fotografia",
+    "organizacao-evento",
+    "canon-rebel-t7"
+   ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
   "dir": "assets/projetos/copa-girlpower/",
@@ -7450,64 +9502,92 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Copa GirlPower"
+     "pt": "Copa GirlPower",
+     "en": "Copa GirlPower",
+     "es": "Copa GirlPower"
     },
     "d": {
-     "pt": "Cobertura fotográfica da Copa GirlPower, torneio multiesportivo feminino entre atléticas universitárias em Tupã (SP), outubro de 2024: vôlei, handebol, tênis de mesa, equipes, premiação e torcida."
+     "pt": "Cobertura fotográfica da Copa GirlPower, torneio multiesportivo feminino entre atléticas universitárias em Tupã (SP), outubro de 2024: vôlei, handebol, tênis de mesa, equipes, premiação e torcida.",
+     "en": "Photo coverage of Copa GirlPower, a women’s multi-sport tournament between university athletic clubs in Tupã (SP), October 2024: volleyball, handball, table tennis, teams, awards and fans.",
+     "es": "Cobertura fotográfica de la Copa GirlPower, torneo multideportivo femenino entre clubes deportivos universitarios en Tupã (SP), octubre de 2024: vóleibol, balonmano, tenis de mesa, equipos, premiación e hinchada."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Quadra, mesa e arquibancada"
+     "pt": "Quadra, mesa e arquibancada",
+     "en": "Court, table and stands",
+     "es": "Cancha, mesa y tribuna"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "Vôlei"
+     "pt": "Vôlei",
+     "en": "Volleyball",
+     "es": "Vóleibol"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Tênis de mesa"
+     "pt": "Tênis de mesa",
+     "en": "Table tennis",
+     "es": "Tenis de mesa"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Equipes e premiação"
+     "pt": "Equipes e premiação",
+     "en": "Teams and awards",
+     "es": "Equipos y premiación"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Fora das quatro linhas"
+     "pt": "Fora das quatro linhas",
+     "en": "Off the court",
+     "es": "Fuera de la cancha"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -7515,76 +9595,96 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Copa GirlPower"
+     "pt": "Copa GirlPower",
+     "en": "Copa GirlPower",
+     "es": "Copa GirlPower"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Quadra, mesa e arquibancada"
+     "pt": "Quadra, mesa e arquibancada",
+     "en": "Court, table and stands",
+     "es": "Cancha, mesa y tribuna"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Vôlei"
+     "pt": "Vôlei",
+     "en": "Volleyball",
+     "es": "Vóleibol"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Tênis de mesa"
+     "pt": "Tênis de mesa",
+     "en": "Table tennis",
+     "es": "Tenis de mesa"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Equipes e premiação"
+     "pt": "Equipes e premiação",
+     "en": "Teams and awards",
+     "es": "Equipos y premiación"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Fora das quatro linhas"
+     "pt": "Fora das quatro linhas",
+     "en": "Off the court",
+     "es": "Fuera de la cancha"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     }
    }
   ],
-  "rel": ["proec"]
+  "rel": [
+   "proec"
+  ]
  },
  {
   "slug": "oficina-gestao-projetos",
   "servicos_relacionados": [],
-  "titulo": "Gestão de Projetos para Design",
+  "titulo": {
+   "pt": "Gestão de Projetos para Design",
+   "en": "Project Management for Design",
+   "es": "Gestión de Proyectos para Diseño"
+  },
   "ano": "2024",
   "cat": {
-    "pt": "Eventos",
-    "en": "Events",
-    "es": "Eventos"
+   "pt": "Eventos",
+   "en": "Events",
+   "es": "Eventos"
   },
   "filtro": "eventos",
   "etiquetas": {
-    "entrega": [
-      "oficina",
-      "material-didatico"
-    ],
-    "setor": [
-      "educacao",
-      "design"
-    ],
-    "contexto": [
-      "projeto-academico",
-      "colaboracao"
-    ],
-    "competencias": [
-      "gestao-projetos",
-      "design-grafico"
-    ]
+   "entrega": [
+    "oficina",
+    "material-didatico"
+   ],
+   "setor": [
+    "educacao",
+    "design"
+   ],
+   "contexto": [
+    "projeto-academico",
+    "colaboracao"
+   ],
+   "competencias": [
+    "gestao-projetos",
+    "design-grafico"
+   ]
   },
   "capa": "assets/projetos/oficina-gestao-projetos/capa.webp",
   "dir": "assets/projetos/oficina-gestao-projetos/",
@@ -7592,73 +9692,105 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Gestão de projetos para design"
+     "pt": "Gestão de projetos para design",
+     "en": "Project management for design",
+     "es": "Gestión de proyectos para diseño"
     },
     "d": {
-     "pt": "Oficina prática de gestão de projetos para design, ministrada com Costanza Guerriero: cinco briefings fictícios, ciclo de quatro semanas, kanban e fluxograma."
+     "pt": "Oficina prática de gestão de projetos para design, ministrada com Costanza Guerriero: cinco briefings fictícios, ciclo de quatro semanas, kanban e fluxograma.",
+     "en": "Hands-on project management workshop for design, taught with Costanza Guerriero: five fictional briefs, a four-week cycle, kanban and flowchart.",
+     "es": "Taller práctico de gestión de proyectos para diseño, impartido con Costanza Guerriero: cinco briefings ficticios, ciclo de cuatro semanas, kanban y diagrama de flujo."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "A oficina"
+     "pt": "A oficina",
+     "en": "The workshop",
+     "es": "El taller"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "t": {
-     "pt": "Na sala"
+     "pt": "Na sala",
+     "en": "In the room",
+     "es": "En el aula"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     },
     "img": "03"
    },
    {
     "img": "04",
     "t": {
-     "pt": "Os briefings"
+     "pt": "Os briefings",
+     "en": "The briefs",
+     "es": "Los briefings"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Ciclo de quatro semanas"
+     "pt": "Ciclo de quatro semanas",
+     "en": "Four-week cycle",
+     "es": "Ciclo de cuatro semanas"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Kanban"
+     "pt": "Kanban",
+     "en": "Kanban",
+     "es": "Kanban"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Fluxograma"
+     "pt": "Fluxograma",
+     "en": "Flowchart",
+     "es": "Diagrama de flujo"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -7666,49 +9798,65 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Gestão de projetos para design"
+     "pt": "Gestão de projetos para design",
+     "en": "Project management for design",
+     "es": "Gestión de proyectos para diseño"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "A oficina"
+     "pt": "A oficina",
+     "en": "The workshop",
+     "es": "El taller"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "Na sala"
+     "pt": "Na sala",
+     "en": "In the room",
+     "es": "En el aula"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Os briefings"
+     "pt": "Os briefings",
+     "en": "The briefs",
+     "es": "Los briefings"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Ciclo de quatro semanas"
+     "pt": "Ciclo de quatro semanas",
+     "en": "Four-week cycle",
+     "es": "Ciclo de cuatro semanas"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Kanban"
+     "pt": "Kanban",
+     "en": "Kanban",
+     "es": "Kanban"
     }
    },
    {
     "p": 7,
     "t": {
-     "pt": "Fluxograma"
+     "pt": "Fluxograma",
+     "en": "Flowchart",
+     "es": "Diagrama de flujo"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     }
    }
   ]
@@ -7716,25 +9864,35 @@ window.PROJETOS = [
  {
   "slug": "o-hobbit",
   "servicos_relacionados": [],
-  "titulo": "O Hobbit: análise literária",
+  "titulo": {
+   "pt": "O Hobbit: análise literária",
+   "en": "The Hobbit: literary analysis",
+   "es": "El hobbit: análisis literario"
+  },
   "ano": "2022",
   "cat": {
-    "pt": "Literária",
-    "en": "Literary",
-    "es": "Literaria"
+   "pt": "Literária",
+   "en": "Literary",
+   "es": "Literaria"
   },
   "filtro": "literaria",
   "etiquetas": {
-    "entrega": ["analise-literaria","editorial"],
-    "setor": [
-      "literatura",
-      "educacao"
-    ],
-    "contexto": [
-      "projeto-academico",
-      "colaboracao"
-    ],
-    "competencias": ["redacao","analise-literaria"]
+   "entrega": [
+    "analise-literaria",
+    "editorial"
+   ],
+   "setor": [
+    "literatura",
+    "educacao"
+   ],
+   "contexto": [
+    "projeto-academico",
+    "colaboracao"
+   ],
+   "competencias": [
+    "redacao",
+    "analise-literaria"
+   ]
   },
   "capa": "assets/projetos/o-hobbit/capa.webp",
   "dir": "assets/projetos/o-hobbit/",
@@ -7742,109 +9900,157 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Lá e de volta outra vez"
+     "pt": "Lá e de volta outra vez",
+     "en": "There and back again",
+     "es": "Ida y vuelta"
     },
     "d": {
-     "pt": "Microanálise do capítulo 12 de O Hobbit, de J. R. R. Tolkien, com Pedro Nakamura, na disciplina Prática de Leitura e de Análise do Texto Literário (RP, Unesp Bauru)."
+     "pt": "Microanálise do capítulo 12 de O Hobbit, de J. R. R. Tolkien, com Pedro Nakamura, na disciplina Prática de Leitura e de Análise do Texto Literário (RP, Unesp Bauru).",
+     "en": "Micro-analysis of chapter 12 of The Hobbit, by J. R. R. Tolkien, with Pedro Nakamura, for the Literary Text Reading and Analysis course (PR, Unesp Bauru).",
+     "es": "Microanálisis del capítulo 12 de El hobbit, de J. R. R. Tolkien, con Pedro Nakamura, en la asignatura Práctica de Lectura y Análisis del Texto Literario (RR. PP., Unesp Bauru)."
     }
    },
    {
     "img": "02",
     "t": {
-     "pt": "Microanálise do capítulo 12"
+     "pt": "Microanálise do capítulo 12",
+     "en": "Micro-analysis of chapter 12",
+     "es": "Microanálisis del capítulo 12"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "03",
     "t": {
-     "pt": "O que é microanálise?"
+     "pt": "O que é microanálise?",
+     "en": "What is micro-analysis?",
+     "es": "¿Qué es el microanálisis?"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "04",
     "t": {
-     "pt": "Estruturação"
+     "pt": "Estruturação",
+     "en": "Structure",
+     "es": "Estructuración"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "05",
     "t": {
-     "pt": "Por que esse trabalho é tão especial?"
+     "pt": "Por que esse trabalho é tão especial?",
+     "en": "Why is this work so special?",
+     "es": "¿Por qué este trabajo es tan especial?"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "06",
     "t": {
-     "pt": "Trabalho completo: capa"
+     "pt": "Trabalho completo: capa",
+     "en": "Full paper: cover",
+     "es": "Trabajo completo: portada"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "07",
     "t": {
-     "pt": "Trabalho completo: enredo e personagens"
+     "pt": "Trabalho completo: enredo e personagens",
+     "en": "Full paper: plot and characters",
+     "es": "Trabajo completo: trama y personajes"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "08",
     "t": {
-     "pt": "Trabalho completo: análise"
+     "pt": "Trabalho completo: análise",
+     "en": "Full paper: analysis",
+     "es": "Trabajo completo: análisis"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "09",
     "t": {
-     "pt": "Trabalho completo: análise"
+     "pt": "Trabalho completo: análise",
+     "en": "Full paper: analysis",
+     "es": "Trabajo completo: análisis"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "10",
     "t": {
-     "pt": "Trabalho completo: análise"
+     "pt": "Trabalho completo: análise",
+     "en": "Full paper: analysis",
+     "es": "Trabajo completo: análisis"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "11",
     "t": {
-     "pt": "Trabalho completo: conclusão e referências"
+     "pt": "Trabalho completo: conclusão e referências",
+     "en": "Full paper: conclusion and references",
+     "es": "Trabajo completo: conclusión y referencias"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    },
    {
     "img": "12",
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     },
     "d": {
-     "pt": ""
+     "pt": "",
+     "en": "",
+     "es": ""
     }
    }
   ],
@@ -7852,43 +10058,57 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Lá e de volta outra vez"
+     "pt": "Lá e de volta outra vez",
+     "en": "There and back again",
+     "es": "Ida y vuelta"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Microanálise do capítulo 12"
+     "pt": "Microanálise do capítulo 12",
+     "en": "Micro-analysis of chapter 12",
+     "es": "Microanálisis del capítulo 12"
     }
    },
    {
     "p": 3,
     "t": {
-     "pt": "O que é microanálise?"
+     "pt": "O que é microanálise?",
+     "en": "What is micro-analysis?",
+     "es": "¿Qué es el microanálisis?"
     }
    },
    {
     "p": 4,
     "t": {
-     "pt": "Estruturação"
+     "pt": "Estruturação",
+     "en": "Structure",
+     "es": "Estructuración"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Por que esse trabalho é tão especial?"
+     "pt": "Por que esse trabalho é tão especial?",
+     "en": "Why is this work so special?",
+     "es": "¿Por qué este trabajo es tan especial?"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Trabalho completo"
+     "pt": "Trabalho completo",
+     "en": "Full paper",
+     "es": "Trabajo completo"
     }
    },
    {
     "p": 12,
     "t": {
-     "pt": "Ficha"
+     "pt": "Ficha",
+     "en": "Credits",
+     "es": "Ficha"
     }
    }
   ]
@@ -7896,7 +10116,11 @@ window.PROJETOS = [
  {
   "slug": "dash-geral",
   "servicos_relacionados": [],
-  "titulo": "Visão geral",
+  "titulo": {
+   "pt": "Visão geral",
+   "en": "Overview",
+   "es": "Visión general"
+  },
   "ano": "2022–2026",
   "capa": "assets/projetos/dashboards/geral.svg",
   "dir": "assets/projetos/dashboards/",
@@ -7929,3 +10153,14 @@ window.PROJETOS = [
   "rel": []
  }
 ];
+
+/* Resolvedor de títulos traduzidos: p.titulo continua sendo texto para quem lê os dados;
+   o idioma vem do <html lang>, que index.html e projeto.html atualizam ao trocar de idioma. */
+(function () {
+  var cur = function () { var l = String(document.documentElement.lang || "pt").slice(0, 2); return l === "en" || l === "es" ? l : "pt"; };
+  window.PROJETOS.forEach(function (p) {
+    var t = p.titulo; if (!t || typeof t !== "object") return;
+    p.tituloI18n = t;
+    Object.defineProperty(p, "titulo", { enumerable: true, configurable: true, get: function () { return t[cur()] || t.pt; } });
+  });
+})();
