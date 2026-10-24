@@ -10348,7 +10348,11 @@ window.PROJETOS = [
      "pt": "13º Encontro de Direitos Humanos da Unesp, do Observatório de Educação em Direitos Humanos (OEDH). Organização e apoio geral: credenciamento, logística, cerimonial e cobertura fotográfica.",
      "en": "13th Unesp Human Rights Meeting, by the Human Rights Education Observatory (OEDH). Organization and general support: check-in, logistics, protocol and photo coverage.",
      "es": "13.º Encuentro de Derechos Humanos de la Unesp, del Observatorio de Educación en Derechos Humanos (OEDH). Organización y apoyo general: acreditación, logística, ceremonial y cobertura fotográfica."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -10361,7 +10365,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -10374,7 +10382,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -10387,7 +10399,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -10400,7 +10416,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
