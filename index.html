@@ -2698,7 +2698,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (igm) {
       const post = (window.POSTS || []).find(x => x.c === igm[1]), link = `https://www.instagram.com/p/${igm[1]}/`;
       amFrame.hidden = true; amFrame.src = 'about:blank';
-      amReader.innerHTML = `<div class="am-igone">${window.HM_POSTS.igEmbed(post || { c: igm[1], r: 1.25, cap: artTitle(a) })}<a class="am-igone-link" href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a></div>`;
+      amReader.innerHTML = `<div class="am-igone">${window.HM_POSTS.igEmbed(post || { c: igm[1], r: 1.25, cap: artTitle(a) })}<a class="am-igone-link" href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a></div>`;
       amReader.hidden = false; amReader.scrollTop = 0; amStage.classList.add('loaded');
       return;
     }
@@ -3670,7 +3670,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
-  const COLS_CFG = { pj: { key: 'hm-wcols', def: [2, 3], max: 5 }, sg: { key: 'hm-scols', def: [2, 4], max: 6 } };
+  const COLS_CFG = { pj: { key: 'hm-wcols', def: [2, 3], max: 5 }, sg: { key: 'hm-scols', def: [2, 3], max: 6 } };
   const colsMode = () => pjSelectedCategory === 'midias' ? 'sg' : 'pj';
   const colsMax = () => mqMob.matches ? 3 : COLS_CFG[colsMode()].max;
   const readCols = () => { try { return JSON.parse(localStorage.getItem(COLS_CFG[colsMode()].key) || '{}') || {}; } catch (e) { return {}; } };
@@ -3874,7 +3874,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="ig-strip${n === 1 || x.embed ? ' one' : ''}">${imgs}</div>
       ${n > 1 && !x.embed ? `<div class="ig-dots" aria-hidden="true">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div>` : ''}
       ${cap ? `<p class="ig-cap${longo ? ' clamp' : ''}">${esc(cap)}</p>${longo ? `<button class="ig-more" type="button">${lx(IG_L.mais)}</button>` : ''}` : ''}
-      <div class="ig-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
+      <div class="ig-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
     </article>`;
   };
   // card de post (grade): galeria embutida no próprio card, setas no desktop, deslize no celular
@@ -3888,7 +3888,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="pc-media" style="--ar:${x.embed ? (1 / ((Number(x.r) || 1.25) + 0.26)).toFixed(4) : (1 / x.r).toFixed(4)}"><div class="pc-track">${imgs}</div>
         ${n > 1 && !x.embed ? `<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="Próxima">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : ''}</div>
       <div class="pc-body"><p class="pc-meta">@${esc(x.user)} — ${fmtData(x.d)}</p>${cap ? `<p class="pc-cap${longo ? ' clamp' : ''}">${esc(cap)}</p>${longo ? `<button class="ig-more" type="button">${lx(IG_L.mais)}</button>` : ''}` : ''}
-        <div class="pc-links"><a href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)} ↗</a>${art ? `<a href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div></div>
+        <div class="pc-links"><a href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div></div>
     </article>`;
   };
   document.addEventListener('scroll', (e) => {

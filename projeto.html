@@ -219,7 +219,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
       '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
       (cap?'<p class="pc-cap'+(longCap?' clamp':'')+'">'+esc(cap)+'</p>'+(longCap?'<button class="ig-more" type="button">'+esc(textLabel("ver mais","more","ver más"))+'</button>':""):"")+
-      '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+' ↗</a>'+
+      '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+'</a>'+
       (post.art?'<a href="'+esc(post.art)+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ler o texto","Read the text","Leer el texto"))+'</a>':"")+'</div></div></article>';
   }
   function addTocBlock(list,id,label){list.push([id,label]);}
