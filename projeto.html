@@ -11,31 +11,58 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261020-share-row">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa-mob">
+<style>
+/* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
+   Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
+body.project-page > header.top-header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-100); }
+body.project-page > header.top-header.menu-open { background: var(--white); }
+body.project-page .project-brand { display: block; color: var(--ink); text-decoration: none; }
+body.project-page .project-brand .brand-name, body.project-page .project-brand .brand-location { display: block; }
+body.project-page .project-brand .brand-location { color: var(--gray-400); }
+body.project-page .project-brand:focus-visible, body.project-page .main-nav a:focus-visible,
+body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+</style>
 </head>
 <body class="project-page">
 <main id="dk" class="dk-ov open" aria-labelledby="project-title">
-  <div class="dk-top">
-    <div class="detail-topcopy">
-      <a class="dk-name" href="index.html#trabalhos" id="project-back">Projetos</a>
-      <span class="dk-meta" id="project-meta"></span>
+<header class="top-header" id="project-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a class="project-brand" href="index.html">
+        <span class="brand-name">Henrique Marinhos</span>
+        <span class="brand-location">— São Paulo, Brasil</span>
+      </a>
     </div>
-    <div class="detail-actions">
-      <div class="detail-lang" id="project-lang" role="group" aria-label="Idioma / Language"></div>
-      <a class="dk-x detail-back" href="index.html#trabalhos" aria-label="Voltar aos projetos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <!-- botão hambúrguer (só no celular) -->
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span></button>
+    <!-- no celular é o painel do menu; no desktop, links no centro e idiomas à direita -->
+    <div class="nav-row" id="nav-panel">
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html" data-nav="home">Início</a>
+        <a href="index.html#sobre" data-nav="about">Sobre</a>
+        <a href="index.html#trabalhos" data-nav="work" class="current" aria-current="page">Projetos</a>
+        <a href="index.html#artigos" data-nav="articles">Artigos</a>
+        <a href="index.html#contato" data-nav="contact">Contato</a>
+      </nav>
+      <div class="lang-switch" id="project-lang" role="group" aria-label="Idioma / Language"></div>
     </div>
   </div>
+</header>
+<main id="dk" class="dk-ov open" aria-labelledby="project-title">
   <div id="project-content-root" class="dk-content">
     <header class="dk-head" id="project-top">
       <p class="dk-kicker" id="project-kicker"></p>
       <h1 class="dk-title" id="project-title"></h1>
       <p class="dk-intro" id="project-intro"></p>
+      <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       <div class="detail-subnav"><a id="project-external-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a></div>
+      <!-- capa do card, repetida abaixo da descrição -->
+      <figure class="dk-cover" id="project-cover" hidden><div class="dk-cover-media" id="project-cover-media"></div></figure>
     </header>
     <div class="dk-body">
       <div class="dk-toc-share">
         <nav class="dk-toc" id="project-toc" aria-label="Sumário do projeto" hidden></nav>
-        <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       </div>
       <div class="dk-imgs" id="project-visuals"></div>
     </div>
@@ -56,8 +83,8 @@
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
-<script src="assets/data/posts.js?v=20261020-rp40-post"></script>
+<script src="assets/data/projetos.js?v=20261023-midias"></script>
+<script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
 
@@ -115,10 +142,30 @@
   function cleanProjectUrl(projectSlug) { return "/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/"; }
   var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
   var main=document.getElementById("dk"), heading=document.getElementById("project-title");
-  var kicker=document.getElementById("project-kicker"), meta=document.getElementById("project-meta");
+  var kicker=document.getElementById("project-kicker");
   var intro=document.getElementById("project-intro"), visuals=document.getElementById("project-visuals");
   var toc=document.getElementById("project-toc"), langHost=document.getElementById("project-lang");
   var nextLink=document.getElementById("project-next");
+  /* --- Cabeçalho: hambúrguer no celular, links centrais no desktop --- */
+  var siteHeader=document.getElementById("project-header"), navToggle=document.getElementById("nav-toggle");
+  function setMenu(open) {
+    siteHeader.classList.toggle("menu-open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? textLabel("Fechar menu","Close menu","Cerrar menú") : textLabel("Abrir menu","Open menu","Abrir menú"));
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  navToggle.addEventListener("click", function () { setMenu(!siteHeader.classList.contains("menu-open")); });
+  siteHeader.querySelectorAll(".main-nav a").forEach(function (link) { link.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("keydown", function (event) { if (event.key === "Escape" && siteHeader.classList.contains("menu-open")) setMenu(false); });
+  matchMedia("(min-width: 768px)").addEventListener("change", function (event) { if (event.matches) setMenu(false); });
+  /* altura real do cabeçalho → --hdr-h (painel do menu) e --project-header-height (sumário e âncoras) */
+  function setHdr() {
+    var h = siteHeader.offsetHeight + "px";
+    document.documentElement.style.setProperty("--hdr-h", h);
+    document.documentElement.style.setProperty("--project-header-height", h);
+  }
+  setHdr();
+  window.addEventListener("resize", setHdr);
   var siteCopy={
     back:{pt:"Todos os projetos",en:"All projects",es:"Todos los proyectos"},
     try:{pt:"Abrir ferramenta interativa",en:"Open interactive tool",es:"Abrir herramienta interactiva"},
@@ -134,14 +181,25 @@
     open:{pt:"Abrir site em nova aba ↗",en:"Open website in a new tab ↗",es:"Abrir sitio en una pestaña nueva ↗"}
   };
   function renderLanguageControls() {
-    document.getElementById("project-back").textContent=lx(siteCopy.back);
+    var NAV_L={
+      home:{pt:"Início",en:"Home",es:"Inicio"},
+      about:{pt:"Sobre",en:"About",es:"Sobre mí"},
+      work:{pt:"Projetos",en:"Projects",es:"Proyectos"},
+      articles:{pt:"Artigos",en:"Articles",es:"Artículos"},
+      contact:{pt:"Contato",en:"Contact",es:"Contacto"}
+    };
+    siteHeader.querySelectorAll("[data-nav]").forEach(function (link) {
+      var v=NAV_L[link.dataset.nav];
+      link.textContent=textLabel(v.pt,v.en,v.es);
+    });
+    setMenu(siteHeader.classList.contains("menu-open"));
     var flags = {
       pt: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#009C3B"/><path d="M10.5 1.6 19.3 7.5 10.5 13.4 1.7 7.5z" fill="#FFDF00"/><circle cx="10.5" cy="7.5" r="3.4" fill="#002776"/><path d="M7.3 6.8c2.1-.6 4.4-.3 6.3.9" stroke="#fff" stroke-width=".55" fill="none"/></svg>',
       en: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#012169"/><path d="M0 0 21 15M21 0 0 15" stroke="#fff" stroke-width="3.6"/><path d="M0 0 21 15M21 0 0 15" stroke="#C8102E" stroke-width="1.5"/><path d="M10.5 0v15M0 7.5h21" stroke="#fff" stroke-width="5"/><path d="M10.5 0v15M0 7.5h21" stroke="#C8102E" stroke-width="2.7"/></svg>',
       es: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#AA151B"/><rect y="3.75" width="21" height="7.5" fill="#F1BF00"/></svg>'
     };
     langHost.innerHTML=["pt","en","es"].map(function(code){
-      return '<button type="button" data-lang="'+code+'" lang="'+code+'" aria-pressed="'+(code===LANG)+'" aria-label="'+LANG_NAMES[code]+'" title="'+LANG_NAMES[code]+'">'+flags[code]+'</button>';
+      return '<button type="button" class="lang-btn" data-lang="'+code+'" lang="'+code+'" aria-pressed="'+(code===LANG)+'" aria-label="'+LANG_NAMES[code]+'" title="'+LANG_NAMES[code]+'">'+flags[code]+'</button>';
     }).join("");
     langHost.querySelectorAll("[data-lang]").forEach(function(button){
       button.addEventListener("click",function(){
@@ -163,7 +221,7 @@
       (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
       '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
       (cap?'<p class="pc-cap'+(longCap?' clamp':'')+'">'+esc(cap)+'</p>'+(longCap?'<button class="ig-more" type="button">'+esc(textLabel("ver mais","more","ver más"))+'</button>':""):"")+
-      '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+' ↗</a>'+
+      '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+'</a>'+
       (post.art?'<a href="'+esc(post.art)+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ler o texto","Read the text","Leer el texto"))+'</a>':"")+'</div></div></article>';
   }
   function addTocBlock(list,id,label){list.push([id,label]);}
@@ -183,7 +241,7 @@
         '<div class="pc-grid'+(items.length>=4?' pc-4':'')+'">'+items.map(postCard).join("")+'</div></div>';
     }).join("");
     if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
-    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+textLabel(" posts"," posts"," posts")+'</span></h3>'+filter+groupsHTML+'</section>';
+    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+(postsCount===1?textLabel(" publicação"," post"," publicación"):textLabel(" posts"," posts"," posts"))+'</span></h3>'+filter+groupsHTML+'</section>';
   }
 
 
@@ -499,8 +557,7 @@
     var blocks=[], contentToc=[], mainScreens=project.telas||[];
     var introText=lx(project.intro||(mainScreens[0]&&mainScreens[0].d));
     heading.textContent=project.titulo;
-    kicker.textContent=project.cat?lx(project.cat):textLabel("Portfólio","Portfolio","Portafolio");
-    meta.textContent=project.cat?lx(project.cat)+(project.ano?" · "+project.ano:""):(project.ano||"");
+    kicker.textContent=(project.cat?lx(project.cat):textLabel("Portfólio","Portfolio","Portafolio"))+(project.ano?" · "+project.ano:"");
     intro.textContent=introText;
     document.title=project.titulo+" — Henrique Marinhos";
     document.documentElement.lang=LANG==="pt"?"pt-br":LANG;
@@ -508,6 +565,13 @@
     var external=document.getElementById("project-external-link");
     if(project.link){external.hidden=false;external.href=project.link;external.textContent=project.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/(index\.html)?$/,"");}
     else external.hidden=true;
+    // capa do card (mesma imagem, proporção 3:2 e enquadramento) logo abaixo da descrição
+    var cover=document.getElementById("project-cover"), coverMedia=document.getElementById("project-cover-media");
+    if(project.capa&&matchMedia("(max-width:767px)").matches){ // só no celular (evita baixar a imagem no desktop)
+      coverMedia.innerHTML='<img src="'+esc(project.capa)+'" alt="" width="1200" height="800" decoding="async" fetchpriority="high"'+(project.capaPosicao?' style="object-position:'+esc(project.capaPosicao)+'"':"")+'>'+
+        (project.slug==="rino-site"?'<img class="rino-cover-logo" src="/assets/projetos/rino/rino-mascote.svg" alt="" decoding="async">':"");
+      cover.hidden=false;
+    }else cover.hidden=true;
     var screenHTML="";
     if(project.slug==="rino-pecas"){
       screenHTML='<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">'+mainScreens.map(function(screen){
@@ -521,7 +585,7 @@
     }
     blocks.push(screenHTML);
     if(project.slug==="rino-site"&&project.web){
-      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p><p class="rino-case-description">'+esc(lx(project.intro))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
+      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
       addTocBlock(contentToc,"dk-b-rino-case",{pt:"Ferramenta interativa",en:"Interactive tool",es:"Herramienta interactiva"});
     }
     if(project.shots&&project.shots.length&&project.slug!=="rino-site"){
@@ -552,7 +616,7 @@
     if(project.rel&&project.rel.length){
       var related=project.rel.map(function(relatedSlug){
         var item=PROJECTS.find(function(candidate){return candidate.slug===relatedSlug;}); if(!item)return "";
-        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p><p class="work-card-tag">'+esc(lx(item.cat||item.badge||""))+'</p></a>';
+        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p></a>';
       }).join("");
       if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
     }
@@ -635,12 +699,10 @@
   var shareFeedback = document.getElementById("project-share-feedback");
   if (shareButton) shareButton.addEventListener("click", async function () {
     var shareUrl = window.location.origin + cleanProjectUrl(slug || (currentProject && currentProject.slug) || "");
-    var shareTitle = heading ? heading.textContent.trim() : document.title;
-    var shareText = intro ? intro.textContent.trim() : "";
     if (shareFeedback) shareFeedback.textContent = "";
     try {
       if (navigator.share) {
-        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        await navigator.share({ url: shareUrl });
         if (shareFeedback) shareFeedback.textContent = textLabel("Compartilhamento aberto.", "Share sheet opened.", "Compartir abierto.");
         return;
       }
