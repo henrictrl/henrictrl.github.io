@@ -8730,7 +8730,11 @@ window.PROJETOS = [
      "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento em HTML, CSS e JavaScript, publicado no GitHub Pages.",
      "en": "Portfolio for journalist and researcher Fellipe Gualberto. Design and development in HTML, CSS and JavaScript, published on GitHub Pages.",
      "es": "Portafolio del periodista e investigador Fellipe Gualberto. Diseño y desarrollo en HTML, CSS y JavaScript, publicado en GitHub Pages."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -8743,7 +8747,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -8756,7 +8764,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -8769,7 +8781,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -8782,7 +8798,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -8795,7 +8815,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -8808,7 +8832,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -8821,7 +8849,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "web": {
