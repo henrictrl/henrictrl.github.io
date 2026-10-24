@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-share-center">
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa">
 <style>
 /* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
    Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
@@ -57,6 +57,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       <p class="dk-intro" id="project-intro"></p>
       <div class="project-share-wrap"><button class="project-share" id="project-share" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg><span>Compartilhar projeto</span></button><span id="project-share-feedback" class="project-share-feedback" role="status" aria-live="polite"></span></div>
       <div class="detail-subnav"><a id="project-external-link" href="#" target="_blank" rel="noopener noreferrer" hidden></a></div>
+      <!-- capa do card, repetida abaixo da descrição -->
+      <figure class="dk-cover" id="project-cover" hidden><div class="dk-cover-media" id="project-cover-media"></div></figure>
     </header>
     <div class="dk-body">
       <div class="dk-toc-share">
@@ -563,6 +565,13 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     var external=document.getElementById("project-external-link");
     if(project.link){external.hidden=false;external.href=project.link;external.textContent=project.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/(index\.html)?$/,"");}
     else external.hidden=true;
+    // capa do card (mesma imagem, proporção 3:2 e enquadramento) logo abaixo da descrição
+    var cover=document.getElementById("project-cover"), coverMedia=document.getElementById("project-cover-media");
+    if(project.capa){
+      coverMedia.innerHTML='<img src="'+esc(project.capa)+'" alt="" width="1200" height="800" decoding="async" fetchpriority="high"'+(project.capaPosicao?' style="object-position:'+esc(project.capaPosicao)+'"':"")+'>'+
+        (project.slug==="rino-site"?'<img class="rino-cover-logo" src="/assets/projetos/rino/rino-mascote.svg" alt="" decoding="async">':"");
+      cover.hidden=false;
+    }else cover.hidden=true;
     var screenHTML="";
     if(project.slug==="rino-pecas"){
       screenHTML='<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">'+mainScreens.map(function(screen){

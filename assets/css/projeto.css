@@ -1751,3 +1751,11 @@ body.project-page .dk-head .project-share svg { width: 15px; height: 15px; flex:
 body.project-page .dk-head .project-share:hover { color: var(--ink); }
 body.project-page .dk-head .project-share:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 body.project-page .dk-head .project-share-feedback { font-size: 11px; color: var(--gray-500); text-align: center !important; }
+
+/* Capa do card abaixo da descrição do projeto: mesma proporção, raio e sombra dos cards */
+body.project-page .dk-cover { width:100%; max-width:640px; margin:28px auto 0; }
+body.project-page .dk-cover[hidden] { display:none; }
+body.project-page .dk-cover-media { position:relative; aspect-ratio:3/2; border-radius:var(--r); overflow:hidden; background:var(--gray-100); box-shadow:0 6px 18px -6px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.05); }
+body.project-page .dk-cover-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+body.project-page .dk-cover-media .rino-cover-logo { inset:43.1% auto auto 9.2%; width:34.8%; height:31.4%; object-fit:contain; border-radius:4px; }
+@media (max-width:767px) { body.project-page .dk-cover { margin-top:22px; } }
