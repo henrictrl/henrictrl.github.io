@@ -3136,14 +3136,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Vídeo: carrega sob demanda; toca só enquanto o holofote existe e a foto está visível
     const ensureVideo = () => {
       if ((saveData && !mobile) || video.src) return;
+      video.muted = true; // Safari só libera autoplay com mudo definido via propriedade
       video.src = video.dataset.src;
       video.load();
     };
+    const wantVideo = () => (s.tr > 0 || s.r >= 1) && inView && !document.hidden;
+    let playRetries = 0;
     const syncVideo = () => {
-      const want = (s.tr > 0 || s.r >= 1) && inView && !document.hidden;
-      if (want) { ensureVideo(); if (video.paused) video.play().catch(() => {}); }
+      const want = wantVideo();
+      if (want) {
+        ensureVideo();
+        if (video.paused) {
+          // play() falha antes de haver dados (Safari) ou é abortado por load(): tenta de novo
+          const p = video.play();
+          if (p && p.catch) p.then(() => { playRetries = 0; }).catch(() => {
+            if (playRetries++ < 20) setTimeout(syncVideo, 250);
+          });
+        }
+      }
       else if (!video.paused) video.pause();
     };
+    // Retoma sempre que o vídeo ficar pronto ou for pausado pelo navegador enquanto deveria tocar
+    video.addEventListener('canplay', syncVideo);
+    video.addEventListener('loadeddata', syncVideo);
+    video.addEventListener('pause', () => { if (wantVideo() && !document.hidden) setTimeout(syncVideo, 100); });
 
     const tick = () => {
       const k = reduce ? 1 : 0.16, kr = reduce ? 1 : 0.12;
