@@ -754,57 +754,66 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 }
 .sm-cta-btn:hover { opacity: 0.85; }
 
-/* --- Modal de serviço: fluxo, entregas, condições, exemplos --- */
-.pm-scroll { min-height: 0; overscroll-behavior: contain; touch-action: pan-y; } /* rolagem própria no celular */
-.project-modal-overlay { overscroll-behavior: contain; }
-body.sm-locked { position: fixed; left: 0; right: 0; width: 100%; overflow: hidden; } /* iOS ignora overflow:hidden no body */
+/* --- Modal de serviço: o próprio overlay é a área rolável (um único scroller, como o deck de projeto) --- */
+#service-modal-overlay { display: block; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 4vh 16px; }
+#service-modal-overlay .service-modal { display: block; height: auto; max-height: none; margin: 0 auto; overflow: visible; }
+#service-modal-overlay .pm-topbar { position: sticky; top: 0; z-index: 3; background: var(--white); border-radius: var(--r) var(--r) 0 0; }
+#service-modal-overlay .pm-scroll { overflow: visible; flex: none; }
 @media (max-width: 640px) {
-  .project-modal { height: 100vh; }
-  .client-modal { max-height: 100vh; }
+  #service-modal-overlay { padding: 0; }
+  #service-modal-overlay .service-modal { min-height: 100%; border-radius: 0; }
+  #service-modal-overlay .pm-topbar { border-radius: 0; }
 }
-@supports (height: 100dvh) { /* 100vh passa da área visível no celular (barra do navegador) */
-  @media (max-width: 640px) { .project-modal { height: 100dvh; } .client-modal { max-height: 100dvh; } }
-}
+@media (max-width: 640px) { .project-modal { height: 100vh; } .client-modal { max-height: 100vh; } }
+@supports (height: 100dvh) { @media (max-width: 640px) { .project-modal { height: 100dvh; } .client-modal { max-height: 100dvh; } } }
+
+body:has(#service-modal-overlay.open) .mobile-top-button { display: none !important; } /* botão da página não aparece sobre o modal */
 .service-modal { --svc: var(--ink); }
 .service-modal[data-svc="identidade"] { --svc: #F72C2B; }
 .service-modal[data-svc="social"]     { --svc: #FFC700; }
 .service-modal[data-svc="redacao"]    { --svc: #1D3DF5; }
 .service-modal[data-svc="landing"]    { --svc: #13A03F; }
 .sm-wrap { container-type: inline-size; padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+.sm-head-ic { display: block; width: 40px; height: 40px; margin-bottom: 18px; }
+.sm-head-ic svg { width: 100%; height: 100%; fill: var(--svc); display: block; }
 .sm-wrap .sm-desc { text-wrap: pretty; margin-bottom: 36px; }
 .sm-sec { margin-bottom: 40px; }
 .sm-sec > .pm-block-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
 .sm-sec > .pm-block-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
 
-/* fluxo: vertical no celular, horizontal quando há largura */
+/* ícones e números em pixel (grade 12x12 e dígitos 3x5, mesma linguagem dos ícones de serviço) */
+.px { display: block; shape-rendering: crispEdges; }
+.sm-ic { width: 44px; height: 44px; border-radius: var(--r); background: color-mix(in srgb, var(--svc) 16%, #fff); display: grid; place-items: center; position: relative; z-index: 1; }
+.sm-ic .px { width: 24px; height: 24px; fill: var(--ink); }
+.sm-num { height: 10px; width: 14px; fill: var(--gray-400); margin: 3px 0 7px; }
+
+/* fluxo: vertical no celular, horizontal quando há largura; linha pontilhada em "pixels" */
 .sm-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-.sm-step { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 14px; padding-bottom: 22px; }
+.sm-step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 16px; padding-bottom: 24px; }
+.sm-step > .sm-ic { grid-row: span 3; }
 .sm-step:last-child { padding-bottom: 0; }
-.sm-step::before { content: ''; position: absolute; left: 17px; top: 40px; bottom: 4px; width: 1px; background: var(--gray-200); }
+.sm-step::before { content: ''; position: absolute; left: 21px; width: 2px; top: 52px; bottom: 8px;
+  background: repeating-linear-gradient(to bottom, var(--gray-400) 0 2px, transparent 2px 6px); opacity: .5; }
 .sm-step:last-child::before { display: none; }
-.sm-n { grid-row: span 2; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ink); background: var(--white);
-  display: grid; place-items: center; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; position: relative; }
-.sm-n::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--svc); opacity: .55; } /* anel na cor do serviço */
-.sm-step h3 { font-size: 15px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; padding-top: 8px; }
+.sm-step h3 { font-size: 15px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
 .sm-step p { font-size: 13.5px; line-height: 1.55; color: var(--gray-500); margin-top: 3px; text-wrap: pretty; }
 @container (min-width: 640px) {
   .sm-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 18px; }
   .sm-step { display: block; padding-bottom: 0; }
-  .sm-step::before { left: 46px; right: -9px; top: 17px; bottom: auto; width: auto; height: 1px; }
-  .sm-n { margin-bottom: 14px; }
-  .sm-step h3 { padding-top: 0; }
+  .sm-step::before { left: 54px; right: -8px; top: 21px; bottom: auto; width: auto; height: 2px;
+    background: repeating-linear-gradient(to right, var(--gray-400) 0 2px, transparent 2px 6px); }
+  .sm-step > .sm-ic { margin-bottom: 12px; }
 }
 
-/* entregas: lista expansível, uma por vez fica aberta */
+/* entregas: lista expansível, uma aberta por vez; mais/menos em pixel */
 .sm-deliv { border-top: 1px solid var(--gray-200); }
 .sm-item { border-bottom: 1px solid var(--gray-200); }
 .sm-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 16px 0; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; }
 .sm-item summary::-webkit-details-marker { display: none; }
 .sm-item summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
-.sm-item summary::after { content: ''; flex: none; width: 9px; height: 9px; border-right: 1.5px solid var(--gray-400); border-bottom: 1.5px solid var(--gray-400);
-  transform: rotate(45deg) translateY(-2px); transition: transform .3s var(--ease); }
-.sm-item[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.sm-pm { flex: none; width: 12px; height: 12px; fill: var(--gray-500); }
+.sm-item[open] .sm-pm .v { display: none; }
 .sm-item-body { padding: 0 0 20px; display: grid; gap: 14px; }
 .sm-item-d { font-size: 14px; line-height: 1.65; color: var(--gray-500); max-width: 62ch; text-wrap: pretty; }
 .sm-k { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 7px; }
@@ -815,13 +824,15 @@ body.sm-locked { position: fixed; left: 0; right: 0; width: 100%; overflow: hidd
 /* condições */
 .sm-terms { display: grid; gap: 8px; }
 @container (min-width: 560px) { .sm-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.sm-term { border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; border-top: 2px solid var(--svc); }
-.sm-term strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.sm-term { border: 1px solid var(--gray-200); border-radius: var(--r); padding: 14px 16px; display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; align-items: start; }
+.sm-term .sm-ic { width: 32px; height: 32px; grid-row: span 2; }
+.sm-term .sm-ic .px { width: 18px; height: 18px; }
+.sm-term strong { display: block; font-size: 14px; font-weight: 600; margin: 6px 0 4px; }
 .sm-term p { font-size: 13px; line-height: 1.55; color: var(--gray-500); text-wrap: pretty; }
 
-/* exemplos (2 cards, mesmo padrão dos Artigos) */
+/* exemplos (2 cards: capa e título) */
 .sm-wrap .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.sm-wrap .work-card-tag { display: none; } /* card só com capa e título */
+.sm-wrap .work-card-tag { display: none; }
 @container (min-width: 640px) { .sm-wrap .work-grid { max-width: 520px; } }
 
 /* contato */
@@ -830,7 +841,6 @@ body.sm-locked { position: fixed; left: 0; right: 0; width: 100%; overflow: hidd
 .sm-cta-btn.alt { background: transparent; color: var(--ink); border: 1px solid var(--gray-200); }
 .sm-cta-btn.alt:hover { border-color: var(--ink); opacity: 1; }
 @media (max-width: 640px) { .sm-cta-row { flex-direction: column; } .sm-cta-row .sm-cta-btn { width: 100%; } }
-@media (prefers-reduced-motion: reduce) { .sm-item summary::after { transition: none; } }
 
 
 @media (max-width: 640px) {
@@ -2072,6 +2082,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </div>
     <div class="pm-scroll" id="sm-scroll">
       <div class="pm-content max-w sm-wrap" style="padding-top:24px;">
+        <span class="sm-head-ic" id="sm-head-ic" aria-hidden="true"></span>
         <p class="pm-block-label" id="sm-eyebrow">Serviço</p>
         <h2 class="pm-title" id="sm-title"></h2>
         <p class="sm-desc" id="sm-desc"></p>
@@ -2955,13 +2966,30 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('pm-gallery-next').onclick = () => navGallery(currentGalleryIndex + 1);
 
   /* --- Modal de serviço: conteúdo vem de assets/data/servicos.js --- */
-  let smScrollY = 0;
-  const smLock = (on) => { // trava a página por baixo (iOS ignora overflow:hidden no body)
-    const b = document.body;
-    if (on) { smScrollY = window.scrollY; b.style.top = `-${smScrollY}px`; b.classList.add('sm-locked'); }
-    else { b.classList.remove('sm-locked'); b.style.top = ''; window.scrollTo(0, smScrollY); }
+  // Ícones em pixel: '#' = pixel aceso. Mesma linguagem dos ícones dos cards (crispEdges).
+  const PX = {
+    briefing: ['............','.##########.','.#........#.','.#.######.#.','.#........#.','.#.####...#.','.#........#.','.##########.','...##.......','...#........','............','............'],
+    refs:     ['............','..#####.....','.#.....#....','#..##...#...','#.#.....#...','#.......#...','#.......#...','.#.....#....','..#####.#...','........##..','.........##.','..........#.'],
+    draft:    ['.........##.','........#..#','.......#..#.','......#..#..','.....#..#...','....#..#....','...#..#.....','..#..#......','.#..#.......','.###........','.##.........','............'],
+    rework:   ['............','...#####..#.','..#.....###.','.#......##..','.#......###.','.#..........','..........#.','.###......#.','..##......#.','.###.....#..','.#..#####...','............'],
+    files:    ['.....##.....','.....##.....','.....##.....','.....##.....','..#..##..#..','...#.##.#...','....####....','.....##.....','#..........#','#..........#','############','............'],
+    clock:    ['...######...','..#......#..','.#...##...#.','#....##....#','#....##....#','#....####..#','#.......#..#','#..........#','.#........#.','..#......#..','...######...','............'],
+    mail:     ['............','############','##........##','#.#......#.#','#..#....#..#','#...#..#...#','#....##....#','#..........#','#..........#','############','............','............']
   };
-  const smClose = () => { smOverlay.classList.remove('open'); smLock(false); document.body.style.overflow = ''; };
+  const DIG = { 0: ['###','#.#','#.#','#.#','###'], 1: ['.#.','##.','.#.','.#.','###'], 2: ['###','..#','###','#..','###'], 3: ['###','..#','###','..#','###'], 4: ['#.#','#.#','###','..#','..#'], 5: ['###','#..','###','..#','###'] };
+  const pxSvg = (rows, cls) => {
+    let d = ''; rows.forEach((r, y) => [...r].forEach((c, x) => { if (c === '#') d += `M${x} ${y}h1v1h-1z`; }));
+    return `<svg class="px ${cls || ''}" viewBox="0 0 ${rows[0].length} ${rows.length}" aria-hidden="true" shape-rendering="crispEdges"><path d="${d}"/></svg>`;
+  };
+  const pxNum = (n) => pxSvg(DIG[0].map((r, i) => r + '.' + DIG[n][i]), 'sm-num'); // "01".."05"
+  const STEP_IC = ['briefing', 'refs', 'draft', 'rework', 'files'];
+  const PM = '<svg class="sm-pm" viewBox="0 0 6 6" aria-hidden="true" shape-rendering="crispEdges"><path d="M0 2h6v2h-6z"/><path class="v" d="M2 0h2v6h-2z"/></svg>';
+
+  const smLock = (on) => { // trava só a página; o overlay rola sozinho
+    document.documentElement.style.overflow = on ? 'hidden' : '';
+    document.body.style.overflow = on ? 'hidden' : '';
+  };
+  const smClose = () => { smOverlay.classList.remove('open'); smLock(false); };
   const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 
   document.querySelectorAll('[data-service-id]').forEach(card => {
@@ -2970,6 +2998,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const U = S.ui, $ = (x) => document.getElementById(x);
       const title = card.querySelector('.service-title').textContent; // já no idioma atual
       smOverlay.querySelector('.service-modal').dataset.svc = id; // cor do serviço
+      const hic = $('sm-head-ic'); hic.innerHTML = ''; const ci = card.querySelector('.service-icon'); if (ci) hic.appendChild(ci.cloneNode(true));
       $('sm-eyebrow').textContent = lx(U.eyebrow);
       $('sm-title').textContent = title;
       $('sm-desc').textContent = lx(s.desc);
@@ -2978,11 +3007,13 @@ document.addEventListener('DOMContentLoaded', () => {
       $('sm-l-condicoes').textContent = lx(U.condicoes);
       $('sm-l-exemplos').textContent = lx(U.exemplos);
 
-      // fluxo: 5 etapas numeradas
+      // fluxo: ícone em pixel + número em pixel + etapa
       const flow = $('sm-flow'); flow.innerHTML = '';
       S.etapas.forEach((et, i) => {
         const li = smEl('li', 'sm-step');
-        li.append(smEl('span', 'sm-n', String(i + 1).padStart(2, '0')), smEl('h3', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
+        const ic = smEl('span', 'sm-ic'); ic.innerHTML = pxSvg(PX[STEP_IC[i]]);
+        const num = smEl('span'); num.innerHTML = pxNum(i + 1); num.setAttribute('aria-label', String(i + 1));
+        li.append(ic, num, smEl('h3', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
         flow.appendChild(li);
       });
 
@@ -2990,7 +3021,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dl = $('sm-deliv'); dl.innerHTML = '';
       s.entregas.forEach((it, i) => {
         const det = smEl('details', 'sm-item'); if (i === 0) det.open = true;
-        det.appendChild(smEl('summary', '', lx(it.t)));
+        const sum = smEl('summary'); sum.appendChild(smEl('span', '', lx(it.t))); sum.insertAdjacentHTML('beforeend', PM); det.appendChild(sum);
         const body = smEl('div', 'sm-item-body');
         body.appendChild(smEl('p', 'sm-item-d', lx(it.d)));
         if (it.f && it.f.length) {
@@ -3005,11 +3036,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // condições (iguais nos 4 serviços)
       const tm = $('sm-terms'); tm.innerHTML = '';
-      [[U.prazo, U.prazoD], [U.revisoes, U.revisoesD], [U.valores, U.valoresD]].forEach(([k, v]) => {
-        const d = smEl('div', 'sm-term'); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
+      [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic]) => {
+        const d = smEl('div', 'sm-term'); const b = smEl('span', 'sm-ic'); b.innerHTML = pxSvg(PX[ic]);
+        d.append(b, smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
       });
 
-      // exemplos: 2 projetos, cards iguais aos de Artigos
+      // exemplos: 2 projetos (capa e título)
       const rel = $('sm-related-projects'); rel.innerHTML = '';
       (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) rel.appendChild(buildWorkCard(p)); });
       $('sm-sec-exemplos').hidden = !rel.children.length;
@@ -3019,8 +3051,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(msg)}`; wa.textContent = lx(U.wa);
       const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.textContent = lx(U.mail);
 
-      $('sm-scroll').scrollTop = 0;
-      smOverlay.classList.add('open'); smLock(true);
+      smOverlay.classList.add('open'); smLock(true); smOverlay.scrollTop = 0;
     };
     card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } }; // acessível por teclado
   });
