@@ -5624,7 +5624,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "18",
