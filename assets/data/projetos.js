@@ -10510,7 +10510,11 @@ window.PROJETOS = [
      "pt": "Cobertura fotográfica da Copa GirlPower, torneio multiesportivo feminino entre atléticas universitárias em Tupã (SP), outubro de 2024: vôlei, handebol, tênis de mesa, equipes, premiação e torcida.",
      "en": "Photo coverage of Copa GirlPower, a women’s multi-sport tournament between university athletic clubs in Tupã (SP), October 2024: volleyball, handball, table tennis, teams, awards and fans.",
      "es": "Cobertura fotográfica de la Copa GirlPower, torneo multideportivo femenino entre clubes deportivos universitarios en Tupã (SP), octubre de 2024: vóleibol, balonmano, tenis de mesa, equipos, premiación e hinchada."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -10523,7 +10527,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -10536,7 +10544,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -10549,7 +10561,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -10562,7 +10578,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -10575,7 +10595,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -10588,7 +10612,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
