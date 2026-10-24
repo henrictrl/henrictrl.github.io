@@ -8535,7 +8535,11 @@ window.PROJETOS = [
      "pt": "Cartaz e folder da 29ª Festa da Polenta de Santa Olímpia, Piracicaba (SP). Estudo das peças da ilustração, ordem de leitura, cores e letras.",
      "en": "Poster and brochure for the 29th Festa da Polenta (Polenta Festival) in Santa Olímpia, Piracicaba (SP). Study of the illustration elements, reading order, colors and lettering.",
      "es": "Cartel y folleto de la 29.ª Festa da Polenta (Fiesta de la Polenta) de Santa Olímpia, Piracicaba (SP). Estudio de las piezas de la ilustración, orden de lectura, colores y letras."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -8548,7 +8552,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -8561,7 +8569,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -8574,7 +8586,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -8587,7 +8603,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -8600,7 +8620,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
