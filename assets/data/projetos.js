@@ -6577,7 +6577,11 @@ window.PROJETOS = [
      "pt": "Identidade da Ocupação Unesp Negra, um mês de ações dos núcleos do Nupe em novembro de 2024: assinatura, roda de palavras, cores, tipografia e peças.",
      "en": "Identity for Ocupação Unesp Negra, a month of activities by NUPE’s centers in November 2024: lockup, word wheel, colors, typography and pieces.",
      "es": "Identidad de la Ocupação Unesp Negra, un mes de acciones de los núcleos del NUPE en noviembre de 2024: firma, rueda de palabras, colores, tipografía y piezas."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -6590,7 +6594,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -6603,7 +6611,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -6616,7 +6628,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -6629,7 +6645,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "t": {
@@ -6642,7 +6662,11 @@ window.PROJETOS = [
      "en": "",
      "es": ""
     },
-    "img": "06"
+    "img": "06",
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -6655,7 +6679,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
@@ -6770,7 +6798,11 @@ window.PROJETOS = [
      "pt": "Brandbook da Prisma, consultoria de Relações Públicas criada na disciplina Laboratório de RP II da Unesp Bauru. Design e diagramação com Pedro Nakamura. Páginas A4 em pares, como livro aberto.",
      "en": "Brandbook for Prisma, a Public Relations consultancy created in the PR Lab II course at Unesp Bauru. Design and layout with Pedro Nakamura. A4 pages in spreads, like an open book.",
      "es": "Brandbook de Prisma, consultoría de Relaciones Públicas creada en la asignatura Laboratorio de RR. PP. II de la Unesp Bauru. Diseño y diagramación con Pedro Nakamura. Páginas A4 en pares, como libro abierto."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -6900,7 +6932,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
