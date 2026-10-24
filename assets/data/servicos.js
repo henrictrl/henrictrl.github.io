@@ -1,6 +1,6 @@
 /* Serviços: conteúdo dos modais (fluxo, entregas, exemplos). Renderizado em index.html (modal de serviço).
    Sem preços: orçamento por WhatsApp ou e-mail. t(pt,en,es) = texto nos três idiomas.
-   exemplos = slugs de assets/data/projetos.js (máx. 2) · f = formatos/arquivos (chips) · a = onde usar */
+   exemplos = slugs de assets/data/projetos.js (3 por serviço) · f = formatos/arquivos (chips) · a = onde usar */
 (function () {
   const t = (pt, en, es) => ({ pt, en, es });
   const rev = t(
@@ -95,7 +95,7 @@
             f: ['PNG', 'JPG', 'TIFF', 'PSD', 'AI', 'Procreate'],
             a: t('Campanhas, mercado editorial, embalagens, estampas e assets para interfaces.', 'Campaigns, publishing, packaging, prints and interface assets.', 'Campañas, mercado editorial, empaques, estampados y assets para interfaces.') }
         ],
-        exemplos: ['rino', 'optica-leopoldina']
+        exemplos: ['rino', 'optica-leopoldina', 'classic-tattoo']
       },
 
       social: {
@@ -141,7 +141,7 @@
             f: ['PDF interativo', 'EPUB', 'Kindle'],
             a: t('Telas A4 (210×297 mm), proporção mobile-first (1080×1920) e e-readers.', 'A4 pages (210×297 mm), mobile-first ratio (1080×1920) and e-readers.', 'Pantallas A4 (210×297 mm), proporción mobile-first (1080×1920) y e-readers.') }
         ],
-        exemplos: ['basement', 'proec']
+        exemplos: ['basement', 'proec', 'rd-cultural']
       },
 
       redacao: {
@@ -177,7 +177,7 @@
                  'Críticas culturales y artículos periodísticos para portales y publicaciones.'),
             f: [], a: null }
         ],
-        exemplos: ['tesoura', 'desvendando']
+        exemplos: ['tesoura', 'desvendando', 'persona']
       },
 
       landing: {
@@ -211,7 +211,7 @@
             f: ['HTML', 'CSS', 'JavaScript'],
             a: null }
         ],
-        exemplos: ['fellipe-gualberto', 'nova-rio-branco']
+        exemplos: ['fellipe-gualberto', 'nova-rio-branco', 'pixelar']
       }
     }
   };

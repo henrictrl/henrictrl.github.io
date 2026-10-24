@@ -839,7 +839,6 @@ body.sv-open .sv { display: block; }
 .sv-term p { font-size: 14px; line-height: 1.55; text-wrap: pretty; }
 
 /* exemplos: capa e título */
-.sv .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
 .sv .work-card-tag { display: none; }
 
 /* contato: centralizado, na linguagem do site */
@@ -856,6 +855,37 @@ body.sv-open .sv { display: block; }
 .sv-btn.line:hover { background: var(--ink); color: var(--white); }
 .sv-btn:focus-visible, .sv-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 @media (max-width: 480px) { .sv-cta-row { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; } }
+
+/* movimento leve: entrada da capa, revelação ao rolar, resposta ao toque (desligado com reduced-motion) */
+.sv .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 980px; gap: 8px; }
+@media (min-width: 640px) { .sv .work-grid { gap: 14px; } }
+.sv-step, .sv-term { transition: transform .45s cubic-bezier(.2, 1.35, .4, 1), box-shadow .3s var(--ease); -webkit-tap-highlight-color: transparent; }
+.sv-btn { -webkit-tap-highlight-color: transparent; }
+.sv-btn:active { transform: scale(.97); }
+@media (prefers-reduced-motion: no-preference) {
+  .sv.open .sv-eyebrow { animation: svUp .6s var(--ease) both; }
+  .sv.open .sv-title { animation: svUp .8s var(--ease) .06s both; }
+  .sv.open .sv-desc { animation: svUp .8s var(--ease) .14s both; }
+  .sv.open .sv-hero-ic { animation: svPop .9s cubic-bezier(.2, 1.4, .4, 1) .18s both; }
+  .sv-hero-ic { cursor: pointer; transition: transform .5s cubic-bezier(.2, 1.4, .4, 1); }
+  .sv-hero-ic:hover { transform: rotate(3deg) scale(1.04); }
+  .sv-hero-ic.spin svg { animation: svSpin .7s cubic-bezier(.2, 1.2, .4, 1); }
+  .sv-confetti span { animation: svFloat var(--t, 5s) ease-in-out var(--d, 0s) infinite alternate; }
+  .sv-rv { opacity: 0; translate: 0 28px; transition: opacity .6s var(--ease) var(--dl, 0s), translate .8s var(--ease) var(--dl, 0s), transform .45s cubic-bezier(.2, 1.35, .4, 1); }
+  .sv-rv.in { opacity: 1; translate: 0 0; }
+  .sv-mi .sv-mi-lead { transform-origin: left center; transform: scaleX(0); transition: transform 1s var(--ease) calc(var(--dl, 0s) + .2s); }
+  .sv-mi.in .sv-mi-lead { transform: scaleX(1); }
+  .sv-step:hover, .sv-term:hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 14px 0 -6px rgba(0,0,0,.18); }
+  .sv-step:active, .sv-term:active { transform: rotate(0deg) scale(.97); }
+  .sv-step.wig .sv-step-ic, .sv-term.wig .px { animation: svWig .5s ease; }
+  .sv-mi:hover .sv-mi-t, .sv-mi:active .sv-mi-t { translate: 6px 0; }
+  .sv-mi-t { transition: translate .35s var(--ease); }
+}
+@keyframes svUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes svPop { from { opacity: 0; transform: rotate(-30deg) scale(.4); } to { opacity: 1; transform: rotate(-7deg) scale(1); } }
+@keyframes svSpin { 0% { transform: rotate(0); } 60% { transform: rotate(380deg) scale(1.1); } 100% { transform: rotate(360deg); } }
+@keyframes svFloat { from { transform: translate(0, 0); } to { transform: translate(var(--fx, 6px), var(--fy, -10px)); } }
+@keyframes svWig { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(10deg); } }
 
 
 @media (max-width: 640px) {
@@ -2112,7 +2142,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </div>
 
 <script src="assets/data/clientes.js"></script>
-<script src="assets/data/servicos.js?v=20261023"></script>
+<script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js"></script>
 <script src="assets/data/projetos.js?v=20261020-rp40-post"></script>
 <script src="assets/data/posts.js"></script>
@@ -3012,6 +3042,22 @@ document.addEventListener('DOMContentLoaded', () => {
     noSmooth(() => window.scrollTo(0, svY));
     if (svCard) svCard.focus({ preventScroll: true });
   };
+  // revela blocos ao entrar na tela (rolagem do documento); sem IO, mostra tudo
+  let svIO = null;
+  const svReveal = () => {
+    const els = smOverlay.querySelectorAll('.sv-rv');
+    if (svIO) svIO.disconnect();
+    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+    svIO = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); svIO.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    els.forEach(e => svIO.observe(e));
+  };
+  // toque: ícone balança na ficha tocada; ícone da capa gira
+  smOverlay.addEventListener('pointerdown', (e) => {
+    const t = e.target.closest('.sv-step, .sv-term');
+    if (t) { t.classList.remove('wig'); void t.offsetWidth; t.classList.add('wig'); }
+  });
+  smOverlay.addEventListener('animationend', (e) => { const t = e.target.closest('.wig, .spin'); if (t) t.classList.remove('wig', 'spin'); });
+  document.getElementById('sm-head-ic').addEventListener('click', (e) => { const h = e.currentTarget; h.classList.remove('spin'); void h.offsetWidth; h.classList.add('spin'); });
   const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 
   document.querySelectorAll('[data-service-id]').forEach(card => {
@@ -3033,7 +3079,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
       for (let i = 0; i < 18; i++) {
         const sp = document.createElement('span'), z = [8, 12, 16, 24][Math.floor(rnd() * 4)];
-        sp.style.cssText = `left:${(52 + rnd() * 45).toFixed(1)}%;top:${(rnd() * 92).toFixed(1)}%;width:${z}px;height:${z}px;background:${i % 5 === 4 ? svOn(c) : outras[i % outras.length]}`;
+        sp.style.cssText = `left:${(52 + rnd() * 45).toFixed(1)}%;top:${(rnd() * 92).toFixed(1)}%;width:${z}px;height:${z}px;background:${i % 5 === 4 ? svOn(c) : outras[i % outras.length]};--t:${(3 + rnd() * 4).toFixed(1)}s;--d:${(-rnd() * 4).toFixed(1)}s;--fx:${Math.round(rnd() * 20 - 10)}px;--fy:${Math.round(rnd() * 24 - 12)}px`;
         cf.appendChild(sp);
       }
 
@@ -3042,7 +3088,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const cores = [c, ...outras, SV_INK];
       const flow = $('sm-flow'); flow.innerHTML = '';
       S.etapas.forEach((et, i) => {
-        const li = smEl('li', 'sv-step'); svPaint(li, cores[i]); li.style.setProperty('--i', i);
+        const li = smEl('li', 'sv-step sv-rv'); li.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(li, cores[i]); li.style.setProperty('--i', i);
         const top = smEl('div', 'sv-step-top'); top.innerHTML = pxBig(i + 1) + pxSvg(PX[STEP_IC[i]], 'sv-step-ic');
         li.append(top, smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
         flow.appendChild(li);
@@ -3052,7 +3098,7 @@ document.addEventListener('DOMContentLoaded', () => {
       $('sm-l-entregas').textContent = lx(U.entregas);
       const dl = $('sm-deliv'); dl.innerHTML = '';
       s.entregas.forEach((it, i) => {
-        const mi = smEl('article', 'sv-mi');
+        const mi = smEl('article', 'sv-mi sv-rv'); mi.style.setProperty('--dl', ((i % 2) * 0.08) + 's');
         const row = smEl('div', 'sv-mi-row'); row.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('span', 'sv-mi-lead'));
         row.insertAdjacentHTML('beforeend', pxSvg(DIG[0].map((r, k) => r + '.' + DIG[(i + 1) % 10][k]), 'sv-mi-n'));
         mi.append(row, smEl('p', 'sv-mi-d', lx(it.d)));
@@ -3065,14 +3111,14 @@ document.addEventListener('DOMContentLoaded', () => {
       $('sm-l-condicoes').textContent = lx(U.condicoes);
       const tm = $('sm-terms'); tm.innerHTML = '';
       [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic], i) => {
-        const d = smEl('div', 'sv-term'); svPaint(d, [outras[0], SV_INK, outras[1]][i]);
+        const d = smEl('div', 'sv-term sv-rv'); d.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(d, [outras[0], SV_INK, outras[1]][i]);
         d.innerHTML = pxSvg(PX[ic]); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
       });
 
       // exemplos: 2 projetos (capa e título)
       $('sm-l-exemplos').textContent = lx(U.exemplos);
       const rel = $('sm-related-projects'); rel.innerHTML = '';
-      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) rel.appendChild(buildWorkCard(p)); });
+      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) { const wc = buildWorkCard(p); wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.08) + 's'); rel.appendChild(wc); } });
       $('sm-sec-exemplos').hidden = !rel.children.length;
 
       // contato (sem preço: orçamento)
@@ -3087,6 +3133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       smOverlay.classList.add('open'); document.body.classList.add('sv-open');
       noSmooth(() => window.scrollTo(0, 0));
       $('sm-close-btn').focus({ preventScroll: true });
+      svReveal();
     };
     card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } }; // acessível por teclado
   });
