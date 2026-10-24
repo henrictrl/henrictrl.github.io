@@ -3936,7 +3936,11 @@ window.PROJETOS = [
      "pt": "Logotipo do Equity 360, podcast da Basement. Primeiro trabalho para a Basement, aprovado sem alterações. Tipografia Gotham, a mesma da marca Basement, redesenhada em vetor: “U” com recorte de pixel e arco oval em gradiente verde-água e azul.",
      "en": "Logo for Equity 360, the Basement podcast. My first job for Basement, approved without changes. Gotham, the Basement brand typeface, redrawn as vector: a pixel cut in the “U” and an oval arc in a teal-to-blue gradient.",
      "es": "Logotipo de Equity 360, el pódcast de Basement. Primer trabajo para Basement, aprobado sin cambios. Tipografía Gotham, la misma de la marca Basement, redibujada en vector: “U” con corte de píxel y arco ovalado en degradado verde agua y azul."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -3949,7 +3953,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -3962,7 +3970,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -3975,7 +3987,11 @@ window.PROJETOS = [
      "pt": "Versão para cabeçalhos e barras de navegação. O arco fica mais fino para equilibrar o peso na proporção horizontal.",
      "en": "Version for headers and navigation bars. The arc is thinner to balance the weight in the horizontal format.",
      "es": "Versión para encabezados y barras de navegación. El arco es más fino para equilibrar el peso en la proporción horizontal."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -3988,7 +4004,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -4001,7 +4021,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -4014,7 +4038,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -4027,7 +4055,11 @@ window.PROJETOS = [
      "pt": "Escala de cinza e preto e branco para documentos impressos, jornais e carimbos.",
      "en": "Grayscale and black-and-white for printed documents, newspapers and stamps.",
      "es": "Escala de grises y blanco y negro para documentos impresos, periódicos y sellos."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -4040,7 +4072,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
@@ -4137,7 +4173,11 @@ window.PROJETOS = [
      "pt": "Identidade visual do Congresso de Extensão Universitária da Unesp 2024, realizado pela PROEC: símbolo, assinaturas, cores, tipografia e peças físicas do evento (backdrop, crachá, kit, camiseta e banner de palco).",
      "en": "Visual identity for the 2024 Unesp University Extension Congress, run by PROEC: symbol, lockups, colors, typography and the event’s physical pieces (backdrop, badge, kit, T-shirt and stage banner).",
      "es": "Identidad visual del Congreso de Extensión Universitaria de la Unesp 2024, organizado por la PROEC: símbolo, firmas, colores, tipografía y piezas físicas del evento (backdrop, credencial, kit, camiseta y banner de escenario)."
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "02",
@@ -4150,7 +4190,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "03",
@@ -4163,7 +4207,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "04",
@@ -4176,7 +4224,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "05",
@@ -4189,7 +4241,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "06",
@@ -4202,7 +4258,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "07",
@@ -4215,7 +4275,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "08",
@@ -4228,7 +4292,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "09",
@@ -4241,7 +4309,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "10",
@@ -4254,7 +4326,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "11",
@@ -4267,7 +4343,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "12",
@@ -4280,7 +4360,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "13",
@@ -4293,7 +4377,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "14",
@@ -4306,7 +4394,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    },
    {
     "img": "15",
@@ -4319,7 +4411,11 @@ window.PROJETOS = [
      "pt": "",
      "en": "",
      "es": ""
-    }
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
    }
   ],
   "secoes": [
