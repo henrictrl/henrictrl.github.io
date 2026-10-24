@@ -585,7 +585,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     }
     blocks.push(screenHTML);
     if(project.slug==="rino-site"&&project.web){
-      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p><p class="rino-case-description">'+esc(lx(project.intro))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
+      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
       addTocBlock(contentToc,"dk-b-rino-case",{pt:"Ferramenta interativa",en:"Interactive tool",es:"Herramienta interactiva"});
     }
     if(project.shots&&project.shots.length&&project.slug!=="rino-site"){
@@ -616,7 +616,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     if(project.rel&&project.rel.length){
       var related=project.rel.map(function(relatedSlug){
         var item=PROJECTS.find(function(candidate){return candidate.slug===relatedSlug;}); if(!item)return "";
-        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p><p class="work-card-tag">'+esc(lx(item.cat||item.badge||""))+'</p></a>';
+        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p></a>';
       }).join("");
       if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
     }
