@@ -83,7 +83,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261023-midias"></script>
+<script src="assets/data/projetos.js?v=20261023-i18n"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
@@ -107,6 +107,16 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     return "pt";
   }
   var LANG = readLanguage();
+  document.documentElement.lang = LANG === "pt" ? "pt-br" : LANG; // antes de ler títulos: o resolvedor de projetos.js usa o lang do <html>
+  /* imagens traduzidas: se idiomasImg (do projeto ou do item) inclui o idioma ativo, usa NN.en.webp / NN.es.webp; se o arquivo faltar, volta ao PT */
+  function locPath(path, langs) {
+    if (LANG === "pt" || !path || !langs || langs.indexOf(LANG) < 0) return path;
+    return String(path).replace(/(\.[a-z0-9]+)$/i, "." + LANG + "$1");
+  }
+  function imgSrc(path, langs) {
+    var loc = locPath(path, langs);
+    return 'src="' + esc(loc) + '"' + (loc !== path ? ' data-pt="' + esc(path) + '" onerror="this.onerror=null;this.src=this.dataset.pt"' : "");
+  }
   function lx(value) {
     if (value == null) return "";
     if (typeof value === "string" || typeof value === "number") return String(value);
@@ -166,6 +176,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   }
   setHdr();
   window.addEventListener("resize", setHdr);
+  function T3L(pt,en,es){return {pt:pt,en:en,es:es};}
   var siteCopy={
     back:{pt:"Todos os projetos",en:"All projects",es:"Todos los proyectos"},
     try:{pt:"Abrir ferramenta interativa",en:"Open interactive tool",es:"Abrir herramienta interactiva"},
@@ -193,6 +204,23 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       link.textContent=textLabel(v.pt,v.en,v.es);
     });
     setMenu(siteHeader.classList.contains("menu-open"));
+    /* textos fixos do HTML (PT no arquivo; EN/ES aplicados aqui) */
+    [
+      ["#project-toc","aria-label",T3L("Sumário do projeto","Project contents","Sumario del proyecto")],
+      [".main-nav","aria-label",T3L("Navegação principal","Main navigation","Navegación principal")],
+      [".brand-location","text",T3L("— São Paulo, Brasil","— São Paulo, Brazil","— São Paulo, Brasil")],
+      ["#project-share span","text",T3L("Compartilhar projeto","Share project","Compartir proyecto")],
+      ["[data-project-top]","text",siteCopy.top],
+      ["#project-not-found .dk-intro","text",siteCopy.notFoundText],
+      ["#project-not-found .dk-link","text",T3L("Voltar aos projetos","Back to projects","Volver a los proyectos")],
+      ["#project-lightbox","aria-label",T3L("Imagem ampliada","Enlarged image","Imagen ampliada")],
+      ["#project-lightbox-close","aria-label",T3L("Fechar imagem","Close image","Cerrar imagen")],
+      [".lightbox-zoom-hint","text",T3L("Esc · Fechar","Esc · Close","Esc · Cerrar")]
+    ].forEach(function(item){
+      document.querySelectorAll(item[0]).forEach(function(el){
+        if(item[1]==="text")el.textContent=lx(item[2]);else el.setAttribute(item[1],lx(item[2]));
+      });
+    });
     var flags = {
       pt: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#009C3B"/><path d="M10.5 1.6 19.3 7.5 10.5 13.4 1.7 7.5z" fill="#FFDF00"/><circle cx="10.5" cy="7.5" r="3.4" fill="#002776"/><path d="M7.3 6.8c2.1-.6 4.4-.3 6.3.9" stroke="#fff" stroke-width=".55" fill="none"/></svg>',
       en: '<svg viewBox="0 0 21 15" aria-hidden="true"><rect width="21" height="15" fill="#012169"/><path d="M0 0 21 15M21 0 0 15" stroke="#fff" stroke-width="3.6"/><path d="M0 0 21 15M21 0 0 15" stroke="#C8102E" stroke-width="1.5"/><path d="M10.5 0v15M0 7.5h21" stroke="#fff" stroke-width="5"/><path d="M10.5 0v15M0 7.5h21" stroke="#C8102E" stroke-width="2.7"/></svg>',
@@ -218,7 +246,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
         return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
       }).join("");
     return '<article class="pc" data-code="'+esc(post.c)+'" data-kind="'+(n>1&&!post.art?"car":"post")+'"><div class="pc-media" style="--ar:'+ar+'"><div class="pc-track">'+imgs+'</div>'+
-      (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
+      (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="'+esc(textLabel("Anterior","Previous","Anterior"))+'" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="'+esc(textLabel("Próxima","Next","Siguiente"))+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
       '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
       (cap?'<p class="pc-cap'+(longCap?' clamp':'')+'">'+esc(cap)+'</p>'+(longCap?'<button class="ig-more" type="button">'+esc(textLabel("ver mais","more","ver más"))+'</button>':""):"")+
       '<div class="pc-links"><a href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+esc(textLabel("Ver no Instagram","View on Instagram","Ver en Instagram"))+'</a>'+
@@ -307,7 +335,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     if (!rows.length) return { html: '', toc };
     const S = (a, f) => a.reduce((s, r) => s + f(r), 0), TOT = S(rows, r => r.v), L = S(rows, r => r.l || 0), C = S(rows, r => r.c), AVG = TOT / rows.length;
     const nP = (n) => n + lx(n > 1 ? DS_L.nN : DS_L.n1), unid = (m === 'c' ? lx(DS_L.kC) : lx(DS_L.kInt).toLowerCase());
-    const nome = (r) => D.por === 'g' ? ((D.nomes || {})[r.x.g] || r.x.v) : ((ENG.contas[r.x.user] || {}).n || r.x.user);
+    const nome = (r) => D.por === 'g' ? (lx((D.nomes || {})[r.x.g]) || r.x.v) : ((ENG.contas[r.x.user] || {}).n || r.x.user);
     const grp = (key) => { const g = {}; rows.forEach(r => { const k = key(r); (g[k] = g[k] || []).push(r); }); return Object.entries(g).map(([k, rs]) => ({ k, rs, n: rs.length, t: S(rs, r => r.v), a: S(rs, r => r.v) / rs.length })); };
     const sec = (id, t, d, body, cls = '') => { toc.push([id, t]); return `<div class="ds-sec ${cls}" id="${id}"><h3 class="ds-h">${lx(t)}</h3>${d ? `<p class="ds-d">${d}</p>` : ''}${body}</div>`; };
     const seg = D.users.reduce((s, u) => s + ((ENG.contas[u] || {}).seg || 0), 0);
@@ -530,10 +558,10 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     stack: ['HTML', 'CSS', 'JavaScript', 'Canvas', 'SVG', 'WebGL', 'WordPress API', 'GitHub Pages', 'PT · EN · ES']
   };
   const metaHTML = () => {
-    const L = (o) => lx(o), D = 'assets/projetos/metaprojeto/';
+    const L = (o) => lx(o), D = 'assets/projetos/metaprojeto/', IL = (currentProject && currentProject.idiomasImg) || [];
     const shot = (img) => Array.isArray(img)
-      ? `<div class="meta-shot meta-phones">${img.map(s => `<img src="${D}${s}" alt="" loading="lazy" decoding="async">`).join('')}</div>`
-      : `<div class="meta-shot"><img src="${D}${img}" alt="" loading="lazy" decoding="async" width="1600" height="1000"></div>`;
+      ? `<div class="meta-shot meta-phones">${img.map(s => `<img ${imgSrc(D + s, IL)} alt="" loading="lazy" decoding="async">`).join('')}</div>`
+      : `<div class="meta-shot"><img ${imgSrc(D + img, IL)} alt="" loading="lazy" decoding="async" width="1600" height="1000"></div>`;
     return `<div class="meta" id="meta">
       <div class="meta-stack">${META_L.stack.map(s => `<span>${s}</span>`).join('')}</div>
       ${META_L.n.map((n) => `${n.g ? `<h3 class="meta-g">${L(n.g)}</h3>` : ''}<div class="meta-row">
@@ -561,7 +589,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     intro.textContent=introText;
     document.title=project.titulo+" — Henrique Marinhos";
     document.documentElement.lang=LANG==="pt"?"pt-br":LANG;
-    document.querySelector('meta[name="description"]').setAttribute("content",introText||(project.titulo+" — projeto de Henrique Marinhos."));
+    document.querySelector('meta[name="description"]').setAttribute("content",introText||(project.titulo+textLabel(" — projeto de Henrique Marinhos."," — a project by Henrique Marinhos."," — proyecto de Henrique Marinhos.")));
     var external=document.getElementById("project-external-link");
     if(project.link){external.hidden=false;external.href=project.link;external.textContent=project.link.replace(/^https?:\/\/(www\.)?/,"").replace(/\/(index\.html)?$/,"");}
     else external.hidden=true;
@@ -574,13 +602,13 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     }else cover.hidden=true;
     var screenHTML="";
     if(project.slug==="rino-pecas"){
-      screenHTML='<section class="rino-pecas-gallery" aria-label="Peças da Rino"><div class="rino-pecas-grid">'+mainScreens.map(function(screen){
-        return '<button class="rino-piece" type="button" data-lightbox="'+esc(project.dir+screen.img+".webp")+'" aria-label="'+esc(textLabel("Abrir imagem","Open image","Abrir imagen")+": "+lx(screen.t))+'" title="'+esc(lx(screen.t))+'"><span class="rino-piece-thumb"><img src="'+esc(project.dir+screen.img+"-t.webp")+'" alt="'+esc(lx(screen.t))+'" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">'+esc(lx(screen.t))+'</span></button>';
+      screenHTML='<section class="rino-pecas-gallery" aria-label="'+esc(textLabel("Peças da Rino","Rino pieces","Piezas de Rino"))+'"><div class="rino-pecas-grid">'+mainScreens.map(function(screen){
+        return '<button class="rino-piece" type="button" data-lightbox="'+esc(locPath(project.dir+screen.img+".webp",screen.idiomasImg||project.idiomasImg))+'" data-pt="'+esc(project.dir+screen.img+".webp")+'" aria-label="'+esc(textLabel("Abrir imagem","Open image","Abrir imagen")+": "+lx(screen.t))+'" title="'+esc(lx(screen.t))+'"><span class="rino-piece-thumb"><img '+imgSrc(project.dir+screen.img+"-t.webp",screen.idiomasImg||project.idiomasImg)+' alt="'+esc(lx(screen.t))+'" loading="lazy" decoding="async" width="320" height="180"></span><span class="rino-piece-title">'+esc(lx(screen.t))+'</span></button>';
       }).join("")+'</div></section>';
     }else{
       screenHTML=mainScreens.map(function(screen,index){
         var caption=index>0&&lx(screen.d)?'<div class="dk-cap"><h3>'+esc(lx(screen.t))+'</h3><p>'+esc(lx(screen.d))+'</p></div>':"";
-        return caption+'<img id="dk-p'+(index+1)+'" src="'+esc(project.dir+screen.img+".webp")+'" alt="'+esc(lx(screen.t))+'" width="2048" height="1152" decoding="async"'+(index>1?' loading="lazy"':"")+'>';
+        return caption+'<img id="dk-p'+(index+1)+'" '+imgSrc(project.dir+screen.img+".webp",screen.idiomasImg||project.idiomasImg)+' alt="'+esc(lx(screen.t))+'" width="2048" height="1152" decoding="async"'+(index>1?' loading="lazy"':"")+'>';
       }).join("");
     }
     blocks.push(screenHTML);
@@ -592,13 +620,13 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       var desktopShots=project.shots.filter(function(s){return s.d!=="mobile";}), mobileShots=project.shots.filter(function(s){return s.d==="mobile";});
       blocks.push('<section class="dk-block" id="dk-b-shots"><h3 class="dk-block-title">'+esc(lx(siteCopy.screens))+(project.siteIntro?'<span>'+esc(lx(project.siteIntro))+'</span>':"")+
         (project.web?'<br><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.open))+'</a>':"")+'</h3>'+
-        desktopShots.map(function(shot){return '<div class="shot-desk'+(shot.d==="pagina"?' shot-page':'')+'"><img src="'+esc(project.dir+shot.img)+'" alt="" loading="lazy" decoding="async"></div>';}).join("")+
-        (mobileShots.length?'<div class="shot-phones">'+mobileShots.map(function(shot){return '<div class="shot-phone"><img src="'+esc(project.dir+shot.img)+'" alt="" loading="lazy" decoding="async"></div>';}).join("")+'</div>':"")+'</section>');
+        desktopShots.map(function(shot){return '<div class="shot-desk'+(shot.d==="pagina"?' shot-page':'')+'"><img '+imgSrc(project.dir+shot.img,shot.idiomasImg||project.idiomasImg)+' alt="" loading="lazy" decoding="async"></div>';}).join("")+
+        (mobileShots.length?'<div class="shot-phones">'+mobileShots.map(function(shot){return '<div class="shot-phone"><img '+imgSrc(project.dir+shot.img,shot.idiomasImg||project.idiomasImg)+' alt="" loading="lazy" decoding="async"></div>';}).join("")+'</div>':"")+'</section>');
       addTocBlock(contentToc,"dk-b-shots",siteCopy.screens);
     }
     if(project.galeria&&project.galeria.length&&project.slug!=="pixelar"){
       blocks.push('<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">'+esc(lx(siteCopy.gallery))+'</h3><div class="dk-gal">'+project.galeria.map(function(item){
-        return '<button type="button" class="detail-gallery-item" data-lightbox="'+esc(project.dir+item)+'" aria-label="'+esc(textLabel("Ampliar imagem","Enlarge image","Ampliar imagen"))+'"><img src="'+esc(project.dir+item)+'" alt="" loading="lazy" decoding="async"></button>';
+        return '<button type="button" class="detail-gallery-item" data-lightbox="'+esc(locPath(project.dir+item,project.idiomasImg))+'" data-pt="'+esc(project.dir+item)+'" aria-label="'+esc(textLabel("Ampliar imagem","Enlarge image","Ampliar imagen"))+'"><img '+imgSrc(project.dir+item,project.idiomasImg)+' alt="" loading="lazy" decoding="async"></button>';
       }).join("")+'</div></section>');
       addTocBlock(contentToc,"dk-b-gal",siteCopy.gallery);
     }
@@ -651,9 +679,9 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       var more=event.target.closest(".ig-more");
       if(more){var caption=more.previousElementSibling,on=caption.classList.toggle("clamp");more.textContent=lx(on?textLabel("ver mais","more","ver más"):textLabel("ver menos","less","ver menos"));return;}
       var rinoPiece=event.target.closest(".rino-piece");
-      if(rinoPiece){openLightbox(rinoPiece.dataset.lightbox,rinoPiece.querySelector("img")?.alt||"");return;}
+      if(rinoPiece){openLightbox(rinoPiece.dataset.lightbox,rinoPiece.querySelector("img")?.alt||"",rinoPiece.dataset.pt);return;}
       var galleryButton=event.target.closest(".detail-gallery-item, .dk-gal button");
-      if(galleryButton){openLightbox(galleryButton.dataset.lightbox,galleryButton.querySelector("img")?.alt||"");return;}
+      if(galleryButton){openLightbox(galleryButton.dataset.lightbox,galleryButton.querySelector("img")?.alt||"",galleryButton.dataset.pt);return;}
       var postImage=event.target.closest(".pc-track img");
       if(postImage&&!postImage.closest("a.ig-reel")){openLightbox(postImage.dataset.full||postImage.src,postImage.alt||"");return;}
       var dashboardPost=event.target.closest(".ds [data-post]");
@@ -681,8 +709,9 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     });
     toc.querySelectorAll("a").forEach(function(link){link.classList.toggle("on",link===active);});
   }
-  function openLightbox(src,alt){
+  function openLightbox(src,alt,ptSrc){
     var overlay=document.getElementById("project-lightbox"),img=document.getElementById("project-lightbox-img");
+    img.onerror=ptSrc&&ptSrc!==src?function(){img.onerror=null;img.src=ptSrc;}:null;
     img.src=src;img.alt=alt||"";overlay.classList.add("open");document.body.style.overflow="hidden";document.getElementById("project-lightbox-close").focus();
   }
   function closeLightbox(){
