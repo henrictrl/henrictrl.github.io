@@ -10117,7 +10117,11 @@ window.PROJETOS = [
   },
   "telas": [],
   "shots": [],
-  "html": "meta"
+  "html": "meta",
+  "idiomasImg": [
+   "en",
+   "es"
+  ]
  },
  {
   "slug": "basement",
