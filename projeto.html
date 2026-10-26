@@ -134,7 +134,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     var month=months[LANG][Number(bits[1])-1];
     return LANG==="en" ? month+" "+Number(bits[2])+", "+bits[0] : Number(bits[2])+" "+month+" "+bits[0];
   }
-  function igImg(post,index) { return post.cover && index===0 ? post.cover : "assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0")+".webp"; }
+  function igImg(post,index) { if (post.cover && index===0) return post.cover; var b="assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0"); return LANG!=="pt" && post.tr && post.tr.indexOf(index+1)>=0 ? b+"."+LANG+".webp" : b+".webp"; }
   function igUrl(post) { return "https://www.instagram.com/"+(post.reel?"reel":"p")+"/"+post.c+"/"; }
   var postGroupNames={};
   PROJECTS.forEach(function(p) {
