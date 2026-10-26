@@ -2288,6 +2288,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     }
   };
   let LANG = 'pt';
+  // imagens de posts traduzidas: x.tr lista os slides (1..n) com NN.en.webp / NN.es.webp
+  const postSrc = (x, i) => { const b = `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(i + 1) ? `${b}.${LANG}.webp` : `${b}.webp`; };
   const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
   const langHooks = [];
   const onLang = (fn) => langHooks.push(fn);
@@ -2776,7 +2778,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.classList.toggle('is-ig', artMode === 'ig' || k === 'carrosseis');
       if (k === 'carrosseis') { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
         grid.innerHTML = CARR.map(x => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
-          <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="assets/posts/${x.c}/01.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
           <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h3 class="art-card-title">${esc(capTitle(x))}</h3></a>`).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
@@ -2791,7 +2793,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
         const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
         const pp = PBA[a.u], ig = artMode === 'ig' && pp;
-        const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="assets/posts/${pp[0].c}/01.webp" alt="" loading="lazy" decoding="async">`
+        const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
           : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${a.imgPath || ('assets/artigos/' + a.img)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
         return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
@@ -3893,7 +3895,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const IG_L = { ver: { pt: 'Ver no Instagram', en: 'View on Instagram', es: 'Ver en Instagram' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
-  const igImg = (x, i) => x.cover && i === 0 ? x.cover : `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}.webp`;
+  const igImg = (x, i) => x.cover && i === 0 ? x.cover : postSrc(x, i);
   // carrossel com vídeo: embed oficial do Instagram (altura = proporção do post + cabeçalho/rodapé do embed)
   const igEmbed = (x) => `<iframe class="ig-embed" src="https://www.instagram.com/p/${x.c}/embed/" title="${esc((x.cap || 'Instagram').slice(0, 80))}" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" style="aspect-ratio:1 / ${((Number(x.er || x.r) || 1.25) + 0.26).toFixed(3)}"></iframe>`;
   // o embed informa a própria altura (MEASURE); ajusta o iframe correspondente
