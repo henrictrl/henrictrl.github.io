@@ -141,7 +141,7 @@
             f: ['PDF interativo', 'EPUB', 'Kindle'],
             a: t('Telas A4 (210×297 mm), proporção mobile-first (1080×1920) e e-readers.', 'A4 pages (210×297 mm), mobile-first ratio (1080×1920) and e-readers.', 'Pantallas A4 (210×297 mm), proporción mobile-first (1080×1920) y e-readers.') }
         ],
-        exemplos: ['basement', 'proec', 'rd-cultural']
+        exemplos: ['basement', 'proec']
       },
 
       redacao: {
