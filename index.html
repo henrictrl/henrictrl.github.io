@@ -1215,7 +1215,27 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .pc-links a:hover { color: var(--ink); }
 /* Artigos no modo Instagram: proporção de cada post (sem cortar o topo) */
 .art-grid.is-ig .art-card-media { aspect-ratio: var(--ar, 4/5); }
-.art-grid.is-ig, .art-grid.is-mixed { align-items: start; }
+.art-grid.is-ig { align-items: start; }
+.art-grid.is-mixed {
+  display: block;
+  column-count: 3;
+  column-gap: 20px;
+}
+.art-grid.is-mixed .art-card {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 32px;
+  vertical-align: top;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+@media (min-width: 640px) and (max-width: 899px) {
+  .art-grid.is-mixed { column-count: 2; column-gap: 16px; }
+}
+@media (max-width: 639px) {
+  .art-grid.is-mixed { column-count: 2; column-gap: 10px; }
+  .art-grid.is-mixed .art-card { margin-bottom: 24px; }
+}
 
 
 /* Dashboard: mais variação cromática e alternância entre gráficos e exemplos de conteúdo */
@@ -3207,6 +3227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ['text', 'https://personaunesp.com.br/pearl-critica/'],
       ['text', 'https://personaunesp.com.br/critica-e-se-fosse-verdade/'],
       ['post', 'DeKDr7dFgRW'],
+      ['post', 'Dd6mzTmFpUe'],
       ['text', 'https://personaunesp.com.br/ainda-temos-o-amanha-critica/'],
       ['post', 'DQfY9lqkZfc']
     ].map(([kind, id]) => ({ kind, item: kind === 'post' ? CARR.find(x => x.c === id) : data.find(a => a.u === id) }))
@@ -3229,7 +3250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = items.map(entry => {
           if (entry.kind === 'post') {
             const x = entry.item, linked = x.art && data.find(a => a.u === x.art);
-            const title = linked ? artTitle(linked) : (x.c === 'DeKDr7dFgRW' ? 'Desvendando o Pop: lançamentos de setembro de 2026' : capTitle(x));
+            const title = linked ? artTitle(linked) : x.c === 'DeKDr7dFgRW' ? 'Desvendando o Pop: lançamentos de setembro de 2026' : x.c === 'Dd6mzTmFpUe' ? 'Tinashe antecipa Popstar no Desvendando o Pop' : capTitle(x);
             return `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
               <div class="art-card-media" style="aspect-ratio:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
               <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h3 class="art-card-title">${title}</h3></a>`;
