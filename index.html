@@ -1077,6 +1077,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pv-head { max-width: none; margin: 0; padding: 16px 18px; border-bottom: 1px solid var(--gray-200); }
 .pv-cap { flex: 1; min-height: 0; overflow-y: auto; margin: 0; padding: 16px 18px; font-size: 14px; line-height: 1.6; color: var(--gray-500); white-space: pre-line; overscroll-behavior: contain; }
 .pv-links { justify-content: flex-start; margin: 0; padding: 14px 18px; border-top: 1px solid var(--gray-200); }
+@media (min-width: 768px) { .pv-head, .pv-cap, .pv-links { padding-left: 0; } }
 .pv-pnav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gray-200); background: var(--white); color: var(--ink); display: none; place-items: center; cursor: pointer; transition: border-color .2s var(--ease); }
 .pv-pnav:hover { border-color: var(--ink); } .pv-pnav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .pv-pnav svg { width: 20px; height: 20px; }
