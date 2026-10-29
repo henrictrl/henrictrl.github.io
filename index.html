@@ -1805,28 +1805,40 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <link rel="stylesheet" href="assets/css/tema.css?v=20261029f">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
+.am-actions { display: contents; }
 @media (max-width: 640px) {
   #art-modal-overlay { inset: 0; align-items: stretch; justify-content: stretch; padding: 0; }
   #art-modal-overlay .art-modal { width: 100%; max-width: none; height: 100vh; height: 100dvh; max-height: 100dvh; min-height: 0; border-radius: 0; }
   #art-modal-overlay .am-bar {
     position: relative;
     top: auto;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
     align-items: center;
-    gap: 4px;
-    padding: calc(8px + env(safe-area-inset-top, 0px)) 4px 8px;
+    gap: 6px;
+    padding: calc(8px + env(safe-area-inset-top, 0px)) 8px 8px;
   }
   #art-modal-overlay .am-info,
   #art-modal-overlay .am-links { display: none !important; }
+  #art-modal-overlay .am-actions {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
+  }
   #art-modal-overlay #am-close {
     position: relative;
     top: auto;
     right: auto;
-    width: 34px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    width: 40px;
     height: 40px;
-    flex: 0 0 34px;
+    flex: 0 0 40px;
   }
   #art-modal-overlay .am-swap,
   #art-modal-overlay .am-ext,
@@ -1854,6 +1866,50 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     cursor: pointer;
   }
   #art-modal-overlay #am-share:hover { color: var(--ink); border-color: var(--ink); }
+}
+@media (max-width: 360px) {
+  #art-modal-overlay .am-actions { gap: 6px; }
+  #art-modal-overlay .am-swap,
+  #art-modal-overlay .am-ext,
+  #art-modal-overlay .am-share { padding-inline: 4px; font-size: 10px; }
+  #art-modal-overlay .am-bar { grid-template-columns: minmax(0, 1fr) 36px; gap: 4px; padding-inline: 6px; }
+  #art-modal-overlay #am-close { width: 36px; height: 40px; flex-basis: 36px; }
+}
+@media (max-width: 767px) {
+  #pv-ov::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: calc(56px + env(safe-area-inset-top, 0px));
+    z-index: 1400;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    pointer-events: none;
+  }
+  #pv-ov .pv-x {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: 10px;
+    z-index: 1402;
+  }
+  #pv-ov .pv-pos {
+    position: fixed;
+    top: calc(18px + env(safe-area-inset-top, 0px));
+    left: 18px;
+    z-index: 1402;
+    transform: none;
+  }
+  #pv-ov .pv-box {
+    margin-top: calc(56px + env(safe-area-inset-top, 0px));
+    overflow: visible;
+  }
+  #pv-ov .pv-head {
+    position: sticky;
+    top: calc(56px + env(safe-area-inset-top, 0px));
+    z-index: 2;
+    background: var(--white);
+  }
+  #pv-ov .pv-pnav { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
 </style>
 
@@ -2259,9 +2315,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <div class="am-bar">
       <div class="am-info"><p class="am-site" id="am-site"></p><p class="am-title" id="am-title"></p></div>
       <div class="am-links" id="am-links"></div>
-      <button class="am-swap" id="am-swap" type="button" hidden></button>
-      <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
-      <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
+      <div class="am-actions">
+        <button class="am-swap" id="am-swap" type="button" hidden></button>
+        <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
+        <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
+      </div>
       <button class="pm-close" id="am-close" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
