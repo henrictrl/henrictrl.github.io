@@ -2289,6 +2289,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   };
   let LANG = 'pt';
   // imagens de posts traduzidas: x.tr lista os slides (1..n) com NN.en.webp / NN.es.webp
+  // capa de artigo vinda de um post: usa o slide traduzido quando houver
+  const artImg = (a) => { const m = /^assets\/posts\/([^/]+)\/01\.webp$/.exec(a.imgPath || ''); const p = m && ((window.POSTS || []).find(x => x.c === m[1])); return p ? postSrc(p, 0) : (a.imgPath || ('assets/artigos/' + a.img)); };
   const postSrc = (x, i) => { const b = `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(i + 1) ? `${b}.${LANG}.webp` : `${b}.webp`; };
   const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
   const langHooks = [];
@@ -2692,7 +2694,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('am-ext-l').textContent = a.ext ? i18n('am.book', a.ext) : i18n('am.open', 'Abrir no site');
     // botões extras (ex.: repositório da Unesp no TCC)
     document.getElementById('am-links').innerHTML = (a.links || []).map(l => `<a class="am-ext am-ext-alt" href="${l.u}" target="_blank" rel="noopener">${i18n('am.link.' + l.l, l.l)}</a>`).join('');
-    document.getElementById('am-cover').src = a.imgPath || ('assets/artigos/' + a.img);
+    document.getElementById('am-cover').src = artImg(a);
     amStage.classList.remove('loaded');
     amLoadL.textContent = translated ? i18n('am.translating', 'Traduzindo…') : i18n('am.loading', 'Carregando texto…');
     amOverlay.classList.add('open'); document.body.style.overflow = 'hidden';
@@ -2794,7 +2796,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
         const pp = PBA[a.u], ig = artMode === 'ig' && pp;
         const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
-          : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${a.imgPath || ('assets/artigos/' + a.img)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
+          : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
         return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
           <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
