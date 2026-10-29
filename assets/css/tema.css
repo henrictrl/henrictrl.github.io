@@ -1,0 +1,69 @@
+/* Modo noturno: troca os tokens e corrige cores fixas. Ativado por html[data-theme="dark"] (assets/js/tema.js) */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --white: #121212;   /* fundo */
+  --ink: #ededed;     /* texto */
+  --gray-100: #1c1c1c;
+  --gray-200: #2c2c2c;
+  --gray-400: #808080; /* contraste ≥ 4.5 sobre o fundo */
+  --gray-500: #a6a6a6;
+}
+
+/* headers translúcidos */
+@media (max-width: 767px) {
+  html[data-theme="dark"] header.top-header { background: rgba(18,18,18,.96); }
+  html[data-theme="dark"] header.top-header.menu-open { background: var(--white); }
+}
+html[data-theme="dark"] body.project-page > header.top-header,
+html[data-theme="dark"] body.project-page .dk-top { background: rgba(18,18,18,.97); }
+html[data-theme="dark"] .mobile-top-button { background: rgba(28,28,28,.9); border-color: rgba(255,255,255,.14); }
+
+/* logos da faixa: cinza claro no escuro; cor original no hover */
+html[data-theme="dark"] .marquee-logo img {
+  filter: grayscale(var(--g, 1)) invert(calc(.88 * var(--g, 1))) contrast(calc(1 + 0.3 * var(--g, 1)));
+}
+
+/* bloco escuro dos serviços continua escuro (ink agora é claro) */
+html[data-theme="dark"] .sv-menu { background: var(--gray-100); }
+
+/* fundos brancos fixos */
+html[data-theme="dark"] .dk-tag,
+html[data-theme="dark"] .pg-sort select { background: var(--white); color: var(--ink); }
+html[data-theme="dark"] .dk-tag:hover,
+html[data-theme="dark"] .dk-tag:focus-visible { background: var(--gray-100); }
+
+/* contadores dentro de filtros ativos (botão claro) */
+html[data-theme="dark"] .pc-filter [aria-pressed="true"] span,
+html[data-theme="dark"] .pj-filter-extra .art-filter[aria-pressed="true"] .pj-tag-count,
+html[data-theme="dark"] .sg-projs .art-filter[aria-pressed="true"] span { color: rgba(0,0,0,.55); }
+
+/* dashboards */
+html[data-theme="dark"] .ds-cmp-i { background: color-mix(in srgb, var(--ac) 14%, var(--white)); }
+html[data-theme="dark"] .ds-cmp-i b { color: color-mix(in srgb, var(--ac) 65%, #fff); }
+html[data-theme="dark"] .ds-mbar i { background: color-mix(in srgb, var(--ac) 55%, var(--white)); }
+html[data-theme="dark"] .ds-heat-c.off { background: repeating-linear-gradient(45deg, #1c1c1c 0 3px, #121212 3px 6px); }
+html[data-theme="dark"] .ds-heat-c:not(.off):hover { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ac); }
+html[data-theme="dark"] .ds-bub-i i { box-shadow: 0 0 0 2px var(--white); }
+
+/* --- Switch sol/lua (à esquerda do nome) --- */
+.header-left { align-items: center; gap: 12px; }
+.theme-switch {
+  position: relative; flex: none; width: 40px; height: 22px; padding: 0;
+  border: 1px solid var(--gray-200); border-radius: 999px; background: var(--gray-100);
+  color: var(--gray-500); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background .3s var(--ease), border-color .3s var(--ease);
+}
+.theme-switch:hover { border-color: var(--gray-400); }
+.theme-switch:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.theme-switch svg { position: absolute; top: 50%; width: 12px; height: 12px; margin-top: -6px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.theme-switch .ts-sun { left: 4px; }
+.theme-switch .ts-moon { right: 4px; }
+/* bolinha: cobre o ícone inativo */
+.theme-switch .ts-knob {
+  position: absolute; top: 2px; left: 20px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ink); transition: transform .35s var(--ease), background .3s var(--ease);
+}
+html[data-theme="dark"] .theme-switch .ts-knob { transform: translateX(-18px); }
+html[data-theme="dark"] .theme-switch .ts-moon { color: #f2c94c; }
+html:not([data-theme="dark"]) .theme-switch .ts-sun { color: #e8930c; }
+@media (prefers-reduced-motion: reduce) { .theme-switch, .theme-switch .ts-knob { transition: none; } }
