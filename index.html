@@ -2504,7 +2504,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
-<script src="assets/data/artigos.js"></script>
+<script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
 <script src="assets/data/projetos.js?v=20261023-i18n"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
@@ -4264,7 +4264,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const POST_BY = Object.fromEntries(POSTS.map(x => [x.c, x]));
   const POSTS_BY_ART = {}; POSTS.forEach(x => { if (x.art) (POSTS_BY_ART[x.art] = POSTS_BY_ART[x.art] || []).push(x); });
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const IG_L = { ver: { pt: 'Ver post', en: 'View post', es: 'Ver publicación' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' }, share: { pt: 'Compartilhar', en: 'Share', es: 'Compartir' },
+  const IG_L = { ver: { pt: 'Ver post', en: 'View post', es: 'Ver publicación' }, ler: { pt: 'Texto', en: 'Text', es: 'Texto' }, site: { pt: 'Site', en: 'Site', es: 'Sitio' }, share: { pt: 'Compartilhar', en: 'Share', es: 'Compartir' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, prev: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next: { pt: 'Próxima', en: 'Next', es: 'Siguiente' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
   const igImg = (x, i) => x.cover && i === 0 ? x.cover : postSrc(x, i);
@@ -4345,7 +4345,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="pv-side">
         <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
         <p class="pv-cap">${esc(cap)}</p>
-        <div class="ig-links pv-links"><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="am-swap pv-action" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a><a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener">${i18n('am.open', 'Abrir no site')}</a>` : ''}<button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button></div>
+        <div class="ig-links pv-links"><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="am-swap pv-action" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a><a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener">${lx(IG_L.site)}</a>` : ''}<button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button></div>
       </div>`;
   };
   const pvShow = (i) => {
