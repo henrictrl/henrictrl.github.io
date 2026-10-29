@@ -1829,7 +1829,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 .am-bar #am-swap:hover,
 .am-bar #am-ext:hover { color: var(--ink); border-color: var(--ink); }
-.am-bar #am-ext-l {
+.am-bar #am-swap[hidden] { display: none; }
+.am-bar #am-ext-l,
+.am-bar #am-share-label {
   position: absolute;
   width: 1px;
   height: 1px;
