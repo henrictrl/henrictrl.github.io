@@ -21,8 +21,29 @@
   };
   var current = function () { return readOverride() || autoTheme(new Date()); };
 
+  // logos com versão clara para o modo noturno (arquivos *-escuro.*, gerados a partir dos originais)
+  var ESC = /\/(logos\/(classic-tattoo|cminds|congresso-extensao|csunesp|equity360|interserv|nova-rio-branco|ntaps|nupe|ocupacao-unesp-negra|optica-leopoldina|rino-logo|persona)|exp\/(basement|unesp))(-escuro)?\.(webp|svg)(\?|#|$)/;
+  var swapImg = function (img) {
+    var s = img.getAttribute('src'); if (!s || !ESC.test(s)) return;
+    var dark = root.getAttribute('data-theme') === 'dark';
+    var w = s.replace(/(-escuro)?\.(webp|svg)(?=\?|#|$)/, dark ? '-escuro.$2' : '.$2');
+    if (w !== s) img.setAttribute('src', w); // idempotente: não entra em loop no observer
+  };
+  var swapAll = function (el) {
+    if (el.tagName === 'IMG') swapImg(el);
+    else if (el.querySelectorAll) el.querySelectorAll('img').forEach(swapImg);
+  };
+  // pega imagens do HTML (já durante o parse) e as renderizadas por JS (currículo, cliente.html)
+  new MutationObserver(function (ms) {
+    ms.forEach(function (m) {
+      if (m.type === 'attributes') swapImg(m.target);
+      else m.addedNodes.forEach(function (n) { if (n.nodeType === 1) swapAll(n); });
+    });
+  }).observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+
   var apply = function (t) {
     root.setAttribute('data-theme', t);
+    swapAll(document);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', t === 'dark' ? '#121212' : '#ffffff');
     document.querySelectorAll('.theme-switch').forEach(function (b) {
