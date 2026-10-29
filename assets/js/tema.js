@@ -26,7 +26,7 @@
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', t === 'dark' ? '#121212' : '#ffffff');
     document.querySelectorAll('.theme-switch').forEach(function (b) {
-      b.setAttribute('aria-checked', String(t === 'dark'));
+      b.setAttribute('aria-pressed', String(t === 'dark'));
       b.setAttribute('aria-label', label());
     });
   };
@@ -39,13 +39,12 @@
   apply(current()); // antes da primeira pintura
 
   var ICON =
-    '<svg class="ts-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>' +
-    '<svg class="ts-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>' +
-    '<span class="ts-knob" aria-hidden="true"></span>';
+    '<svg class="ts-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>' +
+    '<svg class="ts-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path class="ts-star" d="M17 3l.6 1.4L19 5l-1.4.6L17 7l-.6-1.4L15 5l1.4-.6z"/></svg>';
 
   var makeSwitch = function () {
     var b = document.createElement('button');
-    b.type = 'button'; b.className = 'theme-switch'; b.setAttribute('role', 'switch');
+    b.type = 'button'; b.className = 'theme-switch';
     b.innerHTML = ICON;
     b.addEventListener('click', function () {
       var t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -69,7 +68,11 @@
         w.className = 'header-left'; w.style.display = 'flex';
         host.insertBefore(w, block); w.appendChild(block); host = w;
       }
-      host.insertBefore(makeSwitch(), host.firstChild === block ? block : host.firstChild);
+      var btn = makeSwitch();
+      host.insertBefore(btn, host.firstChild === block ? block : host.firstChild);
+      // diâmetro = altura do bloco nome + cidade (recalcula quando a fonte carrega/muda)
+      var fit = function () { var h = block.getBoundingClientRect().height; if (h) btn.style.setProperty('--ts', Math.round(h) + 'px'); };
+      fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(block);
     });
     apply(root.getAttribute('data-theme'));
     // atualiza o rótulo quando o idioma muda
