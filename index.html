@@ -1804,72 +1804,17 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </style>
 <link rel="stylesheet" href="assets/css/tema.css?v=20261029e">
 <style id="article-modal-mobile-fix">
+.am-share { display: none; }
 @media (max-width: 640px) {
-  #art-modal-overlay {
-    inset: 0;
-    align-items: stretch;
-    justify-content: stretch;
-    padding: 0;
-  }
-  #art-modal-overlay .art-modal {
-    width: 100%;
-    max-width: none;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    min-height: 0;
-    border-radius: 0;
-  }
-  #art-modal-overlay .am-bar {
-    position: relative;
-    top: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 44px;
-    align-items: start;
-    gap: 8px 10px;
-    padding: calc(10px + env(safe-area-inset-top, 0px)) 10px 10px 14px;
-  }
-  #art-modal-overlay .am-info {
-    grid-column: 1;
-    grid-row: 1;
-    flex-basis: auto;
-    min-width: 0;
-  }
-  #art-modal-overlay .am-title {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: 1.25;
-  }
-  #art-modal-overlay #am-close {
-    grid-column: 2;
-    grid-row: 1;
-    width: 44px;
-    height: 44px;
-  }
-  #art-modal-overlay .am-links {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    order: initial;
-    min-width: 0;
-  }
-  #art-modal-overlay .am-swap:not([hidden]) {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    justify-self: start;
-    order: initial;
-  }
-  #art-modal-overlay .am-ext {
-    grid-column: 1 / -1;
-    grid-row: 4;
-    justify-self: start;
-    order: initial;
-    margin: 0;
-  }
+  #art-modal-overlay { inset: 0; align-items: stretch; justify-content: stretch; padding: 0; }
+  #art-modal-overlay .art-modal { width: 100%; max-width: none; height: 100vh; height: 100dvh; max-height: 100dvh; min-height: 0; border-radius: 0; }
+  #art-modal-overlay .am-bar { position: relative; top: auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; padding: calc(58px + env(safe-area-inset-top, 0px)) 12px 12px; }
+  #art-modal-overlay .am-info, #art-modal-overlay .am-links { display: none !important; }
+  #art-modal-overlay #am-close { position: absolute; top: calc(6px + env(safe-area-inset-top, 0px)); right: 8px; width: 44px; height: 44px; }
+  #art-modal-overlay .am-swap, #art-modal-overlay .am-ext, #art-modal-overlay .am-share { order: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 40px; margin: 0; padding: 8px 10px; font-size: 12px; }
+  #art-modal-overlay #am-swap[hidden] { display: none; }
+  #art-modal-overlay #am-share { border: 1px solid var(--gray-200); border-radius: var(--r); background: transparent; color: var(--gray-500); font: inherit; font-size: 12px; white-space: nowrap; cursor: pointer; }
+  #art-modal-overlay #am-share:hover { color: var(--ink); border-color: var(--ink); }
 }
 </style>
 
@@ -2277,6 +2222,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       <div class="am-links" id="am-links"></div>
       <button class="am-swap" id="am-swap" type="button" hidden></button>
       <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
+      <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
       <button class="pm-close" id="am-close" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
@@ -2366,7 +2312,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'f.all': 'All', 'f.fav': 'Favorites', 'f.cabine': 'Screenings',
       'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
       'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
-      'am.open': 'Open on site', 'am.book': 'Open book', 'am.link.Repositório Unesp': 'Unesp repository',
+      'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
       'am.loading': 'Loading…', 'am.translating': 'Translating…',
       'am.note': 'Machine translation from Portuguese.', 'am.original': 'Read the original',
       'dk.pdf': 'Download PDF', 'cv.download': 'Download résumé', 'cert.title': 'Certificates', 'ft.title': 'Free tools', 'ft.eyebrow': 'Paid vs. free', 'ft.paid': 'Paid', 'ft.free': 'Free', 'ft.desc': 'Programs I have on my computer that are free, compared with the paid software they stand in for.', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
@@ -2411,7 +2357,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'aboutp.lang': 'Idiomas', 'aboutp.free': 'Herramientas gratuitas', 'aboutp.free.empty': '[Próximamente: las alternativas gratuitas que uso en lugar de los programas pagos.]',
       'credit.text': 'Sitio diseñado y desarrollado por Henrique Marinhos.', 'credit.link': 'Cómo se hizo este sitio →',
       'web.mobile': 'Celular', 'web.desktop': 'Computadora', 'web.open': 'Abrir en otra pestaña', 'web.close': 'Cerrar prueba',
-      'top': 'Volver arriba ↑', 'f.car': 'Carruseles', 'am.mode': 'Modo de lectura', 'am.text': 'Texto', 'am.seepost': 'Ver post', 'am.seetext': 'Ver texto',
+      'top': 'Volver arriba ↑', 'f.car': 'Carruseles', 'am.mode': 'Modo de lectura', 'am.text': 'Texto', 'am.seepost': 'Ver post', 'am.seetext': 'Ver texto', 'am.share': 'Compartir', 'am.copied': 'Enlace copiado', 'am.copy': 'Copie el enlace del artículo:',
       'doc.desc': 'Portafolio de Henrique Marinhos, diseñador enfocado en creación de marcas, diseño editorial, diseño web y estrategias de comunicación B2B.'
     }
   };
@@ -2852,6 +2798,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const wp = isWP(a.u), translated = wp && LANG !== 'pt';
     document.getElementById('am-ext').href = translated ? transUrl(a.u, LANG) : a.u;
     document.getElementById('am-ext-l').textContent = a.ext ? i18n('am.book', a.ext) : i18n('am.open', 'Abrir no site');
+    const shareBtn = document.getElementById('am-share'), shareLabel = document.getElementById('am-share-label');
+    const shareDefaultLabel = () => i18n('am.share', 'Compartilhar');
+    let shareResetTimer;
+    shareLabel.textContent = shareDefaultLabel();
+    const copyArticleLink = async (url) => {
+      await navigator.clipboard.writeText(url);
+      shareLabel.textContent = i18n('am.copied', 'Link copiado');
+      clearTimeout(shareResetTimer);
+      shareResetTimer = setTimeout(() => { shareLabel.textContent = shareDefaultLabel(); }, 1800);
+    };
+    shareBtn.onclick = async () => {
+      const url = location.origin + articlePath;
+      const shareData = { title: artTitle(a), text: a.site || '', url };
+      try {
+        if (navigator.share) { await navigator.share(shareData); return; }
+        await copyArticleLink(url);
+      } catch (error) {
+        if (error && error.name === 'AbortError') return;
+        try { await copyArticleLink(url); }
+        catch (copyError) { window.prompt(i18n('am.copy', 'Copie o link do artigo:'), url); }
+      }
+    };
     // botões extras (ex.: repositório da Unesp no TCC)
     document.getElementById('am-links').innerHTML = (a.links || []).map(l => `<a class="am-ext am-ext-alt" href="${l.u}" target="_blank" rel="noopener">${i18n('am.link.' + l.l, l.l)}</a>`).join('');
     document.getElementById('am-cover').src = artImg(a);
