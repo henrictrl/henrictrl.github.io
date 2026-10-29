@@ -23,6 +23,15 @@ html[data-theme="dark"] .marquee-logo img {
   filter: grayscale(var(--g, 1)) invert(calc(.88 * var(--g, 1))) contrast(calc(1 + 0.3 * var(--g, 1)));
 }
 
+/* logos escuros de Unesp e Basement precisam de uma base clara no currículo */
+html[data-theme="dark"] .cv-logo img[src$="unesp.svg"],
+html[data-theme="dark"] .cv-logo img[src$="basement.webp"] {
+  box-sizing: border-box;
+  padding: 4px;
+  background: #fff;
+  border-radius: 4px;
+}
+
 /* bloco escuro dos serviços continua escuro (ink agora é claro) */
 html[data-theme="dark"] .sv-menu { background: var(--gray-100); }
 
