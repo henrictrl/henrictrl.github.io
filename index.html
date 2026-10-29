@@ -346,6 +346,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   border: 0; display: block; transform-origin: top left; pointer-events: none;
 }
 .work-card:hover .work-card-media img { transform: scale(1.02); }
+.work-card-crop-top .work-card-media img { transform:scale(1.22) translateY(-6%); }
 .work-card-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
 .work-card-tag { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
 @media (min-width: 640px) { .work-card-title { font-size: 14px; } .work-card-tag { font-size: 12px; } }
@@ -483,6 +484,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-badge svg { display: block; flex-shrink: 0; }
 .art-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 .art-card:hover .art-card-media img { transform: scale(1.03); }
+.art-card[data-crop-top="true"] .art-card-media img { transform:scale(1.22) translateY(-6%); }
 .art-card-meta { font-size: 12px; color: var(--gray-400); margin-bottom: 4px; }
 .art-star { display: inline-block; margin-right: 4px; vertical-align: -0.5px; fill: none !important; stroke: currentColor; stroke-width: 1.4; } /* estrela neutra, sem preenchimento amarelo */
 .art-card-title { font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
@@ -2843,7 +2845,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pp = PBA[a.u], ig = artMode === 'ig' && pp;
         const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
           : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
-        return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${ig ? ' data-igart="1"' : ''}>
+        return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
           <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
           <h3 class="art-card-title">${artTitle(a)}</h3>
@@ -3759,7 +3761,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pjEtiqueta = null;
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
-  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
+  const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}${p.capaCropTop ? ' work-card-crop-top' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
