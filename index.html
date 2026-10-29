@@ -1959,6 +1959,83 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   }
   #pv-ov .pv-pnav { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
+#pv-ov::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  z-index: 1400;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  pointer-events: none;
+}
+#pv-ov .pv-x {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  right: 10px;
+  z-index: 1403;
+}
+#pv-ov .pv-pos {
+  position: fixed;
+  top: calc(18px + env(safe-area-inset-top, 0px));
+  left: 18px;
+  z-index: 1403;
+  transform: none;
+}
+#pv-ov .pv-links {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  left: 56px;
+  right: 56px;
+  z-index: 1402;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#pv-ov .pv-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 5px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+#pv-ov .pv-share {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+}
+#pv-ov .pv-share svg { display: block; width: 18px; height: 18px; }
+#pv-ov .pv-share-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+#pv-ov .pv-action:hover, #pv-ov .pv-share:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 360px) {
+  #pv-ov .pv-links { left: 44px; right: 44px; gap: 6px; }
+  #pv-ov .pv-action { padding-inline: 4px; font-size: 10px; }
+  #pv-ov .pv-share { width: 36px; height: 40px; flex-basis: 36px; }
+}
 </style>
 
 </head>
@@ -4182,7 +4259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const POST_BY = Object.fromEntries(POSTS.map(x => [x.c, x]));
   const POSTS_BY_ART = {}; POSTS.forEach(x => { if (x.art) (POSTS_BY_ART[x.art] = POSTS_BY_ART[x.art] || []).push(x); });
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const IG_L = { ver: { pt: 'Ver no Instagram', en: 'View on Instagram', es: 'Ver en Instagram' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' },
+  const IG_L = { ver: { pt: 'Ver post', en: 'View post', es: 'Ver publicación' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' }, share: { pt: 'Compartilhar', en: 'Share', es: 'Compartir' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, prev: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next: { pt: 'Próxima', en: 'Next', es: 'Siguiente' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
   const igImg = (x, i) => x.cover && i === 0 ? x.cover : postSrc(x, i);
@@ -4263,7 +4340,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="pv-side">
         <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
         <p class="pv-cap">${esc(cap)}</p>
-        <div class="ig-links pv-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
+        <div class="ig-links pv-links"><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener">${i18n('am.open', 'Abrir no site')}</a>` : ''}<button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button></div>
       </div>`;
   };
   const pvShow = (i) => {
@@ -4274,6 +4351,23 @@ document.addEventListener('DOMContentLoaded', () => {
     pvPos.textContent = many ? (pvI + 1) + ' / ' + pvList.length : '';
   };
   const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  pvBox.addEventListener('click', async (e) => {
+    const button = e.target.closest('.pv-share');
+    if (!button) return;
+    const post = pvList[pvI], article = post && post.art ? (window.ARTIGOS || []).find(a => a.u === post.art) : null;
+    const url = location.origin + (article ? articleRoute(article) : igUrl(post));
+    const shareData = { title: article ? artTitle(article) : 'Instagram', url };
+    try {
+      if (navigator.share) { await navigator.share(shareData); return; }
+      await navigator.clipboard.writeText(url);
+      button.title = i18n('am.copied', 'Link copiado');
+      button.setAttribute('aria-label', button.title);
+      setTimeout(() => { if (button.isConnected) { button.title = lx(IG_L.share); button.setAttribute('aria-label', lx(IG_L.share)); } }, 1800);
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      window.prompt(i18n('am.copy', 'Copie o link do artigo:'), url);
+    }
+  });
   document.getElementById('pv-prev').onclick = () => pvShow(pvI - 1);
   document.getElementById('pv-next').onclick = () => pvShow(pvI + 1);
   // teclado: ← → passam os slides; no fim do carrossel, vão para o post vizinho
