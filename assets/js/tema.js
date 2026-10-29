@@ -22,7 +22,7 @@
   var current = function () { return readOverride() || autoTheme(new Date()); };
 
   // logos com versão clara para o modo noturno (arquivos *-escuro.*, gerados a partir dos originais)
-  var ESC = /\/(logos\/(classic-tattoo|cminds|congresso-extensao|csunesp|equity360|interserv|nova-rio-branco|ntaps|nupe|ocupacao-unesp-negra|optica-leopoldina|rino-logo|persona)|exp\/(basement|unesp))(-escuro)?\.(webp|svg)(\?|#|$)/;
+  var ESC = /\/(logos\/(classic-tattoo|cminds|congresso-extensao|csunesp|equity360|interserv|nova-rio-branco|ntaps|nupe|ocupacao-unesp-negra|optica-leopoldina|rino-logo)|exp\/(basement|unesp))(-escuro)?\.(webp|svg)(\?|#|$)/;
   var swapImg = function (img) {
     var s = img.getAttribute('src'); if (!s || !ESC.test(s)) return;
     var dark = root.getAttribute('data-theme') === 'dark';
