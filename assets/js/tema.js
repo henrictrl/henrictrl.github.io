@@ -39,8 +39,8 @@
   apply(current()); // antes da primeira pintura
 
   var ICON =
-    '<svg class="ts-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>' +
-    '<svg class="ts-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path class="ts-star" d="M17 3l.6 1.4L19 5l-1.4.6L17 7l-.6-1.4L15 5l1.4-.6z"/></svg>';
+    '<svg class="ts-sun" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3zM2 2h2v2H2zM12 2h2v2h-2zM2 12h2v2H2zM12 12h2v2h-2zM5 5h6v6H5z"/></svg>' +
+    '<svg class="ts-moon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M10 1h4v2h-2v2h-2v3H8v4h2v2h2v2h4v2h-5v-2H8v-2H6v-3H4V8h2V6h2V4h2V2h2z"/></svg>';
 
   var makeSwitch = function () {
     var b = document.createElement('button');
