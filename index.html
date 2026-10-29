@@ -4581,15 +4581,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initTools();
   const mobileTopButton = document.getElementById('mobile-top-button');
   const getProjectScroller = () => dk.classList.contains('open') ? dkScroller : null;
+  // O leitor de artigos rola dentro de .am-reader, não no documento da página.
+  const getArticleScroller = () => {
+    if (!amOverlay.classList.contains('open')) return null;
+    if (!amReader.hidden) return amReader;
+    const amIg = document.getElementById('am-ig');
+    return amIg && !amIg.hidden ? amIg : null;
+  };
+  const getActiveTopScroller = () => getProjectScroller() || getArticleScroller();
   const updateMobileTopButton = () => {
     if (!mobileTopButton) return;
-    const sc = getProjectScroller();
+    const sc = getActiveTopScroller();
     const currentY = sc ? sc.scrollTop : window.scrollY;
     mobileTopButton.classList.toggle('is-visible', window.matchMedia('(max-width: 767px)').matches && currentY > 480);
   };
   if (mobileTopButton) {
     mobileTopButton.addEventListener('click', () => {
-      const sc = getProjectScroller();
+      const sc = getActiveTopScroller();
       if (sc) {
         sc.scrollTo({ top: 0, behavior: 'auto' });
         sc.scrollTop = 0;
@@ -4601,6 +4609,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateMobileTopButton, { passive: true });
     window.addEventListener('resize', updateMobileTopButton);
     dkScroller.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    amReader.addEventListener('scroll', updateMobileTopButton, { passive: true });
+    document.getElementById('am-ig').addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
   const routeFromHash = {
