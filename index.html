@@ -1857,23 +1857,36 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   }
   #art-modal-overlay #am-swap[hidden] { display: none; }
   #art-modal-overlay #am-share {
+    position: relative;
+    width: 40px;
+    flex: 0 0 40px;
+    padding: 0;
     border: 1px solid var(--gray-200);
     border-radius: var(--r);
     background: transparent;
     color: var(--gray-500);
-    font: inherit;
-    font-size: 11px;
     cursor: pointer;
+  }
+  #art-modal-overlay #am-share svg { display: block; width: 18px; height: 18px; }
+  #art-modal-overlay #am-share-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
   }
   #art-modal-overlay #am-share:hover { color: var(--ink); border-color: var(--ink); }
 }
 @media (max-width: 360px) {
   #art-modal-overlay .am-actions { gap: 6px; }
   #art-modal-overlay .am-swap,
-  #art-modal-overlay .am-ext,
-  #art-modal-overlay .am-share { padding-inline: 4px; font-size: 10px; }
+  #art-modal-overlay .am-ext { padding-inline: 4px; font-size: 10px; }
   #art-modal-overlay .am-bar { grid-template-columns: minmax(0, 1fr) 36px; gap: 4px; padding-inline: 6px; }
   #art-modal-overlay #am-close { width: 36px; height: 40px; flex-basis: 36px; }
+  #art-modal-overlay #am-share { width: 36px; flex-basis: 36px; }
 }
 @media (max-width: 767px) {
   #pv-ov::before {
@@ -1890,13 +1903,13 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     position: fixed;
     top: calc(8px + env(safe-area-inset-top, 0px));
     right: 10px;
-    z-index: 1402;
+    z-index: 1403;
   }
   #pv-ov .pv-pos {
     position: fixed;
     top: calc(18px + env(safe-area-inset-top, 0px));
     left: 18px;
-    z-index: 1402;
+    z-index: 1403;
     transform: none;
   }
   #pv-ov .pv-box {
@@ -1915,7 +1928,30 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   }
   #pv-ov .pv-media { order: 1; flex: none; }
   #pv-ov .pv-cap { order: 2; width: 100%; }
-  #pv-ov .pv-links { order: 3; width: 100%; }
+  #pv-ov .pv-links {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    left: 56px;
+    right: 52px;
+    z-index: 1402;
+    order: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  #pv-ov .pv-links .ig-link {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 5px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
   #pv-ov .pv-pnav { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
 </style>
@@ -2324,7 +2360,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       <div class="am-links" id="am-links"></div>
       <button class="am-swap" id="am-swap" type="button" hidden></button>
       <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
-      <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
+      <button class="am-share" id="am-share" type="button" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
       <button class="pm-close" id="am-close" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
@@ -2902,13 +2938,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('am-ext-l').textContent = a.ext ? i18n('am.book', a.ext) : i18n('am.open', 'Abrir no site');
     const shareBtn = document.getElementById('am-share'), shareLabel = document.getElementById('am-share-label');
     const shareDefaultLabel = () => i18n('am.share', 'Compartilhar');
+    const setShareLabel = (label) => { shareLabel.textContent = label; shareBtn.setAttribute('aria-label', label); shareBtn.title = label; };
     let shareResetTimer;
-    shareLabel.textContent = shareDefaultLabel();
+    setShareLabel(shareDefaultLabel());
     const copyArticleLink = async (url) => {
       await navigator.clipboard.writeText(url);
-      shareLabel.textContent = i18n('am.copied', 'Link copiado');
+      setShareLabel(i18n('am.copied', 'Link copiado'));
       clearTimeout(shareResetTimer);
-      shareResetTimer = setTimeout(() => { shareLabel.textContent = shareDefaultLabel(); }, 1800);
+      shareResetTimer = setTimeout(() => { setShareLabel(shareDefaultLabel()); }, 1800);
     };
     shareBtn.onclick = async () => {
       const url = location.origin + articlePath;
