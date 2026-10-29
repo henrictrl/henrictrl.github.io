@@ -1068,7 +1068,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pv-ov.open { opacity: 1; pointer-events: auto; }
 .pv-x { position: absolute; top: 14px; right: 18px; z-index: 1401; }
 .pv-ov { display: grid; place-items: center; background: rgba(250,250,250,.97); }
-.pv-box { display: grid; column-gap: 0; grid-template-columns: auto minmax(300px, 380px); height: min(86vh, 820px); max-width: calc(100vw - 168px); background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 60px -24px rgba(0,0,0,.25), 0 0 0 1px var(--gray-200); }
+.pv-box { display: grid; width: max-content; column-gap: 0; grid-template-columns: max-content minmax(300px, 380px); height: min(86vh, 820px); max-width: calc(100vw - 168px); background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 60px -24px rgba(0,0,0,.25), 0 0 0 1px var(--gray-200); }
 .pv-media { height: 100%; width: auto; aspect-ratio: var(--ar, 4/5); max-width: calc(100vw - 168px - 300px); border-radius: 0; box-shadow: none; background: #000; }
 .pv-media .pc-track img { object-fit: contain; background: #000; cursor: zoom-in; }
 .pv-media .pc-nav { opacity: 1; width: 34px; height: 34px; }
