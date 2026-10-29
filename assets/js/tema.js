@@ -40,7 +40,7 @@
 
   var ICON =
     '<svg class="ts-sun" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path d="M11 1h2v4h-2zM11 19h2v4h-2zM1 11h4v2H1zM19 11h4v2h-4zM4 4h2v2H4zM18 4h2v2h-2zM4 18h2v2H4zM18 18h2v2h-2zM9 9h6v6H9z"/></svg>' +
-    '<svg class="ts-moon" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path fill-rule="evenodd" d="M10 0h4v2h4v2h2v4h2v8h-2v4h-2v2h-4v2h-4v-2H6v-2H4v-4H2V8h2V4h2V2h4z M14 2h6v2h2v4h2v8h-2v4h-2v2h-6v-2h-2v-4h-2v-8h2V4h2z"/></svg>';
+    '<svg class="ts-moon" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path fill-rule="evenodd" d="M13 1h4v1h2v2h2v3h1v9h-1v3h-2v2h-3v1H9v-1H6v-2H4v-3H3V8h1V5h2V3h3V2h4z M16 3h5v2h2v3h1v7h-1v3h-2v2h-5v-2h-2v-3h-2V9h2V6h2z"/></svg>';
 
   var makeSwitch = function () {
     var b = document.createElement('button');
