@@ -79,24 +79,30 @@ html[data-theme="dark"] .pv-ov { background: rgba(18,18,18,.97); }
   header.top-header .brand-collapse-inner,
   header.top-header .project-brand { text-align: center; }
   header.top-header .header-left > .theme-switch { display: none; }
-  /* Switch vertical de ícone no menu, sem trilho arredondado nem fundo. */
+  /* Switch vertical no menu: fundo discreto com sol/lua em pixel art. */
   header.top-header .ts-menu {
     --k: 28px;
     display: block; position: absolute; left: var(--gutter);
     top: calc(50% - var(--hdr-h, 56px) / 2 - var(--k) - 3px);
-    width: 28px; height: calc(var(--k) * 2 + 6px); border: 0; border-radius: 0;
-    background: transparent; box-shadow: none;
-    opacity: 0; transition: opacity .35s var(--ease) .2s;
+    width: calc(var(--k) + 6px); height: calc(var(--k) * 2 + 6px);
+    border: 0; border-radius: 999px;
+    background: var(--gray-100);
+    box-shadow: inset 0 0 0 1px var(--gray-200);
+    opacity: 0; transition: opacity .35s var(--ease) .2s, background .3s var(--ease);
   }
   header.top-header.menu-open .ts-menu { opacity: 1; }
   header.top-header .ts-menu:hover, header.top-header .ts-menu:active { transform: none; }
-  html[data-theme="dark"] header.top-header .ts-menu { background: transparent; box-shadow: none; }
+  html[data-theme="dark"] header.top-header .ts-menu { background: #202020; box-shadow: inset 0 0 0 1px #383838; }
   .ts-menu .ts-knob {
-    position: absolute; left: 0; top: 3px; width: var(--k); height: var(--k);
-    border: 0; border-radius: 0; background: transparent; box-shadow: none;
-    transition: transform .55s cubic-bezier(.34,1.56,.64,1);
+    position: absolute; left: 3px; top: 3px; width: var(--k); height: var(--k);
+    border: 0; border-radius: 50%; background: rgba(255,255,255,.78);
+    box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    transition: transform .55s cubic-bezier(.34,1.56,.64,1), background .3s var(--ease), box-shadow .3s var(--ease);
   }
-  html[data-theme="dark"] .ts-menu .ts-knob { transform: translateY(var(--k)); background: transparent; box-shadow: none; }
+  html[data-theme="dark"] .ts-menu .ts-knob {
+    transform: translateY(var(--k)); background: rgba(255,255,255,.08);
+    box-shadow: 0 1px 3px rgba(0,0,0,.28);
+  }
   /* bandeiras em coluna, no centro vertical, à direita */
   header.top-header .lang-switch {
     position: absolute; right: var(--gutter); top: calc(50% - var(--hdr-h, 56px) / 2 - 46px); /* 3×20px + 2×16px = 92px */
