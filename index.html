@@ -529,7 +529,8 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .am-article .am-video { position: relative; width: 100%; margin: 0 0 18px; border-radius: var(--r); overflow: hidden; background: #000; }
 .am-article .am-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .am-article .am-audio { margin: 0 0 18px; }
-.am-article .am-audio { overflow: hidden; border-radius: var(--r); }
+.am-article .am-audio { overflow: hidden; border-radius: var(--r); position: relative; }
+.am-stage .am-article .am-audio iframe { position: static; inset: auto; height: 152px; opacity: 1; } /* anula o iframe absoluto do .am-stage (o player ia para o topo do texto) */
 .am-article .am-audio iframe { width: 100% !important; max-width: 100%; border: 0; border-radius: var(--r); display: block; }
 .am-article .am-cover { margin: 0 0 24px; }
 .am-article .am-cover img { width: 100%; max-height: none; }
@@ -1066,8 +1067,35 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pv-ov { position: fixed; inset: 0; z-index: 1400; background: var(--white); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
 .pv-ov.open { opacity: 1; pointer-events: auto; }
 .pv-x { position: absolute; top: 14px; right: 18px; z-index: 1401; }
-.pv-scroll { position: absolute; inset: 0; overflow-y: auto; padding-top: 64px; overscroll-behavior: contain; }
-@media (max-width: 767px) { .pv-scroll { padding-top: 56px; } .pv-x { top: 10px; right: 10px; } }
+.pv-ov { display: grid; place-items: center; background: rgba(250,250,250,.97); }
+.pv-box { display: grid; grid-template-columns: auto minmax(300px, 380px); height: min(86vh, 820px); max-width: calc(100vw - 168px); background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 60px -24px rgba(0,0,0,.25), 0 0 0 1px var(--gray-200); }
+.pv-media { height: 100%; width: auto; aspect-ratio: var(--ar, 4/5); max-width: calc(100vw - 168px - 300px); border-radius: 0; box-shadow: none; background: #000; }
+.pv-media .pc-track img { object-fit: contain; background: #000; cursor: zoom-in; }
+.pv-media .pc-nav { opacity: 1; width: 34px; height: 34px; }
+.pv-media .ig-embed { width: 100%; height: 100%; }
+.pv-side { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--gray-200); }
+.pv-head { max-width: none; margin: 0; padding: 16px 18px; border-bottom: 1px solid var(--gray-200); }
+.pv-cap { flex: 1; min-height: 0; overflow-y: auto; margin: 0; padding: 16px 18px; font-size: 14px; line-height: 1.6; color: var(--gray-500); white-space: pre-line; overscroll-behavior: contain; }
+.pv-links { justify-content: flex-start; margin: 0; padding: 14px 18px; border-top: 1px solid var(--gray-200); }
+.pv-pnav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gray-200); background: var(--white); color: var(--ink); display: none; place-items: center; cursor: pointer; transition: border-color .2s var(--ease); }
+.pv-pnav:hover { border-color: var(--ink); } .pv-pnav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.pv-pnav svg { width: 20px; height: 20px; }
+.pv-pprev { left: 24px; } .pv-pnext { right: 24px; }
+.pv-ov.pv-many .pv-pnav { display: grid; }
+body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events: none !important; }
+.pv-pos { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--gray-400); font-variant-numeric: tabular-nums; }
+@media (max-width: 1023px) and (min-width: 768px) { .pv-box { grid-template-columns: auto 300px; max-width: calc(100vw - 120px); } .pv-media { max-width: calc(100vw - 120px - 300px); } .pv-pprev { left: 10px; } .pv-pnext { right: 10px; } .pv-pnav { width: 40px; height: 40px; } }
+@media (max-width: 767px) {
+  .pv-ov { display: block; overflow-y: auto; background: var(--white); }
+  .pv-x { top: 10px; right: 10px; }
+  .pv-box { display: block; height: auto; max-width: none; margin: 56px 0 80px; border-radius: 0; box-shadow: none; }
+  .pv-media { width: 100vw; height: auto; max-width: none; max-height: 72vh; }
+  .pv-side { border-left: 0; }
+  .pv-cap { overflow: visible; }
+  .pv-pnav { position: fixed; top: auto; bottom: 16px; transform: none; width: 44px; height: 44px; box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+  .pv-pprev { left: 16px; } .pv-pnext { right: 16px; }
+  .pv-pos { position: fixed; top: 22px; left: 18px; transform: none; }
+}
 
 /* ---------- Site embutido ---------- */
 .web-ov { position: fixed; inset: 0; z-index: 900; background: rgba(17,17,17,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
@@ -2177,7 +2205,10 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <!-- Post do Instagram (artigos no modo Instagram e carrosséis soltos) -->
 <div class="pv-ov" id="pv-ov" role="dialog" aria-modal="true" aria-label="Post do Instagram">
   <button class="dk-x pv-x" id="pv-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-  <div class="pv-scroll" id="pv-scroll"></div>
+  <button class="pv-pnav pv-pprev" id="pv-prev" type="button" aria-label="Post anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <div class="pv-box" id="pv-box"></div>
+  <button class="pv-pnav pv-pnext" id="pv-next" type="button" aria-label="Próximo post"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  <span class="pv-pos" id="pv-pos" aria-live="polite"></span>
 </div>
 
 <div class="sv" id="service-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="sm-title">
@@ -2291,6 +2322,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   // imagens de posts traduzidas: x.tr lista os slides (1..n) com NN.en.webp / NN.es.webp
   // capa de artigo vinda de um post: usa o slide traduzido quando houver
   const artImg = (a) => { const m = /^assets\/posts\/([^/]+)\/01\.webp$/.exec(a.imgPath || ''); const p = m && ((window.POSTS || []).find(x => x.c === m[1])); return p ? postSrc(p, 0) : (a.imgPath || ('assets/artigos/' + a.img)); };
+  const capOf = (x) => ((LANG !== 'pt' && x['cap_' + LANG]) || x.cap || '').trim();
   const postSrc = (x, i) => { const b = `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(i + 1) ? `${b}.${LANG}.webp` : `${b}.webp`; };
   const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
   const langHooks = [];
@@ -2771,7 +2803,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const CARR = ((window.HM_POSTS || {}).POSTS || []).filter(x => x.lot === 'L1');
     const ORD = { 'Tesoura com Ponta': 0, 'Persona': 1 };
     CARR.sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
-    const capTitle = (x) => { const t = (x.cap || '').split(/\n/).map(l => l.trim()).filter(l => l && !/^[\p{P}\p{S}\s]+$/u.test(l))[0] || x.v; return t.length > 90 ? t.slice(0, 88).replace(/\s+\S*$/, '') + '…' : t; };
+    const capTitle = (x) => { const t = capOf(x).split(/\n/).map(l => l.trim()).filter(l => l && !/^[\p{P}\p{S}\s]+$/u.test(l))[0] || x.v; return t.length > 90 ? t.slice(0, 88).replace(/\s+\S*$/, '') + '…' : t; };
     bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
       `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === artFilter}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
     // entrada em cascata dos cartões visíveis
@@ -2811,8 +2843,12 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.addEventListener('click', (e) => {
       const c = e.target.closest('.art-card'); if (!c || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
       e.preventDefault();
-      if (c.dataset.ig) { const x = CARR.find(z => z.c === c.dataset.ig); window.HM_POSTS.openPosts([x]); return; }
-      if (c.dataset.igart) { window.HM_POSTS.openPosts(PBA[data[+c.dataset.i].u]); return; }
+      // posts: abre no visualizador com todos os posts visíveis na grade (setas laterais passam de um para outro)
+      if (c.dataset.ig || c.dataset.igart) {
+        const lista = [], cards = [...grid.querySelectorAll('.art-card[data-ig], .art-card[data-igart]')]; let start = 0;
+        cards.forEach(k => { if (k === c) start = lista.length; if (k.dataset.ig) lista.push(CARR.find(z => z.c === k.dataset.ig)); else lista.push(...(PBA[data[+k.dataset.i].u] || [])); });
+        window.HM_POSTS.openPosts(lista, start); return;
+      }
       const item = data[+c.dataset.i];
       if (item.project) { openDeck(item.project); return; }
       openArticle(item);
@@ -3895,7 +3931,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const POSTS_BY_ART = {}; POSTS.forEach(x => { if (x.art) (POSTS_BY_ART[x.art] = POSTS_BY_ART[x.art] || []).push(x); });
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const IG_L = { ver: { pt: 'Ver no Instagram', en: 'View on Instagram', es: 'Ver en Instagram' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' },
-    mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
+    mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, prev: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next: { pt: 'Próxima', en: 'Next', es: 'Siguiente' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
   const igImg = (x, i) => x.cover && i === 0 ? x.cover : postSrc(x, i);
   // carrossel com vídeo: embed oficial do Instagram (altura = proporção do post + cabeçalho/rodapé do embed)
@@ -3908,7 +3944,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('iframe.ig-embed').forEach(f => { if (f.contentWindow === ev.source && !f.closest('.pc-track')) { f.style.aspectRatio = 'auto'; f.style.height = Math.ceil(h) + 'px'; } });
   });
   const igPost = (x, opts = {}) => {
-    const n = x.n, ar = (1 / x.r).toFixed(4), cap = (x.cap || '').trim(), longo = cap.length > 240;
+    const n = x.n, ar = (1 / x.r).toFixed(4), cap = capOf(x), longo = cap.length > 240;
     const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => {
       const im = `<img src="${igImg(x, i)}" alt="" loading="lazy" decoding="async" style="--ar:${ar}" data-full="${igImg(x, i)}">`;
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
@@ -3924,7 +3960,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // card de post (grade): galeria embutida no próprio card, setas no desktop, deslize no celular
   const ARR = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const pcCard = (x) => {
-    const n = x.n, cap = (x.cap || '').trim(), longo = cap.length > 140;
+    const n = x.n, cap = capOf(x), longo = cap.length > 140;
     const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => { const im = `<img src="${igImg(x, i)}" alt="" loading="lazy" decoding="async" data-full="${igImg(x, i)}">`;
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
     const art = x.art ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
@@ -3960,9 +3996,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const al = e.target.closest('[data-art-u]'); if (al && !e.metaKey && !e.ctrlKey) { e.preventDefault(); const a = (window.ARTIGOS || []).find(z => z.u === al.dataset.artU); if (a) { closePosts(); openArticle(a); } }
   });
   // modal com um ou mais posts
-  const pvOv = document.getElementById('pv-ov'), pvScroll = document.getElementById('pv-scroll');
-  const openPosts = (lista) => { pvScroll.innerHTML = lista.map(x => igPost(x)).join(''); pvScroll.scrollTop = 0; pvOv.classList.add('open'); document.body.style.overflow = 'hidden'; };
-  const closePosts = () => { if (!pvOv.classList.contains('open')) return; pvOv.classList.remove('open'); if (!dk.classList.contains('open') && !amOverlay.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!pvOv.classList.contains('open')) pvScroll.innerHTML = ''; }, 350); };
+  const pvOv = document.getElementById('pv-ov');
+  /* visualizador de posts: mídia + legenda em altura fixa (sem rolar a página); setas laterais trocam de post,
+     setas dentro da mídia passam os slides do carrossel */
+  const pvBox = document.getElementById('pv-box'), pvPos = document.getElementById('pv-pos');
+  let pvList = [], pvI = 0;
+  const pvView = (x) => {
+    const n = x.n, cap = capOf(x), ar = x.embed ? (1 / ((Number(x.er || x.r) || 1.25) + 0.26)).toFixed(4) : (1 / x.r).toFixed(4);
+    const imgs = x.embed ? igEmbed(x) : Array.from({ length: n }, (_, i) => { const im = `<img src="${igImg(x, i)}" alt="" decoding="async"${i ? ' loading="lazy"' : ''} data-full="${igImg(x, i)}">`;
+      return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
+    const art = x.art ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
+    const nav = n > 1 && !x.embed ? `<button class="pc-nav pc-prev" type="button" aria-label="${lx(IG_L.prev)}" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="${lx(IG_L.next)}">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : '';
+    return `<div class="pc-media pv-media" style="--ar:${ar}"><div class="pc-track">${imgs}</div>${nav}</div>
+      <div class="pv-side">
+        <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
+        <p class="pv-cap">${esc(cap)}</p>
+        <div class="ig-links pv-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
+      </div>`;
+  };
+  const pvShow = (i) => {
+    pvI = (i + pvList.length) % pvList.length;
+    pvBox.innerHTML = pvView(pvList[pvI]);
+    const many = pvList.length > 1;
+    pvOv.classList.toggle('pv-many', many);
+    pvPos.textContent = many ? (pvI + 1) + ' / ' + pvList.length : '';
+  };
+  const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  document.getElementById('pv-prev').onclick = () => pvShow(pvI - 1);
+  document.getElementById('pv-next').onclick = () => pvShow(pvI + 1);
+  // teclado: ← → passam os slides; no fim do carrossel, vão para o post vizinho
+  document.addEventListener('keydown', (e) => {
+    if (!pvOv.classList.contains('open') || lbOverlay.classList.contains('open') || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+    const tr = pvBox.querySelector('.pc-track'), dir = e.key === 'ArrowRight' ? 1 : -1;
+    if (tr && tr.children.length > 1) {
+      const k = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth)), last = tr.children.length - 1;
+      if ((dir > 0 && k < last) || (dir < 0 && k > 0)) { tr.scrollBy({ left: dir * tr.clientWidth, behavior: 'smooth' }); e.preventDefault(); return; }
+    }
+    if (pvList.length > 1) { pvShow(pvI + dir); e.preventDefault(); }
+  });
+  // celular: deslizar na legenda/cabeçalho troca de post
+  let pvTx = null;
+  pvBox.addEventListener('touchstart', (e) => { pvTx = e.target.closest('.pc-track') ? null : e.touches[0].clientX; }, { passive: true });
+  pvBox.addEventListener('touchend', (e) => { if (pvTx == null || pvList.length < 2) return; const dx = e.changedTouches[0].clientX - pvTx; if (Math.abs(dx) > 60) pvShow(pvI + (dx < 0 ? 1 : -1)); pvTx = null; }, { passive: true });
+  const closePosts = () => { if (!pvOv.classList.contains('open')) return; pvOv.classList.remove('open'); if (!dk.classList.contains('open') && !amOverlay.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!pvOv.classList.contains('open')) pvBox.innerHTML = ''; }, 350); };
   document.getElementById('pv-x').onclick = closePosts;
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closePosts(); });
   window.HM_POSTS = { openPosts, POSTS, POSTS_BY_ART, igPost, igEmbed, closePosts };

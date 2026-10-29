@@ -238,7 +238,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     });
   }
   function postCard(post) {
-    var n=Number(post.n)||1, cap=String(post.cap||"").trim(), longCap=cap.length>140, ar=(1/(Number(post.r)||1)).toFixed(4);
+    var n=Number(post.n)||1, cap=String((LANG!=="pt"&&post["cap_"+LANG])||post.cap||"").trim(), longCap=cap.length>140, ar=(1/(Number(post.r)||1)).toFixed(4);
     var imgs=post.embed
       ? '<iframe src="https://www.instagram.com/p/'+esc(post.c)+'/embed/" title="'+esc(cap||"Instagram carousel")+'" loading="lazy" allowtransparency="true" frameborder="0" scrolling="no" style="display:block;flex:0 0 100%;min-width:100%;width:100%;height:640px;border:0;background:#fff"></iframe>'
       : Array.from({length:n},function(_,i){
