@@ -2324,7 +2324,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   // capa de artigo vinda de um post: usa o slide traduzido quando houver
   const artImg = (a) => { if (a.coverFromText) return a.textCover || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; const m = /^assets\/posts\/([^/]+)\/01\.webp$/.exec(a.imgPath || ''); const p = m && ((window.POSTS || []).find(x => x.c === m[1])); return p ? postSrc(p, 0) : (a.imgPath || ('assets/artigos/' + a.img)); };
   const capOf = (x) => ((LANG !== 'pt' && x['cap_' + LANG]) || x.cap || '').trim();
-  const postSrc = (x, i) => { const b = `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(i + 1) ? `${b}.${LANG}.webp` : `${b}.webp`; };
+  const postSrc = (x, i) => { const slide = i + (x.skipFirst ? 1 : 0), num = slide + 1, b = `assets/posts/${x.c}/${String(num).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(num) ? `${b}.${LANG}.webp` : `${b}.webp`; };
   const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
   const langHooks = [];
   const onLang = (fn) => langHooks.push(fn);
