@@ -1802,74 +1802,242 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261029e">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261029f">
 <style id="article-modal-mobile-fix">
+.am-share { display: none; }
+.am-actions { display: contents; }
 @media (max-width: 640px) {
-  #art-modal-overlay {
-    inset: 0;
-    align-items: stretch;
-    justify-content: stretch;
-    padding: 0;
-  }
-  #art-modal-overlay .art-modal {
-    width: 100%;
-    max-width: none;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    min-height: 0;
-    border-radius: 0;
-  }
+  #art-modal-overlay { inset: 0; align-items: stretch; justify-content: stretch; padding: 0; }
+  #art-modal-overlay .art-modal { width: 100%; max-width: none; height: 100vh; height: 100dvh; max-height: 100dvh; min-height: 0; border-radius: 0; }
   #art-modal-overlay .am-bar {
     position: relative;
     top: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 44px;
-    align-items: start;
-    gap: 8px 10px;
-    padding: calc(10px + env(safe-area-inset-top, 0px)) 10px 10px 14px;
-  }
-  #art-modal-overlay .am-info {
-    grid-column: 1;
-    grid-row: 1;
-    flex-basis: auto;
-    min-width: 0;
-  }
-  #art-modal-overlay .am-title {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: 1.25;
-  }
-  #art-modal-overlay #am-close {
-    grid-column: 2;
-    grid-row: 1;
-    width: 44px;
-    height: 44px;
-  }
-  #art-modal-overlay .am-links {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: minmax(0, 1fr) 40px;
     align-items: center;
     gap: 6px;
-    order: initial;
+    padding: calc(8px + env(safe-area-inset-top, 0px)) 8px 8px;
+  }
+  #art-modal-overlay .am-info,
+  #art-modal-overlay .am-links { display: none !important; }
+  #art-modal-overlay .am-actions {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     min-width: 0;
   }
-  #art-modal-overlay .am-swap:not([hidden]) {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    justify-self: start;
-    order: initial;
+  #art-modal-overlay #am-close {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
   }
-  #art-modal-overlay .am-ext {
-    grid-column: 1 / -1;
-    grid-row: 4;
-    justify-self: start;
-    order: initial;
+  #art-modal-overlay .am-swap,
+  #art-modal-overlay .am-ext,
+  #art-modal-overlay .am-share {
+    order: 0;
+    display: inline-flex;
+    flex: 0 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 40px;
     margin: 0;
+    padding: 5px 6px;
+    font-size: 11px;
+    white-space: nowrap;
   }
+  #art-modal-overlay #am-swap[hidden] { display: none; }
+  #art-modal-overlay #am-share {
+    position: relative;
+    width: 40px;
+    flex: 0 0 40px;
+    padding: 0;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r);
+    background: transparent;
+    color: var(--gray-500);
+    cursor: pointer;
+  }
+  #art-modal-overlay #am-share svg { display: block; width: 18px; height: 18px; }
+  #art-modal-overlay #am-share-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+  #art-modal-overlay #am-share:hover { color: var(--ink); border-color: var(--ink); }
+}
+@media (max-width: 360px) {
+  #art-modal-overlay .am-actions { gap: 6px; }
+  #art-modal-overlay .am-swap,
+  #art-modal-overlay .am-ext { padding-inline: 4px; font-size: 10px; }
+  #art-modal-overlay .am-bar { grid-template-columns: minmax(0, 1fr) 36px; gap: 4px; padding-inline: 6px; }
+  #art-modal-overlay #am-close { width: 36px; height: 40px; flex-basis: 36px; }
+  #art-modal-overlay #am-share { width: 36px; flex-basis: 36px; }
+}
+@media (max-width: 767px) {
+  #pv-ov::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: calc(56px + env(safe-area-inset-top, 0px));
+    z-index: 1400;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    pointer-events: none;
+  }
+  #pv-ov .pv-x {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: 10px;
+    z-index: 1403;
+  }
+  #pv-ov .pv-pos {
+    position: fixed;
+    top: calc(18px + env(safe-area-inset-top, 0px));
+    left: 18px;
+    z-index: 1403;
+    transform: none;
+  }
+  #pv-ov .pv-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(56px + env(safe-area-inset-top, 0px));
+    overflow: visible;
+  }
+  #pv-ov .pv-side { display: contents; }
+  #pv-ov .pv-head {
+    order: 0;
+    position: sticky;
+    top: calc(56px + env(safe-area-inset-top, 0px));
+    z-index: 1401;
+    background: var(--white);
+  }
+  #pv-ov .pv-media { order: 1; flex: none; }
+  #pv-ov .pv-cap { order: 2; width: 100%; }
+  #pv-ov .pv-links {
+    position: fixed;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    left: 56px;
+    right: 52px;
+    z-index: 1402;
+    order: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  #pv-ov .pv-links .ig-link {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 7px 12px;
+    color: var(--gray-500);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  #pv-ov .pv-links .ig-link:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  #pv-ov .pv-pnav { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+}
+#pv-ov::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  z-index: 1400;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  pointer-events: none;
+}
+#pv-ov .pv-x {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  right: 10px;
+  z-index: 1403;
+}
+#pv-ov .pv-pos {
+  position: fixed;
+  top: calc(18px + env(safe-area-inset-top, 0px));
+  left: 18px;
+  z-index: 1403;
+  transform: none;
+}
+#pv-ov .pv-links {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  left: 56px;
+  right: 56px;
+  z-index: 1402;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#pv-ov .pv-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 5px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+#pv-ov .pv-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+}
+#pv-ov .pv-share svg { display: block; width: 18px; height: 18px; }
+#pv-ov .pv-share-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+#pv-ov .pv-action:hover, #pv-ov .pv-share:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 360px) {
+  #pv-ov .pv-links { left: 44px; right: 44px; gap: 6px; }
+  #pv-ov .pv-action { padding-inline: 4px; font-size: 10px; }
+  #pv-ov .pv-share { width: 36px; height: 40px; flex-basis: 36px; }
 }
 </style>
 
@@ -2274,9 +2442,12 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   <div class="project-modal art-modal" role="dialog" aria-modal="true" aria-labelledby="am-title">
     <div class="am-bar">
       <div class="am-info"><p class="am-site" id="am-site"></p><p class="am-title" id="am-title"></p></div>
+      <div class="am-actions">
       <div class="am-links" id="am-links"></div>
       <button class="am-swap" id="am-swap" type="button" hidden></button>
       <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
+      <button class="am-share" id="am-share" type="button" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
+      </div>
       <button class="pm-close" id="am-close" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
@@ -2366,7 +2537,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'f.all': 'All', 'f.fav': 'Favorites', 'f.cabine': 'Screenings',
       'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
       'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
-      'am.open': 'Open on site', 'am.book': 'Open book', 'am.link.Repositório Unesp': 'Unesp repository',
+      'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
       'am.loading': 'Loading…', 'am.translating': 'Translating…',
       'am.note': 'Machine translation from Portuguese.', 'am.original': 'Read the original',
       'dk.pdf': 'Download PDF', 'cv.download': 'Download résumé', 'cert.title': 'Certificates', 'ft.title': 'Free tools', 'ft.eyebrow': 'Paid vs. free', 'ft.paid': 'Paid', 'ft.free': 'Free', 'ft.desc': 'Programs I have on my computer that are free, compared with the paid software they stand in for.', 'aboutp.photo': 'Profile photo', 'aboutp.exp': 'Experience', 'aboutp.edu': 'Education', 'aboutp.extra': 'Other activities', 'aboutp.skills': 'Technical skills', 'art.grid': 'Grid view',
@@ -2411,7 +2582,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'aboutp.lang': 'Idiomas', 'aboutp.free': 'Herramientas gratuitas', 'aboutp.free.empty': '[Próximamente: las alternativas gratuitas que uso en lugar de los programas pagos.]',
       'credit.text': 'Sitio diseñado y desarrollado por Henrique Marinhos.', 'credit.link': 'Cómo se hizo este sitio →',
       'web.mobile': 'Celular', 'web.desktop': 'Computadora', 'web.open': 'Abrir en otra pestaña', 'web.close': 'Cerrar prueba',
-      'top': 'Volver arriba ↑', 'f.car': 'Carruseles', 'am.mode': 'Modo de lectura', 'am.text': 'Texto', 'am.seepost': 'Ver post', 'am.seetext': 'Ver texto',
+      'top': 'Volver arriba ↑', 'f.car': 'Carruseles', 'am.mode': 'Modo de lectura', 'am.text': 'Texto', 'am.seepost': 'Ver post', 'am.seetext': 'Ver texto', 'am.share': 'Compartir', 'am.copied': 'Enlace copiado', 'am.copy': 'Copie el enlace del artículo:',
       'doc.desc': 'Portafolio de Henrique Marinhos, diseñador enfocado en creación de marcas, diseño editorial, diseño web y estrategias de comunicación B2B.'
     }
   };
@@ -2852,6 +3023,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const wp = isWP(a.u), translated = wp && LANG !== 'pt';
     document.getElementById('am-ext').href = translated ? transUrl(a.u, LANG) : a.u;
     document.getElementById('am-ext-l').textContent = a.ext ? i18n('am.book', a.ext) : i18n('am.open', 'Abrir no site');
+    const shareBtn = document.getElementById('am-share'), shareLabel = document.getElementById('am-share-label');
+    const shareDefaultLabel = () => i18n('am.share', 'Compartilhar');
+    const setShareLabel = (label) => { shareLabel.textContent = label; shareBtn.setAttribute('aria-label', label); shareBtn.title = label; };
+    let shareResetTimer;
+    setShareLabel(shareDefaultLabel());
+    const copyArticleLink = async (url) => {
+      await navigator.clipboard.writeText(url);
+      setShareLabel(i18n('am.copied', 'Link copiado'));
+      clearTimeout(shareResetTimer);
+      shareResetTimer = setTimeout(() => { setShareLabel(shareDefaultLabel()); }, 1800);
+    };
+    shareBtn.onclick = async () => {
+      const url = location.origin + articlePath;
+      const shareData = { title: artTitle(a), text: a.site || '', url };
+      try {
+        if (navigator.share) { await navigator.share(shareData); return; }
+        await copyArticleLink(url);
+      } catch (error) {
+        if (error && error.name === 'AbortError') return;
+        try { await copyArticleLink(url); }
+        catch (copyError) { window.prompt(i18n('am.copy', 'Copie o link do artigo:'), url); }
+      }
+    };
     // botões extras (ex.: repositório da Unesp no TCC)
     document.getElementById('am-links').innerHTML = (a.links || []).map(l => `<a class="am-ext am-ext-alt" href="${l.u}" target="_blank" rel="noopener">${i18n('am.link.' + l.l, l.l)}</a>`).join('');
     document.getElementById('am-cover').src = artImg(a);
@@ -4070,7 +4264,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const POST_BY = Object.fromEntries(POSTS.map(x => [x.c, x]));
   const POSTS_BY_ART = {}; POSTS.forEach(x => { if (x.art) (POSTS_BY_ART[x.art] = POSTS_BY_ART[x.art] || []).push(x); });
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const IG_L = { ver: { pt: 'Ver no Instagram', en: 'View on Instagram', es: 'Ver en Instagram' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' },
+  const IG_L = { ver: { pt: 'Ver post', en: 'View post', es: 'Ver publicación' }, ler: { pt: 'Ler o texto', en: 'Read the text', es: 'Leer el texto' }, share: { pt: 'Compartilhar', en: 'Share', es: 'Compartir' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, prev: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next: { pt: 'Próxima', en: 'Next', es: 'Siguiente' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
   const igImg = (x, i) => x.cover && i === 0 ? x.cover : postSrc(x, i);
@@ -4151,7 +4345,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="pv-side">
         <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
         <p class="pv-cap">${esc(cap)}</p>
-        <div class="ig-links pv-links"><a class="ig-link" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="ig-link" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div>
+        <div class="ig-links pv-links"><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="am-swap pv-action" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a><a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener">${i18n('am.open', 'Abrir no site')}</a>` : ''}<button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button></div>
       </div>`;
   };
   const pvShow = (i) => {
@@ -4162,6 +4356,23 @@ document.addEventListener('DOMContentLoaded', () => {
     pvPos.textContent = many ? (pvI + 1) + ' / ' + pvList.length : '';
   };
   const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  pvBox.addEventListener('click', async (e) => {
+    const button = e.target.closest('.pv-share');
+    if (!button) return;
+    const post = pvList[pvI], article = post && post.art ? (window.ARTIGOS || []).find(a => a.u === post.art) : null;
+    const url = location.origin + (article ? articleRoute(article) : igUrl(post));
+    const shareData = { title: article ? artTitle(article) : 'Instagram', url };
+    try {
+      if (navigator.share) { await navigator.share(shareData); return; }
+      await navigator.clipboard.writeText(url);
+      button.title = i18n('am.copied', 'Link copiado');
+      button.setAttribute('aria-label', button.title);
+      setTimeout(() => { if (button.isConnected) { button.title = lx(IG_L.share); button.setAttribute('aria-label', lx(IG_L.share)); } }, 1800);
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      window.prompt(i18n('am.copy', 'Copie o link do artigo:'), url);
+    }
+  });
   document.getElementById('pv-prev').onclick = () => pvShow(pvI - 1);
   document.getElementById('pv-next').onclick = () => pvShow(pvI + 1);
   // teclado: ← → passam os slides; no fim do carrossel, vão para o post vizinho
