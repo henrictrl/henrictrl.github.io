@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Henrique Marinhos</title>
+<script>
+(async function () {
+  try {
+    var response = await fetch('/index.html', { cache: 'no-cache' });
+    if (!response.ok) throw new Error('Falha ao carregar o portfólio.');
+    var html = await response.text();
+    html = html.replace('<head>', '<head><base href="/">');
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (error) {
+    document.body.textContent = 'Não foi possível carregar o portfólio.';
+  }
+})();
+</script>
+</head>
+<body><p>Carregando portfólio…</p></body>
+</html>

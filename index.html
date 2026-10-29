@@ -1821,11 +1821,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <!-- nav-row: no mobile é o painel do menu; no desktop "some" (display:contents): links no centro, bandeiras à direita -->
     <div class="nav-row" id="nav-panel">
             <nav class="main-nav" aria-label="Navegação principal">
-        <a href="#home" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
-        <a href="#sobre" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
-        <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
-        <a href="#artigos" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
-        <a href="#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
+        <a href="/" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
+        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
+        <a href="/projetos/" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
+        <a href="/artigos/" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
+        <a href="/#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
       </nav>
       <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
       <div class="lang-switch" role="group" aria-label="Idioma / Language"></div>
@@ -1838,11 +1838,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <div class="header-left"></div>
     <div class="nav-row">
             <nav class="main-nav" aria-label="Navegação principal (fixa)">
-        <a href="#home" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
-        <a href="#sobre" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
-        <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
-        <a href="#artigos" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
-        <a href="#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
+        <a href="/" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
+        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
+        <a href="/projetos/" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
+        <a href="/artigos/" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
+        <a href="/#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
       </nav>
       <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
       <div class="lang-switch" role="group" aria-label="Idioma / Language"></div>
@@ -1884,7 +1884,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
           <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
           <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
-          <a href="#sobre" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
+          <a href="/sobre/" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
         </div>
       </div>
     </section>
@@ -1985,7 +1985,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
         <div class="home-pagination-row">
           <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
           <div class="home-work-more">
-            <a href="#trabalhos" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
+            <a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
           </div>
         </div>
       </div>
@@ -2487,17 +2487,32 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatchEvent(new CustomEvent('portfolio:route-enter', { detail: { route } }));
   };
 
+  const ROUTE_PATHS = { home: '/', about: '/sobre/', work: '/projetos/', articles: '/artigos/' };
+  const routeTo = (route, navId, replace = false) => {
+    if (amOverlay.classList.contains('open')) closeArticle(true);
+    if (dk.classList.contains('open')) closeDeck();
+    const path = ROUTE_PATHS[route] || '/';
+    if (location.pathname !== path || location.hash) {
+      (replace ? history.replaceState : history.pushState).call(history, { portfolioRoute: route }, '', path);
+    }
+    showRoute(route, navId);
+  };
+
   document.querySelectorAll('[data-route]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      showRoute(link.dataset.route, link.dataset.navId);
+      routeTo(link.dataset.route, link.dataset.navId);
     });
   });
 
-  document.querySelectorAll('a[href="#contato"]').forEach(link => {
-    link.addEventListener('click', () => {
-      document.querySelectorAll('[data-nav-id]').forEach(a => a.classList.remove('current'));
-      document.querySelectorAll('[data-nav-id="contato"]').forEach(a => a.classList.add('current'));
+  document.querySelectorAll('[data-nav-id="contato"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (amOverlay.classList.contains('open')) closeArticle(true);
+      if (dk.classList.contains('open')) closeDeck();
+      history.pushState({ portfolioRoute: 'home', contact: true }, '', '/#contato');
+      showRoute('home', 'contato');
+      requestAnimationFrame(() => document.getElementById('contato')?.scrollIntoView());
     });
   });
 
@@ -2753,7 +2768,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const transUrl = (url, tl) => { const u = new URL(url); return `https://${u.hostname.replace(/-/g, '--').replace(/\./g, '-')}.translate.goog${u.pathname}?_x_tr_sl=pt&_x_tr_tl=${tl}&_x_tr_hl=${tl}`; };
   let amToken = 0;
   const showFrame = (url) => { amReader.hidden = true; amReader.innerHTML = ''; amFrame.hidden = false; amFrame.src = url; };
+  const articleSlug = (a) => {
+    try { return decodeURIComponent(new URL(a.u, location.origin).pathname.split('/').filter(Boolean).pop() || ''); }
+    catch (e) { return String(a.t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  };
+  const articleRoute = (a) => '/artigos/' + encodeURIComponent(articleSlug(a)) + '/';
   const openArticle = (a) => {
+    const articlePath = articleRoute(a);
+    if (location.pathname !== articlePath) history.pushState({ portfolioArticle: articleSlug(a) }, '', articlePath);
     const tok = ++amToken;
     document.getElementById('am-site').textContent = a.site + ' · ' + a.tags.map(tagName).join(' · ');
     document.getElementById('am-title').textContent = artTitle(a);
@@ -2798,7 +2820,12 @@ document.addEventListener('DOMContentLoaded', () => {
       hydrateEmbeds(amReader);
     }).catch(() => { if (tok === amToken) showFrame(a.u); });
   };
-  const closeArticle = () => {
+  const closeArticle = (fromHistory = false) => {
+    if (!fromHistory && /^\/artigos\/[^/]+\/?$/.test(location.pathname)) {
+      if (history.state && history.state.portfolioArticle) { history.back(); return; }
+      history.replaceState({ portfolioRoute: 'articles' }, '', '/artigos/');
+      showRoute('articles', 'artigos');
+    }
     amOverlay.classList.remove('open'); document.body.style.overflow = '';
     amToken++; document.getElementById('am-ig').hidden = true; document.getElementById('am-ig').innerHTML = '';
     setTimeout(() => { if (!amOverlay.classList.contains('open')) { amFrame.src = 'about:blank'; amReader.innerHTML = ''; } }, 400); // para áudio/vídeo do texto
@@ -2871,7 +2898,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pp = PBA[a.u], ig = artMode === 'ig' && pp;
         const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
           : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
-        return `<a class="art-card" href="${a.project ? '#projeto/' + a.project : a.u}" target="${a.project ? '_self' : '_blank'}" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
+        return `<a class="art-card" href="${a.project ? cleanProjectUrl(a.project) : articleRoute(a)}" target="_self" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
           <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
           <h3 class="art-card-title">${artTitle(a)}</h3>
@@ -2892,7 +2919,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.HM_POSTS.openPosts(lista, start); return;
       }
       const item = data[+c.dataset.i];
-      if (item.project) { openDeck(item.project); return; }
+      if (item.project) { window.location.assign(cleanProjectUrl(item.project)); return; }
       openArticle(item);
     });
     modeBar.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; artMode = b.dataset.m; try { localStorage.setItem('hm-artmode', artMode); } catch (er) {} drawMode();
@@ -3964,7 +3991,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
-    e.preventDefault(); openDeck(c.dataset.pj);
+    e.preventDefault(); window.location.assign(c.href || cleanProjectUrl(c.dataset.pj));
   });
 
   /* --- Posts do Instagram: componente usado nos cases, no modal de post e nos artigos ---
@@ -4620,7 +4647,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!mobileTopButton) return;
     const sc = getActiveTopScroller();
     const currentY = sc ? sc.scrollTop : window.scrollY;
-    mobileTopButton.classList.toggle('is-visible', window.matchMedia('(max-width: 767px)').matches && currentY > 480);
+    mobileTopButton.classList.toggle('is-visible', !document.body.classList.contains('home-route') && window.matchMedia('(max-width: 767px)').matches && currentY > 480);
   };
   if (mobileTopButton) {
     mobileTopButton.addEventListener('click', () => {
@@ -4640,13 +4667,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('am-ig').addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
-  const routeFromHash = {
-    '#home': ['home', 'inicio'],
-    '#sobre': ['about', 'sobre'],
-    '#trabalhos': ['work', 'trabalhos'],
-    '#artigos': ['articles', 'artigos']
-  }[location.hash];
-  if (routeFromHash) showRoute(routeFromHash[0], routeFromHash[1]);
+  const routeByPath = { '/': ['home', 'inicio'], '/sobre': ['about', 'sobre'], '/projetos': ['work', 'trabalhos'], '/artigos': ['articles', 'artigos'] };
+  const routeFromLocation = () => {
+    const path = location.pathname.replace(/\/$/, '') || '/';
+    const baseRoute = routeByPath[path];
+    if (baseRoute) {
+      showRoute(baseRoute[0], baseRoute[1]);
+      if (location.hash === '#contato') requestAnimationFrame(() => document.getElementById('contato')?.scrollIntoView());
+      return;
+    }
+    const match = path.match(/^\/artigos\/([^/]+)$/);
+    if (match) {
+      showRoute('articles', 'artigos');
+      const slug = decodeURIComponent(match[1]);
+      const article = (window.ARTIGOS || []).find(a => !a.project && articleSlug(a) === slug);
+      if (article) openArticle(article);
+      else history.replaceState({ portfolioRoute: 'articles' }, '', '/artigos/');
+      return;
+    }
+    const legacy = { '#home': ['home', 'inicio', '/'], '#sobre': ['about', 'sobre', '/sobre/'], '#trabalhos': ['work', 'trabalhos', '/projetos/'], '#artigos': ['articles', 'artigos', '/artigos/'] }[location.hash];
+    if (legacy) {
+      history.replaceState({ portfolioRoute: legacy[0] }, '', legacy[2]);
+      showRoute(legacy[0], legacy[1]);
+    }
+  };
+  window.addEventListener('popstate', () => {
+    if (amOverlay.classList.contains('open')) closeArticle(true);
+    if (dk.classList.contains('open')) closeDeck();
+    routeFromLocation();
+  });
+  routeFromLocation();
   fromHash(); // compatibilidade com links antigos; encaminha o case para projeto.html
 });
 </script>
