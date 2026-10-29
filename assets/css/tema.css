@@ -23,13 +23,10 @@ html[data-theme="dark"] .marquee-logo img {
   filter: grayscale(var(--g, 1)) invert(calc(.88 * var(--g, 1))) contrast(calc(1 + 0.3 * var(--g, 1)));
 }
 
-/* logos escuros de Unesp e Basement precisam de uma base clara no currículo */
+/* logos Unesp e Basement em branco para contraste no currículo escuro */
 html[data-theme="dark"] .cv-logo img[src$="unesp.svg"],
 html[data-theme="dark"] .cv-logo img[src$="basement.webp"] {
-  box-sizing: border-box;
-  padding: 4px;
-  background: #fff;
-  border-radius: 4px;
+  filter: brightness(0) invert(1);
 }
 
 /* bloco escuro dos serviços continua escuro (ink agora é claro) */
