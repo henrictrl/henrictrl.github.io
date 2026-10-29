@@ -76,11 +76,12 @@
       var fit = function () { var h = block.getBoundingClientRect().height; if (h) scope.style.setProperty('--ts', Math.round(h) + 'px'); };
       fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(block);
     });
-    // mobile: segunda cópia do botão, dentro do menu aberto, à esquerda do hambúrguer
-    document.querySelectorAll('header.top-header .nav-toggle').forEach(function (tg) {
-      if (tg.parentNode.querySelector(':scope > .ts-menu')) return;
+    // mobile: switch vertical dentro do painel do menu (centro esquerdo)
+    document.querySelectorAll('header.top-header .nav-row').forEach(function (panel) {
+      if (panel.querySelector(':scope > .ts-menu')) return;
       var m = makeSwitch(); m.classList.add('ts-menu');
-      tg.parentNode.insertBefore(m, tg);
+      m.innerHTML = '<span class="ts-knob">' + ICON + '</span>'; // ícones dentro da bolinha
+      panel.appendChild(m);
     });
     apply(root.getAttribute('data-theme'));
     // atualiza o rótulo quando o idioma muda
