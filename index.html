@@ -2558,8 +2558,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const RD_VER = 'v6';
 
   // 1) HTML bruto do WordPress
-  const fetchWP = (u) => once('wp:' + u, async () => {
-    const hit = cacheGet(RD_VER + ':raw:' + u); if (hit) return hit;
+  const fetchWP = (u) => {
+    const article = (window.ARTIGOS || []).find(x => x.u === u);
+    const textCover = !!(article && article.coverFromText);
+    const cacheKey = RD_VER + (textCover ? ':raw-text:' : ':raw:') + u;
+    return once((textCover ? 'wp-text:' : 'wp:') + u, async () => {
+    const hit = cacheGet(cacheKey); if (hit) {
+      if (textCover) { const cachedImage = (hit.match(/<img[^>]+src="([^"]+)"/) || [])[1]; if (cachedImage) article.textCover = cachedImage; }
+      return hit;
+    }
     const url = new URL(u), slug = url.pathname.split('/').filter(Boolean).pop();
     const j = await fetch(`${url.origin}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_fields=content,_links,_embedded&_embed=wp:featuredmedia`).then(r => { if (!r.ok) throw new Error('wp ' + r.status); return r.json(); });
     if (!j[0]) throw new Error('wp vazio');
@@ -2570,11 +2577,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cover = fm && fm.source_url ? (((sz && (sz.large || sz.medium_large || {}).source_url) || fm.source_url)).replace(/^http:\/\//, 'https://') : '';
     const base = (x) => (x || '').split('/').pop().replace(/-\d+x\d+(?=\.)/, '').replace(/\.[a-z]+$/i, '').replace(/-scaled$/, '');
     const firstImg = (html.match(/<img[^>]+src="([^"]+)"/) || [])[1];
-    const article = (window.ARTIGOS || []).find(x => x.u === u);
-    if (article && article.coverFromText && firstImg) article.textCover = firstImg;
+    if (textCover && firstImg) article.textCover = firstImg;
     if (cover && base(cover) !== base(firstImg) && !(article && article.coverFromText)) html = `<figure class="am-cover"><img src="${cover}" alt="" decoding="async"></figure>` + html;
-    cachePut(RD_VER + ':raw:' + u, html); return html;
-  });
+    cachePut(cacheKey, html); return html;
+    });
+  };
 
   // 2) limpeza: mantém só o que o leitor sabe mostrar, sem perder mídia
   const INLINE = /^(A|EM|I|STRONG|B|U|S|SUB|SUP|BR|CODE|MARK|SMALL|SPAN|IMG)$/;
