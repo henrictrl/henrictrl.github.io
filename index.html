@@ -2002,11 +2002,16 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 5px 6px;
-  font-size: 11px;
-  white-space: nowrap;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--gray-500);
 }
+#pv-ov .pv-action svg { display: block; width: 18px; height: 18px; }
 #pv-ov .pv-share {
   display: inline-flex;
   align-items: center;
@@ -2036,7 +2041,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 #pv-ov .pv-action:hover, #pv-ov .pv-share:hover { color: var(--ink); border-color: var(--ink); }
 @media (max-width: 360px) {
   #pv-ov .pv-links { left: 44px; right: 44px; gap: 6px; }
-  #pv-ov .pv-action { padding-inline: 4px; font-size: 10px; }
+  #pv-ov .pv-action { width: 36px; height: 40px; flex-basis: 36px; padding: 0; }
+  #pv-ov .pv-action svg { width: 17px; height: 17px; }
   #pv-ov .pv-share { width: 36px; height: 40px; flex-basis: 36px; }
 }
 </style>
@@ -4345,7 +4351,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="pv-side">
         <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
         <p class="pv-cap">${esc(cap)}</p>
-        <div class="ig-links pv-links"><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a class="am-swap pv-action" href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a><a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener">${lx(IG_L.site)}</a>` : ''}<button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button></div>
+        <div class="ig-links pv-links"><button class="am-share pv-share" type="button" aria-label="${lx(IG_L.share)}" title="${lx(IG_L.share)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2 7.5 4.3"/></svg><span class="pv-share-label">${lx(IG_L.share)}</span></button><a class="am-swap pv-action" href="${igUrl(x)}" target="_blank" rel="noopener" aria-label="${lx(IG_L.ver)}" title="${lx(IG_L.ver)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.7" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></a>${art ? `<a class="am-swap pv-action" href="${art.u}" data-art-u="${art.u}" aria-label="${lx(IG_L.ler)}" title="${lx(IG_L.ler)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></a><a class="am-ext pv-action" href="${art.u}" target="_blank" rel="noopener" aria-label="${lx(IG_L.site)}" title="${lx(IG_L.site)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3z"/></svg></a>` : ''}</div>
       </div>`;
   };
   const pvShow = (i) => {
