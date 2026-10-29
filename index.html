@@ -26,6 +26,24 @@
 <!-- LCP: o retrato é a primeira imagem a carregar -->
 <link rel="preload" as="image" href="assets/img/retrato-cor.webp" fetchpriority="high">
 <script>document.documentElement.classList.add('js');</script>
+<script>
+/* Retrato no celular em tamanho real de foto 3x4 (3 cm × 4 cm).
+   Nenhuma API dá a densidade física da tela: iPhones vêm de tabela (CSS px × DPR → ppi);
+   demais aparelhos usam ~160 CSS px por polegada (base do "dp" no Android). */
+(function () {
+  var w = Math.min(screen.width, screen.height), h = Math.max(screen.width, screen.height), d = window.devicePixelRatio || 1;
+  var ios = /iP(hone|od)/.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform) && w < 500);
+  var PPI = { // "largura x altura @dpr": ppi físico
+    '320x568@2': 326, '375x667@2': 326, '414x736@3': 401, '375x812@3': 458, '360x780@3': 476,
+    '414x896@2': 326, '414x896@3': 458, '390x844@3': 460, '428x926@3': 458, '393x852@3': 460,
+    '430x932@3': 460, '402x874@3': 460, '440x956@3': 460, '420x912@3': 460
+  };
+  var ppi = ios && PPI[w + 'x' + h + '@' + d];
+  var pxPorPol = ppi ? ppi / d : 160;
+  var larg = 3 / 2.54 * pxPorPol; // 3 cm em CSS px
+  document.documentElement.style.setProperty('--foto-3x4-w', larg.toFixed(2) + 'px');
+})();
+</script>
 
 <style>
 /* --- Tokens & Base --- */
@@ -1548,7 +1566,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     padding-top: 8px;
   }
   .hero-portrait {
-    width: 100%;
+    /* tamanho real 3x4 (largura vem do script do head); as margens verticais completam
+       o espaço de antes (largura cheia em 3:4), então nada acima ou abaixo se move */
+    width: min(100%, var(--foto-3x4-w, 100%));
+    align-self: center;
+    margin-block: calc((133.333% - min(100%, var(--foto-3x4-w, 100%)) * 4 / 3) / 2);
     aspect-ratio: 3 / 4;
     user-select: none;
     -webkit-user-select: none;
