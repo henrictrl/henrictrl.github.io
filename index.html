@@ -1157,6 +1157,7 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .art-mode button { font: inherit; font-size: 13px; color: var(--gray-500); background: none; border: 0; border-radius: var(--r); padding: 5px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s var(--ease), background .2s var(--ease); white-space: nowrap; }
 .art-mode button svg { width: 13px; height: 13px; }
 .art-mode button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.art-mode button[data-m="fav"][aria-pressed="true"] svg { fill: currentColor; }
 .art-modebar { display: flex; justify-content: center; margin: 32px 0 -14px; }
 @media (min-width: 768px) { .art-modebar { margin: 48px 0 -24px; } }
 .art-ig-count { position: absolute; top: 10px; right: 10px; z-index: 1; display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #111; background: rgba(255,255,255,.92); border-radius: var(--r); padding: 3px 7px; }
