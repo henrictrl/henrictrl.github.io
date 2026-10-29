@@ -2097,7 +2097,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </nav>
   </div>
   <!-- créditos -->
-  <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span> <a href="#projeto/metaprojeto" data-pj="metaprojeto" data-i18n="credit.link">Como este site foi feito →</a></span>
+  <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span> <a href="/projetos/portfolio/" data-pj="metaprojeto" data-i18n="credit.link">Como este site foi feito →</a></span>
   </div>
 </footer>
 
@@ -3991,7 +3991,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
-    e.preventDefault(); window.location.assign(c.href || cleanProjectUrl(c.dataset.pj));
+    e.preventDefault(); window.location.assign(cleanProjectUrl(c.dataset.pj));
   });
 
   /* --- Posts do Instagram: componente usado nos cases, no modal de post e nos artigos ---
