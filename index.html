@@ -1805,7 +1805,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <link rel="stylesheet" href="assets/css/tema.css?v=20261029f">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
-.am-actions { display: contents; }
+.am-actions { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; }
 .am-bar #am-swap,
 .am-bar #am-ext,
 .am-bar #am-share {
@@ -3173,7 +3173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setGrid = (on) => { artGrid = on; grid.classList.toggle('is-compact', on); const b = bar.querySelector('.art-view'); if (b) b.setAttribute('aria-pressed', on); try { localStorage.setItem('hm-artgrid', on ? '1' : '0'); } catch (e) {} };
     const MINI_STAR = '<svg class="art-star" viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
     const STAR = '<svg class="art-star" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const LINHAS = [[['all', i18n('f.all', 'Todos')], ['fav', STAR, i18n('f.fav', 'Favoritos')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
+    const LINHAS = [[['all', i18n('f.all', 'Todos')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
                     [['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]];
     // modo de leitura: Texto (crítica) ou Instagram (posts ligados ao texto); lembrado entre visitas
     let artMode = 'texto'; try { artMode = localStorage.getItem('hm-artmode') || 'texto'; } catch (e) {}
@@ -3181,7 +3181,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const TXT_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/></svg>';
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
     const modeBar = document.createElement('div'); modeBar.className = 'art-modebar reveal';
-    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button></div>`; };
+    const FAV_ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
+    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button><button type="button" data-m="fav" aria-pressed="${artMode === 'fav'}" aria-label="${i18n('f.fav', 'Favoritos')}" title="${i18n('f.fav', 'Favoritos')}">${FAV_ICO}</button></div>`; };
     drawMode(); bar.parentNode.insertBefore(modeBar, bar);
     const PBA = (window.HM_POSTS || {}).POSTS_BY_ART || {};
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
@@ -3189,12 +3190,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const ORD = { 'Tesoura com Ponta': 0, 'Persona': 1 };
     CARR.sort((a, b) => Number(!!b.featured) - Number(!!a.featured) || (ORD[a.v] ?? 9) - (ORD[b.v] ?? 9) || b.d.localeCompare(a.d));
     const capTitle = (x) => { const t = capOf(x).split(/\n/).map(l => l.trim()).filter(l => l && !/^[\p{P}\p{S}\s]+$/u.test(l))[0] || x.v; return t.length > 90 ? t.slice(0, 88).replace(/\s+\S*$/, '') + '…' : t; };
+    const FAV_SELECTION = [
+      ['post', 'Deuz10vkegd'],
+      ['post', 'DUlOWXWjoWX'],
+      ['post', 'DPCkHYgkbDE'],
+      ['text', 'https://personaunesp.com.br/corisco-e-dada-critica/'],
+      ['text', 'https://personaunesp.com.br/croma-kid-critica/'],
+      ['text', 'https://personaunesp.com.br/as-primas-critica/'],
+      ['text', 'https://personaunesp.com.br/pearl-critica/'],
+      ['text', 'https://personaunesp.com.br/critica-e-se-fosse-verdade/'],
+      ['post', 'DeKDr7dFgRW'],
+      ['text', 'https://personaunesp.com.br/ainda-temos-o-amanha-critica/'],
+      ['post', 'DQfY9lqkZfc']
+    ].map(([kind, id]) => ({ kind, item: kind === 'post' ? CARR.find(x => x.c === id) : data.find(a => a.u === id) }))
+      .filter(entry => entry.item)
+      .sort((a, b) => b.item.d.localeCompare(a.item.d));
     bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
       `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === artFilter}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
     // entrada em cascata dos cartões visíveis
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
       grid.classList.toggle('is-ig', artMode === 'ig' || k === 'carrosseis');
+      if (artMode === 'fav') {
+        let items = FAV_SELECTION;
+        if (k !== 'all') items = items.filter(entry => {
+          if (entry.kind === 'text') return entry.item.tags.includes(k);
+          const linked = entry.item.art && data.find(a => a.u === entry.item.art);
+          return !!linked && linked.tags.includes(k);
+        });
+        grid.innerHTML = items.map(entry => {
+          if (entry.kind === 'post') {
+            const x = entry.item, linked = x.art && data.find(a => a.u === x.art);
+            const title = linked ? artTitle(linked) : (x.c === 'DeKDr7dFgRW' ? 'Desvendando o Pop: lançamentos de setembro de 2026' : capTitle(x));
+            return `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
+              <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
+              <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h3 class="art-card-title">${title}</h3></a>`;
+          }
+          const a = entry.item, index = data.indexOf(a), badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
+          const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
+          const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
+          return `<a class="art-card" href="${articleRoute(a)}" target="_self" rel="noopener" data-i="${index}"${a.cropTop ? ' data-crop-top="true"' : ''}>
+            <div class="art-card-media"${a.bg ? ` style="background:${a.bg}"` : ''}>${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}></div>
+            <p class="art-card-meta">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h3 class="art-card-title">${artTitle(a)}</h3><p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p></a>`;
+        }).join('');
+        [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
+        return;
+      }
       if (k === 'carrosseis') { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
         grid.innerHTML = CARR.map(x => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
           <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
@@ -3202,10 +3243,9 @@ document.addEventListener('DOMContentLoaded', () => {
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
-      let lista = k === 'all' ? data : k === 'fav' ? data.filter(a => a.fav) : data.filter(a => a.tags.includes(k));
+      let lista = k === 'all' ? data : data.filter(a => a.tags.includes(k));
       if (artMode === 'ig') lista = lista.filter(a => PBA[a.u]); // no modo Instagram, só os textos que têm post
-      if (k === 'fav') lista = [...lista.filter(a => a.pin), ...lista.filter(a => !a.pin)]; // fixados primeiro
-      const showTag = k === 'all' || k === 'fav'; // dentro de uma categoria a etiqueta é redundante
+      const showTag = k === 'all'; // dentro de uma categoria a etiqueta é redundante
       grid.innerHTML = lista.map(a => {
         const i = data.indexOf(a);
         const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
@@ -3252,7 +3292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
       const keep = artFilter; const rows = bar.innerHTML = '';
-      LINHAS[0][0][1] = i18n('f.all', 'Todos'); LINHAS[0][1][2] = i18n('f.fav', 'Favoritos'); LINHAS[0][2][1] = i18n('f.cabine', 'Cabines'); LINHAS[0][3][1] = tagName('Cinema');
+      LINHAS[0][0][1] = i18n('f.all', 'Todos'); LINHAS[0][1][1] = i18n('f.cabine', 'Cabines'); LINHAS[0][2][1] = tagName('Cinema');
       LINHAS[1][0][1] = tagName('Música'); LINHAS[1][1][1] = tagName('Televisão'); LINHAS[1][2][1] = tagName('Literatura'); drawMode();
       bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
         `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === keep}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
