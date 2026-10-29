@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/js/tema.js?v=20261029e"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261029f"></script> <!-- modo noturno: no head, antes da pintura -->
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1803,6 +1803,76 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
 </style>
 <link rel="stylesheet" href="assets/css/tema.css?v=20261029e">
+<style id="article-modal-mobile-fix">
+@media (max-width: 640px) {
+  #art-modal-overlay {
+    inset: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+  }
+  #art-modal-overlay .art-modal {
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    border-radius: 0;
+  }
+  #art-modal-overlay .am-bar {
+    position: relative;
+    top: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    align-items: start;
+    gap: 8px 10px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 10px 10px 14px;
+  }
+  #art-modal-overlay .am-info {
+    grid-column: 1;
+    grid-row: 1;
+    flex-basis: auto;
+    min-width: 0;
+  }
+  #art-modal-overlay .am-title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.25;
+  }
+  #art-modal-overlay #am-close {
+    grid-column: 2;
+    grid-row: 1;
+    width: 44px;
+    height: 44px;
+  }
+  #art-modal-overlay .am-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    order: initial;
+    min-width: 0;
+  }
+  #art-modal-overlay .am-swap:not([hidden]) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: start;
+    order: initial;
+  }
+  #art-modal-overlay .am-ext {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-self: start;
+    order: initial;
+    margin: 0;
+  }
+}
+</style>
+
 </head>
 <body class="home-route">
 

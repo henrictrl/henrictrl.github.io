@@ -39,8 +39,8 @@
   apply(current()); // antes da primeira pintura
 
   var ICON =
-    '<svg class="ts-sun" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3zM2 2h2v2H2zM12 2h2v2h-2zM2 12h2v2H2zM12 12h2v2h-2zM5 5h6v6H5z"/></svg>' +
-    '<svg class="ts-moon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M10 1h4v2h-2v2h-2v3H8v4h2v2h2v2h4v2h-5v-2H8v-2H6v-3H4V8h2V6h2V4h2V2h2z"/></svg>';
+    '<svg class="ts-sun" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path d="M11 1h2v4h-2zM11 19h2v4h-2zM1 11h4v2H1zM19 11h4v2h-4zM4 4h2v2H4zM18 4h2v2h-2zM4 18h2v2H4zM18 18h2v2h-2zM9 9h6v6H9z"/></svg>' +
+    '<svg class="ts-moon" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path fill-rule="evenodd" d="M10 0h4v2h4v2h2v4h2v8h-2v4h-2v2h-4v2h-4v-2H6v-2H4v-4H2V8h2V4h2V2h4z M14 2h6v2h2v4h2v8h-2v4h-2v2h-6v-2h-2v-4h-2v-8h2V4h2z"/></svg>';
 
   var makeSwitch = function () {
     var b = document.createElement('button');
