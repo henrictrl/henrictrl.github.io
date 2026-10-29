@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/js/tema.js?v=20261029b"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261029c"></script> <!-- modo noturno: no head, antes da pintura -->
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1558,7 +1558,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
   /* Alinha retrato, título e texto às mesmas margens laterais no celular. */
   .hero-grid { align-items: stretch; }
-  .hero-text { width: 100%; min-width: 0; }
+  .hero-text { width: 100%; min-width: 0; margin-top: calc(10px + var(--E) / 2); } /* título no meio entre cabeçalho e foto; a foto não se move */
+  .hero-text, .hero-portrait { --E: calc((133.333% - min(100%, var(--foto-3x4-w, 100%)) * 4 / 3) / 2); } /* % = largura da coluna, igual nos dois */
   .portrait-wrap {
     --foto-w: 100%;
     width: 100%;
@@ -1570,7 +1571,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
        o espaço de antes (largura cheia em 3:4), então nada acima ou abaixo se move */
     width: min(100%, var(--foto-3x4-w, 100%));
     align-self: center;
-    margin-block: calc((133.333% - min(100%, var(--foto-3x4-w, 100%)) * 4 / 3) / 2);
+    /* sobra vertical E = (espaço 3:4 de largura cheia − foto) / 2; metade dela vai para cima do título */
+    margin-block: calc(var(--E) / 2 - 10px) var(--E);
     aspect-ratio: 3 / 4;
     user-select: none;
     -webkit-user-select: none;
@@ -1800,7 +1802,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261029b">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261029c">
 </head>
 <body class="home-route">
 

@@ -71,8 +71,16 @@
       var btn = makeSwitch();
       host.insertBefore(btn, host.firstChild === block ? block : host.firstChild);
       // diâmetro = altura do bloco nome + cidade (recalcula quando a fonte carrega/muda)
-      var fit = function () { var h = block.getBoundingClientRect().height; if (h) btn.style.setProperty('--ts', Math.round(h) + 'px'); };
+      // --ts no cabeçalho inteiro: vale também para o botão do menu mobile
+      var scope = block.closest('header') || host;
+      var fit = function () { var h = block.getBoundingClientRect().height; if (h) scope.style.setProperty('--ts', Math.round(h) + 'px'); };
       fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(block);
+    });
+    // mobile: segunda cópia do botão, dentro do menu aberto, à esquerda do hambúrguer
+    document.querySelectorAll('header.top-header .nav-toggle').forEach(function (tg) {
+      if (tg.parentNode.querySelector(':scope > .ts-menu')) return;
+      var m = makeSwitch(); m.classList.add('ts-menu');
+      tg.parentNode.insertBefore(m, tg);
     });
     apply(root.getAttribute('data-theme'));
     // atualiza o rótulo quando o idioma muda
