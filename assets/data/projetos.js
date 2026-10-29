@@ -11466,7 +11466,7 @@ window.PROJETOS = [
    }
   ]
  },
- {
+  {
   "slug": "o-hobbit",
   "servicos_relacionados": [],
   "titulo": {
@@ -11499,94 +11499,9 @@ window.PROJETOS = [
     "analise-literaria"
    ]
   },
-  "capa": "assets/projetos/o-hobbit/capa.webp",
+  "capa": "https://nanu.blog.br/wp-content/uploads/2025/01/Capa_Posts154.jpg",
   "dir": "assets/projetos/o-hobbit/",
   "telas": [
-   {
-    "img": "01",
-    "t": {
-     "pt": "Lá e de volta outra vez",
-     "en": "There and back again",
-     "es": "Ida y vuelta"
-    },
-    "d": {
-     "pt": "Microanálise do capítulo 12 de O Hobbit, de J. R. R. Tolkien, com Pedro Nakamura, na disciplina Prática de Leitura e de Análise do Texto Literário (RP, Unesp Bauru).",
-     "en": "Micro-analysis of chapter 12 of The Hobbit, by J. R. R. Tolkien, with Pedro Nakamura, for the Literary Text Reading and Analysis course (PR, Unesp Bauru).",
-     "es": "Microanálisis del capítulo 12 de El hobbit, de J. R. R. Tolkien, con Pedro Nakamura, en la asignatura Práctica de Lectura y Análisis del Texto Literario (RR. PP., Unesp Bauru)."
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "02",
-    "t": {
-     "pt": "Microanálise do capítulo 12",
-     "en": "Micro-analysis of chapter 12",
-     "es": "Microanálisis del capítulo 12"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "03",
-    "t": {
-     "pt": "O que é microanálise?",
-     "en": "What is micro-analysis?",
-     "es": "¿Qué es el microanálisis?"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "04",
-    "t": {
-     "pt": "Estruturação",
-     "en": "Structure",
-     "es": "Estructuración"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "05",
-    "t": {
-     "pt": "Por que esse trabalho é tão especial?",
-     "en": "Why is this work so special?",
-     "es": "¿Por qué este trabajo es tan especial?"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
    {
     "img": "06",
     "t": {
@@ -11688,68 +11603,11 @@ window.PROJETOS = [
      "en",
      "es"
     ]
-   },
-   {
-    "img": "12",
-    "t": {
-     "pt": "Ficha",
-     "en": "Credits",
-     "es": "Ficha"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
    }
   ],
   "secoes": [
    {
     "p": 1,
-    "t": {
-     "pt": "Lá e de volta outra vez",
-     "en": "There and back again",
-     "es": "Ida y vuelta"
-    }
-   },
-   {
-    "p": 2,
-    "t": {
-     "pt": "Microanálise do capítulo 12",
-     "en": "Micro-analysis of chapter 12",
-     "es": "Microanálisis del capítulo 12"
-    }
-   },
-   {
-    "p": 3,
-    "t": {
-     "pt": "O que é microanálise?",
-     "en": "What is micro-analysis?",
-     "es": "¿Qué es el microanálisis?"
-    }
-   },
-   {
-    "p": 4,
-    "t": {
-     "pt": "Estruturação",
-     "en": "Structure",
-     "es": "Estructuración"
-    }
-   },
-   {
-    "p": 5,
-    "t": {
-     "pt": "Por que esse trabalho é tão especial?",
-     "en": "Why is this work so special?",
-     "es": "¿Por qué este trabajo es tan especial?"
-    }
-   },
-   {
-    "p": 6,
     "t": {
      "pt": "Trabalho completo",
      "en": "Full paper",
@@ -11757,14 +11615,31 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 12,
+    "p": 2,
     "t": {
-     "pt": "Ficha",
-     "en": "Credits",
-     "es": "Ficha"
+     "pt": "Enredo e personagens",
+     "en": "Plot and characters",
+     "es": "Trama y personajes"
+    }
+   },
+   {
+    "p": 3,
+    "t": {
+     "pt": "Análise",
+     "en": "Analysis",
+     "es": "Análisis"
+    }
+   },
+   {
+    "p": 6,
+    "t": {
+     "pt": "Conclusão e referências",
+     "en": "Conclusion and references",
+     "es": "Conclusión y referencias"
     }
    }
-  ]
+  ],
+  "capaCropTop": true
  },
  {
   "slug": "dash-geral",
