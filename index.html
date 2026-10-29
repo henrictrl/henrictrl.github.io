@@ -2321,7 +2321,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   let LANG = 'pt';
   // imagens de posts traduzidas: x.tr lista os slides (1..n) com NN.en.webp / NN.es.webp
   // capa de artigo vinda de um post: usa o slide traduzido quando houver
-  const artImg = (a) => { const m = /^assets\/posts\/([^/]+)\/01\.webp$/.exec(a.imgPath || ''); const p = m && ((window.POSTS || []).find(x => x.c === m[1])); return p ? postSrc(p, 0) : (a.imgPath || ('assets/artigos/' + a.img)); };
+  const artImg = (a) => { if (a.coverFromText) return a.textCover || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; const m = /^assets\/posts\/([^/]+)\/01\.webp$/.exec(a.imgPath || ''); const p = m && ((window.POSTS || []).find(x => x.c === m[1])); return p ? postSrc(p, 0) : (a.imgPath || ('assets/artigos/' + a.img)); };
   const capOf = (x) => ((LANG !== 'pt' && x['cap_' + LANG]) || x.cap || '').trim();
   const postSrc = (x, i) => { const b = `assets/posts/${x.c}/${String(i + 1).padStart(2, '0')}`; return LANG !== 'pt' && x.tr && x.tr.includes(i + 1) ? `${b}.${LANG}.webp` : `${b}.webp`; };
   const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
@@ -2570,7 +2570,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cover = fm && fm.source_url ? (((sz && (sz.large || sz.medium_large || {}).source_url) || fm.source_url)).replace(/^http:\/\//, 'https://') : '';
     const base = (x) => (x || '').split('/').pop().replace(/-\d+x\d+(?=\.)/, '').replace(/\.[a-z]+$/i, '').replace(/-scaled$/, '');
     const firstImg = (html.match(/<img[^>]+src="([^"]+)"/) || [])[1];
-    if (cover && base(cover) !== base(firstImg)) html = `<figure class="am-cover"><img src="${cover}" alt="" decoding="async"></figure>` + html;
+    const article = (window.ARTIGOS || []).find(x => x.u === u);
+    if (article && article.coverFromText && firstImg) article.textCover = firstImg;
+    if (cover && base(cover) !== base(firstImg) && !(article && article.coverFromText)) html = `<figure class="am-cover"><img src="${cover}" alt="" decoding="async"></figure>` + html;
     cachePut(RD_VER + ':raw:' + u, html); return html;
   });
 
@@ -2705,7 +2707,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   const readerHtml = (a, lang) => lang === 'pt' ? fetchWP(a.u) : translateHtml(a.u, lang);
   // pré-carrega ao passar o mouse/tocar no card (o texto costuma estar pronto ao abrir)
-  const prefetchArticle = (a) => { if (isWP(a.u)) readerHtml(a, LANG).catch(() => {}); };
+  const prefetchArticle = (a) => isWP(a.u) ? readerHtml(a, LANG).catch(() => '') : Promise.resolve('');
 
   // embeds de terceiros (Instagram / Twitter)
   const loadScript = (src) => new Promise((ok, err) => { if (document.querySelector(`script[src="${src}"]`)) return ok(); const s = document.createElement('script'); s.src = src; s.async = true; s.onload = ok; s.onerror = err; document.head.appendChild(s); });
@@ -2751,6 +2753,12 @@ document.addEventListener('DOMContentLoaded', () => {
     readerHtml(a, LANG).then(html => {
       if (tok !== amToken) return;
       const note = translated ? `<p class="am-note">${i18n('am.note', 'Tradução automática do português.')} <a href="${a.u}" target="_blank" rel="noopener">${i18n('am.original', 'Ler o original')}</a></p>` : '';
+      if (a.textCover) document.getElementById('am-cover').src = a.textCover;
+      if (a.site === 'Persona' && a.tags.includes('Música')) {
+        const body = document.createElement('div'); body.innerHTML = html;
+        body.querySelectorAll('iframe[src*="spotify"]').forEach(frame => (frame.closest('.am-audio, figure, .wp-block-embed') || frame).remove());
+        html = body.innerHTML;
+      }
       amReader.innerHTML = `<article class="am-article">${note}<p class="am-kicker">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h1>${artTitle(a)}</h1><p class="am-byline">${by} · ${a.site}</p><div class="am-body">${html}</div></article>`;
       amReader.hidden = false; amReader.scrollTop = 0; amStage.classList.add('loaded');
       hydrateEmbeds(amReader);
@@ -2863,6 +2871,7 @@ document.addEventListener('DOMContentLoaded', () => {
       artFilter = b.dataset.k; draw(artFilter);
     });
     draw(artFilter); setGrid(artGrid);
+    data.forEach((a, i) => { if (!a.coverFromText) return; prefetchArticle(a).then(() => { if (!a.textCover) return; const card = grid.querySelector(`.art-card[data-i="${i}"]`); const img = card && card.querySelector('.art-card-media img'); if (img) img.src = a.textCover; }); });
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
       const keep = artFilter; const rows = bar.innerHTML = '';
