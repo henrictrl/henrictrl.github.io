@@ -1900,15 +1900,22 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     transform: none;
   }
   #pv-ov .pv-box {
+    display: flex;
+    flex-direction: column;
     margin-top: calc(56px + env(safe-area-inset-top, 0px));
     overflow: visible;
   }
+  #pv-ov .pv-side { display: contents; }
   #pv-ov .pv-head {
+    order: 0;
     position: sticky;
     top: calc(56px + env(safe-area-inset-top, 0px));
-    z-index: 2;
+    z-index: 1401;
     background: var(--white);
   }
+  #pv-ov .pv-media { order: 1; flex: none; }
+  #pv-ov .pv-cap { order: 2; width: 100%; }
+  #pv-ov .pv-links { order: 3; width: 100%; }
   #pv-ov .pv-pnav { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
 </style>
@@ -2315,11 +2322,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <div class="am-bar">
       <div class="am-info"><p class="am-site" id="am-site"></p><p class="am-title" id="am-title"></p></div>
       <div class="am-links" id="am-links"></div>
-      <div class="am-actions">
-        <button class="am-swap" id="am-swap" type="button" hidden></button>
-        <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
-        <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
-      </div>
+      <button class="am-swap" id="am-swap" type="button" hidden></button>
+      <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener"><span id="am-ext-l">Abrir no site</span></a>
+      <button class="am-share" id="am-share" type="button"><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
       <button class="pm-close" id="am-close" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
