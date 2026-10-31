@@ -812,117 +812,88 @@ body.sv-open .sv { display: block; }
 .sv-x:hover, .sv-x:focus-visible { border-color: var(--ink); }
 .sv-x svg { width: 16px; height: 16px; }
 
-/* capa: cor cheia do serviço, título enorme, ícone em pixel gigante com sombra dura e confete de pixels */
-.sv-hero { position: relative; overflow: hidden; background: var(--svc); color: var(--on); }
-.sv-hero .sv-in { position: relative; z-index: 2; display: grid; gap: 28px; padding-top: clamp(48px, 9vw, 120px); padding-bottom: clamp(48px, 8vw, 110px); }
-@media (min-width: 900px) { .sv-hero .sv-in { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; } }
-.sv-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
-.sv-eyebrow::before { content: ''; width: 24px; height: 2px; background: currentColor; }
-.sv-title { font-size: clamp(46px, 11vw, 132px); font-weight: 500; letter-spacing: -0.045em; line-height: .92; margin: 18px 0 22px; text-wrap: balance; }
-.sv-desc { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.5; max-width: 34ch; text-wrap: pretty; }
-.sv-hero-ic { justify-self: start; width: clamp(120px, 26vw, 240px); aspect-ratio: 1; }
-@media (min-width: 900px) { .sv-hero-ic { justify-self: end; } }
-.sv-hero-ic svg { width: 100%; height: 100%; fill: var(--on); filter: drop-shadow(10px 10px 0 var(--sh)); }
-.sv-confetti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.sv-confetti span { position: absolute; display: block; }
+/* Página de serviço no padrão da página de projeto: cabeçalho centralizado, sumário lateral, listas com fio fino.
+   Cor do serviço (--svc) só em detalhes: ícone, número das etapas e marcador do sumário. */
+.sv-head { max-width: 760px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) var(--gutter) clamp(40px, 5vw, 64px); text-align: center; }
+.sv-head-ic { width: 40px; height: 40px; margin: 0 auto 18px; }
+.sv-head-ic svg { width: 100%; height: 100%; fill: var(--svc); }
+.sv-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: .04em; }
+.sv-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; text-wrap: balance; }
+.sv-desc { font-size: 15px; line-height: 1.7; color: var(--gray-500); max-width: 52ch; margin: 0 auto; text-wrap: balance; }
 
-/* títulos de seção */
-.sv-sec { padding: clamp(56px, 8vw, 104px) 0; }
-.sv-h { font-size: clamp(30px, 5.4vw, 60px); font-weight: 500; letter-spacing: -0.035em; line-height: 1; margin-bottom: clamp(28px, 4vw, 48px); display: flex; align-items: center; gap: 14px; }
-.sv-h::before { content: ''; flex: none; width: .32em; height: .32em; background: var(--svc); }
-
-/* fluxo: fichas coloridas em escada (desktop) e em zigue-zague (celular) */
-.sv-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-.sv-step { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 20px 20px 22px; width: 88%; transform: rotate(var(--rot)); display: grid; gap: 10px; }
-.sv-step:nth-child(odd) { margin-right: auto; --rot: -1.4deg; }
-.sv-step:nth-child(even) { margin-left: auto; --rot: 1.4deg; }
-.sv-step-top { display: flex; align-items: center; justify-content: space-between; }
-.sv-num { height: 34px; width: auto; fill: currentColor; }
-.sv-step-ic { width: 34px; height: 34px; fill: currentColor; }
-.sv-step h4 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-top: 8px; }
-.sv-step p { font-size: 14px; line-height: 1.5; opacity: .88; text-wrap: pretty; }
+.sv-body { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (min-width: 900px) { .sv-body { grid-template-columns: 180px minmax(0, 1fr); } }
+.sv-toc { display: none; }
 @media (min-width: 900px) {
-  .sv-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; gap: 14px; padding-bottom: 96px; }
-  .sv-step { width: auto; margin: calc(var(--i) * 24px) 0 0 !important; min-height: 280px; align-content: start; }
+  .sv-toc { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 92px; padding-top: 4px; }
+  .sv-toc a { font-size: 13px; line-height: 1.4; color: var(--gray-400); padding: 5px 0 5px 14px; border-left: 1px solid var(--gray-200); transition: color .2s, border-color .2s; }
+  .sv-toc a:hover { color: var(--ink); }
+  .sv-toc a.on { color: var(--ink); border-left-color: var(--svc); }
+}
+.sv-main { min-width: 0; }
+.sv-sec { padding-bottom: clamp(56px, 7vw, 88px); scroll-margin-top: 84px; }
+.sv-h { font-size: 18px; font-weight: 500; color: var(--gray-400); letter-spacing: -0.01em; margin-bottom: 24px; }
+
+/* etapas: 5 colunas no desktop, lista no celular; fio fino no topo de cada uma */
+.sv-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.sv-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px; padding: 18px 0; border-top: 1px solid var(--gray-200); }
+.sv-step:last-child { border-bottom: 1px solid var(--gray-200); }
+.sv-n { grid-row: span 2; display: flex; align-items: center; gap: 8px; height: 21px; font-size: 13px; font-weight: 500; color: var(--gray-500); font-variant-numeric: tabular-nums; }
+.sv-n::before { content: ''; width: 6px; height: 6px; background: var(--svc); flex: none; } /* cor do serviço só no marcador (amarelo em texto não teria contraste) */
+.sv-step h4 { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; }
+.sv-step p { font-size: 14px; line-height: 1.6; color: var(--gray-500); text-wrap: pretty; }
+@media (min-width: 1024px) {
+  .sv-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+  .sv-step, .sv-step:last-child { grid-template-columns: minmax(0, 1fr); border-bottom: 0; padding: 16px 0 0; align-content: start; }
+  .sv-n { grid-row: auto; margin-bottom: 14px; }
 }
 
-/* cardápio: fundo preto, itens com pontilhado até o número, como preço */
-.sv-menu { background: var(--ink); color: #fff; padding: clamp(56px, 8vw, 104px) 0; }
-.sv-menu .sv-h { color: #fff; }
-.sv-mi { padding: 22px 0 24px; border-bottom: 1px solid rgba(255,255,255,.14); display: grid; gap: 12px; }
-.sv-mi:first-child { border-top: 1px solid rgba(255,255,255,.14); }
-.sv-mi-row { display: flex; align-items: baseline; gap: 12px; }
-.sv-mi-t { font-size: clamp(20px, 2.6vw, 30px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; }
-.sv-mi-lead { flex: 1; min-width: 24px; height: 3px; align-self: center; margin-top: .45em;
-  background: repeating-linear-gradient(to right, var(--svc) 0 3px, transparent 3px 8px); } /* pontilhado em "pixels" */
-.sv-mi-n { flex: none; height: 16px; width: auto; fill: var(--svc); }
-.sv-mi-d { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.72); max-width: 62ch; text-wrap: pretty; }
+/* entregas: lista em duas colunas no desktop */
+.sv-list { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 40px; }
+@media (min-width: 900px) { .sv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sv-mi { padding: 20px 0 22px; border-top: 1px solid var(--gray-200); display: grid; gap: 10px; align-content: start; }
+.sv-mi-t { font-size: 16px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.35; }
+.sv-mi-d { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 60ch; text-wrap: pretty; }
 .sv-mi-f { display: flex; flex-wrap: wrap; gap: 6px; }
-.sv-mi-f span { font-size: 11px; font-weight: 600; letter-spacing: .06em; line-height: 1; padding: 7px 10px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
-.sv-mi-a { font-size: 13.5px; line-height: 1.55; color: #fff; display: flex; gap: 10px; text-wrap: pretty; }
-.sv-mi-a::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: .45em; background: var(--svc); }
-@media (min-width: 900px) {
-  .sv-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
-  .sv-mi:nth-child(2) { border-top: 1px solid rgba(255,255,255,.14); }
-}
+.sv-mi-f span { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border: 1px solid var(--gray-200); border-radius: 999px; font-size: 11px; line-height: 1.2; color: var(--gray-500); }
+.sv-mi-a { font-size: 13px; line-height: 1.55; color: var(--gray-500); text-wrap: pretty; }
+.sv-mi-a b { font-weight: 500; color: var(--ink); }
 
-/* condições: três "etiquetas" em cores cheias */
-.sv-terms { display: grid; gap: 14px; }
-@media (min-width: 760px) { .sv-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.sv-term { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 24px; display: grid; gap: 10px; transform: rotate(var(--rot, 0deg)); }
-.sv-term:nth-child(1) { --rot: -1deg; } .sv-term:nth-child(3) { --rot: 1deg; }
-.sv-term .px { width: 40px; height: 40px; fill: currentColor; }
-.sv-term strong { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; }
-.sv-term p { font-size: 14px; line-height: 1.55; text-wrap: pretty; }
+/* condições: três colunas de texto */
+.sv-terms { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
+@media (min-width: 760px) { .sv-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+.sv-term { padding: 18px 0; border-top: 1px solid var(--gray-200); }
+@media (min-width: 760px) { .sv-term { padding: 16px 0 0; } }
+.sv-term dt { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.sv-term dd { margin: 0; font-size: 14px; line-height: 1.6; color: var(--gray-500); text-wrap: pretty; }
 
-/* exemplos: capa e título */
+/* exemplos: capa e título, mesmos cards do site */
 .sv .work-card-tag { display: none; }
+.sv .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 640px) { .sv .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+@media (max-width: 639px) { .sv .work-grid > :nth-child(n+3) { display: none; } } /* celular: 2 exemplos, sem vão na grade */
 
-/* contato: centralizado, na linguagem do site */
-.sv-cta { border-top: 1px solid var(--gray-200); padding: clamp(56px, 8vw, 96px) 0 calc(clamp(56px, 8vw, 96px) + env(safe-area-inset-bottom, 0px)); text-align: center; }
-.sv-cta .px { width: 36px; height: 36px; fill: var(--svc); margin: 0 auto 18px; }
-.sv-cta-t { font-size: clamp(22px, 3vw, 32px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; max-width: 22ch; margin: 0 auto 28px; text-wrap: balance; }
-.sv-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.sv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px;
-  font-size: 14px; font-weight: 500; letter-spacing: -0.005em; border: 1px solid var(--ink); transition: background .25s var(--ease), color .25s var(--ease); }
-.sv-btn .px { width: 14px; height: 14px; fill: currentColor; margin: 0; }
-.sv-btn.solid { background: var(--ink); color: var(--white); }
-.sv-btn.solid:hover { background: transparent; color: var(--ink); }
-.sv-btn.line { background: transparent; color: var(--ink); }
-.sv-btn.line:hover { background: var(--ink); color: var(--white); }
-.sv-btn:focus-visible, .sv-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-@media (max-width: 480px) { .sv-cta-row { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; } }
+/* contato: mesma linguagem do rodapé (texto à esquerda, botões discretos) */
+.sv-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: 32px 0 calc(72px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--gray-200); }
+.sv-cta-t { font-size: clamp(20px, 2.4vw, 26px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; max-width: 22ch; text-wrap: balance; }
+.sv-cta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.sv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: var(--r);
+  font-size: 13px; font-weight: 500; border: 1px solid var(--gray-200); color: var(--ink); background: transparent; transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease); -webkit-tap-highlight-color: transparent; }
+.sv-btn .px { width: 14px; height: 14px; fill: currentColor; }
+.sv-btn:hover { border-color: var(--ink); }
+.sv-btn.solid { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.sv-btn.solid:hover { opacity: .85; }
+.sv-btn:focus-visible, .sv-x:focus-visible, .sv-toc a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 480px) { .sv-cta-row { width: 100%; flex-direction: column; } }
 
-/* movimento leve: entrada da capa, revelação ao rolar, resposta ao toque (desligado com reduced-motion) */
-.sv .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 980px; gap: 8px; }
-@media (min-width: 640px) { .sv .work-grid { gap: 14px; } }
-.sv-step, .sv-term { transition: transform .45s cubic-bezier(.2, 1.35, .4, 1), box-shadow .3s var(--ease); -webkit-tap-highlight-color: transparent; }
-.sv-btn { -webkit-tap-highlight-color: transparent; }
-.sv-btn:active { transform: scale(.97); }
+/* entrada suave igual ao reveal do site (desligada com reduced-motion) */
 @media (prefers-reduced-motion: no-preference) {
-  .sv.open .sv-eyebrow { animation: svUp .6s var(--ease) both; }
-  .sv.open .sv-title { animation: svUp .8s var(--ease) .06s both; }
-  .sv.open .sv-desc { animation: svUp .8s var(--ease) .14s both; }
-  .sv.open .sv-hero-ic { animation: svPop .9s cubic-bezier(.2, 1.4, .4, 1) .18s both; }
-  .sv-hero-ic { cursor: pointer; transition: transform .5s cubic-bezier(.2, 1.4, .4, 1); }
-  .sv-hero-ic:hover { transform: translate(-4px, -4px); }
-  .sv-hero-ic.spin svg { animation: svSpin .7s cubic-bezier(.2, 1.2, .4, 1); }
-  .sv-confetti span { animation: svFloat var(--t, 5s) ease-in-out var(--d, 0s) infinite alternate; }
-  .sv-rv { opacity: 0; translate: 0 28px; transition: opacity .6s var(--ease) var(--dl, 0s), translate .8s var(--ease) var(--dl, 0s), transform .45s cubic-bezier(.2, 1.35, .4, 1); }
+  .sv.open .sv-head > * { animation: svUp .7s var(--ease) both; }
+  .sv.open .sv-head > :nth-child(2) { animation-delay: .04s; } .sv.open .sv-head > :nth-child(3) { animation-delay: .08s; } .sv.open .sv-head > :nth-child(4) { animation-delay: .12s; }
+  .sv-rv { opacity: 0; translate: 0 16px; transition: opacity .6s var(--ease) var(--dl, 0s), translate .7s var(--ease) var(--dl, 0s); }
   .sv-rv.in { opacity: 1; translate: 0 0; }
-  .sv-mi .sv-mi-lead { transform-origin: left center; transform: scaleX(0); transition: transform 1s var(--ease) calc(var(--dl, 0s) + .2s); }
-  .sv-mi.in .sv-mi-lead { transform: scaleX(1); }
-  .sv-step:hover, .sv-term:hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 14px 0 -6px rgba(0,0,0,.18); }
-  .sv-step:active, .sv-term:active { transform: rotate(0deg) scale(.97); }
-  .sv-step.wig .sv-step-ic, .sv-term.wig .px { animation: svWig .5s ease; }
-  .sv-mi:hover .sv-mi-t, .sv-mi:active .sv-mi-t { translate: 6px 0; }
-  .sv-mi-t { transition: translate .35s var(--ease); }
 }
-@keyframes svUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-@keyframes svPop { from { opacity: 0; transform: translateY(24px) scale(.6); } to { opacity: 1; transform: none; } }
-@keyframes svSpin { 0%, 100% { transform: none; } 30% { transform: translateY(-14px); } 55% { transform: translateY(0) scaleY(.9); } 75% { transform: translateY(-5px); } }
-@keyframes svFloat { from { transform: translate(0, 0); } to { transform: translate(var(--fx, 6px), var(--fy, -10px)); } }
-@keyframes svWig { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(10deg); } }
+@keyframes svUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 
 @media (max-width: 640px) {
@@ -2542,22 +2513,25 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <span class="sv-bar-t"><i aria-hidden="true"></i><span id="sv-bar-t"></span></span>
     <button class="sv-x" id="sm-close-btn" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
-  <header class="sv-hero">
-    <div class="sv-confetti" id="sv-confetti" aria-hidden="true"></div>
-    <div class="sv-in">
-      <div><p class="sv-eyebrow" id="sm-eyebrow"></p><h2 class="sv-title" id="sm-title"></h2><p class="sv-desc" id="sm-desc"></p></div>
-      <div class="sv-hero-ic" id="sm-head-ic" aria-hidden="true"></div>
-    </div>
+  <header class="sv-head">
+    <div class="sv-head-ic" id="sm-head-ic" aria-hidden="true"></div>
+    <p class="sv-kicker" id="sm-eyebrow"></p>
+    <h2 class="sv-title" id="sm-title"></h2>
+    <p class="sv-desc" id="sm-desc"></p>
   </header>
-  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-fluxo"></h3><ol class="sv-flow" id="sm-flow"></ol></div></section>
-  <section class="sv-menu"><div class="sv-in"><h3 class="sv-h" id="sm-l-entregas"></h3><div class="sv-menu-list" id="sm-deliv"></div></div></section>
-  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-condicoes"></h3><div class="sv-terms" id="sm-terms"></div></div></section>
-  <section class="sv-sec" id="sm-sec-exemplos" style="padding-top:0"><div class="sv-in"><h3 class="sv-h" id="sm-l-exemplos"></h3><div class="work-grid" id="sm-related-projects"></div></div></section>
-  <footer class="sv-cta"><div class="sv-in">
-    <span id="sv-cta-ic"></span>
-    <p class="sv-cta-t" id="sv-cta-t"></p>
-    <div class="sv-cta-row"><a class="sv-btn solid" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a><a class="sv-btn line" id="sm-cta-mail"></a></div>
-  </div></footer>
+  <div class="sv-body">
+    <nav class="sv-toc" id="sv-toc" aria-label="Sumário"></nav>
+    <div class="sv-main">
+      <section class="sv-sec" id="sv-s-fluxo"><h3 class="sv-h" id="sm-l-fluxo"></h3><ol class="sv-flow" id="sm-flow"></ol></section>
+      <section class="sv-sec" id="sv-s-entregas"><h3 class="sv-h" id="sm-l-entregas"></h3><div class="sv-list" id="sm-deliv"></div></section>
+      <section class="sv-sec" id="sv-s-condicoes"><h3 class="sv-h" id="sm-l-condicoes"></h3><dl class="sv-terms" id="sm-terms"></dl></section>
+      <section class="sv-sec" id="sm-sec-exemplos"><h3 class="sv-h" id="sm-l-exemplos"></h3><div class="work-grid" id="sm-related-projects"></div></section>
+      <footer class="sv-cta">
+        <p class="sv-cta-t" id="sv-cta-t"></p>
+        <div class="sv-cta-row"><a class="sv-btn solid" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a><a class="sv-btn" id="sm-cta-mail"></a></div>
+      </footer>
+    </div>
+  </div>
 </div>
 
 <script src="assets/data/clientes.js"></script>
@@ -3575,9 +3549,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // cores fortes do site; texto escuro ou branco conforme o contraste de cada uma
   const SV_COL = { identidade: '#F72C2B', social: '#FFC700', redacao: '#1D3DF5', landing: '#13A03F' };
   const SV_INK = '#111111';
-  const svOn = (c) => (c === '#1D3DF5' || c === SV_INK) ? '#fff' : '#111';
-  const svPaint = (el, c) => { el.style.setProperty('--bg', c); el.style.setProperty('--fg', svOn(c)); };
-  const pxBig = (n) => pxSvg(DIG[0].map((r, i) => r + '.' + DIG[n][i]), 'sv-num');
   PX.chat = ['............','############','#..........#','#..........#','#..........#','#..........#','#..........#','############','.##.........','.#..........','............','............'];
   let svY = 0, svCard = null;
   const noSmooth = (fn) => { const h = document.documentElement, b = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; fn(); h.style.scrollBehavior = b; };
@@ -3596,81 +3567,73 @@ document.addEventListener('DOMContentLoaded', () => {
     svIO = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); svIO.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     els.forEach(e => svIO.observe(e));
   };
-  // toque: ícone balança na ficha tocada; ícone da capa gira
-  smOverlay.addEventListener('pointerdown', (e) => {
-    const t = e.target.closest('.sv-step, .sv-term');
-    if (t) { t.classList.remove('wig'); void t.offsetWidth; t.classList.add('wig'); }
-  });
-  smOverlay.addEventListener('animationend', (e) => { const t = e.target.closest('.wig, .spin'); if (t) t.classList.remove('wig', 'spin'); });
-  document.getElementById('sm-head-ic').addEventListener('click', (e) => { const h = e.currentTarget; h.classList.remove('spin'); void h.offsetWidth; h.classList.add('spin'); });
   const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  // sumário lateral: marca a seção visível
+  let svSpy = null;
+  const svToc = () => {
+    const toc = document.getElementById('sv-toc'); toc.innerHTML = '';
+    const secs = [...smOverlay.querySelectorAll('.sv-sec')].filter(x => !x.hidden);
+    secs.forEach(sec => { const a = smEl('a', '', sec.querySelector('.sv-h').textContent); a.href = '#' + sec.id; a.dataset.to = sec.id;
+      a.onclick = (e) => { e.preventDefault(); sec.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+      toc.appendChild(a); });
+    if (svSpy) svSpy.disconnect();
+    if (!('IntersectionObserver' in window)) return;
+    svSpy = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) toc.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.to === en.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+    secs.forEach(x => svSpy.observe(x));
+    if (toc.firstChild) toc.firstChild.classList.add('on');
+  };
 
   document.querySelectorAll('[data-service-id]').forEach(card => {
     card.onclick = () => {
       const id = card.dataset.serviceId, S = window.SERVICOS, s = S && S.itens[id]; if (!s) return;
       const U = S.ui, $ = (x) => document.getElementById(x);
       const title = card.querySelector('.service-title').textContent; // já no idioma atual
-      const c = SV_COL[id] || SV_INK, outras = Object.values(SV_COL).filter(x => x !== c);
-      smOverlay.style.setProperty('--svc', c); smOverlay.style.setProperty('--on', svOn(c)); smOverlay.style.setProperty('--sh', id === 'social' ? '#F72C2B' : '#FFC700'); // sombra dura em cor contrastante (preto sobre preto borrava o ícone)
+      smOverlay.style.setProperty('--svc', SV_COL[id] || SV_INK);
       $('sv-bar-t').textContent = title;
       $('sm-eyebrow').textContent = lx(U.eyebrow);
       $('sm-title').textContent = title;
       $('sm-desc').textContent = lx(s.desc);
       const hic = $('sm-head-ic'); hic.innerHTML = ''; const ci = card.querySelector('.service-icon'); if (ci) { const k = ci.cloneNode(true); k.removeAttribute('class'); hic.appendChild(k); }
 
-      // confete de pixels na capa (posições fixas por serviço, cores das outras áreas)
-      const cf = $('sv-confetti'); cf.innerHTML = '';
-      let seed = [...id].reduce((a, ch) => a + ch.charCodeAt(0), 7);
-      const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-      for (let i = 0; i < 18; i++) {
-        const sp = document.createElement('span'), z = [8, 12, 16, 24][Math.floor(rnd() * 4)];
-        sp.style.cssText = `left:${(52 + rnd() * 45).toFixed(1)}%;top:${(innerWidth < 900 ? 64 + rnd() * 30 : rnd() * 92).toFixed(1)}%;width:${z}px;height:${z}px;background:${i % 5 === 4 ? svOn(c) : outras[i % outras.length]};--t:${(3 + rnd() * 4).toFixed(1)}s;--d:${(-rnd() * 4).toFixed(1)}s;--fx:${Math.round(rnd() * 20 - 10)}px;--fy:${Math.round(rnd() * 24 - 12)}px`;
-        cf.appendChild(sp);
-      }
-
-      // fluxo: fichas coloridas (cor do serviço, depois as outras, por fim preto)
+      // etapas: número, nome e o que acontece
       $('sm-l-fluxo').textContent = lx(U.fluxo);
-      const cores = [c, ...outras, SV_INK];
       const flow = $('sm-flow'); flow.innerHTML = '';
       S.etapas.forEach((et, i) => {
-        const li = smEl('li', 'sv-step sv-rv'); li.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(li, cores[i]); li.style.setProperty('--i', i);
-        const top = smEl('div', 'sv-step-top'); top.innerHTML = pxBig(i + 1) + pxSvg(PX[STEP_IC[i]], 'sv-step-ic');
-        li.append(top, smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
+        const li = smEl('li', 'sv-step sv-rv'); li.style.setProperty('--dl', (i * 0.06) + 's');
+        li.append(smEl('span', 'sv-n', String(i + 1).padStart(2, '0')), smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
         flow.appendChild(li);
       });
 
-      // cardápio de entregas: nome ...... nº, depois descrição, arquivos e onde usar
+      // entregas: nome, descrição, arquivos e onde usar
       $('sm-l-entregas').textContent = lx(U.entregas);
       const dl = $('sm-deliv'); dl.innerHTML = '';
       s.entregas.forEach((it, i) => {
-        const mi = smEl('article', 'sv-mi sv-rv'); mi.style.setProperty('--dl', ((i % 2) * 0.08) + 's');
-        const row = smEl('div', 'sv-mi-row'); row.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('span', 'sv-mi-lead'));
-        row.insertAdjacentHTML('beforeend', pxSvg(DIG[0].map((r, k) => r + '.' + DIG[(i + 1) % 10][k]), 'sv-mi-n'));
-        mi.append(row, smEl('p', 'sv-mi-d', lx(it.d)));
+        const mi = smEl('article', 'sv-mi sv-rv'); mi.style.setProperty('--dl', ((i % 2) * 0.06) + 's');
+        mi.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('p', 'sv-mi-d', lx(it.d)));
         if (it.f && it.f.length) { const f = smEl('div', 'sv-mi-f'); f.setAttribute('aria-label', lx(U.arquivos)); it.f.forEach(x => f.appendChild(smEl('span', '', x))); mi.appendChild(f); }
-        if (it.a) mi.appendChild(smEl('p', 'sv-mi-a', lx(it.a)));
+        if (it.a) { const a = smEl('p', 'sv-mi-a'); a.append(smEl('b', '', lx(U.usos) + ': '), lx(it.a)); mi.appendChild(a); }
         dl.appendChild(mi);
       });
 
-      // condições: etiquetas em cores cheias
+      // condições
       $('sm-l-condicoes').textContent = lx(U.condicoes);
       const tm = $('sm-terms'); tm.innerHTML = '';
-      [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic], i) => {
-        const d = smEl('div', 'sv-term sv-rv'); d.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(d, [outras[0], SV_INK, outras[1]][i]);
-        d.innerHTML = pxSvg(PX[ic]); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
+      [[U.prazo, U.prazoD], [U.revisoes, U.revisoesD], [U.valores, U.valoresD]].forEach(([k, v], i) => {
+        const d = smEl('div', 'sv-term sv-rv'); d.style.setProperty('--dl', (i * 0.06) + 's');
+        d.append(smEl('dt', '', lx(k)), smEl('dd', '', lx(v))); tm.appendChild(d);
       });
 
-      // exemplos: 2 projetos (capa e título)
+      // exemplos: projetos (capa e título)
       $('sm-l-exemplos').textContent = lx(U.exemplos);
       const rel = $('sm-related-projects'); rel.innerHTML = '';
-      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) { const wc = buildWorkCard(p); wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.08) + 's'); rel.appendChild(wc); } });
+      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) { const wc = buildWorkCard(p); wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.06) + 's'); rel.appendChild(wc); } });
       $('sm-sec-exemplos').hidden = !rel.children.length;
 
       // contato (sem preço: orçamento)
-      $('sv-cta-ic').innerHTML = pxSvg(PX.chat);
       $('sv-cta-t').textContent = lx(U.valoresD);
       const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(`${lx(U.waMsg)} ${title}.`)}`; wa.innerHTML = pxSvg(PX.chat); wa.appendChild(smEl('span', '', lx(U.wa)));
       const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.innerHTML = pxSvg(PX.mail); ml.appendChild(smEl('span', '', lx(U.mail)));
+      svToc();
 
       // abre: esconde o site e sobe para o topo; a rolagem é a da própria página
       if (!smOverlay.classList.contains('open')) svY = window.scrollY;
