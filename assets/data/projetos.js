@@ -3696,8 +3696,8 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
+  "capaAnim": {"m":"S","fx":"spin","spin":40,"fundo":[132,51,44],"hv":"d.webp","x":49.875,"y":49.875,"w":44.25,"src":"assets/projetos/sollaris/capa/"},
   "resumo": {"pt": "Identidade visual para marca de bijuterias", "en": "Visual identity for a jewellery brand", "es": "Identidad visual para una marca de bisutería"},
-  "capaAnim": {"m":"H","base":"assets/projetos/sollaris/capa.webp","fundo":[72,28,24],"src":"assets/projetos/sollaris/capa/"},
   "dir": "assets/projetos/sollaris/",
   "telas": [
    {
@@ -4552,6 +4552,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
+  "capaAnim": {"m":"S","fx":"spin","spin":30,"fundo":[248,242,239],"x":34.792,"y":49.875,"w":26.083,"src":"assets/projetos/congresso-extensao/capa/"},
   "resumo": {"pt": "Identidade visual para congresso da PROEC/Unesp", "en": "Visual identity for a PROEC/Unesp congress", "es": "Identidad visual para un congreso de la PROEC/Unesp"},
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
@@ -4977,8 +4978,8 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
+  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[598,160],"src":"assets/projetos/interserv/capa/"},
   "resumo": {"pt": "Identidade visual para os jogos dos servidores da Unesp", "en": "Visual identity for the Unesp staff games", "es": "Identidad visual para los juegos de los servidores de la Unesp"},
-  "capaAnim": {"m":"DC","fundo":[255,255,255],"src":"assets/projetos/interserv/capa/"},
   "dir": "assets/projetos/interserv/",
   "telas": [
    {
@@ -6109,7 +6110,6 @@ window.PROJETOS = [
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
   "resumo": {"pt": "Identidade visual para evento de saúde mental da Unesp", "en": "Visual identity for a Unesp mental health event", "es": "Identidad visual para un evento de salud mental de la Unesp"},
-  "capaAnim": {"m":"DC","full":1,"fundo":[30,30,30],"src":"assets/projetos/mostra-saude-mental/capa/"},
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
    {
@@ -6971,6 +6971,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
+  "capaAnim": {"m":"S","fx":"zoom","fundo":[14,14,14],"x":49.875,"y":50.0,"w":28.917,"src":"assets/projetos/ocupacao-unesp-negra/capa/"},
   "resumo": {"pt": "Identidade visual para mês de ações do Nupe/Unesp", "en": "Visual identity for a month of Nupe/Unesp events", "es": "Identidad visual para un mes de acciones del Nupe/Unesp"},
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
@@ -10150,6 +10151,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/metaprojeto/n01.webp",
+  "capaAnim": {"m":"V","fundo":[255,255,255],"src":"assets/projetos/metaprojeto/capa/"},
   "resumo": {"pt": "Design e código deste site", "en": "Design and code of this site", "es": "Diseño y código de este sitio"},
   "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
@@ -10311,6 +10313,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/persona/capa.webp",
+  "capaAnim": {"m":"S","fx":"blink","fundo":[236,55,46],"x":50.042,"y":49.875,"w":31.417,"src":"assets/projetos/persona/capa/"},
   "resumo": {"pt": "Redes sociais para grupo de crítica cultural da Unesp", "en": "Social media for a Unesp cultural criticism group", "es": "Redes sociales para un grupo de crítica cultural de la Unesp"},
   "dir": "assets/projetos/persona/",
   "intro": {

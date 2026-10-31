@@ -6,7 +6,7 @@
   var css = [
     '.ca{position:absolute;inset:0;overflow:hidden;container-type:inline-size;isolation:isolate;background:var(--ca-bg,#111)}',
     '.work-card-media .ca img{position:absolute;inset:auto;width:auto;height:auto;max-width:none;object-fit:fill;transition:none;display:block;pointer-events:none}',
-    '.work-card:hover .work-card-media .ca img:not(.ca-mark):not(.ca-hv){transform:none}',
+    '.work-card:hover .work-card-media .ca img:not(.ca-mark):not(.ca-hv):not(.ca-el){transform:none}',
     '.ca-side{position:absolute;inset:0 auto 0 0;width:42%;display:grid;place-items:center;background:var(--ca-p);z-index:3}',
     '.work-card-media .ca .ca-lg{position:static;max-width:28cqw;max-height:20cqw;width:auto;height:auto;object-fit:contain}',
     '.ca-ttl{font-weight:600;font-size:5cqw;line-height:1.1;text-align:center;padding:0 3cqw}',
@@ -54,6 +54,19 @@
     '@keyframes ca-spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}',
     '.work-card-media .ca-DC.pulse .ca-bg{animation:ca-pulse 6s ease-in-out infinite alternate}',
     '@keyframes ca-pulse{from{transform:translate(-50%,-50%) scale(1);filter:saturate(1)}to{transform:translate(-50%,-50%) scale(1.06);filter:saturate(1.25)}}',
+    /* S · elemento da capa animado (girar, piscar, anéis crescendo) */
+    '.work-card-media .ca-S .ca-base{inset:0;width:100%;height:100%;object-fit:cover}',
+    '.work-card-media .ca-S .ca-el{height:auto;transform:translate(-50%,-50%)}',
+    '.work-card-media .ca-S .ca-el.spin{animation:ca-spin var(--spin,40s) linear infinite}',
+    '.work-card-media .ca-S .ca-el.blink{animation:ca-blink 4.5s ease-in-out infinite}',
+    '@keyframes ca-blink{0%,88%,100%{transform:translate(-50%,-50%) scaleY(1)}92%{transform:translate(-50%,-50%) scaleY(.06)}96%{transform:translate(-50%,-50%) scaleY(1)}}',
+    '.work-card-media .ca-S .ca-el.zoom{opacity:0;animation:ca-zoom 16s linear infinite}',
+    '@keyframes ca-zoom{0%{transform:translate(-50%,-50%) scale(.25) rotate(0);opacity:0}20%{opacity:1}65%{opacity:.85}100%{transform:translate(-50%,-50%) scale(2.6) rotate(30deg);opacity:0}}',
+    '.work-card-media .ca-S .ca-hv{inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .5s var(--ease,ease),transform .9s var(--ease,ease)}',
+    '.work-card:hover .work-card-media .ca-S .ca-hv,.work-card:focus-visible .work-card-media .ca-S .ca-hv{opacity:1;transform:scale(1)}',
+    /* V · rolagem vertical de uma página longa */
+    '.work-card-media .ca-V .ca-bg{inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;animation:ca-scroll 28s ease-in-out infinite alternate}',
+    '@keyframes ca-scroll{0%,6%{object-position:50% 0}94%,100%{object-position:50% 100%}}',
     /* K · símbolo trocando de cor */
     '.ca-kbg{position:absolute;inset:0;background:#123358}',
     '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
@@ -98,6 +111,15 @@
       h = '<style>@keyframes ' + name + '-b{' + kb + '}@keyframes ' + name + '-f{' + kf + '}</style>' +
           '<div class="ca-kbg" style="animation:' + name + '-b ' + n * 3 + 's ease-in-out infinite"></div>' +
           '<div class="ca-ksym" style="aspect-ratio:' + c.w + '/' + c.h + ';-webkit-mask-image:url(' + c.src + 'mask.png);mask-image:url(' + c.src + 'mask.png);animation:' + name + '-f ' + n * 3 + 's ease-in-out infinite"></div>';
+    } else if (c.m === 'S') {
+      // capa original sem o elemento (base) + o elemento animado por cima, na mesma posição
+      var el = function (extra, st) { return '<img class="ca-el ' + extra + '" src="' + c.src + 'el.webp" alt="" decoding="async" style="left:' + c.x + '%;top:' + c.y + '%;width:' + c.w + '%' + (st || '') + '">'; };
+      h = '<img class="ca-base" src="' + c.src + 'base.webp" alt="" decoding="async">';
+      if (c.fx === 'zoom') { for (var z = 0; z < 4; z++) h += el('zoom', ';animation-delay:' + (-z * 4) + 's'); }
+      else h += el(c.fx, c.spin ? ';--spin:' + c.spin + 's' : '');
+      if (c.hv) h += '<img class="ca-hv" src="' + c.src + c.hv + '" alt="" loading="lazy" decoding="async">';
+    } else if (c.m === 'V') {
+      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" decoding="async">';
     } else if (c.m === 'H') {
       h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {
@@ -115,7 +137,7 @@
       var el = e.target, w = Math.round(e.contentRect.width); if (!w || +el.dataset.w === w) return;
       var first = !el.dataset.w; el.dataset.w = w; el.style.setProperty('--persp', Math.round(w * 4.7) + 'px');
       if (first) return;
-      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col,.ca-row,.ca-mark').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
+      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col,.ca-row,.ca-mark,.ca-el').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
     });
   }) : null;
   var watch = function () { if (ro) document.querySelectorAll('.ca:not([data-ro])').forEach(function (el) { el.dataset.ro = 1; ro.observe(el); }); };
