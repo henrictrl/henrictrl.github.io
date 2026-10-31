@@ -6,7 +6,7 @@
   var css = [
     '.ca{position:absolute;inset:0;overflow:hidden;container-type:inline-size;isolation:isolate;background:var(--ca-bg,#111)}',
     '.work-card-media .ca img{position:absolute;inset:auto;width:auto;height:auto;max-width:none;object-fit:fill;transition:none;display:block;pointer-events:none}',
-    '.work-card:hover .work-card-media .ca img{transform:none}',
+    '.work-card:hover .work-card-media .ca img:not(.ca-mark):not(.ca-hv){transform:none}',
     '.ca-side{position:absolute;inset:0 auto 0 0;width:42%;display:grid;place-items:center;background:var(--ca-p);z-index:3}',
     '.work-card-media .ca .ca-lg{position:static;max-width:28cqw;max-height:20cqw;width:auto;height:auto;object-fit:contain}',
     '.ca-ttl{font-weight:600;font-size:5cqw;line-height:1.1;text-align:center;padding:0 3cqw}',
@@ -39,6 +39,21 @@
     '.work-card-media .ca-H img{inset:0;width:100%;height:100%;object-fit:cover}',
     '.work-card-media .ca-H .ca-hv{opacity:0;transform:scale(1.04);transition:opacity .5s var(--ease,ease),transform .9s var(--ease,ease)}',
     '.work-card:hover .work-card-media .ca-H .ca-hv,.work-card:focus-visible .work-card-media .ca-H .ca-hv{opacity:1;transform:scale(1)}',
+    /* P · panorâmica: imagem larga passeando de um lado ao outro */
+    '.work-card-media .ca-P .ca-bg{inset:0;width:100%;height:100%;object-fit:cover;object-position:0 50%;animation:ca-pano 16s ease-in-out infinite alternate}',
+    '@keyframes ca-pano{from{object-position:0 50%}to{object-position:100% 50%}}',
+    /* L · camadas: faixas correndo (loop exato) + logo/selo no centro */
+    '.ca-band{position:absolute;left:0;right:0;overflow:hidden}',
+    '.ca-row{display:flex;height:100%;width:max-content;animation:ca-hl var(--d) linear infinite}',
+    '.ca-row.r{animation-name:ca-hr}',
+    '.work-card-media .ca-row img{position:static;height:100%;width:auto;flex:none}',
+    '@keyframes ca-hl{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}',
+    '@keyframes ca-hr{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}',
+    '.work-card-media .ca-L .ca-mark{left:50%;top:var(--y,50%);transform:translate(-50%,-50%);width:auto;height:auto;max-width:var(--mw);max-height:var(--mh)}',
+    '.work-card-media .ca-L .ca-mark.spin{animation:ca-spin var(--spin) linear infinite}',
+    '@keyframes ca-spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}',
+    '.work-card-media .ca-DC.pulse .ca-bg{animation:ca-pulse 6s ease-in-out infinite alternate}',
+    '@keyframes ca-pulse{from{transform:translate(-50%,-50%) scale(1);filter:saturate(1)}to{transform:translate(-50%,-50%) scale(1.06);filter:saturate(1.25)}}',
     '@media (prefers-reduced-motion:reduce){.ca *{animation:none!important}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
@@ -62,6 +77,14 @@
       h = '<img class="ca-bg" src="' + c.src + 'd.webp" alt="" decoding="async"><div class="ca-side">' + logo(c, 'logo-d.webp', c.logo, c.tinta, p.titulo) + '</div>';
     } else if (c.m === 'DC' || c.m === 'M') {
       h = '<img class="ca-bg" src="' + c.src + (c.m === 'M' ? 'm.webp' : 'd.webp') + '" alt="" decoding="async">';
+    } else if (c.m === 'P') {
+      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" decoding="async">';
+    } else if (c.m === 'L') {
+      (c.bands || []).forEach(function (b) {
+        var im = '<img src="' + c.src + b.f + '" width="' + b.s[0] + '" height="' + b.s[1] + '" alt="" decoding="async">';
+        h += '<div class="ca-band" style="top:' + b.y + '%;height:' + b.hh + '%"><div class="ca-row' + (b.r ? ' r' : '') + '" style="--d:' + b.d + 's">' + im + im + '</div></div>';
+      });
+      if (c.logo) h += '<img class="ca-mark' + (c.logo.spin ? ' spin' : '') + '" src="' + c.src + c.logo.f + '" width="' + c.logo.w + '" height="' + c.logo.h + '" alt="" decoding="async" style="--mw:' + c.logo.mw + '%;--mh:' + c.logo.mh + '%;--y:' + (c.logo.y || 50) + '%' + (c.logo.spin ? ';--spin:' + c.logo.spin + 's' : '') + '">';
     } else if (c.m === 'H') {
       h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {
@@ -70,7 +93,7 @@
       h = '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" decoding="async" style="width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;--tx:' + (250 / W).toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
-    return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
+    return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
   };
 
   /* Perspectiva proporcional ao card e reinício das animações quando o card muda de tamanho (troca de colunas) */
@@ -79,7 +102,7 @@
       var el = e.target, w = Math.round(e.contentRect.width); if (!w || +el.dataset.w === w) return;
       var first = !el.dataset.w; el.dataset.w = w; el.style.setProperty('--persp', Math.round(w * 4.7) + 'px');
       if (first) return;
-      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
+      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col,.ca-row,.ca-mark').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
     });
   }) : null;
   var watch = function () { if (ro) document.querySelectorAll('.ca:not([data-ro])').forEach(function (el) { el.dataset.ro = 1; ro.observe(el); }); };
@@ -101,7 +124,7 @@
   /* Safari resolve o -50% da fita no início da animação: reinicia quando a imagem carrega */
   document.addEventListener('load', function (e) {
     var t = e.target; if (!t || t.tagName !== 'IMG') return;
-    var col = t.parentNode; if (!col || !col.classList || !col.classList.contains('ca-col')) return;
+    var col = t.parentNode; if (!col || !col.classList || !(col.classList.contains('ca-col') || col.classList.contains('ca-row'))) return;
     col.style.animation = 'none'; void col.offsetHeight; col.style.animation = '';
   }, true);
 })();

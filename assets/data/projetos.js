@@ -7179,7 +7179,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[138,72,99],"src":"assets/projetos/prisma-brandbook/capa/"},
+  "capaAnim": {"m":"DC","full":1,"fundo":[60,10,60],"src":"assets/projetos/prisma-brandbook/capa/"},
   "dir": "assets/projetos/prisma-brandbook/",
   "telas": [
    {
@@ -8487,7 +8487,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[125,19,85],"src":"assets/projetos/prisma-proposta/capa/"},
+  "capaAnim": {"m":"DC","full":1,"pulse":1,"fundo":[247,230,240],"src":"assets/projetos/prisma-proposta/capa/"},
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
    {
@@ -8925,7 +8925,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[2,37,41],"src":"assets/projetos/inspirit/capa/"},
+  "capaAnim": {"m":"DC","full":1,"fundo":[20,40,44],"src":"assets/projetos/inspirit/capa/"},
   "dir": "assets/projetos/inspirit/",
   "telas": [
    {
@@ -10177,7 +10177,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
-  "capaAnim": {"m":"E","w":1537,"h":1900,"cx":0.5,"cy":0.5,"scale":7.4,"ar":0.8,"fundo":[7,46,46],"src":"assets/projetos/basement/capa/"},
+  "capaAnim": {"m":"L","fundo":[7,46,46],"bands":[{"f":"b1.webp","s":[6888,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",
@@ -10337,7 +10337,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
-  "capaAnim": {"m":"E","w":2102,"h":2600,"cx":0.5,"cy":0.5,"scale":7.65,"ar":0.8,"fundo":[6,6,138],"src":"assets/projetos/desvendando/capa/"},
+  "capaAnim": {"m":"L","fundo":[10,10,230],"bands":[{"f":"b1.webp","s":[6314,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/desvendando/capa/"},
   "dir": "assets/projetos/desvendando/",
   "intro": {
    "pt": "Carrosséis do Desvendando o Pop, projeto de análise de música pop no Instagram.",
