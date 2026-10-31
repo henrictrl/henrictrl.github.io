@@ -46,6 +46,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,6,6],"src":"assets/projetos/classic-tattoo/capa/"},
   "link": "https://www.classictattoopch.com",
   "dir": "assets/projetos/classic-tattoo/",
   "telas": [
@@ -4544,6 +4545,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[112,6,6],"src":"assets/projetos/congresso-extensao/capa/"},
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
    {
@@ -6957,6 +6959,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,6,6],"src":"assets/projetos/ocupacao-unesp-negra/capa/"},
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
    {
@@ -7178,6 +7181,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[138,72,99],"src":"assets/projetos/prisma-brandbook/capa/"},
   "dir": "assets/projetos/prisma-brandbook/",
   "telas": [
    {
@@ -7936,6 +7940,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[85,72,46],"src":"assets/projetos/setembro-amarelo/capa/"},
   "dir": "assets/projetos/setembro-amarelo/",
   "telas": [
    {
@@ -8485,6 +8490,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[125,19,85],"src":"assets/projetos/prisma-proposta/capa/"},
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
    {
@@ -9822,6 +9828,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/pixelar/capa.webp",
+  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/pixelar/capa/"},
   "dir": "assets/projetos/pixelar/",
   "intro": {
    "pt": "Editor de pixel art, dither, filmes analógicos e animações para fotos e vídeos, direto no navegador. Nada é enviado para servidor: tudo roda no aparelho (WebGL2 e WebCodecs). Estilos inspirados em obras de arte, texturas e exportação em imagem, vetor e vídeo.",
