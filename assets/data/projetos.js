@@ -10177,7 +10177,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
-  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/basement/capa/"},
+  "capaAnim": {"m":"E","w":1537,"h":1900,"cx":0.5,"cy":0.5,"scale":7.4,"ar":0.8,"fundo":[7,46,46],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",

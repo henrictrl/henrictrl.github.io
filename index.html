@@ -2572,8 +2572,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
-<script src="assets/data/projetos.js?v=20261031-capas2"></script>
-<script src="assets/js/capas.js?v=20261031b"></script>
+<script src="assets/data/projetos.js?v=20261031-capas3"></script>
+<script src="assets/js/capas.js?v=20261031c"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -4216,7 +4216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const applyCols = (grid) => { const n = getCols(); grid.style.setProperty('--wcols', n); grid.dataset.cols = n; document.querySelectorAll('.pj-cols button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.cols === n)); };
   const COLS_L = { pt: 'Colunas', en: 'Columns', es: 'Columnas' };
   const colsHTML = () => `<div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${Array.from({ length: COLS_CFG[colsMode()].max }, (_, i) => i + 1).map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
-  mqMob.addEventListener('change', () => { const g = document.getElementById('work-case-grid'); if (g) applyCols(g); });
+  mqMob.addEventListener('change', () => { if (document.getElementById('work-case-grid')) renderPJ(); });
 
   /* --- Mídias sociais: os projetos da categoria viram filtros e a grade mostra direto os posts e carrosséis ---
      Relevância (padrão): destaques primeiro; depois a posição do post entre os da própria conta (curtidas + comentários,
@@ -4312,11 +4312,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     applyCols(grid);
-    grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
+    grid.innerHTML = summary + (matches.length ? (window.capaSpread ? capaSpread(matches, getCols()) : matches).map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
     requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.getElementById('pj-filters').addEventListener('click', (e) => {
-    const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); applyCols(document.getElementById('work-case-grid')); return; }
+    const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); renderPJ(); return; } // recria os cards: reordena as capas e reinicia as animações
     const sp = e.target.closest('[data-sg-proj]'); if (sp) { sgProj = sp.dataset.sgProj; renderPJ(); return; }
     const so = e.target.closest('[data-sg-ord]'); if (so) { sgOrd = so.dataset.sgOrd; renderPJ(); return; }
     const b = e.target.closest('[data-category-filter]'); if (!b) return;

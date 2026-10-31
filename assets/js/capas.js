@@ -30,9 +30,9 @@
     '@keyframes ca-kb{from{transform:scale(1)}to{transform:scale(1.08)}}',
     '@keyframes ca-kbc{from{transform:translate(-50%,-50%) scale(1)}to{transform:translate(-50%,-50%) scale(1.07)}}',
     /* E · mesa */
-    '.ca-E{perspective:120cqw}',
-    '.work-card-media .ca-E .ca-pl{animation:ca-pan 14s ease-in-out infinite alternate;transform:rotateX(52deg) rotateZ(-32deg) translateX(-2.5cqw)}',
-    '@keyframes ca-pan{from{transform:rotateX(52deg) rotateZ(-32deg) translateX(-2.5cqw)}to{transform:rotateX(52deg) rotateZ(-32deg) translateX(2.5cqw)}}',
+    '.ca-E{perspective:var(--persp,1540px)}',
+    '.work-card-media .ca-E .ca-pl{height:auto;animation:ca-pan 14s ease-in-out infinite alternate;transform:rotateX(52deg) rotateZ(-32deg) translateX(calc(var(--tx) * -1))}',
+    '@keyframes ca-pan{from{transform:rotateX(52deg) rotateZ(-32deg) translateX(calc(var(--tx) * -1))}to{transform:rotateX(52deg) rotateZ(-32deg) translateX(var(--tx))}}',
     /* M · mosaico */
     '.work-card-media .ca-M .ca-bg{left:0;top:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;animation:ca-kb 16s ease-in-out infinite alternate}',
     /* H · capa fixa; no hover mostra uma segunda imagem */
@@ -65,11 +65,37 @@
     } else if (c.m === 'H') {
       h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {
-      var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = 33.333 - c.cy * H;
-      h = '<img class="ca-pl" src="' + c.src + 'e.webp" alt="" decoding="async" style="width:' + W.toFixed(2) + 'cqw;height:' + H.toFixed(2) + 'cqw;left:' + L.toFixed(2) + 'cqw;top:' + T.toFixed(2) + 'cqw;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
+      // tudo em % do card (3:2): não depende de unidades de container, que o Safari congela na animação
+      var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = (33.333 - c.cy * H) / 0.66667;
+      h = '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" decoding="async" style="width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;--tx:' + (250 / W).toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
     return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
+  };
+
+  /* Perspectiva proporcional ao card e reinício das animações quando o card muda de tamanho (troca de colunas) */
+  var ro = window.ResizeObserver ? new ResizeObserver(function (es) {
+    es.forEach(function (e) {
+      var el = e.target, w = Math.round(e.contentRect.width); if (!w || +el.dataset.w === w) return;
+      var first = !el.dataset.w; el.dataset.w = w; el.style.setProperty('--persp', Math.round(w * 4.7) + 'px');
+      if (first) return;
+      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
+    });
+  }) : null;
+  var watch = function () { if (ro) document.querySelectorAll('.ca:not([data-ro])').forEach(function (el) { el.dataset.ro = 1; ro.observe(el); }); };
+  if (window.MutationObserver) new MutationObserver(watch).observe(document.documentElement, { childList: true, subtree: true });
+
+  /* Ordem dos cards: evita capas do mesmo modelo lado a lado ou uma embaixo da outra */
+  var key = function (p) { var c = p.capaAnim; return c ? c.m + (c.full ? 'F' : '') : 'fixa'; };
+  window.capaSpread = function (list, cols) {
+    var rest = list.slice(), out = [];
+    while (rest.length) {
+      var i = out.length, left = i % cols ? key(out[i - 1]) : null, up = i >= cols ? key(out[i - cols]) : null;
+      var j = rest.findIndex(function (p) { var k = key(p); return k !== left && k !== up; });
+      if (j < 0) j = rest.findIndex(function (p) { return key(p) !== left; });
+      out.push(rest.splice(j < 0 ? 0 : j, 1)[0]);
+    }
+    return out;
   };
 
   /* Safari resolve o -50% da fita no início da animação: reinicia quando a imagem carrega */
