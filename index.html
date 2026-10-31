@@ -1162,6 +1162,7 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .art-mode button { font: inherit; font-size: 13px; color: var(--gray-500); background: none; border: 0; border-radius: var(--r); padding: 5px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s var(--ease), background .2s var(--ease); white-space: nowrap; }
 .art-mode button svg { width: 13px; height: 13px; }
 .art-mode button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.art-mode button[data-m="fav"][aria-pressed="true"] svg { fill: currentColor; } /* estrela cheia quando ativa */
 
 .art-modebar { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px 0 -14px; }
 @media (min-width: 768px) { .art-modebar { margin: 48px 0 -24px; } }
@@ -2602,7 +2603,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'work.label': 'Projects', 'work.all': 'See more', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
       'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
       'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
-      'f.all': 'All', 'f.fav': 'Favorites', 'f.cabine': 'Screenings',
+      'f.all': 'All', 'f.fav': 'Favorites', 'am.fav': 'Highlights', 'f.cabine': 'Screenings',
       'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
       'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
       'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
@@ -2636,7 +2637,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
       'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
       'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
-      'f.all': 'Todos', 'f.fav': 'Favoritos', 'f.cabine': 'Pases de prensa',
+      'f.all': 'Todos', 'f.fav': 'Favoritos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa',
       'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
       'art.various': 'Varios autores', 'art.with': 'Con', 'art.and': ' y ',
       'am.open': 'Abrir en el sitio', 'am.book': 'Abrir libro', 'am.link.Repositório Unesp': 'Repositorio Unesp',
@@ -3209,7 +3210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
     const modeBar = document.createElement('div'); modeBar.className = 'art-modebar reveal';
     const FAV_ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button></div><button class="art-mode-fav" type="button" data-m="fav" aria-pressed="${artMode === 'fav'}" aria-label="${i18n('f.fav', 'Favoritos')}" title="${i18n('f.fav', 'Favoritos')}">${FAV_ICO}</button>`; };
+    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button><button type="button" data-m="fav" aria-pressed="${artMode === 'fav'}">${FAV_ICO}${i18n('am.fav', 'Destaques')}</button></div>`; }; // destaques no mesmo grupo de Texto e Instagram
     drawMode(); bar.parentNode.insertBefore(modeBar, bar);
     const PBA = (window.HM_POSTS || {}).POSTS_BY_ART || {};
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
