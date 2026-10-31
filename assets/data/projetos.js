@@ -46,7 +46,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,6,6],"src":"assets/projetos/classic-tattoo/capa/"},
+  "capaAnim": {"m":"DC","full":1,"fundo":[40,40,40],"src":"assets/projetos/classic-tattoo/capa/"},
   "link": "https://www.classictattoopch.com",
   "dir": "assets/projetos/classic-tattoo/",
   "telas": [
@@ -3373,7 +3373,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[24,33,28],"src":"assets/projetos/optica-leopoldina/capa/"},
+  "capaAnim": {"m":"DC","fundo":[240,233,224],"src":"assets/projetos/optica-leopoldina/capa/"},
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
    {
@@ -3691,7 +3691,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[72,28,24],"src":"assets/projetos/sollaris/capa/"},
+  "capaAnim": {"m":"H","base":"assets/projetos/sollaris/capa.webp","fundo":[72,28,24],"src":"assets/projetos/sollaris/capa/"},
   "dir": "assets/projetos/sollaris/",
   "telas": [
    {
@@ -4545,7 +4545,6 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[112,6,6],"src":"assets/projetos/congresso-extensao/capa/"},
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
    {
@@ -4970,7 +4969,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
-  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[598,160],"src":"assets/projetos/interserv/capa/"},
+  "capaAnim": {"m":"DC","fundo":[255,255,255],"src":"assets/projetos/interserv/capa/"},
   "dir": "assets/projetos/interserv/",
   "telas": [
    {
@@ -6098,7 +6097,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[134,103,11],"src":"assets/projetos/mostra-saude-mental/capa/"},
+  "capaAnim": {"m":"DC","full":1,"fundo":[30,30,30],"src":"assets/projetos/mostra-saude-mental/capa/"},
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
    {
@@ -6959,7 +6958,6 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,6,6],"src":"assets/projetos/ocupacao-unesp-negra/capa/"},
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
    {
@@ -8175,7 +8173,6 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[138,46,19],"src":"assets/projetos/rp-40-anos/capa/"},
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
    {
@@ -9306,6 +9303,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
+  "capaAnim": {"m":"DC","fundo":[245,243,239],"src":"assets/projetos/fellipe-gualberto/capa/"},
   "dir": "assets/projetos/fellipe-gualberto/",
   "intro": {
    "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento: apresentação, matérias por editoria (Política, Mobilidade e Textos assinados), recortes de jornal em PDF e contato. HTML, CSS e JavaScript, publicado no GitHub Pages.",
@@ -10179,7 +10177,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
-  "capaAnim": {"m":"E","w":2103,"h":2600,"cx":0.5,"cy":0.5,"scale":7.4,"ar":0.8,"fundo":[6,46,46],"src":"assets/projetos/basement/capa/"},
+  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",

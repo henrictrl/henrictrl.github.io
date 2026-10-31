@@ -35,6 +35,10 @@
     '@keyframes ca-pan{from{transform:rotateX(52deg) rotateZ(-32deg) translateX(-2.5cqw)}to{transform:rotateX(52deg) rotateZ(-32deg) translateX(2.5cqw)}}',
     /* M · mosaico */
     '.work-card-media .ca-M .ca-bg{left:0;top:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;animation:ca-kb 16s ease-in-out infinite alternate}',
+    /* H · capa fixa; no hover mostra uma segunda imagem */
+    '.work-card-media .ca-H img{inset:0;width:100%;height:100%;object-fit:cover}',
+    '.work-card-media .ca-H .ca-hv{opacity:0;transform:scale(1.04);transition:opacity .5s var(--ease,ease),transform .9s var(--ease,ease)}',
+    '.work-card:hover .work-card-media .ca-H .ca-hv,.work-card:focus-visible .work-card-media .ca-H .ca-hv{opacity:1;transform:scale(1)}',
     '@media (prefers-reduced-motion:reduce){.ca *{animation:none!important}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
@@ -58,6 +62,8 @@
       h = '<img class="ca-bg" src="' + c.src + 'd.webp" alt="" decoding="async"><div class="ca-side">' + logo(c, 'logo-d.webp', c.logo, c.tinta, p.titulo) + '</div>';
     } else if (c.m === 'DC' || c.m === 'M') {
       h = '<img class="ca-bg" src="' + c.src + (c.m === 'M' ? 'm.webp' : 'd.webp') + '" alt="" decoding="async">';
+    } else if (c.m === 'H') {
+      h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {
       var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = 33.333 - c.cy * H;
       h = '<img class="ca-pl" src="' + c.src + 'e.webp" alt="" decoding="async" style="width:' + W.toFixed(2) + 'cqw;height:' + H.toFixed(2) + 'cqw;left:' + L.toFixed(2) + 'cqw;top:' + T.toFixed(2) + 'cqw;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
