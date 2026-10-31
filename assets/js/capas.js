@@ -54,6 +54,9 @@
     '@keyframes ca-spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}',
     '.work-card-media .ca-DC.pulse .ca-bg{animation:ca-pulse 6s ease-in-out infinite alternate}',
     '@keyframes ca-pulse{from{transform:translate(-50%,-50%) scale(1);filter:saturate(1)}to{transform:translate(-50%,-50%) scale(1.06);filter:saturate(1.25)}}',
+    /* K · símbolo trocando de cor */
+    '.ca-kbg{position:absolute;inset:0;background:#123358}',
+    '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
     '@media (prefers-reduced-motion:reduce){.ca *{animation:none!important}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
@@ -85,6 +88,16 @@
         h += '<div class="ca-band" style="top:' + b.y + '%;height:' + b.hh + '%"><div class="ca-row' + (b.r ? ' r' : '') + '" style="--d:' + b.d + 's">' + im + im + '</div></div>';
       });
       if (c.logo) h += '<img class="ca-mark' + (c.logo.spin ? ' spin' : '') + '" src="' + c.src + c.logo.f + '" width="' + c.logo.w + '" height="' + c.logo.h + '" alt="" decoding="async" style="--mw:' + c.logo.mw + '%;--mh:' + c.logo.mh + '%;--y:' + (c.logo.y || 50) + '%' + (c.logo.spin ? ';--spin:' + c.logo.spin + 's' : '') + '">';
+    } else if (c.m === 'K') {
+      // símbolo recortado (máscara) trocando de cor; cada par fundo/símbolo respeita contraste. Loop: 0% = 100%
+      var n = c.pares.length, kb = '', kf = '', name = 'ca-k-' + (c.id || 'x');
+      c.pares.concat([c.pares[0]]).forEach(function (pr, i) {
+        var a = (i / n * 100).toFixed(2), b = Math.min(100, i / n * 100 + 100 / n * .6).toFixed(2);
+        kb += a + '%,' + b + '%{background-color:' + pr[0] + '}'; kf += a + '%,' + b + '%{background-color:' + pr[1] + '}';
+      });
+      h = '<style>@keyframes ' + name + '-b{' + kb + '}@keyframes ' + name + '-f{' + kf + '}</style>' +
+          '<div class="ca-kbg" style="animation:' + name + '-b ' + n * 3 + 's ease-in-out infinite"></div>' +
+          '<div class="ca-ksym" style="aspect-ratio:' + c.w + '/' + c.h + ';-webkit-mask-image:url(' + c.src + 'mask.png);mask-image:url(' + c.src + 'mask.png);animation:' + name + '-f ' + n * 3 + 's ease-in-out infinite"></div>';
     } else if (c.m === 'H') {
       h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {

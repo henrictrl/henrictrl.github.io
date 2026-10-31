@@ -3286,7 +3286,7 @@ window.PROJETOS = [
    "landing"
   ],
   "marca": "rino",
-  "titulo": "Rino Cores",
+  "titulo": "Estúdio de cor",
   "ano": "2026",
   "cat": {
    "pt": "Programação",
@@ -3317,6 +3317,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
+  "capaAnim": {"m":"K","w":551,"h":240,"pares":[["#123358","#f1f0ec"],["#617991","#f1f0ec"],["#f1f0ec","#123358"],["#899bac","#123358"],["#3b5674","#f1f0ec"]],"src":"assets/projetos/rino-site/capa/","id":"rino"},
   "resumo": {"pt": "Ferramenta web para testar as cores da marca Rino", "en": "Web tool to test the Rino brand colours", "es": "Herramienta web para probar los colores de la marca Rino"},
   "dir": "assets/projetos/rino/",
   "intro": {
@@ -3377,7 +3378,7 @@ window.PROJETOS = [
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
   "resumo": {"pt": "Logotipo para ótica de bairro em São Paulo", "en": "Logo for a neighbourhood optician in São Paulo", "es": "Logotipo para una óptica de barrio en São Paulo"},
-  "capaAnim": {"m":"DC","fundo":[240,233,224],"src":"assets/projetos/optica-leopoldina/capa/"},
+  "capaAnim": {"m":"DC","fundo":[45,61,49],"src":"assets/projetos/optica-leopoldina/capa/"},
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
    {
