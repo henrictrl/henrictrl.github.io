@@ -46,6 +46,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
+  "resumo": {"pt": "Identidade visual para estúdio de tatuagem na Califórnia, EUA", "en": "Visual identity for a tattoo studio in California, USA", "es": "Identidad visual para un estudio de tatuajes en California, EE. UU."},
   "capaAnim": {"m":"DC","full":1,"fundo":[40,40,40],"src":"assets/projetos/classic-tattoo/capa/"},
   "link": "https://www.classictattoopch.com",
   "dir": "assets/projetos/classic-tattoo/",
@@ -746,6 +747,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa.webp",
+  "resumo": {"pt": "Identidade visual e manual de marca para empresa de crédito B2B", "en": "Visual identity and brand manual for a B2B credit company", "es": "Identidad visual y manual de marca para una empresa de crédito B2B"},
   "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,33,46],"src":"assets/projetos/rino/capa/"},
   "dir": "assets/projetos/rino/",
   "telas": [
@@ -3315,6 +3317,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
+  "resumo": {"pt": "Ferramenta web para testar as cores da marca Rino", "en": "Web tool to test the Rino brand colours", "es": "Herramienta web para probar los colores de la marca Rino"},
   "dir": "assets/projetos/rino/",
   "intro": {
    "pt": "Um definidor de cores para explorar, comparar e aprovar combinações aplicadas diretamente ao logotipo. A interface reúne pré-visualização ao vivo, paletas sugeridas, controles de cor e exportação em PNG.",
@@ -3373,6 +3376,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
+  "resumo": {"pt": "Logotipo para ótica de bairro em São Paulo", "en": "Logo for a neighbourhood optician in São Paulo", "es": "Logotipo para una óptica de barrio en São Paulo"},
   "capaAnim": {"m":"DC","fundo":[240,233,224],"src":"assets/projetos/optica-leopoldina/capa/"},
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
@@ -3691,6 +3695,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
+  "resumo": {"pt": "Identidade visual para marca de bijuterias", "en": "Visual identity for a jewellery brand", "es": "Identidad visual para una marca de bisutería"},
   "capaAnim": {"m":"H","base":"assets/projetos/sollaris/capa.webp","fundo":[72,28,24],"src":"assets/projetos/sollaris/capa/"},
   "dir": "assets/projetos/sollaris/",
   "telas": [
@@ -4307,6 +4312,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
+  "resumo": {"pt": "Logotipo para o podcast da Basement", "en": "Logo for the Basement podcast", "es": "Logotipo para el pódcast de Basement"},
   "capaAnim": {"m":"DC","fundo":[0,0,0],"src":"assets/projetos/equity360/capa/"},
   "dir": "assets/projetos/equity360/",
   "telas": [
@@ -4545,6 +4551,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
+  "resumo": {"pt": "Identidade visual para congresso da PROEC/Unesp", "en": "Visual identity for a PROEC/Unesp congress", "es": "Identidad visual para un congreso de la PROEC/Unesp"},
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
    {
@@ -4969,6 +4976,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
+  "resumo": {"pt": "Identidade visual para os jogos dos servidores da Unesp", "en": "Visual identity for the Unesp staff games", "es": "Identidad visual para los juegos de los servidores de la Unesp"},
   "capaAnim": {"m":"DC","fundo":[255,255,255],"src":"assets/projetos/interserv/capa/"},
   "dir": "assets/projetos/interserv/",
   "telas": [
@@ -5366,6 +5374,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
+  "resumo": {"pt": "Revisão de marca para núcleo psicossocial da Unesp", "en": "Brand revision for a Unesp psychosocial unit", "es": "Revisión de marca para un núcleo psicosocial de la Unesp"},
   "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[33,59,85],"src":"assets/projetos/ntaps/capa/"},
   "dir": "assets/projetos/ntaps/",
   "telas": [
@@ -5702,6 +5711,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
+  "resumo": {"pt": "Manual de marca para a Coordenadoria de Saúde da Unesp", "en": "Brand manual for the Unesp Health Office", "es": "Manual de marca para la Coordinación de Salud de la Unesp"},
   "capaAnim": {"m":"D","p":[220,220,220],"tinta":[17,17,17],"logo":[488,160],"src":"assets/projetos/csunesp/capa/"},
   "dir": "assets/projetos/csunesp/",
   "telas": [
@@ -6097,6 +6107,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
+  "resumo": {"pt": "Identidade visual para evento de saúde mental da Unesp", "en": "Visual identity for a Unesp mental health event", "es": "Identidad visual para un evento de salud mental de la Unesp"},
   "capaAnim": {"m":"DC","full":1,"fundo":[30,30,30],"src":"assets/projetos/mostra-saude-mental/capa/"},
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
@@ -6442,6 +6453,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nupe/capa.webp",
+  "resumo": {"pt": "Rebranding para o Núcleo Negro da Unesp", "en": "Rebrand for Unesp's Black studies unit", "es": "Rebranding para el Núcleo Negro de la Unesp"},
   "capaAnim": {"m":"DC","fundo":[129,130,124],"full":1,"src":"assets/projetos/nupe/capa/"},
   "dir": "assets/projetos/nupe/",
   "telas": [
@@ -6958,6 +6970,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
+  "resumo": {"pt": "Identidade visual para mês de ações do Nupe/Unesp", "en": "Visual identity for a month of Nupe/Unesp events", "es": "Identidad visual para un mes de acciones del Nupe/Unesp"},
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
    {
@@ -7179,6 +7192,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
+  "resumo": {"pt": "Brandbook para consultoria de RP, em projeto acadêmico", "en": "Brandbook for a PR consultancy, academic project", "es": "Brandbook para una consultora de RR. PP., proyecto académico"},
   "capaAnim": {"m":"DC","full":1,"fundo":[60,10,60],"src":"assets/projetos/prisma-brandbook/capa/"},
   "dir": "assets/projetos/prisma-brandbook/",
   "telas": [
@@ -7493,6 +7507,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
+  "resumo": {"pt": "Identidade visual para agência de RP, em projeto acadêmico", "en": "Visual identity for a PR agency, academic project", "es": "Identidad visual para una agencia de RR. PP., proyecto académico"},
   "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[19,72,112],"src":"assets/projetos/cminds/capa/"},
   "dir": "assets/projetos/cminds/",
   "telas": [
@@ -7938,6 +7953,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
+  "resumo": {"pt": "Identidade e peças para evento do NTAPS/Unesp", "en": "Identity and pieces for an NTAPS/Unesp event", "es": "Identidad y piezas para un evento del NTAPS/Unesp"},
   "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[85,72,46],"src":"assets/projetos/setembro-amarelo/capa/"},
   "dir": "assets/projetos/setembro-amarelo/",
   "telas": [
@@ -8173,6 +8189,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
+  "resumo": {"pt": "Redes sociais para os 40 anos do curso de RP da Unesp", "en": "Social media for 40 years of PR at Unesp", "es": "Redes sociales para los 40 años de RR. PP. de la Unesp"},
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
    {
@@ -8487,6 +8504,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
+  "resumo": {"pt": "Proposta de consultoria de RP para startups", "en": "PR consultancy proposal for startups", "es": "Propuesta de consultoría de RR. PP. para startups"},
   "capaAnim": {"m":"DC","full":1,"pulse":1,"fundo":[247,230,240],"src":"assets/projetos/prisma-proposta/capa/"},
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
@@ -8925,6 +8943,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
+  "resumo": {"pt": "Folder para escola de jiu-jitsu na Califórnia, EUA", "en": "Folder for a jiu-jitsu school in California, USA", "es": "Folleto para una escuela de jiu-jitsu en California, EE. UU."},
   "capaAnim": {"m":"DC","full":1,"fundo":[20,40,44],"src":"assets/projetos/inspirit/capa/"},
   "dir": "assets/projetos/inspirit/",
   "telas": [
@@ -9113,6 +9132,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
+  "resumo": {"pt": "Cartaz e folder para festa tradicional em Piracicaba", "en": "Poster and folder for a traditional festival in Piracicaba", "es": "Cartel y folleto para una fiesta tradicional en Piracicaba"},
   "dir": "assets/projetos/festa-da-polenta/",
   "telas": [
    {
@@ -9303,6 +9323,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
+  "resumo": {"pt": "Site-portfólio para jornalista", "en": "Portfolio website for a journalist", "es": "Sitio portafolio para un periodista"},
   "capaAnim": {"m":"DC","fundo":[245,243,239],"src":"assets/projetos/fellipe-gualberto/capa/"},
   "dir": "assets/projetos/fellipe-gualberto/",
   "intro": {
@@ -9586,6 +9607,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nova-rio-branco/capa.webp",
+  "resumo": {"pt": "Catálogo online para loja de Bauru", "en": "Online catalogue for a store in Bauru", "es": "Catálogo en línea para una tienda de Bauru"},
   "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[46,46,138],"src":"assets/projetos/nova-rio-branco/capa/"},
   "dir": "assets/projetos/nova-rio-branco/",
   "telas": [
@@ -9826,6 +9848,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/pixelar/capa.webp",
+  "resumo": {"pt": "Editor de imagem e vídeo no navegador, projeto próprio", "en": "Browser image and video editor, personal project", "es": "Editor de imagen y video en el navegador, proyecto propio"},
   "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/pixelar/capa/"},
   "dir": "assets/projetos/pixelar/",
   "intro": {
@@ -10126,6 +10149,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/metaprojeto/n01.webp",
+  "resumo": {"pt": "Design e código deste site", "en": "Design and code of this site", "es": "Diseño y código de este sitio"},
   "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
@@ -10177,6 +10201,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
+  "resumo": {"pt": "Redes sociais para plataforma de IA jurídica", "en": "Social media for a legal AI platform", "es": "Redes sociales para una plataforma de IA jurídica"},
   "capaAnim": {"m":"L","fundo":[7,46,46],"bands":[{"f":"b1.webp","s":[6888,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
@@ -10227,6 +10252,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/tesoura/capa.webp",
+  "resumo": {"pt": "Redes sociais para portal de jornalismo cultural", "en": "Social media for a cultural journalism outlet", "es": "Redes sociales para un portal de periodismo cultural"},
   "dir": "assets/projetos/tesoura/",
   "intro": {
    "pt": "Carrosséis do Tesoura com Ponta, portal de jornalismo cultural para o qual escrevo: divulgação das críticas, listas de melhores do ano e coberturas de festivais.",
@@ -10284,6 +10310,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/persona/capa.webp",
+  "resumo": {"pt": "Redes sociais para grupo de crítica cultural da Unesp", "en": "Social media for a Unesp cultural criticism group", "es": "Redes sociales para un grupo de crítica cultural de la Unesp"},
   "dir": "assets/projetos/persona/",
   "intro": {
    "pt": "Posts e carrosséis do Persona, grupo de pesquisa e portal de crítica cultural da Unesp, do qual fui coordenador (2021–2024): divulgação dos textos, coberturas de festivais e processos seletivos.",
@@ -10337,6 +10364,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
+  "resumo": {"pt": "Carrosséis para perfil de análise de música pop", "en": "Carousels for a pop music analysis profile", "es": "Carruseles para un perfil de análisis de música pop"},
   "capaAnim": {"m":"L","fundo":[10,10,230],"bands":[{"f":"b1.webp","s":[6314,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/desvendando/capa/"},
   "dir": "assets/projetos/desvendando/",
   "intro": {
@@ -10390,6 +10418,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/proec/capa.webp",
+  "resumo": {"pt": "Redes sociais para a Pró-Reitoria de Extensão da Unesp", "en": "Social media for the Unesp Outreach Office", "es": "Redes sociales para la Prorrectoría de Extensión de la Unesp"},
   "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[375,360],"src":"assets/projetos/proec/capa/"},
   "dir": "assets/projetos/proec/",
   "intro": {
@@ -10596,6 +10625,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
+  "resumo": {"pt": "Redes sociais para evento online de música brasileira", "en": "Social media for an online Brazilian music event", "es": "Redes sociales para un evento en línea de música brasileña"},
   "capaAnim": {"m":"L","fundo":[255,212,86],"logo":{"f":"logo.webp","w":948,"h":948,"mw":56,"mh":84,"spin":40},"src":"assets/projetos/encantos-do-brasil/capa/"},
   "dir": "assets/projetos/encantos-do-brasil/",
   "intro": {
@@ -10902,7 +10932,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
-  "capaAnim": {"m":"DC","fundo":[245,242,234],"src":"assets/projetos/encontro-direitos-humanos/capa/"},
+  "resumo": {"pt": "Organização e cobertura de evento de direitos humanos da Unesp", "en": "Organisation and coverage of a Unesp human rights event", "es": "Organización y cobertura de un evento de derechos humanos de la Unesp"},
   "dir": "assets/projetos/encontro-direitos-humanos/",
   "telas": [
    {
@@ -11065,7 +11095,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
-  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/copa-girlpower/capa/"},
+  "resumo": {"pt": "Cobertura fotográfica de torneio feminino universitário", "en": "Photo coverage of a women's university tournament", "es": "Cobertura fotográfica de un torneo femenino universitario"},
   "dir": "assets/projetos/copa-girlpower/",
   "telas": [
    {
@@ -11284,6 +11314,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/oficina-gestao-projetos/capa.webp",
+  "resumo": {"pt": "Oficina de gestão de projetos para estudantes de design", "en": "Project management workshop for design students", "es": "Taller de gestión de proyectos para estudiantes de diseño"},
   "dir": "assets/projetos/oficina-gestao-projetos/",
   "telas": [
    {
