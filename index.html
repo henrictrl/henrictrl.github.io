@@ -870,7 +870,7 @@ body.sv-open .sv { display: block; }
 /* exemplos: capa e título, mesmos cards do site */
 .sv .work-card-tag { display: none; }
 .sv .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-@media (min-width: 640px) { .sv .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+@media (min-width: 640px) { .sv .work-grid { grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 14px; } }
 @media (max-width: 639px) { .sv .work-grid > :nth-child(n+3) { display: none; } } /* celular: 2 exemplos, sem vão na grade */
 
 /* contato: mesma linguagem do rodapé (texto à esquerda, botões discretos) */
@@ -3626,7 +3626,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // exemplos: projetos (capa e título)
       $('sm-l-exemplos').textContent = lx(U.exemplos);
       const rel = $('sm-related-projects'); rel.innerHTML = '';
-      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) { const wc = buildWorkCard(p); wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.06) + 's'); rel.appendChild(wc); } });
+      // mesmas capas da vitrine e da página Projetos (animadas, prévia ao vivo, recorte), via pjCard
+      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (!p) return;
+        const t = document.createElement('template'); t.innerHTML = pjCard(p).trim(); const wc = t.content.firstElementChild;
+        wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.06) + 's'); rel.appendChild(wc); });
+      rel.style.setProperty('--n', rel.children.length); // 2 ou 3 colunas, conforme os exemplos (sem vão)
+      requestAnimationFrame(observeLiveProjectPreviews);
       $('sm-sec-exemplos').hidden = !rel.children.length;
 
       // contato (sem preço: orçamento)
