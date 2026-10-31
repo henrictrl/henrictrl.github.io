@@ -10596,7 +10596,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[2,99,72],"src":"assets/projetos/encantos-do-brasil/capa/"},
+  "capaAnim": {"m":"L","fundo":[255,212,86],"logo":{"f":"logo.webp","w":948,"h":948,"mw":56,"mh":84,"spin":40},"src":"assets/projetos/encantos-do-brasil/capa/"},
   "dir": "assets/projetos/encantos-do-brasil/",
   "intro": {
    "pt": "Evento online e gratuito de música brasileira com cinco convidados das cinco regiões do país. Posts de apresentação, atrações e parceiros, fevereiro e março de 2022.",
