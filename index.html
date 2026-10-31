@@ -4320,11 +4320,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pageCount < 2) return;
     homeTimer = setTimeout(() => { homePage = (homePage + 1) % pageCount; renderHomeRows(1); }, HOME_AUTO_MS);
   };
+  window.addEventListener('resize', () => { const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; }); // nova largura: altura medida de novo
   const renderHomeRows = (direction = 1) => {
     const home = document.getElementById('work-grid');
     const pager = document.getElementById('home-pagination');
     if (!home || !pager) return;
     const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
+    // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
+    const keepY = window.scrollY;
+    if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
     home.className = 'work-grid home-featured-grid';
     home.style.setProperty('--home-slide-from', direction < 0 ? '-18px' : '18px');
     home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
@@ -4344,7 +4348,8 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHomeRows(direction);
     };
     scheduleHomeAuto(pageCount);
-    requestAnimationFrame(observeLiveProjectPreviews);
+    const restoreY = () => { if (Math.abs(window.scrollY - keepY) > 1) { const h = document.documentElement, sb = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; window.scrollTo(0, keepY); h.style.scrollBehavior = sb; } };
+    restoreY(); requestAnimationFrame(() => { restoreY(); observeLiveProjectPreviews(); });
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
