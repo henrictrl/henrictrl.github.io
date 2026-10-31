@@ -745,6 +745,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,33,46],"src":"assets/projetos/rino/capa/"},
   "dir": "assets/projetos/rino/",
   "telas": [
    {
@@ -3371,6 +3372,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[24,33,28],"src":"assets/projetos/optica-leopoldina/capa/"},
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
    {
@@ -3688,6 +3690,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[72,28,24],"src":"assets/projetos/sollaris/capa/"},
   "dir": "assets/projetos/sollaris/",
   "telas": [
    {
@@ -4303,6 +4306,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
+  "capaAnim": {"m":"DC","fundo":[0,0,0],"src":"assets/projetos/equity360/capa/"},
   "dir": "assets/projetos/equity360/",
   "telas": [
    {
@@ -4964,6 +4968,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
+  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[598,160],"src":"assets/projetos/interserv/capa/"},
   "dir": "assets/projetos/interserv/",
   "telas": [
    {
@@ -5360,6 +5365,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[33,59,85],"src":"assets/projetos/ntaps/capa/"},
   "dir": "assets/projetos/ntaps/",
   "telas": [
    {
@@ -5695,6 +5701,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
+  "capaAnim": {"m":"D","p":[220,220,220],"tinta":[17,17,17],"logo":[488,160],"src":"assets/projetos/csunesp/capa/"},
   "dir": "assets/projetos/csunesp/",
   "telas": [
    {
@@ -6089,6 +6096,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[134,103,11],"src":"assets/projetos/mostra-saude-mental/capa/"},
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
    {
@@ -6433,6 +6441,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nupe/capa.webp",
+  "capaAnim": {"m":"DC","fundo":[129,130,124],"full":1,"src":"assets/projetos/nupe/capa/"},
   "dir": "assets/projetos/nupe/",
   "telas": [
    {
@@ -7482,6 +7491,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[19,72,112],"src":"assets/projetos/cminds/capa/"},
   "dir": "assets/projetos/cminds/",
   "telas": [
    {
@@ -8160,6 +8170,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[138,46,19],"src":"assets/projetos/rp-40-anos/capa/"},
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
    {
@@ -8911,6 +8922,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[2,37,41],"src":"assets/projetos/inspirit/capa/"},
   "dir": "assets/projetos/inspirit/",
   "telas": [
    {
@@ -9570,6 +9582,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nova-rio-branco/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[46,46,138],"src":"assets/projetos/nova-rio-branco/capa/"},
   "dir": "assets/projetos/nova-rio-branco/",
   "telas": [
    {
@@ -10159,6 +10172,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
+  "capaAnim": {"m":"E","w":2103,"h":2600,"cx":0.5,"cy":0.5,"scale":7.4,"ar":0.8,"fundo":[6,46,46],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",
@@ -10318,6 +10332,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
+  "capaAnim": {"m":"E","w":2102,"h":2600,"cx":0.5,"cy":0.5,"scale":7.65,"ar":0.8,"fundo":[6,6,138],"src":"assets/projetos/desvendando/capa/"},
   "dir": "assets/projetos/desvendando/",
   "intro": {
    "pt": "Carrosséis do Desvendando o Pop, projeto de análise de música pop no Instagram.",
@@ -10370,6 +10385,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/proec/capa.webp",
+  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[375,360],"src":"assets/projetos/proec/capa/"},
   "dir": "assets/projetos/proec/",
   "intro": {
    "pt": "Posts e carrosséis feitos na Pró-Reitoria de Extensão e Cultura da Unesp (PROEC), de janeiro a dezembro de 2024: Congresso de Extensão Universitária, curso Educação Política e Gestão Municipal, Mostra Unesp da Canção, InterServ e Ocupação Unesp Negra.",
@@ -10575,6 +10591,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
+  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[2,99,72],"src":"assets/projetos/encantos-do-brasil/capa/"},
   "dir": "assets/projetos/encantos-do-brasil/",
   "intro": {
    "pt": "Evento online e gratuito de música brasileira com cinco convidados das cinco regiões do país. Posts de apresentação, atrações e parceiros, fevereiro e março de 2022.",
@@ -10880,6 +10897,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
+  "capaAnim": {"m":"DC","fundo":[245,242,234],"src":"assets/projetos/encontro-direitos-humanos/capa/"},
   "dir": "assets/projetos/encontro-direitos-humanos/",
   "telas": [
    {
@@ -11042,6 +11060,7 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
+  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/copa-girlpower/capa/"},
   "dir": "assets/projetos/copa-girlpower/",
   "telas": [
    {

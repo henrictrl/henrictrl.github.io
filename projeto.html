@@ -85,7 +85,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261023-i18n"></script>
+<script src="assets/data/projetos.js?v=20261031-capas"></script>
+<script src="assets/js/capas.js?v=20261031"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
@@ -646,7 +647,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     if(project.rel&&project.rel.length){
       var related=project.rel.map(function(relatedSlug){
         var item=PROJECTS.find(function(candidate){return candidate.slug===relatedSlug;}); if(!item)return "";
-        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media"><img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'></div><p class="work-card-title">'+esc(item.titulo)+'</p></a>';
+        return '<a class="work-card" href="'+cleanProjectUrl(item.slug)+'"><div class="work-card-media">'+(item.capaAnim&&window.capaAnimHTML?capaAnimHTML(item):'<img src="'+esc(item.capa||"")+'" alt="" loading="lazy" decoding="async" width="1200" height="800"'+(item.capaPosicao?' style="object-position:'+esc(item.capaPosicao)+'"':"")+'>')+'</div><p class="work-card-title">'+esc(item.titulo)+'</p></a>';
       }).join("");
       if(related)blocks.push('<section class="dk-rel" id="dk-b-related"><p>'+esc(lx(siteCopy.related))+'</p><div class="work-grid">'+related+'</div></section>');
     }

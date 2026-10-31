@@ -2572,7 +2572,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
-<script src="assets/data/projetos.js?v=20261023-i18n"></script>
+<script src="assets/data/projetos.js?v=20261031-capas"></script>
+<script src="assets/js/capas.js?v=20261031"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -4201,7 +4202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}${p.capaCropTop ? ' work-card-crop-top' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
-      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
+      <div class="work-card-media">${p.capaAnim ? capaAnimHTML(p) : p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
       <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
   const mqMob = window.matchMedia('(max-width:767px)');
