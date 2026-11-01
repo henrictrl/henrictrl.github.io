@@ -1,99 +1,59 @@
 /* =========================================================================
-   motion.css — camada de animação (carregamento, hover, transições, scroll)
-   Tudo aqui é aditivo: sem este arquivo o site funciona igual.
-   Desligar: ?nomotion na URL ou prefers-reduced-motion do sistema.
+   motion.css — animações leves, só CSS (sem bibliotecas)
+   Carregamento curto, troca de página em fade, ponto do cursor e hovers discretos.
+   Desligar: ?nomotion na URL ou "reduzir movimento" no sistema.
    ========================================================================= */
 
-/* ---------- 1. Tela de carregamento (pixel, mesma linguagem do logo) ---------- */
+/* ---------- Carregamento: fundo liso + 3x3 pontos do logo; some em fade ---------- */
 #mx-loader {
   position: fixed; inset: 0; z-index: 9999;
   display: grid; place-items: center;
-  background: transparent; color: var(--ink, #111);
-  pointer-events: all;
-  /* failsafe: se o JS falhar, some sozinho em 4s */
-  animation: mx-failsafe 0s linear 4s forwards;
+  background: var(--white, #fff);
+  transition: opacity .5s var(--ease), visibility .5s;
+  animation: mx-failsafe 0s 3s forwards; /* se o JS falhar, some sozinho */
 }
-@keyframes mx-failsafe { to { visibility: hidden; pointer-events: none; } }
+#mx-loader.out { opacity: 0; visibility: hidden; }
+@keyframes mx-failsafe { to { opacity: 0; visibility: hidden; } }
 html.mx-off #mx-loader, html.mx-seen #mx-loader { display: none; }
 
-/* grade de blocos que cobre a tela e se dissolve (efeito pixel) */
-.mx-cells {
-  position: absolute; inset: 0;
-  display: grid; grid-template-columns: repeat(var(--mx-cols, 12), 1fr);
-}
-.mx-cells i { background: var(--white, #fff); display: block; }
+.mx-mark { display: grid; grid-template-columns: repeat(3, 6px); gap: 4px; }
+.mx-mark b { width: 6px; height: 6px; border-radius: 1px; background: var(--ink, #111); animation: mx-dot 1.2s ease-in-out infinite; }
+/* onda diagonal pelos pontos */
+.mx-mark b:nth-child(2), .mx-mark b:nth-child(4) { animation-delay: .1s; }
+.mx-mark b:nth-child(3), .mx-mark b:nth-child(5), .mx-mark b:nth-child(7) { animation-delay: .2s; }
+.mx-mark b:nth-child(6), .mx-mark b:nth-child(8) { animation-delay: .3s; }
+.mx-mark b:nth-child(9) { animation-delay: .4s; }
+@keyframes mx-dot { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
 
-.mx-center { position: relative; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-/* logo 3x3 em pixels: montado ponto a ponto pelo JS */
-.mx-mark { display: grid; grid-template-columns: repeat(3, 8px); gap: 4px; }
-.mx-mark b { width: 8px; height: 8px; background: currentColor; opacity: 0; transform: scale(0); }
-.mx-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; overflow: hidden; }
-.mx-name span { display: inline-block; transform: translateY(110%); }
-.mx-count {
-  position: absolute; right: var(--gutter, 24px); bottom: 24px;
-  font-size: 12px; font-variant-numeric: tabular-nums; color: var(--gray-400, #b2b2b2);
-}
-.mx-bar { width: 120px; height: 1px; background: var(--gray-200, #e5e5e5); overflow: hidden; }
-.mx-bar > i { display: block; height: 100%; background: currentColor; transform-origin: left; transform: scaleX(0); }
+/* ---------- Troca de página: fade curto ---------- */
+main { transition: opacity .22s ease; }
+main.mx-leave { opacity: 0; }
+main.mx-enter { animation: mx-in .45s var(--ease) both; }
+@keyframes mx-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* ---------- 2. Barra de progresso da rolagem ---------- */
-#mx-progress {
-  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 1000;
-  background: var(--ink, #111); transform-origin: 0 50%; transform: scaleX(0);
-  pointer-events: none;
-}
-
-/* ---------- 3. Cursor (só mouse/trackpad): ponto pequeno, cor do texto, halo fino p/ capas escuras ---------- */
+/* ---------- Cursor: ponto pequeno (só mouse/trackpad) ---------- */
 #mx-cursor {
   position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none;
-  width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
-  background: var(--ink, #111); box-shadow: 0 0 0 1px rgba(255,255,255,.55);
-  opacity: 0; transition: opacity .3s; will-change: transform;
+  width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+  background: var(--ink, #111); box-shadow: 0 0 0 1px rgba(255,255,255,.6);
+  opacity: 0; transition: opacity .3s;
 }
 #mx-cursor.on { opacity: 1; }
 @media (hover: none), (pointer: coarse) { #mx-cursor { display: none; } }
 
-/* ---------- 4. Hover ---------- */
-/* nav: sublinhado que entra pela esquerda e sai pela direita */
+/* ---------- Hover discreto ---------- */
 .main-nav a { position: relative; }
 .main-nav a::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
   background: currentColor; transform: scaleX(0); transform-origin: right;
-  transition: transform .45s var(--ease);
+  transition: transform .4s var(--ease);
 }
 .main-nav a:hover::after, .main-nav a.current::after { transform: scaleX(1); transform-origin: left; }
 @media (max-width: 767px) { .top-header .main-nav a::after { display: none; } }
 
-/* links de seção e redes: seta que desliza */
-.section-link, .footer-social { transition: color .25s var(--ease), transform .2s var(--ease); }
-
-/* cartões de projeto: profundidade 3D + brilho que segue o mouse */
-.work-card { transform-style: preserve-3d; will-change: transform; }
-.work-card-media { position: relative; }
-.work-card-media::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mx-x, 50%) var(--mx-y, 50%), rgba(255,255,255,.18), transparent 45%);
-  opacity: 0; transition: opacity .35s var(--ease);
-}
-.work-card:hover .work-card-media::after { opacity: 1; }
-.work-card-media img { transition: transform .9s var(--ease) !important; }
-.work-card:hover .work-card-media img { transform: scale(1.045); }
-.work-card-title { transition: transform .45s var(--ease); }
-.work-card:hover .work-card-title { transform: translateX(4px); }
-
-/* serviço: leve elevação */
-.service-card { transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
-@media (hover: hover) {
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -18px rgba(0,0,0,.25); }
-}
-
-/* ---------- 6. Acessibilidade ---------- */
+/* ---------- Acessibilidade ---------- */
 @media (prefers-reduced-motion: reduce) {
-  #mx-loader, #mx-cursor, #mx-progress { display: none !important; }
+  #mx-loader, #mx-cursor { display: none !important; }
+  main.mx-enter { animation: none; }
 }
-html.mx-off #mx-cursor, html.mx-off #mx-progress { display: none !important; }
-
-/* enquanto a tela de carregamento está ativa, segura as entradas do 1º viewport
-   (elas tocam quando o loader se dissolve) */
-html.mx-loading .first-screen .reveal { opacity: 0 !important; transform: translateY(18px) !important; }
-html.mx-loading body { overflow: hidden; }
+html.mx-off #mx-cursor { display: none !important; }

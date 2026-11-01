@@ -6,8 +6,8 @@
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
 <script src="assets/js/tema.js?v=20261029j"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
-<script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');else{h.classList.add('mx-loading');setTimeout(function(){h.classList.remove('mx-loading')},4000)}}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101b">
+<script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101c">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1705,28 +1705,15 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-projects-viewport { overflow:hidden; }
 .home-featured-grid { width:100%; }
 .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
-/* troca da vitrine: saída rápida (cards descem e somem em cascata) e entrada com cortina na capa
-   (abre na direção da troca), zoom suave da imagem e título subindo; atraso por posição na grade */
+/* troca da vitrine: os cards atuais esmaecem e os novos aparecem em fade, um após o outro */
 .home-featured-grid > .work-card { --i:0; }
 .home-featured-grid > .work-card:nth-child(2) { --i:1; } .home-featured-grid > .work-card:nth-child(3) { --i:2; }
 .home-featured-grid > .work-card:nth-child(4) { --i:3; } .home-featured-grid > .work-card:nth-child(5) { --i:4; }
 .home-featured-grid > .work-card:nth-child(6) { --i:5; }
-.home-featured-grid.home-page-leave > .work-card { animation:home-card-out .26s cubic-bezier(.4,0,1,1) calc(var(--i) * 25ms) both; }
-.home-featured-grid.home-page-enter .work-card-media { animation:home-media-in .9s var(--ease) calc(var(--i) * 70ms) both; }
-.home-featured-grid.home-page-enter .work-card-media > * { animation:home-img-in 1.2s var(--ease) calc(var(--i) * 70ms) both; }
-.home-featured-grid.home-page-enter .work-card-title,
-.home-featured-grid.home-page-enter .work-card-desc,
-.home-featured-grid.home-page-enter .work-card-tag { animation:home-text-in .7s var(--ease) calc(var(--i) * 70ms + 120ms) both; }
-@keyframes home-card-out { to { opacity:0; transform:translateY(10px); } }
-@keyframes home-media-in {
-  from { clip-path:var(--home-clip-from, inset(0 0 0 100% round 6px)); }
-  to   { clip-path:inset(0 0 0 0 round 6px); }
-}
-@keyframes home-img-in { from { transform:scale(1.12); } to { transform:scale(1); } }
-@keyframes home-text-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
-@media (prefers-reduced-motion: reduce) {
-  .home-featured-grid.home-page-leave > .work-card, .home-featured-grid.home-page-enter * { animation:none !important; }
-}
+.home-featured-grid.home-page-leave > .work-card { opacity:0; transition:opacity .2s ease; }
+.home-featured-grid.home-page-enter > .work-card { animation:home-card-in .6s var(--ease) calc(var(--i) * 50ms) both; }
+@keyframes home-card-in { from { opacity:0; } to { opacity:1; } }
+@media (prefers-reduced-motion: reduce) { .home-featured-grid > .work-card { animation:none !important; transition:none !important; } }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
@@ -2162,7 +2149,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </head>
 <body class="home-route">
 <!-- tela de carregamento (motion.js anima e remove) -->
-<div id="mx-loader" aria-hidden="true"><div class="mx-cells"></div><div class="mx-center"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div><p class="mx-name"><span>Henrique Marinhos</span></p><div class="mx-bar"><i></i></div></div><span class="mx-count">000</span></div>
+<div id="mx-loader" aria-hidden="true"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
 
 
 <header class="top-header">
@@ -4395,8 +4382,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
     const keepY = window.scrollY;
     if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
-    // cortina da capa abre no sentido da troca (avançar: da direita; voltar: da esquerda)
-    home.style.setProperty('--home-clip-from', direction < 0 ? 'inset(0 100% 0 0 round 6px)' : 'inset(0 0 0 100% round 6px)');
     const swap = () => {
       home.className = 'work-grid home-featured-grid';
       home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
@@ -4409,7 +4394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasCards = home.children.length && !matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (hasCards) {
       home.classList.remove('home-page-enter'); home.classList.add('home-page-leave');
-      setTimeout(() => { if (home.dataset.swap === token) swap(); }, 300);
+      setTimeout(() => { if (home.dataset.swap === token) swap(); }, 200);
     } else swap();
     // traços no lugar dos números; o traço atual enche durante o tempo da página
     pager.innerHTML = Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-dash" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}><span></span></button>`).join('');
@@ -5210,8 +5195,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/js/motion.js?v=20261101b" defer></script>
+<script src="assets/js/motion.js?v=20261101c" defer></script>
 </body>
 </html>
