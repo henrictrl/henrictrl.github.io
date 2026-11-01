@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
+<!-- canonical por rota: o mesmo HTML serve /, /sobre/, /projetos/... (atualiza também na navegação interna) -->
+<link rel="canonical" id="canonical" href="https://henrictrl.github.io/">
+<script>(function(){var c=document.getElementById('canonical'),set=function(){c.href='https://henrictrl.github.io'+location.pathname;};set();['pushState','replaceState'].forEach(function(k){var o=history[k];history[k]=function(){var r=o.apply(this,arguments);set();return r;};});addEventListener('popstate',set);})();</script>
 <title>Projeto — Henrique Marinhos</title>
 <meta name="description" content="Projeto de Henrique Marinhos.">
 <meta name="theme-color" content="#ffffff">
@@ -86,7 +89,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
-<script src="assets/js/capas.js?v=20261031f"></script>
+<script src="assets/js/capas.js?v=20261101a"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
@@ -795,5 +798,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
 })();
 
 </script>
+<script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
 </body>
 </html>

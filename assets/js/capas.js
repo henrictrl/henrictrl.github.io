@@ -76,7 +76,7 @@
 
   var rgb = function (c) { return 'rgb(' + c.join(',') + ')'; };
   var logo = function (c, f, lg, tinta, titulo) {
-    return lg ? '<img class="ca-lg" src="' + c.src + f + '" width="' + lg[0] + '" height="' + lg[1] + '" alt="" decoding="async">'
+    return lg ? '<img class="ca-lg" src="' + c.src + f + '" width="' + lg[0] + '" height="' + lg[1] + '" alt="" loading="lazy" decoding="async">'
               : '<span class="ca-ttl" style="color:' + rgb(tinta || [255, 255, 255]) + '">' + titulo + '</span>';
   };
 
@@ -85,22 +85,22 @@
     var k = 3.4, h = '';
     if (c.m === 'C') {
       var col = function (f, s, dn) {
-        var im = '<img src="' + c.src + f + '" width="' + s[0] + '" height="' + s[1] + '" alt="" decoding="async">';
+        var im = '<img src="' + c.src + f + '" width="' + s[0] + '" height="' + s[1] + '" alt="" loading="lazy" decoding="async">';
         return '<div class="ca-col' + (dn ? ' dn' : '') + '" style="--d:' + (s[1] / s[0] * k).toFixed(1) + 's">' + im + im + '</div>';
       };
       h = '<div class="ca-side">' + logo(c, 'logo.webp', c.logo, c.tinta, p.titulo) + '</div><div class="ca-cols" aria-hidden="true">' + col('a.webp', c.a) + col('b.webp', c.b, 1) + '</div>';
     } else if (c.m === 'D' || c.m === 'DT') {
-      h = '<img class="ca-bg" src="' + c.src + 'd.webp" alt="" decoding="async"><div class="ca-side">' + logo(c, 'logo-d.webp', c.logo, c.tinta, p.titulo) + '</div>';
+      h = '<img class="ca-bg" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async"><div class="ca-side">' + logo(c, 'logo-d.webp', c.logo, c.tinta, p.titulo) + '</div>';
     } else if (c.m === 'DC' || c.m === 'M') {
-      h = '<img class="ca-bg" src="' + c.src + (c.m === 'M' ? 'm.webp' : 'd.webp') + '" alt="" decoding="async">';
+      h = '<img class="ca-bg" src="' + c.src + (c.m === 'M' ? 'm.webp' : 'd.webp') + '" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'P') {
-      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" decoding="async">';
+      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'L') {
       (c.bands || []).forEach(function (b) {
-        var im = '<img src="' + c.src + b.f + '" width="' + b.s[0] + '" height="' + b.s[1] + '" alt="" decoding="async">';
+        var im = '<img src="' + c.src + b.f + '" width="' + b.s[0] + '" height="' + b.s[1] + '" alt="" loading="lazy" decoding="async">';
         h += '<div class="ca-band" style="top:' + b.y + '%;height:' + b.hh + '%"><div class="ca-row' + (b.r ? ' r' : '') + '" style="--d:' + b.d + 's">' + im + im + '</div></div>';
       });
-      if (c.logo) h += '<img class="ca-mark' + (c.logo.spin ? ' spin' : '') + '" src="' + c.src + c.logo.f + '" width="' + c.logo.w + '" height="' + c.logo.h + '" alt="" decoding="async" style="--mw:' + c.logo.mw + '%;--mh:' + c.logo.mh + '%;--y:' + (c.logo.y || 50) + '%' + (c.logo.spin ? ';--spin:' + c.logo.spin + 's' : '') + '">';
+      if (c.logo) h += '<img class="ca-mark' + (c.logo.spin ? ' spin' : '') + '" src="' + c.src + c.logo.f + '" width="' + c.logo.w + '" height="' + c.logo.h + '" alt="" loading="lazy" decoding="async" style="--mw:' + c.logo.mw + '%;--mh:' + c.logo.mh + '%;--y:' + (c.logo.y || 50) + '%' + (c.logo.spin ? ';--spin:' + c.logo.spin + 's' : '') + '">';
     } else if (c.m === 'K') {
       // símbolo recortado (máscara) trocando de cor; cada par fundo/símbolo respeita contraste. Loop: 0% = 100%
       var n = c.pares.length, kb = '', kf = '', name = 'ca-k-' + (c.id || 'x');
@@ -113,19 +113,19 @@
           '<div class="ca-ksym" style="aspect-ratio:' + c.w + '/' + c.h + ';-webkit-mask-image:url(' + c.src + 'mask.png);mask-image:url(' + c.src + 'mask.png);animation:' + name + '-f ' + n * 3 + 's ease-in-out infinite"></div>';
     } else if (c.m === 'S') {
       // capa original sem o elemento (base) + o elemento animado por cima, na mesma posição
-      var el = function (extra, st) { return '<img class="ca-el ' + extra + '" src="' + c.src + 'el.webp" alt="" decoding="async" style="left:' + c.x + '%;top:' + c.y + '%;width:' + c.w + '%' + (st || '') + '">'; };
-      h = '<img class="ca-base" src="' + c.src + 'base.webp" alt="" decoding="async">';
+      var el = function (extra, st) { return '<img class="ca-el ' + extra + '" src="' + c.src + 'el.webp" alt="" loading="lazy" decoding="async" style="left:' + c.x + '%;top:' + c.y + '%;width:' + c.w + '%' + (st || '') + '">'; };
+      h = '<img class="ca-base" src="' + c.src + 'base.webp" alt="" loading="lazy" decoding="async">';
       if (c.fx === 'zoom') { for (var z = 0; z < 4; z++) h += el('zoom', ';animation-delay:' + (-z * 4) + 's'); }
       else h += el(c.fx, c.spin ? ';--spin:' + c.spin + 's' : '');
       if (c.hv) h += '<img class="ca-hv" src="' + c.src + c.hv + '" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'V') {
-      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" decoding="async">';
+      h = '<img class="ca-bg" src="' + c.src + 'p.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'H') {
       h = '<img src="' + c.base + '" alt="" loading="lazy" decoding="async"><img class="ca-hv" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'E') {
       // tudo em % do card (3:2): não depende de unidades de container, que o Safari congela na animação
       var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = (33.333 - c.cy * H) / 0.66667;
-      h = '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" decoding="async" style="width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;--tx:' + (250 / W).toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
+      h = '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;--tx:' + (250 / W).toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
     return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';

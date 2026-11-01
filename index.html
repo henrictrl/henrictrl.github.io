@@ -7,7 +7,10 @@
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101h">
+<link rel="stylesheet" href="assets/css/motion.css?v=20261102a">
+<!-- canonical por rota: o mesmo HTML serve /, /sobre/, /projetos/... (atualiza também na navegação interna) -->
+<link rel="canonical" id="canonical" href="https://henrictrl.github.io/">
+<script>(function(){var c=document.getElementById('canonical'),set=function(){c.href='https://henrictrl.github.io'+location.pathname;};set();['pushState','replaceState'].forEach(function(k){var o=history[k];history[k]=function(){var r=o.apply(this,arguments);set();return r;};});addEventListener('popstate',set);})();</script>
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1706,6 +1709,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-page-dash span { position:relative; display:block; width:100%; height:3px; border-radius:2px; background:var(--gray-200); overflow:hidden; }
 .home-page-dash span::after { content:""; position:absolute; inset:0; background:var(--ink); transform:scaleX(0); transform-origin:left; }
 .home-page-dash[aria-current="page"] span::after { animation:home-dash var(--home-auto, 4000ms) linear forwards; }
+.home-pagination.is-paused .home-page-dash[aria-current="page"] span::after { animation-play-state:paused; } /* vitrine pausada: o traço congela */
 .home-page-dash:hover span { background:var(--gray-400); }
 .home-page-dash:focus-visible { outline:2px solid var(--ink); outline-offset:3px; border-radius:3px; }
 @keyframes home-dash { to { transform:scaleX(1); } }
@@ -2133,6 +2137,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </style>
 
 <!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Henrique Marinhos","url":"https://henrictrl.github.io/","jobTitle":"Designer e relações-públicas","image":"https://henrictrl.github.io/assets/img/retrato-cor.webp","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Unesp"},"sameAs":["https://www.linkedin.com/in/henrique-marinhos/","https://www.behance.net/henriquemarinhos","http://lattes.cnpq.br/8181966688647381"]}</script>
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henrique Marinhos">
 <meta property="og:title" content="Henrique Marinhos — Designer e relações-públicas">
@@ -2148,6 +2154,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <meta name="twitter:title" content="Henrique Marinhos — Designer e relações-públicas">
 <meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
 <meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<!-- /compartilhamento -->
 </head>
 <body class="home-route">
 <!-- tela de carregamento (motion.js anima e remove) -->
@@ -2350,6 +2357,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   </div>
 
   <div id="view-about" style="display:none;">
+    <h1 class="mx-sr" data-i18n="about.h1">Sobre Henrique Marinhos</h1> <!-- título principal para leitores de tela e buscadores -->
     <section class="cv-actions section-block" aria-label="Currículo">
       <div class="cv-actions-inner">
         <a class="art-filter" id="cv-download-btn" href="assets/docs/Curriculo-Henrique-Marinhos.pdf" download="Curriculo - Henrique Marinhos.pdf" data-i18n="cv.download">Baixar currículo</a>
@@ -2597,7 +2605,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
-<script src="assets/js/capas.js?v=20261031f"></script>
+<script src="assets/js/capas.js?v=20261101a"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -2609,7 +2617,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
      data-i18n-about="larguraEm" → texto alinhado à esquerda; as quebras são calculadas para a largura indicada */
   const I18N = {
     en: {
-      'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
+      'about.h1': 'About Henrique Marinhos', 'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
       'menu.open': 'Open menu', 'menu.close': 'Close menu',
       'hero': '<span class="dim">Designer and<br>PR specialist.</span><br>Critical, functional<br>communication<br>strategies for brands.',
       'hint.mouse': 'hover - click to animate', 'hint.touch': 'drag your finger - tap to animate',
@@ -2644,7 +2652,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'doc.desc': 'Portfolio of Henrique Marinhos, designer focused on brand creation, editorial design, web design and B2B communication strategies.'
     },
     es: {
-      'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
+      'about.h1': 'Sobre Henrique Marinhos', 'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
       'menu.open': 'Abrir menú', 'menu.close': 'Cerrar menú',
       'hero': '<span class="dim">Diseñador y<br>relacionista público.</span><br>Estrategias de<br>comunicación críticas y<br>funcionales para marcas.',
       'hint.mouse': 'pasa el mouse - haz clic para animar', 'hint.touch': 'arrastra el dedo - toca para animar',
@@ -4379,22 +4387,44 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   let homePage = 0;
   let homeSlide = null; // animação da troca em andamento
-  // avanço automático da vitrine: a cada 4 s, sem pausa (mouse, foco, aba ou movimento reduzido não seguram a passagem)
+  // avanço automático da vitrine: a cada 4 s; pausa com mouse em cima, foco, fora da tela ou aba escondida (ver homePause)
   const HOME_AUTO_MS = 4000;
   let homeTimer = null;
-  const scheduleHomeAuto = (pageCount) => {
-    clearTimeout(homeTimer);
-    if (pageCount < 2) return;
-    homeTimer = setTimeout(() => { homePage = (homePage + 1) % pageCount; renderHomeRows(1); }, HOME_AUTO_MS);
+  // pausa (acessibilidade e economia): mouse em cima, foco do teclado, vitrine fora da tela ou aba escondida.
+  // O tempo restante é guardado e o traço que enche congela junto (animation-play-state).
+  let homeLeft = HOME_AUTO_MS, homeStart = 0, homePages = 0;
+  const homePause = { hover: false, focus: false, off: false };
+  const homePaused = () => homePause.hover || homePause.focus || homePause.off || document.hidden;
+  const homeRun = () => {
+    clearTimeout(homeTimer); homeTimer = null;
+    document.getElementById('home-pagination')?.classList.toggle('is-paused', homePaused());
+    if (homePages < 2 || homePaused()) return;
+    homeStart = performance.now();
+    homeTimer = setTimeout(() => { homePage = (homePage + 1) % homePages; renderHomeRows(1); }, homeLeft);
   };
-  window.addEventListener('resize', () => { const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; }); // nova largura: altura medida de novo
+  const homeHold = () => { if (homeTimer) homeLeft = Math.max(0, homeLeft - (performance.now() - homeStart)); homeRun(); };
+  const scheduleHomeAuto = (pageCount) => { homePages = pageCount; homeLeft = HOME_AUTO_MS; homeRun(); };
+  const initHomePause = () => {
+    const vp = document.querySelector('.home-projects-viewport'), row = document.querySelector('.home-pagination-row');
+    if (!vp) return;
+    [vp, row].filter(Boolean).forEach(el => {
+      el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { homePause.hover = true; homeHold(); } });
+      el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { homePause.hover = false; homeRun(); } });
+      el.addEventListener('focusin', () => { homePause.focus = true; homeHold(); });
+      el.addEventListener('focusout', (e) => { if (!el.contains(e.relatedTarget)) { homePause.focus = false; homeRun(); } });
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { homePause.off = !en.isIntersecting; en.isIntersecting ? homeRun() : homeHold(); }).observe(vp);
+    document.addEventListener('visibilitychange', () => document.hidden ? homeHold() : homeRun());
+  };
+  initHomePause();
+  let homeW = innerWidth; // só remede quando a LARGURA muda (no celular a barra do navegador dispara resize ao rolar)
+  window.addEventListener('resize', () => { if (innerWidth === homeW) return; homeW = innerWidth; const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; });
   const renderHomeRows = (direction = 1) => {
     const home = document.getElementById('work-grid');
     const pager = document.getElementById('home-pagination');
     if (!home || !pager) return;
     const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
-    // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
-    const keepY = window.scrollY;
+    // troca só os cards: segura a altura da grade (nunca encolhe), assim o resto da página não sobe nem desce
     if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
     // troca da vitrine: a página nova aparece em fade POR CIMA da atual (a atual fica visível embaixo
     // até ser coberta), então nunca fica vazia. A 1ª página aparece direto, sem animação.
@@ -4426,8 +4456,9 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHomeRows(direction);
     };
     scheduleHomeAuto(pageCount);
-    const restoreY = () => { if (Math.abs(window.scrollY - keepY) > 1) { const h = document.documentElement, sb = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; window.scrollTo(0, keepY); h.style.scrollBehavior = sb; } };
-    restoreY(); requestAnimationFrame(() => { restoreY(); observeLiveProjectPreviews(); });
+    // a página NUNCA é rolada por aqui: a altura da grade fica presa (min-height), então nada se mexe.
+    // (antes havia uma "devolução" da rolagem que puxava a página de volta se a pessoa rolasse durante a troca)
+    requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
@@ -5213,5 +5244,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="assets/js/motion.js?v=20261101h" defer></script>
+<script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
 </body>
 </html>
