@@ -108,3 +108,12 @@ html[data-theme="dark"] .pv-ov { background: rgba(18,18,18,.97); }
     flex-direction: column; gap: 16px; margin-top: 0 !important;
   }
 }
+
+/* troca de tema: o novo tema cresce num círculo a partir do botão (assets/js/tema.js) */
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html.theme-vt::view-transition-new(root) { animation: theme-circle .75s cubic-bezier(.65,0,.35,1); }
+@keyframes theme-circle {
+  from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0)); }
+  to   { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 0)); }
+}

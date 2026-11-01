@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
-<script src="assets/js/tema.js?v=20261029j"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261101a"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101c">
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101d">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1710,8 +1710,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-featured-grid > .work-card:nth-child(2) { --i:1; } .home-featured-grid > .work-card:nth-child(3) { --i:2; }
 .home-featured-grid > .work-card:nth-child(4) { --i:3; } .home-featured-grid > .work-card:nth-child(5) { --i:4; }
 .home-featured-grid > .work-card:nth-child(6) { --i:5; }
-.home-featured-grid.home-page-leave > .work-card { opacity:0; transition:opacity .2s ease; }
-.home-featured-grid.home-page-enter > .work-card { animation:home-card-in .6s var(--ease) calc(var(--i) * 50ms) both; }
+.home-featured-grid.home-page-leave > .work-card { opacity:0; transition:opacity .45s ease calc(var(--i) * 40ms); }
+.home-featured-grid.home-page-enter > .work-card { animation:home-card-in 1.1s cubic-bezier(.4,0,.2,1) calc(var(--i) * 110ms) both; }
 @keyframes home-card-in { from { opacity:0; } to { opacity:1; } }
 @media (prefers-reduced-motion: reduce) { .home-featured-grid > .work-card { animation:none !important; transition:none !important; } }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
@@ -1824,7 +1824,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261029i">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261101a">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
 .am-actions { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; }
@@ -3981,29 +3981,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('marquee-track');
     if (!track) return;
     const mask = track.parentElement;
-    const items = [...track.querySelectorAll('.marquee-logo')];
+    // Faixa infinita: a lista é copiada até cobrir a largura visível + 1 volta; x "dá a volta" (módulo da largura da lista),
+    // então nunca sobra espaço vazio nas pontas. Cópias ficam fora do leitor de tela e do Tab.
+    const list = track.querySelector('.marquee-list');
+    const addCopies = () => {
+      const need = Math.ceil((mask.getBoundingClientRect().width || innerWidth) / Math.max(1, list.offsetWidth || 1)) + 1;
+      for (let n = track.children.length - 1; n < need; n++) {
+        const c = list.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.removeAttribute('aria-label');
+        c.querySelectorAll('a').forEach(a => a.tabIndex = -1);
+        track.appendChild(c);
+      }
+    };
+    addCopies();
+    let items = [...track.querySelectorAll('.marquee-logo')];
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const SPEED = reduce ? 0 : 38;        // px/s em velocidade normal
     // Vaivém: anda da direita p/ a esquerda até o último logo chegar ao centro, inverte, volta até o primeiro, e assim sempre.
     // x fica SEMPRE preso entre lo e hi: a faixa nunca sai da tela, nem com aba escondida, redimensionamento ou arraste.
     let x = 0, dir = 1, v = SPEED, target = SPEED, last = 0, raf = 0, inView = false;
-    let offsets = [], center = 0, lo = 0, hi = 0, hoverEl = null, drag = null, resumeT = 0;
+    let offsets = [], center = 0, lo = 0, hi = 0, period = 0, hoverEl = null, drag = null, resumeT = 0;
     const mobile = matchMedia('(hover: none)').matches;
     let mobileFling = 0;
 
     const measure = () => {
       const w = mask.getBoundingClientRect().width;
       if (!w || !track.offsetWidth) return false;    // escondida (ex.: página de serviço aberta): mantém a última medida
-      offsets = items.map(li => li.offsetLeft + li.offsetWidth / 2);
+      addCopies(); items = [...track.querySelectorAll('.marquee-logo')];
+      const t0 = track.getBoundingClientRect().left;  // posição relativa à faixa (o transform afeta os dois igualmente)
+      offsets = items.map(li => { const r = li.getBoundingClientRect(); return r.left - t0 + r.width / 2; });
       center = w / 2;
-      lo = offsets[0] - center;                        // 1º logo no centro
-      hi = Math.max(lo, offsets[offsets.length - 1] - center); // último logo no centro
+      period = list.offsetWidth;                       // largura de uma volta
+      lo = offsets[0] - center;                        // 1º logo no centro (ponto de partida)
       return true;
     };
     // prende x nos limites; ao bater numa ponta, inverte o sentido
-    const clamp = () => {
-      if (x >= hi) { x = hi; dir = -1; } else if (x <= lo) { x = lo; dir = 1; }
-    };
+    const clamp = () => { if (period > 0) x = ((x % period) + period) % period; };
 
     const paint = () => {
       track.style.transform = `translate3d(${-x}px,0,0)`;
@@ -4019,7 +4031,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobile && Math.abs(mobileFling) > 8) {
           x += mobileFling * dt;
           mobileFling *= Math.exp(-2.4 * dt);       // inércia suave após soltar o dedo
-          if (x >= hi || x <= lo) mobileFling = 0;  // bateu na ponta: para a inércia
         } else {
           mobileFling = 0;
           x += v * dir * dt;
@@ -4085,7 +4096,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.cancelable) e.preventDefault();
         if (window.getSelection) { const sel = window.getSelection(); if (sel && sel.rangeCount) sel.removeAllRanges(); }
       }
-      x = Math.min(hi, Math.max(lo, drag.x0 - dx));
+      x = drag.x0 - dx; clamp();
       track.style.transform = `translate3d(${-x}px,0,0)`;
     });
     const endDrag = (e) => {
@@ -4118,10 +4129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) { measure(); clamp(); start(); } }).observe(mask);
     window.addEventListener('resize', () => { if (measure()) { clamp(); paint(); } });
     // começa com o 1º logo (Óptica Leopoldina) no centro, andando para a esquerda
-    const startCentered = () => { if (measure()) { x = lo; dir = 1; paint(); } };
+    const startCentered = () => { if (measure()) { x = lo; dir = 1; clamp(); paint(); } };
     startCentered();
     let started = false;
-    window.addEventListener('load', () => { if (!started && Math.abs(x - lo) < 60) startCentered(); else if (measure()) { clamp(); paint(); } started = true; });
+    window.addEventListener('load', () => { if (!started) startCentered(); else if (measure()) { clamp(); paint(); } started = true; });
   };
 
 
@@ -4394,7 +4405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasCards = home.children.length && !matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (hasCards) {
       home.classList.remove('home-page-enter'); home.classList.add('home-page-leave');
-      setTimeout(() => { if (home.dataset.swap === token) swap(); }, 200);
+      setTimeout(() => { if (home.dataset.swap === token) swap(); }, 650);
     } else swap();
     // traços no lugar dos números; o traço atual enche durante o tempo da página
     pager.innerHTML = Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-dash" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}><span></span></button>`).join('');
@@ -5195,6 +5206,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script src="assets/js/motion.js?v=20261101c" defer></script>
+<script src="assets/js/motion.js?v=20261101d" defer></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* motion.js — complemento leve do motion.css (sem bibliotecas, ~1 KB)
-   1) tira a tela de carregamento  2) fade na troca de página  3) ponto do cursor */
+   1) carregamento  2) troca de página  3) cartões da página Projetos  4) ponto do cursor */
 (() => {
   const html = document.documentElement;
   const loader = document.getElementById('mx-loader');
@@ -14,27 +14,49 @@
   }
   if (off) return;
 
-  // 2) troca de página: esmaece, troca (handler original do link), aparece
+  // 2) troca de página: a atual esmaece (0,2 s), troca pelo handler original do link,
+  //    e os blocos da nova entram em cascata subindo só 14 px
   const main = document.querySelector('main');
   let busy = false;
   const current = () => ['home', 'work', 'about', 'articles'].find(r => document.getElementById('view-' + r)?.style.display !== 'none');
+  const enterView = () => {
+    const v = document.getElementById('view-' + current()); if (!v) return;
+    const kids = [...v.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 5);
+    kids.forEach((el, i) => {
+      el.style.setProperty('--mx-d', i * 60 + 'ms');
+      el.classList.remove('mx-rise'); void el.offsetWidth; el.classList.add('mx-rise');
+      el.addEventListener('animationend', () => el.classList.remove('mx-rise'), { once: true });
+    });
+  };
   addEventListener('click', (e) => {
     const a = e.target.closest('a[data-route]');
     if (!a || a.dataset.mxPass || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     if (a.dataset.route === current() && !location.hash) return;
     e.preventDefault(); e.stopImmediatePropagation();
     if (busy) return; busy = true;
-    main.classList.remove('mx-enter'); main.classList.add('mx-leave');
+    main.classList.add('mx-leave');
     setTimeout(() => {
       a.dataset.mxPass = '1'; a.click(); delete a.dataset.mxPass;
       scrollTo({ top: 0, behavior: 'instant' });
-      main.classList.remove('mx-leave'); void main.offsetWidth; main.classList.add('mx-enter');
-      busy = false;
-    }, 220);
+      main.classList.remove('mx-leave'); enterView(); busy = false;
+    }, 200);
   }, true);
-  main.addEventListener('animationend', (e) => { if (e.target === main) main.classList.remove('mx-enter'); });
+  addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
 
-  // 3) ponto do cursor: segue o mouse direto (1 transform por quadro, sem atraso)
+  // 3) página Projetos: cartões aparecem só em fade lento ao entrar na tela (sem direção);
+  //    na mesma linha, um leve atraso da esquerda para a direita
+  const grid = document.getElementById('work-case-grid');
+  if (grid && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((ents) => {
+      const vis = ents.filter(en => en.isIntersecting).map(en => en.target);
+      vis.sort((p, q) => p.getBoundingClientRect().left - q.getBoundingClientRect().left);
+      vis.forEach((el, i) => { el.style.setProperty('--mx-d', Math.min(i, 4) * 90 + 'ms'); el.classList.add('mx-in'); io.unobserve(el); });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.12 });
+    const watch = () => grid.querySelectorAll('.work-card:not(.mx-fade)').forEach(c => { c.classList.add('mx-fade'); io.observe(c); });
+    watch(); new MutationObserver(watch).observe(grid, { childList: true });
+  }
+
+  // 4) ponto do cursor: segue o mouse direto (1 transform por quadro, sem atraso)
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const dot = document.createElement('div');
     dot.id = 'mx-cursor'; dot.setAttribute('aria-hidden', 'true');

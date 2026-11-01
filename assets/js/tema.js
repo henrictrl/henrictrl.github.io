@@ -73,7 +73,15 @@
         if (t === autoTheme(new Date())) localStorage.removeItem(KEY); // voltou ao automático
         else localStorage.setItem(KEY, JSON.stringify({ theme: t, until: nextBoundary(new Date()) }));
       } catch (e) {}
-      apply(t);
+      // troca com círculo que se expande a partir do botão (View Transitions; sem suporte = troca direta)
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!document.startViewTransition || reduce) { apply(t); return; }
+      var r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var rad = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+      root.style.setProperty('--vt-x', cx + 'px'); root.style.setProperty('--vt-y', cy + 'px'); root.style.setProperty('--vt-r', rad + 'px');
+      root.classList.add('theme-vt');
+      var vt = document.startViewTransition(function () { apply(t); });
+      vt.finished.then(function () { root.classList.remove('theme-vt'); }, function () { root.classList.remove('theme-vt'); });
     });
     return b;
   };
