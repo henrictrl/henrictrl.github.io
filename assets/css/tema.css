@@ -109,11 +109,7 @@ html[data-theme="dark"] .pv-ov { background: rgba(18,18,18,.97); }
   }
 }
 
-/* troca de tema: o novo tema cresce num círculo a partir do botão (assets/js/tema.js) */
+/* troca de tema: esmaecimento curto (assets/js/tema.js); só o quadro inteiro, sem custo por elemento */
 html.theme-vt::view-transition-old(root),
-html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-html.theme-vt::view-transition-new(root) { animation: theme-circle .75s cubic-bezier(.65,0,.35,1); }
-@keyframes theme-circle {
-  from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0)); }
-  to   { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 0)); }
-}
+html.theme-vt::view-transition-new(root) { animation-duration: .3s; animation-timing-function: ease; }
+html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after { transition: none !important; }

@@ -1,4 +1,4 @@
-/* motion.js — complemento leve do motion.css (sem bibliotecas, ~1 KB)
+/* motion.js — complemento leve do motion.css (sem bibliotecas, ~2 KB)
    1) carregamento  2) troca de página  3) cartões da página Projetos  4) ponto do cursor */
 (() => {
   const html = document.documentElement;
@@ -21,9 +21,9 @@
   const current = () => ['home', 'work', 'about', 'articles'].find(r => document.getElementById('view-' + r)?.style.display !== 'none');
   const enterView = () => {
     const v = document.getElementById('view-' + current()); if (!v) return;
-    const kids = [...v.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 5);
+    const kids = [...v.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 3); // só o que cabe na 1ª tela
     kids.forEach((el, i) => {
-      el.style.setProperty('--mx-d', i * 60 + 'ms');
+      el.style.setProperty('--mx-d', i * 70 + 'ms');
       el.classList.remove('mx-rise'); void el.offsetWidth; el.classList.add('mx-rise');
       el.addEventListener('animationend', () => el.classList.remove('mx-rise'), { once: true });
     });
@@ -39,7 +39,7 @@
       a.dataset.mxPass = '1'; a.click(); delete a.dataset.mxPass;
       scrollTo({ top: 0, behavior: 'instant' });
       main.classList.remove('mx-leave'); enterView(); busy = false;
-    }, 200);
+    }, 180);
   }, true);
   addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
 
@@ -61,11 +61,10 @@
     const dot = document.createElement('div');
     dot.id = 'mx-cursor'; dot.setAttribute('aria-hidden', 'true');
     document.body.appendChild(dot);
-    let x = 0, y = 0, raf = 0;
+    // atualiza direto no evento (já vem 1 por quadro): sem atraso em relação à seta do sistema
     addEventListener('pointermove', (e) => {
-      x = e.clientX; y = e.clientY;
-      if (!raf) raf = requestAnimationFrame(() => { dot.style.transform = `translate3d(${x}px,${y}px,0)`; raf = 0; });
-      dot.classList.add('on');
+      dot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      if (!dot.classList.contains('on')) dot.classList.add('on');
     }, { passive: true });
     document.addEventListener('pointerleave', () => dot.classList.remove('on'));
   }

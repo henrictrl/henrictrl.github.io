@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
-<script src="assets/js/tema.js?v=20261101a"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101d">
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101e">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1711,7 +1711,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-featured-grid > .work-card:nth-child(4) { --i:3; } .home-featured-grid > .work-card:nth-child(5) { --i:4; }
 .home-featured-grid > .work-card:nth-child(6) { --i:5; }
 .home-featured-grid.home-page-leave > .work-card { opacity:0; transition:opacity .45s ease calc(var(--i) * 40ms); }
-.home-featured-grid.home-page-enter > .work-card { animation:home-card-in 1.1s cubic-bezier(.4,0,.2,1) calc(var(--i) * 110ms) both; }
+.home-featured-grid.home-page-enter > .work-card { animation:home-card-in 1s ease calc(var(--i) * 90ms) both; }
 @keyframes home-card-in { from { opacity:0; } to { opacity:1; } }
 @media (prefers-reduced-motion: reduce) { .home-featured-grid > .work-card { animation:none !important; transition:none !important; } }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
@@ -1824,7 +1824,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261101a">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261101b">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
 .am-actions { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; }
@@ -3999,14 +3999,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Vaivém: anda da direita p/ a esquerda até o último logo chegar ao centro, inverte, volta até o primeiro, e assim sempre.
     // x fica SEMPRE preso entre lo e hi: a faixa nunca sai da tela, nem com aba escondida, redimensionamento ou arraste.
     let x = 0, dir = 1, v = SPEED, target = SPEED, last = 0, raf = 0, inView = false;
-    let offsets = [], center = 0, lo = 0, hi = 0, period = 0, hoverEl = null, drag = null, resumeT = 0;
+    let offsets = [], center = 0, lo = 0, hi = 0, period = 0, lastMid = -1, hoverEl = null, drag = null, resumeT = 0;
     const mobile = matchMedia('(hover: none)').matches;
     let mobileFling = 0;
 
     const measure = () => {
       const w = mask.getBoundingClientRect().width;
       if (!w || !track.offsetWidth) return false;    // escondida (ex.: página de serviço aberta): mantém a última medida
-      addCopies(); items = [...track.querySelectorAll('.marquee-logo')];
+      addCopies(); items.forEach(li => li.classList.remove('is-middle')); lastMid = -1; items = [...track.querySelectorAll('.marquee-logo')];
       const t0 = track.getBoundingClientRect().left;  // posição relativa à faixa (o transform afeta os dois igualmente)
       offsets = items.map(li => { const r = li.getBoundingClientRect(); return r.left - t0 + r.width / 2; });
       center = w / 2;
@@ -4020,8 +4020,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const paint = () => {
       track.style.transform = `translate3d(${-x}px,0,0)`;
       let best = 1e9, mid = -1;
-      items.forEach((li, i) => { const d = Math.abs(offsets[i] - x - center); if (d < best) { best = d; mid = i; } });
-      items.forEach((li, i) => li.classList.toggle('is-middle', i === mid)); // o mais central (nome no celular)
+      for (let i = 0; i < offsets.length; i++) { const d = Math.abs(offsets[i] - x - center); if (d < best) { best = d; mid = i; } }
+      if (mid !== lastMid) { items[lastMid]?.classList.remove('is-middle'); items[mid]?.classList.add('is-middle'); lastMid = mid; } // o mais central (nome no celular); só mexe no DOM quando muda
     };
     const tick = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
@@ -5206,6 +5206,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script src="assets/js/motion.js?v=20261101d" defer></script>
+<script src="assets/js/motion.js?v=20261101e" defer></script>
 </body>
 </html>

@@ -73,14 +73,16 @@
         if (t === autoTheme(new Date())) localStorage.removeItem(KEY); // voltou ao automático
         else localStorage.setItem(KEY, JSON.stringify({ theme: t, until: nextBoundary(new Date()) }));
       } catch (e) {}
-      // troca com círculo que se expande a partir do botão (View Transitions; sem suporte = troca direta)
+      // troca de tema: esmaecimento curto entre as cores (View Transitions; sem suporte = troca direta)
       var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!document.startViewTransition || reduce) { apply(t); return; }
-      var r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-      var rad = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
-      root.style.setProperty('--vt-x', cx + 'px'); root.style.setProperty('--vt-y', cy + 'px'); root.style.setProperty('--vt-r', rad + 'px');
+      // troca sem as transições de cor/filtro de cada elemento (dezenas de logos com filter = travamento)
+      var swap = function () {
+        root.classList.add('theme-swap'); apply(t); void root.offsetWidth;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('theme-swap'); }); });
+      };
+      if (!document.startViewTransition || reduce) { swap(); return; }
       root.classList.add('theme-vt');
-      var vt = document.startViewTransition(function () { apply(t); });
+      var vt = document.startViewTransition(swap);
       vt.finished.then(function () { root.classList.remove('theme-vt'); }, function () { root.classList.remove('theme-vt'); });
     });
     return b;
