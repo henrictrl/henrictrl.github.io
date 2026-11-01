@@ -59,7 +59,10 @@
     '@keyframes ca-pulse{from{transform:scale(1);filter:saturate(1)}to{transform:scale(1.06);filter:saturate(1.25)}}',
     /* S · elemento da capa animado (girar, piscar, anéis crescendo) */
     '.work-card-media .ca-S .ca-base{inset:0;width:100%;height:100%;object-fit:cover}',
-    '.work-card-media .ca-S .ca-el{height:auto;translate:-50% -50%}',
+    /* elemento centralizado pelo layout (caixa da altura do card, centrada em y; imagem no meio com flex),
+       sem translate: o Safari errava a posição quando a imagem carregava depois ou girava */
+    '.work-card-media .ca-S .ca-elw{position:absolute;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none}',
+    '.work-card-media .ca-S .ca-elw .ca-el{position:relative;inset:auto;width:100%;height:auto;max-width:100%;transform-origin:50% 50%}',
     '.work-card-media .ca-S .ca-el.spin{animation:ca-spin var(--spin,40s) linear infinite}',
     '.work-card-media .ca-S .ca-el.blink{animation:ca-blink 4.5s ease-in-out infinite}',
     '@keyframes ca-blink{0%,88%,100%{transform:scaleY(1)}92%{transform:scaleY(.06)}96%{transform:scaleY(1)}}',
@@ -116,7 +119,7 @@
           '<div class="ca-ksym" style="aspect-ratio:' + c.w + '/' + c.h + ';-webkit-mask-image:url(' + c.src + 'mask.png);mask-image:url(' + c.src + 'mask.png);animation:' + name + '-f ' + n * 3 + 's ease-in-out infinite"></div>';
     } else if (c.m === 'S') {
       // capa original sem o elemento (base) + o elemento animado por cima, na mesma posição
-      var el = function (extra, st) { return '<img class="ca-el ' + extra + '" src="' + c.src + 'el.webp" alt="" loading="lazy" decoding="async" style="left:' + c.x + '%;top:' + c.y + '%;width:' + c.w + '%' + (st || '') + '">'; };
+      var el = function (extra, st) { return '<span class="ca-elw" style="left:' + (c.x - c.w / 2).toFixed(3) + '%;top:' + (c.y - 50).toFixed(3) + '%;width:' + c.w + '%"><img class="ca-el ' + extra + '" src="' + c.src + 'el.webp" alt="" decoding="async"' + (st ? ' style="' + st.replace(/^;/, '') + '"' : '') + '></span>'; };
       h = '<img class="ca-base" src="' + c.src + 'base.webp" alt="" loading="lazy" decoding="async">';
       if (c.fx === 'zoom') { for (var z = 0; z < 4; z++) h += el('zoom', ';animation-delay:' + (-z * 4) + 's'); }
       else h += el(c.fx, c.spin ? ';--spin:' + c.spin + 's' : '');
