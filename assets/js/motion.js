@@ -49,34 +49,30 @@
     } else { loader?.remove(); afterLoad(); }
 
     /* ---------- 2. TRANSIÇÃO ENTRE PÁGINAS ---------- */
-    const wipe = document.createElement('div');
-    wipe.className = 'mx-wipe'; wipe.setAttribute('aria-hidden', 'true');
-    wipe.innerHTML = '<i></i>'.repeat(COLS);
-    document.body.appendChild(wipe);
-    const bars = wipe.children;
     let busy = false;
     const currentRoute = () => ['home', 'work', 'about', 'articles'].find(r => document.getElementById('view-' + r)?.style.display !== 'none');
+    const main = document.querySelector('main');
 
-    // conteúdo da nova página entra em cascata
+    // conteúdo da nova página entra em cascata, com deslocamento pequeno
     const enterView = (view) => {
-      const kids = [...view.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 6);
-      gsap.fromTo(kids, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: .9, ease: EASE, stagger: .08, clearProps: 'transform,opacity' });
+      const kids = [...view.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 5);
+      gsap.fromTo(kids, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .06, clearProps: 'transform,opacity' });
     };
 
+    // troca de página: a atual esmaece (0,2 s), troca, a nova sobe de leve
     addEventListener('click', (e) => {
       const a = e.target.closest('a[data-route]');
       if (!a || a.dataset.mxPass || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       if (a.dataset.route === currentRoute() && !location.hash) return;
       e.preventDefault(); e.stopImmediatePropagation();
       if (busy) return; busy = true;
-      gsap.timeline()
-        .set(bars, { transformOrigin: 'bottom' })
-        .to(bars, { scaleY: 1, duration: .38, ease: 'power3.inOut', stagger: { each: .025, from: 'start' } })
-        .add(() => { a.dataset.mxPass = '1'; a.click(); delete a.dataset.mxPass; scrollTo(0, 0); })
-        .set(bars, { transformOrigin: 'top' })
-        .to(bars, { scaleY: 0, duration: .5, ease: 'power3.inOut', stagger: { each: .025, from: 'start' } })
-        .add(() => { enterView(document.getElementById('view-' + currentRoute())); ScrollTrigger.refresh(); }, '-=.45')
-        .add(() => { busy = false; });
+      gsap.to(main, { opacity: 0, y: -6, duration: .2, ease: 'power2.in', onComplete: () => {
+        a.dataset.mxPass = '1'; a.click(); delete a.dataset.mxPass;
+        scrollTo({ top: 0, behavior: 'instant' });
+        gsap.set(main, { clearProps: 'opacity,transform' });
+        enterView(document.getElementById('view-' + currentRoute()));
+        ScrollTrigger.refresh(); busy = false;
+      } });
     }, true);
 
     // voltar/avançar do navegador: só a entrada do conteúdo
@@ -84,27 +80,16 @@
 
     /* ---------- 3. HOVER ---------- */
     if (FINE) {
-      // cursor seguidor com rótulo "Ver" sobre projetos
+      // cursor: ponto pequeno que segue o mouse com leve atraso; só "afunda" no clique
       const cur = document.createElement('div');
-      cur.id = 'mx-cursor'; cur.setAttribute('aria-hidden', 'true'); cur.innerHTML = '<span></span>';
+      cur.id = 'mx-cursor'; cur.setAttribute('aria-hidden', 'true');
       document.body.appendChild(cur);
-      const label = cur.firstChild;
-      const xTo = gsap.quickTo(cur, 'x', { duration: .45, ease: 'power3' });
-      const yTo = gsap.quickTo(cur, 'y', { duration: .45, ease: 'power3' });
-      const LBL = { pt: 'Ver', en: 'View', es: 'Ver' };
+      const xTo = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3' });
+      const yTo = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3' });
       addEventListener('pointermove', (e) => { xTo(e.clientX); yTo(e.clientY); cur.classList.add('on'); }, { passive: true });
       document.addEventListener('pointerleave', () => cur.classList.remove('on'));
-      document.addEventListener('pointerover', (e) => {
-        const card = e.target.closest('.work-card, .service-card');
-        const link = !card && e.target.closest('a, button, [role="button"]');
-        if (card) {
-          label.textContent = LBL[(html.lang || 'pt').slice(0, 2)] || 'Ver';
-          cur.classList.add('label'); gsap.to(cur, { width: 64, height: 64, margin: '-32px 0 0 -32px', duration: .4, ease: 'back.out(1.6)' });
-        } else {
-          cur.classList.remove('label');
-          gsap.to(cur, link ? { width: 36, height: 36, margin: '-18px 0 0 -18px', duration: .3 } : { width: 10, height: 10, margin: '-5px 0 0 -5px', duration: .3 });
-        }
-      });
+      addEventListener('pointerdown', () => gsap.to(cur, { scale: .6, duration: .15 }));
+      addEventListener('pointerup', () => gsap.to(cur, { scale: 1, duration: .4, ease: 'back.out(3)' }));
 
       // botões magnéticos: puxam levemente em direção ao cursor
       const MAG = '.main-nav a, .footer-social, .section-link, .lang-switch button, .home-pagination button';
@@ -149,7 +134,7 @@
     // cartões de projeto (renderizados dinamicamente): revelação com máscara + zoom da capa
     const seen = new WeakSet();
     const revealCards = () => {
-      const fresh = [...document.querySelectorAll('.work-card')].filter(c => !seen.has(c) && c.offsetParent);
+      const fresh = [...document.querySelectorAll('.work-card')].filter(c => !seen.has(c) && c.offsetParent && !c.closest('.home-featured-grid'));
       fresh.forEach(c => seen.add(c));
       if (!fresh.length) return;
       ScrollTrigger.batch(fresh, {
@@ -160,7 +145,7 @@
       });
     };
     revealCards();
-    let mqT; new MutationObserver(() => { clearTimeout(mqT); mqT = setTimeout(() => { revealCards(); ScrollTrigger.refresh(); }, 120); })
+    let mqT; new MutationObserver((ms) => { if (ms.every(m => m.target.closest?.('.home-featured-grid'))) return; clearTimeout(mqT); mqT = setTimeout(() => { revealCards(); ScrollTrigger.refresh(); }, 120); })
       .observe(document.querySelector('main'), { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
 
     // faixa de logos: inclina conforme a velocidade da rolagem
