@@ -10156,13 +10156,674 @@ window.PROJETOS = [
   "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
-   "pt": "Como este site foi construído: um arquivo HTML, sem framework, com os dados em JavaScript e animações feitas em canvas.",
-   "en": "How this site was built: a single HTML file, no framework, data in JavaScript and animations drawn on canvas.",
-   "es": "Cómo se construyó este sitio: un archivo HTML, sin framework, con los datos en JavaScript y animaciones hechas en canvas."
+   "pt": "Manual do site em 35 páginas: arquivos do repositório, grade, páginas e sistemas. HTML, CSS e JavaScript sem framework, publicado no GitHub Pages.",
+   "en": "Site manual in 35 pages: repository files, grid, pages and systems. HTML, CSS and JavaScript with no framework, published on GitHub Pages.",
+   "es": "Manual del sitio en 35 páginas: archivos del repositorio, retícula, páginas y sistemas. HTML, CSS y JavaScript sin framework, publicado en GitHub Pages."
   },
-  "telas": [],
+  "telas": [
+   {
+    "img": "01",
+    "t": {
+     "pt": "Este portfólio",
+     "en": "This portfolio",
+     "es": "Este portafolio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "02",
+    "t": {
+     "pt": "Sumário",
+     "en": "Contents",
+     "es": "Sumario"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "03",
+    "t": {
+     "pt": "O site em números",
+     "en": "The site in numbers",
+     "es": "El sitio en números"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "04",
+    "t": {
+     "pt": "Com o que foi feito",
+     "en": "What it’s made with",
+     "es": "Con qué está hecho"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "05",
+    "t": {
+     "pt": "Arquivos",
+     "en": "Files",
+     "es": "Archivos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "06",
+    "t": {
+     "pt": "A raiz do repositório",
+     "en": "The repository root",
+     "es": "La raíz del repositorio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "07",
+    "t": {
+     "pt": "Peso do repositório",
+     "en": "Repository size",
+     "es": "Peso del repositorio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "08",
+    "t": {
+     "pt": "Os dados fora do HTML",
+     "en": "Data outside the HTML",
+     "es": "Los datos fuera del HTML"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "09",
+    "t": {
+     "pt": "Tipos de arquivo",
+     "en": "File types",
+     "es": "Tipos de archivo"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "10",
+    "t": {
+     "pt": "Como uma visita chega à página",
+     "en": "How a visit reaches the page",
+     "es": "Cómo una visita llega a la página"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "11",
+    "t": {
+     "pt": "Grade",
+     "en": "Grid",
+     "es": "Retícula"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "12",
+    "t": {
+     "pt": "Faixa e colunas",
+     "en": "Band and columns",
+     "es": "Franja y columnas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Pontos de quebra",
+     "en": "Breakpoints",
+     "es": "Puntos de quiebre"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "14",
+    "t": {
+     "pt": "Colunas por componente",
+     "en": "Columns by component",
+     "es": "Columnas por componente"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "15",
+    "t": {
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "16",
+    "t": {
+     "pt": "Cores e tokens",
+     "en": "Colours and tokens",
+     "es": "Colores y tokens"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "17",
+    "t": {
+     "pt": "Páginas",
+     "en": "Pages",
+     "es": "Páginas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "18",
+    "t": {
+     "pt": "Mapa do site",
+     "en": "Site map",
+     "es": "Mapa del sitio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "19",
+    "t": {
+     "pt": "Início: seis blocos",
+     "en": "Home: six blocks",
+     "es": "Inicio: seis bloques"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "20",
+    "t": {
+     "pt": "Início: espaços com regra",
+     "en": "Home: spacing with a rule",
+     "es": "Inicio: espacios con regla"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "21",
+    "t": {
+     "pt": "O currículo como página",
+     "en": "The CV as a page",
+     "es": "El currículum como página"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "22",
+    "t": {
+     "pt": "A vitrine completa",
+     "en": "The full showcase",
+     "es": "La vitrina completa"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "23",
+    "t": {
+     "pt": "O acervo",
+     "en": "The archive",
+     "es": "El acervo"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "24",
+    "t": {
+     "pt": "Um molde, 37 cases",
+     "en": "One template, 37 cases",
+     "es": "Una plantilla, 37 casos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "25",
+    "t": {
+     "pt": "Artigos",
+     "en": "Articles",
+     "es": "Artículos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "26",
+    "t": {
+     "pt": "O leitor de artigos",
+     "en": "The article reader",
+     "es": "El lector de artículos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "27",
+    "t": {
+     "pt": "Posts e dashboards",
+     "en": "Posts and dashboards",
+     "es": "Posts y dashboards"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "28",
+    "t": {
+     "pt": "Cliente e serviço",
+     "en": "Client and service",
+     "es": "Cliente y servicio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "29",
+    "t": {
+     "pt": "Sistemas",
+     "en": "Systems",
+     "es": "Sistemas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "30",
+    "t": {
+     "pt": "Três idiomas em tudo",
+     "en": "Three languages everywhere",
+     "es": "Tres idiomas en todo"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "31",
+    "t": {
+     "pt": "Modo noturno pelo relógio",
+     "en": "Night mode by the clock",
+     "es": "Modo nocturno por el reloj"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "32",
+    "t": {
+     "pt": "Movimento e interação",
+     "en": "Motion and interaction",
+     "es": "Movimiento e interacción"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "33",
+    "t": {
+     "pt": "Leve, encontrável e acessível",
+     "en": "Light, findable and accessible",
+     "es": "Liviano, encontrable y accesible"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "34",
+    "t": {
+     "pt": "Do arquivo ao site no ar",
+     "en": "From file to live site",
+     "es": "Del archivo al sitio en línea"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "35",
+    "t": {
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   }
+  ],
+  "secoes": [
+   {
+    "p": 1,
+    "t": {
+     "pt": "Capa",
+     "en": "Cover",
+     "es": "Portada"
+    }
+   },
+   {
+    "p": 2,
+    "t": {
+     "pt": "Sumário",
+     "en": "Contents",
+     "es": "Sumario"
+    }
+   },
+   {
+    "p": 3,
+    "t": {
+     "pt": "Visão geral",
+     "en": "Overview",
+     "es": "Visión general"
+    }
+   },
+   {
+    "p": 5,
+    "t": {
+     "pt": "Arquivos",
+     "en": "Files",
+     "es": "Archivos"
+    }
+   },
+   {
+    "p": 11,
+    "t": {
+     "pt": "Grade",
+     "en": "Grid",
+     "es": "Retícula"
+    }
+   },
+   {
+    "p": 17,
+    "t": {
+     "pt": "Páginas",
+     "en": "Pages",
+     "es": "Páginas"
+    }
+   },
+   {
+    "p": 29,
+    "t": {
+     "pt": "Sistemas",
+     "en": "Systems",
+     "es": "Sistemas"
+    }
+   },
+   {
+    "p": 35,
+    "t": {
+     "pt": "Ficha técnica",
+     "en": "Credits",
+     "es": "Ficha técnica"
+    }
+   }
+  ],
   "shots": [],
-  "html": "meta",
   "idiomasImg": [
    "en",
    "es"
