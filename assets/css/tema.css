@@ -24,7 +24,6 @@ html[data-theme="dark"] .marquee-logo img {
 }
 
 /* bloco escuro dos serviços continua escuro (ink agora é claro) */
-html[data-theme="dark"] .sv-menu { background: var(--gray-100); }
 
 /* fundos brancos fixos */
 html[data-theme="dark"] .dk-tag,

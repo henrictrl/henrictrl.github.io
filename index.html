@@ -369,7 +369,11 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .work-card-crop-top .work-card-media img { transform:scale(1.22) translateY(-6%); }
 .work-card-title { font-size: 13px; font-weight: 500; line-height: 1.3; }
 .work-card-tag { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+.work-card-desc { font-size: 12px; line-height: 1.35; color: #767676; margin-top: 3px; } /* resumo curto do projeto (cinza com contraste AA) */
+@media (min-width: 640px) { .work-card-desc { font-size: 12.5px; } }
+#work-case-grid[data-cols="4"] .work-card-desc, #work-case-grid[data-cols="5"] .work-card-desc { font-size: 11px; }
 @media (min-width: 640px) { .work-card-title { font-size: 14px; } .work-card-tag { font-size: 12px; } }
+@media (max-width: 767px) { .services-grid .service-desc { display: none; } } /* celular: só o título do serviço */
 
 .services-title { font-size: 18px; font-weight: 500; color: var(--gray-400); margin-bottom: 32px; }
 .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; } /* celular: malha 2x2 */
@@ -402,7 +406,9 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 }
 
 /* --- Marquee --- */
-.marquee-section { padding: calc(var(--space-y) / 2) 0; overflow: hidden; }
+.marquee-section { padding: calc(var(--space-y) * .75) 0 calc(var(--space-y) * .85); overflow: hidden; } /* respiro entre Serviços, logos e Projetos */
+#trabalhos { padding-top: calc(var(--space-y) * .45); }
+.services-block { padding-bottom: calc(var(--space-y) * .6); }
 
 .marquee-mask {
   overflow: hidden; padding: 36px 0; margin: -36px 0; /* folga vertical p/ o zoom não cortar */
@@ -417,7 +423,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .marquee-list { -webkit-user-select: none; user-select: none; }
 .marquee-link { -webkit-user-select: none; user-select: none; }
 .marquee-list { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
-/* espaço como margem (não gap): as duas listas têm largura idêntica → loop sem emenda */
+/* espaço entre logos como margem */
 .marquee-logo { position: relative; flex: none; margin-right: 104px; display: flex; align-items: center; padding: 14px 0 22px; }
 @media (min-width: 768px) { .marquee-logo { margin-right: 188px; } }
 .marquee-logo img {
@@ -806,117 +812,88 @@ body.sv-open .sv { display: block; }
 .sv-x:hover, .sv-x:focus-visible { border-color: var(--ink); }
 .sv-x svg { width: 16px; height: 16px; }
 
-/* capa: cor cheia do serviço, título enorme, ícone em pixel gigante com sombra dura e confete de pixels */
-.sv-hero { position: relative; overflow: hidden; background: var(--svc); color: var(--on); }
-.sv-hero .sv-in { position: relative; z-index: 2; display: grid; gap: 28px; padding-top: clamp(48px, 9vw, 120px); padding-bottom: clamp(48px, 8vw, 110px); }
-@media (min-width: 900px) { .sv-hero .sv-in { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; } }
-.sv-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
-.sv-eyebrow::before { content: ''; width: 24px; height: 2px; background: currentColor; }
-.sv-title { font-size: clamp(46px, 11vw, 132px); font-weight: 500; letter-spacing: -0.045em; line-height: .92; margin: 18px 0 22px; text-wrap: balance; }
-.sv-desc { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.5; max-width: 34ch; text-wrap: pretty; }
-.sv-hero-ic { justify-self: start; width: clamp(120px, 26vw, 240px); aspect-ratio: 1; }
-@media (min-width: 900px) { .sv-hero-ic { justify-self: end; } }
-.sv-hero-ic svg { width: 100%; height: 100%; fill: var(--on); filter: drop-shadow(10px 10px 0 var(--sh)); }
-.sv-confetti { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.sv-confetti span { position: absolute; display: block; }
+/* Página de serviço no padrão da página de projeto: cabeçalho centralizado, sumário lateral, listas com fio fino.
+   Cor do serviço (--svc) só em detalhes: ícone, número das etapas e marcador do sumário. */
+.sv-head { max-width: 760px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) var(--gutter) clamp(40px, 5vw, 64px); text-align: center; }
+.sv-head-ic { width: 40px; height: 40px; margin: 0 auto 18px; }
+.sv-head-ic svg { width: 100%; height: 100%; fill: var(--svc); }
+.sv-kicker { font-size: 12px; color: var(--gray-400); letter-spacing: .04em; }
+.sv-title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 18px; text-wrap: balance; }
+.sv-desc { font-size: 15px; line-height: 1.7; color: var(--gray-500); max-width: 52ch; margin: 0 auto; text-wrap: balance; }
 
-/* títulos de seção */
-.sv-sec { padding: clamp(56px, 8vw, 104px) 0; }
-.sv-h { font-size: clamp(30px, 5.4vw, 60px); font-weight: 500; letter-spacing: -0.035em; line-height: 1; margin-bottom: clamp(28px, 4vw, 48px); display: flex; align-items: center; gap: 14px; }
-.sv-h::before { content: ''; flex: none; width: .32em; height: .32em; background: var(--svc); }
-
-/* fluxo: fichas coloridas em escada (desktop) e em zigue-zague (celular) */
-.sv-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-.sv-step { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 20px 20px 22px; width: 88%; transform: rotate(var(--rot)); display: grid; gap: 10px; }
-.sv-step:nth-child(odd) { margin-right: auto; --rot: -1.4deg; }
-.sv-step:nth-child(even) { margin-left: auto; --rot: 1.4deg; }
-.sv-step-top { display: flex; align-items: center; justify-content: space-between; }
-.sv-num { height: 34px; width: auto; fill: currentColor; }
-.sv-step-ic { width: 34px; height: 34px; fill: currentColor; }
-.sv-step h4 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin-top: 8px; }
-.sv-step p { font-size: 14px; line-height: 1.5; opacity: .88; text-wrap: pretty; }
+.sv-body { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (min-width: 900px) { .sv-body { grid-template-columns: 180px minmax(0, 1fr); } }
+.sv-toc { display: none; }
 @media (min-width: 900px) {
-  .sv-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; gap: 14px; padding-bottom: 96px; }
-  .sv-step { width: auto; margin: calc(var(--i) * 24px) 0 0 !important; min-height: 280px; align-content: start; }
+  .sv-toc { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 92px; padding-top: 4px; }
+  .sv-toc a { font-size: 13px; line-height: 1.4; color: var(--gray-400); padding: 5px 0 5px 14px; border-left: 1px solid var(--gray-200); transition: color .2s, border-color .2s; }
+  .sv-toc a:hover { color: var(--ink); }
+  .sv-toc a.on { color: var(--ink); border-left-color: var(--svc); }
+}
+.sv-main { min-width: 0; }
+.sv-sec { padding-bottom: clamp(56px, 7vw, 88px); scroll-margin-top: 84px; }
+.sv-h { font-size: 18px; font-weight: 500; color: var(--gray-400); letter-spacing: -0.01em; margin-bottom: 24px; }
+
+/* etapas: 5 colunas no desktop, lista no celular; fio fino no topo de cada uma */
+.sv-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.sv-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px; padding: 18px 0; border-top: 1px solid var(--gray-200); }
+.sv-step:last-child { border-bottom: 1px solid var(--gray-200); }
+.sv-n { grid-row: span 2; display: flex; align-items: center; gap: 8px; height: 21px; font-size: 13px; font-weight: 500; color: var(--gray-500); font-variant-numeric: tabular-nums; }
+.sv-n::before { content: ''; width: 6px; height: 6px; background: var(--svc); flex: none; } /* cor do serviço só no marcador (amarelo em texto não teria contraste) */
+.sv-step h4 { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; }
+.sv-step p { font-size: 14px; line-height: 1.6; color: var(--gray-500); text-wrap: pretty; }
+@media (min-width: 1024px) {
+  .sv-flow { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+  .sv-step, .sv-step:last-child { grid-template-columns: minmax(0, 1fr); border-bottom: 0; padding: 16px 0 0; align-content: start; }
+  .sv-n { grid-row: auto; margin-bottom: 14px; }
 }
 
-/* cardápio: fundo preto, itens com pontilhado até o número, como preço */
-.sv-menu { background: var(--ink); color: #fff; padding: clamp(56px, 8vw, 104px) 0; }
-.sv-menu .sv-h { color: #fff; }
-.sv-mi { padding: 22px 0 24px; border-bottom: 1px solid rgba(255,255,255,.14); display: grid; gap: 12px; }
-.sv-mi:first-child { border-top: 1px solid rgba(255,255,255,.14); }
-.sv-mi-row { display: flex; align-items: baseline; gap: 12px; }
-.sv-mi-t { font-size: clamp(20px, 2.6vw, 30px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; }
-.sv-mi-lead { flex: 1; min-width: 24px; height: 3px; align-self: center; margin-top: .45em;
-  background: repeating-linear-gradient(to right, var(--svc) 0 3px, transparent 3px 8px); } /* pontilhado em "pixels" */
-.sv-mi-n { flex: none; height: 16px; width: auto; fill: var(--svc); }
-.sv-mi-d { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.72); max-width: 62ch; text-wrap: pretty; }
+/* entregas: lista em duas colunas no desktop */
+.sv-list { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 40px; }
+@media (min-width: 900px) { .sv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sv-mi { padding: 20px 0 22px; border-top: 1px solid var(--gray-200); display: grid; gap: 10px; align-content: start; }
+.sv-mi-t { font-size: 16px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.35; }
+.sv-mi-d { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 60ch; text-wrap: pretty; }
 .sv-mi-f { display: flex; flex-wrap: wrap; gap: 6px; }
-.sv-mi-f span { font-size: 11px; font-weight: 600; letter-spacing: .06em; line-height: 1; padding: 7px 10px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; }
-.sv-mi-a { font-size: 13.5px; line-height: 1.55; color: #fff; display: flex; gap: 10px; text-wrap: pretty; }
-.sv-mi-a::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: .45em; background: var(--svc); }
-@media (min-width: 900px) {
-  .sv-menu-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
-  .sv-mi:nth-child(2) { border-top: 1px solid rgba(255,255,255,.14); }
-}
+.sv-mi-f span { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border: 1px solid var(--gray-200); border-radius: 999px; font-size: 11px; line-height: 1.2; color: var(--gray-500); }
+.sv-mi-a { font-size: 13px; line-height: 1.55; color: var(--gray-500); text-wrap: pretty; }
+.sv-mi-a b { font-weight: 500; color: var(--ink); }
 
-/* condições: três "etiquetas" em cores cheias */
-.sv-terms { display: grid; gap: 14px; }
-@media (min-width: 760px) { .sv-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.sv-term { background: var(--bg); color: var(--fg); border-radius: calc(var(--r) * 1.5); padding: 24px; display: grid; gap: 10px; transform: rotate(var(--rot, 0deg)); }
-.sv-term:nth-child(1) { --rot: -1deg; } .sv-term:nth-child(3) { --rot: 1deg; }
-.sv-term .px { width: 40px; height: 40px; fill: currentColor; }
-.sv-term strong { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; }
-.sv-term p { font-size: 14px; line-height: 1.55; text-wrap: pretty; }
+/* condições: três colunas de texto */
+.sv-terms { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
+@media (min-width: 760px) { .sv-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+.sv-term { padding: 18px 0; border-top: 1px solid var(--gray-200); }
+@media (min-width: 760px) { .sv-term { padding: 16px 0 0; } }
+.sv-term dt { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.sv-term dd { margin: 0; font-size: 14px; line-height: 1.6; color: var(--gray-500); text-wrap: pretty; }
 
-/* exemplos: capa e título */
+/* exemplos: capa e título, mesmos cards do site */
 .sv .work-card-tag { display: none; }
+.sv .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 640px) { .sv .work-grid { grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 14px; } }
+@media (max-width: 639px) { .sv .work-grid > :nth-child(n+3) { display: none; } } /* celular: 2 exemplos, sem vão na grade */
 
-/* contato: centralizado, na linguagem do site */
-.sv-cta { border-top: 1px solid var(--gray-200); padding: clamp(56px, 8vw, 96px) 0 calc(clamp(56px, 8vw, 96px) + env(safe-area-inset-bottom, 0px)); text-align: center; }
-.sv-cta .px { width: 36px; height: 36px; fill: var(--svc); margin: 0 auto 18px; }
-.sv-cta-t { font-size: clamp(22px, 3vw, 32px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; max-width: 22ch; margin: 0 auto 28px; text-wrap: balance; }
-.sv-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.sv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px;
-  font-size: 14px; font-weight: 500; letter-spacing: -0.005em; border: 1px solid var(--ink); transition: background .25s var(--ease), color .25s var(--ease); }
-.sv-btn .px { width: 14px; height: 14px; fill: currentColor; margin: 0; }
-.sv-btn.solid { background: var(--ink); color: var(--white); }
-.sv-btn.solid:hover { background: transparent; color: var(--ink); }
-.sv-btn.line { background: transparent; color: var(--ink); }
-.sv-btn.line:hover { background: var(--ink); color: var(--white); }
-.sv-btn:focus-visible, .sv-x:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-@media (max-width: 480px) { .sv-cta-row { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; } }
+/* contato: mesma linguagem do rodapé (texto à esquerda, botões discretos) */
+.sv-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: 32px 0 calc(72px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--gray-200); }
+.sv-cta-t { font-size: clamp(20px, 2.4vw, 26px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; max-width: 22ch; text-wrap: balance; }
+.sv-cta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.sv-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: var(--r);
+  font-size: 13px; font-weight: 500; border: 1px solid var(--gray-200); color: var(--ink); background: transparent; transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease); -webkit-tap-highlight-color: transparent; }
+.sv-btn .px { width: 14px; height: 14px; fill: currentColor; }
+.sv-btn:hover { border-color: var(--ink); }
+.sv-btn.solid { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.sv-btn.solid:hover { opacity: .85; }
+.sv-btn:focus-visible, .sv-x:focus-visible, .sv-toc a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 480px) { .sv-cta-row { width: 100%; flex-direction: column; } }
 
-/* movimento leve: entrada da capa, revelação ao rolar, resposta ao toque (desligado com reduced-motion) */
-.sv .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 980px; gap: 8px; }
-@media (min-width: 640px) { .sv .work-grid { gap: 14px; } }
-.sv-step, .sv-term { transition: transform .45s cubic-bezier(.2, 1.35, .4, 1), box-shadow .3s var(--ease); -webkit-tap-highlight-color: transparent; }
-.sv-btn { -webkit-tap-highlight-color: transparent; }
-.sv-btn:active { transform: scale(.97); }
+/* entrada suave igual ao reveal do site (desligada com reduced-motion) */
 @media (prefers-reduced-motion: no-preference) {
-  .sv.open .sv-eyebrow { animation: svUp .6s var(--ease) both; }
-  .sv.open .sv-title { animation: svUp .8s var(--ease) .06s both; }
-  .sv.open .sv-desc { animation: svUp .8s var(--ease) .14s both; }
-  .sv.open .sv-hero-ic { animation: svPop .9s cubic-bezier(.2, 1.4, .4, 1) .18s both; }
-  .sv-hero-ic { cursor: pointer; transition: transform .5s cubic-bezier(.2, 1.4, .4, 1); }
-  .sv-hero-ic:hover { transform: translate(-4px, -4px); }
-  .sv-hero-ic.spin svg { animation: svSpin .7s cubic-bezier(.2, 1.2, .4, 1); }
-  .sv-confetti span { animation: svFloat var(--t, 5s) ease-in-out var(--d, 0s) infinite alternate; }
-  .sv-rv { opacity: 0; translate: 0 28px; transition: opacity .6s var(--ease) var(--dl, 0s), translate .8s var(--ease) var(--dl, 0s), transform .45s cubic-bezier(.2, 1.35, .4, 1); }
+  .sv.open .sv-head > * { animation: svUp .7s var(--ease) both; }
+  .sv.open .sv-head > :nth-child(2) { animation-delay: .04s; } .sv.open .sv-head > :nth-child(3) { animation-delay: .08s; } .sv.open .sv-head > :nth-child(4) { animation-delay: .12s; }
+  .sv-rv { opacity: 0; translate: 0 16px; transition: opacity .6s var(--ease) var(--dl, 0s), translate .7s var(--ease) var(--dl, 0s); }
   .sv-rv.in { opacity: 1; translate: 0 0; }
-  .sv-mi .sv-mi-lead { transform-origin: left center; transform: scaleX(0); transition: transform 1s var(--ease) calc(var(--dl, 0s) + .2s); }
-  .sv-mi.in .sv-mi-lead { transform: scaleX(1); }
-  .sv-step:hover, .sv-term:hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 14px 0 -6px rgba(0,0,0,.18); }
-  .sv-step:active, .sv-term:active { transform: rotate(0deg) scale(.97); }
-  .sv-step.wig .sv-step-ic, .sv-term.wig .px { animation: svWig .5s ease; }
-  .sv-mi:hover .sv-mi-t, .sv-mi:active .sv-mi-t { translate: 6px 0; }
-  .sv-mi-t { transition: translate .35s var(--ease); }
 }
-@keyframes svUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-@keyframes svPop { from { opacity: 0; transform: translateY(24px) scale(.6); } to { opacity: 1; transform: none; } }
-@keyframes svSpin { 0%, 100% { transform: none; } 30% { transform: translateY(-14px); } 55% { transform: translateY(0) scaleY(.9); } 75% { transform: translateY(-5px); } }
-@keyframes svFloat { from { transform: translate(0, 0); } to { transform: translate(var(--fx, 6px), var(--fy, -10px)); } }
-@keyframes svWig { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(10deg); } }
+@keyframes svUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 
 @media (max-width: 640px) {
@@ -1162,6 +1139,7 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .art-mode button { font: inherit; font-size: 13px; color: var(--gray-500); background: none; border: 0; border-radius: var(--r); padding: 5px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s var(--ease), background .2s var(--ease); white-space: nowrap; }
 .art-mode button svg { width: 13px; height: 13px; }
 .art-mode button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.art-mode button[data-m="fav"][aria-pressed="true"] svg { fill: currentColor; } /* estrela cheia quando ativa */
 
 .art-modebar { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px 0 -14px; }
 @media (min-width: 768px) { .art-modebar { margin: 48px 0 -24px; } }
@@ -1486,6 +1464,8 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .pg-bar { flex-wrap:wrap; }
 .pg-sort-label { color:var(--gray-400); font-size:11px; margin-right:2px; }
 @media (max-width:600px) { .pg-sort-buttons { justify-content:flex-start; } }
+/* página inicial: sem Voltar ao topo */
+body.home-route .top-before-contact, body.home-route .mobile-top-button { display: none !important; }
 /* Voltar ao topo no mobile */
 .mobile-top-button { display:none; }
 @media (max-width:767px) {
@@ -1608,6 +1588,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   }
   .portrait-layer { object-fit: contain; }
   .portrait-hint { width: 100%; text-align: center; }
+  /* "toque para animar" logo abaixo da foto: sobe o espaço E que fica sob o retrato e devolve embaixo (nada abaixo se move) */
+  .portrait-hint { --E: calc((133.333% - min(100%, var(--foto-3x4-w, 100%)) * 4 / 3) / 2); margin-top: calc(-1 * var(--E)); margin-bottom: var(--E); }
 }
 
 /* O diálogo recebe roda, trackpad e toque; as imagens não interceptam gestos. */
@@ -1725,8 +1707,15 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   from { opacity:.45; transform:translateX(var(--home-slide-from, 18px)); }
   to   { opacity:1;   transform:translateX(0); }
 }
-.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:28px; }
+.home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
+.home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
+.home-page-dash span { position:relative; display:block; width:100%; height:3px; border-radius:2px; background:var(--gray-200); overflow:hidden; }
+.home-page-dash span::after { content:""; position:absolute; inset:0; background:var(--ink); transform:scaleX(0); transform-origin:left; }
+.home-page-dash[aria-current="page"] span::after { animation:home-dash var(--home-auto, 4000ms) linear forwards; }
+.home-page-dash:hover span { background:var(--gray-400); }
+.home-page-dash:focus-visible { outline:2px solid var(--ink); outline-offset:3px; border-radius:3px; }
+@keyframes home-dash { to { transform:scaleX(1); } }
 .home-page-number {
   display:inline-flex; align-items:center; justify-content:center;
   min-width:36px; min-height:36px; padding:0 8px;
@@ -2106,6 +2095,48 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   #pv-ov .pv-action svg { width: 17px; height: 17px; }
   #pv-ov .pv-share { width: 36px; height: 40px; flex-basis: 36px; }
 }
+
+/* ===== ESPAÇAMENTO · PROPOSTA B — blocos por assunto =====
+   1ª tela = abertura (cheia, centralizada). Depois: Sobre | Serviços | Projetos + Clientes (logos).
+   --S = entre blocos de assunto · --s = dentro do mesmo bloco · --lab = rótulo → conteúdo */
+#view-home { --S: 72px; --s: 40px; --lab: 16px; }
+@media (min-width: 768px) { #view-home { --S: 128px; --s: 64px; --lab: 24px; } }
+
+#view-home .section-block { padding-block: calc(var(--S) / 2); } /* só na home: Sobre/Projetos/Artigos mantêm o espaçamento próprio */
+.services-block { padding-block: calc(var(--S) / 2) !important; }
+/* Projetos e logos formam um bloco (o que fiz + para quem): distância menor entre eles */
+#trabalhos { padding-block: calc(var(--S) / 2) calc(var(--s) / 2) !important; }
+/* desconta o respiro interno do logo (14px em cima, 22px embaixo); logos → rodapé = s */
+.marquee-section { padding: calc(var(--s) / 2 - 14px) 0 calc(var(--s) - 22px) !important; }
+
+#view-home .section-grid { gap: var(--lab); }
+.services-title { margin-bottom: var(--lab); }
+.work-intro { margin-bottom: var(--lab) !important; }
+#trabalhos .section-label { margin-bottom: 0 !important; }
+.home-pagination-row { margin-top: 32px; }
+@media (max-width: 767px) { .home-pagination-row { margin-top: 24px; } }
+
+.hero-grid { gap: 0; }
+.hero-text, .portrait-wrap { padding: 0 !important; }
+
+/* celular: abertura ocupa a tela; "Sobre mim" aparece na borda de baixo como convite à rolagem */
+@media (max-width: 767px) {
+  section.hero {
+    min-height: min(calc(100svh - var(--hdr-h, 67px) - 56px), 680px); /* teto: em telas altas a foto não fica isolada */
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px var(--gutter) !important;
+  }
+  .hero-text { margin-top: 0 !important; }
+  .hero-portrait { margin-block: var(--s) 0 !important; } /* título → foto = s */
+  .portrait-hint { margin: 10px 0 0 !important; }
+  #view-home .first-screen > .section-block { padding-top: 16px; }
+}
+/* desktop: abertura + Sobre centralizados na 1ª tela (como hoje), com distância fixa entre eles */
+@media (min-width: 768px) {
+  .first-screen { min-height: calc(100svh - var(--hdr-h, 72px)); padding-block: 24px; }
+  section.hero { padding: 0 var(--gutter) !important; }
+  #view-home .first-screen > .section-block { padding-block: var(--s) 0; } /* foto → Sobre = s */
+}
 </style>
 
 </head>
@@ -2231,9 +2262,25 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       </div>
     </section>
 
+    <section class="section-block" id="trabalhos">
+      <div class="max-w">
+        <div class="work-intro reveal">
+          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
+        </div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- logos de clientes: depois de Projetos (bloco "o que fiz + para quem") -->
     <section class="marquee-section">
       <div class="marquee-mask">
-        <!-- Logos: cinza por padrão, cor no hover/toque. A lista aparece 2x (a 2ª oculta para leitores) para o loop sem emenda -->
+        <!-- Logos: cinza por padrão, cor no hover/toque. A faixa vai e volta (vaivém), sem fim -->
         <div class="marquee-track" id="marquee-track">
         <ul class="marquee-list" aria-label="Clientes e projetos">
           <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="/projetos/optica-leopoldina/" draggable="false"><img src="assets/logos/optica-leopoldina.webp" alt="Óptica Leopoldina" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
@@ -2255,43 +2302,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
           <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/projetos/persona/" draggable="false"><img src="assets/logos/persona.svg" alt="Persona — Crítica Cultural" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
           <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/projetos/rp-40-anos/" draggable="false"><img src="assets/logos/rp-unesp-40.webp" alt="Relações Públicas Unesp Bauru — 40 anos" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
         </ul>
-        <ul class="marquee-list" aria-hidden="true">
-          <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="/projetos/optica-leopoldina/" draggable="false" tabindex="-1"><img src="assets/logos/optica-leopoldina.webp" alt="" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/mostra-saude-mental/" draggable="false" tabindex="-1"><img src="assets/logos/mostra-saude-mental.svg" alt="" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="/projetos/sollaris/" draggable="false" tabindex="-1"><img src="assets/logos/sollaris.svg" alt="" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/ntaps/" draggable="false" tabindex="-1"><img src="assets/logos/ntaps.webp" alt="" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
-          <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="/projetos/rino/" draggable="false" tabindex="-1"><img src="assets/logos/rino-logo.webp" alt="" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
-          <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="/projetos/classic-tattoo/" draggable="false" tabindex="-1"><img src="assets/logos/classic-tattoo.webp" alt="" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
-          <li class="marquee-logo" style="--h:46px;--z:1.7"><a class="marquee-link" href="/projetos/encantos-do-brasil/" draggable="false" tabindex="-1"><img src="assets/logos/encantos-do-brasil.svg" alt="" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Encantos do Brasil</span></a></li>
-          <li class="marquee-logo" style="--h:56px;--z:1.5"><a class="marquee-link" href="/projetos/congresso-extensao/" draggable="false" tabindex="-1"><img src="assets/logos/congresso-extensao.webp" alt="" width="347" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Congresso de Extensão Universitária</span></a></li>
-          <li class="marquee-logo" style="--h:30px;--z:1.2"><a class="marquee-link" href="/projetos/equity360/" draggable="false" tabindex="-1"><img src="assets/logos/equity360.webp" alt="" width="640" height="151" decoding="async"><span class="marquee-name" aria-hidden="true">Equity 360</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/nova-rio-branco/" draggable="false" tabindex="-1"><img src="assets/logos/nova-rio-branco.webp" alt="" width="523" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nova Rio Branco</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/prisma-brandbook/" draggable="false" tabindex="-1"><img src="assets/logos/prisma.webp" alt="" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Prisma Consultoria</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/csunesp/" draggable="false" tabindex="-1"><img src="assets/logos/csunesp.webp" alt="" width="488" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">CSUNESP — Coordenadoria de Saúde da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:32px;--z:1.4"><a class="marquee-link" href="/projetos/nupe/" draggable="false" tabindex="-1"><img src="assets/logos/nupe.webp" alt="" width="550" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nupe — Núcleo Negro da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:34px;--z:1.25"><a class="marquee-link" href="/projetos/interserv/" draggable="false" tabindex="-1"><img src="assets/logos/interserv.webp" alt="" width="598" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Interserv</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.25"><a class="marquee-link" href="/projetos/cminds/" draggable="false" tabindex="-1"><img src="assets/logos/cminds.webp" alt="" width="250" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">C Minds</span></a></li>
-          <li class="marquee-logo" style="--h:42px;--z:1.25"><a class="marquee-link" href="/projetos/ocupacao-unesp-negra/" draggable="false" tabindex="-1"><img src="assets/logos/ocupacao-unesp-negra.webp" alt="" width="571" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Ocupação Unesp Negra</span></a></li>
-          <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/projetos/persona/" draggable="false" tabindex="-1"><img src="assets/logos/persona.svg" alt="" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
-          <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/projetos/rp-40-anos/" draggable="false" tabindex="-1"><img src="assets/logos/rp-unesp-40.webp" alt="" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
-        </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block" id="trabalhos">
-      <div class="max-w">
-        <div class="work-intro reveal">
-          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
-        </div>
-        <div class="home-projects-viewport">
-          <div class="work-grid home-featured-grid" id="work-grid"></div>
-        </div>
-        <div class="home-pagination-row">
-          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
-          <div class="home-work-more">
-            <a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.all">Ver mais</a>
-          </div>
         </div>
       </div>
     </section>
@@ -2551,28 +2561,32 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <span class="sv-bar-t"><i aria-hidden="true"></i><span id="sv-bar-t"></span></span>
     <button class="sv-x" id="sm-close-btn" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
-  <header class="sv-hero">
-    <div class="sv-confetti" id="sv-confetti" aria-hidden="true"></div>
-    <div class="sv-in">
-      <div><p class="sv-eyebrow" id="sm-eyebrow"></p><h2 class="sv-title" id="sm-title"></h2><p class="sv-desc" id="sm-desc"></p></div>
-      <div class="sv-hero-ic" id="sm-head-ic" aria-hidden="true"></div>
-    </div>
+  <header class="sv-head">
+    <div class="sv-head-ic" id="sm-head-ic" aria-hidden="true"></div>
+    <p class="sv-kicker" id="sm-eyebrow"></p>
+    <h2 class="sv-title" id="sm-title"></h2>
+    <p class="sv-desc" id="sm-desc"></p>
   </header>
-  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-fluxo"></h3><ol class="sv-flow" id="sm-flow"></ol></div></section>
-  <section class="sv-menu"><div class="sv-in"><h3 class="sv-h" id="sm-l-entregas"></h3><div class="sv-menu-list" id="sm-deliv"></div></div></section>
-  <section class="sv-sec"><div class="sv-in"><h3 class="sv-h" id="sm-l-condicoes"></h3><div class="sv-terms" id="sm-terms"></div></div></section>
-  <section class="sv-sec" id="sm-sec-exemplos" style="padding-top:0"><div class="sv-in"><h3 class="sv-h" id="sm-l-exemplos"></h3><div class="work-grid" id="sm-related-projects"></div></div></section>
-  <footer class="sv-cta"><div class="sv-in">
-    <span id="sv-cta-ic"></span>
-    <p class="sv-cta-t" id="sv-cta-t"></p>
-    <div class="sv-cta-row"><a class="sv-btn solid" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a><a class="sv-btn line" id="sm-cta-mail"></a></div>
-  </div></footer>
+  <div class="sv-body">
+    <nav class="sv-toc" id="sv-toc" aria-label="Sumário"></nav>
+    <div class="sv-main">
+      <section class="sv-sec" id="sv-s-fluxo"><h3 class="sv-h" id="sm-l-fluxo"></h3><ol class="sv-flow" id="sm-flow"></ol></section>
+      <section class="sv-sec" id="sv-s-entregas"><h3 class="sv-h" id="sm-l-entregas"></h3><div class="sv-list" id="sm-deliv"></div></section>
+      <section class="sv-sec" id="sv-s-condicoes"><h3 class="sv-h" id="sm-l-condicoes"></h3><dl class="sv-terms" id="sm-terms"></dl></section>
+      <section class="sv-sec" id="sm-sec-exemplos"><h3 class="sv-h" id="sm-l-exemplos"></h3><div class="work-grid" id="sm-related-projects"></div></section>
+      <footer class="sv-cta">
+        <p class="sv-cta-t" id="sv-cta-t"></p>
+        <div class="sv-cta-row"><a class="sv-btn solid" id="sm-cta-wa" target="_blank" rel="noopener noreferrer"></a><a class="sv-btn" id="sm-cta-mail"></a></div>
+      </footer>
+    </div>
+  </div>
 </div>
 
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
-<script src="assets/data/projetos.js?v=20261023-i18n"></script>
+<script src="assets/data/projetos.js?v=20261031-manual"></script>
+<script src="assets/js/capas.js?v=20261031f"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -2598,10 +2612,10 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'svc.social.t': 'Social content', 'svc.social.d': 'Visual planning and graphic assets for social media, campaigns and presentations.',
       'svc.redacao.t': 'Copywriting', 'svc.redacao.d': 'Copy for websites, social media, campaigns and presentations, with the brand voice defined and kept consistent across all of them.',
       'svc.landing.t': 'Websites and interfaces', 'svc.landing.d': 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
-      'work.label': 'Projects', 'work.all': 'See more', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
+      'work.label': 'Projects', 'work.all': 'See more', 'work.seeall': 'See all', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
       'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
       'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
-      'f.all': 'All', 'f.fav': 'Favorites', 'f.cabine': 'Screenings',
+      'f.all': 'All', 'f.fav': 'Favorites', 'am.fav': 'Highlights', 'f.cabine': 'Screenings',
       'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
       'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
       'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
@@ -2632,10 +2646,10 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'svc.social.t': 'Contenido y redes sociales', 'svc.social.d': 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.',
       'svc.redacao.t': 'Redacción y copy', 'svc.redacao.d': 'Textos para sitios web, redes, campañas y presentaciones, con la voz de la marca definida y mantenida en todos ellos.',
       'svc.landing.t': 'Sitios web e interfaces', 'svc.landing.d': 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.',
-      'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
+      'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.seeall': 'Ver todos', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
       'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
       'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
-      'f.all': 'Todos', 'f.fav': 'Favoritos', 'f.cabine': 'Pases de prensa',
+      'f.all': 'Todos', 'f.fav': 'Favoritos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa',
       'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
       'art.various': 'Varios autores', 'art.with': 'Con', 'art.and': ' y ',
       'am.open': 'Abrir en el sitio', 'am.book': 'Abrir libro', 'am.link.Repositório Unesp': 'Repositorio Unesp',
@@ -3208,7 +3222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
     const modeBar = document.createElement('div'); modeBar.className = 'art-modebar reveal';
     const FAV_ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button></div><button class="art-mode-fav" type="button" data-m="fav" aria-pressed="${artMode === 'fav'}" aria-label="${i18n('f.fav', 'Favoritos')}" title="${i18n('f.fav', 'Favoritos')}">${FAV_ICO}</button>`; };
+    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button><button type="button" data-m="fav" aria-pressed="${artMode === 'fav'}">${FAV_ICO}${i18n('am.fav', 'Destaques')}</button></div>`; }; // destaques no mesmo grupo de Texto e Instagram
     drawMode(); bar.parentNode.insertBefore(modeBar, bar);
     const PBA = (window.HM_POSTS || {}).POSTS_BY_ART || {};
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
@@ -3583,9 +3597,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // cores fortes do site; texto escuro ou branco conforme o contraste de cada uma
   const SV_COL = { identidade: '#F72C2B', social: '#FFC700', redacao: '#1D3DF5', landing: '#13A03F' };
   const SV_INK = '#111111';
-  const svOn = (c) => (c === '#1D3DF5' || c === SV_INK) ? '#fff' : '#111';
-  const svPaint = (el, c) => { el.style.setProperty('--bg', c); el.style.setProperty('--fg', svOn(c)); };
-  const pxBig = (n) => pxSvg(DIG[0].map((r, i) => r + '.' + DIG[n][i]), 'sv-num');
   PX.chat = ['............','############','#..........#','#..........#','#..........#','#..........#','#..........#','############','.##.........','.#..........','............','............'];
   let svY = 0, svCard = null;
   const noSmooth = (fn) => { const h = document.documentElement, b = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; fn(); h.style.scrollBehavior = b; };
@@ -3604,81 +3615,78 @@ document.addEventListener('DOMContentLoaded', () => {
     svIO = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); svIO.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     els.forEach(e => svIO.observe(e));
   };
-  // toque: ícone balança na ficha tocada; ícone da capa gira
-  smOverlay.addEventListener('pointerdown', (e) => {
-    const t = e.target.closest('.sv-step, .sv-term');
-    if (t) { t.classList.remove('wig'); void t.offsetWidth; t.classList.add('wig'); }
-  });
-  smOverlay.addEventListener('animationend', (e) => { const t = e.target.closest('.wig, .spin'); if (t) t.classList.remove('wig', 'spin'); });
-  document.getElementById('sm-head-ic').addEventListener('click', (e) => { const h = e.currentTarget; h.classList.remove('spin'); void h.offsetWidth; h.classList.add('spin'); });
   const smEl = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  // sumário lateral: marca a seção visível
+  let svSpy = null;
+  const svToc = () => {
+    const toc = document.getElementById('sv-toc'); toc.innerHTML = '';
+    const secs = [...smOverlay.querySelectorAll('.sv-sec')].filter(x => !x.hidden);
+    secs.forEach(sec => { const a = smEl('a', '', sec.querySelector('.sv-h').textContent); a.href = '#' + sec.id; a.dataset.to = sec.id;
+      a.onclick = (e) => { e.preventDefault(); sec.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+      toc.appendChild(a); });
+    if (svSpy) svSpy.disconnect();
+    if (!('IntersectionObserver' in window)) return;
+    svSpy = new IntersectionObserver((ents) => ents.forEach(en => { if (en.isIntersecting) toc.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.to === en.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+    secs.forEach(x => svSpy.observe(x));
+    if (toc.firstChild) toc.firstChild.classList.add('on');
+  };
 
   document.querySelectorAll('[data-service-id]').forEach(card => {
     card.onclick = () => {
       const id = card.dataset.serviceId, S = window.SERVICOS, s = S && S.itens[id]; if (!s) return;
       const U = S.ui, $ = (x) => document.getElementById(x);
       const title = card.querySelector('.service-title').textContent; // já no idioma atual
-      const c = SV_COL[id] || SV_INK, outras = Object.values(SV_COL).filter(x => x !== c);
-      smOverlay.style.setProperty('--svc', c); smOverlay.style.setProperty('--on', svOn(c)); smOverlay.style.setProperty('--sh', id === 'social' ? '#F72C2B' : '#FFC700'); // sombra dura em cor contrastante (preto sobre preto borrava o ícone)
+      smOverlay.style.setProperty('--svc', SV_COL[id] || SV_INK);
       $('sv-bar-t').textContent = title;
       $('sm-eyebrow').textContent = lx(U.eyebrow);
       $('sm-title').textContent = title;
       $('sm-desc').textContent = lx(s.desc);
       const hic = $('sm-head-ic'); hic.innerHTML = ''; const ci = card.querySelector('.service-icon'); if (ci) { const k = ci.cloneNode(true); k.removeAttribute('class'); hic.appendChild(k); }
 
-      // confete de pixels na capa (posições fixas por serviço, cores das outras áreas)
-      const cf = $('sv-confetti'); cf.innerHTML = '';
-      let seed = [...id].reduce((a, ch) => a + ch.charCodeAt(0), 7);
-      const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-      for (let i = 0; i < 18; i++) {
-        const sp = document.createElement('span'), z = [8, 12, 16, 24][Math.floor(rnd() * 4)];
-        sp.style.cssText = `left:${(52 + rnd() * 45).toFixed(1)}%;top:${(innerWidth < 900 ? 64 + rnd() * 30 : rnd() * 92).toFixed(1)}%;width:${z}px;height:${z}px;background:${i % 5 === 4 ? svOn(c) : outras[i % outras.length]};--t:${(3 + rnd() * 4).toFixed(1)}s;--d:${(-rnd() * 4).toFixed(1)}s;--fx:${Math.round(rnd() * 20 - 10)}px;--fy:${Math.round(rnd() * 24 - 12)}px`;
-        cf.appendChild(sp);
-      }
-
-      // fluxo: fichas coloridas (cor do serviço, depois as outras, por fim preto)
+      // etapas: número, nome e o que acontece
       $('sm-l-fluxo').textContent = lx(U.fluxo);
-      const cores = [c, ...outras, SV_INK];
       const flow = $('sm-flow'); flow.innerHTML = '';
       S.etapas.forEach((et, i) => {
-        const li = smEl('li', 'sv-step sv-rv'); li.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(li, cores[i]); li.style.setProperty('--i', i);
-        const top = smEl('div', 'sv-step-top'); top.innerHTML = pxBig(i + 1) + pxSvg(PX[STEP_IC[i]], 'sv-step-ic');
-        li.append(top, smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
+        const li = smEl('li', 'sv-step sv-rv'); li.style.setProperty('--dl', (i * 0.06) + 's');
+        li.append(smEl('span', 'sv-n', String(i + 1).padStart(2, '0')), smEl('h4', '', lx(et)), smEl('p', '', lx(s.fluxo[i])));
         flow.appendChild(li);
       });
 
-      // cardápio de entregas: nome ...... nº, depois descrição, arquivos e onde usar
+      // entregas: nome, descrição, arquivos e onde usar
       $('sm-l-entregas').textContent = lx(U.entregas);
       const dl = $('sm-deliv'); dl.innerHTML = '';
       s.entregas.forEach((it, i) => {
-        const mi = smEl('article', 'sv-mi sv-rv'); mi.style.setProperty('--dl', ((i % 2) * 0.08) + 's');
-        const row = smEl('div', 'sv-mi-row'); row.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('span', 'sv-mi-lead'));
-        row.insertAdjacentHTML('beforeend', pxSvg(DIG[0].map((r, k) => r + '.' + DIG[(i + 1) % 10][k]), 'sv-mi-n'));
-        mi.append(row, smEl('p', 'sv-mi-d', lx(it.d)));
+        const mi = smEl('article', 'sv-mi sv-rv'); mi.style.setProperty('--dl', ((i % 2) * 0.06) + 's');
+        mi.append(smEl('h4', 'sv-mi-t', lx(it.t)), smEl('p', 'sv-mi-d', lx(it.d)));
         if (it.f && it.f.length) { const f = smEl('div', 'sv-mi-f'); f.setAttribute('aria-label', lx(U.arquivos)); it.f.forEach(x => f.appendChild(smEl('span', '', x))); mi.appendChild(f); }
-        if (it.a) mi.appendChild(smEl('p', 'sv-mi-a', lx(it.a)));
+        if (it.a) { const a = smEl('p', 'sv-mi-a'); a.append(smEl('b', '', lx(U.usos) + ': '), lx(it.a)); mi.appendChild(a); }
         dl.appendChild(mi);
       });
 
-      // condições: etiquetas em cores cheias
+      // condições
       $('sm-l-condicoes').textContent = lx(U.condicoes);
       const tm = $('sm-terms'); tm.innerHTML = '';
-      [[U.prazo, U.prazoD, 'clock'], [U.revisoes, U.revisoesD, 'rework'], [U.valores, U.valoresD, 'mail']].forEach(([k, v, ic], i) => {
-        const d = smEl('div', 'sv-term sv-rv'); d.style.setProperty('--dl', (i * 0.08) + 's'); svPaint(d, [outras[0], SV_INK, outras[1]][i]);
-        d.innerHTML = pxSvg(PX[ic]); d.append(smEl('strong', '', lx(k)), smEl('p', '', lx(v))); tm.appendChild(d);
+      [[U.prazo, U.prazoD], [U.revisoes, U.revisoesD], [U.valores, U.valoresD]].forEach(([k, v], i) => {
+        const d = smEl('div', 'sv-term sv-rv'); d.style.setProperty('--dl', (i * 0.06) + 's');
+        d.append(smEl('dt', '', lx(k)), smEl('dd', '', lx(v))); tm.appendChild(d);
       });
 
-      // exemplos: 2 projetos (capa e título)
+      // exemplos: projetos (capa e título)
       $('sm-l-exemplos').textContent = lx(U.exemplos);
       const rel = $('sm-related-projects'); rel.innerHTML = '';
-      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (p) { const wc = buildWorkCard(p); wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.08) + 's'); rel.appendChild(wc); } });
+      // mesmas capas da vitrine e da página Projetos (animadas, prévia ao vivo, recorte), via pjCard
+      (s.exemplos || []).forEach(slug => { const p = (window.PROJETOS || []).find(x => x.slug === slug); if (!p) return;
+        const t = document.createElement('template'); t.innerHTML = pjCard(p).trim(); const wc = t.content.firstElementChild;
+        wc.classList.add('sv-rv'); wc.style.setProperty('--dl', (rel.children.length * 0.06) + 's'); rel.appendChild(wc); });
+      rel.style.setProperty('--n', rel.children.length); // 2 ou 3 colunas, conforme os exemplos (sem vão)
+      requestAnimationFrame(observeLiveProjectPreviews);
       $('sm-sec-exemplos').hidden = !rel.children.length;
 
       // contato (sem preço: orçamento)
-      $('sv-cta-ic').innerHTML = pxSvg(PX.chat);
       $('sv-cta-t').textContent = lx(U.valoresD);
       const wa = $('sm-cta-wa'); wa.href = `${S.contato.wa}?text=${encodeURIComponent(`${lx(U.waMsg)} ${title}.`)}`; wa.innerHTML = pxSvg(PX.chat); wa.appendChild(smEl('span', '', lx(U.wa)));
       const ml = $('sm-cta-mail'); ml.href = `mailto:${S.contato.email}?subject=${encodeURIComponent(title)}`; ml.innerHTML = pxSvg(PX.mail); ml.appendChild(smEl('span', '', lx(U.mail)));
+      svToc();
 
       // abre: esconde o site e sobe para o topo; a rolagem é a da própria página
       if (!smOverlay.classList.contains('open')) svY = window.scrollY;
@@ -3964,22 +3972,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('marquee-track');
     if (!track) return;
     const mask = track.parentElement;
-    const lists = track.querySelectorAll('.marquee-list');
     const items = [...track.querySelectorAll('.marquee-logo')];
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const SPEED = reduce ? 0 : 38;        // px/s em velocidade normal
-    let x = 0, v = SPEED, target = SPEED, half = 0, last = 0, raf = 0, inView = false;
-    let offsets = [], center = 0, zone = 0, hoverEl = null, drag = null, resumeT = 0;
+    // Vaivém: anda da direita p/ a esquerda até o último logo chegar ao centro, inverte, volta até o primeiro, e assim sempre.
+    // x fica SEMPRE preso entre lo e hi: a faixa nunca sai da tela, nem com aba escondida, redimensionamento ou arraste.
+    let x = 0, dir = 1, v = SPEED, target = SPEED, last = 0, raf = 0, inView = false;
+    let offsets = [], center = 0, lo = 0, hi = 0, hoverEl = null, drag = null, resumeT = 0;
     const mobile = matchMedia('(hover: none)').matches;
-    let mobileFling = 0, touchScrollY = 0;
+    let mobileFling = 0;
 
     const measure = () => {
-      half = lists[0].getBoundingClientRect().width;   // largura de uma lista = ponto de emenda
+      const w = mask.getBoundingClientRect().width;
+      if (!w || !track.offsetWidth) return false;    // escondida (ex.: página de serviço aberta): mantém a última medida
       offsets = items.map(li => li.offsetLeft + li.offsetWidth / 2);
-      const r = mask.getBoundingClientRect();
-      center = r.width / 2; zone = Math.min(150, r.width * 0.16); // faixa central que colore
+      center = w / 2;
+      lo = offsets[0] - center;                        // 1º logo no centro
+      hi = Math.max(lo, offsets[offsets.length - 1] - center); // último logo no centro
+      return true;
     };
-    const wrap = () => { if (half) { x = ((x % half) + half) % half; } };
+    // prende x nos limites; ao bater numa ponta, inverte o sentido
+    const clamp = () => {
+      if (x >= hi) { x = hi; dir = -1; } else if (x <= lo) { x = lo; dir = 1; }
+    };
 
     const paint = () => {
       track.style.transform = `translate3d(${-x}px,0,0)`;
@@ -3994,12 +4009,13 @@ document.addEventListener('DOMContentLoaded', () => {
         v += (target - v) * Math.min(1, dt * 3);   // aceleração/frenagem suave (~1s)
         if (mobile && Math.abs(mobileFling) > 8) {
           x += mobileFling * dt;
-          mobileFling *= Math.exp(-2.4 * dt); // inércia suave após soltar o dedo
+          mobileFling *= Math.exp(-2.4 * dt);       // inércia suave após soltar o dedo
+          if (x >= hi || x <= lo) mobileFling = 0;  // bateu na ponta: para a inércia
         } else {
           mobileFling = 0;
-          x += v * dt;
+          x += v * dir * dt;
         }
-        wrap();
+        clamp();
       }
       paint();
       raf = inView ? requestAnimationFrame(tick) : 0;
@@ -4022,23 +4038,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!drag) target = SPEED;
     });
 
-    // Rolagem lateral sem clicar: dois dedos no touchpad (deltaX) ou Shift + roda do mouse.
-    // A rolagem vertical comum continua descendo a página (a faixa não prende quem só quer rolar).
+    // Rolagem lateral: dois dedos no touchpad (deltaX) ou Shift + roda. Vertical comum continua descendo a página.
     mask.addEventListener('wheel', (e) => {
       const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? mask.clientWidth : 1;
       const horizontalTrackpad = Math.abs(e.deltaX) > 0.5 && Math.abs(e.deltaX) >= Math.abs(e.deltaY) * 0.35;
       const dx = horizontalTrackpad ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
       if (Math.abs(dx) <= 0.5) return;
       if (e.cancelable) e.preventDefault();
-      x += dx * k; wrap(); v = 0; target = 0; resumeT = performance.now() + 1400; paint();
+      x += dx * k; dir = dx > 0 ? 1 : -1; clamp(); v = 0; target = 0; resumeT = performance.now() + 1400; paint();
       if (!raf && inView) start();
     }, { passive: false });
 
-    // Arrastar (mouse ou dedo): move a faixa; ao soltar, retoma o movimento
+    // Arrastar (mouse ou dedo): move a faixa dentro dos limites; ao soltar, retoma no sentido do gesto
     track.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
-      /* Evita seleção de texto/arraste nativo de imagens durante o gesto. */
-      if (e.pointerType === 'mouse' && e.cancelable) e.preventDefault();
+      if (e.pointerType === 'mouse' && e.cancelable) e.preventDefault(); // sem seleção/arraste nativo de imagem
       drag = { sx: e.clientX, sy: e.clientY, x0: x, moved: false, axis: null, id: e.pointerId, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), fingerV: 0 };
       mobileFling = 0;
       track.classList.add('is-dragging');
@@ -4048,8 +4062,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
       if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) drag.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
       if (mobile && drag.axis === 'y') {
-        /* Gesto vertical: mantém a rolagem normal da página e não move a faixa. */
-        const dyStep = e.clientY - drag.lastY;
+        const dyStep = e.clientY - drag.lastY; // gesto vertical: rola a página, não a faixa
         if (dyStep) window.scrollBy(0, -dyStep);
         drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now();
         return;
@@ -4061,20 +4074,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (Math.abs(dx) > 4) {
         drag.moved = true;
         if (e.cancelable) e.preventDefault();
-        /* Proteção extra contra seleção iniciada antes do gesto ser reconhecido. */
         if (window.getSelection) { const sel = window.getSelection(); if (sel && sel.rangeCount) sel.removeAllRanges(); }
       }
-      x = drag.x0 - dx;
-      /* O deslocamento sempre é reduzido ao comprimento de uma lista duplicada:
-         a faixa nunca chega ao fim e emenda continuamente no início. */
-      wrap();
+      x = Math.min(hi, Math.max(lo, drag.x0 - dx));
       track.style.transform = `translate3d(${-x}px,0,0)`;
     });
     const endDrag = (e) => {
       if (!drag || (e.pointerId !== undefined && e.pointerId !== drag.id)) return;
       const moved = drag.moved, dragVelocity = drag.fingerV;
+      if (moved && Math.abs(dragVelocity) > 20) dir = dragVelocity < 0 ? 1 : -1; // segue o sentido em que foi jogada
       drag = null; track.classList.remove('is-dragging');
       justDragged = moved;
+      clamp();
       if (e.pointerType === 'mouse' && hoverEl) target = 0;   // continua parado se o mouse está em cima
       else if (mobile && e.pointerType !== 'mouse' && moved) {
         target = 0; v = 0;
@@ -4084,24 +4095,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('pointerup', endDrag);
     window.addEventListener('pointercancel', endDrag);
-    // Clique: o <a> abre a página do cliente em nova aba; se o gesto foi um arraste, cancela o clique
+    // Clique abre o projeto; se o gesto foi um arraste, cancela o clique
     let justDragged = false;
     track.addEventListener('click', (e) => {
       const a = e.target.closest('.marquee-link'); if (!a) return;
-      if (justDragged) { e.preventDefault(); justDragged = false; return; } // arraste não abre o projeto
-      if (e.metaKey || e.ctrlKey || e.shiftKey) return; // Ctrl/Cmd/Shift-clique: o navegador abre em nova aba
+      if (justDragged) { e.preventDefault(); justDragged = false; return; }
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return; // Ctrl/Cmd/Shift-clique: nova aba
       e.preventDefault();
-      window.location.assign(a.href); // todos os logos abrem o projeto direto
+      window.location.assign(a.href);
     });
 
-    new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) start(); }).observe(mask);
-    window.addEventListener('resize', () => { measure(); wrap(); paint(); });
-    // mede depois que as imagens têm tamanho (width/height no HTML já reservam o espaço)
-    // começa com o 1º logo da lista (Óptica Leopoldina) no centro da tela
-    const startCentered = () => { measure(); x = offsets[0] - center; wrap(); paint(); };
+    // remede ao voltar a aparecer (ex.: depois de fechar a página de serviço) e ao redimensionar
+    new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) { measure(); clamp(); start(); } }).observe(mask);
+    window.addEventListener('resize', () => { if (measure()) { clamp(); paint(); } });
+    // começa com o 1º logo (Óptica Leopoldina) no centro, andando para a esquerda
+    const startCentered = () => { if (measure()) { x = lo; dir = 1; paint(); } };
     startCentered();
     let started = false;
-    window.addEventListener('load', () => { if (!started && v === SPEED && Math.abs(x - (offsets[0] - center)) < 60) startCentered(); else measure(); paint(); started = true; });
+    window.addEventListener('load', () => { if (!started && Math.abs(x - lo) < 60) startCentered(); else if (measure()) { clamp(); paint(); } started = true; });
   };
 
 
@@ -4201,8 +4212,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const quickTagLabel = (key) => (FILTROS.find(([k]) => k === key) || [null, null])[1];
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}${p.capaCropTop ? ' work-card-crop-top' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
-      <div class="work-card-media">${p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
-      <p class="work-card-title">${p.titulo}</p>${p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
+      <div class="work-card-media">${p.capaAnim ? capaAnimHTML(p) : p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
+      <p class="work-card-title">${p.titulo}</p>${p.resumo ? `<p class="work-card-desc">${lx(p.resumo)}</p>` : p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
@@ -4215,7 +4226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const applyCols = (grid) => { const n = getCols(); grid.style.setProperty('--wcols', n); grid.dataset.cols = n; document.querySelectorAll('.pj-cols button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.cols === n)); };
   const COLS_L = { pt: 'Colunas', en: 'Columns', es: 'Columnas' };
   const colsHTML = () => `<div class="pj-cols" role="group" aria-label="${lx(COLS_L)}"><span>${lx(COLS_L)}</span>${Array.from({ length: COLS_CFG[colsMode()].max }, (_, i) => i + 1).map(n => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${lx(COLS_L).toLowerCase()}">${n}</button>`).join('')}</div>`;
-  mqMob.addEventListener('change', () => { const g = document.getElementById('work-case-grid'); if (g) applyCols(g); });
+  mqMob.addEventListener('change', () => { if (document.getElementById('work-case-grid')) renderPJ(); });
 
   /* --- Mídias sociais: os projetos da categoria viram filtros e a grade mostra direto os posts e carrosséis ---
      Relevância (padrão): destaques primeiro; depois a posição do post entre os da própria conta (curtidas + comentários,
@@ -4263,19 +4274,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const sgView = (list) => {
     const projs = sgProjects(list);
-    if (sgProj !== 'all' && !projs.some(o => o.p.slug === sgProj)) sgProj = 'all';
+    sgProj = 'all'; // sem visualização separada por projeto: sempre todos
     const owner = {}; projs.slice().sort((a, b) => a.gs.length - b.gs.length).forEach(o => o.gs.forEach(g => { if (!owner[g]) owner[g] = o.p.titulo; }));
     const pool = sgProj === 'all' ? [...new Map(projs.flatMap(o => o.items).map(x => [x.c, x])).values()] : projs.find(o => o.p.slug === sgProj).items.slice();
     const by = { r: (a, b) => sgScore(b) - sgScore(a) || (a.d < b.d ? 1 : -1), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
       p: (a, b) => String(owner[a.g] || '').localeCompare(String(owner[b.g] || ''), LANG) || (a.d < b.d ? 1 : -1) };
     const items = pool.sort(by[sgOrd]);
     const nCar = items.filter(x => x.n > 1).length;
-    const chips = `<button type="button" class="art-filter" data-sg-proj="all" aria-pressed="${sgProj === 'all'}">${lx(SG_L.todos)} <span>${new Set(projs.flatMap(o => o.items.map(x => x.c))).size}</span></button>` +
-      projs.slice().sort((a, b) => b.items.length - a.items.length || a.p.titulo.localeCompare(b.p.titulo, LANG))
-        .map(o => `<button type="button" class="art-filter" data-sg-proj="${o.p.slug}" aria-pressed="${sgProj === o.p.slug}">${esc(o.p.titulo)} <span>${o.items.length}</span></button>`).join('');
     const sorts = [['r', SG_L.oR], ['n', SG_L.oN], ['v', SG_L.oV], ['p', SG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-sg-ord="${k}" aria-pressed="${sgOrd === k}">${lx(l)}</button>`).join('');
-    const controls = `<div class="sg-projs" role="group" aria-label="${lx(SG_L.proj)}">${chips}</div>
-      <div class="sg-tools"><div class="sg-sort" role="group" aria-label="${lx(SG_L.ord)}"><span>${lx(SG_L.ord)}</span>${sorts}</div>${colsHTML()}</div>`;
+    const controls = `<div class="sg-tools"><div class="sg-sort" role="group" aria-label="${lx(SG_L.ord)}"><span>${lx(SG_L.ord)}</span>${sorts}</div>${colsHTML()}</div>`;
     const cur = sgProj !== 'all' ? PJ_BY[sgProj] : null;
     const summary = `<p class="pj-results-line sg-line"><span>${items.length} ${plural(SG_L.pub, items.length)}${nCar ? ` · ${nCar} ${plural(SG_L.car, nCar)}` : ''}</span>${cur ? `<a class="sg-proj-link" href="${cleanProjectUrl(cur.slug)}" data-pj="${cur.slug}">${lx(SG_L.ver)} ${esc(cur.titulo)} →</a>` : ''}</p>`;
     const label = (x) => sgProj === 'all' ? (owner[x.g] || x.v) : '@' + x.user;
@@ -4311,11 +4318,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     applyCols(grid);
-    grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
+    grid.innerHTML = summary + (matches.length ? (window.capaSpread ? capaSpread(matches, getCols()) : matches).map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
     requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.getElementById('pj-filters').addEventListener('click', (e) => {
-    const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); applyCols(document.getElementById('work-case-grid')); return; }
+    const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); renderPJ(); return; } // recria os cards: reordena as capas e reinicia as animações
     const sp = e.target.closest('[data-sg-proj]'); if (sp) { sgProj = sp.dataset.sgProj; renderPJ(); return; }
     const so = e.target.closest('[data-sg-ord]'); if (so) { sgOrd = so.dataset.sgOrd; renderPJ(); return; }
     const b = e.target.closest('[data-category-filter]'); if (!b) return;
@@ -4349,31 +4356,44 @@ document.addEventListener('DOMContentLoaded', () => {
     ...PJ.filter(p => !HOME_FEATURED.includes(p.slug) && !HOME_EXCLUDED.includes(p.slug))
   ];
   let homePage = 0;
+  // avanço automático da vitrine: a cada 4 s, sem pausa (mouse, foco, aba ou movimento reduzido não seguram a passagem)
+  const HOME_AUTO_MS = 4000;
+  let homeTimer = null;
+  const scheduleHomeAuto = (pageCount) => {
+    clearTimeout(homeTimer);
+    if (pageCount < 2) return;
+    homeTimer = setTimeout(() => { homePage = (homePage + 1) % pageCount; renderHomeRows(1); }, HOME_AUTO_MS);
+  };
+  window.addEventListener('resize', () => { const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; }); // nova largura: altura medida de novo
   const renderHomeRows = (direction = 1) => {
     const home = document.getElementById('work-grid');
     const pager = document.getElementById('home-pagination');
     if (!home || !pager) return;
     const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
+    // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
+    const keepY = window.scrollY;
+    if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
     home.className = 'work-grid home-featured-grid';
     home.style.setProperty('--home-slide-from', direction < 0 ? '-18px' : '18px');
     home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
     home.classList.remove('home-page-enter');
     void home.offsetWidth;
     home.classList.add('home-page-enter');
-    pager.innerHTML = `
-      <button type="button" class="home-page-number" data-home-page="${homePage - 1}" aria-label="${lx({pt:'Página anterior',en:'Previous page',es:'Página anterior'})}" ${homePage === 0 ? 'disabled' : ''}>‹</button>
-      ${Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-number" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}>${i + 1}</button>`).join('')}
-      <button type="button" class="home-page-number" data-home-page="${homePage + 1}" aria-label="${lx({pt:'Próxima página',en:'Next page',es:'Página siguiente'})}" ${homePage >= pageCount - 1 ? 'disabled' : ''}>›</button>`;
+    // traços no lugar dos números; o traço atual enche durante o tempo da página
+    pager.innerHTML = Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-dash" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}><span></span></button>`).join('');
+    pager.style.setProperty('--home-auto', HOME_AUTO_MS + 'ms');
     pager.onclick = (e) => {
       const button = e.target.closest('[data-home-page]');
-      if (!button || button.disabled) return;
+      if (!button) return;
       const next = Number(button.dataset.homePage);
       if (!Number.isFinite(next) || next < 0 || next >= pageCount || next === homePage) return;
       const direction = next > homePage ? 1 : -1;
       homePage = next;
       renderHomeRows(direction);
     };
-    requestAnimationFrame(observeLiveProjectPreviews);
+    scheduleHomeAuto(pageCount);
+    const restoreY = () => { if (Math.abs(window.scrollY - keepY) > 1) { const h = document.documentElement, sb = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; window.scrollTo(0, keepY); h.style.scrollBehavior = sb; } };
+    restoreY(); requestAnimationFrame(() => { restoreY(); observeLiveProjectPreviews(); });
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
