@@ -1464,6 +1464,8 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .pg-bar { flex-wrap:wrap; }
 .pg-sort-label { color:var(--gray-400); font-size:11px; margin-right:2px; }
 @media (max-width:600px) { .pg-sort-buttons { justify-content:flex-start; } }
+/* página inicial: sem Voltar ao topo */
+body.home-route .top-before-contact, body.home-route .mobile-top-button { display: none !important; }
 /* Voltar ao topo no mobile */
 .mobile-top-button { display:none; }
 @media (max-width:767px) {
@@ -1586,6 +1588,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   }
   .portrait-layer { object-fit: contain; }
   .portrait-hint { width: 100%; text-align: center; }
+  /* "toque para animar" logo abaixo da foto: sobe o espaço E que fica sob o retrato e devolve embaixo (nada abaixo se move) */
+  .portrait-hint { --E: calc((133.333% - min(100%, var(--foto-3x4-w, 100%)) * 4 / 3) / 2); margin-top: calc(-1 * var(--E)); margin-bottom: var(--E); }
 }
 
 /* O diálogo recebe roda, trackpad e toque; as imagens não interceptam gestos. */
@@ -1703,7 +1707,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   from { opacity:.45; transform:translateX(var(--home-slide-from, 18px)); }
   to   { opacity:1;   transform:translateX(0); }
 }
-.home-pagination-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:28px; }
+.home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
 .home-page-dash span { position:relative; display:block; width:100%; height:3px; border-radius:2px; background:var(--gray-200); overflow:hidden; }
@@ -2254,6 +2258,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
         </div>
         <div class="home-pagination-row">
           <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
         </div>
       </div>
     </section>
@@ -2564,7 +2569,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'svc.social.t': 'Social content', 'svc.social.d': 'Visual planning and graphic assets for social media, campaigns and presentations.',
       'svc.redacao.t': 'Copywriting', 'svc.redacao.d': 'Copy for websites, social media, campaigns and presentations, with the brand voice defined and kept consistent across all of them.',
       'svc.landing.t': 'Websites and interfaces', 'svc.landing.d': 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
-      'work.label': 'Projects', 'work.all': 'See more', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
+      'work.label': 'Projects', 'work.all': 'See more', 'work.seeall': 'See all', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
       'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
       'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
       'f.all': 'All', 'f.fav': 'Favorites', 'am.fav': 'Highlights', 'f.cabine': 'Screenings',
@@ -2598,7 +2603,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'svc.social.t': 'Contenido y redes sociales', 'svc.social.d': 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.',
       'svc.redacao.t': 'Redacción y copy', 'svc.redacao.d': 'Textos para sitios web, redes, campañas y presentaciones, con la voz de la marca definida y mantenida en todos ellos.',
       'svc.landing.t': 'Sitios web e interfaces', 'svc.landing.d': 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.',
-      'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
+      'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.seeall': 'Ver todos', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
       'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
       'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
       'f.all': 'Todos', 'f.fav': 'Favoritos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa',
@@ -4226,19 +4231,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const sgView = (list) => {
     const projs = sgProjects(list);
-    if (sgProj !== 'all' && !projs.some(o => o.p.slug === sgProj)) sgProj = 'all';
+    sgProj = 'all'; // sem visualização separada por projeto: sempre todos
     const owner = {}; projs.slice().sort((a, b) => a.gs.length - b.gs.length).forEach(o => o.gs.forEach(g => { if (!owner[g]) owner[g] = o.p.titulo; }));
     const pool = sgProj === 'all' ? [...new Map(projs.flatMap(o => o.items).map(x => [x.c, x])).values()] : projs.find(o => o.p.slug === sgProj).items.slice();
     const by = { r: (a, b) => sgScore(b) - sgScore(a) || (a.d < b.d ? 1 : -1), n: (a, b) => a.d < b.d ? 1 : -1, v: (a, b) => a.d < b.d ? -1 : 1,
       p: (a, b) => String(owner[a.g] || '').localeCompare(String(owner[b.g] || ''), LANG) || (a.d < b.d ? 1 : -1) };
     const items = pool.sort(by[sgOrd]);
     const nCar = items.filter(x => x.n > 1).length;
-    const chips = `<button type="button" class="art-filter" data-sg-proj="all" aria-pressed="${sgProj === 'all'}">${lx(SG_L.todos)} <span>${new Set(projs.flatMap(o => o.items.map(x => x.c))).size}</span></button>` +
-      projs.slice().sort((a, b) => b.items.length - a.items.length || a.p.titulo.localeCompare(b.p.titulo, LANG))
-        .map(o => `<button type="button" class="art-filter" data-sg-proj="${o.p.slug}" aria-pressed="${sgProj === o.p.slug}">${esc(o.p.titulo)} <span>${o.items.length}</span></button>`).join('');
     const sorts = [['r', SG_L.oR], ['n', SG_L.oN], ['v', SG_L.oV], ['p', SG_L.oP]].map(([k, l]) => `<button type="button" class="art-filter" data-sg-ord="${k}" aria-pressed="${sgOrd === k}">${lx(l)}</button>`).join('');
-    const controls = `<div class="sg-projs" role="group" aria-label="${lx(SG_L.proj)}">${chips}</div>
-      <div class="sg-tools"><div class="sg-sort" role="group" aria-label="${lx(SG_L.ord)}"><span>${lx(SG_L.ord)}</span>${sorts}</div>${colsHTML()}</div>`;
+    const controls = `<div class="sg-tools"><div class="sg-sort" role="group" aria-label="${lx(SG_L.ord)}"><span>${lx(SG_L.ord)}</span>${sorts}</div>${colsHTML()}</div>`;
     const cur = sgProj !== 'all' ? PJ_BY[sgProj] : null;
     const summary = `<p class="pj-results-line sg-line"><span>${items.length} ${plural(SG_L.pub, items.length)}${nCar ? ` · ${nCar} ${plural(SG_L.car, nCar)}` : ''}</span>${cur ? `<a class="sg-proj-link" href="${cleanProjectUrl(cur.slug)}" data-pj="${cur.slug}">${lx(SG_L.ver)} ${esc(cur.titulo)} →</a>` : ''}</p>`;
     const label = (x) => sgProj === 'all' ? (owner[x.g] || x.v) : '@' + x.user;
