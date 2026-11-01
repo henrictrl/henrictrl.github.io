@@ -2095,6 +2095,48 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   #pv-ov .pv-action svg { width: 17px; height: 17px; }
   #pv-ov .pv-share { width: 36px; height: 40px; flex-basis: 36px; }
 }
+
+/* ===== ESPAÇAMENTO · PROPOSTA B — blocos por assunto =====
+   1ª tela = abertura (cheia, centralizada). Depois: Sobre | Serviços | Projetos + Clientes (logos).
+   --S = entre blocos de assunto · --s = dentro do mesmo bloco · --lab = rótulo → conteúdo */
+#view-home { --S: 72px; --s: 40px; --lab: 16px; }
+@media (min-width: 768px) { #view-home { --S: 128px; --s: 64px; --lab: 24px; } }
+
+#view-home .section-block { padding-block: calc(var(--S) / 2); } /* só na home: Sobre/Projetos/Artigos mantêm o espaçamento próprio */
+.services-block { padding-block: calc(var(--S) / 2) !important; }
+/* Projetos e logos formam um bloco (o que fiz + para quem): distância menor entre eles */
+#trabalhos { padding-block: calc(var(--S) / 2) calc(var(--s) / 2) !important; }
+/* desconta o respiro interno do logo (14px em cima, 22px embaixo); logos → rodapé = s */
+.marquee-section { padding: calc(var(--s) / 2 - 14px) 0 calc(var(--s) - 22px) !important; }
+
+#view-home .section-grid { gap: var(--lab); }
+.services-title { margin-bottom: var(--lab); }
+.work-intro { margin-bottom: var(--lab) !important; }
+#trabalhos .section-label { margin-bottom: 0 !important; }
+.home-pagination-row { margin-top: 32px; }
+@media (max-width: 767px) { .home-pagination-row { margin-top: 24px; } }
+
+.hero-grid { gap: 0; }
+.hero-text, .portrait-wrap { padding: 0 !important; }
+
+/* celular: abertura ocupa a tela; "Sobre mim" aparece na borda de baixo como convite à rolagem */
+@media (max-width: 767px) {
+  section.hero {
+    min-height: min(calc(100svh - var(--hdr-h, 67px) - 56px), 680px); /* teto: em telas altas a foto não fica isolada */
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 24px var(--gutter) !important;
+  }
+  .hero-text { margin-top: 0 !important; }
+  .hero-portrait { margin-block: var(--s) 0 !important; } /* título → foto = s */
+  .portrait-hint { margin: 10px 0 0 !important; }
+  #view-home .first-screen > .section-block { padding-top: 16px; }
+}
+/* desktop: abertura + Sobre centralizados na 1ª tela (como hoje), com distância fixa entre eles */
+@media (min-width: 768px) {
+  .first-screen { min-height: calc(100svh - var(--hdr-h, 72px)); padding-block: 24px; }
+  section.hero { padding: 0 var(--gutter) !important; }
+  #view-home .first-screen > .section-block { padding-block: var(--s) 0; } /* foto → Sobre = s */
+}
 </style>
 
 </head>
@@ -2220,6 +2262,22 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       </div>
     </section>
 
+    <section class="section-block" id="trabalhos">
+      <div class="max-w">
+        <div class="work-intro reveal">
+          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
+        </div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- logos de clientes: depois de Projetos (bloco "o que fiz + para quem") -->
     <section class="marquee-section">
       <div class="marquee-mask">
         <!-- Logos: cinza por padrão, cor no hover/toque. A faixa vai e volta (vaivém), sem fim -->
@@ -2244,21 +2302,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
           <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/projetos/persona/" draggable="false"><img src="assets/logos/persona.svg" alt="Persona — Crítica Cultural" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
           <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/projetos/rp-40-anos/" draggable="false"><img src="assets/logos/rp-unesp-40.webp" alt="Relações Públicas Unesp Bauru — 40 anos" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
         </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block" id="trabalhos">
-      <div class="max-w">
-        <div class="work-intro reveal">
-          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
-        </div>
-        <div class="home-projects-viewport">
-          <div class="work-grid home-featured-grid" id="work-grid"></div>
-        </div>
-        <div class="home-pagination-row">
-          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
-          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
         </div>
       </div>
     </section>
