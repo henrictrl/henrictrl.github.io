@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobre mí — Henrique Marinhos</title>
+<script>
+(async function () {
+  try {
+    var response = await fetch('/index.html', { cache: 'no-cache' });
+    if (!response.ok) throw new Error('Falha ao carregar o portfólio.');
+    var html = await response.text();
+    html = html.replace('<head>', '<head><base href="/">');
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (error) {
+    document.body.textContent = 'Não foi possível carregar o portfólio.';
+  }
+})();
+</script>
+<!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<link rel="canonical" href="https://henrictrl.github.io/es/sobre/">
+<link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/sobre/">
+<link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/sobre/">
+<link rel="alternate" hreflang="es" href="https://henrictrl.github.io/es/sobre/">
+<link rel="alternate" hreflang="x-default" href="https://henrictrl.github.io/sobre/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henrique Marinhos">
+<meta property="og:title" content="Sobre mí — Henrique Marinhos">
+<meta property="og:description" content="Estrategias de comunicación críticas y funcionales para marcas. Diseño gráfico, redes sociales, redacción y landing pages.">
+<meta property="og:url" content="https://henrictrl.github.io/es/sobre/">
+<meta property="og:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:secure_url" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sobre mí — Henrique Marinhos">
+<meta name="twitter:description" content="Estrategias de comunicación críticas y funcionales para marcas. Diseño gráfico, redes sociales, redacción y landing pages.">
+<meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<!-- /compartilhamento -->
+</head>
+<body>
+<main class="pre" style="font:15px/1.5 system-ui,sans-serif;color:#555;max-width:640px;margin:12vh auto;padding:0 24px"><h1 style="font-size:24px;color:#111;margin:0 0 8px">Sobre mí</h1><p>Henrique Marinhos — Estrategias de comunicación críticas y funcionales para marcas. Diseño gráfico, redes sociales, redacción y landing pages.</p><p><a href="/es/">Inicio</a> · <a href="/es/projetos/">Proyectos</a> · <a href="/es/artigos/">Artículos</a> · <a href="/es/sobre/">Sobre mí</a></p></main>
+</body>
+</html>

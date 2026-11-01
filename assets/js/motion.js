@@ -9,7 +9,7 @@
   if (loader) {
     try { sessionStorage.setItem('mx-seen', '1'); } catch (e) {}
     let done = false;
-    const hide = () => { if (done) return; done = true; loader.classList.add('out'); html.classList.remove('mx-loading'); setTimeout(() => loader.remove(), 600); };
+    const hide = () => { if (done) return; done = true; loader.classList.add('out'); setTimeout(() => loader.remove(), 600); };
     if (document.readyState === 'complete') hide(); else { addEventListener('load', hide, { once: true }); setTimeout(hide, 1200); }
   }
   if (off) return;

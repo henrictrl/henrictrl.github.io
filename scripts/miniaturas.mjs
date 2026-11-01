@@ -5,12 +5,13 @@
      2) node scripts/miniaturas.mjs          (FORCE=1 node scripts/miniaturas.mjs refaz todas as imagens)
    No GitHub isso roda sozinho: .github/workflows/miniaturas.yml
    Gera:
-     assets/og/projetos/<pasta>.jpg  — a capa do card do projeto (1200×800, igual ao card)
-     assets/og/artigos/<slug>.jpg    — a capa do artigo (1200×630)
-     artigos/<slug>/index.html       — página leve com metatags (WhatsApp, LinkedIn etc. não rodam JS)
-     sitemap.xml e robots.txt        — para o Google achar todas as páginas
-   Cada página leve também traz título/descrição em texto e dados estruturados (JSON-LD) para buscadores.
-   e atualiza og:image dos projetos (projetos/<pasta>/index.html) e das páginas fixas.
+     assets/og/projetos/<pasta>.jpg   capa do card do projeto (1200×800, igual ao card)
+     assets/og/artigos/<slug>.jpg     capa do artigo (1200×630)
+     páginas leves em PT, EN e ES     /, /sobre/, /projetos/, /artigos/, cada projeto e cada artigo
+                                      (PT sem prefixo; EN em /en/..., ES em /es/...). Cada uma tem metatags
+                                      de compartilhamento no idioma, canonical, hreflang, JSON-LD e texto legível
+                                      sem JS; ao abrir, carregam o site (index.html ou projeto.html).
+     sitemap.xml e robots.txt
    ========================================================================= */
 import { createRequire } from 'node:module';
 const { chromium } = createRequire(import.meta.url)('playwright'); // no Mac: npm i -g playwright && npx playwright install chromium
@@ -34,20 +35,38 @@ const { ARTIGOS } = data('assets/data/artigos.js');
 const ALIAS = { 'rino-site': 'rino-cores', 'o-hobbit': 'hobbit', 'metaprojeto': 'portfolio', 'dash-geral': 'visao-geral' };
 const articleSlug = (a) => decodeURIComponent(new URL(a.u, SITE).pathname.split('/').filter(Boolean).pop() || '');
 
-// bloco de metatags; tags antigas de og/twitter são removidas antes de inserir
-const ogBlock = ({ title, desc, url, img, w, h, canon = true, ld = null }) => `<!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
-${canon ? `<link rel="canonical" href="${url}">\n` : ''}${ld ? `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>\n` : ''}
+const LANGS = ['pt', 'en', 'es'];
+const PRE = { pt: '', en: '/en', es: '/es' };
+const LOCALE = { pt: 'pt_BR', en: 'en_US', es: 'es_ES' };
+const HTML_LANG = { pt: 'pt-br', en: 'en', es: 'es' };
+const T = (o, l) => (o && (o[l] || o.pt)) || '';
+const W = { // textos das páginas leves
+  site: { pt: 'Henrique Marinhos — Designer e relações-públicas', en: 'Henrique Marinhos — Designer and PR specialist', es: 'Henrique Marinhos — Diseñador y relacionista público' },
+  desc: { pt: 'Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.',
+          en: 'Critical, functional communication strategies for brands. Graphic design, social media, copywriting and landing pages.',
+          es: 'Estrategias de comunicación críticas y funcionales para marcas. Diseño gráfico, redes sociales, redacción y landing pages.' },
+  home: { pt: 'Início', en: 'Home', es: 'Inicio' }, sobre: { pt: 'Sobre', en: 'About', es: 'Sobre mí' },
+  projetos: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, artigos: { pt: 'Artigos', en: 'Articles', es: 'Artículos' },
+  todosP: { pt: 'Todos os projetos', en: 'All projects', es: 'Todos los proyectos' }, todosA: { pt: 'Todos os artigos', en: 'All articles', es: 'Todos los artículos' },
+  ler: { pt: 'Ler no', en: 'Read on', es: 'Leer en' }, job: { pt: 'Designer e relações-públicas', en: 'Designer and PR specialist', es: 'Diseñador y relacionista público' },
+};
+const hreflang = (p) => LANGS.map((l) => `<link rel="alternate" hreflang="${l === 'pt' ? 'pt-BR' : l}" href="${SITE}${PRE[l]}${p}">`).join('\n') + `\n<link rel="alternate" hreflang="x-default" href="${SITE}${p}">\n`;
+
+// bloco de metatags (canonical, hreflang, JSON-LD, Open Graph); a versão anterior é removida antes de inserir
+const ogBlock = ({ title, desc, path: p, lang = 'pt', img, w, h, ld = null }) => `<!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<link rel="canonical" href="${SITE}${PRE[lang]}${p}">
+${hreflang(p)}${ld ? `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>\n` : ''}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henrique Marinhos">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${url}">
+<meta property="og:url" content="${SITE}${PRE[lang]}${p}">
 <meta property="og:image" content="${img}">
 <meta property="og:image:secure_url" content="${img}">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="${w}">
 <meta property="og:image:height" content="${h}">
-<meta property="og:locale" content="pt_BR">
+<meta property="og:locale" content="${LOCALE[lang]}">\n${LANGS.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${LOCALE[l]}">`).join('\n')}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -56,24 +75,24 @@ ${canon ? `<link rel="canonical" href="${url}">\n` : ''}${ld ? `<script type="ap
 `;
 const setOg = (html, block) => html
   .replace(/<!-- compartilhamento \(gerado[^>]*-->\n[\s\S]*?<!-- \/compartilhamento -->\n/g, '')
-  .replace(/<!-- compartilhamento \(gerado[^>]*-->\n/g, '')
-  .replace(/^[ \t]*<meta (property="og:|name="twitter:)[^>]*>[ \t]*(\n|$)/gm, '')
-  .replace(/<meta property="og:image:width"[^>]*><meta property="og:image:height"[^>]*>\n?/g, '')
   .replace(/<\/head>/, block + '</head>');
+const setLang = (html, l) => html.replace(/<html lang="[^"]*">/, `<html lang="${HTML_LANG[l]}">`);
+const setTitle = (html, t) => html.replace(/<title>[^<]*<\/title>/, `<title>${esc(t)}</title>`);
 
 const PRE_CSS = 'font:15px/1.5 system-ui,sans-serif;color:#555;max-width:640px;margin:12vh auto;padding:0 24px';
+const H1 = (t) => `<h1 style="font-size:24px;color:#111;margin:0 0 8px">${esc(t)}</h1>`;
 const setBody = (html, inner) => html
   .replace(/\n*<main class="pre"[\s\S]*?<\/main>\n*/, '\n') // idempotente: rodar de novo não acumula linhas
   .replace(/<p>Carregando[^<]*<\/p>/, '')
   .replace(/<body>\n*/, `<body>\n<main class="pre" style="${PRE_CSS}">${inner}</main>\n`);
 const PERSON = { '@type': 'Person', name: 'Henrique Marinhos', url: SITE + '/' };
-const sitemap = []; // [url, lastmod]
+const sitemap = []; // [caminho sem idioma, lastmod] → uma entrada por idioma, com as alternativas
 const today = new Date().toISOString().slice(0, 10);
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1400, height: 1000 } });
 
-/* ---------- 1. Projetos: captura a capa do próprio card, em 1200×800 ---------- */
+/* ---------- 1. Miniaturas dos projetos: a capa do próprio card, em 1200×800 ---------- */
 await page.goto(LOCAL + '/projetos/?nomotion', { waitUntil: 'networkidle' });
 await page.addStyleTag({ content: `
   #work-case-grid { grid-template-columns: 1200px !important; gap: 40px !important; }
@@ -105,25 +124,38 @@ for (const p of PROJETOS) {
   await solo.screenshot({ path: path.join(ROOT, file), type: 'jpeg', quality: 82 });
   projImg[p.slug] = file;
 }
-// metatags nas páginas de projeto (pasta do apelido e pasta do slug original, se existir)
+/* ---------- 2. Páginas de projeto ----------
+   PT: projetos/<pasta>/index.html (escrita à mão; aqui só entram metatags e texto). EN/ES: cópias em en/ e es/. */
 for (const p of PROJETOS) {
-  for (const dir of new Set([p.slug, ALIAS[p.slug]].filter(Boolean))) {
-    const f = `projetos/${dir}/index.html`;
-    if (!fs.existsSync(path.join(ROOT, f)) || !projImg[p.slug]) continue;
-    const html = read(f);
-    const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || `${p.titulo} — Henrique Marinhos`;
-    const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
-    const url = `${SITE}/projetos/${ALIAS[p.slug] || p.slug}/`, img = `${SITE}/${projImg[p.slug]}`;
-    const cat = (p.cat && p.cat.pt) || '';
-    const ld = { '@context': 'https://schema.org', '@type': 'CreativeWork', name: p.titulo, description: desc, url, image: img, creator: PERSON, ...(p.ano ? { dateCreated: String(p.ano) } : {}), ...(cat ? { genre: cat } : {}) };
-    const inner = `<h1 style="font-size:24px;color:#111;margin:0 0 8px">${esc(p.titulo)}</h1><p>${esc([cat, p.ano].filter(Boolean).join(' · '))}</p><p>${esc(desc)}</p><p><a href="/projetos/">Todos os projetos</a> · <a href="/">Henrique Marinhos</a></p>`;
-    write(f, setBody(setOg(html, ogBlock({ title, desc, url, img, w: 1200, h: 800, ld })), inner));
-    if (dir === (ALIAS[p.slug] || p.slug)) sitemap.push([url, today]);
+  const dir = ALIAS[p.slug] || p.slug, f = `projetos/${dir}/index.html`;
+  if (!fs.existsSync(path.join(ROOT, f)) || !projImg[p.slug]) continue;
+  const base = read(f), pth = `/projetos/${dir}/`, img = `${SITE}/${projImg[p.slug]}`;
+  const ptTitle = (base.match(/<title>([^<]*)<\/title>/) || [])[1] || `${T(p.tituloI18n || { pt: p.titulo }, 'pt')} — Henrique Marinhos`;
+  const ptDesc = (base.match(/<meta name="description" content="([^"]*)"/) || [])[1] || T(p.resumo, 'pt');
+  for (const l of LANGS) {
+    const name = T(p.tituloI18n || { pt: p.titulo }, l), cat = T(p.cat, l);
+    const title = l === 'pt' ? ptTitle.replace(/&amp;/g, '&') : `${name} — Henrique Marinhos`;
+    const desc = l === 'pt' ? ptDesc.replace(/&quot;/g, '"').replace(/&amp;/g, '&') : (T(p.intro, l) || T(p.resumo, l));
+    const ld = { '@context': 'https://schema.org', '@type': 'CreativeWork', name, description: desc, url: SITE + PRE[l] + pth, image: img, creator: PERSON, inLanguage: HTML_LANG[l], ...(p.ano ? { dateCreated: String(p.ano) } : {}), ...(cat ? { genre: cat } : {}) };
+    let html = setOg(base, ogBlock({ title, desc, path: pth, lang: l, img, w: 1200, h: 800, ld }));
+    html = setBody(html, `${H1(name)}<p>${esc([cat, p.ano].filter(Boolean).join(' · '))}</p><p>${esc(desc)}</p><p><a href="${PRE[l]}/projetos/">${T(W.todosP, l)}</a> · <a href="${PRE[l]}/">Henrique Marinhos</a></p>`);
+    if (l !== 'pt') {
+      html = setTitle(setLang(html, l), title)
+        .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(desc)}">`)
+        .split(`'href="${pth}#$1"'`).join(`'href="${PRE[l]}${pth}#$1"'`); // âncoras internas da página
+    }
+    write(l === 'pt' ? f : `${l}/projetos/${dir}/index.html`, html);
   }
+  // pasta antiga com o slug original (antes do apelido): mesmas metatags, canonical no apelido
+  if (dir !== p.slug && fs.existsSync(path.join(ROOT, `projetos/${p.slug}/index.html`))) {
+    const old = read(`projetos/${p.slug}/index.html`);
+    write(`projetos/${p.slug}/index.html`, setOg(old, ogBlock({ title: ptTitle.replace(/&amp;/g, '&'), desc: ptDesc.replace(/&quot;/g, '"').replace(/&amp;/g, '&'), path: pth, img, w: 1200, h: 800 })));
+  }
+  sitemap.push([pth, today]);
 }
 
-/* ---------- 2. Artigos: capa do artigo em 1200×630 + página com metatags ---------- */
-const stub = read('404.html'); // mesma página leve que carrega o site e abre o artigo pela URL
+/* ---------- 3. Artigos: capa em 1200×630 + página leve em cada idioma ---------- */
+const stub = read('404.html'); // página leve que carrega o site; o site abre o artigo pelo endereço
 let nArt = 0;
 for (const a of ARTIGOS) {
   const slug = a.project ? '' : articleSlug(a);
@@ -133,39 +165,52 @@ for (const a of ARTIGOS) {
   const pos = a.cropTop ? '50% 0%' : (a.pos || '50% 50%');
   const img = `assets/og/artigos/${slug}.jpg`;
   if (!has(img)) {
-  await solo.setViewportSize({ width: 1200, height: 630 });
-  await solo.setContent(`<body style="margin:0;background:${a.bg || '#f5f5f5'}"><img src="${LOCAL}/${local}" style="width:1200px;height:630px;object-fit:${fit};object-position:${pos};display:block"></body>`);
-  await solo.waitForFunction(() => document.images[0].complete, null, { timeout: 15000 }).catch(() => {});
-  await solo.screenshot({ path: path.join(ROOT, img), type: 'jpeg', quality: 82 });
+    await solo.setViewportSize({ width: 1200, height: 630 });
+    await solo.setContent(`<body style="margin:0;background:${a.bg || '#f5f5f5'}"><img src="${LOCAL}/${local}" style="width:1200px;height:630px;object-fit:${fit};object-position:${pos};display:block"></body>`);
+    await solo.waitForFunction(() => document.images[0].complete, null, { timeout: 15000 }).catch(() => {});
+    await solo.screenshot({ path: path.join(ROOT, img), type: 'jpeg', quality: 82 });
   }
-  const title = `${a.t} — Henrique Marinhos`;
-  const url = `${SITE}/artigos/${encodeURIComponent(slug)}/`;
-  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: a.t, url, image: `${SITE}/${img}`, author: { ...PERSON, name: a.a || 'Henrique Marinhos' }, ...(a.d ? { datePublished: a.d } : {}), ...(a.site ? { publisher: { '@type': 'Organization', name: a.site } } : {}), sameAs: a.u, inLanguage: 'pt-BR' };
-  const inner = `<h1 style="font-size:24px;color:#111;margin:0 0 8px">${esc(a.t)}</h1><p>${esc([a.site, a.d && a.d.split('-').reverse().join('/'), a.a].filter(Boolean).join(' · '))}</p><p><a href="${esc(a.u)}" rel="noopener">Ler no ${esc(a.site || 'site original')}</a> · <a href="/artigos/">Todos os artigos</a></p>`;
-  const html = setBody(setOg(stub.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`),
-    ogBlock({ title, desc: a.site || 'Henrique Marinhos', url, img: `${SITE}/${img}`, w: 1200, h: 630, ld })), inner);
-  sitemap.push([url, a.d || today]);
-  write(`artigos/${slug}/index.html`, html);
+  const pth = `/artigos/${encodeURIComponent(slug)}/`;
+  for (const l of LANGS) {
+    const t = (l !== 'pt' && a['t_' + l]) || a.t, title = `${t} — Henrique Marinhos`;
+    const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: t, url: SITE + PRE[l] + pth, image: `${SITE}/${img}`, author: { ...PERSON, name: a.a || 'Henrique Marinhos' }, ...(a.d ? { datePublished: a.d } : {}), ...(a.site ? { publisher: { '@type': 'Organization', name: a.site } } : {}), sameAs: a.u, inLanguage: HTML_LANG[l] };
+    const inner = `${H1(t)}<p>${esc([a.site, a.d && a.d.split('-').reverse().join('/'), a.a].filter(Boolean).join(' · '))}</p><p><a href="${esc(a.u)}" rel="noopener">${T(W.ler, l)} ${esc(a.site || 'site')}</a> · <a href="${PRE[l]}/artigos/">${T(W.todosA, l)}</a></p>`;
+    const html = setBody(setOg(setTitle(setLang(stub, l), title), ogBlock({ title, desc: a.site || 'Henrique Marinhos', path: pth, lang: l, img: `${SITE}/${img}`, w: 1200, h: 630, ld })), inner);
+    write(`${PRE[l].slice(1) ? PRE[l].slice(1) + '/' : ''}artigos/${slug}/index.html`, html);
+  }
+  sitemap.push([pth, a.d || today]);
   nArt++;
 }
 
-/* ---------- 3. Páginas fixas: miniatura geral do site ---------- */
-const DESC = 'Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.';
-const fixed = [['index.html', '/', 'Henrique Marinhos — Designer e relações-públicas'], ['404.html', '/', 'Henrique Marinhos — Designer e relações-públicas'],
-  ['sobre/index.html', '/sobre/', 'Sobre — Henrique Marinhos'], ['projetos/index.html', '/projetos/', 'Projetos — Henrique Marinhos'], ['artigos/index.html', '/artigos/', 'Artigos — Henrique Marinhos']];
-const PERSON_LD = { '@context': 'https://schema.org', ...PERSON, jobTitle: 'Designer e relações-públicas', image: `${SITE}/assets/img/retrato-cor.webp`, address: { '@type': 'PostalAddress', addressLocality: 'São Paulo', addressCountry: 'BR' },
-  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Unesp' }, sameAs: ['https://www.linkedin.com/in/henrique-marinhos/', 'https://www.behance.net/henriquemarinhos', 'http://lattes.cnpq.br/8181966688647381'] };
-for (const [f, url, title] of fixed) {
-  const isRoot = f === 'index.html' || f === '404.html'; // carregados em todas as rotas: canonical é posto pelo JS do index
-  let html = setOg(read(f), ogBlock({ title, desc: DESC, url: SITE + url, img: `${SITE}/assets/img/og.jpg`, w: 1200, h: 630, canon: !isRoot, ld: f === 'index.html' ? PERSON_LD : null }));
-  if (!isRoot) html = setBody(html, `<h1 style="font-size:24px;color:#111;margin:0 0 8px">${esc(title.split(' — ')[0])}</h1><p>Henrique Marinhos — ${esc(DESC)}</p><p><a href="/">Início</a> · <a href="/projetos/">Projetos</a> · <a href="/artigos/">Artigos</a> · <a href="/sobre/">Sobre</a></p>`);
-  write(f, html);
-  if (f !== '404.html') sitemap.unshift([SITE + url, today]);
+/* ---------- 4. Páginas fixas: miniatura geral do site ---------- */
+const PERSON_LD = (l) => ({ '@context': 'https://schema.org', ...PERSON, jobTitle: T(W.job, l), image: `${SITE}/assets/img/retrato-cor.webp`, address: { '@type': 'PostalAddress', addressLocality: 'São Paulo', addressCountry: 'BR' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Unesp' }, sameAs: ['https://www.linkedin.com/in/henrique-marinhos/', 'https://www.behance.net/henriquemarinhos', 'http://lattes.cnpq.br/8181966688647381'] });
+const pageStub = read('sobre/index.html'); // página leve que carrega index.html
+const og = { img: `${SITE}/assets/img/og.jpg`, w: 1200, h: 630 };
+// index.html é o próprio site em "/": recebe só as metatags em PT (o idioma.js corrige canonical/hreflang em cada rota)
+write('index.html', setOg(read('index.html'), ogBlock({ title: W.site.pt, desc: W.desc.pt, path: '/', ...og, ld: PERSON_LD('pt') })));
+write('404.html', setOg(read('404.html'), ogBlock({ title: W.site.pt, desc: W.desc.pt, path: '/', ...og })));
+const FIXED = [['/', null], ['/sobre/', 'sobre'], ['/projetos/', 'projetos'], ['/artigos/', 'artigos']];
+for (const [pth, key] of FIXED) {
+  for (const l of LANGS) {
+    if (l === 'pt' && pth === '/') continue; // "/" é o index.html
+    const name = key ? T(W[key], l) : 'Henrique Marinhos', title = key ? `${name} — Henrique Marinhos` : T(W.site, l);
+    const nav = ['home', 'projetos', 'artigos', 'sobre'].map((k) => `<a href="${PRE[l]}${k === 'home' ? '/' : `/${k}/`}">${T(W[k], l)}</a>`).join(' · ');
+    let html = setOg(setTitle(setLang(pageStub, l), title), ogBlock({ title, desc: T(W.desc, l), path: pth, lang: l, ...og, ld: key ? null : PERSON_LD(l) }));
+    html = setBody(html, `${H1(name)}<p>Henrique Marinhos — ${esc(T(W.desc, l))}</p><p>${nav}</p>`);
+    write(`${PRE[l].slice(1) ? PRE[l].slice(1) + '/' : ''}${pth.slice(1)}index.html`, html);
+  }
+  sitemap.unshift([pth, today]);
 }
 
-/* ---------- 4. Mapa do site e robots.txt ---------- */
-write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemap.map(([u, d]) => `  <url><loc>${u}</loc><lastmod>${d}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+/* ---------- 5. Mapa do site (com as versões de idioma) e robots.txt ---------- */
+const alt = (p) => LANGS.map((l) => `<xhtml:link rel="alternate" hreflang="${l === 'pt' ? 'pt-BR' : l}" href="${SITE}${PRE[l]}${p}"/>`).join('');
+write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemap.flatMap(([p, d]) => LANGS.map((l) => `  <url><loc>${SITE}${PRE[l]}${p}</loc><lastmod>${d}</lastmod>${alt(p)}</url>`)).join('\n')}
+</urlset>
+`);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /scripts/\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
 await browser.close();
-console.log(`projetos: ${Object.keys(projImg).length} miniaturas · artigos: ${nArt} páginas · páginas fixas: ${fixed.length} · sitemap: ${sitemap.length} endereços`);
+console.log(`projetos: ${Object.keys(projImg).length} miniaturas · artigos: ${nArt} · sitemap: ${sitemap.length * LANGS.length} endereços (PT, EN, ES)`);

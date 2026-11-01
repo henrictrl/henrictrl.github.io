@@ -113,3 +113,12 @@ html[data-theme="dark"] .pv-ov { background: rgba(18,18,18,.97); }
 html.theme-vt::view-transition-old(root),
 html.theme-vt::view-transition-new(root) { animation-duration: .3s; animation-timing-function: ease; }
 html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after { transition: none !important; }
+
+/* Toque: links e botões de texto pequenos ganham área de toque ≥ 24 px no celular,
+   sem mudar o desenho nem o espaçamento (área invisível em volta, por pseudo-elemento) */
+@media (pointer: coarse) {
+  :is(.section-link, .marquee-link, .credit-bar a, #certificates-btn, .project-share, .ig-more, .pc-links a, .ig-links a) { position: relative; }
+  :is(.section-link, .marquee-link, .credit-bar a, #certificates-btn, .project-share, .ig-more, .pc-links a, .ig-links a)::before {
+    content: ""; position: absolute; inset: -6px -4px;
+  }
+}

@@ -4,17 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
-<!-- canonical por rota: o mesmo HTML serve /, /sobre/, /projetos/... (atualiza também na navegação interna) -->
-<link rel="canonical" id="canonical" href="https://henrictrl.github.io/">
-<script>(function(){var c=document.getElementById('canonical'),set=function(){c.href='https://henrictrl.github.io'+location.pathname;};set();['pushState','replaceState'].forEach(function(k){var o=history[k];history[k]=function(){var r=o.apply(this,arguments);set();return r;};});addEventListener('popstate',set);})();</script>
+<script src="assets/js/idioma.js?v=20261102a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
+<link rel="canonical" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/">
+<link rel="alternate" hreflang="es" href="https://henrictrl.github.io/es/">
+<link rel="alternate" hreflang="x-default" href="https://henrictrl.github.io/">
 <title>Projeto — Henrique Marinhos</title>
 <meta name="description" content="Projeto de Henrique Marinhos.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" href="assets/img/favicon.ico" sizes="any">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin> <!-- fonte Inter no próprio site -->
+<style>
+/* Inter variável 300–600 (licença OFL), subconjuntos latin e latin-ext: cobre PT, EN e ES */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
 <link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa-mob">
 <style>
 /* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
@@ -27,10 +33,9 @@ body.project-page .project-brand .brand-location { color: var(--gray-400); }
 body.project-page .project-brand:focus-visible, body.project-page .main-nav a:focus-visible,
 body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261101b">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261102a">
 </head>
 <body class="project-page">
-<main id="dk" class="dk-ov open" aria-labelledby="project-title">
 <header class="top-header" id="project-header">
   <div class="header-inner">
     <div class="header-left">
@@ -101,18 +106,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   var PROJECTS = window.PROJETOS || [];
   var POSTS = window.POSTS || [];
   var LANG_NAMES = {pt:"Português",en:"English",es:"Español"};
-  function readLanguage() {
-    try { var saved = localStorage.getItem("hm-lang"); if (saved && ["pt","en","es"].indexOf(saved)>=0) return saved; } catch(e) {}
-    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "pt"];
-    for (var i=0;i<langs.length;i++) {
-      var v=String(langs[i]).toLowerCase();
-      if (/^pt/.test(v)) return "pt";
-      if (/^es/.test(v)) return "es";
-      if (/^en/.test(v)) return "en";
-    }
-    return "pt";
-  }
-  var LANG = readLanguage();
+  var LANG = HMI.initial(); // endereço (/en/, /es/) > escolha salva > navegador (assets/js/idioma.js)
+  HMI.sync(LANG, !!HMI.fromPath());
   document.documentElement.lang = LANG === "pt" ? "pt-br" : LANG; // antes de ler títulos: o resolvedor de projetos.js usa o lang do <html>
   /* imagens traduzidas: se idiomasImg (do projeto ou do item) inclui o idioma ativo, usa NN.en.webp / NN.es.webp; se o arquivo faltar, volta ao PT */
   function locPath(path, langs) {
@@ -155,7 +150,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   var POST_BY=Object.create(null);
   POSTS.forEach(function(p){POST_BY[p.c]=p;});
   var PROJECT_ROUTE_ALIASES = {"rino-site":"rino-cores","o-hobbit":"hobbit","metaprojeto":"portfolio","dash-geral":"visao-geral"};
-  function cleanProjectUrl(projectSlug) { return "/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/"; }
+  function cleanProjectUrl(projectSlug) { return HMI.with("/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/", LANG); }
   var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
   var main=document.getElementById("dk"), heading=document.getElementById("project-title");
   var kicker=document.getElementById("project-kicker");
@@ -190,7 +185,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     gallery:{pt:"Imagens feitas no Pixelar",en:"Images made with Pixelar",es:"Imágenes hechas con Pixelar"},
     posts:{pt:"Posts e carrosséis",en:"Posts and carousels",es:"Posts y carruseles"},
     related:{pt:"Projetos relacionados",en:"Related projects",es:"Proyectos relacionados"},
-    build:{pt:"Construção",en:"How it was built",es:"Construcción"},
     notFound:{pt:"Projeto não encontrado",en:"Project not found",es:"Proyecto no encontrado"},
     notFoundText:{pt:"Este endereço não corresponde a um projeto publicado.",en:"This address does not match a published project.",es:"Esta dirección no corresponde a un proyecto publicado."},
     top:{pt:"Voltar ao topo ↑",en:"Back to top ↑",es:"Volver arriba ↑"},
@@ -239,7 +233,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       button.addEventListener("click",function(){
         var nextLang=button.dataset.lang; if(nextLang===LANG)return;
         try{localStorage.setItem("hm-lang",nextLang);}catch(e){}
-        location.reload();
+        location.assign(HMI.with(HMI.path(),nextLang)+location.hash); // abre o mesmo projeto no endereço do idioma
       });
     });
   }
@@ -251,7 +245,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
         var src=igImg(post,i), image='<img src="'+esc(src)+'" alt="" loading="lazy" decoding="async" data-full="'+esc(src)+'">';
         return post.reel ? '<a class="ig-reel" href="'+esc(igUrl(post))+'" target="_blank" rel="noopener noreferrer">'+image+'</a>' : image;
       }).join("");
-    return '<article class="pc" data-code="'+esc(post.c)+'" data-kind="'+(n>1&&!post.art?"car":"post")+'"><div class="pc-media" style="--ar:'+ar+'"><div class="pc-track">'+imgs+'</div>'+
+    return '<article class="pc" data-code="'+esc(post.c)+'" data-kind="'+(n>1&&!post.art?"car":"post")+'"><div class="pc-media" style="--ar:'+ar+'"><div class="pc-track" role="group" tabindex="0" aria-label="'+esc(lx({pt:"Imagens do post (use as setas)",en:"Post images (use arrow keys)",es:"Imágenes del post (usa las flechas)"}))+'">'+imgs+'</div>'+
       (n>1?'<button class="pc-nav pc-prev" type="button" aria-label="'+esc(textLabel("Anterior","Previous","Anterior"))+'" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pc-nav pc-next" type="button" aria-label="'+esc(textLabel("Próxima","Next","Siguiente"))+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button><div class="pc-dots">'+Array.from({length:n},function(_,i){return '<span'+(i?"":' class="on"')+'></span>';}).join("")+'</div><span class="pc-count">1/'+n+'</span>':"")+
       '</div><div class="pc-body"><p class="pc-meta">@'+esc(post.user)+' — '+esc(fmtData(post.d))+'</p>'+
       (cap?'<p class="pc-cap'+(longCap?' clamp':'')+'">'+esc(cap)+'</p>'+(longCap?'<button class="ig-more" type="button">'+esc(textLabel("ver mais","more","ver más"))+'</button>':""):"")+
@@ -275,7 +269,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
         '<div class="pc-grid'+(items.length>=4?' pc-4':'')+'">'+items.map(postCard).join("")+'</div></div>';
     }).join("");
     if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
-    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h3 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+(postsCount===1?textLabel(" publicação"," post"," publicación"):textLabel(" posts"," posts"," posts"))+'</span></h3>'+filter+groupsHTML+'</section>';
+    return '<section class="dk-block pc-block" id="dk-b-posts-all"><h2 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+(postsCount===1?textLabel(" publicação"," post"," publicación"):textLabel(" posts"," posts"," posts"))+'</span></h2>'+filter+groupsHTML+'</section>';
   }
 
 
@@ -343,7 +337,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     const nP = (n) => n + lx(n > 1 ? DS_L.nN : DS_L.n1), unid = (m === 'c' ? lx(DS_L.kC) : lx(DS_L.kInt).toLowerCase());
     const nome = (r) => D.por === 'g' ? (lx((D.nomes || {})[r.x.g]) || r.x.v) : ((ENG.contas[r.x.user] || {}).n || r.x.user);
     const grp = (key) => { const g = {}; rows.forEach(r => { const k = key(r); (g[k] = g[k] || []).push(r); }); return Object.entries(g).map(([k, rs]) => ({ k, rs, n: rs.length, t: S(rs, r => r.v), a: S(rs, r => r.v) / rs.length })); };
-    const sec = (id, t, d, body, cls = '') => { toc.push([id, t]); return `<div class="ds-sec ${cls}" id="${id}"><h3 class="ds-h">${lx(t)}</h3>${d ? `<p class="ds-d">${d}</p>` : ''}${body}</div>`; };
+    const sec = (id, t, d, body, cls = '') => { toc.push([id, t]); return `<div class="ds-sec ${cls}" id="${id}"><h2 class="ds-h">${lx(t)}</h2>${d ? `<p class="ds-d">${d}</p>` : ''}${body}</div>`; };
     const seg = D.users.reduce((s, u) => s + ((ENG.contas[u] || {}).seg || 0), 0);
     const ms = [], m0 = rows[0].x.d.slice(0, 7), m1 = rows[rows.length - 1].x.d.slice(0, 7);
     for (let [y, mm] = m0.split('-').map(Number); `${y}-${String(mm).padStart(2, '0')}` <= m1; mm === 12 ? (y++, mm = 1) : mm++) ms.push(`${y}-${String(mm).padStart(2, '0')}`);
@@ -507,81 +501,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   window.addEventListener('scroll', () => dsTip.classList.remove('on'), { passive: true });
 
 
-  const META_L = {
-    n: [
-      { g: { pt: 'Início', en: 'Home', es: 'Inicio' }, t: { pt: 'Retrato e apresentação', en: 'Portrait and intro', es: 'Retrato y presentación' }, img: 'n01.webp',
-        p: { pt: ['Por cima, a foto colorida; por baixo, um vídeo em loop feito no Pixelar.', 'O cursor abre um círculo com borda pontilhada (matriz Bayer 8×8, redesenhada em canvas a cada quadro). O clique espalha o vídeo pela foto inteira.'],
-             en: ['On top, the colour photo; underneath, a looping video made in Pixelar.', 'The cursor opens a circle with a dotted edge (8×8 Bayer matrix, redrawn on canvas every frame). A click spreads the video over the whole photo.'],
-             es: ['Arriba, la foto a color; debajo, un video en loop hecho en Pixelar.', 'El cursor abre un círculo con borde punteado (matriz Bayer 8×8, redibujada en canvas en cada cuadro). El clic extiende el video por toda la foto.'] } },
-      { t: { pt: 'Serviços e faixa de logos', en: 'Services and logo strip', es: 'Servicios y franja de logos' }, img: 'n02.webp',
-        p: { pt: ['Os ícones de serviço são desenhados em pixel numa grade 12×12, no mesmo pontilhado do retrato.', 'A faixa de logos anda em JavaScript: desacelera no hover, aceita arrastar e volta ao começo sem emenda. Cada logo tem altura própria para todos pesarem igual; o clique abre o case.'],
-             en: ['The service icons are drawn in pixels on a 12×12 grid, in the same dithering as the portrait.', 'The logo strip runs in JavaScript: it slows down on hover, can be dragged and loops seamlessly. Each logo has its own height so they all weigh the same; a click opens the case study.'],
-             es: ['Los íconos de servicio están dibujados en píxel en una cuadrícula de 12×12, con el mismo punteado del retrato.', 'La franja de logos se mueve en JavaScript: frena en el hover, se puede arrastrar y vuelve al inicio sin corte. Cada logo tiene su propia altura para que todos pesen igual; el clic abre el caso.'] } },
-      { t: { pt: 'Trabalhos em destaque', en: 'Featured work', es: 'Trabajos destacados' }, img: 'n03.webp',
-        p: { pt: ['Cards em grade de três colunas, com capa minimalista: logo pequeno no centro, fundo sólido.', 'Os destaques saem da mesma lista dos projetos; basta marcar um item como destaque.'],
-             en: ['Cards in a three-column grid with minimal covers: a small centred logo on a solid background.', 'Featured items come from the same project list; marking an item as featured is enough.'],
-             es: ['Tarjetas en cuadrícula de tres columnas, con portada minimalista: logo pequeño al centro, fondo sólido.', 'Los destacados salen de la misma lista de proyectos; basta marcar un ítem como destacado.'] } },
-      { g: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, t: { pt: 'Filtros por tipo', en: 'Filters by type', es: 'Filtros por tipo' }, img: 'n04.webp',
-        p: { pt: ['Identidade visual, campanhas, programação, carrosséis e posts, dashboards e explorações.', 'Estrutura, estilo e lógica ficam no index.html; projetos, artigos, posts e ferramentas ficam em listas .js separadas. Projeto novo é um item a mais na lista.'],
-             en: ['Visual identity, campaigns, web development, carousels and posts, dashboards and explorations.', 'Structure, style and logic live in index.html; projects, articles, posts and tools are separate .js lists. A new project is one more item in the list.'],
-             es: ['Identidad visual, campañas, programación, carruseles y posts, dashboards y exploraciones.', 'Estructura, estilo y lógica están en index.html; proyectos, artículos, posts y herramientas son listas .js aparte. Un proyecto nuevo es un ítem más en la lista.'] } },
-      { t: { pt: 'Case vertical', en: 'Vertical case study', es: 'Caso vertical' }, img: 'n05.webp',
-        p: { pt: ['Cada apresentação em PDF vira uma sequência de imagens em alta resolução: uma página corrida, como no Behance.', 'O sumário à esquerda acompanha a rolagem e leva direto a cada seção.'],
-             en: ['Each PDF presentation becomes a sequence of high-resolution images: one long page, as on Behance.', 'The table of contents on the left follows the scroll and jumps to each section.'],
-             es: ['Cada presentación en PDF se convierte en una secuencia de imágenes en alta resolución: una página continua, como en Behance.', 'El sumario a la izquierda sigue el desplazamiento y lleva directo a cada sección.'] } },
-      { t: { pt: 'Posts e carrosséis', en: 'Posts and carousels', es: 'Posts y carruseles' }, img: 'n06.webp',
-        p: { pt: ['Mais de cem posts baixados com legenda e data, em WebP, hospedados no próprio site, sem o embed do Instagram.', 'A partir de quatro posts, a grade usa quatro por linha; cada card abre a galeria completa.'],
-             en: ['Over a hundred posts downloaded with caption and date, in WebP, hosted on the site itself, without Instagram’s embed.', 'From four posts up, the grid shows four per row; each card opens the full gallery.'],
-             es: ['Más de cien posts descargados con leyenda y fecha, en WebP, alojados en el propio sitio, sin el embed de Instagram.', 'Desde cuatro posts, la cuadrícula muestra cuatro por fila; cada tarjeta abre la galería completa.'] } },
-      { t: { pt: 'Sites funcionando', en: 'Live sites', es: 'Sitios funcionando' }, img: 'n07.webp',
-        p: { pt: ['Os projetos de programação abrem rodando dentro de um celular desenhado na tela, ou numa janela de computador.', 'O site da Rino dá para testar ali mesmo: trocar cores, guardar combinações e baixar o logo.'],
-             en: ['Web projects open running inside a phone drawn on screen, or in a desktop window.', 'The Rino site can be tried right there: change colours, save combinations and download the logo.'],
-             es: ['Los proyectos de programación se abren funcionando dentro de un celular dibujado en pantalla, o en una ventana de computadora.', 'El sitio de Rino se puede probar ahí mismo: cambiar colores, guardar combinaciones y descargar el logo.'] } },
-      { t: { pt: 'Dashboards', en: 'Dashboards', es: 'Dashboards' }, img: 'n08.webp',
-        p: { pt: ['Curtidas e comentários de 113 posts em nove contas, somados por ano, mês, conta, formato e dia da semana.', 'Gráficos desenhados em SVG, sem biblioteca, animados quando entram na tela. Os mais curtidos abrem o post.'],
-             en: ['Likes and comments from 113 posts across nine accounts, summed by year, month, account, format and weekday.', 'Charts drawn in SVG, no library, animated as they scroll into view. The most liked open the post.'],
-             es: ['Me gusta y comentarios de 113 posts en nueve cuentas, sumados por año, mes, cuenta, formato y día de la semana.', 'Gráficos dibujados en SVG, sin biblioteca, animados al entrar en pantalla. Los más gustados abren el post.'] } },
-      { g: { pt: 'Artigos', en: 'Articles', es: 'Artículos' }, t: { pt: 'Leitor de artigos', en: 'Article reader', es: 'Lector de artículos' }, img: 'n09.webp',
-        p: { pt: ['Os textos vêm da API do WordPress do Persona e do Tesoura com Ponta e abrem num leitor próprio; um botão alterna entre o texto e o post.', 'Em inglês e espanhol a tradução é automática, com glossário para nomes próprios e títulos de obras.'],
-             en: ['Texts come from the WordPress API of Persona and Tesoura com Ponta and open in a custom reader; a switch toggles between the text and the post.', 'In English and Spanish the translation is automatic, with a glossary for proper names and work titles.'],
-             es: ['Los textos vienen de la API de WordPress de Persona y de Tesoura com Ponta y se abren en un lector propio; un botón alterna entre el texto y el post.', 'En inglés y español la traducción es automática, con glosario para nombres propios y títulos de obras.'] } },
-      { g: { pt: 'Sobre', en: 'About', es: 'Sobre mí' }, t: { pt: 'Currículo', en: 'Résumé', es: 'Currículum' }, img: 'n10.webp',
-        p: { pt: ['Experiência e formação em duas colunas, com o logo de cada empresa ou instituição.', 'Os mesmos dados alimentam as três versões de idioma.'],
-             en: ['Experience and education in two columns, with each company’s or institution’s logo.', 'The same data feeds all three language versions.'],
-             es: ['Experiencia y formación en dos columnas, con el logo de cada empresa o institución.', 'Los mismos datos alimentan las tres versiones de idioma.'] } },
-      { g: { pt: 'Contato', en: 'Contact', es: 'Contacto' }, t: { pt: 'Ícones com gravidade', en: 'Icons with gravity', es: 'Íconos con gravedad' }, img: 'n11.webp',
-        p: { pt: ['As ferramentas que uso caem do topo da área quando o rodapé entra na tela, quicam no chão e rolam até parar.', 'Colidem entre si e com os textos, fogem do cursor (ou do dedo) e são empurradas pela rolagem da página.'],
-             en: ['The tools I use fall from the top of the area when the footer comes into view, bounce on the floor and roll to a stop.', 'They collide with each other and with the text, escape the cursor (or finger) and get pushed by page scrolling.'],
-             es: ['Las herramientas que uso caen desde arriba cuando el pie de página entra en pantalla, rebotan en el suelo y ruedan hasta detenerse.', 'Chocan entre sí y con los textos, huyen del cursor (o del dedo) y el desplazamiento de la página las empuja.'] } },
-      { g: { pt: 'Celular', en: 'Phone', es: 'Celular' }, t: { pt: 'No celular', en: 'On the phone', es: 'En el celular' }, img: ['n12a.webp', 'n12b.webp'],
-        p: { pt: ['Tudo vira uma coluna: o menu recolhe num botão e o retrato passa para baixo do título.', 'Nos cases, o sumário fica no topo e as imagens ocupam a largura toda.'],
-             en: ['Everything becomes one column: the menu collapses into a button and the portrait moves below the title.', 'In case studies, the table of contents sits at the top and images take the full width.'],
-             es: ['Todo pasa a una columna: el menú se recoge en un botón y el retrato baja debajo del título.', 'En los casos, el sumario queda arriba y las imágenes ocupan todo el ancho.'] } }
-    ],
-    fim: { pt: ['Três idiomas (PT, EN, ES), imagens em WebP com carregamento sob demanda e nenhuma biblioteca externa além das fontes.', 'Cada mudança foi testada em computador e celular antes de subir, numa cópia de trabalho separada do site no ar.'],
-           en: ['Three languages (PT, EN, ES), WebP images loaded on demand and no external library besides the fonts.', 'Every change was tested on desktop and phone before going live, in a working copy kept apart from the live site.'],
-           es: ['Tres idiomas (PT, EN, ES), imágenes en WebP con carga bajo demanda y ninguna biblioteca externa además de las fuentes.', 'Cada cambio se probó en computadora y celular antes de publicarse, en una copia de trabajo separada del sitio en línea.'] },
-    stack: ['HTML', 'CSS', 'JavaScript', 'Canvas', 'SVG', 'WebGL', 'WordPress API', 'GitHub Pages', 'PT · EN · ES']
-  };
-  const metaHTML = () => {
-    const L = (o) => lx(o), D = 'assets/projetos/metaprojeto/', IL = (currentProject && currentProject.idiomasImg) || [];
-    const shot = (img) => Array.isArray(img)
-      ? `<div class="meta-shot meta-phones">${img.map(s => `<img ${imgSrc(D + s, IL)} alt="" loading="lazy" decoding="async">`).join('')}</div>`
-      : `<div class="meta-shot"><img ${imgSrc(D + img, IL)} alt="" loading="lazy" decoding="async" width="1600" height="1000"></div>`;
-    return `<div class="meta" id="meta">
-      <div class="meta-stack">${META_L.stack.map(s => `<span>${s}</span>`).join('')}</div>
-      ${META_L.n.map((n) => `${n.g ? `<h3 class="meta-g">${L(n.g)}</h3>` : ''}<div class="meta-row">
-        ${shot(n.img)}
-        <div class="meta-note"><h3><span class="meta-hl">${L(n.t)}</span></h3>${(n.p[LANG] || n.p.pt).map(t => `<p>${t}</p>`).join('')}</div>
-      </div>`).join('')}
-      <div class="meta-end">${(META_L.fim[LANG] || META_L.fim.pt).map(t => `<p>${t}</p>`).join('')}</div>
-    </div>`;
-  };
-  let handLoaded = false;
-  const initMeta = () => {
-    if (handLoaded) return; handLoaded = true;
-    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap'; document.head.appendChild(l);
-  };
   /* --- Contato: ícones das ferramentas flutuando em torno de um centro gravitacional ---
      Em telas estreitas, a atração suave leva a nuvem para uma faixa reservada no canto inferior esquerdo.
      Colidem entre si e com os textos, fogem do cursor/dedo e podem ser arrastados (um por vez) e arremessados.
@@ -613,7 +532,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       }).join("")+'</div></section>';
     }else{
       screenHTML=mainScreens.map(function(screen,index){
-        var caption=index>0&&lx(screen.d)?'<div class="dk-cap"><h3>'+esc(lx(screen.t))+'</h3><p>'+esc(lx(screen.d))+'</p></div>':"";
+        var caption=index>0&&lx(screen.d)?'<div class="dk-cap"><h2>'+esc(lx(screen.t))+'</h2><p>'+esc(lx(screen.d))+'</p></div>':"";
         return caption+'<img id="dk-p'+(index+1)+'" '+imgSrc(project.dir+screen.img+".webp",screen.idiomasImg||project.idiomasImg)+' alt="'+esc(lx(screen.t))+'" width="2048" height="1152" decoding="async"'+(index>1?' loading="lazy"':"")+'>';
       }).join("");
     }
@@ -631,15 +550,10 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
       addTocBlock(contentToc,"dk-b-shots",siteCopy.screens);
     }
     if(project.galeria&&project.galeria.length&&project.slug!=="pixelar"){
-      blocks.push('<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">'+esc(lx(siteCopy.gallery))+'</h3><div class="dk-gal">'+project.galeria.map(function(item){
+      blocks.push('<section class="dk-block" id="dk-b-gal"><h2 class="dk-block-title">'+esc(lx(siteCopy.gallery))+'</h2><div class="dk-gal">'+project.galeria.map(function(item){
         return '<button type="button" class="detail-gallery-item" data-lightbox="'+esc(locPath(project.dir+item,project.idiomasImg))+'" data-pt="'+esc(project.dir+item)+'" aria-label="'+esc(textLabel("Ampliar imagem","Enlarge image","Ampliar imagen"))+'"><img '+imgSrc(project.dir+item,project.idiomasImg)+' alt="" loading="lazy" decoding="async"></button>';
       }).join("")+'</div></section>');
       addTocBlock(contentToc,"dk-b-gal",siteCopy.gallery);
-    }
-    if(project.html==="meta"){
-      initMeta();
-      blocks.push(metaHTML());
-      addTocBlock(contentToc,"dk-b-meta",siteCopy.build);
     }
     var postHTML=buildPosts(project,contentToc); if(postHTML)blocks.push(postHTML);
     if(project.dash){

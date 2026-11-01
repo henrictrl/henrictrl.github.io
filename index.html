@@ -8,9 +8,8 @@
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/motion.css?v=20261102a">
-<!-- canonical por rota: o mesmo HTML serve /, /sobre/, /projetos/... (atualiza também na navegação interna) -->
-<link rel="canonical" id="canonical" href="https://henrictrl.github.io/">
-<script>(function(){var c=document.getElementById('canonical'),set=function(){c.href='https://henrictrl.github.io'+location.pathname;};set();['pushState','replaceState'].forEach(function(k){var o=history[k];history[k]=function(){var r=o.apply(this,arguments);set();return r;};});addEventListener('popstate',set);})();</script>
+<script src="assets/js/idioma.js?v=20261102a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
+<meta name="google-site-verification" content="h6bAkOayPHnAIpK4OAyF0fBiJ_whJN_DQ7ZdN8cxKNc">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -19,9 +18,12 @@
 <link rel="icon" href="assets/img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin> <!-- fonte Inter no próprio site -->
+<style>
+/* Inter variável 300–600 (licença OFL), subconjuntos latin e latin-ext: cobre PT, EN e ES */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
 <!-- LCP: o retrato é a primeira imagem a carregar -->
 <link rel="preload" as="image" href="assets/img/retrato-cor.webp" fetchpriority="high">
 <script>document.documentElement.classList.add('js');</script>
@@ -115,7 +117,7 @@ header.top-header {
 .main-nav a.current, .main-nav a:hover { color: var(--ink); }
 
 @media (min-width: 768px) {
-  header.top-header, header.floating-header { padding-inline: var(--gutter); } /* mesma margem do conteúdo */
+  header.top-header, div.floating-header { padding-inline: var(--gutter); } /* mesma margem do conteúdo */
   .header-inner { 
     display: grid;
     grid-template-columns: 1fr auto 1fr; 
@@ -131,7 +133,7 @@ header.top-header {
 
 /* --- Mobile: header fixo + menu hambúrguer --- */
 @media (max-width: 767px) {
-  header.floating-header { display: none !important; }
+  div.floating-header { display: none !important; }
   header.top-header {
     position: sticky; top: 0; z-index: 150;
     padding: 14px var(--gutter);
@@ -179,7 +181,7 @@ header.top-header {
 }
 
 /* --- Floating Header Desktop --- */
-header.floating-header {
+div.floating-header {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 200;
@@ -188,7 +190,7 @@ header.floating-header {
   transform: translateY(-100%);
   transition: transform 0.35s var(--ease);
 }
-header.floating-header.visible { transform: translateY(0); }
+div.floating-header.visible { transform: translateY(0); }
 
 /* --- Utilities & Reveal Animations --- */
 /* Atraso da entrada em cascata via --d: vale só para opacity/transform (antes, o transition-delay
@@ -596,7 +598,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
    Desktop e celular: cabeçalho do projeto e todas as páginas empilhadas (rolagem vertical, estilo Behance). */
 /* Durante um projeto, a navegação principal continua acessível acima da apresentação. */
 body.project-deck-open > header.top-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 500; isolation: isolate; background: var(--white); border-bottom: 1px solid var(--gray-100); }
-body.project-deck-open > header.floating-header { display: none !important; }
+body.project-deck-open > div.floating-header { display: none !important; }
 /* O modal é a própria área rolável; o cabeçalho permanece preso ao topo. */
 body.project-deck-open .dk-ov.open { top: 0; right: 0; bottom: 0; left: 0; }
 body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-height, 72px)); background: var(--white); flex-shrink: 0; }
@@ -648,8 +650,6 @@ body.project-deck-open .dk-top { padding-top: calc(18px + var(--project-header-h
 .dk-cap h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
 .dk-cap p { font-size: 14px; line-height: 1.7; color: var(--gray-500); text-wrap: balance; }
 .dk-foot { max-width: 1400px; margin: 0 auto; padding: 56px 32px 72px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.dk-next { font: inherit; font-size: 15px; background: none; border: 0; cursor: pointer; color: var(--ink); padding: 0; }
-.dk-next span { color: var(--gray-400); font-size: 12px; display: block; margin-bottom: 4px; text-align: left; }
 @media (max-width: 767px) {
   .dk-tags { margin: 12px auto 0; padding: 0 18px; gap: 7px 10px; }
    .dk-tag { min-height: 24px; padding: 5px 7px; font-size: 10px; }
@@ -907,6 +907,10 @@ body.sv-open .sv { display: block; }
   pointer-events: none; transition: opacity 0.3s var(--ease);
 }
 .lightbox-overlay.open { opacity: 1; pointer-events: auto; }
+/* janelas fechadas ficam fora do Tab e dos leitores de tela (só a opacidade deixava focar o que não aparece);
+   a visibilidade muda depois do fade de saída */
+.dk-ov, .project-modal-overlay, .pv-ov, .web-ov, .lightbox-overlay { visibility: hidden; transition: opacity .3s var(--ease), visibility 0s linear .3s; }
+.dk-ov.open, .project-modal-overlay.open, .pv-ov.open, .web-ov.open, .lightbox-overlay.open { visibility: visible; transition: opacity .3s var(--ease), visibility 0s; }
 .lightbox-close {
   position: absolute; top: 20px; right: 20px; z-index: 2; width: 44px; height: 44px;
   border-radius: 50%; background: rgba(255,255,255,0.12); border: none; color: #fff;
@@ -1379,28 +1383,6 @@ body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events
 .pc-group-head p { font-size: 13px; line-height: 1.6; color: var(--gray-500); text-wrap: balance; }
 .dk-block-title .dk-try { margin-top: 16px; }
 
-/* ---------- Metaprojeto (este site): notas à mão (Gloria Hallelujah) e rabiscos ---------- */
-.meta { --hand: 'Gloria Hallelujah', cursive; --pen: #1D3DF5; max-width: 940px; margin: 0 auto; padding: 0 24px 24px; position: relative; }
-.meta-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-bottom: 64px; position: relative; }
-.meta-row:nth-of-type(even) .meta-shot { order: 2; }
-.meta-shot { position: relative; max-width: 440px; justify-self: center; width: 100%; }
-.meta-shot img { width: 100%; height: auto; display: block; border-radius: var(--r); box-shadow: 0 0 0 1px var(--gray-200), 0 12px 32px -18px rgba(0,0,0,.3); }
-.meta-note { font-family: var(--hand); color: var(--pen); font-size: 16px; line-height: 1.55; position: relative; max-width: 400px; }
-.meta-note h3 { font-family: var(--hand); font-weight: 400; font-size: 21px; line-height: 1.2; margin-bottom: 10px; color: var(--ink); }
-.meta-note p + p { margin-top: 8px; }
-.meta-g { font-family: var(--hand); font-weight: 400; font-size: 28px; color: var(--ink); text-align: center; margin: 24px 0 36px; }
-.meta-g::after { content: ''; display: block; width: 56px; height: 2px; background: var(--ink); margin: 10px auto 0; opacity: .25; }
-.meta-phones { display: flex; gap: 16px; justify-content: center; }
-.meta-phones img { width: calc(50% - 8px); max-width: 200px; }
-.meta-hl { background: linear-gradient(transparent 58%, rgba(255,199,0,.5) 58%, rgba(255,199,0,.5) 90%, transparent 90%); }
-.meta-stack { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 0 auto 56px; max-width: 700px; }
-.meta-stack span { font-family: var(--hand); font-size: 15px; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; padding: 2px 12px; }
-.meta-end { font-family: var(--hand); color: var(--pen); font-size: 16px; line-height: 1.55; max-width: 560px; margin: 0 auto; text-align: center; }
-.meta-end p + p { margin-top: 8px; }
-@media (max-width: 767px) {
-  .meta-row { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
-  .meta-row:nth-of-type(even) .meta-shot { order: 0; }
-  .meta-note { font-size: 15px; } .meta-note h3 { font-size: 19px; }
 }
 
 
@@ -1620,9 +1602,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .dk-ov .dk-toc a { border-left: 0 !important; padding-left: 0 !important; }
 .dk-ov .pg-i { align-items: center !important; }
 .dk-ov .ds-table { margin-inline: auto; }
-.dk-ov .meta-note { margin-inline: auto; }
 .dk-ov .rino-case-intro { text-align: center !important; }
-.dk-ov .dk-next span { text-align: center !important; }
 .dk-ov .ds-tc { text-align: center !important; }
 .dk-ov .ds-table th,
 .dk-ov .ds-table td,
@@ -1814,7 +1794,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261101b">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261102a">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
 .am-actions { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; }
@@ -2137,6 +2117,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </style>
 
 <!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<link rel="canonical" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/">
+<link rel="alternate" hreflang="es" href="https://henrictrl.github.io/es/">
+<link rel="alternate" hreflang="x-default" href="https://henrictrl.github.io/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Henrique Marinhos","url":"https://henrictrl.github.io/","jobTitle":"Designer e relações-públicas","image":"https://henrictrl.github.io/assets/img/retrato-cor.webp","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Unesp"},"sameAs":["https://www.linkedin.com/in/henrique-marinhos/","https://www.behance.net/henriquemarinhos","http://lattes.cnpq.br/8181966688647381"]}</script>
 
 <meta property="og:type" content="website">
@@ -2150,6 +2135,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Henrique Marinhos — Designer e relações-públicas">
 <meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
@@ -2187,7 +2174,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   </div>
 </header>
 
-<header class="floating-header" id="floating-header">
+<div class="floating-header" id="floating-header" role="region" aria-label="Menu fixo">
   <div class="header-inner">
     <div class="header-left"></div>
     <div class="nav-row">
@@ -2202,7 +2189,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       <div class="lang-switch" role="group" aria-label="Idioma / Language"></div>
     </div>
   </div>
-</header>
+</div>
 
 <main>
   <div id="view-home">
@@ -2244,6 +2231,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </section>
 
     </div>
+    <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
+    <script>if (HMI.initial() === 'pt') requestAnimationFrame(function () { document.querySelectorAll('.first-screen .reveal').forEach(function (e) { e.classList.add('in-view'); }); });</script>
     <section class="section-block services-block" style="padding-top:calc(var(--space-y) / 3);">
       <div class="max-w">
         <p class="services-title" data-i18n="services.title">Serviços</p>
@@ -2417,7 +2406,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <div class="top-before-contact"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button></div>
 <footer class="contact-footer" id="contato">
   <!-- ícones das ferramentas: flutuam, reagem à rolagem e fogem do cursor/dedo (assets/data/ferramentas.js) -->
-  <div class="tools-float" id="tools-float" aria-hidden="true"></div>
+  <div class="tools-float" id="tools-float"></div>
   <div class="footer-inner">
     <div class="footer-heading-group">
       <h2 class="footer-headline" data-i18n="footer.headline">Vamos trabalhar juntos?</h2>
@@ -2531,7 +2520,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   <div class="dk-content" id="dk-content">
     <header class="dk-head"><p class="dk-kicker" id="dk-kicker"></p><h2 class="dk-title" id="dk-title"></h2><p class="dk-intro" id="dk-intro"></p><div class="dk-tags" id="dk-tags" aria-label="Etiquetas do projeto" hidden></div><a class="dk-link" id="dk-link" target="_blank" rel="noopener" hidden></a></header>
     <div class="dk-body"><nav class="dk-toc" id="dk-toc" aria-label="Sumário"></nav><div class="dk-imgs" id="dk-imgs"></div></div>
-    <footer class="dk-foot"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button><button class="dk-next" id="dk-next"></button></footer>
+    <div class="dk-foot"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button></div>
   </div>
 </div>
 <div class="project-modal-overlay" id="art-modal-overlay">
@@ -2741,7 +2730,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     const md = document.querySelector('meta[name="description"]');
     if (md) { if (!md.dataset.pt) md.dataset.pt = md.content; md.content = i18n('doc.desc', md.dataset.pt); }
     document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
-    if (save) { try { localStorage.setItem('hm-lang', LANG); } catch (e) {} }
+    window.HMI && HMI.sync(LANG, save); // endereço (/en/, /es/), canonical e hreflang no idioma atual
     langHooks.forEach(fn => fn());
   };
   // bandeiras (SVG inline; ids únicos por instância por causa do clipPath da Union Jack)
@@ -2757,11 +2746,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       box.innerHTML = ['pt', 'en', 'es'].map(l => `<button class="lang-btn" type="button" data-lang="${l}" lang="${l}" aria-pressed="false" aria-label="${LANG_NAMES[l]}" title="${LANG_NAMES[l]}">${FLAGS[l]()}</button>`).join('');
       box.addEventListener('click', (e) => { const b = e.target.closest('.lang-btn'); if (b) setLang(b.dataset.lang); });
     });
-    let saved = null; try { saved = localStorage.getItem('hm-lang'); } catch (e) {}
-    // 1ª visita: idioma do navegador/sistema (pt → PT, es → ES, qualquer outro → EN); depois vale a escolha salva
-    const nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'pt']).map(l => String(l).toLowerCase());
-    const auto = nav.find(l => /^(pt|es|en)/.test(l));
-    setLang(saved || (auto ? auto.slice(0, 2) : 'en'), false);
+    // idioma do endereço (/en/, /es/) > escolha salva > idioma do navegador (ver assets/js/idioma.js)
+    setLang(HMI.initial(), !!HMI.fromPath());
   };
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -2794,12 +2780,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Descrições das janelas de serviço; os projetos relacionados vêm do catálogo real.
 
   /* --- Animations & Observers --- */
-  /* Dissolução pontilhada (mesma linguagem do vídeo do retrato): máscara em células de CELL px,
-     limiar Bayer 8x8 + ruído novo a cada frame (o "chiado" do dither) varrendo da esquerda/topo.
-     A máscara é gerada num canvas do tamanho do título e aplicada via CSS mask; some ao terminar. */
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const BAYER8 = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,
-    3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21].map(v => (v + 0.5) / 64);
 
 
   const revealObserver = new IntersectionObserver((entries) => {
@@ -2833,7 +2813,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (amOverlay.classList.contains('open')) closeArticle(true);
     if (dk.classList.contains('open')) closeDeck();
     const path = ROUTE_PATHS[route] || '/';
-    if (location.pathname !== path || location.hash) {
+    if (HMI.path() !== path || location.hash) {
       (replace ? history.replaceState : history.pushState).call(history, { portfolioRoute: route }, '', path);
     }
     showRoute(route, navId);
@@ -3116,7 +3096,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const articleRoute = (a) => '/artigos/' + encodeURIComponent(articleSlug(a)) + '/';
   const openArticle = (a) => {
     const articlePath = articleRoute(a);
-    if (location.pathname !== articlePath) history.pushState({ portfolioArticle: articleSlug(a) }, '', articlePath);
+    if (HMI.path() !== articlePath) history.pushState({ portfolioArticle: articleSlug(a) }, '', articlePath);
     const tok = ++amToken;
     document.getElementById('am-site').textContent = a.site + ' · ' + a.tags.map(tagName).join(' · ');
     document.getElementById('am-title').textContent = artTitle(a);
@@ -3138,7 +3118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       shareResetTimer = setTimeout(() => { setShareLabel(shareDefaultLabel()); }, 1800);
     };
     shareBtn.onclick = async () => {
-      const url = location.origin + articlePath;
+      const url = location.origin + HMI.with(articlePath);
       const shareData = { url }; // só o link, sem texto
       try {
         if (navigator.share) { await navigator.share(shareData); return; }
@@ -3196,7 +3176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(() => { if (tok === amToken) showFrame(a.u); });
   };
   const closeArticle = (fromHistory = false) => {
-    if (!fromHistory && /^\/artigos\/[^/]+\/?$/.test(location.pathname)) {
+    if (!fromHistory && /^\/artigos\/[^/]+\/?$/.test(HMI.path())) {
       if (history.state && history.state.portfolioArticle) { history.back(); return; }
       history.replaceState({ portfolioRoute: 'articles' }, '', '/artigos/');
       showRoute('articles', 'artigos');
@@ -3287,14 +3267,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const title = linked ? artTitle(linked) : x.c === 'DeKDr7dFgRW' ? 'Desvendando o Pop: lançamentos de setembro de 2026' : x.c === 'Dd6mzTmFpUe' ? 'Tinashe antecipa Popstar no Desvendando o Pop' : capTitle(x);
             return `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
               <div class="art-card-media" style="aspect-ratio:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
-              <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h3 class="art-card-title">${title}</h3></a>`;
+              <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${title}</h2></a>`;
           }
           const a = entry.item, index = data.indexOf(a), badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
           const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
           const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
           return `<a class="art-card" href="${articleRoute(a)}" target="_self" rel="noopener" data-i="${index}"${a.cropTop ? ' data-crop-top="true"' : ''}>
             <div class="art-card-media"${a.bg ? ` style="background:${a.bg}"` : ''}>${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}></div>
-            <p class="art-card-meta">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h3 class="art-card-title">${artTitle(a)}</h3><p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p></a>`;
+            <p class="art-card-meta">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h2 class="art-card-title">${artTitle(a)}</h2><p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p></a>`;
         }).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
@@ -3302,7 +3282,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (k === 'carrosseis') { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
         grid.innerHTML = CARR.map(x => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
           <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
-          <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h3 class="art-card-title">${esc(capTitle(x))}</h3></a>`).join('');
+          <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${esc(capTitle(x))}</h2></a>`).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
@@ -3320,7 +3300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<a class="art-card" href="${a.project ? cleanProjectUrl(a.project) : articleRoute(a)}" target="_self" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
           <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
           <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
-          <h3 class="art-card-title">${artTitle(a)}</h3>
+          <h2 class="art-card-title">${artTitle(a)}</h2>
           <p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p>
         </a>`;
       }).join('');
@@ -4152,7 +4132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Projetos: cards + apresentação (deck) --- */
   const PROJECT_ROUTE_ALIASES = {"rino-site":"rino-cores","o-hobbit":"hobbit","metaprojeto":"portfolio","dash-geral":"visao-geral"};
-  const cleanProjectUrl = (slug) => '/projetos/' + (PROJECT_ROUTE_ALIASES[slug] || slug) + '/';
+  const cleanProjectUrl = (slug) => HMI.with('/projetos/' + (PROJECT_ROUTE_ALIASES[slug] || slug) + '/');
   const PJ = window.PROJETOS || [];
   const PJ_BY = Object.fromEntries(PJ.map(p => [p.slug, p]));
   // Mantém a prévia real do editor em viewport desktop e escala o iframe para o card.
@@ -4471,6 +4451,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const POST_BY = Object.fromEntries(POSTS.map(x => [x.c, x]));
   const POSTS_BY_ART = {}; POSTS.forEach(x => { if (x.art) (POSTS_BY_ART[x.art] = POSTS_BY_ART[x.art] || []).push(x); });
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const PC_TRACK = { pt: 'Imagens do post (use as setas)', en: 'Post images (use arrow keys)', es: 'Imágenes del post (usa las flechas)' };
   const IG_L = { ver: { pt: 'Ver post', en: 'View post', es: 'Ver publicación' }, ler: { pt: 'Texto', en: 'Text', es: 'Texto' }, site: { pt: 'Site', en: 'Site', es: 'Sitio' }, share: { pt: 'Compartilhar', en: 'Share', es: 'Compartir' },
     mais: { pt: 'ver mais', en: 'more', es: 'ver más' }, prev: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next: { pt: 'Próxima', en: 'Next', es: 'Siguiente' }, menos: { pt: 'ver menos', en: 'less', es: 'ver menos' } };
   const igUrl = (x) => `https://www.instagram.com/${x.reel ? 'reel' : 'p'}/${x.c}/`;
@@ -4506,7 +4487,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
     const art = x.art ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
     return `<article class="pc" data-code="${x.c}">
-      <div class="pc-media" style="--ar:${x.embed ? (1 / ((Number(x.r) || 1.25) + 0.26)).toFixed(4) : (1 / x.r).toFixed(4)}"><div class="pc-track">${imgs}</div>
+      <div class="pc-media" style="--ar:${x.embed ? (1 / ((Number(x.r) || 1.25) + 0.26)).toFixed(4) : (1 / x.r).toFixed(4)}"><div class="pc-track" role="group" tabindex="0" aria-label="${lx(PC_TRACK)}">${imgs}</div>
         ${n > 1 && !x.embed ? `<button class="pc-nav pc-prev" type="button" aria-label="Anterior" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="Próxima">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : ''}</div>
       <div class="pc-body"><p class="pc-meta">@${esc(x.user)} — ${fmtData(x.d)}</p>${cap ? `<p class="pc-cap${longo ? ' clamp' : ''}">${esc(cap)}</p>${longo ? `<button class="ig-more" type="button">${lx(IG_L.mais)}</button>` : ''}` : ''}
         <div class="pc-links"><a href="${igUrl(x)}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a>${art ? `<a href="${art.u}" data-art-u="${art.u}">${lx(IG_L.ler)}</a>` : ''}</div></div>
@@ -4548,7 +4529,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return x.reel ? `<a class="ig-reel" href="${igUrl(x)}" target="_blank" rel="noopener">${im}</a>` : im; }).join('');
     const art = x.art ? (window.ARTIGOS || []).find(a => a.u === x.art) : null;
     const nav = n > 1 && !x.embed ? `<button class="pc-nav pc-prev" type="button" aria-label="${lx(IG_L.prev)}" disabled>${ARR('M15 18l-6-6 6-6')}</button><button class="pc-nav pc-next" type="button" aria-label="${lx(IG_L.next)}">${ARR('M9 18l6-6-6-6')}</button><div class="pc-dots">${Array.from({ length: n }, (_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div><span class="pc-count">1/${n}</span>` : '';
-    return `<div class="pc-media pv-media" style="--ar:${ar}"><div class="pc-track">${imgs}</div>${nav}</div>
+    return `<div class="pc-media pv-media" style="--ar:${ar}"><div class="pc-track" role="group" tabindex="0" aria-label="${lx(PC_TRACK)}">${imgs}</div>${nav}</div>
       <div class="pv-side">
         <header class="ig-head pv-head"><span class="ig-av" aria-hidden="true">${esc(x.v[0])}</span><span class="ig-user">@${esc(x.user)}${x.co && x.co.length ? ` <span style="color:var(--gray-400);font-weight:400">· @${x.co.map(esc).join(' · @')}</span>` : ''}</span><span class="ig-date">${fmtData(x.d)}</span></header>
         <p class="pv-cap">${esc(cap)}</p>
@@ -4567,7 +4548,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = e.target.closest('.pv-share');
     if (!button) return;
     const post = pvList[pvI], article = post && post.art ? (window.ARTIGOS || []).find(a => a.u === post.art) : null;
-    const url = location.origin + (article ? articleRoute(article) : igUrl(post));
+    const url = article ? location.origin + HMI.with(articleRoute(article)) : igUrl(post); // sem artigo: o próprio post no Instagram
     const shareData = { url }; // só o link, sem texto
     try {
       if (navigator.share) { await navigator.share(shareData); return; }
@@ -4638,7 +4619,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const NEXT_L = { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' };
   const DK_L = { try: { pt: 'Testar o site', en: 'Try the site', es: 'Probar el sitio' }, telas: { pt: 'Telas', en: 'Screens', es: 'Pantallas' }, shotsT: { pt: 'Capturas de tela', en: 'Screenshots', es: 'Capturas de pantalla' },
     gal: { pt: 'Imagens feitas no Pixelar', en: 'Images made with Pixelar', es: 'Imágenes hechas con Pixelar' }, posts: { pt: 'Posts e carrosséis', en: 'Posts and carousels', es: 'Posts y carruseles' },
-    rel: { pt: 'Projeto ligado', en: 'Related project', es: 'Proyecto relacionado' }, meta: { pt: 'Construção', en: 'How it was built', es: 'Construcción' },
+    rel: { pt: 'Projeto ligado', en: 'Related project', es: 'Proyecto relacionado' },
     nPosts: { pt: ' posts', en: ' posts', es: ' posts' },
     fAll: { pt: 'Todos', en: 'All', es: 'Todos' }, fPost: { pt: 'Posts', en: 'Posts', es: 'Posts' }, fCar: { pt: 'Carrosséis', en: 'Carousels', es: 'Carruseles' }, site: { pt: 'Site de teste de cores', en: 'Colour test site', es: 'Sitio de prueba de colores' } };
   // filtro Posts | Carrosséis dentro do case
@@ -4858,7 +4839,6 @@ document.addEventListener('DOMContentLoaded', () => {
       toc.push(['dk-b-shots', p.siteIntro ? DK_L.site : DK_L.telas]);
     }
     if (p.galeria && p.slug !== 'pixelar') { out.push(`<section class="dk-block" id="dk-b-gal"><h3 class="dk-block-title">${lx(DK_L.gal)}</h3><div class="dk-gal">${p.galeria.map(g => `<img src="${p.dir}${g}" alt="" loading="lazy" decoding="async" onclick="openLightbox('${p.dir}${g}')">`).join('')}</div></section>`); toc.push(['dk-b-gal', DK_L.gal]); }
-    if (p.html === 'meta') { out.push(`<section class="dk-block" id="dk-b-meta">${metaHTML()}</section>`); toc.push(['dk-b-meta', DK_L.meta]); }
     // As análises entram após os grupos de posts e carrosséis.
     // posts: carrossel = várias imagens SEM texto publicado; o resto (imagem única ou ligado a um artigo) = post
     const kind = (x) => x.n > 1 && !x.art ? 'car' : 'post';
@@ -4928,85 +4908,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const fromHash = () => { const m = location.hash.match(/^#projeto\/([\w-]+)/); if (m && PJ_BY[m[1]]) openDeck(m[1]); };
   window.addEventListener('hashchange', fromHash);
 
-  /* --- Metaprojeto: página sobre a construção deste site (rabiscos + notas à mão) ---
-     A fonte manuscrita ainda está em escolha: o seletor no topo troca entre as opções e guarda a escolha neste navegador. */
-  // Fonte das anotações: Gloria Hallelujah (escolhida). Carregada só quando o case abre.
-  /* "Este portfólio": seções do site, página a página. g = seção; img = print 16:10 (ou par de celular). */
-  const META_L = {
-    n: [
-      { g: { pt: 'Início', en: 'Home', es: 'Inicio' }, t: { pt: 'Retrato e apresentação', en: 'Portrait and intro', es: 'Retrato y presentación' }, img: 'n01.webp',
-        p: { pt: ['Por cima, a foto colorida; por baixo, um vídeo em loop feito no Pixelar.', 'O cursor abre um círculo com borda pontilhada (matriz Bayer 8×8, redesenhada em canvas a cada quadro). O clique espalha o vídeo pela foto inteira.'],
-             en: ['On top, the colour photo; underneath, a looping video made in Pixelar.', 'The cursor opens a circle with a dotted edge (8×8 Bayer matrix, redrawn on canvas every frame). A click spreads the video over the whole photo.'],
-             es: ['Arriba, la foto a color; debajo, un video en loop hecho en Pixelar.', 'El cursor abre un círculo con borde punteado (matriz Bayer 8×8, redibujada en canvas en cada cuadro). El clic extiende el video por toda la foto.'] } },
-      { t: { pt: 'Serviços e faixa de logos', en: 'Services and logo strip', es: 'Servicios y franja de logos' }, img: 'n02.webp',
-        p: { pt: ['Os ícones de serviço são desenhados em pixel numa grade 12×12, no mesmo pontilhado do retrato.', 'A faixa de logos anda em JavaScript: desacelera no hover, aceita arrastar e volta ao começo sem emenda. Cada logo tem altura própria para todos pesarem igual; o clique abre o case.'],
-             en: ['The service icons are drawn in pixels on a 12×12 grid, in the same dithering as the portrait.', 'The logo strip runs in JavaScript: it slows down on hover, can be dragged and loops seamlessly. Each logo has its own height so they all weigh the same; a click opens the case study.'],
-             es: ['Los íconos de servicio están dibujados en píxel en una cuadrícula de 12×12, con el mismo punteado del retrato.', 'La franja de logos se mueve en JavaScript: frena en el hover, se puede arrastrar y vuelve al inicio sin corte. Cada logo tiene su propia altura para que todos pesen igual; el clic abre el caso.'] } },
-      { t: { pt: 'Trabalhos em destaque', en: 'Featured work', es: 'Trabajos destacados' }, img: 'n03.webp',
-        p: { pt: ['Cards em grade de três colunas, com capa minimalista: logo pequeno no centro, fundo sólido.', 'Os destaques saem da mesma lista dos projetos; basta marcar um item como destaque.'],
-             en: ['Cards in a three-column grid with minimal covers: a small centred logo on a solid background.', 'Featured items come from the same project list; marking an item as featured is enough.'],
-             es: ['Tarjetas en cuadrícula de tres columnas, con portada minimalista: logo pequeño al centro, fondo sólido.', 'Los destacados salen de la misma lista de proyectos; basta marcar un ítem como destacado.'] } },
-      { g: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, t: { pt: 'Filtros por tipo', en: 'Filters by type', es: 'Filtros por tipo' }, img: 'n04.webp',
-        p: { pt: ['Identidade visual, campanhas, programação, carrosséis e posts, dashboards e explorações.', 'Estrutura, estilo e lógica ficam no index.html; projetos, artigos, posts e ferramentas ficam em listas .js separadas. Projeto novo é um item a mais na lista.'],
-             en: ['Visual identity, campaigns, web development, carousels and posts, dashboards and explorations.', 'Structure, style and logic live in index.html; projects, articles, posts and tools are separate .js lists. A new project is one more item in the list.'],
-             es: ['Identidad visual, campañas, programación, carruseles y posts, dashboards y exploraciones.', 'Estructura, estilo y lógica están en index.html; proyectos, artículos, posts y herramientas son listas .js aparte. Un proyecto nuevo es un ítem más en la lista.'] } },
-      { t: { pt: 'Case vertical', en: 'Vertical case study', es: 'Caso vertical' }, img: 'n05.webp',
-        p: { pt: ['Cada apresentação em PDF vira uma sequência de imagens em alta resolução: uma página corrida, como no Behance.', 'O sumário à esquerda acompanha a rolagem e leva direto a cada seção.'],
-             en: ['Each PDF presentation becomes a sequence of high-resolution images: one long page, as on Behance.', 'The table of contents on the left follows the scroll and jumps to each section.'],
-             es: ['Cada presentación en PDF se convierte en una secuencia de imágenes en alta resolución: una página continua, como en Behance.', 'El sumario a la izquierda sigue el desplazamiento y lleva directo a cada sección.'] } },
-      { t: { pt: 'Posts e carrosséis', en: 'Posts and carousels', es: 'Posts y carruseles' }, img: 'n06.webp',
-        p: { pt: ['Mais de cem posts baixados com legenda e data, em WebP, hospedados no próprio site, sem o embed do Instagram.', 'A partir de quatro posts, a grade usa quatro por linha; cada card abre a galeria completa.'],
-             en: ['Over a hundred posts downloaded with caption and date, in WebP, hosted on the site itself, without Instagram’s embed.', 'From four posts up, the grid shows four per row; each card opens the full gallery.'],
-             es: ['Más de cien posts descargados con leyenda y fecha, en WebP, alojados en el propio sitio, sin el embed de Instagram.', 'Desde cuatro posts, la cuadrícula muestra cuatro por fila; cada tarjeta abre la galería completa.'] } },
-      { t: { pt: 'Sites funcionando', en: 'Live sites', es: 'Sitios funcionando' }, img: 'n07.webp',
-        p: { pt: ['Os projetos de programação abrem rodando dentro de um celular desenhado na tela, ou numa janela de computador.', 'O site da Rino dá para testar ali mesmo: trocar cores, guardar combinações e baixar o logo.'],
-             en: ['Web projects open running inside a phone drawn on screen, or in a desktop window.', 'The Rino site can be tried right there: change colours, save combinations and download the logo.'],
-             es: ['Los proyectos de programación se abren funcionando dentro de un celular dibujado en pantalla, o en una ventana de computadora.', 'El sitio de Rino se puede probar ahí mismo: cambiar colores, guardar combinaciones y descargar el logo.'] } },
-      { t: { pt: 'Dashboards', en: 'Dashboards', es: 'Dashboards' }, img: 'n08.webp',
-        p: { pt: ['Curtidas e comentários de 113 posts em nove contas, somados por ano, mês, conta, formato e dia da semana.', 'Gráficos desenhados em SVG, sem biblioteca, animados quando entram na tela. Os mais curtidos abrem o post.'],
-             en: ['Likes and comments from 113 posts across nine accounts, summed by year, month, account, format and weekday.', 'Charts drawn in SVG, no library, animated as they scroll into view. The most liked open the post.'],
-             es: ['Me gusta y comentarios de 113 posts en nueve cuentas, sumados por año, mes, cuenta, formato y día de la semana.', 'Gráficos dibujados en SVG, sin biblioteca, animados al entrar en pantalla. Los más gustados abren el post.'] } },
-      { g: { pt: 'Artigos', en: 'Articles', es: 'Artículos' }, t: { pt: 'Leitor de artigos', en: 'Article reader', es: 'Lector de artículos' }, img: 'n09.webp',
-        p: { pt: ['Os textos vêm da API do WordPress do Persona e do Tesoura com Ponta e abrem num leitor próprio; um botão alterna entre o texto e o post.', 'Em inglês e espanhol a tradução é automática, com glossário para nomes próprios e títulos de obras.'],
-             en: ['Texts come from the WordPress API of Persona and Tesoura com Ponta and open in a custom reader; a switch toggles between the text and the post.', 'In English and Spanish the translation is automatic, with a glossary for proper names and work titles.'],
-             es: ['Los textos vienen de la API de WordPress de Persona y de Tesoura com Ponta y se abren en un lector propio; un botón alterna entre el texto y el post.', 'En inglés y español la traducción es automática, con glosario para nombres propios y títulos de obras.'] } },
-      { g: { pt: 'Sobre', en: 'About', es: 'Sobre mí' }, t: { pt: 'Currículo', en: 'Résumé', es: 'Currículum' }, img: 'n10.webp',
-        p: { pt: ['Experiência e formação em duas colunas, com o logo de cada empresa ou instituição.', 'Os mesmos dados alimentam as três versões de idioma.'],
-             en: ['Experience and education in two columns, with each company’s or institution’s logo.', 'The same data feeds all three language versions.'],
-             es: ['Experiencia y formación en dos columnas, con el logo de cada empresa o institución.', 'Los mismos datos alimentan las tres versiones de idioma.'] } },
-      { g: { pt: 'Contato', en: 'Contact', es: 'Contacto' }, t: { pt: 'Ícones com gravidade', en: 'Icons with gravity', es: 'Íconos con gravedad' }, img: 'n11.webp',
-        p: { pt: ['As ferramentas que uso caem do topo da área quando o rodapé entra na tela, quicam no chão e rolam até parar.', 'Colidem entre si e com os textos, fogem do cursor (ou do dedo) e são empurradas pela rolagem da página.'],
-             en: ['The tools I use fall from the top of the area when the footer comes into view, bounce on the floor and roll to a stop.', 'They collide with each other and with the text, escape the cursor (or finger) and get pushed by page scrolling.'],
-             es: ['Las herramientas que uso caen desde arriba cuando el pie de página entra en pantalla, rebotan en el suelo y ruedan hasta detenerse.', 'Chocan entre sí y con los textos, huyen del cursor (o del dedo) y el desplazamiento de la página las empuja.'] } },
-      { g: { pt: 'Celular', en: 'Phone', es: 'Celular' }, t: { pt: 'No celular', en: 'On the phone', es: 'En el celular' }, img: ['n12a.webp', 'n12b.webp'],
-        p: { pt: ['Tudo vira uma coluna: o menu recolhe num botão e o retrato passa para baixo do título.', 'Nos cases, o sumário fica no topo e as imagens ocupam a largura toda.'],
-             en: ['Everything becomes one column: the menu collapses into a button and the portrait moves below the title.', 'In case studies, the table of contents sits at the top and images take the full width.'],
-             es: ['Todo pasa a una columna: el menú se recoge en un botón y el retrato baja debajo del título.', 'En los casos, el sumario queda arriba y las imágenes ocupan todo el ancho.'] } }
-    ],
-    fim: { pt: ['Três idiomas (PT, EN, ES), imagens em WebP com carregamento sob demanda e nenhuma biblioteca externa além das fontes.', 'Cada mudança foi testada em computador e celular antes de subir, numa cópia de trabalho separada do site no ar.'],
-           en: ['Three languages (PT, EN, ES), WebP images loaded on demand and no external library besides the fonts.', 'Every change was tested on desktop and phone before going live, in a working copy kept apart from the live site.'],
-           es: ['Tres idiomas (PT, EN, ES), imágenes en WebP con carga bajo demanda y ninguna biblioteca externa además de las fuentes.', 'Cada cambio se probó en computadora y celular antes de publicarse, en una copia de trabajo separada del sitio en línea.'] },
-    stack: ['HTML', 'CSS', 'JavaScript', 'Canvas', 'SVG', 'WebGL', 'WordPress API', 'GitHub Pages', 'PT · EN · ES']
-  };
-  const metaHTML = () => {
-    const L = (o) => lx(o), D = 'assets/projetos/metaprojeto/';
-    const shot = (img) => Array.isArray(img)
-      ? `<div class="meta-shot meta-phones">${img.map(s => `<img src="${D}${s}" alt="" loading="lazy" decoding="async">`).join('')}</div>`
-      : `<div class="meta-shot"><img src="${D}${img}" alt="" loading="lazy" decoding="async" width="1600" height="1000"></div>`;
-    return `<div class="meta" id="meta">
-      <div class="meta-stack">${META_L.stack.map(s => `<span>${s}</span>`).join('')}</div>
-      ${META_L.n.map((n) => `${n.g ? `<h3 class="meta-g">${L(n.g)}</h3>` : ''}<div class="meta-row">
-        ${shot(n.img)}
-        <div class="meta-note"><h3><span class="meta-hl">${L(n.t)}</span></h3>${(n.p[LANG] || n.p.pt).map(t => `<p>${t}</p>`).join('')}</div>
-      </div>`).join('')}
-      <div class="meta-end">${(META_L.fim[LANG] || META_L.fim.pt).map(t => `<p>${t}</p>`).join('')}</div>
-    </div>`;
-  };
-  let handLoaded = false;
-  const initMeta = () => {
-    if (handLoaded) return; handLoaded = true;
-    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap'; document.head.appendChild(l);
-  };
   /* --- Contato: ícones das ferramentas flutuando em torno de um centro gravitacional ---
      Em telas estreitas, a atração suave leva a nuvem para uma faixa reservada no canto inferior esquerdo.
      Colidem entre si e com os textos, fogem do cursor/dedo e podem ser arrastados (um por vez) e arremessados.
@@ -5015,7 +4916,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const box = document.getElementById('tools-float'), foot = document.getElementById('contato');
     const LIST = window.FERRAMENTAS || []; if (!box || !LIST.length) return;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    box.innerHTML = LIST.map(t => t.url ? `<a class="tool-ic tool-ic-link" data-url="${t.url}" href="${t.url}" target="_blank" rel="noopener noreferrer" title="${t.n}" aria-label="${t.n}">${t.svg}</a>` : `<div class="tool-ic" title="${t.n}">${t.svg}</div>`).join('');
+    box.innerHTML = LIST.map(t => t.url ? `<a class="tool-ic tool-ic-link" data-url="${t.url}" href="${t.url}" target="_blank" rel="noopener noreferrer" title="${t.n}" aria-label="${t.n}">${t.svg}</a>` : `<div class="tool-ic" title="${t.n}" aria-hidden="true">${t.svg}</div>`).join('');
     const els = [...box.children];
     let W = 0, H = 0, S = 46, R = 23, obst = [], G = { x: 0, y: 0 };
     const GAP = matchMedia('(max-width: 767px)').matches ? 5 : 3;
@@ -5157,7 +5058,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const routeByPath = { '/': ['home', 'inicio'], '/sobre': ['about', 'sobre'], '/projetos': ['work', 'trabalhos'], '/artigos': ['articles', 'artigos'] };
   const routeFromLocation = () => {
-    const path = location.pathname.replace(/\/$/, '') || '/';
+    const path = HMI.path().replace(/\/$/, '') || '/';
     const baseRoute = routeByPath[path];
     if (baseRoute) {
       showRoute(baseRoute[0], baseRoute[1]);
