@@ -1,0 +1,80 @@
+/* motion.js — complemento leve do motion.css (sem bibliotecas, ~2 KB)
+   1) carregamento  2) troca de página  3) cartões da página Projetos  4) ponto do cursor */
+(() => {
+  const html = document.documentElement;
+  const loader = document.getElementById('mx-loader');
+  const off = html.classList.contains('mx-off') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1) carregamento: some quando a página carrega (no máximo 1,2 s)
+  if (loader) {
+    try { sessionStorage.setItem('mx-seen', '1'); } catch (e) {}
+    let done = false;
+    const hide = () => { if (done) return; done = true; loader.classList.add('out'); html.classList.remove('mx-loading'); setTimeout(() => loader.remove(), 600); };
+    if (document.readyState === 'complete') hide(); else { addEventListener('load', hide, { once: true }); setTimeout(hide, 1200); }
+  }
+  if (off) return;
+
+  // 2) troca de página: a atual esmaece (0,2 s), troca pelo handler original do link,
+  //    e os blocos da nova entram em cascata subindo só 14 px
+  const main = document.querySelector('main');
+  let busy = false;
+  const current = () => ['home', 'work', 'about', 'articles'].find(r => document.getElementById('view-' + r)?.style.display !== 'none');
+  const enterView = () => {
+    const v = document.getElementById('view-' + current()); if (!v) return;
+    const kids = [...v.querySelectorAll(':scope > section, :scope > .first-screen > section, :scope > div > section')].slice(0, 3); // só o que cabe na 1ª tela
+    kids.forEach((el, i) => {
+      el.style.setProperty('--mx-d', i * 70 + 'ms');
+      el.classList.remove('mx-rise'); void el.offsetWidth; el.classList.add('mx-rise');
+      el.addEventListener('animationend', () => el.classList.remove('mx-rise'), { once: true });
+    });
+  };
+  addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-route]');
+    if (!a || a.dataset.mxPass || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    if (a.dataset.route === current() && !location.hash) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (busy) return; busy = true;
+    main.classList.add('mx-leave');
+    setTimeout(() => {
+      a.dataset.mxPass = '1'; a.click(); delete a.dataset.mxPass;
+      scrollTo({ top: 0, behavior: 'instant' });
+      main.classList.remove('mx-leave'); enterView(); busy = false;
+    }, 180);
+  }, true);
+  addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
+
+  let rescan = () => {};
+  // 3) página Projetos: cartões ficam visíveis por padrão (nunca há tela vazia). Só os que estão
+  //    ABAIXO da tela são escondidos (fora da vista, sem piscar) e surgem em fade lento ao chegar
+  const grid = document.getElementById('work-case-grid');
+  if (grid && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((ents) => {
+      const arriving = [];
+      ents.forEach(en => {
+        const el = en.target;
+        if (!en.isIntersecting) { if (en.boundingClientRect.top > innerHeight) el.classList.add('mx-wait'); return; }
+        if (el.classList.contains('mx-wait')) arriving.push(el); else { io.unobserve(el); el.classList.add('mx-done'); } // já estava na tela: fica como está
+      });
+      arriving.sort((p, q) => p.getBoundingClientRect().left - q.getBoundingClientRect().left);
+      arriving.forEach((el, i) => { el.style.setProperty('--mx-d', Math.min(i, 4) * 90 + 'ms'); el.classList.remove('mx-wait'); el.classList.add('mx-done'); io.unobserve(el); });
+    });
+    const watch = () => grid.querySelectorAll('.work-card:not(.mx-fade)').forEach(c => { c.classList.add('mx-fade'); io.observe(c); });
+    watch(); new MutationObserver(watch).observe(grid, { childList: true });
+    // a grade fica escondida até abrir a página Projetos: ao aparecer, remede os cartões pendentes
+    rescan = () => grid.querySelectorAll('.work-card.mx-fade:not(.mx-done)').forEach(c => { io.unobserve(c); io.observe(c); });
+    new MutationObserver(rescan).observe(document.getElementById('view-work'), { attributes: true, attributeFilter: ['style'] });
+  }
+
+  // 4) ponto do cursor: segue o mouse direto (1 transform por quadro, sem atraso)
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const dot = document.createElement('div');
+    dot.id = 'mx-cursor'; dot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(dot);
+    // atualiza direto no evento (já vem 1 por quadro): sem atraso em relação à seta do sistema
+    addEventListener('pointermove', (e) => {
+      dot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      if (!dot.classList.contains('on')) dot.classList.add('on');
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => dot.classList.remove('on'));
+  }
+})();

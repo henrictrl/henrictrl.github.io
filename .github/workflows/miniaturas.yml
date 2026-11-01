@@ -1,0 +1,52 @@
+# Gera sozinho as miniaturas de compartilhamento, as páginas de artigo, o sitemap.xml e o robots.txt
+# sempre que entrar projeto, artigo ou post novo (ou ao rodar à mão em Actions → Miniaturas → Run workflow).
+name: Miniaturas
+on:
+  push:
+    branches: [main]
+    paths:
+      - assets/data/projetos.js
+      - assets/data/artigos.js
+      - assets/data/posts.js
+      - assets/projetos/**
+      - assets/artigos/**
+      - scripts/miniaturas.mjs
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Refazer todas as imagens (1) ou só as que faltam (0)
+        default: "0"
+permissions:
+  contents: write
+  pages: write
+concurrency: { group: miniaturas, cancel-in-progress: false }
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Playwright (fora do repositório)
+        run: |
+          npm i --prefix /tmp/pw playwright@1 >/dev/null
+          /tmp/pw/node_modules/.bin/playwright install --with-deps chromium >/dev/null
+      - name: Gerar
+        env:
+          NODE_PATH: /tmp/pw/node_modules
+          FORCE: ${{ github.event.inputs.force || '0' }}
+        run: |
+          python3 -m http.server 8080 >/dev/null 2>&1 &
+          sleep 2
+          node scripts/miniaturas.mjs
+      - name: Salvar no repositório
+        run: |
+          git add assets/og artigos projetos sobre index.html 404.html sitemap.xml robots.txt
+          if git diff --cached --quiet; then echo "nada novo"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Miniaturas e páginas de compartilhamento atualizadas (automático)"
+          git push
+          # commits feitos pelo Actions não disparam o Pages sozinhos: pede a publicação
+          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true

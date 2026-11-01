@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
-<script src="assets/js/tema.js?v=20261029j"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
+<!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
+<script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
+<link rel="stylesheet" href="assets/css/motion.css?v=20261102a">
+<!-- canonical por rota: o mesmo HTML serve /, /sobre/, /projetos/... (atualiza também na navegação interna) -->
+<link rel="canonical" id="canonical" href="https://henrictrl.github.io/">
+<script>(function(){var c=document.getElementById('canonical'),set=function(){c.href='https://henrictrl.github.io'+location.pathname;};set();['pushState','replaceState'].forEach(function(k){var o=history[k];history[k]=function(){var r=o.apply(this,arguments);set();return r;};});addEventListener('popstate',set);})();</script>
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -13,14 +19,6 @@
 <link rel="icon" href="assets/img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta name="theme-color" content="#ffffff">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Henrique Marinhos — Designer e relações-públicas">
-<meta property="og:description" content="Estratégias de comunicação críticas e funcionais para marcas. Identidade visual, social media, redação e landing pages.">
-<meta property="og:image" content="assets/img/og.jpg">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:locale" content="pt_BR">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/img/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1702,17 +1700,16 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-projects-viewport { overflow:hidden; }
 .home-featured-grid { width:100%; }
 .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
-.home-featured-grid.home-page-enter { animation:home-page-slide .32s var(--ease) both; }
-@keyframes home-page-slide {
-  from { opacity:.45; transform:translateX(var(--home-slide-from, 18px)); }
-  to   { opacity:1;   transform:translateX(0); }
-}
+/* troca da vitrine: a grade nova fica sobre a antiga e aparece em fade (JS: renderHomeRows) */
+.home-projects-viewport { position:relative; }
+.home-featured-grid.home-fade-in { position:absolute; top:0; left:0; right:0; background:var(--white); }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
 .home-page-dash span { position:relative; display:block; width:100%; height:3px; border-radius:2px; background:var(--gray-200); overflow:hidden; }
 .home-page-dash span::after { content:""; position:absolute; inset:0; background:var(--ink); transform:scaleX(0); transform-origin:left; }
 .home-page-dash[aria-current="page"] span::after { animation:home-dash var(--home-auto, 4000ms) linear forwards; }
+.home-pagination.is-paused .home-page-dash[aria-current="page"] span::after { animation-play-state:paused; } /* vitrine pausada: o traço congela */
 .home-page-dash:hover span { background:var(--gray-400); }
 .home-page-dash:focus-visible { outline:2px solid var(--ink); outline-offset:3px; border-radius:3px; }
 @keyframes home-dash { to { transform:scaleX(1); } }
@@ -1817,7 +1814,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 
 </style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261029i">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261101b">
 <style id="article-modal-mobile-fix">
 .am-share { display: none; }
 .am-actions { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 12px; }
@@ -2139,8 +2136,29 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 </style>
 
+<!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Henrique Marinhos","url":"https://henrictrl.github.io/","jobTitle":"Designer e relações-públicas","image":"https://henrictrl.github.io/assets/img/retrato-cor.webp","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Unesp"},"sameAs":["https://www.linkedin.com/in/henrique-marinhos/","https://www.behance.net/henriquemarinhos","http://lattes.cnpq.br/8181966688647381"]}</script>
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henrique Marinhos">
+<meta property="og:title" content="Henrique Marinhos — Designer e relações-públicas">
+<meta property="og:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta property="og:url" content="https://henrictrl.github.io/">
+<meta property="og:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:secure_url" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Henrique Marinhos — Designer e relações-públicas">
+<meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<!-- /compartilhamento -->
 </head>
 <body class="home-route">
+<!-- tela de carregamento (motion.js anima e remove) -->
+<div id="mx-loader" aria-hidden="true"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
 
 
 <header class="top-header">
@@ -2158,9 +2176,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <div class="nav-row" id="nav-panel">
             <nav class="main-nav" aria-label="Navegação principal">
         <a href="/" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
-        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
         <a href="/projetos/" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
         <a href="/artigos/" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
+        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
         <a href="/#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
       </nav>
       <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
@@ -2175,9 +2193,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <div class="nav-row">
             <nav class="main-nav" aria-label="Navegação principal (fixa)">
         <a href="/" data-route="home" data-nav-id="inicio" class="current" data-i18n="nav.home">Início</a>
-        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
         <a href="/projetos/" data-route="work" data-nav-id="trabalhos" data-i18n="nav.work">Projetos</a>
         <a href="/artigos/" data-route="articles" data-nav-id="artigos" data-i18n="nav.articles">Artigos</a>
+        <a href="/sobre/" data-route="about" data-nav-id="sobre" data-i18n="nav.about">Sobre</a>
         <a href="/#contato" data-nav-id="contato" data-i18n="nav.contact">Contato</a>
       </nav>
       <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
@@ -2233,7 +2251,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
           <div class="service-card" data-service-id="identidade" role="button" tabindex="0">
             <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM1 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1z"/></svg>
             <div>
-              <p class="service-title" data-i18n="svc.identidade.t">Identidade visual</p>
+              <p class="service-title" data-i18n="svc.identidade.t">Design gráfico</p>
               <p class="service-desc" data-i18n="svc.identidade.d">Logotipo, paleta, tipografia e as peças que levam a marca para o mundo: cartão, papelaria, embalagem e impressos para eventos.</p>
             </div>
           </div>
@@ -2339,6 +2357,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   </div>
 
   <div id="view-about" style="display:none;">
+    <h1 class="mx-sr" data-i18n="about.h1">Sobre Henrique Marinhos</h1> <!-- título principal para leitores de tela e buscadores -->
     <section class="cv-actions section-block" aria-label="Currículo">
       <div class="cv-actions-inner">
         <a class="art-filter" id="cv-download-btn" href="assets/docs/Curriculo-Henrique-Marinhos.pdf" download="Curriculo - Henrique Marinhos.pdf" data-i18n="cv.download">Baixar currículo</a>
@@ -2586,7 +2605,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
-<script src="assets/js/capas.js?v=20261031f"></script>
+<script src="assets/js/capas.js?v=20261101a"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
@@ -2598,7 +2617,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
      data-i18n-about="larguraEm" → texto alinhado à esquerda; as quebras são calculadas para a largura indicada */
   const I18N = {
     en: {
-      'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
+      'about.h1': 'About Henrique Marinhos', 'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
       'menu.open': 'Open menu', 'menu.close': 'Close menu',
       'hero': '<span class="dim">Designer and<br>PR specialist.</span><br>Critical, functional<br>communication<br>strategies for brands.',
       'hint.mouse': 'hover - click to animate', 'hint.touch': 'drag your finger - tap to animate',
@@ -2608,7 +2627,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'about.text.d': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
       'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
       'services.title': 'Services',
-      'svc.identidade.t': 'Visual identity', 'svc.identidade.d': 'Logo, palette, typography and the pieces that take the brand into the world: business cards, stationery, packaging and event print.',
+      'svc.identidade.t': 'Graphic design', 'svc.identidade.d': 'Logo, palette, typography and the pieces that take the brand into the world: business cards, stationery, packaging and event print.',
       'svc.social.t': 'Social content', 'svc.social.d': 'Visual planning and graphic assets for social media, campaigns and presentations.',
       'svc.redacao.t': 'Copywriting', 'svc.redacao.d': 'Copy for websites, social media, campaigns and presentations, with the brand voice defined and kept consistent across all of them.',
       'svc.landing.t': 'Websites and interfaces', 'svc.landing.d': 'Custom websites, catalogues and web tools, with a focus on clarity, lightness and performance.',
@@ -2633,7 +2652,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'doc.desc': 'Portfolio of Henrique Marinhos, designer focused on brand creation, editorial design, web design and B2B communication strategies.'
     },
     es: {
-      'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
+      'about.h1': 'Sobre Henrique Marinhos', 'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
       'menu.open': 'Abrir menú', 'menu.close': 'Cerrar menú',
       'hero': '<span class="dim">Diseñador y<br>relacionista público.</span><br>Estrategias de<br>comunicación críticas y<br>funcionales para marcas.',
       'hint.mouse': 'pasa el mouse - haz clic para animar', 'hint.touch': 'arrastra el dedo - toca para animar',
@@ -2642,7 +2661,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       'about.text.d': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
       'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
       'services.title': 'Servicios',
-      'svc.identidade.t': 'Identidad visual', 'svc.identidade.d': 'Logotipo, paleta, tipografía y las piezas que llevan la marca al mundo: tarjetas, papelería, empaques e impresos para eventos.',
+      'svc.identidade.t': 'Diseño gráfico', 'svc.identidade.d': 'Logotipo, paleta, tipografía y las piezas que llevan la marca al mundo: tarjetas, papelería, empaques e impresos para eventos.',
       'svc.social.t': 'Contenido y redes sociales', 'svc.social.d': 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.',
       'svc.redacao.t': 'Redacción y copy', 'svc.redacao.d': 'Textos para sitios web, redes, campañas y presentaciones, con la voz de la marca definida y mantenida en todos ellos.',
       'svc.landing.t': 'Sitios web e interfaces', 'svc.landing.d': 'Sitios web, catálogos y herramientas a medida, con foco en claridad, ligereza y rendimiento.',
@@ -3120,7 +3139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     shareBtn.onclick = async () => {
       const url = location.origin + articlePath;
-      const shareData = { title: artTitle(a), text: a.site || '', url };
+      const shareData = { url }; // só o link, sem texto
       try {
         if (navigator.share) { await navigator.share(shareData); return; }
         await copyArticleLink(url);
@@ -3972,35 +3991,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('marquee-track');
     if (!track) return;
     const mask = track.parentElement;
-    const items = [...track.querySelectorAll('.marquee-logo')];
+    // Faixa infinita: a lista é copiada até cobrir a largura visível + 1 volta; x "dá a volta" (módulo da largura da lista),
+    // então nunca sobra espaço vazio nas pontas. Cópias ficam fora do leitor de tela e do Tab.
+    const list = track.querySelector('.marquee-list');
+    const addCopies = () => {
+      const need = Math.ceil((mask.getBoundingClientRect().width || innerWidth) / Math.max(1, list.offsetWidth || 1)) + 1;
+      for (let n = track.children.length - 1; n < need; n++) {
+        const c = list.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.removeAttribute('aria-label');
+        c.querySelectorAll('a').forEach(a => a.tabIndex = -1);
+        track.appendChild(c);
+      }
+    };
+    addCopies();
+    let items = [...track.querySelectorAll('.marquee-logo')];
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const SPEED = reduce ? 0 : 38;        // px/s em velocidade normal
     // Vaivém: anda da direita p/ a esquerda até o último logo chegar ao centro, inverte, volta até o primeiro, e assim sempre.
     // x fica SEMPRE preso entre lo e hi: a faixa nunca sai da tela, nem com aba escondida, redimensionamento ou arraste.
     let x = 0, dir = 1, v = SPEED, target = SPEED, last = 0, raf = 0, inView = false;
-    let offsets = [], center = 0, lo = 0, hi = 0, hoverEl = null, drag = null, resumeT = 0;
+    let offsets = [], center = 0, lo = 0, hi = 0, period = 0, lastMid = -1, hoverEl = null, drag = null, resumeT = 0;
     const mobile = matchMedia('(hover: none)').matches;
     let mobileFling = 0;
 
     const measure = () => {
       const w = mask.getBoundingClientRect().width;
       if (!w || !track.offsetWidth) return false;    // escondida (ex.: página de serviço aberta): mantém a última medida
-      offsets = items.map(li => li.offsetLeft + li.offsetWidth / 2);
+      addCopies(); items.forEach(li => li.classList.remove('is-middle')); lastMid = -1; items = [...track.querySelectorAll('.marquee-logo')];
+      const t0 = track.getBoundingClientRect().left;  // posição relativa à faixa (o transform afeta os dois igualmente)
+      offsets = items.map(li => { const r = li.getBoundingClientRect(); return r.left - t0 + r.width / 2; });
       center = w / 2;
-      lo = offsets[0] - center;                        // 1º logo no centro
-      hi = Math.max(lo, offsets[offsets.length - 1] - center); // último logo no centro
+      period = list.offsetWidth;                       // largura de uma volta
+      lo = offsets[0] - center;                        // 1º logo no centro (ponto de partida)
       return true;
     };
     // prende x nos limites; ao bater numa ponta, inverte o sentido
-    const clamp = () => {
-      if (x >= hi) { x = hi; dir = -1; } else if (x <= lo) { x = lo; dir = 1; }
-    };
+    const clamp = () => { if (period > 0) x = ((x % period) + period) % period; };
 
     const paint = () => {
       track.style.transform = `translate3d(${-x}px,0,0)`;
       let best = 1e9, mid = -1;
-      items.forEach((li, i) => { const d = Math.abs(offsets[i] - x - center); if (d < best) { best = d; mid = i; } });
-      items.forEach((li, i) => li.classList.toggle('is-middle', i === mid)); // o mais central (nome no celular)
+      for (let i = 0; i < offsets.length; i++) { const d = Math.abs(offsets[i] - x - center); if (d < best) { best = d; mid = i; } }
+      if (mid !== lastMid) { items[lastMid]?.classList.remove('is-middle'); items[mid]?.classList.add('is-middle'); lastMid = mid; } // o mais central (nome no celular); só mexe no DOM quando muda
     };
     const tick = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
@@ -4010,7 +4041,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobile && Math.abs(mobileFling) > 8) {
           x += mobileFling * dt;
           mobileFling *= Math.exp(-2.4 * dt);       // inércia suave após soltar o dedo
-          if (x >= hi || x <= lo) mobileFling = 0;  // bateu na ponta: para a inércia
         } else {
           mobileFling = 0;
           x += v * dir * dt;
@@ -4076,7 +4106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.cancelable) e.preventDefault();
         if (window.getSelection) { const sel = window.getSelection(); if (sel && sel.rangeCount) sel.removeAllRanges(); }
       }
-      x = Math.min(hi, Math.max(lo, drag.x0 - dx));
+      x = drag.x0 - dx; clamp();
       track.style.transform = `translate3d(${-x}px,0,0)`;
     });
     const endDrag = (e) => {
@@ -4109,10 +4139,10 @@ document.addEventListener('DOMContentLoaded', () => {
     new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) { measure(); clamp(); start(); } }).observe(mask);
     window.addEventListener('resize', () => { if (measure()) { clamp(); paint(); } });
     // começa com o 1º logo (Óptica Leopoldina) no centro, andando para a esquerda
-    const startCentered = () => { if (measure()) { x = lo; dir = 1; paint(); } };
+    const startCentered = () => { if (measure()) { x = lo; dir = 1; clamp(); paint(); } };
     startCentered();
     let started = false;
-    window.addEventListener('load', () => { if (!started && Math.abs(x - lo) < 60) startCentered(); else if (measure()) { clamp(); paint(); } started = true; });
+    window.addEventListener('load', () => { if (!started) startCentered(); else if (measure()) { clamp(); paint(); } started = true; });
   };
 
 
@@ -4356,29 +4386,63 @@ document.addEventListener('DOMContentLoaded', () => {
     ...PJ.filter(p => !HOME_FEATURED.includes(p.slug) && !HOME_EXCLUDED.includes(p.slug))
   ];
   let homePage = 0;
-  // avanço automático da vitrine: a cada 4 s, sem pausa (mouse, foco, aba ou movimento reduzido não seguram a passagem)
+  let homeSlide = null; // animação da troca em andamento
+  // avanço automático da vitrine: a cada 4 s; pausa com mouse em cima, foco, fora da tela ou aba escondida (ver homePause)
   const HOME_AUTO_MS = 4000;
   let homeTimer = null;
-  const scheduleHomeAuto = (pageCount) => {
-    clearTimeout(homeTimer);
-    if (pageCount < 2) return;
-    homeTimer = setTimeout(() => { homePage = (homePage + 1) % pageCount; renderHomeRows(1); }, HOME_AUTO_MS);
+  // pausa (acessibilidade e economia): mouse em cima, foco do teclado, vitrine fora da tela ou aba escondida.
+  // O tempo restante é guardado e o traço que enche congela junto (animation-play-state).
+  let homeLeft = HOME_AUTO_MS, homeStart = 0, homePages = 0;
+  const homePause = { hover: false, focus: false, off: false };
+  const homePaused = () => homePause.hover || homePause.focus || homePause.off || document.hidden;
+  const homeRun = () => {
+    clearTimeout(homeTimer); homeTimer = null;
+    document.getElementById('home-pagination')?.classList.toggle('is-paused', homePaused());
+    if (homePages < 2 || homePaused()) return;
+    homeStart = performance.now();
+    homeTimer = setTimeout(() => { homePage = (homePage + 1) % homePages; renderHomeRows(1); }, homeLeft);
   };
-  window.addEventListener('resize', () => { const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; }); // nova largura: altura medida de novo
+  const homeHold = () => { if (homeTimer) homeLeft = Math.max(0, homeLeft - (performance.now() - homeStart)); homeRun(); };
+  const scheduleHomeAuto = (pageCount) => { homePages = pageCount; homeLeft = HOME_AUTO_MS; homeRun(); };
+  const initHomePause = () => {
+    const vp = document.querySelector('.home-projects-viewport'), row = document.querySelector('.home-pagination-row');
+    if (!vp) return;
+    [vp, row].filter(Boolean).forEach(el => {
+      el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { homePause.hover = true; homeHold(); } });
+      el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { homePause.hover = false; homeRun(); } });
+      el.addEventListener('focusin', () => { homePause.focus = true; homeHold(); });
+      el.addEventListener('focusout', (e) => { if (!el.contains(e.relatedTarget)) { homePause.focus = false; homeRun(); } });
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { homePause.off = !en.isIntersecting; en.isIntersecting ? homeRun() : homeHold(); }).observe(vp);
+    document.addEventListener('visibilitychange', () => document.hidden ? homeHold() : homeRun());
+  };
+  initHomePause();
+  let homeW = innerWidth; // só remede quando a LARGURA muda (no celular a barra do navegador dispara resize ao rolar)
+  window.addEventListener('resize', () => { if (innerWidth === homeW) return; homeW = innerWidth; const g = document.getElementById('work-grid'); if (g) g.style.minHeight = ''; });
   const renderHomeRows = (direction = 1) => {
     const home = document.getElementById('work-grid');
     const pager = document.getElementById('home-pagination');
     if (!home || !pager) return;
     const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
-    // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
-    const keepY = window.scrollY;
+    // troca só os cards: segura a altura da grade (nunca encolhe), assim o resto da página não sobe nem desce
     if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
-    home.className = 'work-grid home-featured-grid';
-    home.style.setProperty('--home-slide-from', direction < 0 ? '-18px' : '18px');
-    home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
-    home.classList.remove('home-page-enter');
-    void home.offsetWidth;
-    home.classList.add('home-page-enter');
+    // troca da vitrine: a página nova aparece em fade POR CIMA da atual (a atual fica visível embaixo
+    // até ser coberta), então nunca fica vazia. A 1ª página aparece direto, sem animação.
+    const html6 = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    homeSlide?.finish(); // clique durante a troca: conclui a anterior na hora
+    const cur = document.getElementById('work-grid');
+    if (!cur.children.length || reduce || !cur.animate) {
+      cur.className = 'work-grid home-featured-grid'; cur.innerHTML = html6;
+    } else {
+      const next = document.createElement('div');
+      next.className = 'work-grid home-featured-grid home-fade-in'; next.innerHTML = html6;
+      cur.removeAttribute('id'); next.id = 'work-grid'; next.style.minHeight = cur.style.minHeight;
+      cur.after(next);
+      homeSlide = next.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, easing: 'ease' });
+      homeSlide.finished.then(() => { cur.remove(); next.classList.remove('home-fade-in'); homeSlide = null; });
+    }
+    requestAnimationFrame(observeLiveProjectPreviews);
     // traços no lugar dos números; o traço atual enche durante o tempo da página
     pager.innerHTML = Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-dash" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}><span></span></button>`).join('');
     pager.style.setProperty('--home-auto', HOME_AUTO_MS + 'ms');
@@ -4392,8 +4456,9 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHomeRows(direction);
     };
     scheduleHomeAuto(pageCount);
-    const restoreY = () => { if (Math.abs(window.scrollY - keepY) > 1) { const h = document.documentElement, sb = h.style.scrollBehavior; h.style.scrollBehavior = 'auto'; window.scrollTo(0, keepY); h.style.scrollBehavior = sb; } };
-    restoreY(); requestAnimationFrame(() => { restoreY(); observeLiveProjectPreviews(); });
+    // a página NUNCA é rolada por aqui: a altura da grade fica presa (min-height), então nada se mexe.
+    // (antes havia uma "devolução" da rolagem que puxava a página de volta se a pessoa rolasse durante a troca)
+    requestAnimationFrame(observeLiveProjectPreviews);
   };
   document.addEventListener('click', (e) => {
     const c = e.target.closest('[data-pj]'); if (!c || e.metaKey || e.ctrlKey) return;
@@ -4503,7 +4568,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!button) return;
     const post = pvList[pvI], article = post && post.art ? (window.ARTIGOS || []).find(a => a.u === post.art) : null;
     const url = location.origin + (article ? articleRoute(article) : igUrl(post));
-    const shareData = { title: article ? artTitle(article) : 'Instagram', url };
+    const shareData = { url }; // só o link, sem texto
     try {
       if (navigator.share) { await navigator.share(shareData); return; }
       await navigator.clipboard.writeText(url);
@@ -5178,5 +5243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script src="assets/js/motion.js?v=20261101h" defer></script>
+<script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
 </body>
 </html>

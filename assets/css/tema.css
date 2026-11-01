@@ -108,3 +108,8 @@ html[data-theme="dark"] .pv-ov { background: rgba(18,18,18,.97); }
     flex-direction: column; gap: 16px; margin-top: 0 !important;
   }
 }
+
+/* troca de tema: esmaecimento curto (assets/js/tema.js); só o quadro inteiro, sem custo por elemento */
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-new(root) { animation-duration: .3s; animation-timing-function: ease; }
+html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after { transition: none !important; }

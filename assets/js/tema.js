@@ -73,7 +73,17 @@
         if (t === autoTheme(new Date())) localStorage.removeItem(KEY); // voltou ao automático
         else localStorage.setItem(KEY, JSON.stringify({ theme: t, until: nextBoundary(new Date()) }));
       } catch (e) {}
-      apply(t);
+      // troca de tema: esmaecimento curto entre as cores (View Transitions; sem suporte = troca direta)
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // troca sem as transições de cor/filtro de cada elemento (dezenas de logos com filter = travamento)
+      var swap = function () {
+        root.classList.add('theme-swap'); apply(t); void root.offsetWidth;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('theme-swap'); }); });
+      };
+      if (!document.startViewTransition || reduce) { swap(); return; }
+      root.classList.add('theme-vt');
+      var vt = document.startViewTransition(swap);
+      vt.finished.then(function () { root.classList.remove('theme-vt'); }, function () { root.classList.remove('theme-vt'); });
     });
     return b;
   };
