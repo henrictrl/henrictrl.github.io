@@ -63,9 +63,9 @@ const setOg = (html, block) => html
 
 const PRE_CSS = 'font:15px/1.5 system-ui,sans-serif;color:#555;max-width:640px;margin:12vh auto;padding:0 24px';
 const setBody = (html, inner) => html
-  .replace(/<main class="pre"[\s\S]*?<\/main>/, '')
+  .replace(/\n*<main class="pre"[\s\S]*?<\/main>\n*/, '\n') // idempotente: rodar de novo não acumula linhas
   .replace(/<p>Carregando[^<]*<\/p>/, '')
-  .replace(/<body>/, `<body>\n<main class="pre" style="${PRE_CSS}">${inner}</main>`);
+  .replace(/<body>\n*/, `<body>\n<main class="pre" style="${PRE_CSS}">${inner}</main>\n`);
 const PERSON = { '@type': 'Person', name: 'Henrique Marinhos', url: SITE + '/' };
 const sitemap = []; // [url, lastmod]
 const today = new Date().toISOString().slice(0, 10);
