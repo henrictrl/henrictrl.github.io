@@ -79,12 +79,18 @@ const setOg = (html, block) => html
 const setLang = (html, l) => html.replace(/<html lang="[^"]*">/, `<html lang="${HTML_LANG[l]}">`);
 const setTitle = (html, t) => html.replace(/<title>[^<]*<\/title>/, `<title>${esc(t)}</title>`);
 
-const PRE_CSS = 'font:15px/1.5 system-ui,sans-serif;color:#555;max-width:640px;margin:12vh auto;padding:0 24px';
-const H1 = (t) => `<h1 style="font-size:24px;color:#111;margin:0 0 8px">${esc(t)}</h1>`;
+// Página leve: o texto (para buscadores) fica fora da vista; na tela, só o fundo no tema atual e os
+// pontos do logo, que aparecem se o carregamento passar de 0,25 s. Some quando o site é escrito por cima.
+const PRE_CSS = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap';
+const LOADER = `<script>(function(){var d;try{var o=JSON.parse(localStorage.getItem('hm-tema')||'null');if(o&&o.until>Date.now())d=o.theme==='dark';}catch(e){}if(d===undefined){var h=new Date().getHours();d=h>=18||h<6;}document.documentElement.style.background=d?'#121212':'#fff';document.documentElement.style.color=d?'#f5f5f5':'#111';})()</script>
+<style>body{margin:0;min-height:100vh}.ld{position:fixed;inset:0;display:grid;place-items:center;opacity:0;animation:ld-in .3s ease .25s forwards}.ld i{display:grid;grid-template-columns:repeat(3,6px);gap:4px}.ld b{width:6px;height:6px;border-radius:1px;background:currentColor;animation:ld 1.2s ease-in-out infinite}.ld b:nth-child(2),.ld b:nth-child(4){animation-delay:.1s}.ld b:nth-child(3),.ld b:nth-child(5),.ld b:nth-child(7){animation-delay:.2s}.ld b:nth-child(6),.ld b:nth-child(8){animation-delay:.3s}.ld b:nth-child(9){animation-delay:.4s}@keyframes ld{0%,100%{opacity:.15}50%{opacity:1}}@keyframes ld-in{to{opacity:1}}@media (prefers-reduced-motion:reduce){.ld b{animation:none;opacity:.6}}</style>
+<div class="ld" aria-hidden="true"><i><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>`;
+const H1 = (t) => `<h1>${esc(t)}</h1>`;
 const setBody = (html, inner) => html
-  .replace(/\n*<main class="pre"[\s\S]*?<\/main>\n*/, '\n') // idempotente: rodar de novo não acumula linhas
+  .replace(/\n*<script>\(function\(\)\{var d;try\{[\s\S]*?<div class="ld"[\s\S]*?<\/div>\n*/, '\n') // idempotente
+  .replace(/\n*<main class="pre"[\s\S]*?<\/main>\n*/, '\n')
   .replace(/<p>Carregando[^<]*<\/p>/, '')
-  .replace(/<body>\n*/, `<body>\n<main class="pre" style="${PRE_CSS}">${inner}</main>\n`);
+  .replace(/<body>\n*/, `<body>\n${LOADER}\n<main class="pre" style="${PRE_CSS}">${inner}</main>\n`);
 const PERSON = { '@type': 'Person', name: 'Henrique Marinhos', url: SITE + '/' };
 const sitemap = []; // [caminho sem idioma, lastmod] → uma entrada por idioma, com as alternativas
 const today = new Date().toISOString().slice(0, 10);
@@ -189,7 +195,7 @@ const pageStub = read('sobre/index.html'); // página leve que carrega index.htm
 const og = { img: `${SITE}/assets/img/og.jpg`, w: 1200, h: 630 };
 // index.html é o próprio site em "/": recebe só as metatags em PT (o idioma.js corrige canonical/hreflang em cada rota)
 write('index.html', setOg(read('index.html'), ogBlock({ title: W.site.pt, desc: W.desc.pt, path: '/', ...og, ld: PERSON_LD('pt') })));
-write('404.html', setOg(read('404.html'), ogBlock({ title: W.site.pt, desc: W.desc.pt, path: '/', ...og })));
+write('404.html', setBody(setOg(read('404.html'), ogBlock({ title: W.site.pt, desc: W.desc.pt, path: '/', ...og })), ''));
 const FIXED = [['/', null], ['/sobre/', 'sobre'], ['/projetos/', 'projetos'], ['/artigos/', 'artigos']];
 for (const [pth, key] of FIXED) {
   for (const l of LANGS) {

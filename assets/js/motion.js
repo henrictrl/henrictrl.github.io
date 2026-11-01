@@ -43,6 +43,19 @@
   }, true);
   addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
 
+  // abrir um projeto (página própria, recarrega): a atual esmaece antes, sem corte seco.
+  // Só links de projeto; a faixa de logos fica de fora (tem regra própria para arrastar sem abrir).
+  addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.dataset.route || a.dataset.navId || a.closest('.marquee-track') || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || !/^(\/(en|es))?\/projetos\/[^/]+\/$/.test(u.pathname)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    main.classList.add('mx-leave');
+    setTimeout(() => location.assign(u.href), 180);
+  }, true);
+  addEventListener('pageshow', (e) => { if (e.persisted) main.classList.remove('mx-leave'); }); // voltar pelo histórico do navegador
+
   let rescan = () => {};
   // 3) página Projetos: cartões ficam visíveis por padrão (nunca há tela vazia). Só os que estão
   //    ABAIXO da tela são escondidos (fora da vista, sem piscar) e surgem em fade lento ao chegar
