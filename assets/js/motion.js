@@ -9,7 +9,7 @@
   if (loader) {
     try { sessionStorage.setItem('mx-seen', '1'); } catch (e) {}
     let done = false;
-    const hide = () => { if (done) return; done = true; loader.classList.add('out'); html.classList.remove('mx-loading'); setTimeout(() => loader.remove(), 600); };
+    const hide = () => { if (done) return; done = true; loader.classList.add('out'); setTimeout(() => loader.remove(), 600); };
     if (document.readyState === 'complete') hide(); else { addEventListener('load', hide, { once: true }); setTimeout(hide, 1200); }
   }
   if (off) return;
@@ -42,6 +42,19 @@
     }, 180);
   }, true);
   addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
+
+  // abrir um projeto (página própria, recarrega): a atual esmaece antes, sem corte seco.
+  // Só links de projeto; a faixa de logos fica de fora (tem regra própria para arrastar sem abrir).
+  addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.dataset.route || a.dataset.navId || a.closest('.marquee-track') || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || !/^(\/(en|es))?\/projetos\/[^/]+\/$/.test(u.pathname)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    main.classList.add('mx-leave');
+    setTimeout(() => location.assign(u.href), 180);
+  }, true);
+  addEventListener('pageshow', (e) => { if (e.persisted) main.classList.remove('mx-leave'); }); // voltar pelo histórico do navegador
 
   let rescan = () => {};
   // 3) página Projetos: cartões ficam visíveis por padrão (nunca há tela vazia). Só os que estão
