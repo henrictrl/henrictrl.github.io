@@ -7,7 +7,7 @@
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101e">
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101f">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1705,15 +1705,10 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-projects-viewport { overflow:hidden; }
 .home-featured-grid { width:100%; }
 .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
-/* troca da vitrine: os cards atuais esmaecem e os novos aparecem em fade, um após o outro */
-.home-featured-grid > .work-card { --i:0; }
-.home-featured-grid > .work-card:nth-child(2) { --i:1; } .home-featured-grid > .work-card:nth-child(3) { --i:2; }
-.home-featured-grid > .work-card:nth-child(4) { --i:3; } .home-featured-grid > .work-card:nth-child(5) { --i:4; }
-.home-featured-grid > .work-card:nth-child(6) { --i:5; }
-.home-featured-grid.home-page-leave > .work-card { opacity:0; transition:opacity .45s ease calc(var(--i) * 40ms); }
-.home-featured-grid.home-page-enter > .work-card { animation:home-card-in 1s ease calc(var(--i) * 90ms) both; }
-@keyframes home-card-in { from { opacity:0; } to { opacity:1; } }
-@media (prefers-reduced-motion: reduce) { .home-featured-grid > .work-card { animation:none !important; transition:none !important; } }
+/* troca da vitrine: a grade nova fica sobre a antiga e as duas deslizam juntas (JS: renderHomeRows) */
+.home-projects-viewport { position:relative; }
+.home-featured-grid.home-slide-in { position:absolute; top:0; left:0; right:0; }
+.home-projects-viewport > .home-featured-grid { will-change:transform; }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
@@ -4376,6 +4371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ...PJ.filter(p => !HOME_FEATURED.includes(p.slug) && !HOME_EXCLUDED.includes(p.slug))
   ];
   let homePage = 0;
+  let homeSlide = null; // animação da troca em andamento
   // avanço automático da vitrine: a cada 4 s, sem pausa (mouse, foco, aba ou movimento reduzido não seguram a passagem)
   const HOME_AUTO_MS = 4000;
   let homeTimer = null;
@@ -4393,20 +4389,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
     const keepY = window.scrollY;
     if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
-    const swap = () => {
-      home.className = 'work-grid home-featured-grid';
-      home.innerHTML = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
-      void home.offsetWidth;
-      home.classList.add('home-page-enter');
-      requestAnimationFrame(observeLiveProjectPreviews);
-    };
-    // com cards na tela: saída curta antes de trocar (token evita trocas sobrepostas em cliques rápidos)
-    const token = home.dataset.swap = String((Number(home.dataset.swap) || 0) + 1);
-    const hasCards = home.children.length && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (hasCards) {
-      home.classList.remove('home-page-enter'); home.classList.add('home-page-leave');
-      setTimeout(() => { if (home.dataset.swap === token) swap(); }, 650);
-    } else swap();
+    // troca da vitrine: a página atual desliza para fora e a próxima entra pelo lado ao mesmo tempo
+    // (nunca fica vazia). Avançar: entra pela direita; voltar: pela esquerda. Só transform (leve).
+    const html6 = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    homeSlide?.finish(); // clique durante a troca: conclui a anterior na hora
+    const cur = document.getElementById('work-grid');
+    if (!cur.children.length || reduce || !cur.animate) {
+      cur.className = 'work-grid home-featured-grid'; cur.innerHTML = html6;
+    } else {
+      const next = document.createElement('div');
+      next.className = 'work-grid home-featured-grid home-slide-in'; next.innerHTML = html6;
+      cur.after(next);
+      const off = 'calc(' + (direction < 0 ? '-' : '') + '100% + ' + (direction < 0 ? '-' : '') + '32px)';
+      const back = 'calc(' + (direction < 0 ? '' : '-') + '100% - ' + (direction < 0 ? '-' : '') + '32px)';
+      const opt = { duration: 900, easing: 'cubic-bezier(.65,0,.35,1)' };
+      cur.removeAttribute('id');
+      next.id = 'work-grid'; next.style.minHeight = cur.style.minHeight;
+      cur.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(' + back + ')' }], opt);
+      homeSlide = next.animate([{ transform: 'translateX(' + off + ')' }, { transform: 'translateX(0)' }], opt);
+      homeSlide.finished.then(() => { cur.remove(); next.classList.remove('home-slide-in'); homeSlide = null; });
+    }
+    requestAnimationFrame(observeLiveProjectPreviews);
     // traços no lugar dos números; o traço atual enche durante o tempo da página
     pager.innerHTML = Array.from({length: pageCount}, (_, i) => `<button type="button" class="home-page-dash" data-home-page="${i}" aria-label="${lx({pt:'Página',en:'Page',es:'Página'})} ${i + 1}" ${i === homePage ? 'aria-current="page"' : ''}><span></span></button>`).join('');
     pager.style.setProperty('--home-auto', HOME_AUTO_MS + 'ms');
