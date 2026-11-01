@@ -43,17 +43,26 @@
   }, true);
   addEventListener('popstate', () => requestAnimationFrame(enterView)); // voltar/avançar do navegador
 
-  // 3) página Projetos: cartões aparecem só em fade lento ao entrar na tela (sem direção);
-  //    na mesma linha, um leve atraso da esquerda para a direita
+  let rescan = () => {};
+  // 3) página Projetos: cartões ficam visíveis por padrão (nunca há tela vazia). Só os que estão
+  //    ABAIXO da tela são escondidos (fora da vista, sem piscar) e surgem em fade lento ao chegar
   const grid = document.getElementById('work-case-grid');
   if (grid && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((ents) => {
-      const vis = ents.filter(en => en.isIntersecting).map(en => en.target);
-      vis.sort((p, q) => p.getBoundingClientRect().left - q.getBoundingClientRect().left);
-      vis.forEach((el, i) => { el.style.setProperty('--mx-d', Math.min(i, 4) * 90 + 'ms'); el.classList.add('mx-in'); io.unobserve(el); });
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.12 });
+      const arriving = [];
+      ents.forEach(en => {
+        const el = en.target;
+        if (!en.isIntersecting) { if (en.boundingClientRect.top > innerHeight) el.classList.add('mx-wait'); return; }
+        if (el.classList.contains('mx-wait')) arriving.push(el); else { io.unobserve(el); el.classList.add('mx-done'); } // já estava na tela: fica como está
+      });
+      arriving.sort((p, q) => p.getBoundingClientRect().left - q.getBoundingClientRect().left);
+      arriving.forEach((el, i) => { el.style.setProperty('--mx-d', Math.min(i, 4) * 90 + 'ms'); el.classList.remove('mx-wait'); el.classList.add('mx-done'); io.unobserve(el); });
+    });
     const watch = () => grid.querySelectorAll('.work-card:not(.mx-fade)').forEach(c => { c.classList.add('mx-fade'); io.observe(c); });
     watch(); new MutationObserver(watch).observe(grid, { childList: true });
+    // a grade fica escondida até abrir a página Projetos: ao aparecer, remede os cartões pendentes
+    rescan = () => grid.querySelectorAll('.work-card.mx-fade:not(.mx-done)').forEach(c => { io.unobserve(c); io.observe(c); });
+    new MutationObserver(rescan).observe(document.getElementById('view-work'), { attributes: true, attributeFilter: ['style'] });
   }
 
   // 4) ponto do cursor: segue o mouse direto (1 transform por quadro, sem atraso)

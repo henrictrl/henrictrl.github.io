@@ -7,7 +7,7 @@
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<link rel="stylesheet" href="assets/css/motion.css?v=20261101f">
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101h">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -1705,10 +1705,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 .home-projects-viewport { overflow:hidden; }
 .home-featured-grid { width:100%; }
 .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
-/* troca da vitrine: a grade nova fica sobre a antiga e as duas deslizam juntas (JS: renderHomeRows) */
+/* troca da vitrine: a grade nova fica sobre a antiga e aparece em fade (JS: renderHomeRows) */
 .home-projects-viewport { position:relative; }
-.home-featured-grid.home-slide-in { position:absolute; top:0; left:0; right:0; }
-.home-projects-viewport > .home-featured-grid { will-change:transform; }
+.home-featured-grid.home-fade-in { position:absolute; top:0; left:0; right:0; background:var(--white); }
 .home-pagination-row { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; margin-top:28px; } /* traços e, embaixo, Ver todos */
 .home-pagination { display:flex; align-items:center; justify-content:center; gap:7px; margin:0; }
 .home-page-dash { width:34px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:inline-flex; align-items:center; }
@@ -4389,8 +4388,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // troca só os cards: segura a altura da grade (nunca encolhe) e devolve a rolagem exatamente onde estava
     const keepY = window.scrollY;
     if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
-    // troca da vitrine: a página atual desliza para fora e a próxima entra pelo lado ao mesmo tempo
-    // (nunca fica vazia). Avançar: entra pela direita; voltar: pela esquerda. Só transform (leve).
+    // troca da vitrine: a página nova aparece em fade POR CIMA da atual (a atual fica visível embaixo
+    // até ser coberta), então nunca fica vazia. A 1ª página aparece direto, sem animação.
     const html6 = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     homeSlide?.finish(); // clique durante a troca: conclui a anterior na hora
@@ -4399,16 +4398,11 @@ document.addEventListener('DOMContentLoaded', () => {
       cur.className = 'work-grid home-featured-grid'; cur.innerHTML = html6;
     } else {
       const next = document.createElement('div');
-      next.className = 'work-grid home-featured-grid home-slide-in'; next.innerHTML = html6;
+      next.className = 'work-grid home-featured-grid home-fade-in'; next.innerHTML = html6;
+      cur.removeAttribute('id'); next.id = 'work-grid'; next.style.minHeight = cur.style.minHeight;
       cur.after(next);
-      const off = 'calc(' + (direction < 0 ? '-' : '') + '100% + ' + (direction < 0 ? '-' : '') + '32px)';
-      const back = 'calc(' + (direction < 0 ? '' : '-') + '100% - ' + (direction < 0 ? '-' : '') + '32px)';
-      const opt = { duration: 900, easing: 'cubic-bezier(.65,0,.35,1)' };
-      cur.removeAttribute('id');
-      next.id = 'work-grid'; next.style.minHeight = cur.style.minHeight;
-      cur.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(' + back + ')' }], opt);
-      homeSlide = next.animate([{ transform: 'translateX(' + off + ')' }, { transform: 'translateX(0)' }], opt);
-      homeSlide.finished.then(() => { cur.remove(); next.classList.remove('home-slide-in'); homeSlide = null; });
+      homeSlide = next.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 700, easing: 'ease' });
+      homeSlide.finished.then(() => { cur.remove(); next.classList.remove('home-fade-in'); homeSlide = null; });
     }
     requestAnimationFrame(observeLiveProjectPreviews);
     // traços no lugar dos números; o traço atual enche durante o tempo da página
@@ -5210,6 +5204,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
-<script src="assets/js/motion.js?v=20261101e" defer></script>
+<script src="assets/js/motion.js?v=20261101h" defer></script>
 </body>
 </html>

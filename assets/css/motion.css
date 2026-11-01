@@ -31,9 +31,9 @@ main.mx-leave { opacity: 0; } /* só opacidade: sem repintar a página inteira *
 .mx-rise { animation: mx-rise .6s cubic-bezier(.22,1,.36,1) var(--mx-d, 0ms) both; will-change: opacity, transform; }
 @keyframes mx-rise { from { opacity: 0; transform: translate3d(0,10px,0); } to { opacity: 1; transform: none; } }
 
-/* ---------- Página Projetos: cartões em fade lento, sem deslocamento ---------- */
-.work-card.mx-fade { opacity: 0; will-change: opacity; }
-.work-card.mx-fade.mx-in { opacity: 1; transition: opacity .9s ease var(--mx-d, 0ms); }
+/* ---------- Página Projetos: 1ª tela direto; os próximos em fade lento, sem deslocamento ---------- */
+.work-card.mx-fade { transition: opacity .9s ease var(--mx-d, 0ms); }
+.work-card.mx-fade.mx-wait { opacity: 0; transition: none; will-change: opacity; } /* abaixo da tela, esperando */
 
 /* ---------- Cursor: ponto pequeno (só mouse/trackpad) ---------- */
 #mx-cursor {
@@ -59,7 +59,7 @@ main.mx-leave { opacity: 0; } /* só opacidade: sem repintar a página inteira *
 @media (prefers-reduced-motion: reduce) {
   #mx-loader, #mx-cursor { display: none !important; }
   .mx-rise { animation: none; }
-  .work-card.mx-fade { opacity: 1; }
+  .work-card.mx-wait { opacity: 1 !important; }
 }
 html.mx-off #mx-cursor { display: none !important; }
-html.mx-off .work-card.mx-fade { opacity: 1; }
+html.mx-off .work-card.mx-wait { opacity: 1 !important; }
