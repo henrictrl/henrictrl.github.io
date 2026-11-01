@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
 <script src="assets/js/tema.js?v=20261029j"></script> <!-- modo noturno: no head, antes da pintura -->
+<!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
+<script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');else{h.classList.add('mx-loading');setTimeout(function(){h.classList.remove('mx-loading')},4000)}}catch(e){}})(document.documentElement)</script>
+<link rel="stylesheet" href="assets/css/motion.css?v=20261101a">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
 
@@ -2141,6 +2144,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
 </head>
 <body class="home-route">
+<!-- tela de carregamento (motion.js anima e remove) -->
+<div id="mx-loader" aria-hidden="true"><div class="mx-cells"></div><div class="mx-center"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div><p class="mx-name"><span>Henrique Marinhos</span></p><div class="mx-bar"><i></i></div></div><span class="mx-count">000</span></div>
 
 
 <header class="top-header">
@@ -5178,5 +5183,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/motion.js?v=20261101a" defer></script>
 </body>
 </html>
