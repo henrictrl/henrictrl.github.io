@@ -1,4 +1,7 @@
 /* Capas animadas dos cards de projeto.
+   Centralização pela propriedade translate (separada de transform): as animações só mexem em transform,
+   então a posição é recalculada quando a imagem termina de carregar (no Safari, translate(-50%) dentro
+   da animação ficava preso ao tamanho de antes do carregamento e o elemento aparecia deslocado).
    Lê p.capaAnim (assets/data/projetos.js) e devolve o miolo de .work-card-media.
    Modelos: C (fita de peças), D (mockup com logo ao lado), DT (logo acima), DC (imagem centralizada),
    E (páginas na mesa), M (mosaico de fotos). Loops sem emenda: C em volta exata; D/E em ida e volta. */
@@ -25,10 +28,10 @@
     '.work-card-media .ca-DT .ca-bg{left:0;top:22%;width:100%;height:78%;object-fit:cover;object-position:50% 40%;transform-origin:50% 60%;animation:ca-kb 12s ease-in-out infinite alternate}',
     '.ca-DT .ca-side{inset:0 0 auto 0;width:auto;height:46%;background:linear-gradient(180deg,var(--ca-p) 0,var(--ca-p) 48%,transparent 100%);place-items:start center;padding-top:5.5cqw}',
     '.work-card-media .ca-DT .ca-lg{max-width:44cqw;max-height:13cqw}',
-    '.work-card-media .ca-DC .ca-bg{left:50%;top:50%;width:84%;height:84%;object-fit:contain;transform:translate(-50%,-50%);animation:ca-kbc 12s ease-in-out infinite alternate}',
+    '.work-card-media .ca-DC .ca-bg{left:50%;top:50%;width:84%;height:84%;object-fit:contain;translate:-50% -50%;animation:ca-kbc 12s ease-in-out infinite alternate}',
     '.work-card-media .ca-DC.full .ca-bg{width:100%;height:100%;object-fit:cover}',
     '@keyframes ca-kb{from{transform:scale(1)}to{transform:scale(1.08)}}',
-    '@keyframes ca-kbc{from{transform:translate(-50%,-50%) scale(1)}to{transform:translate(-50%,-50%) scale(1.07)}}',
+    '@keyframes ca-kbc{from{transform:scale(1)}to{transform:scale(1.07)}}',
     /* E · mesa */
     '.ca-E{perspective:var(--persp,1540px)}',
     '.work-card-media .ca-E .ca-pl{height:auto;animation:ca-pan 14s ease-in-out infinite alternate;transform:rotateX(52deg) rotateZ(-32deg) translateX(calc(var(--tx) * -1))}',
@@ -49,19 +52,19 @@
     '.work-card-media .ca-row img{position:static;height:100%;width:auto;flex:none}',
     '@keyframes ca-hl{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}',
     '@keyframes ca-hr{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}',
-    '.work-card-media .ca-L .ca-mark{left:50%;top:var(--y,50%);transform:translate(-50%,-50%);width:auto;height:auto;max-width:var(--mw);max-height:var(--mh)}',
+    '.work-card-media .ca-L .ca-mark{left:50%;top:var(--y,50%);translate:-50% -50%;width:auto;height:auto;max-width:var(--mw);max-height:var(--mh)}',
     '.work-card-media .ca-L .ca-mark.spin{animation:ca-spin var(--spin) linear infinite}',
-    '@keyframes ca-spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}',
+    '@keyframes ca-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}',
     '.work-card-media .ca-DC.pulse .ca-bg{animation:ca-pulse 6s ease-in-out infinite alternate}',
-    '@keyframes ca-pulse{from{transform:translate(-50%,-50%) scale(1);filter:saturate(1)}to{transform:translate(-50%,-50%) scale(1.06);filter:saturate(1.25)}}',
+    '@keyframes ca-pulse{from{transform:scale(1);filter:saturate(1)}to{transform:scale(1.06);filter:saturate(1.25)}}',
     /* S · elemento da capa animado (girar, piscar, anéis crescendo) */
     '.work-card-media .ca-S .ca-base{inset:0;width:100%;height:100%;object-fit:cover}',
-    '.work-card-media .ca-S .ca-el{height:auto;transform:translate(-50%,-50%)}',
+    '.work-card-media .ca-S .ca-el{height:auto;translate:-50% -50%}',
     '.work-card-media .ca-S .ca-el.spin{animation:ca-spin var(--spin,40s) linear infinite}',
     '.work-card-media .ca-S .ca-el.blink{animation:ca-blink 4.5s ease-in-out infinite}',
-    '@keyframes ca-blink{0%,88%,100%{transform:translate(-50%,-50%) scaleY(1)}92%{transform:translate(-50%,-50%) scaleY(.06)}96%{transform:translate(-50%,-50%) scaleY(1)}}',
+    '@keyframes ca-blink{0%,88%,100%{transform:scaleY(1)}92%{transform:scaleY(.06)}96%{transform:scaleY(1)}}',
     '.work-card-media .ca-S .ca-el.zoom{opacity:0;animation:ca-zoom 16s linear infinite}',
-    '@keyframes ca-zoom{0%{transform:translate(-50%,-50%) scale(.25) rotate(0);opacity:0}20%{opacity:1}65%{opacity:.85}100%{transform:translate(-50%,-50%) scale(2.6) rotate(30deg);opacity:0}}',
+    '@keyframes ca-zoom{0%{transform:scale(.25) rotate(0);opacity:0}20%{opacity:1}65%{opacity:.85}100%{transform:scale(2.6) rotate(30deg);opacity:0}}',
     '.work-card-media .ca-S .ca-hv{inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .5s var(--ease,ease),transform .9s var(--ease,ease)}',
     '.work-card:hover .work-card-media .ca-S .ca-hv,.work-card:focus-visible .work-card-media .ca-S .ca-hv{opacity:1;transform:scale(1)}',
     /* V · rolagem vertical de uma página longa */
@@ -69,7 +72,7 @@
     '@keyframes ca-scroll{0%,6%{object-position:50% 0}94%,100%{object-position:50% 100%}}',
     /* K · símbolo trocando de cor */
     '.ca-kbg{position:absolute;inset:0;background:#123358}',
-    '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
+    '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;translate:-50% -50%;background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
     '@media (prefers-reduced-motion:reduce){.ca *{animation:none!important}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);

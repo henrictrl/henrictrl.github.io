@@ -2099,7 +2099,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 /* celular: abertura ocupa a tela; "Sobre mim" aparece na borda de baixo como convite à rolagem */
 @media (max-width: 767px) {
   section.hero {
-    min-height: min(calc(100svh - var(--hdr-h, 67px) - 56px), 680px); /* teto: em telas altas a foto não fica isolada */
+    min-height: calc(100svh - var(--hdr-h, 67px)); /* abertura ocupa a 1ª tela inteira: "Sobre mim" só aparece ao rolar */
     display: flex; flex-direction: column; justify-content: center;
     padding: 24px var(--gutter) !important;
   }
@@ -2232,7 +2232,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
     </div>
     <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
-    <script>if (HMI.initial() === 'pt') requestAnimationFrame(function () { document.querySelectorAll('.first-screen .reveal').forEach(function (e) { e.classList.add('in-view'); }); });</script>
+    <script>if (HMI.initial() === 'pt' && 'IntersectionObserver' in window) { var fsIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); fsIO.unobserve(e.target); } }); }, { threshold: 0.15 }); document.querySelectorAll('.first-screen .reveal').forEach(function (e) { fsIO.observe(e); }); }</script> <!-- só o que está na tela; o resto entra ao rolar -->
     <section class="section-block services-block" style="padding-top:calc(var(--space-y) / 3);">
       <div class="max-w">
         <p class="services-title" data-i18n="services.title">Serviços</p>
@@ -2594,7 +2594,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
-<script src="assets/js/capas.js?v=20261101a"></script>
+<script src="assets/js/capas.js?v=20261102a"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
