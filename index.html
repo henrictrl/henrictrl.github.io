@@ -106,6 +106,12 @@ header.top-header {
 .lang-btn:hover { opacity: 0.8; filter: none; }
 .lang-btn[aria-pressed="true"] { opacity: 1; filter: none; }
 .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* troca de idioma: caracteres ainda não resolvidos em cinza (mais claro dentro de .dim) + toque na bandeira */
+.scr { color: var(--gray-400); }
+.dim .scr { color: var(--gray-200); }
+@keyframes lang-pop { 0% { transform: scale(1); } 40% { transform: scale(0.82); } 100% { transform: scale(1); } }
+.lang-btn.is-pop { animation: lang-pop 0.38s var(--ease); }
+@media (prefers-reduced-motion: reduce) { .lang-btn.is-pop { animation: none; } }
 
 .main-nav { 
   display: flex; 
@@ -2689,8 +2695,68 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   const applyLangTo = (el) => {
     if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
     const v = LANG === 'pt' ? PT_HTML.get(el) : I18N[LANG][el.dataset.i18n];
-    if (v != null && el.innerHTML !== v) el.innerHTML = v;
+    if (v != null && el.innerHTML !== v) { el.innerHTML = v; return true; }
+    return false;
   };
+  /* Troca de idioma animada: o texto novo surge em símbolos (cinza) e cada letra assenta devagar,
+     da esquerda para a direita, com leve variação. Só anima o que está na tela; respeita reduced-motion. */
+  const Scramble = (() => {
+    const SYM = '#%&*+=/\\<>~^×÷§¶@·:;!?{}[]()|°±≈≠∆∑Ωµ∂∞√◊¤©®†‡•'; // todos presentes na Inter (sem fallback)
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const live = new Set();
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; };
+    const run = (el, delay = 0) => {
+      if (reduce.matches || !inView(el)) return;
+      const tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), items = [];
+      let total = 0, n;
+      while ((n = tw.nextNode())) {
+        if (!n.nodeValue.trim()) continue;
+        const done = document.createTextNode(''), mid = document.createElement('span'), wrap = document.createElement('span');
+        mid.className = 'scr'; wrap.append(done, mid);
+        items.push({ node: n, text: n.nodeValue, start: total, done, mid, wrap, cache: [], t: [] });
+        total += n.nodeValue.length;
+      }
+      if (!total) return;
+      const spread = Math.min(450 + total * 6, 1100), settle = 380, end = spread + settle;
+      items.forEach(it => {
+        it.node.replaceWith(it.wrap);
+        for (let i = 0; i < it.text.length; i++) it.t[i] = (it.start + i) / total * spread + Math.random() * settle;
+      });
+      el.setAttribute('aria-busy', 'true');
+      const job = { raf: 0 };
+      const finish = () => { cancelAnimationFrame(job.raf); items.forEach(it => it.wrap.replaceWith(it.node)); el.removeAttribute('aria-busy'); live.delete(job); };
+      job.cancel = finish; live.add(job);
+      const t0 = performance.now() + delay; let lastSwap = 0;
+      const tick = (now) => {
+        const t = now - t0, swap = now - lastSwap > 140; // ~7 trocas/s; a cada troca só ~1/3 dos símbolos muda
+        if (swap) lastSwap = now;
+        for (const it of items) {
+          const L = it.text.length;
+          let a = 0; while (a < L && it.t[a] <= t) a++;
+          let m = '';
+          for (let i = a; i < L; i++) {
+            const c = it.text[i];
+            if (/\s/.test(c) || it.t[i] <= t) { m += c; continue; }
+            if (!it.cache[i] || (swap && Math.random() < 0.35)) it.cache[i] = SYM[(Math.random() * SYM.length) | 0];
+            m += it.cache[i];
+          }
+          it.done.nodeValue = it.text.slice(0, a);
+          it.mid.textContent = m;
+        }
+        t < end ? (job.raf = requestAnimationFrame(tick)) : finish();
+      };
+      job.raf = requestAnimationFrame(tick);
+    };
+    return {
+      run,
+      flush: () => [...live].forEach(j => j.cancel()),
+      runAll(els) { // cascata de cima para baixo
+        const pos = (e) => e.getBoundingClientRect();
+        [...els].filter(inView).sort((a, b) => pos(a).top - pos(b).top || pos(a).left - pos(b).left)
+          .forEach((el, i) => run(el, Math.min(i * 35, 350)));
+      }
+    };
+  })();
   // Calcula as quebras de linha do texto traduzido de Sobre para manter uma largura visual previsível.
   const measureCtx = document.createElement('canvas').getContext('2d');
   const layoutAboutLines = (el, html, widthEm) => {
@@ -2713,19 +2779,22 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     const lines = []; for (let i = 0; i < n; i = nxt[i]) lines.push(words.slice(i, nxt[i]).join(' '));
     el.innerHTML = lines.map(l => `<span class="l">${l}</span>`).join(' ');
   };
-  const setLang = (lang, save = true) => {
+  const setLang = (lang, save = true, animate = false) => {
     if (!['pt', 'en', 'es'].includes(lang)) lang = 'pt';
+    if (animate && lang === LANG) return; // clique na bandeira ativa: nada a fazer
+    Scramble.flush(); // encerra animação em curso antes de trocar o HTML
     LANG = lang;
     document.documentElement.lang = lang === 'pt' ? 'pt-br' : lang;
-    document.querySelectorAll('[data-i18n]').forEach(applyLangTo);
+    const changed = [...document.querySelectorAll('[data-i18n]')].filter(applyLangTo);
+    if (animate) Scramble.runAll(changed);
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       if (!PT_ARIA.has(el)) PT_ARIA.set(el, el.getAttribute('aria-label'));
       el.setAttribute('aria-label', LANG === 'pt' ? PT_ARIA.get(el) : I18N[LANG][el.dataset.i18nAria] || PT_ARIA.get(el));
     });
     document.querySelectorAll('[data-i18n-about]').forEach(el => {
       if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
-      if (LANG === 'pt') el.innerHTML = PT_HTML.get(el);
-      else document.fonts.ready.then(() => { if (LANG !== 'pt') layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); });
+      if (LANG === 'pt') { el.innerHTML = PT_HTML.get(el); if (animate) Scramble.run(el, 120); }
+      else document.fonts.ready.then(() => { if (LANG !== 'pt') { layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); if (animate && LANG === lang) Scramble.run(el, 120); } });
     });
     const md = document.querySelector('meta[name="description"]');
     if (md) { if (!md.dataset.pt) md.dataset.pt = md.content; md.content = i18n('doc.desc', md.dataset.pt); }
@@ -2744,7 +2813,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   const initLang = () => {
     document.querySelectorAll('.lang-switch').forEach(box => {
       box.innerHTML = ['pt', 'en', 'es'].map(l => `<button class="lang-btn" type="button" data-lang="${l}" lang="${l}" aria-pressed="false" aria-label="${LANG_NAMES[l]}" title="${LANG_NAMES[l]}">${FLAGS[l]()}</button>`).join('');
-      box.addEventListener('click', (e) => { const b = e.target.closest('.lang-btn'); if (b) setLang(b.dataset.lang); });
+      box.addEventListener('click', (e) => {
+        const b = e.target.closest('.lang-btn'); if (!b) return;
+        b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop'); // toque na bandeira
+        setLang(b.dataset.lang, true, true);
+      });
     });
     // idioma do endereço (/en/, /es/) > escolha salva > idioma do navegador (ver assets/js/idioma.js)
     setLang(HMI.initial(), !!HMI.fromPath());
