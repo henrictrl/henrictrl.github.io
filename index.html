@@ -2698,12 +2698,13 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     if (v != null && el.innerHTML !== v) { el.innerHTML = v; return true; }
     return false;
   };
-  /* Troca de idioma animada: o texto novo surge em símbolos (cinza) e cada letra assenta devagar,
-     da esquerda para a direita, com leve variação. Só anima o que está na tela; respeita reduced-motion. */
+  /* Troca de idioma animada: todo o texto visível vira símbolos (cinza) de uma vez e cada letra assenta
+     num momento aleatório, sem ordem, ao longo de 1,2 s. Só anima o que está na tela; respeita reduced-motion. */
   const Scramble = (() => {
     const SYM = '#%&*+=/\\<>~^×÷§¶@·:;!?{}[]()|°±≈≠∆∑Ωµ∂∞√◊¤©®†‡•'; // todos presentes na Inter (sem fallback)
     const reduce = matchMedia('(prefers-reduced-motion: reduce)');
     const live = new Set();
+    const esc = (x) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const inView = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; };
     const run = (el, delay = 0) => {
       if (reduce.matches || !inView(el)) return;
@@ -2711,16 +2712,14 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       let total = 0, n;
       while ((n = tw.nextNode())) {
         if (!n.nodeValue.trim()) continue;
-        const done = document.createTextNode(''), mid = document.createElement('span'), wrap = document.createElement('span');
-        mid.className = 'scr'; wrap.append(done, mid);
-        items.push({ node: n, text: n.nodeValue, start: total, done, mid, wrap, cache: [], t: [] });
+        items.push({ node: n, text: n.nodeValue, wrap: document.createElement('span'), cache: [], t: [] });
         total += n.nodeValue.length;
       }
       if (!total) return;
-      const spread = Math.min(450 + total * 6, 1100), settle = 380, end = spread + settle;
+      const end = 1200; // mesma duração para todos os blocos
       items.forEach(it => {
         it.node.replaceWith(it.wrap);
-        for (let i = 0; i < it.text.length; i++) it.t[i] = (it.start + i) / total * spread + Math.random() * settle;
+        for (let i = 0; i < it.text.length; i++) it.t[i] = 180 + Math.random() * (end - 180); // momento aleatório por letra
       });
       el.setAttribute('aria-busy', 'true');
       const job = { raf: 0 };
@@ -2731,17 +2730,17 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
         const t = now - t0, swap = now - lastSwap > 140; // ~7 trocas/s; a cada troca só ~1/3 dos símbolos muda
         if (swap) lastSwap = now;
         for (const it of items) {
-          const L = it.text.length;
-          let a = 0; while (a < L && it.t[a] <= t) a++;
-          let m = '';
-          for (let i = a; i < L; i++) {
-            const c = it.text[i];
-            if (/\s/.test(c) || it.t[i] <= t) { m += c; continue; }
-            if (!it.cache[i] || (swap && Math.random() < 0.35)) it.cache[i] = SYM[(Math.random() * SYM.length) | 0];
-            m += it.cache[i];
+          // trechos alternados: letra assentada (cor normal) | símbolo (span .scr)
+          let html = '', run = '', inScr = false;
+          const out = () => { if (run) html += inScr ? `<span class="scr">${esc(run)}</span>` : esc(run); run = ''; };
+          for (let i = 0; i < it.text.length; i++) {
+            const c = it.text[i], sp = /\s/.test(c), scr = !sp && it.t[i] > t;
+            if (!sp && scr !== inScr) { out(); inScr = scr; }
+            if (scr && (!it.cache[i] || (swap && Math.random() < 0.35))) it.cache[i] = SYM[(Math.random() * SYM.length) | 0];
+            run += scr ? it.cache[i] : c;
           }
-          it.done.nodeValue = it.text.slice(0, a);
-          it.mid.textContent = m;
+          out();
+          if (it.wrap.innerHTML !== html) it.wrap.innerHTML = html;
         }
         t < end ? (job.raf = requestAnimationFrame(tick)) : finish();
       };
@@ -2750,11 +2749,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     return {
       run,
       flush: () => [...live].forEach(j => j.cancel()),
-      runAll(els) { // cascata de cima para baixo
-        const pos = (e) => e.getBoundingClientRect();
-        [...els].filter(inView).sort((a, b) => pos(a).top - pos(b).top || pos(a).left - pos(b).left)
-          .forEach((el, i) => run(el, Math.min(i * 35, 350)));
-      }
+      runAll: (els) => els.forEach(el => run(el)) // todos ao mesmo tempo
     };
   })();
   // Calcula as quebras de linha do texto traduzido de Sobre para manter uma largura visual previsível.
@@ -2793,8 +2788,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     });
     document.querySelectorAll('[data-i18n-about]').forEach(el => {
       if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
-      if (LANG === 'pt') { el.innerHTML = PT_HTML.get(el); if (animate) Scramble.run(el, 120); }
-      else document.fonts.ready.then(() => { if (LANG !== 'pt') { layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); if (animate && LANG === lang) Scramble.run(el, 120); } });
+      if (LANG === 'pt') { el.innerHTML = PT_HTML.get(el); if (animate) Scramble.run(el); }
+      else document.fonts.ready.then(() => { if (LANG !== 'pt') { layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); if (animate && LANG === lang) Scramble.run(el); } });
     });
     const md = document.querySelector('meta[name="description"]');
     if (md) { if (!md.dataset.pt) md.dataset.pt = md.content; md.content = i18n('doc.desc', md.dataset.pt); }
