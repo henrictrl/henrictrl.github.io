@@ -106,6 +106,12 @@ header.top-header {
 .lang-btn:hover { opacity: 0.8; filter: none; }
 .lang-btn[aria-pressed="true"] { opacity: 1; filter: none; }
 .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* troca de idioma: caracteres ainda não resolvidos em cinza (mais claro dentro de .dim) + toque na bandeira */
+.scr { color: var(--gray-400); }
+.dim .scr { color: var(--gray-200); }
+@keyframes lang-pop { 0% { transform: scale(1); } 40% { transform: scale(0.82); } 100% { transform: scale(1); } }
+.lang-btn.is-pop { animation: lang-pop 0.38s var(--ease); }
+@media (prefers-reduced-motion: reduce) { .lang-btn.is-pop { animation: none; } }
 
 .main-nav { 
   display: flex; 
@@ -2081,10 +2087,9 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
 #view-home .section-block { padding-block: calc(var(--S) / 2); } /* só na home: Sobre/Projetos/Artigos mantêm o espaçamento próprio */
 .services-block { padding-block: calc(var(--S) / 2) !important; }
-/* Projetos e logos formam um bloco (o que fiz + para quem): distância menor entre eles */
-#trabalhos { padding-block: calc(var(--S) / 2) calc(var(--s) / 2) !important; }
-/* desconta o respiro interno do logo (14px em cima, 22px embaixo); logos → rodapé = s */
-.marquee-section { padding: calc(var(--s) / 2 - 14px) 0 calc(var(--s) - 22px) !important; }
+/* ordem da home: Sobre → logos → Projetos → Serviços; Projetos usa o espaçamento padrão */
+/* desconta o respiro interno do logo (14px em cima, 22px embaixo): Sobre → logos = s; embaixo só o respiro do logo + padding de Projetos */
+.marquee-section { padding: calc(var(--s) - 14px) 0 0 !important; }
 
 #view-home .section-grid { gap: var(--lab); }
 .services-title { margin-bottom: var(--lab); }
@@ -2233,7 +2238,51 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </div>
     <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
     <script>if (HMI.initial() === 'pt' && 'IntersectionObserver' in window) { var fsIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); fsIO.unobserve(e.target); } }); }, { threshold: 0.15 }); document.querySelectorAll('.first-screen .reveal').forEach(function (e) { fsIO.observe(e); }); }</script> <!-- só o que está na tela; o resto entra ao rolar -->
-    <section class="section-block services-block" style="padding-top:calc(var(--space-y) / 3);">
+    <!-- logos de clientes: logo após Sobre mim -->
+    <section class="marquee-section">
+      <div class="marquee-mask">
+        <!-- Logos: cinza por padrão, cor no hover/toque. A faixa vai e volta (vaivém), sem fim -->
+        <div class="marquee-track" id="marquee-track">
+        <ul class="marquee-list" aria-label="Clientes e projetos">
+          <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="/projetos/optica-leopoldina/" draggable="false"><img src="assets/logos/optica-leopoldina.webp" alt="Óptica Leopoldina" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/mostra-saude-mental/" draggable="false"><img src="assets/logos/mostra-saude-mental.svg" alt="Mostra de Saúde Mental da Unesp" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="/projetos/sollaris/" draggable="false"><img src="assets/logos/sollaris.svg" alt="Sollaris" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/ntaps/" draggable="false"><img src="assets/logos/ntaps.webp" alt="NTAPS — Núcleo Técnico de Atenção Psicossocial" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
+          <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="/projetos/rino/" draggable="false"><img src="assets/logos/rino-logo.webp" alt="Rino" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
+          <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="/projetos/classic-tattoo/" draggable="false"><img src="assets/logos/classic-tattoo.webp" alt="Classic Tattoo" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
+          <li class="marquee-logo" style="--h:46px;--z:1.7"><a class="marquee-link" href="/projetos/encantos-do-brasil/" draggable="false"><img src="assets/logos/encantos-do-brasil.svg" alt="Encantos do Brasil" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Encantos do Brasil</span></a></li>
+          <li class="marquee-logo" style="--h:56px;--z:1.5"><a class="marquee-link" href="/projetos/congresso-extensao/" draggable="false"><img src="assets/logos/congresso-extensao.webp" alt="Congresso de Extensão Universitária" width="347" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Congresso de Extensão Universitária</span></a></li>
+          <li class="marquee-logo" style="--h:30px;--z:1.2"><a class="marquee-link" href="/projetos/equity360/" draggable="false"><img src="assets/logos/equity360.webp" alt="Equity 360" width="640" height="151" decoding="async"><span class="marquee-name" aria-hidden="true">Equity 360</span></a></li>
+          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/nova-rio-branco/" draggable="false"><img src="assets/logos/nova-rio-branco.webp" alt="Nova Rio Branco — multi soluções para sua empresa" width="523" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nova Rio Branco</span></a></li>
+          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/prisma-brandbook/" draggable="false"><img src="assets/logos/prisma.webp" alt="Prisma Consultoria" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Prisma Consultoria</span></a></li>
+          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/csunesp/" draggable="false"><img src="assets/logos/csunesp.webp" alt="CSUNESP — Coordenadoria de Saúde da Unesp" width="488" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">CSUNESP — Coordenadoria de Saúde da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:32px;--z:1.4"><a class="marquee-link" href="/projetos/nupe/" draggable="false"><img src="assets/logos/nupe.webp" alt="Nupe — Núcleo Negro da Unesp" width="550" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nupe — Núcleo Negro da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:34px;--z:1.25"><a class="marquee-link" href="/projetos/interserv/" draggable="false"><img src="assets/logos/interserv.webp" alt="Interserv" width="598" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Interserv</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.25"><a class="marquee-link" href="/projetos/cminds/" draggable="false"><img src="assets/logos/cminds.webp" alt="C Minds" width="250" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">C Minds</span></a></li>
+          <li class="marquee-logo" style="--h:42px;--z:1.25"><a class="marquee-link" href="/projetos/ocupacao-unesp-negra/" draggable="false"><img src="assets/logos/ocupacao-unesp-negra.webp" alt="Ocupação Unesp Negra" width="571" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Ocupação Unesp Negra</span></a></li>
+          <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/projetos/persona/" draggable="false"><img src="assets/logos/persona.svg" alt="Persona — Crítica Cultural" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
+          <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/projetos/rp-40-anos/" draggable="false"><img src="assets/logos/rp-unesp-40.webp" alt="Relações Públicas Unesp Bauru — 40 anos" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="trabalhos">
+      <div class="max-w">
+        <div class="work-intro reveal">
+          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
+        </div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block services-block">
       <div class="max-w">
         <p class="services-title" data-i18n="services.title">Serviços</p>
         <div class="services-grid reveal-stagger">
@@ -2265,50 +2314,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
               <p class="service-desc" data-i18n="svc.landing.d">Sites, catálogos e ferramentas web sob medida, com foco em clareza, leveza e desempenho.</p>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block" id="trabalhos">
-      <div class="max-w">
-        <div class="work-intro reveal">
-          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
-        </div>
-        <div class="home-projects-viewport">
-          <div class="work-grid home-featured-grid" id="work-grid"></div>
-        </div>
-        <div class="home-pagination-row">
-          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
-          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- logos de clientes: depois de Projetos (bloco "o que fiz + para quem") -->
-    <section class="marquee-section">
-      <div class="marquee-mask">
-        <!-- Logos: cinza por padrão, cor no hover/toque. A faixa vai e volta (vaivém), sem fim -->
-        <div class="marquee-track" id="marquee-track">
-        <ul class="marquee-list" aria-label="Clientes e projetos">
-          <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="/projetos/optica-leopoldina/" draggable="false"><img src="assets/logos/optica-leopoldina.webp" alt="Óptica Leopoldina" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/mostra-saude-mental/" draggable="false"><img src="assets/logos/mostra-saude-mental.svg" alt="Mostra de Saúde Mental da Unesp" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="/projetos/sollaris/" draggable="false"><img src="assets/logos/sollaris.svg" alt="Sollaris" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/projetos/ntaps/" draggable="false"><img src="assets/logos/ntaps.webp" alt="NTAPS — Núcleo Técnico de Atenção Psicossocial" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
-          <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="/projetos/rino/" draggable="false"><img src="assets/logos/rino-logo.webp" alt="Rino" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
-          <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="/projetos/classic-tattoo/" draggable="false"><img src="assets/logos/classic-tattoo.webp" alt="Classic Tattoo" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
-          <li class="marquee-logo" style="--h:46px;--z:1.7"><a class="marquee-link" href="/projetos/encantos-do-brasil/" draggable="false"><img src="assets/logos/encantos-do-brasil.svg" alt="Encantos do Brasil" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Encantos do Brasil</span></a></li>
-          <li class="marquee-logo" style="--h:56px;--z:1.5"><a class="marquee-link" href="/projetos/congresso-extensao/" draggable="false"><img src="assets/logos/congresso-extensao.webp" alt="Congresso de Extensão Universitária" width="347" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Congresso de Extensão Universitária</span></a></li>
-          <li class="marquee-logo" style="--h:30px;--z:1.2"><a class="marquee-link" href="/projetos/equity360/" draggable="false"><img src="assets/logos/equity360.webp" alt="Equity 360" width="640" height="151" decoding="async"><span class="marquee-name" aria-hidden="true">Equity 360</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/nova-rio-branco/" draggable="false"><img src="assets/logos/nova-rio-branco.webp" alt="Nova Rio Branco — multi soluções para sua empresa" width="523" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nova Rio Branco</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/prisma-brandbook/" draggable="false"><img src="assets/logos/prisma.webp" alt="Prisma Consultoria" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Prisma Consultoria</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/csunesp/" draggable="false"><img src="assets/logos/csunesp.webp" alt="CSUNESP — Coordenadoria de Saúde da Unesp" width="488" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">CSUNESP — Coordenadoria de Saúde da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:32px;--z:1.4"><a class="marquee-link" href="/projetos/nupe/" draggable="false"><img src="assets/logos/nupe.webp" alt="Nupe — Núcleo Negro da Unesp" width="550" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nupe — Núcleo Negro da Unesp</span></a></li>
-          <li class="marquee-logo" style="--h:34px;--z:1.25"><a class="marquee-link" href="/projetos/interserv/" draggable="false"><img src="assets/logos/interserv.webp" alt="Interserv" width="598" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Interserv</span></a></li>
-          <li class="marquee-logo" style="--h:50px;--z:1.25"><a class="marquee-link" href="/projetos/cminds/" draggable="false"><img src="assets/logos/cminds.webp" alt="C Minds" width="250" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">C Minds</span></a></li>
-          <li class="marquee-logo" style="--h:42px;--z:1.25"><a class="marquee-link" href="/projetos/ocupacao-unesp-negra/" draggable="false"><img src="assets/logos/ocupacao-unesp-negra.webp" alt="Ocupação Unesp Negra" width="571" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Ocupação Unesp Negra</span></a></li>
-          <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/projetos/persona/" draggable="false"><img src="assets/logos/persona.svg" alt="Persona — Crítica Cultural" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
-          <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/projetos/rp-40-anos/" draggable="false"><img src="assets/logos/rp-unesp-40.webp" alt="Relações Públicas Unesp Bauru — 40 anos" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
-        </ul>
         </div>
       </div>
     </section>
@@ -2689,8 +2694,63 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   const applyLangTo = (el) => {
     if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
     const v = LANG === 'pt' ? PT_HTML.get(el) : I18N[LANG][el.dataset.i18n];
-    if (v != null && el.innerHTML !== v) el.innerHTML = v;
+    if (v != null && el.innerHTML !== v) { el.innerHTML = v; return true; }
+    return false;
   };
+  /* Troca de idioma animada: todo o texto visível vira símbolos (cinza) de uma vez e cada letra assenta
+     num momento aleatório, sem ordem, ao longo de 1,2 s. Só anima o que está na tela; respeita reduced-motion. */
+  const Scramble = (() => {
+    const SYM = '#%&*+=/\\<>~^×÷§¶@·:;!?{}[]()|°±≈≠∆∑Ωµ∂∞√◊¤©®†‡•'; // todos presentes na Inter (sem fallback)
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const live = new Set();
+    const esc = (x) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; };
+    const run = (el, delay = 0) => {
+      if (reduce.matches || !inView(el)) return;
+      const tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), items = [];
+      let total = 0, n;
+      while ((n = tw.nextNode())) {
+        if (!n.nodeValue.trim()) continue;
+        items.push({ node: n, text: n.nodeValue, wrap: document.createElement('span'), cache: [], t: [] });
+        total += n.nodeValue.length;
+      }
+      if (!total) return;
+      const end = 1200; // mesma duração para todos os blocos
+      items.forEach(it => {
+        it.node.replaceWith(it.wrap);
+        for (let i = 0; i < it.text.length; i++) it.t[i] = 180 + Math.random() * (end - 180); // momento aleatório por letra
+      });
+      el.setAttribute('aria-busy', 'true');
+      const job = { raf: 0 };
+      const finish = () => { cancelAnimationFrame(job.raf); items.forEach(it => it.wrap.replaceWith(it.node)); el.removeAttribute('aria-busy'); live.delete(job); };
+      job.cancel = finish; live.add(job);
+      const t0 = performance.now() + delay; let lastSwap = 0;
+      const tick = (now) => {
+        const t = now - t0, swap = now - lastSwap > 140; // ~7 trocas/s; a cada troca só ~1/3 dos símbolos muda
+        if (swap) lastSwap = now;
+        for (const it of items) {
+          // trechos alternados: letra assentada (cor normal) | símbolo (span .scr)
+          let html = '', run = '', inScr = false;
+          const out = () => { if (run) html += inScr ? `<span class="scr">${esc(run)}</span>` : esc(run); run = ''; };
+          for (let i = 0; i < it.text.length; i++) {
+            const c = it.text[i], sp = /\s/.test(c), scr = !sp && it.t[i] > t;
+            if (!sp && scr !== inScr) { out(); inScr = scr; }
+            if (scr && (!it.cache[i] || (swap && Math.random() < 0.35))) it.cache[i] = SYM[(Math.random() * SYM.length) | 0];
+            run += scr ? it.cache[i] : c;
+          }
+          out();
+          if (it.wrap.innerHTML !== html) it.wrap.innerHTML = html;
+        }
+        t < end ? (job.raf = requestAnimationFrame(tick)) : finish();
+      };
+      job.raf = requestAnimationFrame(tick);
+    };
+    return {
+      run,
+      flush: () => [...live].forEach(j => j.cancel()),
+      runAll: (els) => els.forEach(el => run(el)) // todos ao mesmo tempo
+    };
+  })();
   // Calcula as quebras de linha do texto traduzido de Sobre para manter uma largura visual previsível.
   const measureCtx = document.createElement('canvas').getContext('2d');
   const layoutAboutLines = (el, html, widthEm) => {
@@ -2713,19 +2773,22 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     const lines = []; for (let i = 0; i < n; i = nxt[i]) lines.push(words.slice(i, nxt[i]).join(' '));
     el.innerHTML = lines.map(l => `<span class="l">${l}</span>`).join(' ');
   };
-  const setLang = (lang, save = true) => {
+  const setLang = (lang, save = true, animate = false) => {
     if (!['pt', 'en', 'es'].includes(lang)) lang = 'pt';
+    if (animate && lang === LANG) return; // clique na bandeira ativa: nada a fazer
+    Scramble.flush(); // encerra animação em curso antes de trocar o HTML
     LANG = lang;
     document.documentElement.lang = lang === 'pt' ? 'pt-br' : lang;
-    document.querySelectorAll('[data-i18n]').forEach(applyLangTo);
+    const changed = [...document.querySelectorAll('[data-i18n]')].filter(applyLangTo);
+    if (animate) Scramble.runAll(changed);
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       if (!PT_ARIA.has(el)) PT_ARIA.set(el, el.getAttribute('aria-label'));
       el.setAttribute('aria-label', LANG === 'pt' ? PT_ARIA.get(el) : I18N[LANG][el.dataset.i18nAria] || PT_ARIA.get(el));
     });
     document.querySelectorAll('[data-i18n-about]').forEach(el => {
       if (!PT_HTML.has(el)) PT_HTML.set(el, el.innerHTML);
-      if (LANG === 'pt') el.innerHTML = PT_HTML.get(el);
-      else document.fonts.ready.then(() => { if (LANG !== 'pt') layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); });
+      if (LANG === 'pt') { el.innerHTML = PT_HTML.get(el); if (animate) Scramble.run(el); }
+      else document.fonts.ready.then(() => { if (LANG !== 'pt') { layoutAboutLines(el, I18N[LANG][+el.dataset.i18nAbout > 25 ? 'about.text.d' : 'about.text.m'], +el.dataset.i18nAbout); if (animate && LANG === lang) Scramble.run(el); } });
     });
     const md = document.querySelector('meta[name="description"]');
     if (md) { if (!md.dataset.pt) md.dataset.pt = md.content; md.content = i18n('doc.desc', md.dataset.pt); }
@@ -2744,7 +2807,11 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   const initLang = () => {
     document.querySelectorAll('.lang-switch').forEach(box => {
       box.innerHTML = ['pt', 'en', 'es'].map(l => `<button class="lang-btn" type="button" data-lang="${l}" lang="${l}" aria-pressed="false" aria-label="${LANG_NAMES[l]}" title="${LANG_NAMES[l]}">${FLAGS[l]()}</button>`).join('');
-      box.addEventListener('click', (e) => { const b = e.target.closest('.lang-btn'); if (b) setLang(b.dataset.lang); });
+      box.addEventListener('click', (e) => {
+        const b = e.target.closest('.lang-btn'); if (!b) return;
+        b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop'); // toque na bandeira
+        setLang(b.dataset.lang, true, true);
+      });
     });
     // idioma do endereço (/en/, /es/) > escolha salva > idioma do navegador (ver assets/js/idioma.js)
     setLang(HMI.initial(), !!HMI.fromPath());
