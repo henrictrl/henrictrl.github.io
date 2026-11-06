@@ -1729,7 +1729,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   .work-intro { margin-bottom:20px; }
   .work-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 12px; }
   .work-card-media { aspect-ratio:3 / 2; margin-bottom:8px; }
-  .home-featured-grid { row-gap:10px; }
+  .home-featured-grid { row-gap:24px; }
   .home-featured-grid .work-card-media { aspect-ratio:3 / 2; }
   .work-card-title { font-size:13px; line-height:1.35; }
   .work-card-tag { font-size:11px; }
@@ -2082,14 +2082,20 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 /* ===== ESPAÇAMENTO · PROPOSTA B — blocos por assunto =====
    1ª tela = abertura (cheia, centralizada). Depois: Sobre | Serviços | Projetos + Clientes (logos).
    --S = entre blocos de assunto · --s = dentro do mesmo bloco · --lab = rótulo → conteúdo */
-#view-home { --S: 72px; --s: 40px; --lab: 16px; }
-@media (min-width: 768px) { #view-home { --S: 128px; --s: 64px; --lab: 24px; } }
+/* --G = distância entre blocos (Sobre → logos → Projetos → Serviços → rodapé), medida de conteúdo a conteúdo
+   --H = cabeçalho → abertura e abertura → Sobre (desktop) · --lab = rótulo → conteúdo */
+#view-home { --S: 72px; --s: 40px; --lab: 16px; --G: 64px; --H: 40px; }
+@media (min-width: 768px) { #view-home { --S: 128px; --s: 64px; --lab: 24px; --G: 96px; --H: 64px; } }
 
 #view-home .section-block { padding-block: calc(var(--S) / 2); } /* só na home: Sobre/Projetos/Artigos mantêm o espaçamento próprio */
-.services-block { padding-block: calc(var(--S) / 2) !important; }
-/* ordem da home: Sobre → logos → Projetos → Serviços; Projetos usa o espaçamento padrão */
-/* desconta o respiro interno do logo (14px em cima, 22px embaixo): Sobre → logos = s; embaixo só o respiro do logo + padding de Projetos */
-.marquee-section { padding: calc(var(--s) - 14px) 0 0 !important; }
+/* ritmo vertical da home: cada bloco só tem margem em cima (--G) e o espaço é medido entre conteúdos visíveis.
+   Os descontos (−14, −22, −12/−9) removem o respiro interno dos logos e da paginação. */
+#view-home .first-screen > .section-block { padding-block: 0; }
+.marquee-section { padding: 0 !important; margin-top: calc(var(--G) - 14px); }
+#view-home #trabalhos { padding-block: 0 !important; margin-top: calc(var(--G) - 22px); }
+.services-block { padding-block: 0 var(--G) !important; margin-top: calc(var(--G) - 12px); }
+@media (min-width: 768px) { .services-block { margin-top: calc(var(--G) - 9px); } }
+.services-grid { grid-auto-rows: 1fr; } /* cards da mesma altura em todas as linhas */
 
 #view-home .section-grid { gap: var(--lab); }
 .services-title { margin-bottom: var(--lab); }
@@ -2111,13 +2117,15 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   .hero-text { margin-top: 0 !important; }
   .hero-portrait { margin-block: var(--s) 0 !important; } /* título → foto = s */
   .portrait-hint { margin: 10px 0 0 !important; }
-  #view-home .first-screen > .section-block { padding-top: 16px; }
+  /* margens se adaptam à altura da tela: cabeçalho → título = foto → borda inferior (centralizado, padding simétrico);
+     "Sobre mim" começa na borda da 1ª tela e só aparece ao rolar */
+  #view-home .section-grid { width: 100%; } /* Sobre alinhado ao mesmo eixo (gutter) dos demais blocos */
 }
 /* desktop: abertura + Sobre centralizados na 1ª tela (como hoje), com distância fixa entre eles */
 @media (min-width: 768px) {
-  .first-screen { min-height: calc(100svh - var(--hdr-h, 72px)); padding-block: 24px; }
-  section.hero { padding: 0 var(--gutter) !important; }
-  #view-home .first-screen > .section-block { padding-block: var(--s) 0; } /* foto → Sobre = s */
+  .first-screen { min-height: 0; padding-block: 0; display: block; } /* sem altura mínima: espaços fixos, iguais em qualquer tela */
+  section.hero { padding: var(--H) var(--gutter) 0 !important; } /* cabeçalho → abertura = H */
+  #view-home .first-screen > .section-block { padding-block: var(--H) 0; } /* abertura → Sobre = H */
 }
 </style>
 
