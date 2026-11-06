@@ -11254,6 +11254,70 @@ window.PROJETOS = [
   ]
  },
  {
+  "slug": "rd-cultural",
+  "servicos_relacionados": [
+   "social",
+   "redacao"
+  ],
+  "titulo": "RD Cultural",
+  "ano": "2023",
+  "cat": {
+   "pt": "Mídias sociais",
+   "en": "Social media",
+   "es": "Redes sociales"
+  },
+  "filtro": "midias",
+  "etiquetas": {
+   "entrega": [
+    "posts-carrosseis",
+    "divulgacao-evento",
+    "organizacao-evento",
+    "pecas-graficas"
+   ],
+   "setor": [
+    "entretenimento",
+    "turismo"
+   ],
+   "contexto": [
+    "estagio"
+   ],
+   "competencias": [
+    "social-media",
+    "redacao",
+    "meta-business-suite",
+    "html",
+    "wordpress",
+    "photoshop",
+    "illustrator",
+    "notion"
+   ]
+  },
+  "capa": "assets/projetos/rd-cultural/capa.webp",
+  "resumo": {
+   "pt": "Redes sociais para agência de excursões a shows e eventos",
+   "en": "Social media for an agency running trips to concerts and events",
+   "es": "Redes sociales para una agencia de excursiones a shows y eventos"
+  },
+  "dir": "assets/projetos/rd-cultural/",
+  "exp": "Rd Cultural",
+  "intro": {
+   "pt": "Posts e carrosséis da RD Cultural, agência de excursões para shows e eventos de Bauru, feitos no estágio de comunicação, de fevereiro a julho de 2023.",
+   "en": "Posts and carousels for RD Cultural, a Bauru agency running trips to concerts and events, made during my communications internship, February to July 2023.",
+   "es": "Posts y carruseles de RD Cultural, agencia de excursiones a shows y eventos de Bauru, hechos en la pasantía de comunicación, de febrero a julio de 2023."
+  },
+  "telas": [],
+  "secoes": [],
+  "posts": "rdcultural",
+  "dash": {
+   "users": [
+    "rdcultural"
+   ],
+   "m": "l",
+   "cor": "#eb6834",
+   "on": "#fff"
+  }
+ },
+ {
   "slug": "encantos-do-brasil",
   "servicos_relacionados": [
    "identidade"
@@ -12373,9 +12437,9 @@ window.PROJETOS = [
   "capa": "assets/projetos/dashboards/geral.svg",
   "dir": "assets/projetos/dashboards/",
   "intro": {
-   "pt": "Interações somadas dos 113 posts e carrosséis do portfólio, em nove contas do Instagram, de 2022 a 2026, e os números do Behance.",
-   "en": "Combined interactions on the 113 posts and carousels in this portfolio, across nine Instagram accounts, from 2022 to 2026, plus Behance figures.",
-   "es": "Interacciones sumadas de los 113 posts y carruseles del portafolio, en nueve cuentas de Instagram, de 2022 a 2026, y los números de Behance."
+   "pt": "Interações somadas dos 152 posts e carrosséis do portfólio, em dez contas do Instagram, de 2022 a 2026, e os números do Behance.",
+   "en": "Combined interactions on the 152 posts and carousels in this portfolio, across ten Instagram accounts, from 2022 to 2026, plus Behance figures.",
+   "es": "Interacciones sumadas de los 152 posts y carruseles del portafolio, en diez cuentas de Instagram, de 2022 a 2026, y los números de Behance."
   },
   "telas": [],
   "dash": {
@@ -12388,7 +12452,8 @@ window.PROJETOS = [
     "cac.unesp.rioclaro",
     "s.ollaris",
     "emcantosbr",
-    "basement_cc"
+    "basement_cc",
+    "rdcultural"
    ],
    "m": "l",
    "cor": "#2a78d6",
