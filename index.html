@@ -8,7 +8,7 @@
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/motion.css?v=20261102a">
-<script src="assets/js/idioma.js?v=20261102a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
+<script src="assets/js/idioma.js?v=20261105a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
 <meta name="google-site-verification" content="h6bAkOayPHnAIpK4OAyF0fBiJ_whJN_DQ7ZdN8cxKNc">
 <title>Henrique Marinhos</title>
 <meta name="description" content="Portfólio de Henrique Marinhos, designer focado em criação de marcas, design editorial, web design e estratégias de comunicação B2B.">
@@ -2821,8 +2821,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
         setLang(b.dataset.lang, true, true);
       });
     });
-    // idioma do endereço (/en/, /es/) > escolha salva > idioma do navegador (ver assets/js/idioma.js)
-    setLang(HMI.initial(), !!HMI.fromPath());
+    // idioma do endereço (/en/, /es/) > escolha na bandeira > idioma do aparelho > PT (ver assets/js/idioma.js)
+    setLang(HMI.initial(), false); // abrir um link /es/ não vira escolha salva
   };
 document.addEventListener('DOMContentLoaded', () => {
 
