@@ -2,11 +2,11 @@
    Carregado no <head> de index.html e projeto.html, antes de tudo.
    - HMI.path(): caminho sem o prefixo, para as rotas internas continuarem iguais
    - HMI.with(path, lang): caminho com o prefixo do idioma
-   - HMI.initial(): idioma do endereço > escolha salva > idioma do navegador (robôs: PT)
+   - HMI.initial(): idioma do endereço > escolha feita na bandeira > idioma do aparelho > PT (robôs: PT)
    - HMI.sync(lang, save): ajusta endereço, canonical, hreflang e links internos ao idioma
    pushState/replaceState recebem o prefixo sozinhos, então o resto do código usa caminhos sem idioma. */
 (function () {
-  var SITE = 'https://henrictrl.github.io', LANGS = ['pt', 'en', 'es'], KEY = 'hm-lang';
+  var SITE = 'https://henrictrl.github.io', LANGS = ['pt', 'en', 'es'], KEY = 'hm-idioma'; // chave nova: 'hm-lang' antiga guardava /es/ visitado como escolha e travava o site em espanhol
   var PREFIX = /^\/(en|es)(?=\/|$)/;
   var cur = 'pt';
   var strip = function (p) { return (p || '/').replace(PREFIX, '') || '/'; };
@@ -16,11 +16,12 @@
 
   var initial = function () {
     var p = fromPath(); if (p) return p;
-    try { var s = localStorage.getItem(KEY); if (LANGS.indexOf(s) >= 0) return s; } catch (e) {}
+    try { localStorage.removeItem('hm-lang'); var s = localStorage.getItem(KEY); if (LANGS.indexOf(s) >= 0) return s; } catch (e) {}
     if (BOT.test(navigator.userAgent)) return 'pt';
-    var nav = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'pt'];
+    // idioma do aparelho: primeiro da lista que o site tenha; sem informação ou sem suporte, PT
+    var nav = navigator.languages && navigator.languages.length ? navigator.languages : (navigator.language ? [navigator.language] : []);
     for (var i = 0; i < nav.length; i++) { var v = String(nav[i]).toLowerCase().slice(0, 2); if (LANGS.indexOf(v) >= 0) return v; }
-    return 'en';
+    return 'pt';
   };
 
   // caminhos internos ganham o prefixo do idioma atual (o código do site continua passando caminhos sem idioma)
@@ -63,7 +64,7 @@
   var sync = function (l, save) {
     if (LANGS.indexOf(l) < 0) l = 'pt';
     cur = l;
-    if (save) { try { localStorage.setItem(KEY, l); } catch (e) {} }
+    if (save) { try { localStorage.setItem(KEY, l); } catch (e) {} } // só clique na bandeira salva
     var target = withLang(location.pathname) + location.search + location.hash;
     if (target !== location.pathname + location.search + location.hash) {
       try { history.replaceState(history.state, '', target); } catch (e) {}
@@ -76,6 +77,6 @@
 
   cur = fromPath() || 'pt';
   document.addEventListener('DOMContentLoaded', meta);
-  window.HMI = { path: function () { return strip(location.pathname); }, with: withLang, strip: strip, initial: initial, sync: sync, fromPath: fromPath, lang: function () { return cur; }, SITE: SITE };
+  window.HMI = { KEY: KEY, path: function () { return strip(location.pathname); }, with: withLang, strip: strip, initial: initial, sync: sync, fromPath: fromPath, lang: function () { return cur; }, SITE: SITE };
   meta();
 })();

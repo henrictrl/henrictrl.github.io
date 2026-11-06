@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
-<script src="assets/js/idioma.js?v=20261102a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
+<script src="assets/js/idioma.js?v=20261105a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
 <link rel="canonical" href="https://henrictrl.github.io/">
 <link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/">
 <link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/">
@@ -106,8 +106,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   var PROJECTS = window.PROJETOS || [];
   var POSTS = window.POSTS || [];
   var LANG_NAMES = {pt:"Português",en:"English",es:"Español"};
-  var LANG = HMI.initial(); // endereço (/en/, /es/) > escolha salva > navegador (assets/js/idioma.js)
-  HMI.sync(LANG, !!HMI.fromPath());
+  var LANG = HMI.initial(); // endereço (/en/, /es/) > escolha na bandeira > aparelho > PT (assets/js/idioma.js)
+  HMI.sync(LANG, false); // abrir um link /es/ não vira escolha salva
   document.documentElement.lang = LANG === "pt" ? "pt-br" : LANG; // antes de ler títulos: o resolvedor de projetos.js usa o lang do <html>
   /* imagens traduzidas: se idiomasImg (do projeto ou do item) inclui o idioma ativo, usa NN.en.webp / NN.es.webp; se o arquivo faltar, volta ao PT */
   function locPath(path, langs) {
@@ -232,7 +232,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     langHost.querySelectorAll("[data-lang]").forEach(function(button){
       button.addEventListener("click",function(){
         var nextLang=button.dataset.lang; if(nextLang===LANG)return;
-        try{localStorage.setItem("hm-lang",nextLang);}catch(e){}
+        try{localStorage.setItem(HMI.KEY,nextLang);}catch(e){}
         location.assign(HMI.with(HMI.path(),nextLang)+location.hash); // abre o mesmo projeto no endereço do idioma
       });
     });
