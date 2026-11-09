@@ -11,6 +11,7 @@
                                       (PT sem prefixo; EN em /en/..., ES em /es/...). Cada uma tem metatags
                                       de compartilhamento no idioma, canonical, hreflang, JSON-LD e texto legível
                                       sem JS; ao abrir, carregam o site (index.html ou projeto.html).
+     assets/og/colecoes/<slug>.jpg  mosaico de cada coleção de artigos + página leve /artigos/<slug>/ (só PT)
      sitemap.xml e robots.txt
    ========================================================================= */
 import { createRequire } from 'node:module';
@@ -188,6 +189,43 @@ for (const a of ARTIGOS) {
   nArt++;
 }
 
+/* ---------- 3b. Coleções de artigos: /artigos/<slug>/ e /artigos/mostra-sp/<ano>/ (só PT) + mosaico 1200×630 ---------- */
+const { COLECOES, colMatch } = data('assets/data/colecoes.js');
+const artSrc = (a) => a.img ? (a.img.startsWith('../') ? 'assets/' + a.img.slice(3) : 'assets/artigos/' + a.img) : (a.imgPath && !/^https?:/.test(a.imgPath) ? a.imgPath : '');
+const artHref = (a) => a.project ? `/projetos/${ALIAS[a.project] || a.project}/` : `/artigos/${encodeURIComponent(articleSlug(a))}/`;
+const sitemapPT = []; // coleções existem só em PT
+const colPages = [];
+for (const c of COLECOES) {
+  colPages.push([c, '']);
+  if (c.mostra) [...new Set(ARTIGOS.filter((a) => a.mostra).map((a) => String(a.mostra)))].sort().reverse().forEach((y) => colPages.push([c, y]));
+}
+for (const [c, ano] of colPages) {
+  const lista = ARTIGOS.filter((a) => colMatch(c, a, ano));
+  if (!lista.length) continue;
+  const key = c.s + (ano ? '-' + ano : '');
+  const img = `assets/og/colecoes/${key}.jpg`;
+  // mosaico com as capas mais recentes (sempre refeito: a coleção muda quando entra texto novo)
+  const pics = lista.map(artSrc).filter(Boolean);
+  const n = pics.length >= 8 ? 8 : pics.length >= 6 ? 6 : pics.length >= 4 ? 4 : pics.length;
+  const cols = n === 8 ? 4 : n === 6 ? 3 : n === 4 ? 2 : n;
+  await solo.setViewportSize({ width: 1200, height: 630 });
+  await solo.setContent(`<body style="margin:0;background:#111;display:grid;grid-template-columns:repeat(${cols},1fr);grid-auto-rows:1fr;gap:4px;width:1200px;height:630px">${pics.slice(0, n).map((p) => `<img src="${LOCAL}/${p}" style="width:100%;height:100%;object-fit:cover;display:block;min-height:0">`).join('')}</body>`);
+  await solo.waitForFunction(() => [...document.images].every((i) => i.complete), null, { timeout: 15000 }).catch(() => {});
+  fs.mkdirSync(path.join(ROOT, 'assets/og/colecoes'), { recursive: true });
+  await solo.screenshot({ path: path.join(ROOT, img), type: 'jpeg', quality: 82 });
+  const pth = `/artigos/${c.s}/${ano ? ano + '/' : ''}`;
+  const name = c.t + (ano ? ' ' + ano : '');
+  const title = `${name} — Artigos de Henrique Marinhos`;
+  const desc = `${c.d} ${lista.length} ${lista.length === 1 ? 'texto' : 'textos'}.`;
+  const ld = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, url: SITE + pth, description: desc, author: PERSON, inLanguage: 'pt-br',
+    hasPart: lista.map((a) => ({ '@type': 'Article', headline: a.t, url: SITE + artHref(a) })) };
+  const block = ogBlock({ title, desc, path: pth, lang: 'pt', img: `${SITE}/${img}`, w: 1200, h: 630, ld })
+    .replace(/<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n/g, '').replace(/<meta property="og:locale:alternate"[^>]*>\n?/g, '');
+  const inner = `${H1(name)}<p>${esc(desc)}</p><ul>${lista.map((a) => `<li><a href="${artHref(a)}">${esc(a.t)}</a></li>`).join('')}</ul><p><a href="/artigos/">${T(W.todosA, 'pt')}</a></p>`;
+  write(`artigos/${c.s}/${ano ? ano + '/' : ''}index.html`, setBody(setOg(setTitle(setLang(stub, 'pt'), title), block), inner));
+  sitemapPT.push([pth, today]);
+}
+
 /* ---------- 4. Páginas fixas: miniatura geral do site ---------- */
 const PERSON_LD = (l) => ({ '@context': 'https://schema.org', ...PERSON, jobTitle: T(W.job, l), image: `${SITE}/assets/img/retrato-cor.webp`, address: { '@type': 'PostalAddress', addressLocality: 'São Paulo', addressCountry: 'BR' },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Unesp' }, sameAs: ['https://www.linkedin.com/in/henrique-marinhos/', 'https://www.behance.net/henriquemarinhos', 'http://lattes.cnpq.br/8181966688647381'] });
@@ -214,9 +252,10 @@ const alt = (p) => LANGS.map((l) => `<xhtml:link rel="alternate" hreflang="${l =
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemap.flatMap(([p, d]) => LANGS.map((l) => `  <url><loc>${SITE}${PRE[l]}${p}</loc><lastmod>${d}</lastmod>${alt(p)}</url>`)).join('\n')}
+${sitemapPT.map(([p, d]) => `  <url><loc>${SITE}${p}</loc><lastmod>${d}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /scripts/\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
 await browser.close();
-console.log(`projetos: ${Object.keys(projImg).length} miniaturas · artigos: ${nArt} · sitemap: ${sitemap.length * LANGS.length} endereços (PT, EN, ES)`);
+console.log(`projetos: ${Object.keys(projImg).length} miniaturas · artigos: ${nArt} · sitemap: ${sitemap.length * LANGS.length + sitemapPT.length} endereços (PT, EN, ES) · coleções: ${sitemapPT.length}`);
