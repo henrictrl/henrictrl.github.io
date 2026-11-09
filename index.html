@@ -472,6 +472,23 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-title .dim { color: var(--gray-400); }
 @media (max-width: 767px) { html[lang="es"] .art-title { font-size: min(24px, calc((100vw - 2 * var(--gutter)) / 11.6)); } }
 .art-hero { padding-bottom: 0 !important; }
+/* coleção de artigos com endereço próprio (/artigos/cinema/, /artigos/mostra-sp/2026/ …) */
+.col-head { text-align: center; margin: 8px 0 40px; }
+.col-head[hidden], .art-hero[hidden], .art-filters[hidden], .art-modebar[hidden] { display: none !important; }
+.col-kicker { font-size: 13px; color: var(--gray-500); margin-bottom: 10px; }
+.col-kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+.col-kicker a:hover { color: var(--ink); }
+.col-title { font-size: clamp(34px, 9vw, 56px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+.col-title .dim { color: var(--gray-400); }
+.col-desc { font-size: 15px; color: var(--gray-500); margin: 12px auto 0; max-width: 34ch; text-wrap: balance; }
+.col-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 22px; }
+.col-bar a.art-filter { text-decoration: none; display: inline-block; }
+.col-bar a.art-filter[aria-current="page"] { color: var(--white, #fff); background: var(--ink); border-color: var(--ink); }
+.col-copy { display: inline-flex; align-items: center; gap: 6px; }
+.col-copy svg { width: 14px; height: 14px; }
+.col-others { margin-top: 10px; }
+.col-others .art-filter { font-size: 12px; }
+@media (min-width: 768px) { .col-head { margin-bottom: 56px; } }
 /* mesmo espaço entre título → filtros e filtros → artigos */
 .art-filters { --art-gap: 36px; display: flex; flex-direction: column; align-items: center; gap: 10px; margin: var(--art-gap) 0; }
 .art-row { display: flex; justify-content: center; gap: 6px; }
@@ -2605,7 +2622,8 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
 <script src="assets/data/clientes.js"></script>
 <script src="assets/data/servicos.js?v=20261023b"></script>
-<script src="assets/data/artigos.js?v=20261029-agente-instagram"></script>
+<script src="assets/data/artigos.js?v=20261109-mostra"></script>
+<script src="assets/data/colecoes.js?v=20261109"></script>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
 <script src="assets/js/capas.js?v=20261102b"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
@@ -2888,6 +2906,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (amOverlay.classList.contains('open')) closeArticle(true);
     if (dk.classList.contains('open')) closeDeck();
     const path = ROUTE_PATHS[route] || '/';
+    if (window.HM_COL) { window.HM_COL = null; if (route === 'articles' && window.HM_applyCol) setTimeout(window.HM_applyCol); } // sai da coleção
     if (HMI.path() !== path || location.hash) {
       (replace ? history.replaceState : history.pushState).call(history, { portfolioRoute: route }, '', path);
     }
@@ -3327,9 +3346,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // entrada em cascata dos cartões visíveis
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
-      grid.classList.toggle('is-ig', artMode === 'ig' || k === 'carrosseis');
-      grid.classList.toggle('is-mixed', artMode === 'fav');
-      if (artMode === 'fav') {
+      const COL = window.HM_COL;
+      grid.classList.toggle('is-ig', !COL && (artMode === 'ig' || k === 'carrosseis'));
+      grid.classList.toggle('is-mixed', !COL && artMode === 'fav');
+      if (artMode === 'fav' && !COL) {
         let items = FAV_SELECTION;
         if (k !== 'all') items = items.filter(entry => {
           if (entry.kind === 'text') return entry.item.tags.includes(k);
@@ -3354,22 +3374,22 @@ document.addEventListener('DOMContentLoaded', () => {
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
-      if (k === 'carrosseis') { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
+      if (k === 'carrosseis' && !COL) { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
         grid.innerHTML = CARR.map(x => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
           <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
           <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${esc(capTitle(x))}</h2></a>`).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
-      let lista = k === 'all' ? data : data.filter(a => a.tags.includes(k));
-      if (artMode === 'ig') lista = lista.filter(a => PBA[a.u]); // no modo Instagram, só os textos que têm post
-      const showTag = k === 'all'; // dentro de uma categoria a etiqueta é redundante
+      let lista = COL ? data.filter(a => window.colMatch(COL.c, a, COL.ano)) : k === 'all' ? data : data.filter(a => a.tags.includes(k));
+      if (artMode === 'ig' && !COL) lista = lista.filter(a => PBA[a.u]); // no modo Instagram, só os textos que têm post
+      const showTag = COL ? !COL.c.tag : k === 'all'; // dentro de uma categoria a etiqueta é redundante
       grid.innerHTML = lista.map(a => {
         const i = data.indexOf(a);
         const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
         const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
         const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
-        const pp = PBA[a.u], ig = artMode === 'ig' && pp;
+        const pp = PBA[a.u], ig = !COL && artMode === 'ig' && pp;
         const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
           : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
         return `<a class="art-card" href="${a.project ? cleanProjectUrl(a.project) : articleRoute(a)}" target="_self" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
@@ -3405,7 +3425,35 @@ document.addEventListener('DOMContentLoaded', () => {
       bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x === b));
       artFilter = b.dataset.k; draw(artFilter);
     });
-    draw(artFilter); setGrid(artGrid);
+    // coleção (/artigos/<slug>/): cabeçalho próprio no lugar do título e dos filtros
+    const colHead = document.createElement('div'); colHead.className = 'col-head'; colHead.hidden = true;
+    bar.parentNode.insertBefore(colHead, modeBar);
+    const hero = document.querySelector('#view-articles .art-hero'), baseTitle = document.title;
+    const LINK_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
+    const applyCol = () => {
+      const C = window.HM_COL, on = !!C;
+      colHead.hidden = !on; modeBar.hidden = on; bar.hidden = on; if (hero) hero.hidden = on;
+      if (on) {
+        const c = C.c, base = '/artigos/' + c.s + '/', n = data.filter(a => window.colMatch(c, a, C.ano)).length;
+        const anos = c.mostra ? [...new Set(data.filter(a => a.mostra).map(a => String(a.mostra)))].sort().reverse() : [];
+        const outras = (window.COLECOES || []).filter(x => x.s !== c.s);
+        colHead.innerHTML = `<p class="col-kicker"><a href="/artigos/">Artigos</a> · ${n} ${n === 1 ? 'texto' : 'textos'}</p>
+          <h1 class="col-title">${c.t}${C.ano ? ` <span class="dim">${C.ano}</span>` : ''}</h1>
+          <p class="col-desc">${c.d}</p>
+          ${anos.length ? `<div class="col-bar" role="navigation" aria-label="Edições"><a class="art-filter" href="${base}"${!C.ano ? ' aria-current="page"' : ''}>Todas</a>${anos.map(y => `<a class="art-filter" href="${base}${y}/"${C.ano === y ? ' aria-current="page"' : ''}>${y}</a>`).join('')}</div>` : ''}
+          <div class="col-bar"><button type="button" class="art-filter col-copy">${LINK_ICO}<span>Copiar link</span></button></div>
+          <div class="col-bar col-others" role="navigation" aria-label="Outras coleções">${outras.map(x => `<a class="art-filter" href="/artigos/${x.s}/">${x.t}</a>`).join('')}</div>`;
+        document.title = `${c.t}${C.ano ? ' ' + C.ano : ''} — Artigos de Henrique Marinhos`;
+        const btn = colHead.querySelector('.col-copy'), lbl = btn.querySelector('span');
+        btn.onclick = async () => {
+          const url = location.origin + base + (C.ano ? C.ano + '/' : '');
+          try { if (navigator.share && matchMedia('(pointer:coarse)').matches) { await navigator.share({ url }); return; } await navigator.clipboard.writeText(url); lbl.textContent = 'Link copiado'; setTimeout(() => { lbl.textContent = 'Copiar link'; }, 1800); } catch (e) {}
+        };
+      } else document.title = baseTitle;
+      draw(artFilter);
+    };
+    window.HM_applyCol = applyCol;
+    applyCol(); setGrid(artGrid);
     data.forEach((a, i) => { if (!a.coverFromText) return; prefetchArticle(a).then(() => { if (!a.textCover) return; const card = grid.querySelector(`.art-card[data-i="${i}"]`); const img = card && card.querySelector('.art-card-media img'); if (img) img.src = a.textCover; }); });
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
@@ -5140,8 +5188,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const routeFromLocation = () => {
     const path = HMI.path().replace(/\/$/, '') || '/';
     const baseRoute = routeByPath[path];
+    const colM = path.match(/^\/artigos\/([^/]+)(?:\/(\d{4}))?$/);
+    const col = colM && (window.COLECOES || []).find(c => c.s === colM[1]);
+    window.HM_COL = col ? { c: col, ano: colM[2] || '' } : null; // coleção de artigos com endereço próprio
+    if (col) { showRoute('articles', 'artigos'); window.HM_applyCol && window.HM_applyCol(); return; }
     if (baseRoute) {
       showRoute(baseRoute[0], baseRoute[1]);
+      if (baseRoute[0] === 'articles' && window.HM_applyCol) window.HM_applyCol();
       if (location.hash === '#contato') requestAnimationFrame(() => document.getElementById('contato')?.scrollIntoView());
       return;
     }
