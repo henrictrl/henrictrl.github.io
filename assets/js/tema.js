@@ -61,7 +61,7 @@
 
   var ICON =
     '<svg class="ts-sun" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path d="M11 1h2v4h-2zM11 19h2v4h-2zM1 11h4v2H1zM19 11h4v2h-4zM4 4h2v2H4zM18 4h2v2h-2zM4 18h2v2H4zM18 18h2v2h-2zM9 9h6v6H9z"/></svg>' +
-    '<svg class="ts-moon" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path d="M8 2h8v1h-8zM11 3h7v1h-7zM13 4h6v1h-6zM14 5h6v1h-6zM15 6h6v1h-6zM15 7h6v1h-6zM16 8h6v1h-6zM16 9h6v1h-6zM16 10h6v1h-6zM17 11h5v1h-5zM17 12h5v1h-5zM16 13h6v1h-6zM16 14h6v1h-6zM16 15h6v1h-6zM15 16h6v1h-6zM15 17h6v1h-6zM14 18h6v1h-6zM13 19h6v1h-6zM11 20h7v1h-7zM8 21h8v1h-8z"/></svg>';
+    '<svg class="ts-moon" viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true"><path transform="matrix(-1 0 0 1 24 0)" d="M8 2h8v1h-8zM11 3h7v1h-7zM13 4h6v1h-6zM14 5h6v1h-6zM15 6h6v1h-6zM15 7h6v1h-6zM16 8h6v1h-6zM16 9h6v1h-6zM16 10h6v1h-6zM17 11h5v1h-5zM17 12h5v1h-5zM16 13h6v1h-6zM16 14h6v1h-6zM16 15h6v1h-6zM15 16h6v1h-6zM15 17h6v1h-6zM14 18h6v1h-6zM13 19h6v1h-6zM11 20h7v1h-7zM8 21h8v1h-8z"/></svg>';
 
   var makeSwitch = function () {
     var b = document.createElement('button');
