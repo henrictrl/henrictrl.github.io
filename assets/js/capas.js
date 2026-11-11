@@ -75,7 +75,10 @@
     /* K · símbolo trocando de cor */
     '.ca-kbg{position:absolute;inset:0;background:#123358}',
     '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;translate:-50% -50%;background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
-    '@media (prefers-reduced-motion:reduce){.ca *{animation:none!important}}'
+    /* capas estáticas (pedido do Henrique, nov 2026): todo movimento desligado; só o hover com 2ª imagem continua */
+    '.ca,.ca *{animation:none!important}',
+    /* modelo S com anéis crescendo (Ocupação): parado, mostra um único elemento inteiro */
+    '.work-card-media .ca-S .ca-elw:nth-child(n+3){display:none}.work-card-media .ca-S .ca-el.zoom{opacity:1;transform:none}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
@@ -132,7 +135,7 @@
       var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = (33.333 - c.cy * H) / 0.66667;
       var tx = +(250 / W).toFixed(3), kn = 'ca-pan-' + Math.round(tx * 1000), tf = function (v) { return 'rotateX(52deg) rotateZ(-32deg) translateX(' + v + '%)'; };
       h = '<style>@keyframes ' + kn + '{from{transform:' + tf(-tx) + '}to{transform:' + tf(tx) + '}}</style>';
-      h += '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="animation-name:' + kn + ';transform:' + tf(-tx) + ';width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
+      h += '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="animation-name:' + kn + ';transform:' + tf(0) + ';width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
     return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
