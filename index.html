@@ -491,6 +491,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .art-filters { --art-gap: 36px; display: flex; flex-direction: column; align-items: center; gap: 10px; margin: var(--art-gap) 0; }
 .art-row { display: flex; justify-content: center; gap: 6px; }
 @media (min-width: 768px) { .art-filters { flex-direction: row; justify-content: center; gap: 6px; } .art-row { display: contents; } } /* desktop: tudo numa linha */
+@media (min-width: 768px) { .art-filters { flex-direction: column; align-items: center; gap: 8px; } .art-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; } } /* três linhas */
 .art-filter-icon { display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; }
 .art-filter-icon svg { display: block; }
 .art-filter-icon[aria-pressed="true"] svg { fill: currentColor; }
@@ -2340,7 +2341,7 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henrique Marinhos">
 <meta property="og:title" content="Henrique Marinhos — Designer e relações-públicas">
-<meta property="og:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta property="og:description" content="Designer e relações-públicas. Estratégias de comunicação críticas e funcionais.">
 <meta property="og:url" content="https://henrictrl.github.io/">
 <meta property="og:image" content="https://henrictrl.github.io/assets/img/og.jpg">
 <meta property="og:image:secure_url" content="https://henrictrl.github.io/assets/img/og.jpg">
@@ -2352,7 +2353,7 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
 <meta property="og:locale:alternate" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Henrique Marinhos — Designer e relações-públicas">
-<meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta name="twitter:description" content="Designer e relações-públicas. Estratégias de comunicação críticas e funcionais.">
 <meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
 <!-- /compartilhamento -->
 </head>
@@ -2443,8 +2444,8 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
         </div>
         <div class="reveal section-body">
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
-          <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
-          <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
+          <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Desenvolvo identidades visuais, <em>landing pages</em> e peças gráficas para marcas. Também sou redator cultural em portais jornalísticos independentes.</p>
+          <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Desenvolvo identidades visuais, <em>landing pages</em> e peças gráficas para marcas. Também sou redator cultural em portais jornalísticos independentes.</p>
           <a href="/sobre/" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
         </div>
       </div>
@@ -2628,7 +2629,6 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
       <a href="mailto:henriquemarinhos@icloud.com" class="footer-social">E-mail</a>
       <a href="https://www.linkedin.com/in/henrique-marinhos/" class="footer-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://www.behance.net/henriquemarinhos" class="footer-social" target="_blank" rel="noopener noreferrer">Behance</a>
-      <a href="https://substack.com/@henrictrl" class="footer-social" target="_blank" rel="noopener noreferrer">Substack</a>
       <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
     </nav>
   </div>
@@ -2841,7 +2841,7 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
       'work.label': 'Projects', 'work.all': 'See more', 'work.seeall': 'See all', 'work.cases': 'Case studies', 'work.explorations': 'Explorations',
       'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
       'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
-      'f.all': 'All', 'f.fav': 'Favorites', 'am.fav': 'Highlights', 'f.cabine': 'Screenings',
+      'f.all': 'All', 'f.fav': 'Favorites', 'am.fav': 'Highlights', 'f.cabine': 'Screenings', 'f.carrosseis': 'Carousels', 'f.premiacoes': 'Awards',
       'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
       'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
       'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
@@ -2875,7 +2875,7 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
       'work.label': 'Proyectos', 'work.all': 'Ver más', 'work.seeall': 'Ver todos', 'work.cases': 'Casos de estudio', 'work.explorations': 'Exploraciones',
       'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
       'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
-      'f.all': 'Todos', 'f.fav': 'Favoritos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa',
+      'f.all': 'Todos', 'f.fav': 'Favoritos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa', 'f.carrosseis': 'Carruseles', 'f.premiacoes': 'Premios',
       'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
       'art.various': 'Varios autores', 'art.with': 'Con', 'art.and': ' y ',
       'am.open': 'Abrir en el sitio', 'am.book': 'Abrir libro', 'am.link.Repositório Unesp': 'Repositorio Unesp',
@@ -3503,17 +3503,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const MINI_STAR = '<svg class="art-star" viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
     const STAR = '<svg class="art-star" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
     const PVFAV = '<svg class="pv-fav" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const LINHAS = [[['all', i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
-                    [['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]];
-    // modo de leitura: Texto (crítica) ou Instagram (posts ligados ao texto); lembrado entre visitas
+    // modo de leitura (Texto ou Instagram) são botões da linha de cima; lembrado entre visitas
     let artMode = 'texto'; try { const _m = localStorage.getItem('hm-artmode-v3'); if (_m === 'ig' || _m === 'texto') artMode = _m; } catch (e) {} // previa: abre em Texto
     const IG_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
     const TXT_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/></svg>';
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
-    const modeBar = document.createElement('div'); modeBar.className = 'art-modebar reveal';
-    const FAV_ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto' && artFilter !== 'fav'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig' && artFilter !== 'fav'}">${IG_ICO}Instagram</button></div>`; }; // destaques no mesmo grupo de Texto e Instagram
-    drawMode(); bar.parentNode.insertBefore(modeBar, bar);
+    // linha 1: Todos · Destaques · Texto · Instagram | linha 2: Cabines · Mostra SP · Carrosséis · Premiações | linha 3: Cinema · Música · Televisão · Literatura
+    const LINHAS = () => [
+      [['all', i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')], ['m:texto', TXT_ICO + i18n('am.text', 'Texto')], ['m:ig', IG_ICO + 'Instagram']],
+      [['cabines', i18n('f.cabine', 'Cabines')], ['mostra', 'Mostra SP'], ['carrosseis', i18n('f.carrosseis', 'Carrosséis')], ['premiacoes', i18n('f.premiacoes', 'Premiações')]],
+      [['Cinema', tagName('Cinema')], ['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]
+    ];
+    const rowsHtml = (keep) => LINHAS().map((l, li) => '<div class="art-row">' + l.map(([k, html]) => {
+      const on = k.startsWith('m:') ? (artFilter !== 'fav' && k === 'm:' + artMode) : k === keep;
+      return `<button class="art-filter" data-k="${k}" aria-pressed="${on}">${html}</button>`;
+    }).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
+    // categorias com lista própria (assets/data/colecoes.js → CATEGORIAS); membros = textos (u) e posts (p)
+    const CATS = window.CATEGORIAS || {};
+    const catEntries = (k) => {
+      const s = CATS[k] || {};
+      const arts = (s.u || []).map(u => data.find(x => x.u === u)).filter(Boolean).map(x => ({ kind: 'text', item: x, d: x.d }));
+      const posts = Object.entries(s.p || {}).map(([c, t]) => { const x = (window.POSTS || []).find(z => z.c === c); return x ? { kind: 'post', item: x, title: t, d: x.d } : null; }).filter(Boolean);
+      return [...arts, ...posts].sort((p, q) => String(q.d).localeCompare(String(p.d)));
+    };
+    const postCard = (x, title) => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
+      <div class="art-card-media" style="aspect-ratio:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
+      <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${title}</h2></a>`;
+    const artCard = (a, { showTag, ig }) => {
+      const i = data.indexOf(a), pp = PBA[a.u], useIg = ig && pp;
+      const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
+      const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
+      const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
+      const media = useIg ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
+        : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
+      return `<a class="art-card" href="${a.project ? cleanProjectUrl(a.project) : articleRoute(a)}" target="_self" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${useIg ? ' data-igart="1"' : ''}>
+        <div class="art-card-media"${useIg ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
+        <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !useIg ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
+        <h2 class="art-card-title">${artTitle(a)}</h2>
+        <p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p>
+      </a>`;
+    };
     const PBA = (window.HM_POSTS || {}).POSTS_BY_ART || {};
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
     const CARR = ((window.HM_POSTS || {}).POSTS || []).filter(x => x.lot === 'L1');
@@ -3538,13 +3567,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ].map(([kind, id]) => ({ kind, item: kind === 'post' ? CARR.find(x => x.c === id) : data.find(a => a.u === id) }))
       .filter(entry => entry.item)
       .sort((a, b) => b.item.d.localeCompare(a.item.d));
-    bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
-      `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === artFilter}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
+    bar.innerHTML = rowsHtml(artFilter);
     // entrada em cascata dos cartões visíveis
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
-      const COL = window.HM_COL;
-      grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || k === 'carrosseis'));
+      const COL = window.HM_COL, isCat = !COL && !!CATS[k];
+      grid.classList.toggle('is-ig', !COL && artMode === 'ig' && k !== 'fav');
       grid.classList.toggle('is-mixed', !COL && k === 'fav');
       if (k === 'fav' && !COL) {
         let items = FAV_SELECTION;
@@ -3571,31 +3599,17 @@ document.addEventListener('DOMContentLoaded', () => {
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
-      if (k === 'carrosseis' && !COL) { // lista de posts e carrosséis (abre o post; "Ler o texto" quando houver)
-        grid.innerHTML = CARR.map(x => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
-          <div class="art-card-media" style="--ar:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
-          <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${esc(capTitle(x))}</h2></a>`).join('');
+      if (isCat) { // Cabines, Mostra SP, Carrosséis, Premiações: só os itens da categoria, sem acumular
+        const ents = catEntries(k);
+        grid.classList.toggle('is-mixed', ents.some(e => e.kind === 'post'));
+        grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, e.title) : artCard(e.item, { showTag: false, ig: artMode === 'ig' })).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
-      let lista = COL ? data.filter(a => window.colMatch(COL.c, a, COL.ano)) : k === 'all' ? data : data.filter(a => a.tags.includes(k));
-      if (artMode === 'ig' && !COL) lista = lista.filter(a => PBA[a.u]); // no modo Instagram, só os textos que têm post
+      // Todos e Cinema · Música · Televisão · Literatura: todos os textos da etiqueta (o modo Instagram só troca a miniatura)
+      const lista = COL ? data.filter(a => window.colMatch(COL.c, a, COL.ano)) : k === 'all' ? data : data.filter(a => a.tags.includes(k));
       const showTag = COL ? !COL.c.tag : k === 'all'; // dentro de uma categoria a etiqueta é redundante
-      grid.innerHTML = lista.map(a => {
-        const i = data.indexOf(a);
-        const co = a.a.replace(/^Henrique Marinhos( e )?/, '');
-        const por = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : co ? i18n('art.with', 'Com') + ' ' + co.replace(' e ', i18n('art.and', ' e ')) : '';
-        const badge = (LANG !== 'pt' && a['badge_' + LANG]) || a.badge;
-        const pp = PBA[a.u], ig = !COL && artMode === 'ig' && pp;
-        const media = ig ? `${pp[0].n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${pp[0].n}</span>` : ''}<img src="${postSrc(pp[0], 0)}" alt="" loading="lazy" decoding="async">`
-          : `${a.badge ? `<span class="art-badge">${badge}</span>` : ''}<img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit || a.pos ? ` style="${a.fit ? 'object-fit:' + a.fit + ';' : ''}${a.pos ? 'object-position:' + a.pos : ''}"` : ''}>`;
-        return `<a class="art-card" href="${a.project ? cleanProjectUrl(a.project) : articleRoute(a)}" target="_self" rel="noopener" data-i="${i}"${a.cropTop ? ' data-crop-top="true"' : ''}${ig ? ' data-igart="1"' : ''}>
-          <div class="art-card-media"${ig ? ` style="--ar:${(1 / pp[0].r).toFixed(4)}"` : a.bg ? ` style="background:${a.bg}"` : ''}>${media}</div>
-          <p class="art-card-meta">${showTag ? (a.pin ? MINI_STAR : '') + a.tags.map(tagName).join(' · ') + ' — ' : ''}${fmtData(a.d)}${pp && !ig ? `<span class="art-ig-flag" title="Instagram">${IG_ICO}</span>` : ''}</p>
-          <h2 class="art-card-title">${artTitle(a)}</h2>
-          <p class="art-card-by">${a.site}${por ? ' · ' + por : ''}</p>
-        </a>`;
-      }).join('');
+      grid.innerHTML = lista.map(a => artCard(a, { showTag, ig: !COL && artMode === 'ig' })).join('');
       [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
     };
     const pre = (e) => { const c = e.target.closest && e.target.closest('.art-card'); if (c && !data[+c.dataset.i]?.project) prefetchArticle(data[+c.dataset.i]); };
@@ -3613,23 +3627,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (item.project) { window.location.assign(cleanProjectUrl(item.project)); return; }
       openArticle(item);
     });
-    modeBar.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; artMode = b.dataset.m; try { localStorage.setItem('hm-artmode-v3', artMode); } catch (er) {} drawMode();
-      if (artFilter === 'carrosseis' || artFilter === 'fav') { artFilter = 'all'; drawMode(); bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x.dataset.k === 'all')); }
-      draw(artFilter); });
     bar.addEventListener('click', (e) => {
       if (e.target.closest('.art-view')) { setGrid(!artGrid); return; }
       const b = e.target.closest('.art-filter'); if (!b) return;
-      bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x === b));
-      const _p = artFilter; artFilter = b.dataset.k; if (artFilter === 'fav' || _p === 'fav') drawMode(); draw(artFilter);
+      const k = b.dataset.k;
+      if (k.startsWith('m:')) { artMode = k.slice(2); try { localStorage.setItem('hm-artmode-v3', artMode); } catch (er) {} if (artFilter === 'fav') artFilter = 'all'; }
+      else artFilter = k;
+      bar.innerHTML = rowsHtml(artFilter); draw(artFilter);
     });
     // coleção (/artigos/<slug>/): cabeçalho próprio no lugar do título e dos filtros
     const colHead = document.createElement('div'); colHead.className = 'col-head'; colHead.hidden = true;
-    bar.parentNode.insertBefore(colHead, modeBar);
+    bar.parentNode.insertBefore(colHead, bar);
     const hero = document.querySelector('#view-articles .art-hero'), baseTitle = document.title;
     const LINK_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
     const applyCol = () => {
       const C = window.HM_COL, on = !!C;
-      colHead.hidden = !on; modeBar.hidden = on; bar.hidden = on; if (hero) hero.hidden = on;
+      colHead.hidden = !on; bar.hidden = on; if (hero) hero.hidden = on;
       if (on) {
         const c = C.c, base = '/artigos/' + c.s + '/', n = data.filter(a => window.colMatch(c, a, C.ano)).length;
         const anos = c.mostra ? [...new Set(data.filter(a => a.mostra).map(a => String(a.mostra)))].sort().reverse() : [];
@@ -3654,12 +3667,7 @@ document.addEventListener('DOMContentLoaded', () => {
     data.forEach((a, i) => { if (!a.coverFromText) return; prefetchArticle(a).then(() => { if (!a.textCover) return; const card = grid.querySelector(`.art-card[data-i="${i}"]`); const img = card && card.querySelector('.art-card-media img'); if (img) img.src = a.textCover; }); });
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
-      const keep = artFilter; const rows = bar.innerHTML = '';
-      LINHAS[0][0][1] = i18n('f.all', 'Todos'); LINHAS[0][1][1] = PVFAV + i18n('am.fav', 'Destaques'); LINHAS[0][2][1] = i18n('f.cabine', 'Cabines'); LINHAS[0][3][1] = tagName('Cinema');
-      LINHAS[1][0][1] = tagName('Música'); LINHAS[1][1][1] = tagName('Televisão'); LINHAS[1][2][1] = tagName('Literatura'); drawMode();
-      bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
-        `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === keep}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
-      draw(keep);
+      const keep = artFilter; bar.innerHTML = rowsHtml(keep); draw(keep);
     });
   };
 
@@ -4530,7 +4538,6 @@ document.addEventListener('DOMContentLoaded', () => {
     "notion":{pt:"Notion",en:"Notion",es:"Notion"},
     "trello":{pt:"Trello",en:"Trello",es:"Trello"},
     "gmail":{pt:"Gmail",en:"Gmail",es:"Gmail"},
-    "substack":{pt:"Substack",en:"Substack",es:"Substack"},
     "microsoft-office":{pt:"Microsoft Office",en:"Microsoft Office",es:"Microsoft Office"},
     "premiere":{pt:"Premiere",en:"Premiere",es:"Premiere"},
     "monday":{pt:"Monday",en:"Monday",es:"Monday"},
@@ -5428,7 +5435,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     measure();
     const B = [];
-    const areaLivre = W * H - obst.reduce((a, o) => a + o.w * o.h, 0), cabem = Math.max(6, Math.floor(areaLivre / ((S + GAP) * (S + GAP) * 2.2)));
+    const areaLivre = W * H - obst.reduce((a, o) => a + o.w * o.h, 0), cabem = matchMedia('(max-width: 767px)').matches ? els.length : Math.max(6, Math.floor(areaLivre / ((S + GAP) * (S + GAP) * 2.2)));
     els.forEach((el, i) => { if (i >= cabem) el.style.display = 'none'; });
     const ativos = els.slice(0, cabem);
     ativos.forEach((el, i) => { const a = i * 2.39996, rr = (S + GAP) * (matchMedia('(max-width: 767px)').matches ? 0.5 : 0.62) * Math.sqrt(i + 1); // espiral de Fermat em volta do centro

@@ -5,7 +5,7 @@
   var LINKS = [
     ['WhatsApp', 'https://wa.me/5514991394590'], ['E-mail', 'mailto:henriquemarinhos@icloud.com'],
     ['LinkedIn', 'https://www.linkedin.com/in/henrique-marinhos/'],
-    ['Behance', 'https://www.behance.net/henriquemarinhos'], ['Substack', 'https://substack.com/@henrictrl'],
+    ['Behance', 'https://www.behance.net/henriquemarinhos'],
     ['Lattes', 'http://lattes.cnpq.br/8181966688647381']
   ];
   var T = { btn: { pt: 'Contato', en: 'Contact', es: 'Contacto' }, h: { pt: 'Vamos trabalhar juntos?', en: "Let's work together?", es: '¿Trabajamos juntos?' }, close: { pt: 'Fechar', en: 'Close', es: 'Cerrar' } };
