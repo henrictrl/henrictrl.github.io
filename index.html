@@ -4714,7 +4714,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ['DPCkHYgkbDE', { pt: 'E o prêmio de Melhor Roteiro Original (não) vai para 2025', en: 'And the Best Original Screenplay award (doesn’t) go to 2025', es: 'Y el premio al Mejor Guion Original (no) es para 2025' }],
     ['Dd6mzTmFpUe', { pt: 'Tinashe reivindica o título que sempre foi dela em “Popstar”', en: 'Tinashe claims the title that was always hers in “Popstar”', es: 'Tinashe reivindica el título que siempre fue suyo en “Popstar”' }]
   ].map(([c, t]) => ({ x: (window.POSTS || []).find(p => p.c === c), t })).filter(d => d.x);
-  const HOME_TICK = HOME_ARTS_ALL.filter(x => !HOME_ARTS.includes(x) && !x.pin).slice(0, 24);
+  // fora da faixa: listas/coleções e títulos que não são só o nome de uma obra
+  const TICK_FORA = ['Os Curtas do Oscar 2026', 'Os Melhores Filmes de 2025', 'Os Melhores Discos de 2025', 'As Melhores Séries de 2025', 'Todo Mundo (Ainda) Tem Problemas Sexuais (e amorosos)', 'Representatividade LGBTQIA+', 'Os Melhores Filmes de 2023', 'As Melhores Séries de 2023', 'Os Melhores Discos de 2023', 'Os Curtas do Oscar 2023', 'Os Melhores Discos de 2022', 'As Melhores Séries de 2022', 'Os Melhores Filmes de 2022', 'As Melhores Séries de 2021'];
+  const HOME_TICK = HOME_ARTS_ALL.filter(x => !HOME_ARTS.includes(x) && !x.pin && !TICK_FORA.includes(x.t)).slice(0, 24);
   const homeCounts = () => ({ pj: PJ.filter(p => !HOME_EXCLUDED.includes(p.slug)).length, art: HOME_ARTS_ALL.length, post: (window.POSTS || []).length });
   let homeCounted = false;
 
