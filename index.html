@@ -2172,8 +2172,156 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 <meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
 <meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
 <!-- /compartilhamento -->
+<style id="previa-css">
+/* ===== PREVIA · rodada 3 ===== */
+/* cinzas com contraste AA: 600 = texto secundario (4,54:1) · 700 = rotulos de secao (7:1). --gray-400 fica so para tracos e bordas */
+:root { --gray-600: #767676; --gray-700: #595959; }
+html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
+.hero-headline .dim, .work-page-title .dim, .art-title .dim, .col-title .dim { color: var(--gray-600); }
+.section-label { color: var(--gray-700); line-height: 1.3; }
+.brand-location, .section-link, .home-work-more .section-link, .art-card-meta, .art-card-by, .portrait-hint { color: var(--gray-600); }
+.home-work-more .section-link { font-size: 13px; }
+.main-nav a, .top-header .main-nav a { color: var(--gray-600); }
+.main-nav a.current, .main-nav a:hover, .top-header .main-nav a.current { color: var(--ink); }
+
+/* rodape */
+.footer-social { color: var(--ink); }
+.footer-social:hover { color: var(--gray-600); }
+.credit-bar { color: var(--gray-700); }
+@media (min-width: 768px) { .tools-float { bottom: 56px; } } /* nuvem de ferramentas sem corte pela faixa de credito */
+.marquee-logo img { opacity: calc(1 - 0.25 * var(--g, 1)); }
+
+/* Projetos: vitrine fixa na home; sem "Veja os numeros" (metricas ficam em cada conteudo) */
+.home-pagination:has(> .home-page-dash:only-child) { display: none; }
+.work-dashboard-cta { display: none; }
+
+/* Sobre mim: numeros na coluna do rotulo */
+.home-aside { display: flex; flex-direction: column; gap: 22px; align-self: flex-start; }
+.home-stats { list-style: none; display: flex; gap: 28px; }
+.home-stats a { display: flex; flex-direction: column; gap: 4px; }
+.home-stats b { font-size: clamp(28px, 3vw, 40px); font-weight: 300; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.home-stats span { font-size: 12px; color: var(--gray-600); transition: color 0.25s var(--ease); }
+.home-stats a:hover span { color: var(--ink); }
+@media (max-width: 767px) { .home-aside { gap: 14px; margin-bottom: 4px; } }
+
+/* Artigos na home: 3 cards iguais aos da pagina Artigos; no celular 1 + 2 */
+.home-art-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 10px; margin-top: 24px; }
+.home-art-grid .art-card:first-child { grid-column: 1 / -1; }
+@media (max-width: 767px) { .home-art-grid .art-card:not(:first-child) .art-card-title { font-size: 13px; line-height: 1.3; } }
+@media (min-width: 768px) { .home-art-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; margin-top: 32px; } .home-art-grid .art-card:first-child { grid-column: auto; } }
+
+/* faixa de titulos: duas linhas em sentidos opostos; pausa com mouse ou foco */
+.home-ticker { margin: 36px calc(-1 * var(--gutter)) 0; overflow: hidden; display: flex; flex-direction: column; gap: 2px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.home-ticker:empty { display: none; }
+.tk-track { display: flex; width: max-content; animation: tk var(--tk, 80s) linear infinite; }
+.tk-row:nth-child(2) .tk-track { animation-direction: reverse; }
+.home-ticker:hover .tk-track, .home-ticker:focus-within .tk-track { animation-play-state: paused; }
+.tk-set { display: flex; align-items: center; flex: none; }
+.tk-set a { font-size: clamp(15px, 1.5vw, 19px); font-weight: 400; letter-spacing: -0.01em; line-height: 1.9; white-space: nowrap; color: var(--gray-600); transition: color 0.25s var(--ease); }
+.tk-set a:hover, .tk-set a:focus-visible { color: var(--ink); }
+.tk-set i { flex: none; width: 4px; height: 4px; margin: 0 clamp(12px, 1.6vw, 22px); border-radius: 50%; background: var(--gray-200); }
+@keyframes tk { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .tk-row { overflow-x: auto; } .tk-set[aria-hidden] { display: none; } }
+
+/* Destaques: 4 posts em linha; no celular 2 + 2 */
+.home-dest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 10px; margin-top: 24px; }
+@media (min-width: 768px) { .home-dest-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; } }
+.dest-card .art-card-media { position: relative; }
+.dest-n { position: absolute; top: 8px; right: 8px; z-index: 2; padding: 3px 8px; border-radius: 999px; background: rgba(17,17,17,0.72); color: #fff; font-size: 11px; font-variant-numeric: tabular-nums; }
+
+/* Sobre: foto em preto e branco; com mouse, foco ou toque, so a pessoa ganha cor */
+.about-photo { position: relative; margin: 0; border-radius: var(--r); overflow: hidden; background: var(--gray-100); cursor: pointer; aspect-ratio: 1800 / 1012; }
+.about-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-photo .ap-bw { filter: grayscale(1) contrast(1.05); }
+.about-photo .ap-cor { opacity: 0; transition: opacity 0.5s var(--ease); }
+.about-photo:hover .ap-cor, .about-photo:focus-visible .ap-cor, .about-photo.on .ap-cor { opacity: 1; }
+.about-photo:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 767px) { .about-photo { aspect-ratio: 4 / 3; } .about-photo img { object-position: 52% 50%; } }
+#view-about .cv-actions { padding-top: 0; }
+
+/* Certificados: mosaico */
+.resource-gallery.is-mosaic { display: block; columns: 3 220px; column-gap: 10px; }
+.cert-item { position: relative; display: block; width: 100%; margin: 0 0 10px; padding: 0; border: 1px solid var(--gray-200); border-radius: var(--r); overflow: hidden; background: var(--gray-100); cursor: zoom-in; break-inside: avoid; font: inherit; text-align: left; animation: cert-in 0.4s var(--ease) both; animation-delay: calc(var(--i) * 30ms); }
+.cert-item img { display: block; width: 100%; height: auto; transition: transform 0.5s var(--ease); }
+.cert-item:hover img, .cert-item:focus-visible img { transform: scale(1.03); }
+.cert-item span { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 9px; background: linear-gradient(transparent, rgba(0,0,0,0.78)); color: #fff; font-size: 11px; line-height: 1.35; opacity: 0; transition: opacity 0.25s var(--ease); }
+.cert-item span b { display: block; font-size: 12px; font-weight: 500; }
+.cert-item:hover span, .cert-item:focus-visible span { opacity: 1; }
+@media (hover: none) { .cert-item span { opacity: 1; } }
+.cert-zoom { position: fixed; inset: 0; z-index: 10; display: grid; grid-template-rows: 1fr auto; place-items: center; gap: 10px; padding: 24px; background: rgba(0,0,0,0.92); cursor: zoom-out; }
+.cert-zoom[hidden] { display: none; }
+.cert-zoom img { max-width: 100%; max-height: calc(100vh - 90px); max-height: calc(100dvh - 90px); object-fit: contain; border-radius: 4px; }
+.cert-zoom p { color: #fff; font-size: 13px; text-align: center; }
+@keyframes cert-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* rolagem: nada espera para aparecer */
+.reveal, .reveal-stagger > * { transition-duration: 0.35s, 0.35s; transform: translateY(10px); }
+.reveal.in-view, .reveal-stagger.in-view > * { transform: none; }
+.reveal-stagger > *:nth-child(n) { --d: 0s; }
+.art-card { opacity: 1; transform: none; transition: none; }
+.work-card.mx-fade, .work-card.mx-fade.mx-wait { opacity: 1 !important; transition: none !important; }
+
+/* ----- movimento ----- */
+/* cards: a capa sobe e ganha sombra; seta entra ao lado do titulo */
+.work-card-media, .art-card-media { transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease); }
+.work-card:hover .work-card-media, .work-card:focus-visible .work-card-media, .art-card:hover .art-card-media, .art-card:focus-visible .art-card-media { transform: translateY(-5px); box-shadow: 0 22px 40px -18px rgba(0,0,0,0.32), 0 2px 6px rgba(0,0,0,0.06); }
+.work-card-title::after, .art-card-title::after { content: "\2192"; display: inline-block; margin-left: 6px; opacity: 0; transform: translateX(-8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+.work-card:hover .work-card-title::after, .work-card:focus-visible .work-card-title::after, .art-card:hover .art-card-title::after, .art-card:focus-visible .art-card-title::after { opacity: 1; transform: none; }
+/* etiqueta da previa (nao vai para o site) */
+.previa-tag { position: fixed; left: 10px; bottom: 10px; z-index: 9999; padding: 5px 9px; border-radius: 999px; background: #111; color: #fff; font: 500 11px/1 Inter, sans-serif; letter-spacing: 0.03em; pointer-events: none; opacity: 0.85; }
+
+/* rodada 4: tudo carregado, sem entrada ao rolar */
+.reveal, .reveal-stagger, .reveal-stagger > *, .art-card, .work-card, .work-card.mx-fade, .work-card.mx-fade.mx-wait { opacity: 1 !important; transform: none !important; transition-delay: 0s !important; }
+.reveal, .reveal-stagger > * { transition: none !important; }
+.mx-rise { animation: none !important; }
+/* faixa de titulos nunca pausa (nem com o mouse em cima) */
+.home-ticker:hover .tk-track, .home-ticker:focus-within .tk-track { animation-play-state: running; }
+.tk-set a u.obra { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+/* destaques: 3 posts */
+.home-dest-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
+@media (min-width: 768px) { .home-dest-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+
+/* rodada 4b: cards de Destaques com a mesma altura; faixa de titulos entre Destaques e Artigos; Sobre mim centralizado no celular */
+.dest-card .art-card-media { aspect-ratio: 4 / 5 !important; overflow: hidden; }
+.dest-card .art-card-media img { width: 100%; height: 100%; object-fit: cover; }
+.home-ticker { margin: 8px 0 24px; }
+@media (max-width: 767px) {
+  /* bloco centralizado na tela, texto alinhado a esquerda */
+  section:has(.home-aside) .home-aside, section:has(.home-aside) .section-body { width: min(100%, 20rem); margin-inline: auto; text-align: left; }
+  section:has(.home-aside) .home-aside { display: flex; flex-direction: column; align-items: flex-start; }
+  section:has(.home-aside) .home-stats { justify-content: flex-start; }
+}
+
+/* respiro entre Sobre mim e Projetos */
+section:has(.home-aside) { margin-bottom: clamp(88px, 11vw, 160px); }
+
+/* rodada 4c: mais respiro nas faixas rolantes e, no celular, entre Sobre mim e Projetos */
+.marquee-section { margin-top: 48px !important; margin-bottom: 48px !important; }
+.home-ticker { margin: 40px 0 56px; }
+@media (max-width: 767px) {
+  section:has(.home-aside) { margin-bottom: 128px; }
+  .marquee-section { margin-top: 40px !important; margin-bottom: 40px !important; }
+  .home-ticker { margin: 32px 0 48px; }
+}
+
+/* rodada 4d */
+.art-filter svg.pv-fav { width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; flex: none; }
+.art-filter[aria-pressed="true"] svg.pv-fav { fill: currentColor; }
+/* Sollaris: sem troca de imagem ao passar o mouse */
+.work-card:hover .work-card-media .ca-S .ca-hv, .work-card:focus-visible .work-card-media .ca-S .ca-hv { opacity: 0 !important; transform: scale(1.04) !important; }
+/* sobre: Idiomas alinhado aos demais blocos */
+@media (max-width: 767px) { #view-about .section-grid:has(.lang-item) { margin-left: 0 !important; } }
+@media (max-width: 767px) {
+  /* categorias de Projetos: 3 + 3, mesma largura */
+  .pj-filter-main { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 8px; width: calc(100% - 14px); align-self: center; }
+  .pj-filter-main .art-filter { width: 100%; min-height: 42px; padding: 6px; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.2; font-size: 12.5px; }
+  /* icones flutuantes do contato um pouco maiores */
+  .tool-ic { width: 38px !important; height: 38px !important; }
+}
+</style>
 </head>
 <body class="home-route">
+<div class="previa-tag" aria-hidden="true">Prévia · rodada 3</div>
 <!-- tela de carregamento (motion.js anima e remove) -->
 <div id="mx-loader" aria-hidden="true"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
 
@@ -2250,7 +2398,14 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
     <section class="section-block">
       <div class="section-grid">
-        <p class="section-label" data-i18n="about.label">Sobre mim</p>
+        <div class="home-aside">
+          <h2 class="section-label" data-i18n="about.label">Sobre mim</h2>
+          <ul class="home-stats" id="home-stats">
+            <li><a href="/projetos/" data-route="work" data-nav-id="trabalhos"><b data-count="pj">0</b><span data-i18n="nav.work">Projetos</span></a></li>
+            <li><a href="/artigos/" data-route="articles" data-nav-id="artigos"><b data-count="art">0</b><span data-i18n="nav.articles">Artigos</span></a></li>
+            <li><a href="/projetos/" data-route="work" data-nav-id="trabalhos"><b data-count="post">0</b><span>Posts</span></a></li>
+          </ul>
+        </div>
         <div class="reveal section-body">
           <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
           <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Atuo de forma crítica em construção de narrativas e sou redator cultural em portais jornalísticos. Também desenvolvo <em>landing</em> <em>pages</em> e peças gráficas alinhadas à sua marca.</p>
@@ -2263,6 +2418,22 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </div>
     <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
     <script>if (HMI.initial() === 'pt' && 'IntersectionObserver' in window) { var fsIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); fsIO.unobserve(e.target); } }); }, { threshold: 0.15 }); document.querySelectorAll('.first-screen .reveal').forEach(function (e) { fsIO.observe(e); }); }</script> <!-- só o que está na tela; o resto entra ao rolar -->
+
+    <section class="section-block" id="trabalhos">
+      <div class="max-w">
+        <div class="work-intro reveal">
+          <h2 class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</h2>
+        </div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link"><span data-i18n="work.seeall">Ver todos</span> (<span id="home-work-count"></span>)</a></div>
+        </div>
+      </div>
+    </section>
+
     <!-- logos de clientes: logo após Sobre mim -->
     <section class="marquee-section">
       <div class="marquee-mask">
@@ -2278,7 +2449,6 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
           <li class="marquee-logo" style="--h:46px;--z:1.7"><a class="marquee-link" href="/projetos/encantos-do-brasil/" draggable="false"><img src="assets/logos/encantos-do-brasil.svg" alt="Encantos do Brasil" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Encantos do Brasil</span></a></li>
           <li class="marquee-logo" style="--h:56px;--z:1.5"><a class="marquee-link" href="/projetos/congresso-extensao/" draggable="false"><img src="assets/logos/congresso-extensao.webp" alt="Congresso de Extensão Universitária" width="347" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Congresso de Extensão Universitária</span></a></li>
           <li class="marquee-logo" style="--h:30px;--z:1.2"><a class="marquee-link" href="/projetos/equity360/" draggable="false"><img src="assets/logos/equity360.webp" alt="Equity 360" width="640" height="151" decoding="async"><span class="marquee-name" aria-hidden="true">Equity 360</span></a></li>
-          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/nova-rio-branco/" draggable="false"><img src="assets/logos/nova-rio-branco.webp" alt="Nova Rio Branco — multi soluções para sua empresa" width="523" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nova Rio Branco</span></a></li>
           <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/prisma-brandbook/" draggable="false"><img src="assets/logos/prisma.webp" alt="Prisma Consultoria" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Prisma Consultoria</span></a></li>
           <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/projetos/csunesp/" draggable="false"><img src="assets/logos/csunesp.webp" alt="CSUNESP — Coordenadoria de Saúde da Unesp" width="488" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">CSUNESP — Coordenadoria de Saúde da Unesp</span></a></li>
           <li class="marquee-logo" style="--h:32px;--z:1.4"><a class="marquee-link" href="/projetos/nupe/" draggable="false"><img src="assets/logos/nupe.webp" alt="Nupe — Núcleo Negro da Unesp" width="550" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nupe — Núcleo Negro da Unesp</span></a></li>
@@ -2291,54 +2461,23 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
         </div>
       </div>
     </section>
-
-    <section class="section-block" id="trabalhos">
+    <!-- previa: Destaques (posts escolhidos) entre Projetos e Artigos -->
+    <section class="section-block" id="home-destaques">
       <div class="max-w">
-        <div class="work-intro reveal">
-          <p class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</p>
-        </div>
-        <div class="home-projects-viewport">
-          <div class="work-grid home-featured-grid" id="work-grid"></div>
-        </div>
-        <div class="home-pagination-row">
-          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
-          <div class="home-work-more"><a href="/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link" data-i18n="work.seeall">Ver todos</a></div>
-        </div>
+        <h2 class="section-label" id="home-dest-title">Destaques</h2>
+        <div class="home-dest-grid" id="home-dest-grid"></div>
       </div>
     </section>
-
-    <section class="section-block services-block">
+    <div class="home-ticker" id="home-ticker"></div><!-- previa: lista de titulos entre Destaques e Artigos -->
+    <!-- previa: Artigos na home (3 escolhidos + faixa com os titulos seguintes; dados de assets/data/artigos.js) -->
+    <section class="section-block" id="home-artigos">
       <div class="max-w">
-        <p class="services-title" data-i18n="services.title">Serviços</p>
-        <div class="services-grid reveal-stagger">
-          <div class="service-card" data-service-id="identidade" role="button" tabindex="0">
-            <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM1 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1z"/></svg>
-            <div>
-              <p class="service-title" data-i18n="svc.identidade.t">Design gráfico</p>
-              <p class="service-desc" data-i18n="svc.identidade.d">Logotipo, paleta, tipografia e as peças que levam a marca para o mundo: cartão, papelaria, embalagem e impressos para eventos.</p>
-            </div>
-          </div>
-          <div class="service-card" data-service-id="social" role="button" tabindex="0">
-            <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM5 1h1v1h-1zM6 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM1 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM6 11h1v1h-1z"/></svg>
-            <div>
-              <p class="service-title" data-i18n="svc.social.t">Conteúdo e redes sociais</p>
-              <p class="service-desc" data-i18n="svc.social.d">Planejamento visual e criação de peças gráficas para redes, campanhas e apresentações.</p>
-            </div>
-          </div>
-          <div class="service-card" data-service-id="redacao" role="button" tabindex="0">
-            <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM7 0h1v1h-1zM1 1h1v1h-1zM7 1h1v1h-1zM8 1h1v1h-1zM1 2h1v1h-1zM7 2h1v1h-1zM9 2h1v1h-1zM1 3h1v1h-1zM7 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM10 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1z"/></svg>
-            <div>
-              <p class="service-title" data-i18n="svc.redacao.t">Redação e copywriting</p>
-              <p class="service-desc" data-i18n="svc.redacao.d">Textos para site, redes, campanhas e apresentações, com a voz da marca definida e mantida em todos eles.</p>
-            </div>
-          </div>
-          <div class="service-card" data-service-id="landing" role="button" tabindex="0">
-            <svg class="service-icon" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges"><path d="M1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM7 0h1v1h-1zM8 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM1 1h1v1h-1zM3 1h1v1h-1zM5 1h1v1h-1zM10 1h1v1h-1zM1 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM10 2h1v1h-1zM1 3h1v1h-1zM10 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM7 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM1 6h1v1h-1zM10 6h1v1h-1zM1 7h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM10 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1z"/></svg>
-            <div>
-              <p class="service-title" data-i18n="svc.landing.t">Sites e interfaces</p>
-              <p class="service-desc" data-i18n="svc.landing.d">Sites, catálogos e ferramentas web sob medida, com foco em clareza, leveza e desempenho.</p>
-            </div>
-          </div>
+        <h2 class="section-label" data-i18n="nav.articles">Artigos</h2>
+        <div class="home-art-grid" id="home-art-grid"></div>
+      </div>
+      <div class="max-w">
+        <div class="home-pagination-row">
+          <div class="home-work-more"><a href="/artigos/" data-route="articles" data-nav-id="artigos" class="section-link"><span data-i18n="work.seeall">Ver todos</span> (<span id="home-art-count"></span>)</a></div>
         </div>
       </div>
     </section>
@@ -2364,7 +2503,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
   <div id="view-articles" style="display:none;">
     <section class="work-page-hero art-hero">
       <div class="max-w">
-        <h1 class="art-title reveal" data-i18n="art.title"><span class="dim">Artigos culturais</span><br>sobre cinema, música,<br>televisão e literatura.</h1>
+        <h1 class="art-title reveal" data-i18n="art.title"><span class="dim">Textos culturais</span><br>sobre cinema, música,<br>televisão e literatura.</h1>
       </div>
     </section>
     <section class="section-block" style="padding-top:0;">
@@ -2377,6 +2516,14 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 
   <div id="view-about" style="display:none;">
     <h1 class="mx-sr" data-i18n="about.h1">Sobre Henrique Marinhos</h1> <!-- título principal para leitores de tela e buscadores -->
+    <section class="section-block about-photo-block">
+      <div class="max-w">
+        <figure class="about-photo" id="about-photo" tabindex="0" role="button" aria-pressed="false" aria-label="Retrato de Henrique Marinhos. Ative para ver em cores.">
+          <img class="ap-bw" src="assets/img/sobre.webp" width="1800" height="1012" alt="Henrique Marinhos em um jardim" decoding="async">
+          <img class="ap-cor" src="assets/img/sobre-recorte.webp" width="1800" height="1012" alt="" aria-hidden="true" decoding="async">
+        </figure>
+      </div>
+    </section>
     <section class="cv-actions section-block" aria-label="Currículo">
       <div class="cv-actions-inner">
         <a class="art-filter" id="cv-download-btn" href="assets/docs/Curriculo-Henrique-Marinhos.pdf" download="Curriculo - Henrique Marinhos.pdf" data-i18n="cv.download">Baixar currículo</a>
@@ -2384,15 +2531,15 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </section>
     <!-- conteúdo = currículo (dados em CV, no script) -->
     <section class="section-block cv-first">
-      <div class="section-grid cv-wide">
-        <p class="section-label" data-i18n="aboutp.exp">Experiência</p>
+      <div class="section-grid">
+        <h2 class="section-label" data-i18n="aboutp.exp">Experiência</h2>
         <div class="cv-list" id="cv-exp"></div>
       </div>
     </section>
     <section class="section-block">
       <div class="section-grid">
         <div class="section-heading">
-          <p class="section-label" data-i18n="aboutp.edu">Formação</p>
+          <h2 class="section-label" data-i18n="aboutp.edu">Formação</h2>
           <div class="resource-inline cert-inline">
             <button type="button" class="resource-action" id="certificates-btn">Certificados</button>
           </div>
@@ -2404,14 +2551,14 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     </section>
     <section class="section-block">
       <div class="section-grid">
-        <p class="section-label" data-i18n="aboutp.extra">Atividades complementares</p>
+        <h2 class="section-label" data-i18n="aboutp.extra">Atividades complementares</h2>
         <div class="cv-list" id="cv-extra"></div>
       </div>
     </section>
     <section class="section-block">
       <div class="section-grid">
         <div class="section-heading">
-          <p class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</p>
+          <h2 class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</h2>
           <!-- SUSPENSO: "Ferramentas gratuitas". Para reativar, descomente o botão abaixo (modal e dados continuam no código).
           <div class="resource-inline free-tools-inline">
             <button type="button" class="resource-action" id="free-tools-btn">Ferramentas gratuitas</button>
@@ -2426,7 +2573,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
     <!-- IDIOMAS: bandeiras em SVG (as mesmas do seletor de idioma; emoji de bandeira não aparece no Windows) -->
     <section class="section-block">
       <div class="section-grid">
-        <p class="section-label" data-i18n="aboutp.lang">Idiomas</p>
+        <h2 class="section-label" data-i18n="aboutp.lang">Idiomas</h2>
         <div class="cv-list" id="cv-lang"></div>
       </div>
     </section>
@@ -2442,11 +2589,12 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
       <h2 class="footer-headline" data-i18n="footer.headline">Vamos trabalhar juntos?</h2>
     </div>
     <nav class="footer-socials" aria-label="Redes e contatos">
+      <a href="https://wa.me/5514991394590" class="footer-social" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       <a href="mailto:henriquemarinhos@icloud.com" class="footer-social">E-mail</a>
       <a href="https://www.linkedin.com/in/henrique-marinhos/" class="footer-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://wa.me/5514991394590" class="footer-social" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
       <a href="https://www.behance.net/henriquemarinhos" class="footer-social" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="https://substack.com/@henrictrl" class="footer-social" target="_blank" rel="noopener noreferrer">Substack</a>
+      <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
     </nav>
   </div>
   <!-- créditos -->
@@ -2621,12 +2769,16 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 </div>
 
 <script src="assets/data/clientes.js"></script>
-<script src="assets/data/servicos.js?v=20261023b"></script>
 <script src="assets/data/artigos.js?v=20261109-mostra"></script>
 <script src="assets/data/colecoes.js?v=20261109"></script>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
+<script src="assets/js/previa-grupos.js"></script>
+<script src="assets/js/previa-origem.js"></script>
 <script src="assets/js/capas.js?v=20261102b"></script>
+<script src="assets/js/previa-capas.js"></script>
+<script src="assets/js/previa-obras.js"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
+<script src="assets/js/previa-posts.js"></script>
 <script src="assets/data/engajamento.js"></script>
 <script src="assets/data/ferramentas.js" defer></script>
 <script src="assets/data/glossario.js" defer></script>
@@ -2882,13 +3034,14 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: '0px 0px 18% 0px' }); // previa: comeca antes de entrar na tela
   const refreshReveal = (node = document) => node.querySelectorAll('.reveal:not(.in-view), .reveal-stagger:not(.in-view)').forEach(el => revealObserver.observe(el));
   refreshReveal();
 
   /* --- Routing --- */
   const showRoute = (route, navId) => {
     document.body.classList.toggle('home-route', route === 'home');
+    document.title = route === 'home' ? 'Henrique Marinhos' : ({ work: i18n('nav.work', 'Projetos'), articles: i18n('nav.articles', 'Artigos'), about: i18n('nav.about', 'Sobre') })[route] + ' — Henrique Marinhos'; // previa
     ROUTES.forEach(r => document.getElementById('view-' + r).style.display = (r === route) ? 'block' : 'none');
     if (navId) {
       document.querySelectorAll('[data-nav-id]').forEach(a => a.classList.toggle('current', a.dataset.navId === navId));
@@ -3188,7 +3341,10 @@ document.addEventListener('DOMContentLoaded', () => {
     catch (e) { return String(a.t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
   };
   const articleRoute = (a) => '/artigos/' + encodeURIComponent(articleSlug(a)) + '/';
+  let amPrevTitle = ''; // previa: titulo da aba com o nome do artigo
   const openArticle = (a) => {
+    if (!amOverlay.classList.contains('open')) amPrevTitle = document.title;
+    document.title = artTitle(a) + ' — Henrique Marinhos';
     const articlePath = articleRoute(a);
     if (HMI.path() !== articlePath) history.pushState({ portfolioArticle: articleSlug(a) }, '', articlePath);
     const tok = ++amToken;
@@ -3276,11 +3432,12 @@ document.addEventListener('DOMContentLoaded', () => {
       showRoute('articles', 'artigos');
     }
     amOverlay.classList.remove('open'); document.body.style.overflow = '';
+    if (amPrevTitle) { document.title = amPrevTitle; amPrevTitle = ''; }
     amToken++; document.getElementById('am-ig').hidden = true; document.getElementById('am-ig').innerHTML = '';
     setTimeout(() => { if (!amOverlay.classList.contains('open')) { amFrame.src = 'about:blank'; amReader.innerHTML = ''; } }, 400); // para áudio/vídeo do texto
   };
   amFrame.addEventListener('load', () => { if (!amFrame.hidden && amFrame.src !== 'about:blank') amStage.classList.add('loaded'); });
-  document.getElementById('am-close').onclick = closeArticle;
+  document.getElementById('am-close').onclick = () => closeArticle();
   amOverlay.addEventListener('click', (e) => { if (e.target === amOverlay) closeArticle(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && amOverlay.classList.contains('open')) closeArticle(); });
 
@@ -3301,21 +3458,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('art-grid'), bar = document.getElementById('art-filters');
     // filtros em 2 linhas fixas (3 + 3; a estrela não conta no equilíbrio)
     // modo grade (celular): 2 colunas desencontradas; lembrado entre visitas
-    let artGrid = false; try { artGrid = localStorage.getItem('hm-artgrid') === '1'; } catch (e) {}
+    let artGrid = window.matchMedia('(max-width:767px)').matches; try { const _v = localStorage.getItem('hm-artgrid2'); if (_v !== null) artGrid = _v === '1'; } catch (e) {} // previa: 2 colunas por padrao no celular
     const GRID_ICO = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="5" height="6" rx="1"/><rect x="9" y="3.5" width="5" height="6" rx="1"/><rect x="2" y="9.5" width="5" height="5" rx="1"/><rect x="9" y="11.5" width="5" height="3" rx="1"/></svg>';
-    const setGrid = (on) => { artGrid = on; grid.classList.toggle('is-compact', on); const b = bar.querySelector('.art-view'); if (b) b.setAttribute('aria-pressed', on); try { localStorage.setItem('hm-artgrid', on ? '1' : '0'); } catch (e) {} };
+    const setGrid = (on) => { artGrid = on; grid.classList.toggle('is-compact', on); const b = bar.querySelector('.art-view'); if (b) b.setAttribute('aria-pressed', on); try { localStorage.setItem('hm-artgrid2', on ? '1' : '0'); } catch (e) {} };
     const MINI_STAR = '<svg class="art-star" viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
     const STAR = '<svg class="art-star" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const LINHAS = [[['all', i18n('f.all', 'Todos')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
+    const PVFAV = '<svg class="pv-fav" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
+    const LINHAS = [[['all', i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')], ['Cabine', i18n('f.cabine', 'Cabines')], ['Cinema', tagName('Cinema')]],
                     [['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]];
     // modo de leitura: Texto (crítica) ou Instagram (posts ligados ao texto); lembrado entre visitas
-    let artMode = 'fav'; try { artMode = localStorage.getItem('hm-artmode-v2') || 'fav'; } catch (e) {}
+    let artMode = 'texto'; try { const _m = localStorage.getItem('hm-artmode-v3'); if (_m === 'ig' || _m === 'texto') artMode = _m; } catch (e) {} // previa: abre em Texto
     const IG_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
     const TXT_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/></svg>';
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
     const modeBar = document.createElement('div'); modeBar.className = 'art-modebar reveal';
     const FAV_ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.9l1.85 3.85 4.2.55-3.08 2.9.78 4.17L8 11.33l-3.75 2.04.78-4.17-3.08-2.9 4.2-.55z"/></svg>';
-    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig'}">${IG_ICO}Instagram</button><button type="button" data-m="fav" aria-pressed="${artMode === 'fav'}">${FAV_ICO}${i18n('am.fav', 'Destaques')}</button></div>`; }; // destaques no mesmo grupo de Texto e Instagram
+    const drawMode = () => { modeBar.innerHTML = `<div class="art-mode" role="group" aria-label="${i18n('am.mode', 'Modo de leitura')}"><button type="button" data-m="texto" aria-pressed="${artMode === 'texto' && artFilter !== 'fav'}">${TXT_ICO}${i18n('am.text', 'Texto')}</button><button type="button" data-m="ig" aria-pressed="${artMode === 'ig' && artFilter !== 'fav'}">${IG_ICO}Instagram</button></div>`; }; // destaques no mesmo grupo de Texto e Instagram
     drawMode(); bar.parentNode.insertBefore(modeBar, bar);
     const PBA = (window.HM_POSTS || {}).POSTS_BY_ART || {};
     // carrosséis/posts do 1º lote (Persona e Tesoura primeiro), com ou sem texto ligado
@@ -3347,11 +3505,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
       const COL = window.HM_COL;
-      grid.classList.toggle('is-ig', !COL && (artMode === 'ig' || k === 'carrosseis'));
-      grid.classList.toggle('is-mixed', !COL && artMode === 'fav');
-      if (artMode === 'fav' && !COL) {
+      grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || k === 'carrosseis'));
+      grid.classList.toggle('is-mixed', !COL && k === 'fav');
+      if (k === 'fav' && !COL) {
         let items = FAV_SELECTION;
-        if (k !== 'all') items = items.filter(entry => {
+        if (k !== 'all' && k !== 'fav') items = items.filter(entry => {
           if (entry.kind === 'text') return entry.item.tags.includes(k);
           const linked = entry.item.art && data.find(a => a.u === entry.item.art);
           return !!linked && linked.tags.includes(k);
@@ -3416,14 +3574,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (item.project) { window.location.assign(cleanProjectUrl(item.project)); return; }
       openArticle(item);
     });
-    modeBar.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; artMode = b.dataset.m; try { localStorage.setItem('hm-artmode-v2', artMode); } catch (er) {} drawMode();
-      if (artFilter === 'carrosseis') { artFilter = 'all'; bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x.dataset.k === 'all')); }
+    modeBar.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; artMode = b.dataset.m; try { localStorage.setItem('hm-artmode-v3', artMode); } catch (er) {} drawMode();
+      if (artFilter === 'carrosseis' || artFilter === 'fav') { artFilter = 'all'; drawMode(); bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x.dataset.k === 'all')); }
       draw(artFilter); });
     bar.addEventListener('click', (e) => {
       if (e.target.closest('.art-view')) { setGrid(!artGrid); return; }
       const b = e.target.closest('.art-filter'); if (!b) return;
       bar.querySelectorAll('.art-filter').forEach(x => x.setAttribute('aria-pressed', x === b));
-      artFilter = b.dataset.k; draw(artFilter);
+      const _p = artFilter; artFilter = b.dataset.k; if (artFilter === 'fav' || _p === 'fav') drawMode(); draw(artFilter);
     });
     // coleção (/artigos/<slug>/): cabeçalho próprio no lugar do título e dos filtros
     const colHead = document.createElement('div'); colHead.className = 'col-head'; colHead.hidden = true;
@@ -3458,7 +3616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
       const keep = artFilter; const rows = bar.innerHTML = '';
-      LINHAS[0][0][1] = i18n('f.all', 'Todos'); LINHAS[0][1][1] = i18n('f.cabine', 'Cabines'); LINHAS[0][2][1] = tagName('Cinema');
+      LINHAS[0][0][1] = i18n('f.all', 'Todos'); LINHAS[0][1][1] = PVFAV + i18n('am.fav', 'Destaques'); LINHAS[0][2][1] = i18n('f.cabine', 'Cabines'); LINHAS[0][3][1] = tagName('Cinema');
       LINHAS[1][0][1] = tagName('Música'); LINHAS[1][1][1] = tagName('Televisão'); LINHAS[1][2][1] = tagName('Literatura'); drawMode();
       bar.innerHTML = LINHAS.map((l, li) => '<div class="art-row">' + l.map(([k, html, aria]) =>
         `<button class="art-filter${aria ? ' art-filter-icon' : ''}" data-k="${k}" aria-pressed="${k === keep}"${aria ? ` aria-label="${aria}" title="${aria}"` : ''}>${html}</button>`).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
@@ -3603,7 +3761,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ]}
   ];
   // Ao receber os documentos, acrescente objetos {titulo, tipo:'image'|'pdf', src} aqui.
-  const CERTIFICADOS = [];
+  const CERTIFICADOS = [
+    ['01-senai-javascript', 'Desenvolvimento em JavaScript', 'SENAI · 2025 · 60 h'],
+    ['03-branding-essencial', 'Branding Essencial', 'Ana Couto · 2023'],
+    ['04-direcao-de-arte-ebac', 'Direção de Arte: da concepção à realização', 'EBAC · 2024'],
+    ['07-persona-unesp', 'Grupo de Pesquisa Persona', 'Unesp · 2021–2024'],
+    ['02-senai-power-bi', 'Microsoft Power BI', 'SENAI · 2025 · 32 h'],
+    ['05-domestika', 'Marketing digital humanizado para redes sociais', 'Domestika · 2023'],
+    ['08-congresso-extensao', 'Comitê de Comunicação · Congresso de Extensão', 'Unesp · 2024 · 40 h'],
+    ['09-mostra-saude-mental', 'Comissão Organizadora · Mostra de Saúde Mental', 'Unesp · 2023'],
+    ['06-design-grafico-bradesco', 'Fundamentos do Design Gráfico', 'Fundação Bradesco · 2021'],
+    ['10-setembro-amarelo', 'Organização · Setembro Amarelo', 'NTAPS Unesp · 2022 · 40 h'],
+    ['11-voluntariado-ntaps', 'Voluntariado em Comunicação', 'NTAPS Unesp · 2021 · 40 h']
+  ].map(([f, titulo, org]) => ({ titulo, org, src: 'assets/certificados/' + f + '.webp', t: 'assets/certificados/' + f + '-t.webp' }));
   const escT = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const resourceOverlay = document.getElementById('resource-modal-overlay');
   const resourceGallery = document.getElementById('resource-gallery');
@@ -3612,10 +3782,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const openCertificates = () => {
     resourceEmpty.hidden = CERTIFICADOS.length > 0;
     resourceEmpty.textContent = 'Os certificados serão adicionados quando os documentos forem enviados.';
-    resourceGallery.innerHTML = CERTIFICADOS.map(item => {
-      const media = item.tipo === 'image' ? `<img src="${escT(item.src)}" alt="">` : '<span class="resource-pdf">Documento PDF ↗</span>';
-      return `<a class="resource-card" href="${escT(item.src)}" target="_blank" rel="noopener noreferrer">${media}<span>${escT(item.titulo)}</span></a>`;
-    }).join('');
+    resourceGallery.classList.add('is-mosaic');
+    resourceGallery.innerHTML = CERTIFICADOS.map((c, i) => `<button type="button" class="cert-item" data-cert="${i}" style="--i:${i}"><img src="${escT(c.t)}" alt="" loading="lazy" decoding="async"><span><b>${escT(c.titulo)}</b>${escT(c.org)}</span></button>`).join('');
+    if (!resourceGallery.dataset.b) { resourceGallery.dataset.b = '1';
+      const zoom = document.createElement('div'); zoom.className = 'cert-zoom'; zoom.hidden = true; zoom.innerHTML = '<img alt=""><p></p>'; resourceOverlay.appendChild(zoom);
+      let zi = -1; const zShow = (i) => { zi = (i + CERTIFICADOS.length) % CERTIFICADOS.length; const c = CERTIFICADOS[zi]; zoom.querySelector('img').src = c.src; zoom.querySelector('img').alt = c.titulo; zoom.querySelector('p').textContent = c.titulo + ' — ' + c.org; zoom.hidden = false; };
+      resourceGallery.addEventListener('click', (e) => { const b = e.target.closest('[data-cert]'); if (b) zShow(+b.dataset.cert); });
+      zoom.addEventListener('click', () => { zoom.hidden = true; });
+      document.addEventListener('keydown', (e) => { if (zoom.hidden) return; if (e.key === 'Escape') { e.stopImmediatePropagation(); zoom.hidden = true; } if (e.key === 'ArrowRight') zShow(zi + 1); if (e.key === 'ArrowLeft') zShow(zi - 1); }, true);
+    }
     resourceOverlay.hidden = false; lockScroll(true);
     resourceOverlay.querySelector('button')?.focus();
   };
@@ -3647,13 +3822,13 @@ document.addEventListener('DOMContentLoaded', () => {
   freeToolsOverlay.addEventListener('click', e => { if (e.target === freeToolsOverlay) closeFreeTools(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !freeToolsOverlay.hidden) closeFreeTools(); });
   const renderAboutPage = () => {
+    { const ap = document.getElementById('about-photo'); if (ap && !ap.dataset.b) { ap.dataset.b = '1'; const tg = () => ap.setAttribute('aria-pressed', String(ap.classList.toggle('on'))); ap.addEventListener('click', tg); ap.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tg(); } }); } } // previa
     const lg = document.getElementById('cv-lang');
     if (lg) lg.innerHTML = IDIOMAS.map(i => `<div class="cv-item lang-item reveal"><div class="cv-head"><div class="cv-logo" aria-hidden="true">${i.f()}</div><div class="cv-main"><p class="cv-name" style="font-weight:400">${tx(i.t)}</p>${i.desc ? `<p class="cv-desc">${tx(i.desc)}</p>` : ''}</div></div></div>`).join('');
     ['exp', 'edu', 'extra', 'skills'].forEach(k => {
       const el = document.getElementById('cv-' + k); if (!el) return;
       // experiência: 4 freelas mais recentes numa coluna, o resto na outra
-      el.innerHTML = k === 'exp' ? [CV.exp.slice(0, 4), CV.exp.slice(4)].map(c => `<div class="cv-col">${c.map(cvItem).join('')}</div>`).join('')
-        : CV[k].map(cvItem).join('');
+      el.innerHTML = CV[k].map(cvItem).join(''); // previa: uma coluna, em ordem
       refreshReveal(el);
     });
     if (lg) refreshReveal(lg);
@@ -4279,7 +4454,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lx = (o) => o == null ? '' : typeof o === 'string' ? o : (o[LANG] || o.pt);
 
   // grupos da página Projetos (a ordem é a da lista em projetos.js). Dashboards: só a visão geral, num botão à parte.
-  const FILTROS = [['identidade', { pt: 'Identidade visual', en: 'Visual identity', es: 'Identidad visual' }], ['programacao', { pt: 'Programação', en: 'Programming', es: 'Programación' }], ['midias', { pt: 'Mídias sociais', en: 'Social media', es: 'Redes sociales' }], ['eventos', { pt: 'Eventos', en: 'Events', es: 'Eventos' }], ['estrategia', { pt: 'Estratégia de marca', en: 'Brand strategy', es: 'Estrategia de marca' }], ['rebranding', { pt: 'Rebranding', en: 'Rebranding', es: 'Rebranding' }]];
+  const FILTROS = [['marcas', { pt: 'Marcas e Clientes', en: 'Brands and Clients', es: 'Marcas y Clientes' }], ['inst', { pt: 'Institucional', en: 'Institutional', es: 'Institucional' }], ['cultura', { pt: 'Cultura e crítica', en: 'Culture and criticism', es: 'Cultura y crítica' }]];
 
   const ETIQUETA_LABELS = {"banners":{"pt":"Banners","en":"Banners","es":"Banners"},"certificado":{"pt":"Certificado","en":"Certificate","es":"Certificado"},"conteudo-editorial":{"pt":"Conteúdo editorial","en":"Editorial content","es":"Contenido editorial"},"conteudo-recorrente":{"pt":"Conteúdo recorrente","en":"Recurring content","es":"Contenido recurrente"},"cracha":{"pt":"Crachá","en":"Badge","es":"Credencial"},"divulgacao-evento":{"pt":"Divulgação de evento","en":"Event promotion","es":"Difusión de evento"},"exportacao":{"pt":"Exportação","en":"Export","es":"Exportación"},"exportacao-png":{"pt":"Exportação em PNG","en":"PNG export","es":"Exportación en PNG"},"medalhas":{"pt":"Medalhas","en":"Medals","es":"Medallas"},"pecas-digitais":{"pt":"Peças digitais","en":"Digital pieces","es":"Piezas digitales"},"pictogramas":{"pt":"Pictogramas","en":"Pictograms","es":"Pictogramas"},"plano-comunicacao":{"pt":"Plano de comunicação","en":"Communication plan","es":"Plan de comunicación"},"portfolio-site":{"pt":"Site de portfólio","en":"Portfolio site","es":"Sitio de portafolio"},"press-kit":{"pt":"Press kit","en":"Press kit","es":"Press kit"},"processo":{"pt":"Processo","en":"Process","es":"Proceso"},"sinalizacao":{"pt":"Sinalização","en":"Signage","es":"Señalización"},"stories-gifs":{"pt":"Stories e GIFs","en":"Stories and GIFs","es":"Stories y GIFs"},"identidade-visual":{"pt":"Identidade visual","en":"Visual identity","es":"Identidad visual"},"logotipo":{"pt":"Logotipo","en":"Logo","es":"Logotipo"},"manual-marca":{"pt":"Manual de marca","en":"Brand manual","es":"Manual de marca"},"aplicacoes-marca":{"pt":"Aplicações de marca","en":"Brand applications","es":"Aplicaciones de marca"},"pecas-graficas":{"pt":"Peças gráficas","en":"Graphic materials","es":"Piezas gráficas"},"layouts-pecas":{"pt":"Layouts de peças","en":"Collateral layouts","es":"Diseños de piezas"},"mockups":{"pt":"Mockups","en":"Mockups","es":"Mockups"},"kit-impresso":{"pt":"Kit impresso","en":"Printed kit","es":"Kit impreso"},"ilustracao-vetorial":{"pt":"Ilustração vetorial","en":"Vector illustration","es":"Ilustración vectorial"},"producao-grafica":{"pt":"Produção gráfica","en":"Print production","es":"Producción gráfica"},"vs-code":{"pt":"VS Code","en":"VS Code","es":"VS Code"},"html":{"pt":"HTML","en":"HTML","es":"HTML"},"css":{"pt":"CSS","en":"CSS","es":"CSS"},"javascript":{"pt":"JavaScript","en":"JavaScript","es":"JavaScript"},"gestao-fornecedores":{"pt":"Gestão de fornecedores","en":"Vendor management","es":"Gestión de proveedores"},"logistica-producao":{"pt":"Logística de produção","en":"Production logistics","es":"Logística de producción"},"ferramenta-interativa":{"pt":"Ferramenta interativa","en":"Interactive tool","es":"Herramienta interactiva"},"catalogo-digital":{"pt":"Catálogo digital","en":"Digital catalog","es":"Catálogo digital"},"posts-carrosseis":{"pt":"Posts e carrosséis","en":"Posts & carousels","es":"Posts y carruseles"},"proposta-estrategica":{"pt":"Proposta estratégica","en":"Strategy proposal","es":"Propuesta estratégica"},"cartaz-folder":{"pt":"Cartaz e folder","en":"Poster & brochure","es":"Cartel y folleto"},"cobertura-fotografica":{"pt":"Cobertura fotográfica","en":"Photo coverage","es":"Cobertura fotográfica"},"organizacao-evento":{"pt":"Organização de eventos","en":"Event management","es":"Organización de eventos"},"analise-literaria":{"pt":"Análise literária","en":"Literary analysis","es":"Análisis literario"},"dashboard":{"pt":"Dashboard","en":"Dashboard","es":"Dashboard"},"direcao-arte":{"pt":"Direção de arte","en":"Art direction","es":"Dirección de arte"},"design-grafico":{"pt":"Design gráfico","en":"Graphic design","es":"Diseño gráfico"},"design-editorial":{"pt":"Design editorial","en":"Editorial design","es":"Diseño editorial"},"design-interface":{"pt":"Design de interface","en":"Interface design","es":"Diseño de interfaces"},"gestao-projetos":{"pt":"Gestão de projetos","en":"Project management","es":"Gestión de proyectos"},"visualizacao-dados":{"pt":"Visualização de dados","en":"Data visualization","es":"Visualización de datos"},"analise-dados":{"pt":"Análise de dados","en":"Data analysis","es":"Análisis de datos"},"credito-financas":{"pt":"Crédito e finanças","en":"Credit & finance","es":"Crédito y finanzas"},"moda-acessorios":{"pt":"Moda e acessórios","en":"Fashion & accessories","es":"Moda y accesorios"},"jornalismo-cultural":{"pt":"Jornalismo cultural","en":"Cultural journalism","es":"Periodismo cultural"},"direitos-humanos":{"pt":"Direitos humanos","en":"Human rights","es":"Derechos humanos"},"servicos-locais":{"pt":"Serviços locais","en":"Local services","es":"Servicios locales"},"desdobramento-marca":{"pt":"Desdobramentos de marca","en":"Brand extensions","es":"Aplicaciones de marca"},"tecnologia":{"pt":"Tecnologia","en":"Technology","es":"Tecnología"},"tatuagem":{"pt":"Tatuagem","en":"Tattoo","es":"Tatuaje"},"cliente":{"pt":"Cliente","en":"Client","es":"Cliente"},"internacional":{"pt":"Internacional","en":"International","es":"Internacional"},"idioma-ingles":{"pt":"Idioma inglês","en":"English-language","es":"Idioma inglés"},"b2b":{"pt":"B2B","en":"B2B","es":"B2B"},"varejo":{"pt":"Varejo","en":"Retail","es":"Comercio minorista"},"optica":{"pt":"Óptica","en":"Optical retail","es":"Óptica"},"beleza":{"pt":"Beleza","en":"Beauty","es":"Belleza"},"podcast":{"pt":"Podcast","en":"Podcast","es":"Pódcast"},"institucional":{"pt":"Institucional","en":"Institutional","es":"Institucional"},"educacao":{"pt":"Educação","en":"Education","es":"Educación"},"saude":{"pt":"Saúde","en":"Health","es":"Salud"},"esporte":{"pt":"Esporte","en":"Sports","es":"Deporte"},"cultura":{"pt":"Cultura","en":"Culture","es":"Cultura"},"musica":{"pt":"Música","en":"Music","es":"Música"},"consultoria":{"pt":"Consultoria","en":"Consulting","es":"Consultoría"},"entretenimento":{"pt":"Entretenimento","en":"Entertainment","es":"Entretenimiento"},"turismo":{"pt":"Turismo","en":"Tourism","es":"Turismo"},"literatura":{"pt":"Literatura","en":"Literature","es":"Literatura"},"dados":{"pt":"Dados","en":"Data","es":"Datos"},"arte-digital":{"pt":"Arte digital","en":"Digital art","es":"Arte digital"},"fotografia":{"pt":"Fotografia","en":"Photography","es":"Fotografía"},"evento":{"pt":"Evento","en":"Event","es":"Evento"},"campanha":{"pt":"Campanha","en":"Campaign","es":"Campaña"},"projeto-academico":{"pt":"Projeto acadêmico","en":"Academic project","es":"Proyecto académico"},"colaboracao":{"pt":"Colaboração","en":"Collaboration","es":"Colaboración"},"trabalho-recorrente":{"pt":"Trabalho recorrente","en":"Ongoing work","es":"Trabajo recurrente"},"rebranding":{"pt":"Redesign de marca","en":"Rebranding","es":"Rediseño de marca"},"ferramenta-propria":{"pt":"Ferramenta própria","en":"Own tool","es":"Herramienta propia"},"portfolio":{"pt":"Portfólio","en":"Portfolio","es":"Portafolio"},"grupo-pesquisa":{"pt":"Grupo de pesquisa","en":"Research group","es":"Grupo de investigación"},"competicao":{"pt":"Competição","en":"Competition","es":"Competición"},"estagio":{"pt":"Estágio","en":"Internship","es":"Prácticas"},"redacao":{"pt":"Redação","en":"Writing","es":"Redacción"},"social-media":{"pt":"Mídias sociais","en":"Social media","es":"Redes sociales"},"programacao":{"pt":"Programação","en":"Programming","es":"Programación"},"diagramacao":{"pt":"Diagramação","en":"Layout & typesetting","es":"Maquetación"},"ilustracao":{"pt":"Ilustração","en":"Illustration","es":"Ilustración"},"redes-sociais":{"pt":"Redes sociais","en":"Social media","es":"Redes sociales"},"site":{"pt":"Site","en":"Website","es":"Sitio web"},"editorial":{"pt":"Editorial","en":"Editorial","es":"Editorial"},"folder":{"pt":"Folder","en":"Brochure","es":"Folleto"},"embalagens":{"pt":"Embalagens","en":"Packaging","es":"Empaques"},"oficina":{"pt":"Oficina","en":"Workshop","es":"Taller"},"material-didatico":{"pt":"Material didático","en":"Learning materials","es":"Material didáctico"},"apresentacao":{"pt":"Apresentação","en":"Presentation","es":"Presentación"},"artigos":{"pt":"Artigos","en":"Articles","es":"Artículos"},"processamento-grafico":{"pt":"Processamento gráfico","en":"Graphics processing","es":"Procesamiento gráfico"}};
   Object.assign(ETIQUETA_LABELS, {
@@ -4351,11 +4526,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectTagLabel = (key) => quickTagLabel(key) ? lx(quickTagLabel(key)) : etiquetaNome(key);
   const pjCard = (p) => `<a class="work-card${p.capaLive ? ' work-card-live-preview' : ''}${p.capaCropTop ? ' work-card-crop-top' : ''}" href="${cleanProjectUrl(p.slug)}" data-pj="${p.slug}">
       <div class="work-card-media">${p.capaAnim ? capaAnimHTML(p) : p.capaLive ? `<iframe src="${p.capaLive}" title="Prévia real do editor Rino" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>` : `<img src="${p.capa}" alt="" loading="lazy" decoding="async" width="1200" height="800"${p.capaPosicao ? ` style="object-position:${p.capaPosicao}"` : ''}>${p.slug === 'rino-site' ? '<img class="rino-cover-logo" src="assets/projetos/rino/rino-mascote.svg" alt="Ilustração detalhada do rinoceronte Rino" loading="lazy" decoding="async">' : ''}`}</div>
-      <p class="work-card-title">${p.titulo}</p>${p.resumo ? `<p class="work-card-desc">${lx(p.resumo)}</p>` : p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
+      <p class="work-card-title">${p.titulo}</p>${(p.entrega || p.resumo) ? `<p class="work-card-desc">${lx(p.entrega || p.resumo)}</p>` : p.badge ? `<p class="work-card-tag">${lx(p.badge)}</p>` : ''}</a>`;
   // quantidade de colunas, lembrada por modo: projetos (celular 1–3, desktop 2–5) e mídias sociais (celular 1–3, desktop 2–6)
   const mqMob = window.matchMedia('(max-width:767px)');
   const colsKey = () => mqMob.matches ? 'm' : 'd';
-  const COLS_CFG = { pj: { key: 'hm-wcols', def: [2, 3], max: 5 }, sg: { key: 'hm-scols', def: [2, 3], max: 6 } };
+  const COLS_CFG = { pj: { key: 'hm-wcols2', def: [2, 3], max: 5 }, sg: { key: 'hm-scols2', def: [2, 3], max: 6 } } // previa: chaves novas = padrao de 2 colunas no celular;
   const colsMode = () => pjSelectedCategory === 'midias' ? 'sg' : 'pj';
   const colsMax = () => mqMob.matches ? 3 : COLS_CFG[colsMode()].max;
   const readCols = () => { try { return JSON.parse(localStorage.getItem(COLS_CFG[colsMode()].key) || '{}') || {}; } catch (e) { return {}; } };
@@ -4434,7 +4609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!grid || !bar) return;
     const displayedPJ = PJ.filter(p => !['o-hobbit','rino-pecas','sollaris-instagram','dash-geral'].includes(p.slug));
     const counts = new Map();
-    displayedPJ.forEach(p => [].concat(p.filtro || []).filter(Boolean).forEach(category => counts.set(category, (counts.get(category) || 0) + 1)));
+    displayedPJ.filter(p => !HOME_EXCLUDED.includes(p.slug)).forEach(p => [].concat(p.filtro || []).filter(Boolean).forEach(category => counts.set(category, (counts.get(category) || 0) + 1)));
     const categories = FILTROS.filter(([key]) => counts.has(key));
     if (pjSelectedCategory !== 'all' && !counts.has(pjSelectedCategory)) pjSelectedCategory = 'all';
     const social = pjSelectedCategory === 'midias';
@@ -4453,7 +4628,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     bar.innerHTML = main + colsHTML();
-    const matches = displayedPJ.filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
+    const matches = displayedPJ.filter(p => !HOME_EXCLUDED.includes(p.slug)).filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     applyCols(grid);
     grid.innerHTML = summary + (matches.length ? (window.capaSpread ? capaSpread(matches, getCols()) : matches).map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
@@ -4487,12 +4662,57 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 
   /* --- Página inicial: catálogo em páginas numeradas, seis projetos por página --- */
-  const HOME_FEATURED = ['sollaris', 'rino', 'pixelar', 'optica-leopoldina', 'classic-tattoo', 'equity360'];
-  const HOME_EXCLUDED = ['o-hobbit','rino-pecas','sollaris-instagram','dash-geral'];
+  const HOME_FEATURED = ['rino', 'sollaris', 'classic-tattoo', 'tesoura', 'optica-leopoldina', 'equity360']; // previa: escolha do Henrique
+  const HOME_EXCLUDED = window.HM_OCULTOS || ['o-hobbit','rino-pecas','sollaris-instagram','dash-geral']; // previa: capitulos ficam dentro do projeto-pai
   const HOME_PROJECTS = [
-    ...HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean),
-    ...PJ.filter(p => !HOME_FEATURED.includes(p.slug) && !HOME_EXCLUDED.includes(p.slug))
+    ...HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean)
   ];
+  /* previa: Artigos na home, faixa de titulos e numeros */
+  const HOME_ARTS_ALL = (window.ARTIGOS || []).filter(x => !x.project);
+  const HOME_ARTS = ['https://tesouracomponta.com/o-sentido-da-vida/', 'https://online.visual-paradigm.com/pt/share/book/livro-persona-e-book-2faf3yvpm', 'https://personaunesp.com.br/pearl-critica/'].map(u => HOME_ARTS_ALL.find(x => x.u === u)).filter(Boolean);
+  const HOME_DEST = [
+    ['DQfY9lqkZfc', { pt: 'O Agente Secreto: coletiva de imprensa em São Paulo', en: 'The Secret Agent: press conference in São Paulo', es: 'El agente secreto: rueda de prensa en São Paulo' }],
+    ['DPCkHYgkbDE', { pt: 'E o prêmio de Melhor Roteiro Original (não) vai para 2025', en: 'And the Best Original Screenplay award (doesn’t) go to 2025', es: 'Y el premio al Mejor Guion Original (no) es para 2025' }],
+    ['Dd6mzTmFpUe', { pt: 'Tinashe reivindica o título que sempre foi dela em “Popstar”', en: 'Tinashe claims the title that was always hers in “Popstar”', es: 'Tinashe reivindica el título que siempre fue suyo en “Popstar”' }]
+  ].map(([c, t]) => ({ x: (window.POSTS || []).find(p => p.c === c), t })).filter(d => d.x);
+  const HOME_TICK = HOME_ARTS_ALL.filter(x => !HOME_ARTS.includes(x) && !x.pin).slice(0, 24);
+  const homeCounts = () => ({ pj: PJ.filter(p => !HOME_EXCLUDED.includes(p.slug)).length, art: HOME_ARTS_ALL.length, post: (window.POSTS || []).length });
+  let homeCounted = false;
+  const renderHomeExtras = () => {
+    const g = document.getElementById('home-art-grid');
+    if (g) {
+      g.innerHTML = HOME_ARTS.map((a, i) => `<a class="art-card in" href="${articleRoute(a)}" data-home-art="${i}"><div class="art-card-media"${a.bg ? ` style="background:${a.bg}"` : ''}><img src="${artImg(a)}" alt="" loading="lazy" decoding="async"${a.fit ? ` style="object-fit:${a.fit}"` : ''}></div><p class="art-card-meta">${a.tags.map(tagName).join(' · ')} — ${fmtData(a.d)}</p><h3 class="art-card-title">${artTitle(a)}</h3><p class="art-card-by">${a.site}</p></a>`).join('');
+      g.onclick = (e) => { const c = e.target.closest('[data-home-art]'); if (!c || e.metaKey || e.ctrlKey) return; e.preventDefault(); openArticle(HOME_ARTS[+c.dataset.homeArt]); };
+    }
+    const tk = document.getElementById('home-ticker');
+    if (tk) {
+      const row = (list, off) => { const items = (hid) => list.map((a, i) => `<a href="${articleRoute(a)}" data-tk="${off + i}"${hid ? ' tabindex="-1"' : ''}>${window.HM_OBRAS_HTML ? window.HM_OBRAS_HTML(artTitle(a)) : artTitle(a)}</a><i aria-hidden="true"></i>`).join(''); return `<div class="tk-row"><div class="tk-track" style="--tk:${list.length * 22}s"><div class="tk-set">${items(false)}</div><div class="tk-set" aria-hidden="true">${items(true)}</div></div></div>`; };
+      const half = Math.ceil(HOME_TICK.length / 2);
+      tk.innerHTML = HOME_TICK.length > 5 ? row(HOME_TICK.slice(0, half), 0) + row(HOME_TICK.slice(half), half) : '';
+      tk.onclick = (e) => { const c = e.target.closest('[data-tk]'); if (!c || e.metaKey || e.ctrlKey) return; e.preventDefault(); openArticle(HOME_TICK[+c.dataset.tk]); };
+    }
+    const dg = document.getElementById('home-dest-grid'), dt = document.getElementById('home-dest-title');
+    if (dt) dt.textContent = lx({ pt: 'Destaques', en: 'Highlights', es: 'Destacados' });
+    if (dg) {
+      dg.innerHTML = HOME_DEST.map((d, i) => `<a class="art-card in dest-card" href="https://www.instagram.com/${d.x.reel ? 'reel' : 'p'}/${d.x.c}/" target="_blank" rel="noopener" data-dest="${i}"><div class="art-card-media" style="aspect-ratio:${(1 / (d.x.r || 1.25)).toFixed(4)}">${d.x.n > 1 ? `<span class="dest-n">1/${d.x.n}</span>` : ''}<img src="${postSrc(d.x, 0)}" alt="" loading="lazy" decoding="async"></div><p class="art-card-meta">${d.x.v} — ${fmtData(d.x.d)}</p><h3 class="art-card-title">${lx(d.t)}</h3></a>`).join('');
+      dg.onclick = (e) => { const c = e.target.closest('[data-dest]'); if (!c || e.metaKey || e.ctrlKey) return; e.preventDefault(); openPosts([HOME_DEST[+c.dataset.dest].x]); };
+      // com o mouse em cima, a capa passa pelos primeiros slides do carrossel
+      dg.querySelectorAll('[data-dest]').forEach(card => { const d = HOME_DEST[+card.dataset.dest], img = card.querySelector('img'), tag = card.querySelector('.dest-n'), n = Math.min(d.x.n || 1, 6); if (n < 2) return; let k = 0, tm = null;
+        const show = (j) => { k = j; img.src = postSrc(d.x, k); if (tag) tag.textContent = (k + 1) + '/' + d.x.n; };
+        card.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse' || tm) return; tm = setInterval(() => show((k + 1) % n), 850); });
+        card.addEventListener('pointerleave', () => { clearInterval(tm); tm = null; show(0); }); });
+    }
+    const N = homeCounts();
+    const ac = document.getElementById('home-art-count'); if (ac) ac.textContent = N.art;
+    const wc = document.getElementById('home-work-count'); if (wc) wc.textContent = N.pj;
+    const st = document.getElementById('home-stats');
+    if (st && !homeCounted) {
+      const els = [...st.querySelectorAll('[data-count]')], fin = () => els.forEach(b => { b.textContent = N[b.dataset.count]; });
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { homeCounted = true; fin(); }
+      else new IntersectionObserver((es, io) => { if (!es[0].isIntersecting || homeCounted) return; homeCounted = true; io.disconnect();
+        const t0 = performance.now(), T = 1400; const step = (t) => { const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 4); els.forEach(b => { b.textContent = Math.round(N[b.dataset.count] * e); }); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }, { threshold: 0.6 }).observe(st);
+    }
+  };
   let homePage = 0;
   let homeSlide = null; // animação da troca em andamento
   // avanço automático da vitrine: a cada 4 s; pausa com mouse em cima, foco, fora da tela ou aba escondida (ver homePause)
@@ -4564,6 +4784,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHomeRows(direction);
     };
     scheduleHomeAuto(pageCount);
+    renderHomeExtras(); // previa
     // a página NUNCA é rolada por aqui: a altura da grade fica presa (min-height), então nada se mexe.
     // (antes havia uma "devolução" da rolagem que puxava a página de volta se a pessoa rolasse durante a troca)
     requestAnimationFrame(observeLiveProjectPreviews);
@@ -5231,9 +5452,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const GLINT_MS = 4800;      // duração da passagem
   const COOLDOWN = 30000;     // intervalo mínimo entre passagens no mesmo elemento
   const selector = [
-    '#view-home .hero-headline .dim', 'body.home-route .top-header .brand-location', '#view-home .about-more-link',
-    '.contact-footer .footer-social', '#view-about #cv-download-btn', '#view-about #certificates-btn', '#view-about #free-tools-btn',
-    '#view-work .work-page-title .dim', '#view-articles .art-title .dim', '#view-articles .art-star', '#art-filters .art-star'
+    '#view-home .hero-headline .dim', '#view-work .work-page-title .dim', '#view-articles .art-title .dim'
   ].join(', ');
   const lastPlayed = new WeakMap();
   const isGray = (rgb) => {
@@ -5277,6 +5496,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<script src="assets/js/previa-contato.js" defer></script>
 <script src="assets/js/motion.js?v=20261102a" defer></script>
 <script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
 </body>
