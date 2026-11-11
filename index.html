@@ -3574,7 +3574,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
       const COL = window.HM_COL, isCat = !COL && !!CATS[k];
-      grid.classList.toggle('is-ig', !COL && artMode === 'ig' && k !== 'fav');
+      grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || k === 'carrosseis'));
       grid.classList.toggle('is-mixed', !COL && k === 'fav');
       if (k === 'fav' && !COL) {
         let items = FAV_SELECTION;
@@ -3603,8 +3603,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (isCat) { // Cabines, Mostra SP, Carrosséis, Premiações: só os itens da categoria, sem acumular
         const ents = catEntries(k).filter(e => artMode !== 'ig' || e.kind === 'post' || PBA[e.item.u]);
-        grid.classList.toggle('is-mixed', ents.some(e => e.kind === 'post'));
-        grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, postTitle(e.item)) : artCard(e.item, { showTag: false, ig: artMode === 'ig' })).join('');
+        grid.classList.toggle('is-mixed', k !== 'carrosseis' && ents.some(e => e.kind === 'post'));
+        grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, postTitle(e.item)) : artCard(e.item, { showTag: false, ig: artMode === 'ig' || k === 'carrosseis' })).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }

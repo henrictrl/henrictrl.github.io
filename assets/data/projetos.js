@@ -11029,7 +11029,6 @@ window.PROJETOS = [
   },
   "capa": "assets/projetos/desvendando/capa.webp",
   "resumo": {"pt": "Carrosséis para perfil de análise de música pop", "en": "Carousels for a pop music analysis profile", "es": "Carruseles para un perfil de análisis de música pop"},
-  "capaAnim": {"m":"L","fundo":[10,10,230],"bands":[{"f":"b1.webp","s":[6314,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/desvendando/capa/"},
   "dir": "assets/projetos/desvendando/",
   "intro": {
    "pt": "Carrosséis do Desvendando o Pop, projeto de análise de música pop no Instagram.",
