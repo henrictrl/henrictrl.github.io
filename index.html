@@ -1107,7 +1107,7 @@ footer.contact-footer { position: relative; overflow: hidden; display: flex; fle
 .pv-pnav svg { width: 20px; height: 20px; }
 .pv-pprev { left: 24px; } .pv-pnext { right: 24px; }
 .pv-ov.pv-many .pv-pnav { display: grid; }
-body:has(.pv-ov.open) .mobile-top-button { opacity: 0 !important; pointer-events: none !important; }
+body.pv-open .mobile-top-button { opacity: 0 !important; pointer-events: none !important; }
 .pv-pos { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--gray-400); font-variant-numeric: tabular-nums; }
 @media (max-width: 1023px) and (min-width: 768px) { .pv-box { max-width: calc(100vw - 120px); } .pv-media { max-width: calc(100vw - 120px - 300px); } .pv-side { flex-basis: 300px; } .pv-pprev { left: 10px; } .pv-pnext { right: 10px; } .pv-pnav { width: 40px; height: 40px; } }
 @media (max-width: 767px) {
@@ -2250,9 +2250,8 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 .mx-rise { animation: none !important; }
 /* faixa de titulos nunca pausa (nem com o mouse em cima) */
 .home-ticker:hover .tk-track, .home-ticker:focus-within .tk-track { animation-play-state: running; }
-/* animacoes da home sempre em movimento ao rolar: camadas proprias na GPU (Safari/iOS congela as que ficam na thread principal) */
-.home-ticker { -webkit-transform: translateZ(0); transform: translateZ(0); }
-.tk-track, .ca-pl, .ca-bg, .ca-col, .ca-row, .ca-mark, .ca-el { will-change: transform; }
+/* faixa de titulos: animacao de transform roda na GPU, sem depender da thread principal ao rolar */
+.tk-track { will-change: transform; }
 .tk-set a u.obra { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 /* destaques: 3 posts */
 .home-dest-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
@@ -2264,19 +2263,19 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 .home-ticker { margin: 8px 0 24px; }
 @media (max-width: 767px) {
   /* bloco centralizado na tela, texto alinhado a esquerda */
-  section:has(.home-aside) .home-aside, section:has(.home-aside) .section-body { width: min(100%, 20rem); margin-inline: auto; text-align: left; }
-  section:has(.home-aside) .home-aside { display: flex; flex-direction: column; align-items: flex-start; }
-  section:has(.home-aside) .home-stats { justify-content: flex-start; }
+  section.has-aside .home-aside, section.has-aside .section-body { width: min(100%, 20rem); margin-inline: auto; text-align: left; }
+  section.has-aside .home-aside { display: flex; flex-direction: column; align-items: flex-start; }
+  section.has-aside .home-stats { justify-content: flex-start; }
 }
 
 /* respiro entre Sobre mim e Projetos */
-section:has(.home-aside) { margin-bottom: clamp(88px, 11vw, 160px); }
+section.has-aside { margin-bottom: clamp(88px, 11vw, 160px); }
 
 /* rodada 4c: mais respiro nas faixas rolantes e, no celular, entre Sobre mim e Projetos */
 .marquee-section { margin-top: 48px !important; margin-bottom: 48px !important; }
 .home-ticker { margin: 40px 0 56px; }
 @media (max-width: 767px) {
-  section:has(.home-aside) { margin-bottom: 128px; }
+  section.has-aside { margin-bottom: 128px; }
   .marquee-section { margin-top: 40px !important; margin-bottom: 40px !important; }
   .home-ticker { margin: 32px 0 48px; }
 }
@@ -2399,7 +2398,7 @@ section:has(.home-aside) { margin-bottom: clamp(88px, 11vw, 160px); }
       </div>
     </section>
 
-    <section class="section-block">
+    <section class="section-block has-aside">
       <div class="section-grid">
         <div class="home-aside">
           <h2 class="section-label" data-i18n="about.label">Sobre mim</h2>
@@ -2777,7 +2776,7 @@ section:has(.home-aside) { margin-bottom: clamp(88px, 11vw, 160px); }
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
 <script src="assets/js/previa-grupos.js"></script>
 <script src="assets/js/previa-origem.js"></script>
-<script src="assets/js/capas.js?v=20261102b"></script>
+<script src="assets/js/capas.js?v=20261111a"></script>
 <script src="assets/js/previa-capas.js"></script>
 <script src="assets/js/previa-obras.js"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
@@ -3110,15 +3109,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const topHeader = document.querySelector('header.top-header');
   let lastY = window.scrollY, ticking = false;
 
+  let hdrY = lastY, hdrScrolled = null, hdrVisible = null;
   window.addEventListener('scroll', () => {
+    hdrY = window.scrollY; // lido no evento: no rAF a leitura forçava layout depois das outras animações
     if (!ticking) {
       requestAnimationFrame(() => {
-        const y = window.scrollY, deltaY = y - lastY;
-        if (y <= 20) topHeader.classList.remove('scrolled');
-        else topHeader.classList.add('scrolled');
-
+        const y = hdrY, deltaY = y - lastY, sc = y > 20;
+        if (sc !== hdrScrolled) { hdrScrolled = sc; topHeader.classList.toggle('scrolled', sc); }
         if (Math.abs(deltaY) > 10 || y <= 0) {
-          floatingHeader.classList.toggle('visible', deltaY < 0 && y > 300);
+          const vis = deltaY < 0 && y > 300;
+          if (vis !== hdrVisible) { hdrVisible = vis; floatingHeader.classList.toggle('visible', vis); }
           lastY = y;
         }
         ticking = false;
@@ -4756,7 +4756,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!home || !pager) return;
     const pageCount = Math.ceil(HOME_PROJECTS.length / 6);
     // troca só os cards: segura a altura da grade (nunca encolhe), assim o resto da página não sobe nem desce
-    if (home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
+    if (home.children.length && home.offsetHeight) home.style.minHeight = Math.max(parseFloat(home.style.minHeight) || 0, home.offsetHeight) + 'px';
     // troca da vitrine: a página nova aparece em fade POR CIMA da atual (a atual fica visível embaixo
     // até ser coberta), então nunca fica vazia. A 1ª página aparece direto, sem animação.
     const html6 = HOME_PROJECTS.slice(homePage * 6, homePage * 6 + 6).map(pjCard).join('');
@@ -4895,7 +4895,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pvOv.classList.toggle('pv-many', many);
     pvPos.textContent = many ? (pvI + 1) + ' / ' + pvList.length : '';
   };
-  const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.classList.add('pv-open'); document.body.style.overflow = 'hidden'; };
   pvBox.addEventListener('click', async (e) => {
     const button = e.target.closest('.pv-share');
     if (!button) return;
@@ -4929,7 +4929,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let pvTx = null;
   pvBox.addEventListener('touchstart', (e) => { pvTx = e.target.closest('.pc-track') ? null : e.touches[0].clientX; }, { passive: true });
   pvBox.addEventListener('touchend', (e) => { if (pvTx == null || pvList.length < 2) return; const dx = e.changedTouches[0].clientX - pvTx; if (Math.abs(dx) > 60) pvShow(pvI + (dx < 0 ? 1 : -1)); pvTx = null; }, { passive: true });
-  const closePosts = () => { if (!pvOv.classList.contains('open')) return; pvOv.classList.remove('open'); if (!dk.classList.contains('open') && !amOverlay.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!pvOv.classList.contains('open')) pvBox.innerHTML = ''; }, 350); };
+  const closePosts = () => { if (!pvOv.classList.contains('open')) return; pvOv.classList.remove('open'); document.body.classList.remove('pv-open'); if (!dk.classList.contains('open') && !amOverlay.classList.contains('open')) document.body.style.overflow = ''; setTimeout(() => { if (!pvOv.classList.contains('open')) pvBox.innerHTML = ''; }, 350); };
   document.getElementById('pv-x').onclick = closePosts;
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pvOv.classList.contains('open') && !lbOverlay.classList.contains('open')) closePosts(); });
   window.HM_POSTS = { openPosts, POSTS, POSTS_BY_ART, igPost, igEmbed, closePosts };
@@ -5318,13 +5318,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastY = window.scrollY, kick = 0;
     window.addEventListener('scroll', () => { const y = window.scrollY; kick += (y - lastY); lastY = y; if (inView) wake(); }, { passive: true });
     const FUGA = () => Math.max(80, Math.min(130, W * 0.09));
-    let frame = 0;
+    let frame = 0; const mqTools = matchMedia('(max-width: 767px)');
     const tick = (now) => {
       const dt = Math.min(0.033, (now - last) / 1000 || 0.016); last = now; t += dt;
-      if (++frame % 30 === 0) measure();
+      if (++frame % 240 === 0) measure(); // obstáculos só mudam com resize/fonte; resize já remede
       const push = Math.max(-24, Math.min(24, kick)); kick = 0;
       const rf = FUGA(), damp = Math.pow(0.18, dt); let energy = 0;
-      const mobile = matchMedia('(max-width: 767px)').matches;
+      const mobile = mqTools.matches;
       const active = B;
       for (const b of active) {
         if (drag && drag.b === b) continue;
@@ -5368,12 +5368,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => { measure(); wake(); });
   };
 
-  renderPJ();
-  initLang();
+  initLang(); // setLang inicial já chama renderPJ pelo onLang (antes a grade era montada duas vezes)
   initMarquee();
   initPortrait();
   initHome();
-  initTools();
+  // rodapé: a física dos ícones só começa quando o contato se aproxima da tela (tira ~50 ms do carregamento)
+  { const ft = document.getElementById('contato'); if (ft && 'IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); initTools(); } }, { rootMargin: '600px 0px' }); io.observe(ft); } else initTools(); }
   const mobileTopButton = document.getElementById('mobile-top-button');
   const getProjectScroller = () => dk.classList.contains('open') ? dkScroller : null;
   // O leitor de artigos rola dentro de .am-reader, não no documento da página.
@@ -5384,11 +5384,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return amIg && !amIg.hidden ? amIg : null;
   };
   const getActiveTopScroller = () => getProjectScroller() || getArticleScroller();
+  const mqTopBtn = window.matchMedia('(max-width: 767px)');
   const updateMobileTopButton = () => {
     if (!mobileTopButton) return;
     const sc = getActiveTopScroller();
     const currentY = sc ? sc.scrollTop : window.scrollY;
-    mobileTopButton.classList.toggle('is-visible', !document.body.classList.contains('home-route') && window.matchMedia('(max-width: 767px)').matches && currentY > 480);
+    const on = !document.body.classList.contains('home-route') && mqTopBtn.matches && currentY > 480;
+    if (on !== mobileTopButton.classList.contains('is-visible')) mobileTopButton.classList.toggle('is-visible', on); // só mexe quando muda
   };
   if (mobileTopButton) {
     mobileTopButton.addEventListener('click', () => {

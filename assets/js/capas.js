@@ -147,7 +147,9 @@
     });
   }) : null;
   var watch = function () { if (ro) document.querySelectorAll('.ca:not([data-ro])').forEach(function (el) { el.dataset.ro = 1; ro.observe(el); }); };
-  if (window.MutationObserver) new MutationObserver(watch).observe(document.documentElement, { childList: true, subtree: true });
+  // agrupa as mutações num quadro (antes rodava querySelectorAll a cada mudança de texto da página)
+  var wq = 0, watchSoon = function () { if (!wq) wq = requestAnimationFrame(function () { wq = 0; watch(); }); };
+  if (window.MutationObserver) new MutationObserver(watchSoon).observe(document.documentElement, { childList: true, subtree: true });
 
   /* Ordem dos cards: evita capas do mesmo modelo lado a lado ou uma embaixo da outra */
   var key = function (p) { var c = p.capaAnim; return c ? c.m + (c.full ? 'F' : '') : 'fixa'; };
