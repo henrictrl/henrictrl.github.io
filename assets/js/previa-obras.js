@@ -1,4 +1,4 @@
-/* PREVIA · sublinha o nome da obra em cada titulo da faixa de artigos (lista manual, titulos em PT) */
+/* PREVIA · faixa de artigos mostra só o nome da obra de cada título, sem sublinhado (lista manual, títulos em PT) */
 (function () {
   var OBRAS = ['O Sentido da Vida', 'O Intruso', 'Você Não Vai Acreditar Quem Morreu', 'Primetime', 'Zoom In, Zoom Out', 'Zi', 'Ir também é ficar', 'Grande Sertão: Veredas', 'Popstar', 'Adults',
     'Big Brother Brasil 26', 'O Drama', 'Lollapalooza', 'E Se Fosse Verdade', 'Arco', 'Viva Verdi!', 'Os Curtas do Oscar 2026', 'Os Curtas do Oscar 2023', 'Zootopia 2: O Inimigo Agora é Outro',
@@ -85,6 +85,8 @@
   var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
   var re = new RegExp('(?<![\\p{L}\\d])(' + OBRAS.map(function (x) { return x.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&'); }).join('|') + ')(?![\\p{L}\\d])', 'gu');
   window.HM_OBRAS_HTML = function (t) {
-    return t.split(re).map(function (p, i) { return i % 2 ? '<u class="obra">' + esc(p) + '</u>' : esc(p); }).join('');
+    // só o(s) nome(s) da obra, sem sublinhado; sem correspondência, mantém o título inteiro
+    var obras = t.split(re).filter(function (p, i) { return i % 2; });
+    return esc(obras.length ? obras.join(' · ') : t);
   };
 })();
