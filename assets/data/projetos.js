@@ -11024,7 +11024,6 @@ window.PROJETOS = [
    "competencias": [
     "redacao",
     "social-media",
-    "substack",
     "google-docs"
    ]
   },

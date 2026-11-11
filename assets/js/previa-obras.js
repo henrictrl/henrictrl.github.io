@@ -1,7 +1,7 @@
-/* PREVIA · sublinha o nome da obra em cada titulo da faixa de artigos (lista manual, titulos em PT) */
+/* PREVIA · faixa de artigos mostra só o nome da obra de cada título, sem sublinhado (lista manual, títulos em PT) */
 (function () {
   var OBRAS = ['O Sentido da Vida', 'O Intruso', 'Você Não Vai Acreditar Quem Morreu', 'Primetime', 'Zoom In, Zoom Out', 'Zi', 'Ir também é ficar', 'Grande Sertão: Veredas', 'Popstar', 'Adults',
-    'Big Brother Brasil 26', 'O Drama', 'Lollapalooza', 'E Se Fosse Verdade', 'Arco', 'Viva Verdi!', 'Os Curtas do Oscar 2026', 'Os Curtas do Oscar 2023', 'Zootopia 2: O Inimigo Agora é Outro',
+    'Big Brother Brasil 26', 'O Drama', 'Lollapalooza', 'E Se Fosse Verdade', 'Arco', 'Viva Verdi!', 'Os Curtas do Oscar 2026', 'Os Curtas do Oscar 2023', 'Zootopia 2',
     'Sonhos de Trem', 'Anaconda', 'Os Melhores Filmes de 2025', 'Os Melhores Discos de 2025', 'As Melhores Séries de 2025', 'Os Melhores Filmes de 2023', 'As Melhores Séries de 2023',
     'Os Melhores Discos de 2023', 'Os Melhores Discos de 2022', 'As Melhores Séries de 2022', 'Os Melhores Filmes de 2022', 'As Melhores Séries de 2021', 'No Other Choice', 'Studio Ghibli',
     'Corrida das Blogueiras', 'Erupcja', 'Ghibli Fest', 'Ego Death at a Bachelorette Party', 'Rachel Chinouriri', 'Melhor Roteiro Original', 'MasterChef Amadores', 'MasterChef',
@@ -10,6 +10,7 @@
     "Brat and it's completely different but also still brat", 'BRAT', 'Harlequin', 'Quantum Baby', 'Ainda Temos o Amanhã', 'Representatividade LGBTQIA+', 'Depois da Morte', 'BB/ANG3L',
     'Questão de Tempo', 'Black Panther: The Album', 'Sweetener', 'Isolation', 'X-Men', 'Croma Kid', 'Dulcineia', 'El mal querer', 'Do Lixo ao Tesouro: Transformando Negativos em Positivos',
     'My Mind & Me', 'Dirty Computer', 'John Wick 4: Baba Yaga', 'Treta', 'Vício Inerente', 'As Primas', 'Hunters', 'Pearl', 'Avatar: O Caminho da Água', 'Ctrl (Deluxe)',
+    'O Hobbit',
     'All of a Sudden',
     'The Incomer',
     "You'll Never Believe Who's Dead",
@@ -17,7 +18,7 @@
     'Just Like Heaven',
     'The 2026 Oscar Shorts',
     'The 2023 Oscar Shorts',
-    'Zootopia 2: The Enemy Is Someone Else Now',
+    'Zootopia 2',
     'Train Dreams',
     'The Best Films of 2025',
     'The Best Albums of 2025',
@@ -52,7 +53,7 @@
     'Ojalá fuera cierto',
     'Los Cortos del Óscar 2026',
     'Los Cortos del Óscar 2023',
-    'Zootopia 2: El enemigo ahora es otro',
+    'Zootopia 2',
     'Las Mejores Películas de 2025',
     'Los Mejores Discos de 2025',
     'Las Mejores Series de 2025',
@@ -85,6 +86,8 @@
   var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
   var re = new RegExp('(?<![\\p{L}\\d])(' + OBRAS.map(function (x) { return x.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&'); }).join('|') + ')(?![\\p{L}\\d])', 'gu');
   window.HM_OBRAS_HTML = function (t) {
-    return t.split(re).map(function (p, i) { return i % 2 ? '<u class="obra">' + esc(p) + '</u>' : esc(p); }).join('');
+    // só o(s) nome(s) da obra, sem sublinhado; sem correspondência, mantém o título inteiro
+    var obras = t.split(re).filter(function (p, i) { return i % 2; });
+    return esc(obras.length ? obras.join(' · ') : t);
   };
 })();

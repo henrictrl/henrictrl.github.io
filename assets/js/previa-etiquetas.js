@@ -35,7 +35,6 @@ window.HM_ETQ = (function () {
     "notion":{pt:"Notion",en:"Notion",es:"Notion"},
     "trello":{pt:"Trello",en:"Trello",es:"Trello"},
     "gmail":{pt:"Gmail",en:"Gmail",es:"Gmail"},
-    "substack":{pt:"Substack",en:"Substack",es:"Substack"},
     "microsoft-office":{pt:"Microsoft Office",en:"Microsoft Office",es:"Microsoft Office"},
     "premiere":{pt:"Premiere",en:"Premiere",es:"Premiere"},
     "monday":{pt:"Monday",en:"Monday",es:"Monday"},
