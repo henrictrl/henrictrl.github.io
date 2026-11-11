@@ -2277,6 +2277,7 @@ section.has-aside { margin-bottom: clamp(88px, 11vw, 160px); }
 }
 
 /* rodada 4d */
+.art-filter svg { width: 13px; height: 13px; margin-right: 6px; vertical-align: -2px; flex: none; }
 .art-filter svg.pv-fav { width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; flex: none; }
 .art-filter[aria-pressed="true"] svg.pv-fav { fill: currentColor; }
 /* Sollaris: sem troca de imagem ao passar o mouse */
@@ -2831,8 +2832,8 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
       'portrait.aria': 'Portrait of Henrique Marinhos. Activate to see it in motion.',
       'about.label': 'About me', 'about.more': 'Learn more',
       // dois textos: cada um escolhido para justificar sem buracos na sua largura (desktop 31.6em / mobile 19.7em)
-      'about.text.d': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
-      'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and strategies in <em>branding</em> and <em>design</em>. I take a critical approach to building narratives and write about culture for journalistic outlets. I also develop <em>landing</em> <em>pages</em> and graphic assets aligned with your brand.',
+      'about.text.d': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and <em>branding</em> and <em>design</em> strategies. I develop visual identities, <em>landing pages</em> and graphic assets for brands. I am also a cultural writer for independent news outlets.',
+      'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and <em>branding</em> and <em>design</em> strategies. I develop visual identities, <em>landing pages</em> and graphic assets for brands. I am also a cultural writer for independent news outlets.',
       'services.title': 'Services',
       'svc.identidade.t': 'Graphic design', 'svc.identidade.d': 'Logo, palette, typography and the pieces that take the brand into the world: business cards, stationery, packaging and event print.',
       'svc.social.t': 'Social content', 'svc.social.d': 'Visual planning and graphic assets for social media, campaigns and presentations.',
@@ -2865,8 +2866,8 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
       'hint.mouse': 'pasa el mouse - haz clic para animar', 'hint.touch': 'arrastra el dedo - toca para animar',
       'portrait.aria': 'Retrato de Henrique Marinhos. Actívalo para verlo en movimiento.',
       'about.label': 'Sobre mí', 'about.more': 'Saber más',
-      'about.text.d': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
-      'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Abordo de forma crítica la construcción de narrativas y escribo sobre cultura para medios periodísticos. También desarrollo <em>landing</em> <em>pages</em> y piezas gráficas alineadas con tu marca.',
+      'about.text.d': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
+      'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
       'services.title': 'Servicios',
       'svc.identidade.t': 'Diseño gráfico', 'svc.identidade.d': 'Logotipo, paleta, tipografía y las piezas que llevan la marca al mundo: tarjetas, papelería, empaques e impresos para eventos.',
       'svc.social.t': 'Contenido y redes sociales', 'svc.social.d': 'Planificación visual y piezas gráficas para redes, campañas y presentaciones.',
@@ -3517,15 +3518,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const rowsHtml = (keep) => LINHAS().map((l, li) => '<div class="art-row">' + l.map(([k, html]) => {
       const on = k.startsWith('m:') ? (artFilter !== 'fav' && k === 'm:' + artMode) : k === keep;
       return `<button class="art-filter" data-k="${k}" aria-pressed="${on}">${html}</button>`;
-    }).join('') + (li === 1 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
+    }).join('') + (li === 2 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
     // categorias com lista própria (assets/data/colecoes.js → CATEGORIAS); membros = textos (u) e posts (p)
     const CATS = window.CATEGORIAS || {};
     const catEntries = (k) => {
       const s = CATS[k] || {};
       const arts = (s.u || []).map(u => data.find(x => x.u === u)).filter(Boolean).map(x => ({ kind: 'text', item: x, d: x.d }));
-      const posts = Object.entries(s.p || {}).map(([c, t]) => { const x = (window.POSTS || []).find(z => z.c === c); return x ? { kind: 'post', item: x, title: t, d: x.d } : null; }).filter(Boolean);
+      const posts = (s.p || []).map(c => { const x = (window.POSTS || []).find(z => z.c === c); return x ? { kind: 'post', item: x, d: x.d } : null; }).filter(Boolean);
       return [...arts, ...posts].sort((p, q) => String(q.d).localeCompare(String(p.d)));
     };
+    const postTitle = (x) => { const t = (window.POST_TITULOS || {})[x.c]; return t ? (t[LANG] || t.pt) : esc(capTitle(x)); };
     const postCard = (x, title) => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
       <div class="art-card-media" style="aspect-ratio:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
       <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${title}</h2></a>`;
@@ -3584,7 +3586,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = items.map(entry => {
           if (entry.kind === 'post') {
             const x = entry.item, linked = x.art && data.find(a => a.u === x.art);
-            const title = linked ? artTitle(linked) : x.c === 'DeKDr7dFgRW' ? 'Desvendando o Pop: lançamentos de setembro de 2026' : x.c === 'Dd6mzTmFpUe' ? 'Tinashe antecipa Popstar no Desvendando o Pop' : capTitle(x);
+            const title = linked ? artTitle(linked) : postTitle(x);
             return `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
               <div class="art-card-media" style="aspect-ratio:${(1 / x.r).toFixed(4)}">${x.n > 1 ? `<span class="art-ig-count">${SLIDES_ICO}${x.n}</span>` : ''}<img src="${postSrc(x, 0)}" alt="" loading="lazy" decoding="async"></div>
               <p class="art-card-meta">${x.v} — ${fmtData(x.d)}</p><h2 class="art-card-title">${title}</h2></a>`;
@@ -3600,14 +3602,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (isCat) { // Cabines, Mostra SP, Carrosséis, Premiações: só os itens da categoria, sem acumular
-        const ents = catEntries(k);
+        const ents = catEntries(k).filter(e => artMode !== 'ig' || e.kind === 'post' || PBA[e.item.u]);
         grid.classList.toggle('is-mixed', ents.some(e => e.kind === 'post'));
-        grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, e.title) : artCard(e.item, { showTag: false, ig: artMode === 'ig' })).join('');
+        grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, postTitle(e.item)) : artCard(e.item, { showTag: false, ig: artMode === 'ig' })).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }
       // Todos e Cinema · Música · Televisão · Literatura: todos os textos da etiqueta (o modo Instagram só troca a miniatura)
-      const lista = COL ? data.filter(a => window.colMatch(COL.c, a, COL.ano)) : k === 'all' ? data : data.filter(a => a.tags.includes(k));
+      let lista = COL ? data.filter(a => window.colMatch(COL.c, a, COL.ano)) : k === 'all' ? data : data.filter(a => a.tags.includes(k));
+      if (artMode === 'ig' && !COL) lista = lista.filter(a => PBA[a.u]); // modo Instagram: só os textos que têm post
       const showTag = COL ? !COL.c.tag : k === 'all'; // dentro de uma categoria a etiqueta é redundante
       grid.innerHTML = lista.map(a => artCard(a, { showTag, ig: !COL && artMode === 'ig' })).join('');
       [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });

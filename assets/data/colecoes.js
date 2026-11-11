@@ -40,7 +40,10 @@ window.CATEGORIAS = {
    "https://tesouracomponta.com/primetime/",
    "https://tesouracomponta.com/critica-zoom-in-zoom-out/",
    "https://tesouracomponta.com/critica-zi-kogonada/",
+   "https://tesouracomponta.com/no-other-choice-critica/",
+   "https://tesouracomponta.com/erupcja-critica/",
    "https://personaunesp.com.br/48a-mostra-internacional-de-cinema-reportagem/",
+   "https://personaunesp.com.br/coracoes-jovens-critica/",
    "https://personaunesp.com.br/o-pardal-na-chamine-critica/",
    "https://personaunesp.com.br/lispectorante-critica/",
    "https://personaunesp.com.br/uma-terra-deixada-para-tras-critica/",
@@ -63,11 +66,11 @@ window.CATEGORIAS = {
    "https://tesouracomponta.com/os-melhores-filmes-de-2025/",
    "https://tesouracomponta.com/ir-tambem-e-ficar-critica/"
   ],
-  "p": {
-   "DfXT4e8oXpD": "Desvendando o Pop: lançamentos de outubro de 2026",
-   "DeKDr7dFgRW": "Desvendando o Pop: lançamentos de setembro de 2026",
-   "Dd6mzTmFpUe": "Tinashe antecipa Popstar no Desvendando o Pop"
-  }
+  "p": [
+   "DfXT4e8oXpD",
+   "DeKDr7dFgRW",
+   "Dd6mzTmFpUe"
+  ]
  },
  "premiacoes": {
   "u": [
@@ -82,5 +85,23 @@ window.CATEGORIAS = {
    "https://personaunesp.com.br/os-curtas-do-oscar-2023/",
    "https://personaunesp.com.br/avatar-o-caminho-da-agua-critica/"
   ]
+ }
+};
+/* títulos dos posts do Instagram sem texto ligado (PT/EN/ES) */
+window.POST_TITULOS = {
+ "DfXT4e8oXpD": {
+  "pt": "Desvendando o Pop: lançamentos de outubro de 2026",
+  "en": "Desvendando o Pop: October 2026 releases",
+  "es": "Desvendando o Pop: lanzamientos de octubre de 2026"
+ },
+ "DeKDr7dFgRW": {
+  "pt": "Desvendando o Pop: lançamentos de setembro de 2026",
+  "en": "Desvendando o Pop: September 2026 releases",
+  "es": "Desvendando o Pop: lanzamientos de septiembre de 2026"
+ },
+ "Dd6mzTmFpUe": {
+  "pt": "Tinashe antecipa Popstar no Desvendando o Pop",
+  "en": "Tinashe previews Popstar on Desvendando o Pop",
+  "es": "Tinashe anticipa Popstar en Desvendando o Pop"
  }
 };
