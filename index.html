@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos (assets/...) sempre a partir da raiz, mesmo após pushState para /sobre/, /projetos/ etc. -->
-<script src="assets/js/tema.js?v=20261101b"></script> <!-- modo noturno: no head, antes da pintura -->
+<script src="assets/js/tema.js?v=20261111b"></script> <!-- modo noturno: no head, antes da pintura -->
 <!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
 <script>(function(h){try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/motion.css?v=20261102a">
@@ -418,8 +418,6 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 
 .marquee-mask {
   overflow: hidden; padding: 36px 0; margin: -36px 0; /* folga vertical p/ o zoom não cortar */
-  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
 .marquee-track { display: flex; width: max-content; align-items: center; will-change: transform; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 @media (hover: none) { .marquee-track { touch-action: none; } }
@@ -2140,7 +2138,7 @@ a.ft-side:focus-visible { outline:2px solid var(--ink); outline-offset:4px; bord
 }
 /* desktop: abertura + Sobre centralizados na 1ª tela (como hoje), com distância fixa entre eles */
 @media (min-width: 768px) {
-  .first-screen { min-height: 0; padding-block: 0; display: block; } /* sem altura mínima: espaços fixos, iguais em qualquer tela */
+  .first-screen { min-height: calc(100vh - var(--hdr-h, 72px)); min-height: calc(100svh - var(--hdr-h, 72px)); padding-block: 0; display: block; } /* espaços fixos entre os blocos; a altura mínima empurra Projetos para depois da 1ª tela */
   section.hero { padding: var(--H) var(--gutter) 0 !important; } /* cabeçalho → abertura = H */
   #view-home .first-screen > .section-block { padding-block: var(--H) 0; } /* abertura → Sobre = H */
 }
@@ -2185,7 +2183,7 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 @media (min-width: 768px) { .home-art-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; margin-top: 32px; } .home-art-grid .art-card:first-child { grid-column: auto; } }
 
 /* faixa de titulos: duas linhas em sentidos opostos; pausa com mouse ou foco */
-.home-ticker { margin: 36px calc(-1 * var(--gutter)) 0; overflow: hidden; display: flex; flex-direction: column; gap: 2px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.home-ticker { margin: 36px calc(-1 * var(--gutter)) 0; overflow: hidden; display: flex; flex-direction: column; gap: 2px; }
 .home-ticker:empty { display: none; }
 .tk-track { display: flex; width: max-content; animation: tk var(--tk, 80s) linear infinite; }
 .tk-row:nth-child(2) .tk-track { animation-direction: reverse; }
@@ -2194,7 +2192,7 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 .tk-set a { font-size: clamp(15px, 1.5vw, 19px); font-weight: 400; letter-spacing: -0.01em; line-height: 1.9; white-space: nowrap; color: var(--gray-600); transition: color 0.25s var(--ease); }
 .tk-set a:hover, .tk-set a:focus-visible { color: var(--ink); }
 .tk-set i { flex: none; width: 4px; height: 4px; margin: 0 clamp(12px, 1.6vw, 22px); border-radius: 50%; background: var(--gray-200); }
-@keyframes tk { to { transform: translateX(-50%); } }
+@keyframes tk { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 @media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .tk-row { overflow-x: auto; } .tk-set[aria-hidden] { display: none; } }
 
 /* Destaques: 4 posts em linha; no celular 2 + 2 */
@@ -2241,8 +2239,6 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 .work-card:hover .work-card-media, .work-card:focus-visible .work-card-media, .art-card:hover .art-card-media, .art-card:focus-visible .art-card-media { transform: translateY(-5px); box-shadow: 0 22px 40px -18px rgba(0,0,0,0.32), 0 2px 6px rgba(0,0,0,0.06); }
 .work-card-title::after, .art-card-title::after { content: "\2192"; display: inline-block; margin-left: 6px; opacity: 0; transform: translateX(-8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
 .work-card:hover .work-card-title::after, .work-card:focus-visible .work-card-title::after, .art-card:hover .art-card-title::after, .art-card:focus-visible .art-card-title::after { opacity: 1; transform: none; }
-/* etiqueta da previa (nao vai para o site) */
-.previa-tag { position: fixed; left: 10px; bottom: 10px; z-index: 9999; padding: 5px 9px; border-radius: 999px; background: #111; color: #fff; font: 500 11px/1 Inter, sans-serif; letter-spacing: 0.03em; pointer-events: none; opacity: 0.85; }
 
 /* rodada 4: tudo carregado, sem entrada ao rolar */
 .reveal, .reveal-stagger, .reveal-stagger > *, .art-card, .work-card, .work-card.mx-fade, .work-card.mx-fade.mx-wait { opacity: 1 !important; transform: none !important; transition-delay: 0s !important; }
@@ -2294,6 +2290,22 @@ section.has-aside { margin-bottom: clamp(88px, 11vw, 160px); }
   /* icones flutuantes do contato um pouco maiores */
   .tool-ic { width: 38px !important; height: 38px !important; }
 }
+
+/* ===== Desempenho na rolagem (Safari, Chrome, Firefox, iOS, Android) =====
+   - mask-image em contêiner com filho animado obriga repintura a cada quadro: bordas viram degradês sobrepostos
+   - capas animadas e faixa de títulos só correm na tela; todas animam só transform/opacity (aceleradas também no Safari) */
+.home-ticker { position: relative; contain: layout paint; }
+.home-ticker::before, .home-ticker::after, .marquee-mask::before, .marquee-mask::after { content: ""; position: absolute; top: 0; bottom: 0; z-index: 3; pointer-events: none; }
+.home-ticker::before { left: 0; width: 7%; background: linear-gradient(90deg, var(--white, #fff), transparent); }
+.home-ticker::after { right: 0; width: 7%; background: linear-gradient(270deg, var(--white, #fff), transparent); }
+.marquee-mask { position: relative; }
+.marquee-mask::before { left: 0; width: 8%; background: linear-gradient(90deg, var(--white, #fff), transparent); }
+.marquee-mask::after { right: 0; width: 8%; background: linear-gradient(270deg, var(--white, #fff), transparent); }
+.tk-track { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.work-card-media { isolation: isolate; }
+.ca { transform: translateZ(0); }
+.home-ticker.is-off .tk-track, .ca.is-off, .ca.is-off * { animation-play-state: paused !important; }
+.home-featured-grid.home-fade-in { will-change: opacity; transform: translateZ(0); }
 </style>
 <!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
 <link rel="canonical" href="https://henrictrl.github.io/">
@@ -2323,7 +2335,6 @@ section.has-aside { margin-bottom: clamp(88px, 11vw, 160px); }
 <!-- /compartilhamento -->
 </head>
 <body class="home-route">
-<div class="previa-tag" aria-hidden="true">Prévia · rodada 3</div>
 <!-- tela de carregamento (motion.js anima e remove) -->
 <div id="mx-loader" aria-hidden="true"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
 
@@ -2776,8 +2787,8 @@ section.has-aside { margin-bottom: clamp(88px, 11vw, 160px); }
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
 <script src="assets/js/previa-grupos.js"></script>
 <script src="assets/js/previa-origem.js"></script>
-<script src="assets/js/capas.js?v=20261111a"></script>
-<script src="assets/js/previa-capas.js"></script>
+<script src="assets/js/capas.js?v=20261111b"></script>
+<script src="assets/js/previa-capas.js?v=20261111b"></script>
 <script src="assets/js/previa-obras.js"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
 <script src="assets/js/previa-posts.js"></script>
@@ -4724,8 +4735,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // pausa (acessibilidade e economia): mouse em cima, foco do teclado, vitrine fora da tela ou aba escondida.
   // O tempo restante é guardado e o traço que enche congela junto (animation-play-state).
   let homeLeft = HOME_AUTO_MS, homeStart = 0, homePages = 0;
-  const homePause = { hover: false, focus: false, off: false };
-  const homePaused = () => homePause.hover || homePause.focus || homePause.off || document.hidden;
+  const homePause = { hover: false, focus: false, off: false, scroll: false };
+  const homePaused = () => homePause.hover || homePause.focus || homePause.off || homePause.scroll || document.hidden;
   const homeRun = () => {
     clearTimeout(homeTimer); homeTimer = null;
     document.getElementById('home-pagination')?.classList.toggle('is-paused', homePaused());
@@ -4744,7 +4755,16 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('focusin', () => { homePause.focus = true; homeHold(); });
       el.addEventListener('focusout', (e) => { if (!el.contains(e.relatedTarget)) { homePause.focus = false; homeRun(); } });
     });
-    // a vitrine segue girando mesmo fora da tela (rolagem não pausa); só mouse, foco e aba escondida pausam
+    // a troca nunca acontece durante a rolagem (decodificar capas novas no meio do gesto travava a página) nem fora da tela
+    let scT = 0;
+    addEventListener('scroll', () => {
+      if (!homePause.scroll) { homePause.scroll = true; homeHold(); }
+      clearTimeout(scT); scT = setTimeout(() => { homePause.scroll = false; homeRun(); }, 700);
+    }, { passive: true });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => {
+      const off = !en.isIntersecting; if (off === homePause.off) return;
+      homePause.off = off; off ? homeHold() : homeRun();
+    }).observe(vp);
     document.addEventListener('visibilitychange', () => document.hidden ? homeHold() : homeRun());
   };
   initHomePause();
@@ -4787,6 +4807,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderHomeRows(direction);
     };
     scheduleHomeAuto(pageCount);
+    // aquece o cache das imagens da próxima página enquanto a atual está parada
+    const warm = () => { const n = (homePage + 1) % pageCount; if (n === homePage) return;
+      (HOME_PROJECTS.slice(n * 6, n * 6 + 6).map(pjCard).join('').match(/(?:src="|url\()[^")]+/g) || []).forEach(m => { const u = m.replace(/^(?:src="|url\()/, ''); if (!/^(?:assets\/|\/)/.test(u)) return; const im = new Image(); im.decoding = 'async'; im.src = u; im.decode && im.decode().catch(() => {}); }); };
+    ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 1500 }) : setTimeout(warm, 600);
     renderHomeExtras(); // previa
     // a página NUNCA é rolada por aqui: a altura da grade fica presa (min-height), então nada se mexe.
     // (antes havia uma "devolução" da rolagem que puxava a página de volta se a pessoa rolasse durante a troca)
@@ -5504,5 +5528,16 @@ document.addEventListener('DOMContentLoaded', () => {
 <script src="assets/js/previa-contato.js" defer></script>
 <script src="assets/js/motion.js?v=20261102a" defer></script>
 <script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
+<script>
+/* Desempenho: pausa capas e faixa de títulos fora da tela (ver CSS "Desempenho na rolagem") */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var seen = new WeakSet(), q = 0;
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('is-off', !e.isIntersecting); }); }, { rootMargin: '160px 0px' });
+  var scan = function () { q = 0; document.querySelectorAll('.ca, .home-ticker').forEach(function (el) { if (!seen.has(el)) { seen.add(el); io.observe(el); } }); };
+  scan();
+  new MutationObserver(function () { if (!q) q = requestAnimationFrame(scan); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 </body>
 </html>

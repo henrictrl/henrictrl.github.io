@@ -9,17 +9,19 @@
   var px = by('pixelar'); if (px) px.capaAnim = null; // capa do Pixelar = logo (capa.webp)
   // Tesoura com Ponta volta ao logo estatico (sem capaAnim)
   var st = document.createElement('style');
-  st.textContent = '.work-card-media .ca.ca-seq img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;animation:ca-seq calc(var(--n)*var(--s)) linear infinite;animation-delay:calc(var(--i)*var(--s));will-change:opacity,transform}' +
-    '.work-card-media .ca.ca-seq img:first-child{opacity:1}' +
-    '@keyframes ca-seq{0%{opacity:0;z-index:2;transform:scale(1.05)}3%{opacity:1;z-index:2}25%{opacity:1;z-index:2}25.01%{opacity:1;z-index:1}29%{opacity:1;z-index:1;transform:scale(1)}29.01%{opacity:0;z-index:1}100%{opacity:0;z-index:1;transform:scale(1)}}' +
-    '.work-card-media .ca.ca-seq2 img{animation-name:ca-seq2}@keyframes ca-seq2{0%{opacity:0;z-index:2;transform:scale(1.04)}6%{opacity:1;z-index:2}50%{opacity:1;z-index:2}50.01%{opacity:1;z-index:1}58%{opacity:1;z-index:1;transform:scale(1)}58.01%{opacity:0;z-index:1}100%{opacity:0;z-index:1;transform:scale(1)}}' +
+  st.textContent = '.work-card-media .ca.ca-seq img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;backface-visibility:hidden}' +
+    /* 1ª imagem fica embaixo e só respira; a 2ª entra e sai em fusão por cima */
+    '.work-card-media .ca.ca-seq img:first-child{animation:ca-s1 calc(var(--n)*var(--s)) ease-out infinite}' +
+    '.work-card-media .ca.ca-seq img:nth-child(2){opacity:0;animation:ca-s2 calc(var(--n)*var(--s)) linear infinite}' +
+    '@keyframes ca-s1{0%,50%{transform:scale(1.04)}48%,100%{transform:scale(1)}}' +
+    '@keyframes ca-s2{0%{opacity:0;transform:scale(1.04)}6%{opacity:1}50%{opacity:1;transform:scale(1)}56%,100%{opacity:0;transform:scale(1)}}' +
     '@media (prefers-reduced-motion:reduce){.work-card-media .ca.ca-seq img{animation:none}}';
   document.head.appendChild(st);
   var orig = window.capaAnimHTML;
   window.capaAnimHTML = function (p) {
     var q = SEQ[p.slug]; if (!q) return orig ? orig(p) : '';
     var h = '';
-    for (var i = 0; i < q.n; i++) h += '<img style="--i:' + i + '" src="assets/projetos/' + p.slug + '/capa/s' + q.f[i] + '.webp" alt="" width="900" height="600" decoding="async"' + (i ? ' loading="lazy"' : '') + '>';
+    for (var i = 0; i < q.n; i++) h += '<img src="assets/projetos/' + p.slug + '/capa/s' + q.f[i] + '.webp" alt="" width="900" height="600" decoding="async"' + (i ? ' loading="lazy"' : '') + '>';
     return '<div class="ca ca-seq' + (q.n === 2 ? ' ca-seq2' : '') + '" style="--ca-bg:' + q.bg + ';--n:' + q.n + ';--s:' + q.s + 's">' + h + '</div>';
   };
 })();

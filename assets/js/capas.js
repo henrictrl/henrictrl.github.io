@@ -28,14 +28,13 @@
     '.work-card-media .ca-DT .ca-bg{left:0;top:22%;width:100%;height:78%;object-fit:cover;object-position:50% 40%;transform-origin:50% 60%;animation:ca-kb 12s ease-in-out infinite alternate}',
     '.ca-DT .ca-side{inset:0 0 auto 0;width:auto;height:46%;background:linear-gradient(180deg,var(--ca-p) 0,var(--ca-p) 48%,transparent 100%);place-items:start center;padding-top:5.5cqw}',
     '.work-card-media .ca-DT .ca-lg{max-width:44cqw;max-height:13cqw}',
-    '.work-card-media .ca-DC .ca-bg{left:50%;top:50%;width:84%;height:84%;object-fit:contain;translate:-50% -50%;animation:ca-kbc 12s ease-in-out infinite alternate}',
-    '.work-card-media .ca-DC.full .ca-bg{width:100%;height:100%;object-fit:cover}',
+    '.work-card-media .ca-DC .ca-bg{left:8%;top:8%;width:84%;height:84%;object-fit:contain;animation:ca-kbc 12s ease-in-out infinite alternate}',
+    '.work-card-media .ca-DC.full .ca-bg{left:0;top:0;width:100%;height:100%;object-fit:cover}',
     '@keyframes ca-kb{from{transform:scale(1)}to{transform:scale(1.08)}}',
     '@keyframes ca-kbc{from{transform:scale(1)}to{transform:scale(1.07)}}',
     /* E · mesa */
     '.ca-E{perspective:var(--persp,1540px)}',
-    '.work-card-media .ca-E .ca-pl{height:auto;animation:ca-pan 14s ease-in-out infinite alternate;transform:rotateX(52deg) rotateZ(-32deg) translateX(calc(var(--tx) * -1))}',
-    '@keyframes ca-pan{from{transform:rotateX(52deg) rotateZ(-32deg) translateX(calc(var(--tx) * -1))}to{transform:rotateX(52deg) rotateZ(-32deg) translateX(var(--tx))}}',
+    '.work-card-media .ca-E .ca-pl{height:auto;animation-duration:14s;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate}', /* keyframes com valores fixos por capa (JS): var() em keyframes tira a aceleração no Safari */
     /* M · mosaico */
     '.work-card-media .ca-M .ca-bg{left:0;top:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;animation:ca-kb 16s ease-in-out infinite alternate}',
     /* H · capa fixa; no hover mostra uma segunda imagem */
@@ -52,11 +51,11 @@
     '.work-card-media .ca-row img{position:static;height:100%;width:auto;flex:none}',
     '@keyframes ca-hl{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}',
     '@keyframes ca-hr{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}',
-    '.work-card-media .ca-L .ca-mark{left:50%;top:var(--y,50%);translate:-50% -50%;width:auto;height:auto;max-width:var(--mw);max-height:var(--mh)}',
+    '.work-card-media .ca-L .ca-mark{inset:0;top:calc((var(--y,50%) - 50%) * 2);margin:auto;width:auto;height:auto;max-width:var(--mw);max-height:var(--mh)}',
     '.work-card-media .ca-L .ca-mark.spin{animation:ca-spin var(--spin) linear infinite}',
     '@keyframes ca-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}',
     '.work-card-media .ca-DC.pulse .ca-bg{animation:ca-pulse 6s ease-in-out infinite alternate}',
-    '@keyframes ca-pulse{from{transform:scale(1);filter:saturate(1)}to{transform:scale(1.06);filter:saturate(1.25)}}',
+    '@keyframes ca-pulse{from{transform:scale(1)}to{transform:scale(1.06)}}',
     /* S · elemento da capa animado (girar, piscar, anéis crescendo) */
     '.work-card-media .ca-S .ca-base{inset:0;width:100%;height:100%;object-fit:cover}',
     /* elemento centralizado pelo layout (caixa da altura do card, centrada em y; imagem no meio com flex),
@@ -71,8 +70,8 @@
     '.work-card-media .ca-S .ca-hv{inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .5s var(--ease,ease),transform .9s var(--ease,ease)}',
     '.work-card:hover .work-card-media .ca-S .ca-hv,.work-card:focus-visible .work-card-media .ca-S .ca-hv{opacity:1;transform:scale(1)}',
     /* V · rolagem vertical de uma página longa */
-    '.work-card-media .ca-V .ca-bg{inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;animation:ca-scroll 28s ease-in-out infinite alternate}',
-    '@keyframes ca-scroll{0%,6%{object-position:50% 0}94%,100%{object-position:50% 100%}}',
+    '.work-card-media .ca-V .ca-bg{left:0;top:0;width:100%;height:auto;animation:ca-scroll 28s ease-in-out infinite alternate}',
+    '@keyframes ca-scroll{0%,6%{transform:translate3d(0,0,0)}94%,100%{transform:translate3d(0,calc(-100% + 66.667cqw),0)}}', /* card 3:2: altura = 66,667cqw */
     /* K · símbolo trocando de cor */
     '.ca-kbg{position:absolute;inset:0;background:#123358}',
     '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;translate:-50% -50%;background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
@@ -131,19 +130,22 @@
     } else if (c.m === 'E') {
       // tudo em % do card (3:2): não depende de unidades de container, que o Safari congela na animação
       var P = c.ar > 1 ? 36 : 30, W = c.scale * P, H = W * c.h / c.w, L = 50 - c.cx * W, T = (33.333 - c.cy * H) / 0.66667;
-      h = '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;--tx:' + (250 / W).toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
+      var tx = +(250 / W).toFixed(3), kn = 'ca-pan-' + Math.round(tx * 1000), tf = function (v) { return 'rotateX(52deg) rotateZ(-32deg) translateX(' + v + '%)'; };
+      h = '<style>@keyframes ' + kn + '{from{transform:' + tf(-tx) + '}to{transform:' + tf(tx) + '}}</style>';
+      h += '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="animation-name:' + kn + ';transform:' + tf(-tx) + ';width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
     return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
   };
 
+  var restart = function (els) { [].forEach.call(els, function (a) { if (a.getAnimations) a.getAnimations().forEach(function (an) { an.cancel(); an.play(); }); }); };
   /* Perspectiva proporcional ao card e reinício das animações quando o card muda de tamanho (troca de colunas) */
   var ro = window.ResizeObserver ? new ResizeObserver(function (es) {
     es.forEach(function (e) {
       var el = e.target, w = Math.round(e.contentRect.width); if (!w || +el.dataset.w === w) return;
       var first = !el.dataset.w; el.dataset.w = w; el.style.setProperty('--persp', Math.round(w * 4.7) + 'px');
       if (first) return;
-      el.querySelectorAll('.ca-pl,.ca-bg,.ca-col,.ca-row,.ca-mark,.ca-el').forEach(function (a) { a.style.animation = 'none'; void a.offsetWidth; a.style.animation = ''; });
+      restart(el.querySelectorAll('.ca-pl,.ca-bg,.ca-col,.ca-row,.ca-mark,.ca-el'));
     });
   }) : null;
   var watch = function () { if (ro) document.querySelectorAll('.ca:not([data-ro])').forEach(function (el) { el.dataset.ro = 1; ro.observe(el); }); };
@@ -168,6 +170,6 @@
   document.addEventListener('load', function (e) {
     var t = e.target; if (!t || t.tagName !== 'IMG') return;
     var col = t.parentNode; if (!col || !col.classList || !(col.classList.contains('ca-col') || col.classList.contains('ca-row'))) return;
-    col.style.animation = 'none'; void col.offsetHeight; col.style.animation = '';
+    restart([col]);
   }, true);
 })();
