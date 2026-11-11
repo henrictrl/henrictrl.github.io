@@ -10,6 +10,7 @@
     "Brat and it's completely different but also still brat", 'BRAT', 'Harlequin', 'Quantum Baby', 'Ainda Temos o Amanhã', 'Representatividade LGBTQIA+', 'Depois da Morte', 'BB/ANG3L',
     'Questão de Tempo', 'Black Panther: The Album', 'Sweetener', 'Isolation', 'X-Men', 'Croma Kid', 'Dulcineia', 'El mal querer', 'Do Lixo ao Tesouro: Transformando Negativos em Positivos',
     'My Mind & Me', 'Dirty Computer', 'John Wick 4: Baba Yaga', 'Treta', 'Vício Inerente', 'As Primas', 'Hunters', 'Pearl', 'Avatar: O Caminho da Água', 'Ctrl (Deluxe)',
+    'O Hobbit',
     'All of a Sudden',
     'The Incomer',
     "You'll Never Believe Who's Dead",
