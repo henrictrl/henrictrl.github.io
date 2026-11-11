@@ -94,8 +94,12 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 <script src="assets/data/projetos.js?v=20261031-manual"></script>
+<script src="assets/js/previa-grupos.js"></script>
 <script src="assets/js/capas.js?v=20261102b"></script>
+<script src="assets/js/previa-capas.js"></script>
+<script src="assets/js/previa-obras.js"></script>
 <script src="assets/data/posts.js?v=20261023-midias"></script>
+<script src="assets/js/previa-posts.js"></script>
 <script src="assets/data/engajamento.js?v=20261018-review3"></script>
 <script>
 
@@ -574,7 +578,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     toc.innerHTML=tocItems.map(function(item,index){return '<a href="#'+esc(item[0])+'" data-t="'+esc(item[0])+'"'+(index?"":' class="on"')+'>'+esc(lx(item[1]))+'</a>';}).join("");
     toc.hidden=tocItems.length<2;
     toc.parentNode.classList.toggle("no-toc",toc.hidden);
-    var navigationProjects=PROJECTS;
+    var navigationProjects=PROJECTS.filter(function(item){return (window.HM_OCULTOS||[]).indexOf(item.slug)<0||item.slug===project.slug;}); // previa: capitulos fora da sequencia
     var navIndex=navigationProjects.findIndex(function(item){return item.slug===project.slug;});
     var next=navIndex>=0?navigationProjects[(navIndex+1)%navigationProjects.length]:null;
     if(next&&navigationProjects.length>1){nextLink.href=cleanProjectUrl(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
@@ -712,6 +716,9 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
 })();
 
 </script>
+<script src="assets/js/previa-etiquetas.js"></script>
+<script src="assets/js/previa-caso.js"></script>
+<script src="assets/js/previa-contato.js"></script>
 <script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
 </body>
 </html>

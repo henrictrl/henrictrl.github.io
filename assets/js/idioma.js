@@ -14,14 +14,9 @@
   var fromPath = function () { var m = location.pathname.match(PREFIX); return m ? m[1] : null; };
   var BOT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|whatsapp|preview/i;
 
-  var initial = function () {
-    var p = fromPath(); if (p) return p;
-    try { localStorage.removeItem('hm-lang'); var s = localStorage.getItem(KEY); if (LANGS.indexOf(s) >= 0) return s; } catch (e) {}
-    if (BOT.test(navigator.userAgent)) return 'pt';
-    // idioma do aparelho: primeiro da lista que o site tenha; sem informação ou sem suporte, PT
-    var nav = navigator.languages && navigator.languages.length ? navigator.languages : (navigator.language ? [navigator.language] : []);
-    for (var i = 0; i < nav.length; i++) { var v = String(nav[i]).toLowerCase().slice(0, 2); if (LANGS.indexOf(v) >= 0) return v; }
-    return 'pt';
+  var initial = function () { // previa: sem idioma do aparelho e sem escolha guardada; PT e o padrao
+    try { localStorage.removeItem('hm-lang'); localStorage.removeItem(KEY); } catch (e) {}
+    return fromPath() || 'pt';
   };
 
   // caminhos internos ganham o prefixo do idioma atual (o código do site continua passando caminhos sem idioma)
