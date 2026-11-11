@@ -2250,6 +2250,9 @@ html[data-theme="dark"] { --gray-600: #9a9a9a; --gray-700: #b8b8b8; }
 .mx-rise { animation: none !important; }
 /* faixa de titulos nunca pausa (nem com o mouse em cima) */
 .home-ticker:hover .tk-track, .home-ticker:focus-within .tk-track { animation-play-state: running; }
+/* animacoes da home sempre em movimento ao rolar: camadas proprias na GPU (Safari/iOS congela as que ficam na thread principal) */
+.home-ticker { -webkit-transform: translateZ(0); transform: translateZ(0); }
+.tk-track, .ca-pl, .ca-bg, .ca-col, .ca-row, .ca-mark, .ca-el { will-change: transform; }
 .tk-set a u.obra { text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 /* destaques: 3 posts */
 .home-dest-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 10px; }
@@ -4741,7 +4744,7 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('focusin', () => { homePause.focus = true; homeHold(); });
       el.addEventListener('focusout', (e) => { if (!el.contains(e.relatedTarget)) { homePause.focus = false; homeRun(); } });
     });
-    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { homePause.off = !en.isIntersecting; en.isIntersecting ? homeRun() : homeHold(); }).observe(vp);
+    // a vitrine segue girando mesmo fora da tela (rolagem não pausa); só mouse, foco e aba escondida pausam
     document.addEventListener('visibilitychange', () => document.hidden ? homeHold() : homeRun());
   };
   initHomePause();
