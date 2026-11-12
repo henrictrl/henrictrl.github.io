@@ -20,6 +20,7 @@
     '.hm-fab-panel[hidden]{display:none}@keyframes hm-pop{from{opacity:0;transform:translateY(10px) scale(.96)}}' +
     '.hm-fab-h{font-size:17px;font-weight:300;letter-spacing:-.02em;margin:0 0 8px}' +
     '.hm-fab-panel a:first-child{border-top:0}.hm-fab-panel a{display:flex;justify-content:space-between;align-items:center;min-height:44px;border-top:1px solid var(--gray-200,#e5e5e5);font-size:15px;color:inherit;text-decoration:none;animation:hm-item .45s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i)*35ms + 80ms)}' +
+    '.hm-fab-panel a:focus:not(:focus-visible){outline:none}' +
     '.hm-fab-panel a::after{content:"\\2197";color:var(--gray-600,#767676);transition:transform .25s}.hm-fab-panel a:hover::after{transform:translate(2px,-2px);color:inherit}' +
     '@keyframes hm-item{from{opacity:0;transform:translateY(6px)}}' +
     '@media (prefers-reduced-motion:reduce){.hm-fab-panel,.hm-fab-panel a{animation:none}.hm-fab-wrap,.hm-fab,.hm-fab svg{transition:none}}';
@@ -31,10 +32,10 @@
   document.body.appendChild(wrap);
   var btn = wrap.querySelector('.hm-fab'), panel = wrap.querySelector('.hm-fab-panel');
   var paint = function () { var l = lang(); btn.setAttribute('aria-label', T.btn[l]); btn.title = T.btn[l]; panel.setAttribute('aria-label', T.btn[l]); };
-  var set = function (open) { paint(); panel.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (open) { var a = panel.querySelector('a'); if (a) a.focus({ preventScroll: true }); } };
+  var set = function (open, kb) { paint(); panel.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (open && kb !== false) { var a = panel.querySelector('a'); if (a) a.focus({ preventScroll: true }); } };
   paint();
   new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-  btn.addEventListener('click', function () { set(panel.hidden); });
+  btn.addEventListener('click', function (e) { set(panel.hidden, e.detail === 0); }); /* mouse/toque: não foca o 1º link (sem contorno); teclado: foca */
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
   document.addEventListener('click', function (e) {
     var nav = e.target.closest && e.target.closest('[data-nav-id="contato"],[data-nav="contact"]');
