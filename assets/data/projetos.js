@@ -3586,6 +3586,71 @@ window.PROJETOS = [
     ]
    },
    {
+    "img": "14",
+    "t": {
+     "pt": "Papelaria",
+     "en": "Stationery",
+     "es": "Papelería"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "15",
+    "t": {
+     "pt": "Kit de papelaria",
+     "en": "Stationery set",
+     "es": "Kit de papelería"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "16",
+    "t": {
+     "pt": "Aplicações",
+     "en": "Applications",
+     "es": "Aplicaciones"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "17",
+    "t": {
+     "pt": "Embalagens",
+     "en": "Packaging",
+     "es": "Embalajes"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "18",
+    "t": {
+     "pt": "Fachada",
+     "en": "Storefront",
+     "es": "Fachada"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
     "img": "13",
     "t": {
      "pt": "Óptica Leopoldina",
@@ -3654,6 +3719,14 @@ window.PROJETOS = [
      "pt": "Arquivos",
      "en": "Files",
      "es": "Archivos"
+    }
+   },
+   {
+    "p": 13,
+    "t": {
+     "pt": "Mockups",
+     "en": "Mockups",
+     "es": "Mockups"
     }
    }
   ],
