@@ -10939,7 +10939,6 @@ window.PROJETOS = [
   },
   "capa": "assets/projetos/basement/capa.webp",
   "resumo": {"pt": "Redes sociais para plataforma de IA jurídica", "en": "Social media for a legal AI platform", "es": "Redes sociales para una plataforma de IA jurídica"},
-  "capaAnim": {"m":"L","fundo":[7,46,46],"bands":[{"f":"b1.webp","s":[6888,700],"y":8,"hh":84,"d":70}],"src":"assets/projetos/basement/capa/"},
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",
