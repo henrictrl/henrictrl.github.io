@@ -3,4 +3,4 @@
 window.HM_GRUPOS = {}; // sem agrupamento: cada projeto filho volta a ser um card proprio
 window.HM_OCULTOS = ['o-hobbit', 'dash-geral'];
 /* Programacao: fora do ar por enquanto (nao publicados). Para voltar, apague esta linha. */
-window.HM_OCULTOS = window.HM_OCULTOS.concat(['fellipe-gualberto', 'nova-rio-branco', 'pixelar', 'metaprojeto', 'rino-site']);
+window.HM_OCULTOS = window.HM_OCULTOS.concat(['pixelar', 'metaprojeto', 'rino-site']);
