@@ -542,7 +542,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     }
     blocks.push(screenHTML);
     if(project.slug==="rino-site"&&project.web){
-      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+' — prévia não interativa" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
+      blocks.push('<section class="dk-block rino-case-block" id="dk-b-rino-case"><div class="rino-case-intro"><div><p class="rino-case-eyebrow">'+esc(textLabel("FERRAMENTA INTERATIVA","INTERACTIVE TOOL","HERRAMIENTA INTERACTIVA"))+'</p></div></div><div class="rino-case-frame"><iframe src="'+esc(project.web.url)+'" title="'+esc(project.titulo)+'" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="rino-case-intro"><a class="dk-try" href="'+esc(project.web.url)+'" target="_blank" rel="noopener noreferrer">'+esc(lx(siteCopy.try))+' ↗</a></div></section>');
       addTocBlock(contentToc,"dk-b-rino-case",{pt:"Ferramenta interativa",en:"Interactive tool",es:"Herramienta interactiva"});
     }
     if(project.shots&&project.shots.length&&project.slug!=="rino-site"){
