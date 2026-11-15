@@ -1,19 +1,16 @@
-/* Projetos (cases). Cada um: card na página Projetos + apresentação com todas as páginas (sem download).
-   secoes = sumário da apresentação (p = número da página onde a seção começa).
-   marca = slug da faixa de logos; exp = nome da experiência no Sobre (clique abre o case).
-   Imagens: NN.webp 2048x1152 (16:9) + miniatura NN-t.webp 320x180. capa.webp 1200x800 (3:2, logo centralizado).
-   filtro: identidade | web (Programação) | conteudo (Carrosséis e posts) | dashboards | dashboards | dashboards | dashboards | dashboards; pode ser lista (aparece nos dois grupos) · destaque = aparece na home
-   intro = texto do cabeçalho quando não há telas · web = {url, dev: mobile|desktop} abre o site num modal
-   shots = capturas (desktop | mobile | pagina) · galeria = imagens soltas · posts = grupo em posts.js · postGroups = vários grupos com título (ex.: PROEC) · siteIntro = texto do bloco do site · html = bloco próprio · rel = projetos ligados
-   idiomasImg = ["en","es"] no projeto (ou numa tela/shot) indica que existem imagens traduzidas: NN.en.webp, NN-t.en.webp, NN.es.webp… (mesma pasta). Sem a lista, EN/ES usam a imagem em PT.
-   titulo pode ser texto ou {pt,en,es}; o resolvedor no fim do arquivo devolve sempre texto no idioma ativo.
-   dash = dashboard de engajamento (dados em engajamento.js): users = contas · m = l (curtidas) | c (comentários) · por = user | g (quebra) · nomes = rótulos de g · tabela · linha = false esconde post a post */
+/* Projetos (cases): card na página Projetos e página própria com todas as telas (sem download).
+   titulo = texto ou {pt,en,es} · cat = categoria · resumo = descrição curta · entrega = tipo de entrega (sob o título do card)
+   filtro = grupo na página Projetos: marcas | inst | cultura · oculto = fora da grade e da navegação (página continua no ar)
+   dir = pasta das imagens: NN.webp 2048×1152 + miniatura NN-t.webp 320×180 · capa = imagem do card (3:2)
+   capaAnim = capa montada por assets/js/capas.js (m = modelo; fusao = quadros sobrepostos)
+   telas = páginas da apresentação · secoes = sumário (p = página onde a seção começa) · idiomasImg = ["en","es"]: há NN.en.webp/NN.es.webp
+   intro = texto do cabeçalho · etiquetas = ficha técnica · marca = slug na faixa de logos · exp = experiência ligada no Sobre
+   posts / postGroups = grupos de assets/data/posts.js · shots = capturas (desktop | mobile | pagina) · galeria = imagens soltas
+   web = {url, dev} site embutido · siteIntro = texto do bloco do site · rel = projetos ligados
+   dash = dashboard de engajamento (assets/data/engajamento.js): users = contas · m = l (curtidas) | c (comentários) · por = user | g · tabela */
 window.PROJETOS = [
  {
   "slug": "classic-tattoo",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "classic-tattoo",
   "exp": "t.pr consulting",
   "titulo": "Classic Tattoo PCH",
@@ -23,7 +20,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "logotipo",
@@ -46,8 +45,21 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/classic-tattoo/capa.webp",
-  "resumo": {"pt": "Identidade visual para estúdio de tatuagem na Califórnia, EUA", "en": "Visual identity for a tattoo studio in California, USA", "es": "Identidad visual para un estudio de tatuajes en California, EE. UU."},
-  "capaAnim": {"m":"DC","full":1,"fundo":[40,40,40],"src":"assets/projetos/classic-tattoo/capa/"},
+  "resumo": {
+   "pt": "Identidade visual para estúdio de tatuagem na Califórnia, EUA",
+   "en": "Visual identity for a tattoo studio in California, USA",
+   "es": "Identidad visual para un estudio de tatuajes en California, EE. UU."
+  },
+  "capaAnim": {
+   "m": "DC",
+   "full": 1,
+   "fundo": [
+    40,
+    40,
+    40
+   ],
+   "src": "assets/projetos/classic-tattoo/capa/"
+  },
   "link": "https://www.classictattoopch.com",
   "dir": "assets/projetos/classic-tattoo/",
   "telas": [
@@ -705,13 +717,14 @@ window.PROJETOS = [
     }
    }
   ],
-  "destaque": true
+  "entrega": {
+   "pt": "Logotipo · Peças gráficas",
+   "en": "Logo · Graphic pieces",
+   "es": "Logotipo · Piezas gráficas"
+  }
  },
  {
   "slug": "rino",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "rino",
   "exp": null,
   "titulo": "Rino",
@@ -721,7 +734,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "logotipo",
@@ -747,8 +762,26 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa.webp",
-  "resumo": {"pt": "Identidade visual e manual de marca para empresa de crédito B2B", "en": "Visual identity and brand manual for a B2B credit company", "es": "Identidad visual y manual de marca para una empresa de crédito B2B"},
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[6,33,46],"src":"assets/projetos/rino/capa/"},
+  "resumo": {
+   "pt": "Identidade visual e manual de marca para empresa de crédito B2B",
+   "en": "Visual identity and brand manual for a B2B credit company",
+   "es": "Identidad visual y manual de marca para una empresa de crédito B2B"
+  },
+  "capaAnim": {
+   "m": "E",
+   "w": 2600,
+   "h": 1527,
+   "cx": 0.5,
+   "cy": 0.5,
+   "scale": 7.4,
+   "ar": 1.7778,
+   "fundo": [
+    6,
+    33,
+    46
+   ],
+   "src": "assets/projetos/rino/capa/"
+  },
   "dir": "assets/projetos/rino/",
   "telas": [
    {
@@ -1664,17 +1697,18 @@ window.PROJETOS = [
     }
    }
   ],
-  "destaque": true,
   "rel": [
    "rino-site",
    "rino-pecas"
-  ]
+  ],
+  "entrega": {
+   "pt": "Identidade visual · Manual de marca",
+   "en": "Visual identity · Brand manual",
+   "es": "Identidad visual · Manual de marca"
+  }
  },
  {
   "slug": "rino-pecas",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "rino",
   "titulo": {
    "pt": "Rino: peças",
@@ -3282,9 +3316,6 @@ window.PROJETOS = [
  },
  {
   "slug": "rino-site",
-  "servicos_relacionados": [
-   "landing"
-  ],
   "marca": "rino",
   "titulo": "Estúdio de cor",
   "ano": "2026",
@@ -3317,8 +3348,40 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rino/capa-definidor.svg",
-  "capaAnim": {"m":"K","w":551,"h":240,"pares":[["#123358","#f1f0ec"],["#617991","#f1f0ec"],["#f1f0ec","#123358"],["#899bac","#123358"],["#3b5674","#f1f0ec"]],"src":"assets/projetos/rino-site/capa/","id":"rino"},
-  "resumo": {"pt": "Ferramenta web para testar as cores da marca Rino", "en": "Web tool to test the Rino brand colours", "es": "Herramienta web para probar los colores de la marca Rino"},
+  "capaAnim": {
+   "m": "K",
+   "w": 551,
+   "h": 240,
+   "pares": [
+    [
+     "#123358",
+     "#f1f0ec"
+    ],
+    [
+     "#617991",
+     "#f1f0ec"
+    ],
+    [
+     "#f1f0ec",
+     "#123358"
+    ],
+    [
+     "#899bac",
+     "#123358"
+    ],
+    [
+     "#3b5674",
+     "#f1f0ec"
+    ]
+   ],
+   "src": "assets/projetos/rino-site/capa/",
+   "id": "rino"
+  },
+  "resumo": {
+   "pt": "Ferramenta web para testar as cores da marca Rino",
+   "en": "Web tool to test the Rino brand colours",
+   "es": "Herramienta web para probar los colores de la marca Rino"
+  },
   "dir": "assets/projetos/rino/",
   "intro": {
    "pt": "Um definidor de cores para explorar, comparar e aprovar combinações aplicadas diretamente ao logotipo. A interface reúne pré-visualização ao vivo, paletas sugeridas, controles de cor e exportação em PNG.",
@@ -3338,13 +3401,11 @@ window.PROJETOS = [
   },
   "rel": [
    "rino"
-  ]
+  ],
+  "oculto": true
  },
  {
   "slug": "optica-leopoldina",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "optica-leopoldina",
   "exp": null,
   "titulo": "Óptica Leopoldina",
@@ -3354,7 +3415,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "logotipo",
@@ -3377,8 +3440,27 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/optica-leopoldina/capa.webp",
-  "resumo": {"pt": "Logotipo para ótica de bairro em São Paulo", "en": "Logo for a neighbourhood optician in São Paulo", "es": "Logotipo para una óptica de barrio en São Paulo"},
-  "capaAnim": {"m":"DC","fundo":[45,61,49],"src":"assets/projetos/optica-leopoldina/capa/"},
+  "resumo": {
+   "pt": "Logotipo para ótica de bairro em São Paulo",
+   "en": "Logo for a neighbourhood optician in São Paulo",
+   "es": "Logotipo para una óptica de barrio en São Paulo"
+  },
+  "capaAnim": {
+   "m": "DC",
+   "fundo": [
+    45,
+    61,
+    49
+   ],
+   "src": "assets/projetos/optica-leopoldina/capa/",
+   "fusao": {
+    "f": [
+     3,
+     4
+    ],
+    "s": 2.6
+   }
+  },
   "dir": "assets/projetos/optica-leopoldina/",
   "telas": [
    {
@@ -3730,13 +3812,14 @@ window.PROJETOS = [
     }
    }
   ],
-  "destaque": true
+  "entrega": {
+   "pt": "Logotipo · Aplicações",
+   "en": "Logo · Applications",
+   "es": "Logotipo · Aplicaciones"
+  }
  },
  {
   "slug": "sollaris",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "sollaris",
   "titulo": "Sollaris",
   "ano": "2023",
@@ -3746,8 +3829,7 @@ window.PROJETOS = [
    "es": "Identidad visual"
   },
   "filtro": [
-   "identidade",
-   "midias"
+   "marcas"
   ],
   "etiquetas": {
    "entrega": [
@@ -3769,8 +3851,26 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/sollaris/capa.webp",
-  "capaAnim": {"m":"S","fx":"spin","spin":40,"fundo":[132,51,44],"hv":"d.webp","x":49.875,"y":49.875,"w":44.25,"src":"assets/projetos/sollaris/capa/"},
-  "resumo": {"pt": "Identidade visual para marca de bijuterias", "en": "Visual identity for a jewellery brand", "es": "Identidad visual para una marca de bisutería"},
+  "capaAnim": {
+   "m": "S",
+   "fx": "spin",
+   "spin": 40,
+   "fundo": [
+    132,
+    51,
+    44
+   ],
+   "hv": "d.webp",
+   "x": 49.875,
+   "y": 49.875,
+   "w": 44.25,
+   "src": "assets/projetos/sollaris/capa/"
+  },
+  "resumo": {
+   "pt": "Identidade visual para marca de bijuterias",
+   "en": "Visual identity for a jewellery brand",
+   "es": "Identidad visual para una marca de bisutería"
+  },
   "dir": "assets/projetos/sollaris/",
   "telas": [
    {
@@ -4344,7 +4444,6 @@ window.PROJETOS = [
    }
   ],
   "posts": "sollaris",
-  "destaque": true,
   "dash": {
    "users": [
     "s.ollaris"
@@ -4352,13 +4451,15 @@ window.PROJETOS = [
    "m": "l",
    "cor": "#84332C",
    "on": "#fff"
+  },
+  "entrega": {
+   "pt": "Logotipo · Manual de marca · Instagram",
+   "en": "Logo · Brand manual · Instagram",
+   "es": "Logotipo · Manual de marca · Instagram"
   }
  },
  {
   "slug": "equity360",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "marca": "equity360",
   "titulo": "Equity 360",
   "ano": "2026",
@@ -4367,7 +4468,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "logotipo"
@@ -4386,8 +4489,20 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/equity360/capa.webp",
-  "resumo": {"pt": "Logotipo para o podcast da Basement", "en": "Logo for the Basement podcast", "es": "Logotipo para el pódcast de Basement"},
-  "capaAnim": {"m":"DC","fundo":[0,0,0],"src":"assets/projetos/equity360/capa/"},
+  "resumo": {
+   "pt": "Logotipo para o podcast da Basement",
+   "en": "Logo for the Basement podcast",
+   "es": "Logotipo para el pódcast de Basement"
+  },
+  "capaAnim": {
+   "m": "DC",
+   "fundo": [
+    0,
+    0,
+    0
+   ],
+   "src": "assets/projetos/equity360/capa/"
+  },
   "dir": "assets/projetos/equity360/",
   "telas": [
    {
@@ -4581,13 +4696,14 @@ window.PROJETOS = [
   "rel": [
    "basement"
   ],
-  "destaque": true
+  "entrega": {
+   "pt": "Logotipo",
+   "en": "Logo",
+   "es": "Logotipo"
+  }
  },
  {
   "slug": "congresso-extensao",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": {
    "pt": "Congresso de Extensão Universitária",
    "en": "University Extension Congress",
@@ -4600,8 +4716,7 @@ window.PROJETOS = [
    "es": "Identidad visual"
   },
   "filtro": [
-   "identidade",
-   "midias"
+   "inst"
   ],
   "etiquetas": {
    "entrega": [
@@ -4625,8 +4740,25 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/congresso-extensao/capa.webp",
-  "capaAnim": {"m":"S","fx":"spin","spin":30,"fundo":[248,242,239],"x":34.792,"y":49.875,"w":26.083,"src":"assets/projetos/congresso-extensao/capa/"},
-  "resumo": {"pt": "Identidade visual para congresso da PROEC/Unesp", "en": "Visual identity for a PROEC/Unesp congress", "es": "Identidad visual para un congreso de la PROEC/Unesp"},
+  "capaAnim": {
+   "m": "S",
+   "fx": "spin",
+   "spin": 30,
+   "fundo": [
+    248,
+    242,
+    239
+   ],
+   "x": 34.792,
+   "y": 49.875,
+   "w": 26.083,
+   "src": "assets/projetos/congresso-extensao/capa/"
+  },
+  "resumo": {
+   "pt": "Identidade visual para congresso da PROEC/Unesp",
+   "en": "Visual identity for a PROEC/Unesp congress",
+   "es": "Identidad visual para un congreso de la PROEC/Unesp"
+  },
   "dir": "assets/projetos/congresso-extensao/",
   "telas": [
    {
@@ -5011,13 +5143,15 @@ window.PROJETOS = [
    "proec"
   ],
   "exp": "Unesp",
-  "posts": "congresso-extensao"
+  "posts": "congresso-extensao",
+  "entrega": {
+   "pt": "Identidade visual · Peças gráficas · Posts",
+   "en": "Visual identity · Graphic pieces · Posts",
+   "es": "Identidad visual · Piezas gráficas · Posts"
+  }
  },
  {
   "slug": "interserv",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "InterServ 2023/2024",
   "ano": "2024",
   "cat": {
@@ -5025,7 +5159,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "identidade-visual",
@@ -5051,8 +5187,29 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/interserv/capa.webp",
-  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[598,160],"src":"assets/projetos/interserv/capa/"},
-  "resumo": {"pt": "Identidade visual para os jogos dos servidores da Unesp", "en": "Visual identity for the Unesp staff games", "es": "Identidad visual para los juegos de los servidores de la Unesp"},
+  "capaAnim": {
+   "m": "DT",
+   "p": [
+    255,
+    255,
+    255
+   ],
+   "tinta": [
+    17,
+    17,
+    17
+   ],
+   "logo": [
+    598,
+    160
+   ],
+   "src": "assets/projetos/interserv/capa/"
+  },
+  "resumo": {
+   "pt": "Identidade visual para os jogos dos servidores da Unesp",
+   "en": "Visual identity for the Unesp staff games",
+   "es": "Identidad visual para los juegos de los servidores de la Unesp"
+  },
   "dir": "assets/projetos/interserv/",
   "telas": [
    {
@@ -5411,13 +5568,15 @@ window.PROJETOS = [
   "rel": [
    "proec"
   ],
-  "exp": "Unesp"
+  "exp": "Unesp",
+  "entrega": {
+   "pt": "Identidade visual · Pictogramas · Sinalização",
+   "en": "Visual identity · Pictograms · Signage",
+   "es": "Identidad visual · Pictogramas · Señalización"
+  }
  },
  {
   "slug": "ntaps",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "NTAPS",
   "ano": "2022",
   "cat": {
@@ -5425,7 +5584,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "identidade-visual",
@@ -5449,8 +5610,26 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ntaps/capa.webp",
-  "resumo": {"pt": "Revisão de marca para núcleo psicossocial da Unesp", "en": "Brand revision for a Unesp psychosocial unit", "es": "Revisión de marca para un núcleo psicosocial de la Unesp"},
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[33,59,85],"src":"assets/projetos/ntaps/capa/"},
+  "resumo": {
+   "pt": "Revisão de marca para núcleo psicossocial da Unesp",
+   "en": "Brand revision for a Unesp psychosocial unit",
+   "es": "Revisión de marca para un núcleo psicosocial de la Unesp"
+  },
+  "capaAnim": {
+   "m": "E",
+   "w": 2600,
+   "h": 1527,
+   "cx": 0.5,
+   "cy": 0.5,
+   "scale": 7.4,
+   "ar": 1.7778,
+   "fundo": [
+    33,
+    59,
+    85
+   ],
+   "src": "assets/projetos/ntaps/capa/"
+  },
   "dir": "assets/projetos/ntaps/",
   "telas": [
    {
@@ -5754,13 +5933,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "setembro-amarelo"
-  ]
+  ],
+  "entrega": {
+   "pt": "Identidade visual · Plano de comunicação",
+   "en": "Visual identity · Communication plan",
+   "es": "Identidad visual · Plan de comunicación"
+  }
  },
  {
   "slug": "csunesp",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "CSUNESP",
   "ano": "2023",
   "cat": {
@@ -5768,7 +5949,9 @@ window.PROJETOS = [
    "en": "Brand strategy",
    "es": "Estrategia de marca"
   },
-  "filtro": "estrategia",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "manual-marca"
@@ -5786,8 +5969,29 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/csunesp/capa.webp",
-  "resumo": {"pt": "Manual de marca para a Coordenadoria de Saúde da Unesp", "en": "Brand manual for the Unesp Health Office", "es": "Manual de marca para la Coordinación de Salud de la Unesp"},
-  "capaAnim": {"m":"D","p":[220,220,220],"tinta":[17,17,17],"logo":[488,160],"src":"assets/projetos/csunesp/capa/"},
+  "resumo": {
+   "pt": "Manual de marca para a Coordenadoria de Saúde da Unesp",
+   "en": "Brand manual for the Unesp Health Office",
+   "es": "Manual de marca para la Coordinación de Salud de la Unesp"
+  },
+  "capaAnim": {
+   "m": "D",
+   "p": [
+    220,
+    220,
+    220
+   ],
+   "tinta": [
+    17,
+    17,
+    17
+   ],
+   "logo": [
+    488,
+    160
+   ],
+   "src": "assets/projetos/csunesp/capa/"
+  },
   "dir": "assets/projetos/csunesp/",
   "telas": [
    {
@@ -6145,13 +6349,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "mostra-saude-mental"
-  ]
+  ],
+  "entrega": {
+   "pt": "Manual de marca",
+   "en": "Brand manual",
+   "es": "Manual de marca"
+  }
  },
  {
   "slug": "mostra-saude-mental",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": {
    "pt": "Mostra de Saúde Mental",
    "en": "Mental Health Showcase",
@@ -6163,7 +6369,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "identidade-visual",
@@ -6182,7 +6390,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/mostra-saude-mental/capa.webp",
-  "resumo": {"pt": "Identidade visual para evento de saúde mental da Unesp", "en": "Visual identity for a Unesp mental health event", "es": "Identidad visual para un evento de salud mental de la Unesp"},
+  "resumo": {
+   "pt": "Identidade visual para evento de saúde mental da Unesp",
+   "en": "Visual identity for a Unesp mental health event",
+   "es": "Identidad visual para un evento de salud mental de la Unesp"
+  },
   "dir": "assets/projetos/mostra-saude-mental/",
   "telas": [
    {
@@ -6490,13 +6702,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "csunesp"
-  ]
+  ],
+  "entrega": {
+   "pt": "Identidade visual · Evento",
+   "en": "Visual identity · Event",
+   "es": "Identidad visual · Evento"
+  }
  },
  {
   "slug": "nupe",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "NUPE",
   "ano": "2024",
   "cat": {
@@ -6504,7 +6718,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "badge": {
    "pt": "Rebranding",
    "en": "Rebranding",
@@ -6527,8 +6743,21 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nupe/capa.webp",
-  "resumo": {"pt": "Rebranding para o Núcleo Negro da Unesp", "en": "Rebrand for Unesp's Black studies unit", "es": "Rebranding para el Núcleo Negro de la Unesp"},
-  "capaAnim": {"m":"DC","fundo":[129,130,124],"full":1,"src":"assets/projetos/nupe/capa/"},
+  "resumo": {
+   "pt": "Rebranding para o Núcleo Negro da Unesp",
+   "en": "Rebrand for Unesp's Black studies unit",
+   "es": "Rebranding para el Núcleo Negro de la Unesp"
+  },
+  "capaAnim": {
+   "m": "DC",
+   "fundo": [
+    129,
+    130,
+    124
+   ],
+   "full": 1,
+   "src": "assets/projetos/nupe/capa/"
+  },
   "dir": "assets/projetos/nupe/",
   "telas": [
    {
@@ -7011,13 +7240,15 @@ window.PROJETOS = [
    "ocupacao-unesp-negra",
    "proec"
   ],
-  "exp": "Unesp"
+  "exp": "Unesp",
+  "entrega": {
+   "pt": "Manual de marca · Peças gráficas",
+   "en": "Brand manual · Graphic pieces",
+   "es": "Manual de marca · Piezas gráficas"
+  }
  },
  {
   "slug": "ocupacao-unesp-negra",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "Ocupação Unesp Negra",
   "ano": "2024",
   "cat": {
@@ -7025,7 +7256,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "pecas-graficas",
@@ -7044,8 +7277,24 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/ocupacao-unesp-negra/capa.webp",
-  "capaAnim": {"m":"S","fx":"zoom","fundo":[14,14,14],"x":49.875,"y":50.0,"w":28.917,"src":"assets/projetos/ocupacao-unesp-negra/capa/"},
-  "resumo": {"pt": "Identidade visual para mês de ações do Nupe/Unesp", "en": "Visual identity for a month of Nupe/Unesp events", "es": "Identidad visual para un mes de acciones del Nupe/Unesp"},
+  "capaAnim": {
+   "m": "S",
+   "fx": "zoom",
+   "fundo": [
+    14,
+    14,
+    14
+   ],
+   "x": 49.875,
+   "y": 50,
+   "w": 28.917,
+   "src": "assets/projetos/ocupacao-unesp-negra/capa/"
+  },
+  "resumo": {
+   "pt": "Identidade visual para mês de ações do Nupe/Unesp",
+   "en": "Visual identity for a month of Nupe/Unesp events",
+   "es": "Identidad visual para un mes de acciones del Nupe/Unesp"
+  },
   "dir": "assets/projetos/ocupacao-unesp-negra/",
   "telas": [
    {
@@ -7230,13 +7479,15 @@ window.PROJETOS = [
    "nupe",
    "proec"
   ],
-  "exp": "Unesp"
+  "exp": "Unesp",
+  "entrega": {
+   "pt": "Peças gráficas · Posts · Evento",
+   "en": "Graphic pieces · Posts · Event",
+   "es": "Piezas gráficas · Posts · Evento"
+  }
  },
  {
   "slug": "prisma-brandbook",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "Prisma Consultoria",
   "ano": "2023",
   "cat": {
@@ -7244,7 +7495,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "manual-marca",
@@ -7267,8 +7520,21 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-brandbook/capa.webp",
-  "resumo": {"pt": "Brandbook para consultoria de RP, em projeto acadêmico", "en": "Brandbook for a PR consultancy, academic project", "es": "Brandbook para una consultora de RR. PP., proyecto académico"},
-  "capaAnim": {"m":"DC","full":1,"fundo":[60,10,60],"src":"assets/projetos/prisma-brandbook/capa/"},
+  "resumo": {
+   "pt": "Brandbook para consultoria de RP, em projeto acadêmico",
+   "en": "Brandbook for a PR consultancy, academic project",
+   "es": "Brandbook para una consultora de RR. PP., proyecto académico"
+  },
+  "capaAnim": {
+   "m": "DC",
+   "full": 1,
+   "fundo": [
+    60,
+    10,
+    60
+   ],
+   "src": "assets/projetos/prisma-brandbook/capa/"
+  },
   "dir": "assets/projetos/prisma-brandbook/",
   "telas": [
    {
@@ -7547,13 +7813,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "prisma-proposta"
-  ]
+  ],
+  "entrega": {
+   "pt": "Manual de marca · Editorial",
+   "en": "Brand manual · Editorial",
+   "es": "Manual de marca · Editorial"
+  }
  },
  {
   "slug": "cminds",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "C Minds",
   "ano": "2022",
   "cat": {
@@ -7561,7 +7829,9 @@ window.PROJETOS = [
    "en": "Visual identity",
    "es": "Identidad visual"
   },
-  "filtro": "identidade",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "logotipo",
@@ -7582,8 +7852,26 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/cminds/capa.webp",
-  "resumo": {"pt": "Identidade visual para agência de RP, em projeto acadêmico", "en": "Visual identity for a PR agency, academic project", "es": "Identidad visual para una agencia de RR. PP., proyecto académico"},
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[19,72,112],"src":"assets/projetos/cminds/capa/"},
+  "resumo": {
+   "pt": "Identidade visual para agência de RP, em projeto acadêmico",
+   "en": "Visual identity for a PR agency, academic project",
+   "es": "Identidad visual para una agencia de RR. PP., proyecto académico"
+  },
+  "capaAnim": {
+   "m": "E",
+   "w": 2600,
+   "h": 1527,
+   "cx": 0.5,
+   "cy": 0.5,
+   "scale": 7.4,
+   "ar": 1.7778,
+   "fundo": [
+    19,
+    72,
+    112
+   ],
+   "src": "assets/projetos/cminds/capa/"
+  },
   "dir": "assets/projetos/cminds/",
   "telas": [
    {
@@ -7988,13 +8276,15 @@ window.PROJETOS = [
      "es": "Ficha técnica"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Logotipo · Manual de marca",
+   "en": "Logo · Brand manual",
+   "es": "Logotipo · Manual de marca"
+  }
  },
  {
   "slug": "setembro-amarelo",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "Setembro Amarelo 2022",
   "ano": "2022",
   "cat": {
@@ -8002,7 +8292,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "identidade-visual",
@@ -8028,8 +8320,26 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/setembro-amarelo/capa.webp",
-  "resumo": {"pt": "Identidade e peças para evento do NTAPS/Unesp", "en": "Identity and pieces for an NTAPS/Unesp event", "es": "Identidad y piezas para un evento del NTAPS/Unesp"},
-  "capaAnim": {"m":"E","w":2600,"h":1527,"cx":0.5,"cy":0.5,"scale":7.4,"ar":1.7778,"fundo":[85,72,46],"src":"assets/projetos/setembro-amarelo/capa/"},
+  "resumo": {
+   "pt": "Identidade e peças para evento do NTAPS/Unesp",
+   "en": "Identity and pieces for an NTAPS/Unesp event",
+   "es": "Identidad y piezas para un evento del NTAPS/Unesp"
+  },
+  "capaAnim": {
+   "m": "E",
+   "w": 2600,
+   "h": 1527,
+   "cx": 0.5,
+   "cy": 0.5,
+   "scale": 7.4,
+   "ar": 1.7778,
+   "fundo": [
+    85,
+    72,
+    46
+   ],
+   "src": "assets/projetos/setembro-amarelo/capa/"
+  },
   "dir": "assets/projetos/setembro-amarelo/",
   "telas": [
    {
@@ -8204,14 +8514,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "ntaps"
-  ]
+  ],
+  "entrega": {
+   "pt": "Identidade visual · Cartaz · Crachá · Certificado",
+   "en": "Visual identity · Poster · Badge · Certificate",
+   "es": "Identidad visual · Cartel · Credencial · Certificado"
+  }
  },
  {
   "slug": "rp-40-anos",
-  "servicos_relacionados": [
-   "identidade",
-   "social"
-  ],
   "titulo": {
    "pt": "RP 40 anos",
    "en": "RP 40 anos",
@@ -8239,8 +8550,7 @@ window.PROJETOS = [
    "es": "Eventos"
   },
   "filtro": [
-   "eventos",
-   "midias"
+   "inst"
   ],
   "etiquetas": {
    "entrega": [
@@ -8264,7 +8574,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/rp-40-anos/capa.webp",
-  "resumo": {"pt": "Redes sociais para os 40 anos do curso de RP da Unesp", "en": "Social media for 40 years of PR at Unesp", "es": "Redes sociales para los 40 años de RR. PP. de la Unesp"},
+  "resumo": {
+   "pt": "Redes sociais para os 40 anos do curso de RP da Unesp",
+   "en": "Social media for 40 years of PR at Unesp",
+   "es": "Redes sociales para los 40 años de RR. PP. de la Unesp"
+  },
   "dir": "assets/projetos/rp-40-anos/",
   "telas": [
    {
@@ -8540,13 +8854,15 @@ window.PROJETOS = [
      "es": "Ficha técnica"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Posts · Stories · GIFs",
+   "en": "Posts · Stories · GIFs",
+   "es": "Posts · Stories · GIFs"
+  }
  },
  {
   "slug": "prisma-proposta",
-  "servicos_relacionados": [
-   "redacao"
-  ],
   "titulo": {
    "pt": "Proposta Prisma",
    "en": "Prisma proposal",
@@ -8558,7 +8874,9 @@ window.PROJETOS = [
    "en": "Brand strategy",
    "es": "Estrategia de marca"
   },
-  "filtro": "estrategia",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "proposta-estrategica",
@@ -8579,8 +8897,22 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/prisma-proposta/capa.webp",
-  "resumo": {"pt": "Proposta de consultoria de RP para startups", "en": "PR consultancy proposal for startups", "es": "Propuesta de consultoría de RR. PP. para startups"},
-  "capaAnim": {"m":"DC","full":1,"pulse":1,"fundo":[247,230,240],"src":"assets/projetos/prisma-proposta/capa/"},
+  "resumo": {
+   "pt": "Proposta de consultoria de RP para startups",
+   "en": "PR consultancy proposal for startups",
+   "es": "Propuesta de consultoría de RR. PP. para startups"
+  },
+  "capaAnim": {
+   "m": "DC",
+   "full": 1,
+   "pulse": 1,
+   "fundo": [
+    247,
+    230,
+    240
+   ],
+   "src": "assets/projetos/prisma-proposta/capa/"
+  },
   "dir": "assets/projetos/prisma-proposta/",
   "telas": [
    {
@@ -8984,13 +9316,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "prisma-brandbook"
-  ]
+  ],
+  "entrega": {
+   "pt": "Proposta estratégica · Apresentação",
+   "en": "Strategic proposal · Presentation",
+   "es": "Propuesta estratégica · Presentación"
+  }
  },
  {
   "slug": "inspirit",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "Inspirit Jiu Jitsu",
   "ano": "2026",
   "cat": {
@@ -8998,7 +9332,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "folder",
@@ -9018,8 +9354,21 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/inspirit/capa.webp",
-  "resumo": {"pt": "Folder para escola de jiu-jitsu na Califórnia, EUA", "en": "Folder for a jiu-jitsu school in California, USA", "es": "Folleto para una escuela de jiu-jitsu en California, EE. UU."},
-  "capaAnim": {"m":"DC","full":1,"fundo":[20,40,44],"src":"assets/projetos/inspirit/capa/"},
+  "resumo": {
+   "pt": "Folder para escola de jiu-jitsu na Califórnia, EUA",
+   "en": "Folder for a jiu-jitsu school in California, USA",
+   "es": "Folleto para una escuela de jiu-jitsu en California, EE. UU."
+  },
+  "capaAnim": {
+   "m": "DC",
+   "full": 1,
+   "fundo": [
+    20,
+    40,
+    44
+   ],
+   "src": "assets/projetos/inspirit/capa/"
+  },
   "dir": "assets/projetos/inspirit/",
   "telas": [
    {
@@ -9170,13 +9519,15 @@ window.PROJETOS = [
      "es": "Ficha técnica"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Folder · Editorial",
+   "en": "Brochure · Editorial",
+   "es": "Folleto · Editorial"
+  }
  },
  {
   "slug": "festa-da-polenta",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "Festa da Polenta",
   "ano": "2026",
   "cat": {
@@ -9184,7 +9535,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "cartaz-folder",
@@ -9207,7 +9560,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/festa-da-polenta/capa.webp",
-  "resumo": {"pt": "Cartaz e folder para festa tradicional em Piracicaba", "en": "Poster and folder for a traditional festival in Piracicaba", "es": "Cartel y folleto para una fiesta tradicional en Piracicaba"},
+  "resumo": {
+   "pt": "Cartaz e folder para festa tradicional em Piracicaba",
+   "en": "Poster and folder for a traditional festival in Piracicaba",
+   "es": "Cartel y folleto para una fiesta tradicional en Piracicaba"
+  },
   "dir": "assets/projetos/festa-da-polenta/",
   "telas": [
    {
@@ -9362,13 +9719,15 @@ window.PROJETOS = [
      "es": "Ficha técnica"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Cartaz · Folder · Ilustração",
+   "en": "Poster · Brochure · Illustration",
+   "es": "Cartel · Folleto · Ilustración"
+  }
  },
  {
   "slug": "fellipe-gualberto",
-  "servicos_relacionados": [
-   "landing"
-  ],
   "titulo": "Fellipe Gualberto",
   "ano": "2026",
   "cat": {
@@ -9398,27 +9757,307 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/fellipe-gualberto/capa.webp",
-  "resumo": {"pt": "Site-portfólio para jornalista", "en": "Portfolio website for a journalist", "es": "Sitio portafolio para un periodista"},
+  "resumo": {
+   "pt": "Site-portfólio para jornalista",
+   "en": "Portfolio website for a journalist",
+   "es": "Sitio portafolio para un periodista"
+  },
   "dir": "assets/projetos/fellipe-gualberto/",
   "intro": {
    "pt": "Portfólio do jornalista e pesquisador Fellipe Gualberto. Design e desenvolvimento: apresentação, matérias por editoria (Política, Mobilidade e Textos assinados), recortes de jornal em PDF e contato. HTML, CSS e JavaScript, publicado no GitHub Pages.",
    "en": "Portfolio for journalist and researcher Fellipe Gualberto. Design and development: introduction, articles by section (Politics, Mobility and Bylined pieces), newspaper clippings as PDF and contact. HTML, CSS and JavaScript, published on GitHub Pages.",
    "es": "Portafolio del periodista e investigador Fellipe Gualberto. Diseño y desarrollo: presentación, notas por sección (Política, Movilidad y Textos firmados), recortes de periódico en PDF y contacto. HTML, CSS y JavaScript, publicado en GitHub Pages."
   },
-  "telas": [{"img": "01", "t": {"pt": "Fellipe Gualberto", "en": "Fellipe Gualberto", "es": "Fellipe Gualberto"}, "d": {"pt": "Elementos e definições do site-portfólio do jornalista e pesquisador Fellipe Gualberto, página por página. Design e desenvolvimento em HTML, CSS e JavaScript, publicado no GitHub Pages.", "en": "Elements and definitions of the portfolio site of journalist and researcher Fellipe Gualberto, page by page. Design and development in HTML, CSS and JavaScript, published on GitHub Pages.", "es": "Elementos y definiciones del sitio portafolio del periodista e investigador Fellipe Gualberto, página por página. Diseño y desarrollo en HTML, CSS y JavaScript, publicado en GitHub Pages."}}, {"img": "02", "t": {"pt": "O projeto", "en": "The project", "es": "El proyecto"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "03", "t": {"pt": "Estrutura", "en": "Structure", "es": "Estructura"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "04", "t": {"pt": "Cores", "en": "Colors", "es": "Colores"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "05", "t": {"pt": "Tipografia", "en": "Typography", "es": "Tipografía"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "06", "t": {"pt": "Navegação", "en": "Navigation", "es": "Navegación"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "07", "t": {"pt": "Início", "en": "Start", "es": "Inicio"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "08", "t": {"pt": "Quem sou eu", "en": "About me", "es": "Quién soy"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "09", "t": {"pt": "Política", "en": "Politics", "es": "Política"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "10", "t": {"pt": "Anatomia do card", "en": "Card anatomy", "es": "Anatomía de la tarjeta"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "11", "t": {"pt": "Mobilidade", "en": "Mobility", "es": "Movilidad"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "12", "t": {"pt": "Textos assinados", "en": "Bylined pieces", "es": "Textos firmados"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "13", "t": {"pt": "Recortes em PDF", "en": "PDF clippings", "es": "Recortes en PDF"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "14", "t": {"pt": "Contato", "en": "Contact", "es": "Contacto"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "15", "t": {"pt": "Currículo", "en": "Résumé", "es": "Currículum"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "16", "t": {"pt": "No celular", "en": "On the phone", "es": "En el celular"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "17", "t": {"pt": "Obrigado", "en": "Thank you", "es": "Gracias"}, "d": {"pt": "", "en": "", "es": ""}}],
+  "telas": [
+   {
+    "img": "01",
+    "t": {
+     "pt": "Fellipe Gualberto",
+     "en": "Fellipe Gualberto",
+     "es": "Fellipe Gualberto"
+    },
+    "d": {
+     "pt": "Elementos e definições do site-portfólio do jornalista e pesquisador Fellipe Gualberto, página por página. Design e desenvolvimento em HTML, CSS e JavaScript, publicado no GitHub Pages.",
+     "en": "Elements and definitions of the portfolio site of journalist and researcher Fellipe Gualberto, page by page. Design and development in HTML, CSS and JavaScript, published on GitHub Pages.",
+     "es": "Elementos y definiciones del sitio portafolio del periodista e investigador Fellipe Gualberto, página por página. Diseño y desarrollo en HTML, CSS y JavaScript, publicado en GitHub Pages."
+    }
+   },
+   {
+    "img": "02",
+    "t": {
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "03",
+    "t": {
+     "pt": "Estrutura",
+     "en": "Structure",
+     "es": "Estructura"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "04",
+    "t": {
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "05",
+    "t": {
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "06",
+    "t": {
+     "pt": "Navegação",
+     "en": "Navigation",
+     "es": "Navegación"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "07",
+    "t": {
+     "pt": "Início",
+     "en": "Start",
+     "es": "Inicio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "08",
+    "t": {
+     "pt": "Quem sou eu",
+     "en": "About me",
+     "es": "Quién soy"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "09",
+    "t": {
+     "pt": "Política",
+     "en": "Politics",
+     "es": "Política"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "10",
+    "t": {
+     "pt": "Anatomia do card",
+     "en": "Card anatomy",
+     "es": "Anatomía de la tarjeta"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "11",
+    "t": {
+     "pt": "Mobilidade",
+     "en": "Mobility",
+     "es": "Movilidad"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "12",
+    "t": {
+     "pt": "Textos assinados",
+     "en": "Bylined pieces",
+     "es": "Textos firmados"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Recortes em PDF",
+     "en": "PDF clippings",
+     "es": "Recortes en PDF"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "14",
+    "t": {
+     "pt": "Contato",
+     "en": "Contact",
+     "es": "Contacto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "15",
+    "t": {
+     "pt": "Currículo",
+     "en": "Résumé",
+     "es": "Currículum"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "16",
+    "t": {
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "17",
+    "t": {
+     "pt": "Obrigado",
+     "en": "Thank you",
+     "es": "Gracias"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   }
+  ],
   "web": {
    "url": "https://fellipegualberto.github.io/portfolio/index.html",
    "dev": "desktop"
   },
   "shots": [],
   "link": "https://fellipegualberto.github.io/portfolio/index.html",
-  "secoes": [{"p": 1, "t": {"pt": "Fellipe Gualberto", "en": "Fellipe Gualberto", "es": "Fellipe Gualberto"}}, {"p": 3, "t": {"pt": "Estrutura", "en": "Structure", "es": "Estructura"}}, {"p": 4, "t": {"pt": "Cores e tipografia", "en": "Colors and typography", "es": "Colores y tipografía"}}, {"p": 6, "t": {"pt": "Navegação", "en": "Navigation", "es": "Navegación"}}, {"p": 7, "t": {"pt": "Páginas", "en": "Pages", "es": "Páginas"}}, {"p": 14, "t": {"pt": "Contato e currículo", "en": "Contact and résumé", "es": "Contacto y currículum"}}, {"p": 16, "t": {"pt": "Celular", "en": "Phone", "es": "Celular"}}]
+  "secoes": [
+   {
+    "p": 1,
+    "t": {
+     "pt": "Fellipe Gualberto",
+     "en": "Fellipe Gualberto",
+     "es": "Fellipe Gualberto"
+    }
+   },
+   {
+    "p": 3,
+    "t": {
+     "pt": "Estrutura",
+     "en": "Structure",
+     "es": "Estructura"
+    }
+   },
+   {
+    "p": 4,
+    "t": {
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
+    }
+   },
+   {
+    "p": 6,
+    "t": {
+     "pt": "Navegação",
+     "en": "Navigation",
+     "es": "Navegación"
+    }
+   },
+   {
+    "p": 7,
+    "t": {
+     "pt": "Páginas",
+     "en": "Pages",
+     "es": "Páginas"
+    }
+   },
+   {
+    "p": 14,
+    "t": {
+     "pt": "Contato e currículo",
+     "en": "Contact and résumé",
+     "es": "Contacto y currículum"
+    }
+   },
+   {
+    "p": 16,
+    "t": {
+     "pt": "Celular",
+     "en": "Phone",
+     "es": "Celular"
+    }
+   }
+  ]
  },
  {
   "slug": "nova-rio-branco",
-  "servicos_relacionados": [
-   "landing"
-  ],
   "titulo": "Nova Rio Branco",
   "ano": "2025",
   "cat": {
@@ -9446,18 +10085,294 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/nova-rio-branco/capa.webp",
-  "resumo": {"pt": "Catálogo online para loja de Bauru", "en": "Online catalogue for a store in Bauru", "es": "Catálogo en línea para una tienda de Bauru"},
+  "resumo": {
+   "pt": "Catálogo online para loja de Bauru",
+   "en": "Online catalogue for a store in Bauru",
+   "es": "Catálogo en línea para una tienda de Bauru"
+  },
   "dir": "assets/projetos/nova-rio-branco/",
-  "intro": {"pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp.", "en": "Online catalog with quote requests for Nova Rio Branco, in Bauru. HTML, CSS and JavaScript, no framework: 1,113 items grouped into 394 cards, filters, search and a PDF quote sent via WhatsApp.", "es": "Catálogo en línea con solicitud de presupuesto para Nova Rio Branco, de Bauru. HTML, CSS y JavaScript, sin framework: 1.113 ítems agrupados en 394 tarjetas, filtros, búsqueda y presupuesto en PDF con envío por WhatsApp."},
-  "telas": [{"img": "01", "t": {"pt": "Nova Rio Branco", "en": "Nova Rio Branco", "es": "Nova Rio Branco"}, "d": {"pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp.", "en": "Online catalog with quote requests for Nova Rio Branco, in Bauru. HTML, CSS and JavaScript, no framework: 1,113 items grouped into 394 cards, filters, search and a PDF quote sent via WhatsApp.", "es": "Catálogo en línea con solicitud de presupuesto para Nova Rio Branco, de Bauru. HTML, CSS y JavaScript, sin framework: 1.113 ítems agrupados en 394 tarjetas, filtros, búsqueda y presupuesto en PDF con envío por WhatsApp."}}, {"img": "02", "t": {"pt": "O projeto", "en": "The project", "es": "El proyecto"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "03", "t": {"pt": "Estrutura", "en": "Structure", "es": "Estructura"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "04", "t": {"pt": "Cores", "en": "Colors", "es": "Colores"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "05", "t": {"pt": "Tipografia", "en": "Typography", "es": "Tipografía"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "06", "t": {"pt": "Navegação", "en": "Navigation", "es": "Navegación"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "07", "t": {"pt": "Início", "en": "Start", "es": "Inicio"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "08", "t": {"pt": "Catálogo", "en": "Catalog", "es": "Catálogo"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "09", "t": {"pt": "Filtros e ordenação", "en": "Filters and sorting", "es": "Filtros y orden"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "10", "t": {"pt": "Cards de produto", "en": "Product cards", "es": "Tarjetas de producto"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "11", "t": {"pt": "Variações", "en": "Variants", "es": "Variantes"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "12", "t": {"pt": "Orçamento", "en": "Quote", "es": "Presupuesto"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "13", "t": {"pt": "Onde estamos", "en": "Where we are", "es": "Dónde estamos"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "14", "t": {"pt": "Rodapé", "en": "Footer", "es": "Pie de página"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "15", "t": {"pt": "No celular", "en": "On the phone", "es": "En el celular"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "16", "t": {"pt": "No celular: janelas e rodapé", "en": "On the phone: windows and footer", "es": "En el celular: ventanas y pie"}, "d": {"pt": "", "en": "", "es": ""}}, {"img": "17", "t": {"pt": "Obrigado", "en": "Thank you", "es": "Gracias"}, "d": {"pt": "", "en": "", "es": ""}}],
-  "secoes": [{"p": 1, "t": {"pt": "Nova Rio Branco", "en": "Nova Rio Branco", "es": "Nova Rio Branco"}}, {"p": 3, "t": {"pt": "Estrutura", "en": "Structure", "es": "Estructura"}}, {"p": 4, "t": {"pt": "Cores e tipografia", "en": "Colors and typography", "es": "Colores y tipografía"}}, {"p": 6, "t": {"pt": "Navegação", "en": "Navigation", "es": "Navegación"}}, {"p": 7, "t": {"pt": "Páginas", "en": "Pages", "es": "Páginas"}}, {"p": 15, "t": {"pt": "Celular", "en": "Phone", "es": "Celular"}}],
+  "intro": {
+   "pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp.",
+   "en": "Online catalog with quote requests for Nova Rio Branco, in Bauru. HTML, CSS and JavaScript, no framework: 1,113 items grouped into 394 cards, filters, search and a PDF quote sent via WhatsApp.",
+   "es": "Catálogo en línea con solicitud de presupuesto para Nova Rio Branco, de Bauru. HTML, CSS y JavaScript, sin framework: 1.113 ítems agrupados en 394 tarjetas, filtros, búsqueda y presupuesto en PDF con envío por WhatsApp."
+  },
+  "telas": [
+   {
+    "img": "01",
+    "t": {
+     "pt": "Nova Rio Branco",
+     "en": "Nova Rio Branco",
+     "es": "Nova Rio Branco"
+    },
+    "d": {
+     "pt": "Catálogo online com pedido de orçamento para a Nova Rio Branco, de Bauru. HTML, CSS e JavaScript, sem framework: 1.113 itens agrupados em 394 cards, filtros, busca e orçamento em PDF com envio pelo WhatsApp.",
+     "en": "Online catalog with quote requests for Nova Rio Branco, in Bauru. HTML, CSS and JavaScript, no framework: 1,113 items grouped into 394 cards, filters, search and a PDF quote sent via WhatsApp.",
+     "es": "Catálogo en línea con solicitud de presupuesto para Nova Rio Branco, de Bauru. HTML, CSS y JavaScript, sin framework: 1.113 ítems agrupados en 394 tarjetas, filtros, búsqueda y presupuesto en PDF con envío por WhatsApp."
+    }
+   },
+   {
+    "img": "02",
+    "t": {
+     "pt": "O projeto",
+     "en": "The project",
+     "es": "El proyecto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "03",
+    "t": {
+     "pt": "Estrutura",
+     "en": "Structure",
+     "es": "Estructura"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "04",
+    "t": {
+     "pt": "Cores",
+     "en": "Colors",
+     "es": "Colores"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "05",
+    "t": {
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "06",
+    "t": {
+     "pt": "Navegação",
+     "en": "Navigation",
+     "es": "Navegación"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "07",
+    "t": {
+     "pt": "Início",
+     "en": "Start",
+     "es": "Inicio"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "08",
+    "t": {
+     "pt": "Catálogo",
+     "en": "Catalog",
+     "es": "Catálogo"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "09",
+    "t": {
+     "pt": "Filtros e ordenação",
+     "en": "Filters and sorting",
+     "es": "Filtros y orden"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "10",
+    "t": {
+     "pt": "Cards de produto",
+     "en": "Product cards",
+     "es": "Tarjetas de producto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "11",
+    "t": {
+     "pt": "Variações",
+     "en": "Variants",
+     "es": "Variantes"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "12",
+    "t": {
+     "pt": "Orçamento",
+     "en": "Quote",
+     "es": "Presupuesto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Onde estamos",
+     "en": "Where we are",
+     "es": "Dónde estamos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "14",
+    "t": {
+     "pt": "Rodapé",
+     "en": "Footer",
+     "es": "Pie de página"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "15",
+    "t": {
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "16",
+    "t": {
+     "pt": "No celular: janelas e rodapé",
+     "en": "On the phone: windows and footer",
+     "es": "En el celular: ventanas y pie"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   },
+   {
+    "img": "17",
+    "t": {
+     "pt": "Obrigado",
+     "en": "Thank you",
+     "es": "Gracias"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    }
+   }
+  ],
+  "secoes": [
+   {
+    "p": 1,
+    "t": {
+     "pt": "Nova Rio Branco",
+     "en": "Nova Rio Branco",
+     "es": "Nova Rio Branco"
+    }
+   },
+   {
+    "p": 3,
+    "t": {
+     "pt": "Estrutura",
+     "en": "Structure",
+     "es": "Estructura"
+    }
+   },
+   {
+    "p": 4,
+    "t": {
+     "pt": "Cores e tipografia",
+     "en": "Colors and typography",
+     "es": "Colores y tipografía"
+    }
+   },
+   {
+    "p": 6,
+    "t": {
+     "pt": "Navegação",
+     "en": "Navigation",
+     "es": "Navegación"
+    }
+   },
+   {
+    "p": 7,
+    "t": {
+     "pt": "Páginas",
+     "en": "Pages",
+     "es": "Páginas"
+    }
+   },
+   {
+    "p": 15,
+    "t": {
+     "pt": "Celular",
+     "en": "Phone",
+     "es": "Celular"
+    }
+   }
+  ],
   "link": "https://papelariariobranco.com.br"
  },
  {
   "slug": "pixelar",
-  "servicos_relacionados": [
-   "landing"
-  ],
   "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
@@ -9485,8 +10400,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/pixelar/capa.webp",
-  "resumo": {"pt": "Editor de imagem e vídeo no navegador, projeto próprio", "en": "Browser image and video editor, personal project", "es": "Editor de imagen y video en el navegador, proyecto propio"},
-  "capaAnim": {"m":"M","fundo":[17,17,17],"src":"assets/projetos/pixelar/capa/"},
+  "resumo": {
+   "pt": "Editor de imagem e vídeo no navegador, projeto próprio",
+   "en": "Browser image and video editor, personal project",
+   "es": "Editor de imagen y video en el navegador, proyecto propio"
+  },
   "dir": "assets/projetos/pixelar/",
   "intro": {
    "pt": "Editor de pixel art, dither, filmes analógicos e animações para fotos e vídeos, direto no navegador. Nada é enviado para servidor: tudo roda no aparelho (WebGL2 e WebCodecs). Estilos inspirados em obras de arte, texturas e exportação em imagem, vetor e vídeo.",
@@ -9682,7 +10600,6 @@ window.PROJETOS = [
    "g09.webp",
    "g10.webp"
   ],
-  "destaque": true,
   "secoes": [
    {
     "p": 1,
@@ -9748,13 +10665,11 @@ window.PROJETOS = [
      "es": "Ficha técnica"
     }
    }
-  ]
+  ],
+  "oculto": true
  },
  {
   "slug": "metaprojeto",
-  "servicos_relacionados": [
-   "landing"
-  ],
   "titulo": {
    "pt": "Este portfólio",
    "en": "This portfolio",
@@ -9786,8 +10701,20 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/metaprojeto/n01.webp",
-  "capaAnim": {"m":"V","fundo":[255,255,255],"src":"assets/projetos/metaprojeto/capa/"},
-  "resumo": {"pt": "Design e código deste site", "en": "Design and code of this site", "es": "Diseño y código de este sitio"},
+  "capaAnim": {
+   "m": "V",
+   "fundo": [
+    255,
+    255,
+    255
+   ],
+   "src": "assets/projetos/metaprojeto/capa/"
+  },
+  "resumo": {
+   "pt": "Design e código deste site",
+   "en": "Design and code of this site",
+   "es": "Diseño y código de este sitio"
+  },
   "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
@@ -10462,14 +11389,11 @@ window.PROJETOS = [
   "idiomasImg": [
    "en",
    "es"
-  ]
+  ],
+  "oculto": true
  },
  {
   "slug": "basement",
-  "servicos_relacionados": [
-   "social",
-   "redacao"
-  ],
   "titulo": "Basement",
   "ano": "2026",
   "cat": {
@@ -10477,7 +11401,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10500,7 +11426,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/basement/capa.webp",
-  "resumo": {"pt": "Redes sociais para plataforma de IA jurídica", "en": "Social media for a legal AI platform", "es": "Redes sociales para una plataforma de IA jurídica"},
+  "resumo": {
+   "pt": "Redes sociais para plataforma de IA jurídica",
+   "en": "Social media for a legal AI platform",
+   "es": "Redes sociales para una plataforma de IA jurídica"
+  },
   "dir": "assets/projetos/basement/",
   "intro": {
    "pt": "Peças para Instagram e LinkedIn da Basement, plataforma de IA para o societário, no ecossistema Vórtx. Entregas semanais desde março de 2026. O primeiro trabalho foi o logotipo do Equity 360.",
@@ -10512,14 +11442,15 @@ window.PROJETOS = [
   "rel": [
    "equity360"
   ],
-  "exp": "Basement"
+  "exp": "Basement",
+  "entrega": {
+   "pt": "Posts e carrosséis recorrentes",
+   "en": "Recurring posts and carousels",
+   "es": "Posts y carruseles recurrentes"
+  }
  },
  {
   "slug": "tesoura",
-  "servicos_relacionados": [
-   "social",
-   "redacao"
-  ],
   "titulo": "Tesoura com Ponta",
   "ano": "2025–2026",
   "cat": {
@@ -10527,7 +11458,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "cultura"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10550,7 +11483,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/tesoura/capa.webp",
-  "resumo": {"pt": "Redes sociais para portal de jornalismo cultural", "en": "Social media for a cultural journalism outlet", "es": "Redes sociales para un portal de periodismo cultural"},
+  "resumo": {
+   "pt": "Redes sociais para portal de jornalismo cultural",
+   "en": "Social media for a cultural journalism outlet",
+   "es": "Redes sociales para un portal de periodismo cultural"
+  },
   "dir": "assets/projetos/tesoura/",
   "intro": {
    "pt": "Carrosséis do Tesoura com Ponta, portal de jornalismo cultural para o qual escrevo: divulgação das críticas, listas de melhores do ano e coberturas de festivais.",
@@ -10566,14 +11503,15 @@ window.PROJETOS = [
    "m": "c",
    "cor": "#e34948",
    "on": "#fff"
+  },
+  "entrega": {
+   "pt": "Posts · Carrosséis · Artigos",
+   "en": "Posts · Carousels · Articles",
+   "es": "Posts · Carruseles · Artículos"
   }
  },
  {
   "slug": "persona",
-  "servicos_relacionados": [
-   "social",
-   "redacao"
-  ],
   "titulo": "Persona",
   "ano": "2023–2026",
   "cat": {
@@ -10581,7 +11519,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "cultura"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10608,8 +11548,24 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/persona/capa.webp",
-  "capaAnim": {"m":"S","fx":"blink","fundo":[236,55,46],"x":50.042,"y":49.875,"w":31.417,"src":"assets/projetos/persona/capa/"},
-  "resumo": {"pt": "Redes sociais para grupo de crítica cultural da Unesp", "en": "Social media for a Unesp cultural criticism group", "es": "Redes sociales para un grupo de crítica cultural de la Unesp"},
+  "capaAnim": {
+   "m": "S",
+   "fx": "blink",
+   "fundo": [
+    236,
+    55,
+    46
+   ],
+   "x": 50.042,
+   "y": 49.875,
+   "w": 31.417,
+   "src": "assets/projetos/persona/capa/"
+  },
+  "resumo": {
+   "pt": "Redes sociais para grupo de crítica cultural da Unesp",
+   "en": "Social media for a Unesp cultural criticism group",
+   "es": "Redes sociales para un grupo de crítica cultural de la Unesp"
+  },
   "dir": "assets/projetos/persona/",
   "intro": {
    "pt": "Posts e carrosséis do Persona, grupo de pesquisa e portal de crítica cultural da Unesp, do qual fui coordenador (2021–2024): divulgação dos textos, coberturas de festivais e processos seletivos.",
@@ -10626,14 +11582,15 @@ window.PROJETOS = [
    "m": "l",
    "cor": "#6250d6",
    "on": "#fff"
+  },
+  "entrega": {
+   "pt": "Posts · Artigos",
+   "en": "Posts · Articles",
+   "es": "Posts · Artículos"
   }
  },
  {
   "slug": "desvendando",
-  "servicos_relacionados": [
-   "social",
-   "redacao"
-  ],
   "titulo": "Desvendando o Pop",
   "ano": "2026",
   "cat": {
@@ -10641,7 +11598,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "cultura"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10662,7 +11621,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/desvendando/capa.webp",
-  "resumo": {"pt": "Carrosséis para perfil de análise de música pop", "en": "Carousels for a pop music analysis profile", "es": "Carruseles para un perfil de análisis de música pop"},
+  "resumo": {
+   "pt": "Carrosséis para perfil de análise de música pop",
+   "en": "Carousels for a pop music analysis profile",
+   "es": "Carruseles para un perfil de análisis de música pop"
+  },
   "dir": "assets/projetos/desvendando/",
   "intro": {
    "pt": "Carrosséis do Desvendando o Pop, projeto de análise de música pop no Instagram.",
@@ -10670,13 +11633,15 @@ window.PROJETOS = [
    "es": "Carruseles de Desvendando o Pop, proyecto de análisis de música pop en Instagram."
   },
   "telas": [],
-  "posts": "desvendando"
+  "posts": "desvendando",
+  "entrega": {
+   "pt": "Posts · Conteúdo editorial",
+   "en": "Posts · Editorial content",
+   "es": "Posts · Contenido editorial"
+  }
  },
  {
   "slug": "proec",
-  "servicos_relacionados": [
-   "social"
-  ],
   "marca": [
    "congresso-extensao",
    "interserv",
@@ -10690,7 +11655,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10715,8 +11682,29 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/proec/capa.webp",
-  "resumo": {"pt": "Redes sociais para a Pró-Reitoria de Extensão da Unesp", "en": "Social media for the Unesp Outreach Office", "es": "Redes sociales para la Prorrectoría de Extensión de la Unesp"},
-  "capaAnim": {"m":"DT","p":[255,255,255],"tinta":[17,17,17],"logo":[375,360],"src":"assets/projetos/proec/capa/"},
+  "resumo": {
+   "pt": "Redes sociais para a Pró-Reitoria de Extensão da Unesp",
+   "en": "Social media for the Unesp Outreach Office",
+   "es": "Redes sociales para la Prorrectoría de Extensión de la Unesp"
+  },
+  "capaAnim": {
+   "m": "DT",
+   "p": [
+    255,
+    255,
+    255
+   ],
+   "tinta": [
+    17,
+    17,
+    17
+   ],
+   "logo": [
+    375,
+    360
+   ],
+   "src": "assets/projetos/proec/capa/"
+  },
   "dir": "assets/projetos/proec/",
   "intro": {
    "pt": "Posts e carrosséis feitos na Pró-Reitoria de Extensão e Cultura da Unesp (PROEC), de janeiro a dezembro de 2024: Congresso de Extensão Universitária, curso Educação Política e Gestão Municipal, Mostra Unesp da Canção, InterServ e Ocupação Unesp Negra.",
@@ -10840,13 +11828,15 @@ window.PROJETOS = [
      "es": "Trabajo final (RP Unesp)"
     }
    }
+  },
+  "entrega": {
+   "pt": "Posts · Divulgação de evento",
+   "en": "Posts · Event promotion",
+   "es": "Posts · Difusión de evento"
   }
  },
  {
   "slug": "sollaris-instagram",
-  "servicos_relacionados": [
-   "social"
-  ],
   "titulo": "Sollaris · Instagram",
   "ano": "2023",
   "cat": {
@@ -10887,10 +11877,6 @@ window.PROJETOS = [
  },
  {
   "slug": "rd-cultural",
-  "servicos_relacionados": [
-   "social",
-   "redacao"
-  ],
   "titulo": "RD Cultural",
   "ano": "2023",
   "cat": {
@@ -10898,7 +11884,9 @@ window.PROJETOS = [
    "en": "Social media",
    "es": "Redes sociales"
   },
-  "filtro": "midias",
+  "filtro": [
+   "marcas"
+  ],
   "etiquetas": {
    "entrega": [
     "posts-carrosseis",
@@ -10947,13 +11935,15 @@ window.PROJETOS = [
    "m": "l",
    "cor": "#eb6834",
    "on": "#fff"
+  },
+  "entrega": {
+   "pt": "Posts · Divulgação de evento",
+   "en": "Posts · Event promotion",
+   "es": "Posts · Difusión de evento"
   }
  },
  {
   "slug": "encantos-do-brasil",
-  "servicos_relacionados": [
-   "identidade"
-  ],
   "titulo": "EmCantos do Brasil",
   "ano": "2022",
   "cat": {
@@ -10962,8 +11952,7 @@ window.PROJETOS = [
    "es": "Eventos"
   },
   "filtro": [
-   "eventos",
-   "midias"
+   "inst"
   ],
   "etiquetas": {
    "entrega": [
@@ -10986,8 +11975,28 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encantos-do-brasil/capa.webp",
-  "resumo": {"pt": "Redes sociais para evento online de música brasileira", "en": "Social media for an online Brazilian music event", "es": "Redes sociales para un evento en línea de música brasileña"},
-  "capaAnim": {"m":"L","fundo":[255,212,86],"logo":{"f":"logo.webp","w":948,"h":948,"mw":56,"mh":84,"spin":40},"src":"assets/projetos/encantos-do-brasil/capa/"},
+  "resumo": {
+   "pt": "Redes sociais para evento online de música brasileira",
+   "en": "Social media for an online Brazilian music event",
+   "es": "Redes sociales para un evento en línea de música brasileña"
+  },
+  "capaAnim": {
+   "m": "L",
+   "fundo": [
+    255,
+    212,
+    86
+   ],
+   "logo": {
+    "f": "logo.webp",
+    "w": 948,
+    "h": 948,
+    "mw": 56,
+    "mh": 84,
+    "spin": 40
+   },
+   "src": "assets/projetos/encantos-do-brasil/capa/"
+  },
   "dir": "assets/projetos/encantos-do-brasil/",
   "intro": {
    "pt": "Evento online e gratuito de música brasileira com cinco convidados das cinco regiões do país. Posts de apresentação, atrações e parceiros, fevereiro e março de 2022.",
@@ -11257,11 +12266,15 @@ window.PROJETOS = [
    "m": "l",
    "cor": "#05B384",
    "on": "#141A2E"
+  },
+  "entrega": {
+   "pt": "Identidade visual · Posts",
+   "en": "Visual identity · Posts",
+   "es": "Identidad visual · Posts"
   }
  },
  {
   "slug": "encontro-direitos-humanos",
-  "servicos_relacionados": [],
   "titulo": {
    "pt": "13º Encontro de Direitos Humanos",
    "en": "13th Human Rights Meeting",
@@ -11273,7 +12286,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "fotografia",
@@ -11293,7 +12308,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/encontro-direitos-humanos/capa.webp",
-  "resumo": {"pt": "Organização e cobertura de evento de direitos humanos da Unesp", "en": "Organisation and coverage of a Unesp human rights event", "es": "Organización y cobertura de un evento de derechos humanos de la Unesp"},
+  "resumo": {
+   "pt": "Organização e cobertura de evento de direitos humanos da Unesp",
+   "en": "Organisation and coverage of a Unesp human rights event",
+   "es": "Organización y cobertura de un evento de derechos humanos de la Unesp"
+  },
   "dir": "assets/projetos/encontro-direitos-humanos/",
   "telas": [
    {
@@ -11423,11 +12442,15 @@ window.PROJETOS = [
      "es": "Ficha"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Fotografia · Organização de evento",
+   "en": "Photography · Event organization",
+   "es": "Fotografía · Organización de evento"
+  }
  },
  {
   "slug": "copa-girlpower",
-  "servicos_relacionados": [],
   "titulo": "Copa GirlPower",
   "ano": "2024",
   "cat": {
@@ -11435,7 +12458,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "fotografia",
@@ -11456,7 +12481,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/copa-girlpower/capa.webp",
-  "resumo": {"pt": "Cobertura fotográfica de torneio feminino universitário", "en": "Photo coverage of a women's university tournament", "es": "Cobertura fotográfica de un torneo femenino universitario"},
+  "resumo": {
+   "pt": "Cobertura fotográfica de torneio feminino universitário",
+   "en": "Photo coverage of a women's university tournament",
+   "es": "Cobertura fotográfica de un torneo femenino universitario"
+  },
   "dir": "assets/projetos/copa-girlpower/",
   "telas": [
    {
@@ -11639,11 +12668,15 @@ window.PROJETOS = [
   ],
   "rel": [
    "proec"
-  ]
+  ],
+  "entrega": {
+   "pt": "Fotografia · Cobertura de evento",
+   "en": "Photography · Event coverage",
+   "es": "Fotografía · Cobertura de evento"
+  }
  },
  {
   "slug": "oficina-gestao-projetos",
-  "servicos_relacionados": [],
   "titulo": {
    "pt": "Gestão de Projetos para Design",
    "en": "Project Management for Design",
@@ -11655,7 +12688,9 @@ window.PROJETOS = [
    "en": "Events",
    "es": "Eventos"
   },
-  "filtro": "eventos",
+  "filtro": [
+   "inst"
+  ],
   "etiquetas": {
    "entrega": [
     "oficina",
@@ -11675,7 +12710,11 @@ window.PROJETOS = [
    ]
   },
   "capa": "assets/projetos/oficina-gestao-projetos/capa.webp",
-  "resumo": {"pt": "Oficina de gestão de projetos para estudantes de design", "en": "Project management workshop for design students", "es": "Taller de gestión de proyectos para estudiantes de diseño"},
+  "resumo": {
+   "pt": "Oficina de gestão de projetos para estudantes de design",
+   "en": "Project management workshop for design students",
+   "es": "Taller de gestión de proyectos para estudiantes de diseño"
+  },
   "dir": "assets/projetos/oficina-gestao-projetos/",
   "telas": [
    {
@@ -11880,11 +12919,15 @@ window.PROJETOS = [
      "es": "Ficha"
     }
    }
-  ]
+  ],
+  "entrega": {
+   "pt": "Oficina · Material didático",
+   "en": "Workshop · Teaching material",
+   "es": "Taller · Material didáctico"
+  }
  },
-  {
+ {
   "slug": "o-hobbit",
-  "servicos_relacionados": [],
   "titulo": {
    "pt": "O Hobbit: análise literária",
    "en": "The Hobbit: literary analysis",
@@ -12055,11 +13098,11 @@ window.PROJETOS = [
     }
    }
   ],
-  "capaCropTop": true
+  "capaCropTop": true,
+  "oculto": true
  },
  {
   "slug": "dash-geral",
-  "servicos_relacionados": [],
   "titulo": {
    "pt": "Visão geral",
    "en": "Overview",
@@ -12094,7 +13137,8 @@ window.PROJETOS = [
    "tabela": true,
    "behance": true
   },
-  "rel": []
+  "rel": [],
+  "oculto": true
  }
 ];
 

@@ -3,37 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="assets/js/tema.js?v=20261111c"></script> <!-- modo noturno: no head, antes da pintura -->
-<script src="assets/js/idioma.js?v=20261105a"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
-<link rel="canonical" href="https://henrictrl.github.io/">
-<link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/">
-<link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/">
-<link rel="alternate" hreflang="es" href="https://henrictrl.github.io/es/">
-<link rel="alternate" hreflang="x-default" href="https://henrictrl.github.io/">
 <title>Projeto — Henrique Marinhos</title>
 <meta name="description" content="Projeto de Henrique Marinhos.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
-<link rel="icon" href="assets/img/favicon.ico" sizes="any">
-<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin> <!-- fonte Inter no próprio site -->
-<style>
-/* Inter variável 300–600 (licença OFL), subconjuntos latin e latin-ext: cobre PT, EN e ES */
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 600; font-display: swap; src: url('assets/fonts/inter-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-</style>
-<link rel="stylesheet" href="assets/css/projeto.css?v=20261023-capa-mob">
-<style>
-/* Cabeçalho do site nas páginas de projeto (mesmo menu da home).
-   Celular: hambúrguer. Desktop: Início, Sobre, Projetos, Artigos, Contato no centro. */
-body.project-page > header.top-header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-100); }
-body.project-page > header.top-header.menu-open { background: var(--white); }
-body.project-page .project-brand { display: block; color: var(--ink); text-decoration: none; }
-body.project-page .project-brand .brand-name, body.project-page .project-brand .brand-location { display: block; }
-body.project-page .project-brand .brand-location { color: var(--gray-400); }
-body.project-page .project-brand:focus-visible, body.project-page .main-nav a:focus-visible,
-body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-</style>
-<link rel="stylesheet" href="assets/css/tema.css?v=20261102a">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/js/tema.js?v=20261115"></script> <!-- modo noturno: antes da primeira pintura -->
+<script src="assets/js/idioma.js?v=20261115"></script> <!-- idioma no endereço, canonical e hreflang -->
+<link rel="stylesheet" href="assets/css/projeto.css?v=20261115">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261115">
 </head>
 <body class="project-page">
 <header class="top-header" id="project-header">
@@ -93,16 +72,11 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   <div class="lightbox-zoom-hint">Esc · Fechar</div>
 </div>
 <button type="button" class="mobile-top-button" id="project-mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-<script src="assets/data/projetos.js?v=20261112-mockups"></script>
-<script src="assets/js/previa-grupos.js"></script>
-<script src="assets/js/capas.js?v=20261111c"></script>
-<script src="assets/js/previa-capas.js?v=20261111c"></script>
-<script src="assets/js/previa-obras.js"></script>
-<script src="assets/data/posts.js?v=20261023-midias"></script>
-<script src="assets/js/previa-posts.js"></script>
-<script src="assets/data/engajamento.js?v=20261018-review3"></script>
+<script src="assets/data/projetos.js?v=20261115"></script>
+<script src="assets/js/capas.js?v=20261115"></script>
+<script src="assets/data/posts.js?v=20261115"></script>
+<script src="assets/data/engajamento.js?v=20261115"></script>
 <script>
-
 (function () {
   "use strict";
   var params = new URLSearchParams(location.search);
@@ -110,8 +84,8 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   var PROJECTS = window.PROJETOS || [];
   var POSTS = window.POSTS || [];
   var LANG_NAMES = {pt:"Português",en:"English",es:"Español"};
-  var LANG = HMI.initial(); // endereço (/en/, /es/) > escolha na bandeira > aparelho > PT (assets/js/idioma.js)
-  HMI.sync(LANG, false); // abrir um link /es/ não vira escolha salva
+  var LANG = HMI.initial();
+  HMI.sync(LANG);
   document.documentElement.lang = LANG === "pt" ? "pt-br" : LANG; // antes de ler títulos: o resolvedor de projetos.js usa o lang do <html>
   /* imagens traduzidas: se idiomasImg (do projeto ou do item) inclui o idioma ativo, usa NN.en.webp / NN.es.webp; se o arquivo faltar, volta ao PT */
   function locPath(path, langs) {
@@ -141,22 +115,12 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
   }
   function igImg(post,index) { if (post.cover && index===0) return post.cover; var b="assets/posts/"+post.c+"/"+String(index+1).padStart(2,"0"); return LANG!=="pt" && post.tr && post.tr.indexOf(index+1)>=0 ? b+"."+LANG+".webp" : b+".webp"; }
   function igUrl(post) { return "https://www.instagram.com/"+(post.reel?"reel":"p")+"/"+post.c+"/"; }
-  var postGroupNames={};
-  PROJECTS.forEach(function(p) {
-    if (p.posts) postGroupNames[p.posts]=postGroupNames[p.posts]||p.titulo;
-    (p.postGroups||[]).forEach(function(g) { postGroupNames[g.g]=g.t||p.titulo; });
-  });
-  function pgProj(group) { return lx(postGroupNames[group]) || group; }
-  function pgOrgName(user) {
-    var map={persona:"Persona",unesp:"Unesp"}, data=(window.ENGAJAMENTO||{}).contas||{};
-    return map[user] || (data[user]&&data[user].n) || user;
-  }
   var POST_BY=Object.create(null);
   POSTS.forEach(function(p){POST_BY[p.c]=p;});
   var PROJECT_ROUTE_ALIASES = {"rino-site":"rino-cores","o-hobbit":"hobbit","metaprojeto":"portfolio","dash-geral":"visao-geral"};
   function cleanProjectUrl(projectSlug) { return HMI.with("/projetos/" + (PROJECT_ROUTE_ALIASES[projectSlug] || projectSlug) + "/", LANG); }
   var currentProject=PROJECTS.find(function(p){return p.slug===slug;});
-  var main=document.getElementById("dk"), heading=document.getElementById("project-title");
+  var heading=document.getElementById("project-title");
   var kicker=document.getElementById("project-kicker");
   var intro=document.getElementById("project-intro"), visuals=document.getElementById("project-visuals");
   var toc=document.getElementById("project-toc"), langHost=document.getElementById("project-lang");
@@ -236,7 +200,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     langHost.querySelectorAll("[data-lang]").forEach(function(button){
       button.addEventListener("click",function(){
         var nextLang=button.dataset.lang; if(nextLang===LANG)return;
-        try{localStorage.setItem(HMI.KEY,nextLang);}catch(e){}
         location.assign(HMI.with(HMI.path(),nextLang)+location.hash); // abre o mesmo projeto no endereço do idioma
       });
     });
@@ -275,7 +238,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     if(!groups.some(function(group){return group.t;}))addTocBlock(contentToc,"dk-b-posts-all",siteCopy.posts);
     return '<section class="dk-block pc-block" id="dk-b-posts-all"><h2 class="dk-block-title">'+esc(lx(siteCopy.posts))+'<span>'+postsCount+(postsCount===1?textLabel(" publicação"," post"," publicación"):textLabel(" posts"," posts"," posts"))+'</span></h2>'+filter+groupsHTML+'</section>';
   }
-
 
   const MESES = {
     pt: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'],
@@ -370,7 +332,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
         <svg class="ds-hero-g" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="ds-fade" d="${area}" fill="currentColor" opacity=".18"/><path class="ds-draw" pathLength="1" d="${line}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
         <div class="ds-chips">${chips.map(([v, l]) => `<span class="ds-chip">${v ? `<b>${v}</b> ` : ''}${l}</span>`).join('')}</div></div>`); }
 
-    // Seções de exemplos de posts removidas a pedido; o dashboard mantém os gráficos e indicadores.
 
     // 2) MAIS CURTIDOS (ranking com número na cor; miniatura ganha cor no hover)
     { const top = [...rows].sort((a, b) => b.v - a.v || b.c - a.c).slice(0, 5), mx = top[0] ? top[0].v : 1;
@@ -409,7 +370,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     // 6) POR ANO (colunas, ano mais forte na cor)
     if (anos.length > 1) { const pk = Math.max(...anos.map(a => a.t)); out.push(sec('dk-b-ds-ano', DS_L.ano, lx(DS_L.anoD), vcols(anos.map(a => ({ l: a.k, sub: nP(a.n), v: a.t, hi: a.t === pk, d: `${nf(a.t)}<small>${nf(a.t / TOT * 100, dd(a.t / TOT * 100))}%</small>`, tip: `<b>${a.k}</b><br>${nf(a.t)} ${unid} · ${nP(a.n)}<br>${nf(a.a, dd(a.a))} ${lx(DS_L.pp)}` }))))); }
 
-    // Sem blocos de exemplos adicionais: foco nos dados e comparações.
 
     // 7) PARTICIPAÇÃO: rosca + legenda (até 7 fatias + Outros)
     if (gs.length > 1) { const top = gs.slice(0, 7), rest = gs.slice(7), sl = top.map((g, i) => ({ l: esc(nome(g.rs[0])), t: g.t, n: g.n, c: PAL[i], hid: m === 'l' && g.rs.every(r => r.l == null) }));
@@ -455,8 +415,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     return { html: `<section class="dk-block ds" id="dk-b-ds" style="--ac:${AC};--on:${ON}">${out.join('')}</section>`, toc };
   };
 
-
-  // contador animado dos números do dashboard (mesma função do index.html)
+  // contador animado dos números do dashboard
   const dsCount = (el) => { const n = +el.dataset.n, d = +el.dataset.d, pre = el.dataset.pre || '', suf = el.dataset.suf || '', t0 = performance.now(), T = 1100;
     const step = (t) => { const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = pre + nf(n * e, k < 1 ? (d ? d : 0) : d) + suf; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
   let dsIO = null;
@@ -503,7 +462,6 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     if (t && !t.contains(e.relatedTarget)) dsTip.classList.remove('on');
   });
   window.addEventListener('scroll', () => dsTip.classList.remove('on'), { passive: true });
-
 
   /* --- Contato: ícones das ferramentas flutuando em torno de um centro gravitacional ---
      Em telas estreitas, a atração suave leva a nuvem para uma faixa reservada no canto inferior esquerdo.
@@ -578,7 +536,7 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
     toc.innerHTML=tocItems.map(function(item,index){return '<a href="#'+esc(item[0])+'" data-t="'+esc(item[0])+'"'+(index?"":' class="on"')+'>'+esc(lx(item[1]))+'</a>';}).join("");
     toc.hidden=tocItems.length<2;
     toc.parentNode.classList.toggle("no-toc",toc.hidden);
-    var navigationProjects=PROJECTS.filter(function(item){return (window.HM_OCULTOS||[]).indexOf(item.slug)<0||item.slug===project.slug;}); // previa: capitulos fora da sequencia
+    var navigationProjects=PROJECTS.filter(function(item){return !item.oculto||item.slug===project.slug;});
     var navIndex=navigationProjects.findIndex(function(item){return item.slug===project.slug;});
     var next=navIndex>=0?navigationProjects[(navIndex+1)%navigationProjects.length]:null;
     if(next&&navigationProjects.length>1){nextLink.href=cleanProjectUrl(next.slug);nextLink.innerHTML='<span>'+esc(lx(siteCopy.next))+'</span>'+esc(next.titulo)+' →';nextLink.hidden=false;}
@@ -716,9 +674,9 @@ body.project-page .nav-toggle:focus-visible, body.project-page .lang-btn:focus-v
 })();
 
 </script>
-<script src="assets/js/previa-etiquetas.js"></script>
-<script src="assets/js/previa-caso.js"></script>
-<script src="assets/js/previa-contato.js?v=20261112a"></script>
-<script src="assets/js/estatisticas.js?v=20261101a" defer></script> <!-- estatísticas privadas -->
+<script src="assets/data/etiquetas.js?v=20261115"></script>
+<script src="assets/js/caso.js?v=20261115"></script>
+<script src="assets/js/contato.js?v=20261115"></script>
+<script src="assets/js/estatisticas.js?v=20261115" defer></script> <!-- estatísticas privadas -->
 </body>
 </html>

@@ -22,7 +22,7 @@
   var current = function () { return readOverride() || autoTheme(new Date()); };
 
   // logos com versão clara para o modo noturno (arquivos *-escuro.*, gerados a partir dos originais)
-  var ESC = /\/(logos\/(classic-tattoo|cminds|congresso-extensao|csunesp|equity360|interserv|nova-rio-branco|ntaps|nupe|ocupacao-unesp-negra|optica-leopoldina|rino-logo)|exp\/(basement|unesp))(-escuro)?\.(webp|svg)(\?|#|$)/;
+  var ESC = /\/(logos\/(classic-tattoo|cminds|congresso-extensao|csunesp|equity360|interserv|ntaps|nupe|ocupacao-unesp-negra|optica-leopoldina|rino-logo)|exp\/(basement|unesp))(-escuro)?\.(webp|svg)(\?|#|$)/;
   var swapImg = function (img) {
     var s = img.getAttribute('src'); if (!s || !ESC.test(s)) return;
     var dark = root.getAttribute('data-theme') === 'dark';
@@ -33,7 +33,7 @@
     if (el.tagName === 'IMG') swapImg(el);
     else if (el.querySelectorAll) el.querySelectorAll('img').forEach(swapImg);
   };
-  // pega imagens do HTML (já durante o parse) e as renderizadas por JS (currículo, cliente.html)
+  // pega imagens do HTML (já durante o parse) e as renderizadas por JS
   new MutationObserver(function (ms) {
     ms.forEach(function (m) {
       if (m.type === 'attributes') swapImg(m.target);
@@ -89,16 +89,11 @@
   };
 
   var mount = function () {
-    // à esquerda do nome em cada cabeçalho (home, projeto, cliente)
-    document.querySelectorAll('.brand-name, a.brand').forEach(function (el) {
+    // à esquerda do nome em cada cabeçalho (home e projeto)
+    document.querySelectorAll('.brand-name').forEach(function (el) {
       var block = el.closest('.brand-collapse-inner, .project-brand') || el;
       var host = block.parentNode;
       if (!host || host.querySelector(':scope > .theme-switch')) return;
-      if (block.matches('a.brand')) { // cliente.html: agrupa switch + nome num só item do flex
-        var w = document.createElement('div');
-        w.className = 'header-left'; w.style.display = 'flex';
-        host.insertBefore(w, block); w.appendChild(block); host = w;
-      }
       var btn = makeSwitch();
       host.insertBefore(btn, host.firstChild === block ? block : host.firstChild);
       // diâmetro = altura do bloco nome + cidade (recalcula quando a fonte carrega/muda)

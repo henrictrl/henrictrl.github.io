@@ -2,22 +2,18 @@
    Carregado no <head> de index.html e projeto.html, antes de tudo.
    - HMI.path(): caminho sem o prefixo, para as rotas internas continuarem iguais
    - HMI.with(path, lang): caminho com o prefixo do idioma
-   - HMI.initial(): idioma do endereço > escolha feita na bandeira > idioma do aparelho > PT (robôs: PT)
-   - HMI.sync(lang, save): ajusta endereço, canonical, hreflang e links internos ao idioma
+   - HMI.initial(): idioma do endereço; sem prefixo, PT
+   - HMI.sync(lang): ajusta endereço, canonical, hreflang e links internos ao idioma
    pushState/replaceState recebem o prefixo sozinhos, então o resto do código usa caminhos sem idioma. */
 (function () {
-  var SITE = 'https://henrictrl.github.io', LANGS = ['pt', 'en', 'es'], KEY = 'hm-idioma'; // chave nova: 'hm-lang' antiga guardava /es/ visitado como escolha e travava o site em espanhol
+  var SITE = 'https://henrictrl.github.io', LANGS = ['pt', 'en', 'es'];
   var PREFIX = /^\/(en|es)(?=\/|$)/;
   var cur = 'pt';
   var strip = function (p) { return (p || '/').replace(PREFIX, '') || '/'; };
   var withLang = function (p, l) { p = strip(p); l = l || cur; return l === 'pt' ? p : '/' + l + p; };
   var fromPath = function () { var m = location.pathname.match(PREFIX); return m ? m[1] : null; };
-  var BOT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|whatsapp|preview/i;
 
-  var initial = function () { // previa: sem idioma do aparelho e sem escolha guardada; PT e o padrao
-    try { localStorage.removeItem('hm-lang'); localStorage.removeItem(KEY); } catch (e) {}
-    return fromPath() || 'pt';
-  };
+  var initial = function () { return fromPath() || 'pt'; };
 
   // caminhos internos ganham o prefixo do idioma atual (o código do site continua passando caminhos sem idioma)
   var fix = function (url) {
@@ -56,10 +52,9 @@
     });
   };
 
-  var sync = function (l, save) {
+  var sync = function (l) {
     if (LANGS.indexOf(l) < 0) l = 'pt';
     cur = l;
-    if (save) { try { localStorage.setItem(KEY, l); } catch (e) {} } // só clique na bandeira salva
     var target = withLang(location.pathname) + location.search + location.hash;
     if (target !== location.pathname + location.search + location.hash) {
       try { history.replaceState(history.state, '', target); } catch (e) {}
@@ -72,6 +67,6 @@
 
   cur = fromPath() || 'pt';
   document.addEventListener('DOMContentLoaded', meta);
-  window.HMI = { KEY: KEY, path: function () { return strip(location.pathname); }, with: withLang, strip: strip, initial: initial, sync: sync, fromPath: fromPath, lang: function () { return cur; }, SITE: SITE };
+  window.HMI = { path: function () { return strip(location.pathname); }, with: withLang, strip: strip, initial: initial, sync: sync, fromPath: fromPath, lang: function () { return cur; }, SITE: SITE };
   meta();
 })();

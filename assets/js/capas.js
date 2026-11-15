@@ -75,7 +75,10 @@
     /* K · símbolo trocando de cor */
     '.ca-kbg{position:absolute;inset:0;background:#123358}',
     '.ca-ksym{position:absolute;left:50%;top:50%;width:46%;translate:-50% -50%;background:#f1f0ec;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
-    /* capas estáticas (pedido do Henrique, nov 2026): todo movimento desligado; só o hover com 2ª imagem continua */
+    /* fusão: quadros sobrepostos; com o movimento desligado, fica o primeiro */
+    '.work-card-media .ca.ca-seq img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;backface-visibility:hidden}',
+    '.work-card-media .ca.ca-seq img+img{opacity:0}',
+    /* capas estáticas: movimento desligado; só o hover com a 2ª imagem continua */
     '.ca,.ca *{animation:none!important}',
     /* modelo S com anéis crescendo (Ocupação): parado, mostra um único elemento inteiro */
     '.work-card-media .ca-S .ca-elw:nth-child(n+3){display:none}.work-card-media .ca-S .ca-el.zoom{opacity:1;transform:none}'
@@ -99,6 +102,9 @@
       h = '<div class="ca-side">' + logo(c, 'logo.webp', c.logo, c.tinta, p.titulo) + '</div><div class="ca-cols" aria-hidden="true">' + col('a.webp', c.a) + col('b.webp', c.b, 1) + '</div>';
     } else if (c.m === 'D' || c.m === 'DT') {
       h = '<img class="ca-bg" src="' + c.src + 'd.webp" alt="" loading="lazy" decoding="async"><div class="ca-side">' + logo(c, 'logo-d.webp', c.logo, c.tinta, p.titulo) + '</div>';
+    } else if (c.fusao) {
+      // quadros em fusão: o primeiro fica embaixo; os seguintes entram e saem por cima
+      c.fusao.f.forEach(function (f, i) { h += '<img src="' + c.src + 's' + f + '.webp" alt="" width="900" height="600" decoding="async"' + (i ? ' loading="lazy"' : '') + '>'; });
     } else if (c.m === 'DC' || c.m === 'M') {
       h = '<img class="ca-bg" src="' + c.src + (c.m === 'M' ? 'm.webp' : 'd.webp') + '" alt="" loading="lazy" decoding="async">';
     } else if (c.m === 'P') {
@@ -138,7 +144,8 @@
       h += '<img class="ca-pl" src="' + c.src + 'e.webp" width="' + c.w + '" height="' + c.h + '" alt="" loading="lazy" decoding="async" style="animation-name:' + kn + ';transform:' + tf(0) + ';width:' + W.toFixed(3) + '%;left:' + L.toFixed(3) + '%;top:' + T.toFixed(3) + '%;transform-origin:' + (c.cx * 100).toFixed(2) + '% ' + (c.cy * 100).toFixed(2) + '%">';
     }
     var bg = c.p || c.fundo || [17, 17, 17];
-    return '<div class="ca ca-' + c.m + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + '">' + h + '</div>';
+    var fz = c.fusao ? ';--n:' + c.fusao.f.length + ';--s:' + c.fusao.s + 's' : '';
+    return '<div class="ca ' + (c.fusao ? 'ca-seq' : 'ca-' + c.m) + (c.full ? ' full' : '') + (c.pulse ? ' pulse' : '') + '" style="--ca-bg:' + rgb(bg) + ';--ca-p:' + rgb(c.p || bg) + fz + '">' + h + '</div>';
   };
 
   var restart = function (els) { [].forEach.call(els, function (a) { if (a.getAnimations) a.getAnimations().forEach(function (an) { an.cancel(); an.play(); }); }); };
