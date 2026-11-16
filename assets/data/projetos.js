@@ -10407,9 +10407,9 @@ window.PROJETOS = [
   },
   "dir": "assets/projetos/pixelar/",
   "intro": {
-   "pt": "Editor de pixel art, dither, filmes analógicos e animações para fotos e vídeos, direto no navegador. Nada é enviado para servidor: tudo roda no aparelho (WebGL2 e WebCodecs). Estilos inspirados em obras de arte, texturas e exportação em imagem, vetor e vídeo.",
-   "en": "A pixel art, dithering, analogue film and animation editor for photos and videos, right in the browser. Nothing is uploaded: everything runs on the device (WebGL2 and WebCodecs). Styles inspired by artworks, textures, and export as image, vector and video.",
-   "es": "Editor de pixel art, dither, películas analógicas y animaciones para fotos y videos, directo en el navegador. Nada se envía a un servidor: todo corre en el dispositivo (WebGL2 y WebCodecs). Estilos inspirados en obras de arte, texturas y exportación en imagen, vector y video."
+   "pt": "Editor de pixel, dither, filmes e movimento para fotos e vídeos, com marca e interface próprias. Tudo roda no aparelho, sem enviar nada. O case acompanha uma única foto pelos looks, texturas e filmes, e as oito interfaces que o app teve em dez semanas.",
+   "en": "A pixel, dither, film and motion editor for photos and videos, with its own brand and interface. Everything runs on the device, nothing is uploaded. The case follows a single photo through looks, textures and films, and the eight interfaces the app went through in ten weeks.",
+   "es": "Editor de píxel, dither, películas y movimiento para fotos y videos, con marca e interfaz propias. Todo corre en el dispositivo, sin enviar nada. El case acompaña una sola foto por looks, texturas y películas, y las ocho interfaces que tuvo la app en diez semanas."
   },
   "telas": [
    {
@@ -10420,9 +10420,9 @@ window.PROJETOS = [
      "es": "Pixelar"
     },
     "d": {
-     "pt": "Editor de pixel art, dither, filme analógico e animação para fotos e vídeos, no navegador. Tudo roda no aparelho (WebGL2 e WebCodecs): 88 estilos, 55 filmes e câmeras, 52 efeitos e exportação em imagem, SVG, vídeo e GIF.",
-     "en": "A pixel art, dithering, analog film and animation editor for photos and videos, in the browser. Everything runs on the device (WebGL2 and WebCodecs): 88 styles, 55 films and cameras, 52 effects and export as image, SVG, video and GIF.",
-     "es": "Editor de pixel art, dither, película analógica y animación para fotos y videos, en el navegador. Todo corre en el dispositivo (WebGL2 y WebCodecs): 88 estilos, 55 películas y cámaras, 52 efectos y exportación en imagen, SVG, video y GIF."
+     "pt": "",
+     "en": "",
+     "es": ""
     },
     "idiomasImg": [
      "en",
@@ -10432,9 +10432,9 @@ window.PROJETOS = [
    {
     "img": "02",
     "t": {
-     "pt": "O que é",
-     "en": "What it is",
-     "es": "Qué es"
+     "pt": "Uma foto só",
+     "en": "One photo",
+     "es": "Una sola foto"
     },
     "d": {
      "pt": "",
@@ -10449,9 +10449,9 @@ window.PROJETOS = [
    {
     "img": "03",
     "t": {
-     "pt": "Antes e depois",
-     "en": "Before and after",
-     "es": "Antes y después"
+     "pt": "Doze looks prontos",
+     "en": "Twelve ready looks",
+     "es": "Doce looks listos"
     },
     "d": {
      "pt": "",
@@ -10466,9 +10466,9 @@ window.PROJETOS = [
    {
     "img": "04",
     "t": {
-     "pt": "Grupo, prato e flores",
-     "en": "Group, dish and flowers",
-     "es": "Grupo, plato y flores"
+     "pt": "Oito interfaces em dez semanas",
+     "en": "Eight interfaces in ten weeks",
+     "es": "Ocho interfaces en diez semanas"
     },
     "d": {
      "pt": "",
@@ -10483,9 +10483,9 @@ window.PROJETOS = [
    {
     "img": "05",
     "t": {
-     "pt": "Um rosto, três saídas",
-     "en": "One face, three outputs",
-     "es": "Un rostro, tres salidas"
+     "pt": "Do vidro ao plano",
+     "en": "From glass to flat",
+     "es": "Del vidrio al plano"
     },
     "d": {
      "pt": "",
@@ -10500,9 +10500,9 @@ window.PROJETOS = [
    {
     "img": "06",
     "t": {
-     "pt": "Cor",
-     "en": "Color",
-     "es": "Color"
+     "pt": "Um sol em doze pixels",
+     "en": "A sun in twelve pixels",
+     "es": "Un sol en doce píxeles"
     },
     "d": {
      "pt": "",
@@ -10517,9 +10517,9 @@ window.PROJETOS = [
    {
     "img": "07",
     "t": {
-     "pt": "Filmes",
-     "en": "Films",
-     "es": "Películas"
+     "pt": "Noite e papel",
+     "en": "Night and paper",
+     "es": "Noche y papel"
     },
     "d": {
      "pt": "",
@@ -10534,9 +10534,9 @@ window.PROJETOS = [
    {
     "img": "08",
     "t": {
-     "pt": "Efeitos",
-     "en": "Effects",
-     "es": "Efectos"
+     "pt": "Uma grade, duas formas",
+     "en": "One grid, two shapes",
+     "es": "Una retícula, dos formas"
     },
     "d": {
      "pt": "",
@@ -10550,6 +10550,91 @@ window.PROJETOS = [
    },
    {
     "img": "09",
+    "t": {
+     "pt": "Ao alcance do polegar",
+     "en": "Within thumb reach",
+     "es": "Al alcance del pulgar"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "10",
+    "t": {
+     "pt": "Texturas",
+     "en": "Textures",
+     "es": "Texturas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "11",
+    "t": {
+     "pt": "Filmes e câmeras",
+     "en": "Films and cameras",
+     "es": "Películas y cámaras"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "12",
+    "t": {
+     "pt": "O sol sorteia",
+     "en": "The sun shuffles",
+     "es": "El sol sortea"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Receita e exportação",
+     "en": "Recipe and export",
+     "es": "Receta y exportación"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "14",
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -10567,38 +10652,18 @@ window.PROJETOS = [
    }
   ],
   "web": {
-   "url": "assets/web/pixelar/index.html",
+   "url": "https://henrictrl.github.io/pixelar/",
    "dev": "desktop"
   },
   "shots": [
    {
     "img": "tela-d.webp",
-    "d": "desktop",
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
+    "d": "desktop"
    },
    {
     "img": "tela-m.webp",
-    "d": "mobile",
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
+    "d": "mobile"
    }
-  ],
-  "galeria": [
-   "g01.webp",
-   "g02.webp",
-   "g03.webp",
-   "g04.webp",
-   "g05.webp",
-   "g06.webp",
-   "g07.webp",
-   "g08.webp",
-   "g09.webp",
-   "g10.webp"
   ],
   "secoes": [
    {
@@ -10612,53 +10677,45 @@ window.PROJETOS = [
    {
     "p": 2,
     "t": {
-     "pt": "O que é",
-     "en": "What it is",
-     "es": "Qué es"
+     "pt": "Obra",
+     "en": "Work",
+     "es": "Obra"
     }
    },
    {
-    "p": 3,
+    "p": 4,
     "t": {
-     "pt": "Antes e depois",
-     "en": "Before and after",
-     "es": "Antes y después"
-    }
-   },
-   {
-    "p": 5,
-    "t": {
-     "pt": "Um rosto, três saídas",
-     "en": "One face, three outputs",
-     "es": "Un rostro, tres salidas"
+     "pt": "História",
+     "en": "History",
+     "es": "Historia"
     }
    },
    {
     "p": 6,
     "t": {
-     "pt": "Cor",
-     "en": "Color",
-     "es": "Color"
-    }
-   },
-   {
-    "p": 7,
-    "t": {
-     "pt": "Filmes",
-     "en": "Films",
-     "es": "Películas"
+     "pt": "Marca",
+     "en": "Brand",
+     "es": "Marca"
     }
    },
    {
     "p": 8,
     "t": {
-     "pt": "Efeitos",
-     "en": "Effects",
-     "es": "Efectos"
+     "pt": "Interface",
+     "en": "Interface",
+     "es": "Interfaz"
     }
    },
    {
-    "p": 9,
+    "p": 10,
+    "t": {
+     "pt": "Resultados",
+     "en": "Results",
+     "es": "Resultados"
+    }
+   },
+   {
+    "p": 14,
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -10666,7 +10723,8 @@ window.PROJETOS = [
     }
    }
   ],
-  "oculto": true
+  "oculto": true,
+  "link": "https://henrictrl.github.io/pixelar/"
  },
  {
   "slug": "metaprojeto",
@@ -10700,27 +10758,17 @@ window.PROJETOS = [
     "design-interface"
    ]
   },
-  "capa": "assets/projetos/metaprojeto/n01.webp",
-  "capaAnim": {
-   "m": "V",
-   "fundo": [
-    255,
-    255,
-    255
-   ],
-   "src": "assets/projetos/metaprojeto/capa/"
-  },
+  "capa": "assets/projetos/metaprojeto/capa.webp",
   "resumo": {
    "pt": "Design e código deste site",
    "en": "Design and code of this site",
    "es": "Diseño y código de este sitio"
   },
-  "capaPosicao": "top",
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
-   "pt": "Manual do site em 35 páginas: arquivos do repositório, grade, páginas e sistemas. HTML, CSS e JavaScript sem framework, publicado no GitHub Pages.",
-   "en": "Site manual in 35 pages: repository files, grid, pages and systems. HTML, CSS and JavaScript with no framework, published on GitHub Pages.",
-   "es": "Manual del sitio en 35 páginas: archivos del repositorio, retícula, páginas y sistemas. HTML, CSS y JavaScript sin framework, publicado en GitHub Pages."
+   "pt": "A história deste site pelas versões que ele teve, de junho de 2025 até hoje: o texto provisório da primeira página, a caricatura com cor sorteada, a virada para mostruário e as escolhas de design que ficaram.",
+   "en": "The story of this site through its versions, from June 2025 to today: the placeholder text on the first page, the caricature with a random colour, the turn into a showcase and the design choices that stayed.",
+   "es": "La historia de este sitio por las versiones que tuvo, de junio de 2025 hasta hoy: el texto provisorio de la primera página, la caricatura con color sorteado, el giro hacia vitrina y las decisiones de diseño que se quedaron."
   },
   "telas": [
    {
@@ -10743,9 +10791,9 @@ window.PROJETOS = [
    {
     "img": "02",
     "t": {
-     "pt": "Sumário",
-     "en": "Contents",
-     "es": "Sumario"
+     "pt": "Começou com um texto provisório",
+     "en": "It began with placeholder text",
+     "es": "Empezó con un texto provisorio"
     },
     "d": {
      "pt": "",
@@ -10760,9 +10808,9 @@ window.PROJETOS = [
    {
     "img": "03",
     "t": {
-     "pt": "O site em números",
-     "en": "The site in numbers",
-     "es": "El sitio en números"
+     "pt": "Uma caricatura e uma cor por visita",
+     "en": "A caricature and a colour per visit",
+     "es": "Una caricatura y un color por visita"
     },
     "d": {
      "pt": "",
@@ -10777,9 +10825,9 @@ window.PROJETOS = [
    {
     "img": "04",
     "t": {
-     "pt": "Com o que foi feito",
-     "en": "What it’s made with",
-     "es": "Con qué está hecho"
+     "pt": "O site vira mostruário",
+     "en": "The site becomes a showcase",
+     "es": "El sitio se vuelve vitrina"
     },
     "d": {
      "pt": "",
@@ -10794,9 +10842,9 @@ window.PROJETOS = [
    {
     "img": "05",
     "t": {
-     "pt": "Arquivos",
-     "en": "Files",
-     "es": "Archivos"
+     "pt": "Do desenho ao pixel",
+     "en": "From drawing to pixel",
+     "es": "Del dibujo al píxel"
     },
     "d": {
      "pt": "",
@@ -10811,9 +10859,9 @@ window.PROJETOS = [
    {
     "img": "06",
     "t": {
-     "pt": "A raiz do repositório",
-     "en": "The repository root",
-     "es": "La raíz del repositorio"
+     "pt": "O cinza faz a hierarquia",
+     "en": "Grey does the hierarchy",
+     "es": "El gris hace la jerarquía"
     },
     "d": {
      "pt": "",
@@ -10828,9 +10876,9 @@ window.PROJETOS = [
    {
     "img": "07",
     "t": {
-     "pt": "Peso do repositório",
-     "en": "Repository size",
-     "es": "Peso del repositorio"
+     "pt": "Dia e noite",
+     "en": "Day and night",
+     "es": "Día y noche"
     },
     "d": {
      "pt": "",
@@ -10845,9 +10893,9 @@ window.PROJETOS = [
    {
     "img": "08",
     "t": {
-     "pt": "Os dados fora do HTML",
-     "en": "Data outside the HTML",
-     "es": "Los datos fuera del HTML"
+     "pt": "Capa e título, e mais nada",
+     "en": "Cover and title, nothing else",
+     "es": "Portada y título, y nada más"
     },
     "d": {
      "pt": "",
@@ -10862,9 +10910,9 @@ window.PROJETOS = [
    {
     "img": "09",
     "t": {
-     "pt": "Tipos de arquivo",
-     "en": "File types",
-     "es": "Tipos de archivo"
+     "pt": "O case como página corrida",
+     "en": "The case as one long page",
+     "es": "El case como página corrida"
     },
     "d": {
      "pt": "",
@@ -10879,9 +10927,9 @@ window.PROJETOS = [
    {
     "img": "10",
     "t": {
-     "pt": "Como uma visita chega à página",
-     "en": "How a visit reaches the page",
-     "es": "Cómo una visita llega a la página"
+     "pt": "Três idiomas, a mesma página",
+     "en": "Three languages, the same page",
+     "es": "Tres idiomas, la misma página"
     },
     "d": {
      "pt": "",
@@ -10896,9 +10944,9 @@ window.PROJETOS = [
    {
     "img": "11",
     "t": {
-     "pt": "Grade",
-     "en": "Grid",
-     "es": "Retícula"
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
     },
     "d": {
      "pt": "",
@@ -10912,397 +10960,6 @@ window.PROJETOS = [
    },
    {
     "img": "12",
-    "t": {
-     "pt": "Faixa e colunas",
-     "en": "Band and columns",
-     "es": "Franja y columnas"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "13",
-    "t": {
-     "pt": "Pontos de quebra",
-     "en": "Breakpoints",
-     "es": "Puntos de quiebre"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "14",
-    "t": {
-     "pt": "Colunas por componente",
-     "en": "Columns by component",
-     "es": "Columnas por componente"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "15",
-    "t": {
-     "pt": "Tipografia",
-     "en": "Typography",
-     "es": "Tipografía"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "16",
-    "t": {
-     "pt": "Cores e tokens",
-     "en": "Colours and tokens",
-     "es": "Colores y tokens"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "17",
-    "t": {
-     "pt": "Páginas",
-     "en": "Pages",
-     "es": "Páginas"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "18",
-    "t": {
-     "pt": "Mapa do site",
-     "en": "Site map",
-     "es": "Mapa del sitio"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "19",
-    "t": {
-     "pt": "Início: seis blocos",
-     "en": "Home: six blocks",
-     "es": "Inicio: seis bloques"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "20",
-    "t": {
-     "pt": "Início: espaços com regra",
-     "en": "Home: spacing with a rule",
-     "es": "Inicio: espacios con regla"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "21",
-    "t": {
-     "pt": "O currículo como página",
-     "en": "The CV as a page",
-     "es": "El currículum como página"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "22",
-    "t": {
-     "pt": "A vitrine completa",
-     "en": "The full showcase",
-     "es": "La vitrina completa"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "23",
-    "t": {
-     "pt": "O acervo",
-     "en": "The archive",
-     "es": "El acervo"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "24",
-    "t": {
-     "pt": "Um molde, 37 cases",
-     "en": "One template, 37 cases",
-     "es": "Una plantilla, 37 casos"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "25",
-    "t": {
-     "pt": "Artigos",
-     "en": "Articles",
-     "es": "Artículos"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "26",
-    "t": {
-     "pt": "O leitor de artigos",
-     "en": "The article reader",
-     "es": "El lector de artículos"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "27",
-    "t": {
-     "pt": "Posts e dashboards",
-     "en": "Posts and dashboards",
-     "es": "Posts y dashboards"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "28",
-    "t": {
-     "pt": "Cliente e serviço",
-     "en": "Client and service",
-     "es": "Cliente y servicio"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "29",
-    "t": {
-     "pt": "Sistemas",
-     "en": "Systems",
-     "es": "Sistemas"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "30",
-    "t": {
-     "pt": "Três idiomas em tudo",
-     "en": "Three languages everywhere",
-     "es": "Tres idiomas en todo"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "31",
-    "t": {
-     "pt": "Modo noturno pelo relógio",
-     "en": "Night mode by the clock",
-     "es": "Modo nocturno por el reloj"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "32",
-    "t": {
-     "pt": "Movimento e interação",
-     "en": "Motion and interaction",
-     "es": "Movimiento e interacción"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "33",
-    "t": {
-     "pt": "Leve, encontrável e acessível",
-     "en": "Light, findable and accessible",
-     "es": "Liviano, encontrable y accesible"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "34",
-    "t": {
-     "pt": "Do arquivo ao site no ar",
-     "en": "From file to live site",
-     "es": "Del archivo al sitio en línea"
-    },
-    "d": {
-     "pt": "",
-     "en": "",
-     "es": ""
-    },
-    "idiomasImg": [
-     "en",
-     "es"
-    ]
-   },
-   {
-    "img": "35",
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -11323,45 +10980,37 @@ window.PROJETOS = [
    {
     "p": 1,
     "t": {
-     "pt": "Capa",
-     "en": "Cover",
-     "es": "Portada"
+     "pt": "Este portfólio",
+     "en": "This portfolio",
+     "es": "Este portafolio"
     }
    },
    {
     "p": 2,
     "t": {
-     "pt": "Sumário",
-     "en": "Contents",
-     "es": "Sumario"
+     "pt": "2025",
+     "en": "2025",
+     "es": "2025"
     }
    },
    {
-    "p": 3,
+    "p": 4,
     "t": {
-     "pt": "Visão geral",
-     "en": "Overview",
-     "es": "Visión general"
+     "pt": "2026",
+     "en": "2026",
+     "es": "2026"
     }
    },
    {
     "p": 5,
     "t": {
-     "pt": "Arquivos",
-     "en": "Files",
-     "es": "Archivos"
+     "pt": "Linguagem",
+     "en": "Language",
+     "es": "Lenguaje"
     }
    },
    {
-    "p": 11,
-    "t": {
-     "pt": "Grade",
-     "en": "Grid",
-     "es": "Retícula"
-    }
-   },
-   {
-    "p": 17,
+    "p": 8,
     "t": {
      "pt": "Páginas",
      "en": "Pages",
@@ -11369,15 +11018,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 29,
-    "t": {
-     "pt": "Sistemas",
-     "en": "Systems",
-     "es": "Sistemas"
-    }
-   },
-   {
-    "p": 35,
+    "p": 12,
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",

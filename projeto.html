@@ -545,7 +545,20 @@
     bindProjectInteractions();
     requestAnimationFrame(function(){var target=document.getElementById("project-top");if(target)target.scrollIntoView({behavior:"auto",block:"start"});updateToc();});
   }
+  // carrossel: slide vizinho por índice absoluto, com snap desligado durante a animação (Safari volta ao slide de origem com scrollBy)
+  function slideTrack(track,dir){
+    if(!track)return;
+    var w=track.clientWidth||1,cur=Math.round(track.scrollLeft/w),k=Math.max(0,Math.min(track.children.length-1,cur+dir));
+    if(k===cur)return;
+    var smooth=!matchMedia("(prefers-reduced-motion: reduce)").matches;
+    clearTimeout(track._snapT);track.style.scrollSnapType="none";
+    track.scrollTo({left:k*w,behavior:smooth?"smooth":"auto"});
+    function restore(){clearTimeout(track._snapT);track.style.scrollSnapType="";track.removeEventListener("scrollend",restore);}
+    track.addEventListener("scrollend",restore);track._snapT=setTimeout(restore,smooth?800:50);
+  }
   function bindProjectInteractions(){
+    if(visuals.dataset.bound)return bindTracks(); // render repetido (troca de idioma): não empilha o listener de clique
+    visuals.dataset.bound="1";
     visuals.addEventListener("click",function(event){
       var filter=event.target.closest("[data-pk]");
       if(filter){
@@ -557,7 +570,7 @@
         return;
       }
       var navButton=event.target.closest(".pc-nav");
-      if(navButton){var track=navButton.parentNode.querySelector(".pc-track");if(track)track.scrollBy({left:(navButton.classList.contains("pc-next")?1:-1)*track.clientWidth,behavior:"smooth"});return;}
+      if(navButton){event.preventDefault();slideTrack(navButton.parentNode.querySelector(".pc-track"),navButton.classList.contains("pc-next")?1:-1);return;}
       var more=event.target.closest(".ig-more");
       if(more){var caption=more.previousElementSibling,on=caption.classList.toggle("clamp");more.textContent=lx(on?textLabel("ver mais","more","ver más"):textLabel("ver menos","less","ver menos"));return;}
       var rinoPiece=event.target.closest(".rino-piece");
@@ -569,7 +582,11 @@
       var dashboardPost=event.target.closest(".ds [data-post]");
       if(dashboardPost){var post=POST_BY[dashboardPost.dataset.post];if(post)window.open(igUrl(post),"_blank","noopener,noreferrer");}
     });
+    bindTracks();
+  }
+  function bindTracks(){
     visuals.querySelectorAll(".pc-track").forEach(function(track){
+      if(track.dataset.bound)return;track.dataset.bound="1";
       function updateCarousel(){
         var card=track.closest(".pc"),i=Math.round(track.scrollLeft/Math.max(1,track.clientWidth));
         var dots=card&&card.querySelector(".pc-dots");

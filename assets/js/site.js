@@ -7,8 +7,8 @@ const I18N = {
     'about.h1': 'About Henrique Marinhos', 'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
     'menu.open': 'Open menu', 'menu.close': 'Close menu',
     'hero': '<span class="dim">Designer and<br>PR specialist.</span><br>Critical, functional<br>communication<br>strategies for brands.',
-    'hint.mouse': 'hover - click to animate', 'hint.touch': 'drag your finger - tap to animate',
-    'portrait.aria': 'Portrait of Henrique Marinhos. Activate to see it in motion.',
+    'hint.mouse': 'hover - click to see the photo', 'hint.touch': 'drag your finger - tap to see the photo',
+    'portrait.aria': 'Portrait of Henrique Marinhos. Activate to see the still photo.',
     'about.label': 'About me', 'about.more': 'Learn more',
     // dois textos: cada um escolhido para justificar sem buracos na sua largura (desktop 31.6em / mobile 19.7em)
     'about.text.d': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and <em>branding</em> and <em>design</em> strategies. I develop visual identities, <em>landing pages</em> and graphic assets for brands. I am also a cultural writer for independent news outlets.',
@@ -34,8 +34,8 @@ const I18N = {
     'about.h1': 'Sobre Henrique Marinhos', 'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
     'menu.open': 'Abrir menú', 'menu.close': 'Cerrar menú',
     'hero': '<span class="dim">Diseñador y<br>relacionista público.</span><br>Estrategias de<br>comunicación críticas y<br>funcionales para marcas.',
-    'hint.mouse': 'pasa el mouse - haz clic para animar', 'hint.touch': 'arrastra el dedo - toca para animar',
-    'portrait.aria': 'Retrato de Henrique Marinhos. Actívalo para verlo en movimiento.',
+    'hint.mouse': 'pasa el mouse - haz clic para ver la foto', 'hint.touch': 'arrastra el dedo - toca para ver la foto',
+    'portrait.aria': 'Retrato de Henrique Marinhos. Actívalo para ver la foto.',
     'about.label': 'Sobre mí', 'about.more': 'Saber más',
     'about.text.d': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
     'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
@@ -66,6 +66,19 @@ const postSrc = (x, i) => { const slide = i + (x.skipFirst ? 1 : 0), num = slide
 const i18n = (k, fb) => (LANG !== 'pt' && I18N[LANG] && I18N[LANG][k]) || fb;
 const langHooks = [];
 const onLang = (fn) => langHooks.push(fn);
+// carrosséis: vai para o slide vizinho por índice absoluto; o snap fica desligado durante a animação
+// (no Safari, scrollBy suave num trilho com scroll-snap mandatory volta para o slide de origem)
+const slideTrack = (tr, dir) => {
+  if (!tr) return false;
+  const w = tr.clientWidth || 1, n = tr.children.length, cur = Math.round(tr.scrollLeft / w), k = Math.max(0, Math.min(n - 1, cur + dir));
+  if (k === cur) return false;
+  const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  clearTimeout(tr._snapT); tr.style.scrollSnapType = 'none';
+  tr.scrollTo({ left: k * w, behavior: smooth ? 'smooth' : 'auto' });
+  const restore = () => { clearTimeout(tr._snapT); tr.style.scrollSnapType = ''; tr.removeEventListener('scrollend', restore); };
+  tr.addEventListener('scrollend', restore); tr._snapT = setTimeout(restore, smooth ? 800 : 50);
+  return true;
+};
 const PT_HTML = new WeakMap(), PT_ARIA = new WeakMap();
 // aplica o idioma atual a um elemento com data-i18n (guarda o PT original na 1ª vez)
 const applyLangTo = (el) => {
@@ -98,12 +111,12 @@ const Scramble = (() => {
       for (let i = 0; i < it.text.length; i++) it.t[i] = 180 + Math.random() * (end - 180); // momento aleatório por letra
     });
     el.setAttribute('aria-busy', 'true');
-    const job = { raf: 0 };
+    const job = { raf: 0, t0: performance.now() + delay }; // delay Infinity = segura nos símbolos até release()
     const finish = () => { cancelAnimationFrame(job.raf); items.forEach(it => it.wrap.replaceWith(it.node)); el.removeAttribute('aria-busy'); live.delete(job); };
     job.cancel = finish; live.add(job);
-    const t0 = performance.now() + delay; let lastSwap = 0;
+    let lastSwap = 0;
     const tick = (now) => {
-      const t = now - t0, swap = now - lastSwap > 140; // ~7 trocas/s; a cada troca só ~1/3 dos símbolos muda
+      const t = now - job.t0, swap = now - lastSwap > 140; // ~7 trocas/s; a cada troca só ~1/3 dos símbolos muda
       if (swap) lastSwap = now;
       for (const it of items) {
         // trechos alternados: letra assentada (cor normal) | símbolo (span .scr)
@@ -125,7 +138,8 @@ const Scramble = (() => {
   return {
     run,
     flush: () => [...live].forEach(j => j.cancel()),
-    runAll: (els) => els.forEach(el => run(el)) // todos ao mesmo tempo
+    runAll: (els, delay) => els.forEach(el => run(el, delay)), // todos ao mesmo tempo
+    release: () => { const now = performance.now(); live.forEach(j => { if (j.t0 === Infinity) j.t0 = now; }); }
   };
 })();
 // Calcula as quebras de linha do texto traduzido de Sobre para manter uma largura visual previsível.
@@ -303,6 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Leitor de artigos --- */
   const amOverlay = document.getElementById('art-modal-overlay');
   const amFrame = document.getElementById('am-frame'), amStage = amOverlay.querySelector('.am-stage');
+  // troca a página do iframe sem criar entrada no histórico (senão o "voltar" do fechamento navegava o iframe e o modal não fechava)
+  let amFrameUrl = 'about:blank';
+  const frameGo = (url) => { amFrameUrl = url; try { amFrame.contentWindow.location.replace(url); } catch (_) { amFrame.src = url; } };
   const amReader = document.getElementById('am-reader'), amLoadL = document.getElementById('am-loading-l');
   /* Leitor próprio (PT, EN e ES): o texto vem da API do WordPress (Persona e Tesoura com Ponta liberam CORS),
      é limpo (sem estilos/scripts) e mantém imagens, legendas, citações, listas, links, vídeos do YouTube, Spotify,
@@ -485,15 +502,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const transUrl = (url, tl) => { const u = new URL(url); return `https://${u.hostname.replace(/-/g, '--').replace(/\./g, '-')}.translate.goog${u.pathname}?_x_tr_sl=pt&_x_tr_tl=${tl}&_x_tr_hl=${tl}`; };
   let amToken = 0;
-  const showFrame = (url) => { amReader.hidden = true; amReader.innerHTML = ''; amFrame.hidden = false; amFrame.src = url; };
+  const showFrame = (url) => { amReader.hidden = true; amReader.innerHTML = ''; amFrame.hidden = false; frameGo(url); };
   const articleSlug = (a) => {
     try { return decodeURIComponent(new URL(a.u, location.origin).pathname.split('/').filter(Boolean).pop() || ''); }
     catch (e) { return String(a.t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
   };
   const articleRoute = (a) => '/artigos/' + encodeURIComponent(articleSlug(a)) + '/';
   let amPrevTitle = ''; // título da aba com o nome do artigo
+  let amFrom = null;
   const openArticle = (a) => {
-    if (!amOverlay.classList.contains('open')) amPrevTitle = document.title;
+    if (!amOverlay.classList.contains('open')) { amPrevTitle = document.title; amFrom = { url: location.pathname + location.search + location.hash, y: window.scrollY }; } // de onde o modal abriu: ao fechar, volta para a mesma rolagem
     document.title = artTitle(a) + ' — Henrique Marinhos';
     const articlePath = articleRoute(a);
     if (HMI.path() !== articlePath) history.pushState({ portfolioArticle: articleSlug(a) }, '', articlePath);
@@ -553,13 +571,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const igm = a.u.match(/instagram\.com\/(?:p|reel)\/([\w-]+)/);
     if (igm) {
       const post = (window.POSTS || []).find(x => x.c === igm[1]), link = `https://www.instagram.com/p/${igm[1]}/`;
-      amFrame.hidden = true; amFrame.src = 'about:blank';
+      amFrame.hidden = true; frameGo('about:blank');
       amReader.innerHTML = `<div class="am-igone">${window.HM_POSTS.igEmbed(post || { c: igm[1], r: 1.25, cap: artTitle(a) })}<a class="am-igone-link" href="${link}" target="_blank" rel="noopener">${lx(IG_L.ver)}</a></div>`;
       amReader.hidden = false; amReader.scrollTop = 0; amStage.classList.add('loaded');
       return;
     }
     if (!wp) { showFrame(a.u); return; }
-    amFrame.hidden = true; amFrame.src = 'about:blank'; amReader.hidden = true;
+    amFrame.hidden = true; frameGo('about:blank'); amReader.hidden = true;
     const by = a.a === 'Vários Autores' ? i18n('art.various', 'Vários autores') : a.a.replace(' e ', i18n('art.and', ' e '));
     readerHtml(a, LANG).then(html => {
       if (tok !== amToken) return;
@@ -584,9 +602,9 @@ document.addEventListener('DOMContentLoaded', () => {
     amOverlay.classList.remove('open'); document.body.style.overflow = '';
     if (amPrevTitle) { document.title = amPrevTitle; amPrevTitle = ''; }
     amToken++; document.getElementById('am-ig').hidden = true; document.getElementById('am-ig').innerHTML = '';
-    setTimeout(() => { if (!amOverlay.classList.contains('open')) { amFrame.src = 'about:blank'; amReader.innerHTML = ''; } }, 400); // para áudio/vídeo do texto
+    setTimeout(() => { if (!amOverlay.classList.contains('open')) { frameGo('about:blank'); amReader.innerHTML = ''; } }, 400); // para áudio/vídeo do texto
   };
-  amFrame.addEventListener('load', () => { if (!amFrame.hidden && amFrame.src !== 'about:blank') amStage.classList.add('loaded'); });
+  amFrame.addEventListener('load', () => { if (!amFrame.hidden && amFrameUrl !== 'about:blank') amStage.classList.add('loaded'); });
   document.getElementById('am-close').onclick = () => closeArticle();
   amOverlay.addEventListener('click', (e) => { if (e.target === amOverlay) closeArticle(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && amOverlay.classList.contains('open')) closeArticle(); });
@@ -942,17 +960,18 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('lightbox-close-btn').onclick = () => { lbOverlay.classList.remove('open'); document.body.style.overflow = ''; };
 
-  lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) lbOverlay.querySelector('.lightbox-close').click(); });
+  lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay || e.target.id === 'lightbox-stage') lbOverlay.querySelector('.lightbox-close').click(); }); // clique fora da imagem fecha
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && lbOverlay.classList.contains('open')) lbOverlay.querySelector('.lightbox-close').click(); });
 
   /* --- Retrato interativo ---
-     Padrão: foto colorida estática. Hover/arraste: o vídeo (dither em movimento) aparece dentro de um
-     holofote com borda pontilhada (máscara Bayer 8x8 em baixa resolução). Clique/toque: vídeo na foto inteira.
-     O vídeo só toca enquanto está visível em algum ponto; rAF para quando o holofote some. */
+     Padrão (desktop e mobile): vídeo dither em loop. Hover/arraste: a foto natural aparece dentro de um
+     holofote com borda pontilhada (máscara Bayer 8x8 em baixa resolução). Clique/toque: foto inteira / volta ao vídeo.
+     Até o vídeo tocar (ou com economia de dados), a foto fica visível como fallback. */
   const initPortrait = () => {
     const box = document.getElementById('hero-portrait');
     if (!box) return;
     const video = box.querySelector('.portrait-video');
+    const photo = box.querySelector('.portrait-base');
     const canvas = box.querySelector('.portrait-reveal');
     const ctx = canvas.getContext('2d');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -974,7 +993,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const EXPAND_MS = 1500;   // clique: vídeo se expande pela foto
     const COLLAPSE_MS = 550; // clique de novo: volta para a foto
     const farCorner = () => Math.max(Math.hypot(s.x, s.y), Math.hypot(W - s.x, s.y), Math.hypot(s.x, H - s.y), Math.hypot(W - s.x, H - s.y));
-    const videoReady = () => video.readyState >= 2 && video.videoWidth > 0;
+    const photoReady = () => photo.complete && photo.naturalWidth > 0;
 
     // object-fit: contain no canvas: preserva a imagem inteira e deixa o fundo branco aparecer quando necessário.
     const drawContain = (c, src, sw0, sh0, cw, ch) => {
@@ -984,10 +1003,10 @@ document.addEventListener('DOMContentLoaded', () => {
       c.drawImage(src, 0, 0, sw0, sh0, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     };
 
-    // Mobile: vídeo inteiro e parado no lugar (sem animação de raio) → mostra o <video> direto se estiver tocando
+    // Vídeo tocando de fato → a <img> sai e o <video> aparece direto; o canvas desenha só a foto do holofote
     let playing = false;
-    const mobileFull = () => mobile && s.locked && !s.anim;
-    const direct = () => mobileFull() && playing;
+    const photoFull = () => s.locked && !s.anim; // foto inteira fixada: vídeo pode pausar
+    const direct = () => playing;
     let fadeTimer = null;
     const updateDirect = (fade) => {
       const on = direct();
@@ -999,9 +1018,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (mobileFull()) return; // tocando: <video> direto; parado/bloqueado: foto colorida (nunca frame estático)
-      if (s.r < 1 || !videoReady()) return;
-      drawContain(ctx, video, video.videoWidth, video.videoHeight, canvas.width, canvas.height);
+      if (s.r < 1 || !photoReady()) return;
+      drawContain(ctx, photo, photo.naturalWidth, photo.naturalHeight, canvas.width, canvas.height);
       // borda pontilhada: larga no hover (45% do raio), mais estreita na expansão do clique (frente de onda visível)
       const inner = s.r * (s.locked || s.anim ? 0.8 : 0.55), band = s.r - inner;
       if (inner >= farCorner()) return; // vídeo cobre a foto inteira: sem máscara
@@ -1023,14 +1041,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vídeo: carrega sob demanda; toca só enquanto o holofote existe e a foto está visível
     const ensureVideo = () => {
-      if ((saveData && !mobile) || video.src) return;
+      if (saveData || video.src) return;
       video.muted = true; video.defaultMuted = true; // Safari só libera autoplay com mudo definido via propriedade
       video.playsInline = true;
       if (mobile) { video.autoplay = true; video.preload = 'auto'; }
       video.src = video.dataset.src;
       video.load();
     };
-    const wantVideo = () => (s.tr > 0 || s.r >= 1) && inView && !document.hidden;
+    const wantVideo = () => !photoFull() && inView && !document.hidden;
     let playRetries = 0;
     const syncVideo = () => {
       const want = wantVideo();
@@ -1082,8 +1100,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (settled) { s.x = s.tx; s.y = s.ty; s.r = s.tr; }
       draw();
       updateDirect();
-      // continua enquanto houver vídeo no canvas (cada frame precisa ser redesenhado); mobile inteiro dispensa o canvas
-      if (settled && (s.r < 1 || !inView || document.hidden || mobileFull())) { raf = 0; syncVideo(); return; }
+      // canvas só tem a foto (estática): parou de mexer, para o rAF
+      if (settled) { raf = 0; syncVideo(); return; }
       raf = requestAnimationFrame(tick);
     };
     const kick = () => { syncVideo(); if (!raf) raf = requestAnimationFrame(tick); };
@@ -1100,18 +1118,16 @@ document.addEventListener('DOMContentLoaded', () => {
       maskData = mctx.createImageData(gw, gh);
       mask32 = new Uint32Array(maskData.data.buffer);
       if (s.locked) s.r = s.tr = fullR();
-      /* O retrato começa colorido e estático em todas as telas.
-         No mobile, a animação automática é iniciada separadamente após 2 segundos. */
       draw();
-      if (mobile && inView) kick();
+      if (inView) kick();
     };
 
     const pos = (e) => { const r = box.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 
     let creditTimer = null;
     const toggle = (x, y) => {
-      // Mobile com autoplay bloqueado: o toque dá play em vez de alternar (a foto colorida já está visível)
-      if (mobile && s.locked && !playing && !s.anim) { ensureVideo(); video.play().catch(() => {}); return; }
+      // Mobile com autoplay bloqueado: o toque dá play em vez de alternar (a foto já está visível)
+      if (mobile && !s.locked && !playing && !s.anim && !saveData) { ensureVideo(); video.play().catch(() => {}); return; }
       const hint = box.parentElement && box.parentElement.querySelector('.portrait-hint');
       if (hint) {
         clearTimeout(creditTimer);
@@ -1153,10 +1169,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.pointerType === 'mouse') spotMove(...pos(e));
       else if (touch) { const [x, y] = pos(e); spotMove(x, y); if (Math.hypot(x - touch.x, y - touch.y) > 10) touch.moved = true; }
     });
-    // Clique do mouse: vídeo na foto inteira / volta (toque é tratado no pointerup)
+    // Clique do mouse: foto inteira / volta ao vídeo (toque é tratado no pointerup)
     box.addEventListener('click', (e) => { if (lastType === 'mouse') toggle(...pos(e)); });
 
-    // Toque: dedo pousado/arrastando = holofote; toque rápido sem arrastar = vídeo inteiro / volta
+    // Toque: dedo pousado/arrastando = holofote da foto; toque rápido sem arrastar = foto inteira / volta
     // (touch-action: none na foto → o arraste não rola a página enquanto o dedo está sobre ela)
     box.addEventListener('pointerdown', (e) => {
       lastType = e.pointerType;
@@ -1180,21 +1196,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(W / 2, H / 2); }
     });
 
-    new IntersectionObserver(([en]) => { inView = en.isIntersecting; inView && (s.r >= 1 || s.tr > 0) ? kick() : syncVideo(); }, { threshold: 0.15 }).observe(box);
-    document.addEventListener('visibilitychange', () => { !document.hidden && s.r >= 1 ? kick() : syncVideo(); });
+    new IntersectionObserver(([en]) => { inView = en.isIntersecting; inView ? kick() : syncVideo(); }, { threshold: 0.15 }).observe(box);
+    document.addEventListener('visibilitychange', () => { !document.hidden ? kick() : syncVideo(); });
     new ResizeObserver(resize).observe(box);
 
-    // Somente no mobile: abre direto no vídeo tocando na foto inteira.
-    // Até o 1º frame tocar (ou se o autoplay for bloqueado), a foto colorida fica visível.
-    if (mobile) {
-      s.locked = true;
-      box.setAttribute('aria-pressed', 'true');
-      ensureVideo(); // acima da dobra: carrega já, sem esperar ocioso
-      syncVideo();
-    }
-
-    // Pré-carrega o vídeo quando o navegador estiver ocioso (evita espera no 1º hover)
-    if (!saveData && !mobile) ('requestIdleCallback' in window) ? requestIdleCallback(ensureVideo, { timeout: 3000 }) : setTimeout(ensureVideo, 2000);
+    // Retrato abre no vídeo em todas as telas: carrega já (acima da dobra)
+    ensureVideo();
+    syncVideo();
   };
 
   /* --- Faixa de logos ---
@@ -1498,7 +1506,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ['pointerover', 'focusin', 'touchstart'].forEach(ev => wcg.addEventListener(ev, (e) => { if (e.target.closest) sgHydrate(e.target.closest('.sg-t')); }, { passive: true }));
   wcg.addEventListener('click', (e) => {
     const nav = e.target.closest('.sg-nav');
-    if (nav) { const tr = nav.parentNode.querySelector('.sg-track'); sgHydrate(nav.closest('.sg-t')); tr.scrollBy({ left: (nav.classList.contains('sg-next') ? 1 : -1) * tr.clientWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); return; }
+    if (nav) { e.preventDefault(); e.stopPropagation(); sgHydrate(nav.closest('.sg-t')); slideTrack(nav.parentNode.querySelector('.sg-track'), nav.classList.contains('sg-next') ? 1 : -1); return; }
     const op = e.target.closest('[data-sg-open], .sg-track'); if (!op) return;
     const x = POST_BY[op.closest('.sg-t').dataset.sgc]; if (x) openPosts([x]);
   });
@@ -1814,6 +1822,22 @@ document.addEventListener('DOMContentLoaded', () => {
     pvPos.textContent = many ? (pvI + 1) + ' / ' + pvList.length : '';
   };
   const openPosts = (lista, i = 0) => { pvList = (lista || []).filter(Boolean); if (!pvList.length) return; pvShow(i); pvOv.classList.add('open'); document.body.classList.add('pv-open'); document.body.style.overflow = 'hidden'; };
+  // setas dentro da mídia passam os slides do carrossel
+  pvBox.addEventListener('click', (e) => {
+    const nav = e.target.closest('.pc-nav'); if (!nav) return;
+    e.preventDefault(); e.stopPropagation();
+    slideTrack(nav.parentNode.querySelector('.pc-track'), nav.classList.contains('pc-next') ? 1 : -1);
+  });
+  // bolinhas, contador e setas acompanham o slide atual (clique, teclado ou deslize)
+  pvBox.addEventListener('scroll', (e) => {
+    const tr = e.target; if (!tr.classList || !tr.classList.contains('pc-track')) return;
+    const m = tr.parentNode, n = tr.children.length, i = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth));
+    const dots = m.querySelector('.pc-dots'); if (dots) [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+    const c = m.querySelector('.pc-count'); if (c) c.textContent = (i + 1) + '/' + n;
+    const pv = m.querySelector('.pc-prev'), nx = m.querySelector('.pc-next'); if (pv) pv.disabled = i <= 0; if (nx) nx.disabled = i >= n - 1;
+  }, true);
+  // clique fora da caixa do post (no fundo) fecha o visualizador
+  pvOv.addEventListener('click', (e) => { if (e.target === pvOv) closePosts(); });
   pvBox.addEventListener('click', async (e) => {
     const button = e.target.closest('.pv-share');
     if (!button) return;
@@ -1839,7 +1863,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tr = pvBox.querySelector('.pc-track'), dir = e.key === 'ArrowRight' ? 1 : -1;
     if (tr && tr.children.length > 1) {
       const k = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth)), last = tr.children.length - 1;
-      if ((dir > 0 && k < last) || (dir < 0 && k > 0)) { tr.scrollBy({ left: dir * tr.clientWidth, behavior: 'smooth' }); e.preventDefault(); return; }
+      if ((dir > 0 && k < last) || (dir < 0 && k > 0)) { slideTrack(tr, dir); e.preventDefault(); return; }
     }
     if (pvList.length > 1) { pvShow(pvI + dir); e.preventDefault(); }
   });
@@ -1973,12 +1997,11 @@ document.addEventListener('DOMContentLoaded', () => {
   (() => {
     try { if (sessionStorage.getItem('hm-intro')) return; sessionStorage.setItem('hm-intro', '1'); } catch (e) { return; }
     if (LANG !== 'pt') return;
-    let done = false;
-    const go = () => { if (done || LANG !== 'pt') return; done = true;
-      Scramble.runAll([...document.querySelectorAll('[data-i18n], [data-i18n-about]')].filter(el => el.offsetParent !== null)); };
-    const later = () => setTimeout(go, 450); // depois que a tela de carregamento some
+    // já entra embaralhado (sem mostrar as palavras prontas antes); só começa a assentar depois do carregamento
+    Scramble.runAll([...document.querySelectorAll('[data-i18n], [data-i18n-about]')].filter(el => el.offsetParent !== null), Infinity);
+    const later = () => setTimeout(Scramble.release, 450); // depois que a tela de carregamento some
     document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
-    setTimeout(go, 1800); // carregamento lento: não espera as imagens
+    setTimeout(Scramble.release, 1800); // carregamento lento: não espera as imagens
   })();
   initMarquee();
   initPortrait();
@@ -2048,7 +2071,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   window.addEventListener('popstate', () => {
-    if (amOverlay.classList.contains('open')) closeArticle(true);
+    if (amOverlay.classList.contains('open')) {
+      const from = amFrom; amFrom = null; closeArticle(true);
+      // voltou para a página de onde o artigo abriu: só fecha o modal, sem recarregar a rota (que rolava ao topo)
+      if (from && location.pathname + location.search + location.hash === from.url) { window.scrollTo({ top: from.y, behavior: 'instant' }); return; }
+    }
     routeFromLocation();
   });
   routeFromLocation();

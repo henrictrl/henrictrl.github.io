@@ -222,8 +222,8 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
 .portrait-video { z-index: 0; background: #fff; }
 .portrait-base { z-index: 1; }
 .portrait-reveal { z-index: 2; }
-/* Mobile com vídeo tocando de fato: foto sai, vídeo aparece direto (sem canvas, qualidade nativa).
-   Se o vídeo não tocar, nada muda: a foto colorida segue visível como fallback. */
+/* Vídeo tocando de fato (padrão): foto sai, vídeo aparece direto; o canvas mostra a foto no holofote.
+   Se o vídeo não tocar, nada muda: a foto segue visível como fallback. */
 .hero-portrait.is-direct .portrait-base { opacity: 0; }
 .hero-portrait.is-fade .portrait-base { transition: opacity 0.35s var(--ease); }
 .portrait-reveal { image-rendering: pixelated; }
