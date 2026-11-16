@@ -10401,15 +10401,15 @@ window.PROJETOS = [
   },
   "capa": "assets/projetos/pixelar/capa.webp",
   "resumo": {
-   "pt": "Editor de imagem e vídeo no navegador, projeto próprio",
-   "en": "Browser image and video editor, personal project",
-   "es": "Editor de imagen y video en el navegador, proyecto propio"
+   "pt": "Editor de foto e vídeo no navegador",
+   "en": "Photo and video editor in the browser",
+   "es": "Editor de foto y video en el navegador"
   },
   "dir": "assets/projetos/pixelar/",
   "intro": {
-   "pt": "Editor de pixel, dither, filmes e movimento para fotos e vídeos, com marca e interface próprias. Tudo roda no aparelho, sem enviar nada. O case acompanha uma única foto pelos looks, texturas e filmes, e as oito interfaces que o app teve em dez semanas.",
-   "en": "A pixel, dither, film and motion editor for photos and videos, with its own brand and interface. Everything runs on the device, nothing is uploaded. The case follows a single photo through looks, textures and films, and the eight interfaces the app went through in ten weeks.",
-   "es": "Editor de píxel, dither, películas y movimiento para fotos y videos, con marca e interfaz propias. Todo corre en el dispositivo, sin enviar nada. El case acompaña una sola foto por looks, texturas y películas, y las ocho interfaces que tuvo la app en diez semanas."
+   "pt": "Editor de foto e vídeo no navegador: pixel art, dither, paletas, texturas, filmes e animação. Tudo roda no aparelho. Marca, interface e código próprios.",
+   "en": "Photo and video editor in the browser: pixel art, dither, palettes, textures, films and animation. Everything runs on the device. Own brand, interface and code.",
+   "es": "Editor de foto y video en el navegador: pixel art, dither, paletas, texturas, películas y animación. Todo corre en el dispositivo. Marca, interfaz y código propios."
   },
   "telas": [
    {
@@ -10432,9 +10432,9 @@ window.PROJETOS = [
    {
     "img": "02",
     "t": {
-     "pt": "Uma foto só",
-     "en": "One photo",
-     "es": "Una sola foto"
+     "pt": "Sumário",
+     "en": "Contents",
+     "es": "Sumario"
     },
     "d": {
      "pt": "",
@@ -10449,9 +10449,9 @@ window.PROJETOS = [
    {
     "img": "03",
     "t": {
-     "pt": "Doze looks prontos",
-     "en": "Twelve ready looks",
-     "es": "Doce looks listos"
+     "pt": "Marca",
+     "en": "Brand",
+     "es": "Marca"
     },
     "d": {
      "pt": "",
@@ -10466,9 +10466,9 @@ window.PROJETOS = [
    {
     "img": "04",
     "t": {
-     "pt": "Oito interfaces em dez semanas",
-     "en": "Eight interfaces in ten weeks",
-     "es": "Ocho interfaces en diez semanas"
+     "pt": "Logo",
+     "en": "Logo",
+     "es": "Logo"
     },
     "d": {
      "pt": "",
@@ -10483,9 +10483,9 @@ window.PROJETOS = [
    {
     "img": "05",
     "t": {
-     "pt": "Do vidro ao plano",
-     "en": "From glass to flat",
-     "es": "Del vidrio al plano"
+     "pt": "Construção",
+     "en": "Construction",
+     "es": "Construcción"
     },
     "d": {
      "pt": "",
@@ -10500,9 +10500,9 @@ window.PROJETOS = [
    {
     "img": "06",
     "t": {
-     "pt": "Um sol em doze pixels",
-     "en": "A sun in twelve pixels",
-     "es": "Un sol en doce píxeles"
+     "pt": "Versões",
+     "en": "Versions",
+     "es": "Versiones"
     },
     "d": {
      "pt": "",
@@ -10516,6 +10516,125 @@ window.PROJETOS = [
    },
    {
     "img": "07",
+    "t": {
+     "pt": "Cores",
+     "en": "Colours",
+     "es": "Colores"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "08",
+    "t": {
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "09",
+    "t": {
+     "pt": "Ícones",
+     "en": "Icons",
+     "es": "Íconos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "10",
+    "t": {
+     "pt": "Interface",
+     "en": "Interface",
+     "es": "Interfaz"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "11",
+    "t": {
+     "pt": "No celular",
+     "en": "On the phone",
+     "es": "En el celular"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "12",
+    "t": {
+     "pt": "No computador",
+     "en": "On the computer",
+     "es": "En la computadora"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Ferramentas",
+     "en": "Tools",
+     "es": "Herramientas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "14",
     "t": {
      "pt": "Noite e papel",
      "en": "Night and paper",
@@ -10532,11 +10651,11 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "08",
+    "img": "15",
     "t": {
-     "pt": "Uma grade, duas formas",
-     "en": "One grid, two shapes",
-     "es": "Una retícula, dos formas"
+     "pt": "Receita",
+     "en": "Recipe",
+     "es": "Receta"
     },
     "d": {
      "pt": "",
@@ -10549,11 +10668,11 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "09",
+    "img": "16",
     "t": {
-     "pt": "Ao alcance do polegar",
-     "en": "Within thumb reach",
-     "es": "Al alcance del pulgar"
+     "pt": "Vídeo",
+     "en": "Video",
+     "es": "Video"
     },
     "d": {
      "pt": "",
@@ -10566,7 +10685,92 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "10",
+    "img": "17",
+    "t": {
+     "pt": "Possibilidades",
+     "en": "Possibilities",
+     "es": "Posibilidades"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "18",
+    "t": {
+     "pt": "Pixel art",
+     "en": "Pixel art",
+     "es": "Pixel art"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "19",
+    "t": {
+     "pt": "Padrões de dither",
+     "en": "Dither patterns",
+     "es": "Patrones de dither"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "20",
+    "t": {
+     "pt": "Cor",
+     "en": "Colour",
+     "es": "Color"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "21",
+    "t": {
+     "pt": "Paletas",
+     "en": "Palettes",
+     "es": "Paletas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "22",
     "t": {
      "pt": "Texturas",
      "en": "Textures",
@@ -10583,7 +10787,24 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "11",
+    "img": "23",
+    "t": {
+     "pt": "Texturas",
+     "en": "Textures",
+     "es": "Texturas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "24",
     "t": {
      "pt": "Filmes e câmeras",
      "en": "Films and cameras",
@@ -10600,7 +10821,75 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "12",
+    "img": "25",
+    "t": {
+     "pt": "Lente e grão",
+     "en": "Lens and grain",
+     "es": "Lente y grano"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "26",
+    "t": {
+     "pt": "Dupla exposição",
+     "en": "Double exposure",
+     "es": "Doble exposición"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "27",
+    "t": {
+     "pt": "Pintura por números",
+     "en": "Paint by numbers",
+     "es": "Pintura por números"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "28",
+    "t": {
+     "pt": "Looks prontos",
+     "en": "Ready looks",
+     "es": "Looks listos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "29",
     "t": {
      "pt": "O sol sorteia",
      "en": "The sun shuffles",
@@ -10617,11 +10906,11 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "13",
+    "img": "30",
     "t": {
-     "pt": "Receita e exportação",
-     "en": "Recipe and export",
-     "es": "Receta y exportación"
+     "pt": "Exportação",
+     "en": "Export",
+     "es": "Exportación"
     },
     "d": {
      "pt": "",
@@ -10634,7 +10923,24 @@ window.PROJETOS = [
     ]
    },
    {
-    "img": "14",
+    "img": "31",
+    "t": {
+     "pt": "Exportar",
+     "en": "Export",
+     "es": "Exportar"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "32",
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -10675,23 +10981,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 2,
-    "t": {
-     "pt": "Obra",
-     "en": "Work",
-     "es": "Obra"
-    }
-   },
-   {
-    "p": 4,
-    "t": {
-     "pt": "História",
-     "en": "History",
-     "es": "Historia"
-    }
-   },
-   {
-    "p": 6,
+    "p": 3,
     "t": {
      "pt": "Marca",
      "en": "Brand",
@@ -10699,7 +10989,7 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 8,
+    "p": 10,
     "t": {
      "pt": "Interface",
      "en": "Interface",
@@ -10707,15 +10997,23 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 10,
+    "p": 17,
     "t": {
-     "pt": "Resultados",
-     "en": "Results",
-     "es": "Resultados"
+     "pt": "Possibilidades",
+     "en": "Possibilities",
+     "es": "Posibilidades"
     }
    },
    {
-    "p": 14,
+    "p": 30,
+    "t": {
+     "pt": "Exportação",
+     "en": "Export",
+     "es": "Exportación"
+    }
+   },
+   {
+    "p": 32,
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -10723,7 +11021,6 @@ window.PROJETOS = [
     }
    }
   ],
-  "oculto": true,
   "link": "https://henrictrl.github.io/pixelar/"
  },
  {
@@ -10766,9 +11063,9 @@ window.PROJETOS = [
   },
   "dir": "assets/projetos/metaprojeto/",
   "intro": {
-   "pt": "A história deste site pelas versões que ele teve, de junho de 2025 até hoje: o texto provisório da primeira página, a caricatura com cor sorteada, a virada para mostruário e as escolhas de design que ficaram.",
-   "en": "The story of this site through its versions, from June 2025 to today: the placeholder text on the first page, the caricature with a random colour, the turn into a showcase and the design choices that stayed.",
-   "es": "La historia de este sitio por las versiones que tuvo, de junio de 2025 hasta hoy: el texto provisorio de la primera página, la caricatura con color sorteado, el giro hacia vitrina y las decisiones de diseño que se quedaron."
+   "pt": "Manual do site: identidade, cada página e os recursos, com telas no computador e no celular. Design e código próprios, em português, inglês e espanhol.",
+   "en": "Site manual: identity, every page and the features, with screens on computer and phone. Own design and code, in Portuguese, English and Spanish.",
+   "es": "Manual del sitio: identidad, cada página y los recursos, con pantallas en computadora y celular. Diseño y código propios, en portugués, inglés y español."
   },
   "telas": [
    {
@@ -10791,9 +11088,9 @@ window.PROJETOS = [
    {
     "img": "02",
     "t": {
-     "pt": "Começou com um texto provisório",
-     "en": "It began with placeholder text",
-     "es": "Empezó con un texto provisorio"
+     "pt": "Sumário",
+     "en": "Contents",
+     "es": "Sumario"
     },
     "d": {
      "pt": "",
@@ -10808,9 +11105,9 @@ window.PROJETOS = [
    {
     "img": "03",
     "t": {
-     "pt": "Uma caricatura e uma cor por visita",
-     "en": "A caricature and a colour per visit",
-     "es": "Una caricatura y un color por visita"
+     "pt": "Identidade",
+     "en": "Identity",
+     "es": "Identidad"
     },
     "d": {
      "pt": "",
@@ -10825,9 +11122,9 @@ window.PROJETOS = [
    {
     "img": "04",
     "t": {
-     "pt": "O site vira mostruário",
-     "en": "The site becomes a showcase",
-     "es": "El sitio se vuelve vitrina"
+     "pt": "Retrato",
+     "en": "Portrait",
+     "es": "Retrato"
     },
     "d": {
      "pt": "",
@@ -10842,9 +11139,9 @@ window.PROJETOS = [
    {
     "img": "05",
     "t": {
-     "pt": "Do desenho ao pixel",
-     "en": "From drawing to pixel",
-     "es": "Del dibujo al píxel"
+     "pt": "Tipografia",
+     "en": "Typography",
+     "es": "Tipografía"
     },
     "d": {
      "pt": "",
@@ -10859,9 +11156,9 @@ window.PROJETOS = [
    {
     "img": "06",
     "t": {
-     "pt": "O cinza faz a hierarquia",
-     "en": "Grey does the hierarchy",
-     "es": "El gris hace la jerarquía"
+     "pt": "Cores",
+     "en": "Colours",
+     "es": "Colores"
     },
     "d": {
      "pt": "",
@@ -10893,9 +11190,9 @@ window.PROJETOS = [
    {
     "img": "08",
     "t": {
-     "pt": "Capa e título, e mais nada",
-     "en": "Cover and title, nothing else",
-     "es": "Portada y título, y nada más"
+     "pt": "Páginas",
+     "en": "Pages",
+     "es": "Páginas"
     },
     "d": {
      "pt": "",
@@ -10910,9 +11207,9 @@ window.PROJETOS = [
    {
     "img": "09",
     "t": {
-     "pt": "O case como página corrida",
-     "en": "The case as one long page",
-     "es": "El case como página corrida"
+     "pt": "Mapa do site",
+     "en": "Site map",
+     "es": "Mapa del sitio"
     },
     "d": {
      "pt": "",
@@ -10927,9 +11224,9 @@ window.PROJETOS = [
    {
     "img": "10",
     "t": {
-     "pt": "Três idiomas, a mesma página",
-     "en": "Three languages, the same page",
-     "es": "Tres idiomas, la misma página"
+     "pt": "Início",
+     "en": "Home",
+     "es": "Inicio"
     },
     "d": {
      "pt": "",
@@ -10944,9 +11241,9 @@ window.PROJETOS = [
    {
     "img": "11",
     "t": {
-     "pt": "No celular",
-     "en": "On the phone",
-     "es": "En el celular"
+     "pt": "Início, do topo ao rodapé",
+     "en": "Home, top to bottom",
+     "es": "Inicio, de arriba abajo"
     },
     "d": {
      "pt": "",
@@ -10960,6 +11257,193 @@ window.PROJETOS = [
    },
    {
     "img": "12",
+    "t": {
+     "pt": "Projetos",
+     "en": "Projects",
+     "es": "Proyectos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "13",
+    "t": {
+     "pt": "Página de projeto",
+     "en": "Project page",
+     "es": "Página de proyecto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "14",
+    "t": {
+     "pt": "Páginas ou mesa de luz",
+     "en": "Pages or light table",
+     "es": "Páginas o mesa de luz"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "15",
+    "t": {
+     "pt": "Artigos",
+     "en": "Articles",
+     "es": "Artículos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "16",
+    "t": {
+     "pt": "Sobre",
+     "en": "About",
+     "es": "Sobre mí"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "17",
+    "t": {
+     "pt": "Recursos",
+     "en": "Features",
+     "es": "Recursos"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "18",
+    "t": {
+     "pt": "Três idiomas",
+     "en": "Three languages",
+     "es": "Tres idiomas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "19",
+    "t": {
+     "pt": "Contato",
+     "en": "Contact",
+     "es": "Contacto"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "20",
+    "t": {
+     "pt": "Menu no celular",
+     "en": "Phone menu",
+     "es": "Menú en el celular"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "21",
+    "t": {
+     "pt": "Compartilhamento",
+     "en": "Sharing",
+     "es": "Compartir"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "22",
+    "t": {
+     "pt": "Faixas",
+     "en": "Strips",
+     "es": "Franjas"
+    },
+    "d": {
+     "pt": "",
+     "en": "",
+     "es": ""
+    },
+    "idiomasImg": [
+     "en",
+     "es"
+    ]
+   },
+   {
+    "img": "23",
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -10986,27 +11470,11 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 2,
+    "p": 3,
     "t": {
-     "pt": "2025",
-     "en": "2025",
-     "es": "2025"
-    }
-   },
-   {
-    "p": 4,
-    "t": {
-     "pt": "2026",
-     "en": "2026",
-     "es": "2026"
-    }
-   },
-   {
-    "p": 5,
-    "t": {
-     "pt": "Linguagem",
-     "en": "Language",
-     "es": "Lenguaje"
+     "pt": "Identidade",
+     "en": "Identity",
+     "es": "Identidad"
     }
    },
    {
@@ -11018,7 +11486,15 @@ window.PROJETOS = [
     }
    },
    {
-    "p": 12,
+    "p": 17,
+    "t": {
+     "pt": "Recursos",
+     "en": "Features",
+     "es": "Recursos"
+    }
+   },
+   {
+    "p": 23,
     "t": {
      "pt": "Ficha técnica",
      "en": "Credits",
@@ -11030,8 +11506,7 @@ window.PROJETOS = [
   "idiomasImg": [
    "en",
    "es"
-  ],
-  "oculto": true
+  ]
  },
  {
   "slug": "basement",
