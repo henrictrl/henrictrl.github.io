@@ -275,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
     topHdr.classList.toggle('menu-open', open);
     navToggle.setAttribute('aria-expanded', open);
     navToggle.setAttribute('aria-label', open ? i18n('menu.close', 'Fechar menu') : i18n('menu.open', 'Abrir menu'));
-    document.body.style.overflow = open ? 'hidden' : '';
   };
   navToggle.addEventListener('click', () => setMenu(!topHdr.classList.contains('menu-open')));
   document.querySelectorAll('#nav-panel a').forEach(a => a.addEventListener('click', () => setMenu(false)));
@@ -636,16 +635,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const IG_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
     const TXT_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 6h14M5 11h14M5 16h9"/></svg>';
     const SLIDES_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="3" width="13" height="15" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/></svg>';
-    // linha 1: Todos · Destaques · Texto · Instagram | linha 2: Cabines · Mostra SP · Carrosséis · Premiações | linha 3: Cinema · Música · Televisão · Literatura
-    const LINHAS = () => [
-      [['all', i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')], ['m:texto', TXT_ICO + i18n('am.text', 'Texto')], ['m:ig', IG_ICO + 'Instagram']],
-      [['cabines', i18n('f.cabine', 'Cabines')], ['mostra', 'Mostra SP'], ['carrosseis', i18n('f.carrosseis', 'Carrosséis')], ['premiacoes', i18n('f.premiacoes', 'Premiações')]],
-      [['Cinema', tagName('Cinema')], ['Música', tagName('Música')], ['Televisão', tagName('Televisão')], ['Literatura', tagName('Literatura')]]
-    ];
-    const rowsHtml = (keep) => LINHAS().map((l, li) => '<div class="art-row">' + l.map(([k, html]) => {
+    // ícones dos filtros (traço 1.8, mesma família da estrela e do Instagram)
+    const FI = {
+      'all': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.4" cy="7.4" r="3.3"/><rect x="13.3" y="4.1" width="6.6" height="6.6" rx="2.4"/><rect x="4.1" y="13.3" width="6.6" height="6.6" rx="2.4"/><circle cx="16.6" cy="16.6" r="3.3"/></svg>',
+      'cabines': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 10.5h12l-1.2 8.3a1.5 1.5 0 0 1-1.5 1.2H8.7a1.5 1.5 0 0 1-1.5-1.2zM10.3 13l.2 4.5M13.7 13l-.2 4.5M6.3 10.5a2.3 2.3 0 0 1 1.6-3.9 2.6 2.6 0 0 1 4.1-2.1 2.6 2.6 0 0 1 4.1 2.1 2.3 2.3 0 0 1 1.6 3.9"/></svg>',
+      'mostra': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6.5h12A2.5 2.5 0 0 1 20.5 9v1.2a1.8 1.8 0 0 0 0 3.6V15a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 15v-1.2a1.8 1.8 0 0 0 0-3.6V9A2.5 2.5 0 0 1 6 6.5z"/><path d="M15 9.6v4.8" stroke-dasharray=".01 2.4"/></svg>',
+      'carrosseis': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="4" width="8" height="16" rx="2.4"/><path d="M5.7 6.9 4.4 7.3a1.6 1.6 0 0 0-1.1 2l2 7.4M18.3 6.9l1.3.4a1.6 1.6 0 0 1 1.1 2l-2 7.4"/></svg>',
+      'premiacoes': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 4.5h9v4a4.5 4.5 0 0 1-9 0zM7.5 6H6a2 2 0 0 0 0 4h1.9M16.5 6H18a2 2 0 0 1 0 4h-1.9M12 13v3.2M8.6 19.5c0-1.4 1.1-2.5 2.5-2.5h1.8c1.4 0 2.5 1.1 2.5 2.5z"/></svg>',
+      'Cinema': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="10.5" width="17" height="9.5" rx="2.5"/><g transform="rotate(-11 3.5 9)"><rect x="3.5" y="5" width="17" height="3.8" rx="1.5"/><path d="M9.3 5.4 8.1 8.4M14.8 5.4l-1.2 3"/></g></svg>',
+      'Música': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17.5V7.2a1 1 0 0 1 .8-1l8-1.6a1 1 0 0 1 1.2 1v9.9"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/></svg>',
+      'Televisão': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12" rx="3.5"/><path d="M9 3.8 12 7l3-3.2"/></svg>',
+      'Literatura': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7C10.1 5.5 7.4 4.9 4.5 5.2a1 1 0 0 0-.9 1V18c0 .6.5 1 1.1 1 2.6-.2 5.1.4 7.3 1.8 2.2-1.4 4.7-2 7.3-1.8.6 0 1.1-.4 1.1-1V6.2a1 1 0 0 0-.9-1C16.6 4.9 13.9 5.5 12 7zM12 7v13.5"/></svg>',
+    };
+    // linha 1: seletor Texto | Instagram (modo de leitura) · Todos · Destaques (+ grade no celular)
+    // linha 2: linguagens | coberturas. No celular as categorias quebram em linhas, sem rolagem lateral.
+    const MODOS = () => [['m:texto', TXT_ICO + i18n('am.text', 'Texto')], ['m:ig', IG_ICO + 'Instagram']];
+    const TOPO = () => [['all', FI.all + i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')]];
+    const LING = () => ['Cinema', 'Música', 'Televisão', 'Literatura'].map(k => [k, FI[k] + tagName(k)]);
+    const COB = () => [['cabines', FI.cabines + i18n('f.cabine', 'Cabines')], ['mostra', FI.mostra + 'Mostra SP'], ['premiacoes', FI.premiacoes + i18n('f.premiacoes', 'Premiações')], ['carrosseis', FI.carrosseis + i18n('f.carrosseis', 'Carrosséis')]];
+    const btnOf = (keep) => ([k, html]) => {
       const on = k.startsWith('m:') ? (artFilter !== 'fav' && k === 'm:' + artMode) : k === keep;
       return `<button class="art-filter" data-k="${k}" aria-pressed="${on}">${html}</button>`;
-    }).join('') + (li === 2 ? '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>' : '') + '</div>').join('');
+    };
+    // linguagens: só ícone, num grupo separado (no celular o mesmo grupo vira menu flutuante)
+    const icoGroup = (keep) => '<div class="art-ico-grp" role="group" aria-label="' + ({ pt: 'Linguagens', en: 'Media', es: 'Lenguajes' })[LANG] + '">'
+      + ['Cinema', 'Música', 'Televisão', 'Literatura'].map(k => `<button class="art-filter art-ico" data-k="${k}" aria-pressed="${k === keep}" aria-label="${tagName(k)}" title="${tagName(k)}">${FI[k]}</button>`).join('') + '</div>';
+    const rowsHtml = (keep) => {
+      const btn = btnOf(keep), sep = '<span class="art-sep" aria-hidden="true"></span>';
+      const view = '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>';
+      return '<div class="art-row art-row-top"><div class="art-seg" role="group" aria-label="' + ({ pt: 'Modo de leitura', en: 'Reading mode', es: 'Modo de lectura' })[LANG] + '">' + MODOS().map(btn).join('') + '</div>' + view + sep + TOPO().map(btn).join('') + '</div>'
+        + '<div class="art-row">' + COB().map(btn).join('') + sep + icoGroup(keep) + '</div>';
+    };
+    // menu flutuante (celular): fica no body para não herdar transform dos blocos com reveal
+    const flt = document.createElement('nav'); flt.className = 'art-float'; flt.setAttribute('aria-label', ({ pt: 'Filtrar por linguagem', en: 'Filter by medium', es: 'Filtrar por lenguaje' })[LANG]);
+    document.body.appendChild(flt);
+    const paint = (k) => { bar.innerHTML = rowsHtml(k); flt.innerHTML = icoGroup(k); };
+    const mqMob = window.matchMedia('(max-width:639px)');
+    const fltSync = () => {
+      const r = grid.getBoundingClientRect();
+      const show = mqMob.matches && !bar.hidden && bar.offsetParent !== null && grid.offsetParent !== null && r.top < innerHeight - 80 && r.bottom > 120
+        && !document.body.classList.contains('pv-open') && !amOverlay.classList.contains('open');
+      flt.classList.toggle('show', show); document.body.classList.toggle('has-art-float', show);
+    };
+    let fltRaf = 0; const fltQ = () => { if (!fltRaf) fltRaf = requestAnimationFrame(() => { fltRaf = 0; fltSync(); }); };
+    addEventListener('scroll', fltQ, { passive: true }); addEventListener('resize', fltQ); addEventListener('popstate', fltQ);
+    new MutationObserver(fltQ).observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: false });
+    setInterval(fltQ, 800); // rotas trocam sem scroll: confere de tempos em tempos (barato)
     // categorias com lista própria (assets/data/colecoes.js → CATEGORIAS); membros = textos (u) e posts (p)
     const CATS = window.CATEGORIAS || {};
     const catEntries = (k) => {
@@ -696,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ].map(([kind, id]) => ({ kind, item: kind === 'post' ? CARR.find(x => x.c === id) : data.find(a => a.u === id) }))
       .filter(entry => entry.item)
       .sort((a, b) => b.item.d.localeCompare(a.item.d));
-    bar.innerHTML = rowsHtml(artFilter);
+    paint(artFilter);
     // entrada em cascata dos cartões visíveis
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
@@ -757,14 +792,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (item.project) { window.location.assign(cleanProjectUrl(item.project)); return; }
       openArticle(item);
     });
-    bar.addEventListener('click', (e) => {
+    const onFilterClick = (e) => {
       if (e.target.closest('.art-view')) { setGrid(!artGrid); return; }
       const b = e.target.closest('.art-filter'); if (!b) return;
-      const k = b.dataset.k;
+      const k = b.dataset.k, fromFloat = flt.contains(b);
       if (k.startsWith('m:')) { artMode = k.slice(2); try { localStorage.setItem('hm-artmode-v3', artMode); } catch (er) {} if (artFilter === 'fav') artFilter = 'all'; }
-      else artFilter = k;
-      bar.innerHTML = rowsHtml(artFilter); draw(artFilter);
-    });
+      else artFilter = (b.classList.contains('art-ico') && artFilter === k) ? 'all' : k;
+      paint(artFilter); draw(artFilter); if (fromFloat && grid.getBoundingClientRect().top < 0) scrollTo({ top: grid.getBoundingClientRect().top + scrollY - 90, behavior: 'smooth' });
+    };
+    bar.addEventListener('click', onFilterClick); flt.addEventListener('click', onFilterClick);
     // coleção (/artigos/<slug>/): cabeçalho próprio no lugar do título e dos filtros
     const colHead = document.createElement('div'); colHead.className = 'col-head'; colHead.hidden = true;
     bar.parentNode.insertBefore(colHead, bar);
@@ -797,7 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
     data.forEach((a, i) => { if (!a.coverFromText) return; prefetchArticle(a).then(() => { if (!a.textCover) return; const card = grid.querySelector(`.art-card[data-i="${i}"]`); const img = card && card.querySelector('.art-card-media img'); if (img) img.src = a.textCover; }); });
     // troca de idioma: refaz filtros e cartões mantendo o filtro atual
     onLang(() => {
-      const keep = artFilter; bar.innerHTML = rowsHtml(keep); draw(keep);
+      const keep = artFilter; paint(keep); draw(keep);
     });
   };
 
@@ -1618,8 +1654,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (alive) { measure(); rows.forEach(r => { wrap(r); paint(r); }); } }); // remede com a Inter carregada
   };
   let homeExtrasKey = '';
+  const TK_MQ = matchMedia('(max-width: 767px)');
+  TK_MQ.addEventListener('change', () => renderHomeExtras()); // gira/redimensiona: refaz com o nº certo de linhas
   const renderHomeExtras = () => {
-    const key = LANG + ':' + HOME_TICK.length + ':' + HOME_ARTS.length; // só refaz quando muda o idioma ou os dados
+    const tkRows = TK_MQ.matches ? 4 : 2; // faixa de títulos: 4 linhas no celular, 2 no desktop
+    const key = LANG + ':' + HOME_TICK.length + ':' + HOME_ARTS.length + ':' + tkRows; // só refaz quando muda idioma, dados ou nº de linhas
     if (key === homeExtrasKey) return; homeExtrasKey = key;
     const g = document.getElementById('home-art-grid');
     if (g) {
@@ -1629,8 +1668,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tk = document.getElementById('home-ticker');
     if (tk) {
       const row = (list, off) => { const items = (hid) => list.map((a, i) => `<a href="${articleRoute(a)}" draggable="false" data-tk="${off + i}"${hid ? ' tabindex="-1"' : ''}>${window.HM_OBRAS_HTML ? window.HM_OBRAS_HTML(artTitle(a)) : artTitle(a)}</a><i aria-hidden="true"></i>`).join(''); return `<div class="tk-row"><div class="tk-track"><div class="tk-set">${items(false)}</div><div class="tk-set" aria-hidden="true">${items(true)}</div></div></div>`; };
-      const half = Math.ceil(HOME_TICK.length / 2);
-      tk.innerHTML = HOME_TICK.length > 5 ? row(HOME_TICK.slice(0, half), 0) + row(HOME_TICK.slice(half), half) : '';
+      const per = Math.ceil(HOME_TICK.length / tkRows);
+      tk.innerHTML = HOME_TICK.length > 5 ? Array.from({ length: tkRows }, (_, k) => row(HOME_TICK.slice(k * per, (k + 1) * per), k * per)).join('') : '';
       initTicker(tk);
       tk.onclick = (e) => { const c = e.target.closest('[data-tk]'); if (!c || e.metaKey || e.ctrlKey) return; e.preventDefault(); openArticle(HOME_TICK[+c.dataset.tk]); };
     }

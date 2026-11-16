@@ -111,3 +111,101 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after { transit
     content: ""; position: absolute; inset: -6px -4px;
   }
 }
+
+/* ============================================================
+   Celular: barra flutuante inferior + pílulas de idioma e tema abaixo do nome
+   (assets/js/barra.js cria a barra e controla o contato)
+   ============================================================ */
+.hm-dock { display: none; }
+@media (max-width: 767px) {
+  /* vidro: claro e pouco transparente; escuro no modo noturno */
+  .hm-dock, header.top-header .lang-switch, header.top-header .ts-menu, html .hm-fab {
+    background: rgba(255,255,255,.8);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid rgba(255,255,255,.7);
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  html[data-theme="dark"] .hm-dock, html[data-theme="dark"] header.top-header .lang-switch,
+  html[data-theme="dark"] header.top-header .ts-menu, html[data-theme="dark"] .hm-fab {
+    background: rgba(30,30,30,.78); border-color: rgba(255,255,255,.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  /* --- barra inferior: estreita, só ícones; cresce um pouco ao rolar para cima --- */
+  .hm-dock {
+    display: flex; gap: 0; padding: 3px 6px; border-radius: 999px;
+    position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 1450;
+    transform: translateX(-50%) scale(1); transform-origin: 50% 100%;
+    transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .25s var(--ease);
+  }
+  .hm-dock.is-big { transform: translateX(-50%) scale(1.1); }
+  .hm-dock a {
+    display: flex; align-items: center; justify-content: center; height: 44px; min-width: 52px; padding: 0 13px; border-radius: 999px;
+    color: var(--gray-400); text-decoration: none; -webkit-tap-highlight-color: transparent; transition: color .25s var(--ease);
+  }
+  .hm-dock a.current { color: var(--ink); }
+  .hm-dock a:focus-visible { outline: 1.5px solid var(--ink); outline-offset: -3px; }
+  .hm-dock svg { width: 22px; height: 22px; display: block; flex: none; }
+  /* nome ao tocar: entra dentro da barra, ao lado do ícone */
+  .hm-dock .hm-tip {
+    max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0;
+    font-size: 13px; line-height: 1; color: var(--ink);
+    transition: max-width .3s var(--ease), opacity .2s var(--ease), margin .3s var(--ease);
+  }
+  .hm-dock a.tip-on .hm-tip { max-width: 90px; opacity: 1; margin-left: 7px; }
+  body[style*="overflow: hidden"] .hm-dock, body.pv-open .hm-dock { opacity: 0; pointer-events: none; } /* some sob modais e visualizador */
+
+  /* --- contato: círculo de vidro acima da barra, à direita --- */
+  .hm-fab-wrap { right: 14px !important; bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
+  html .hm-fab { width: 46px; height: 46px; color: var(--ink); }
+  html .hm-fab:hover { transform: none; }
+  html .hm-fab svg { width: 21px; height: 21px; }
+  .hm-fab-wrap.is-hide { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+  /* outros flutuantes acima da barra */
+  .mobile-top-button { bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
+  body.has-art-float .mobile-top-button { bottom: calc(124px + env(safe-area-inset-bottom)) !important; }
+  /* categorias de Artigos: mesmo vidro e mesma escala da barra */
+  .art-float { bottom: calc(78px + env(safe-area-inset-bottom)) !important; padding: 2px 4px !important; }
+  .art-float, html[data-theme="dark"] .art-float {
+    background: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.7);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  html[data-theme="dark"] .art-float { background: rgba(30,30,30,.78); border-color: rgba(255,255,255,.08); box-shadow: 0 4px 16px rgba(0,0,0,.35); }
+  .art-float .art-filter.art-ico { width: 38px !important; height: 30px !important; }
+  .art-float .art-ico > svg { width: 16px !important; height: 16px !important; }
+  html .mobile-top-button { width: 40px; height: 40px; }
+  .credit-bar { padding-bottom: calc(100px + env(safe-area-inset-bottom)) !important; }
+  body.project-page { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+
+  /* --- menu (2 traços): abre duas pílulas lado a lado abaixo do nome --- */
+  header.top-header .nav-row {
+    top: calc(100% + 4px); left: auto; right: calc(var(--gutter) - 7px); width: auto; height: auto; /* coluna centrada sob os 2 traços */
+    flex-direction: column; align-items: center; justify-content: flex-start; gap: 8px; padding: 0;
+    background: none; border: 0; box-shadow: none; pointer-events: none;
+    transform: translateY(-6px);
+  }
+  header.top-header.menu-open .nav-row { transform: none; }
+  header.top-header.menu-open .nav-row > * { pointer-events: auto; }
+  header.top-header.menu-open { background: rgba(255,255,255,.96); }
+  html[data-theme="dark"] header.top-header.menu-open { background: rgba(18,18,18,.96); }
+  header.top-header .nav-row .main-nav { display: none; }
+  /* pílula do tema: switch sol/lua horizontal */
+  header.top-header .ts-menu {
+    --k: 26px; order: 2; position: relative; left: auto; top: auto;
+    width: calc(var(--k) + 8px); height: calc(var(--k) * 2 + 8px); border-radius: 999px;
+  }
+  .ts-menu .ts-knob { left: 4px !important; top: 4px !important; }
+  html[data-theme="dark"] .ts-menu .ts-knob { transform: translateY(var(--k)); }
+  .ts-menu .ts-knob svg { width: 14px; height: 14px; margin: -7px 0 0 -7px; }
+  /* pílula do idioma: as três bandeiras */
+  header.top-header .lang-switch {
+    order: 1; position: static; flex-direction: column; gap: 12px; width: 34px; height: auto; padding: 12px 0; border-radius: 999px;
+    margin: 0 !important;
+  }
+  header.top-header .lang-btn { width: 22px; height: 16px; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .hm-dock, .hm-dock .hm-tip, .hm-fab-wrap { transition: none; }
+}

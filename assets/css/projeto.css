@@ -67,7 +67,8 @@ header.top-header {
   justify-content: center; 
   align-items: center; 
 }
-.main-nav a { font-size: 14px; color: var(--gray-400); transition: color 0.25s var(--ease); }
+.main-nav a { font-size: 14px; color: var(--gray-400); transition: color 0.25s var(--ease); display: inline-flex; align-items: center; gap: 6px; }
+.nav-ico { width: 15px; height: 15px; flex: none; }
 .main-nav a.current, .main-nav a:hover { color: var(--ink); }
 
 @media (min-width: 768px) {
@@ -114,8 +115,9 @@ header.top-header {
   }
   .menu-open .nav-row { opacity: 1; visibility: visible; transform: none; }
   .top-header .main-nav { flex-direction: column; align-items: center; gap: 0; }
-  .top-header .main-nav a { display: block; padding: 12px 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; color: var(--gray-400); }
+  .top-header .main-nav a { display: flex; gap: 10px; padding: 12px 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; color: var(--gray-400); }
   .top-header .main-nav a.current { color: var(--ink); }
+  .top-header .main-nav .nav-ico { width: 20px; height: 20px; }
   .top-header .lang-switch { margin-top: 56px; gap: 16px; }
   .top-header .lang-btn { width: 28px; height: 20px; }
   /* entrada em cascata dos itens */
