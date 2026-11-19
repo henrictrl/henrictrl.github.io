@@ -67,6 +67,10 @@ window.CATEGORIAS = {
    "https://tesouracomponta.com/ir-tambem-e-ficar-critica/"
   ],
   "p": [
+   "DfpsMJen9Wf",
+   "DfDEIdJG-Ek",
+   "DefHzhQn90a",
+   "DdjXMpJkd19",
    "Df2Mgq8Fqi0",
    "DfXT4e8oXpD",
    "DeKDr7dFgRW",
