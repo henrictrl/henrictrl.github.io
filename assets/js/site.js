@@ -688,6 +688,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const POST_CATS = { Cultura: ['rdcultural', 'congresso-extensao', 'educacao-politica', 'mostra-cancao', 'interserv', 'ocupacao-unesp-negra'], Tecnologia: ['basement'] };
     Object.entries(POST_CATS).forEach(([k, gs]) => { CATS[k] = { p: (window.POSTS || []).filter(x => gs.includes(x.g)).map(x => x.c) }; });
     const POST_ONLY = ['carrosseis', 'Cultura', 'Tecnologia']; // grades só de posts
+    // mosaico (Cultura: proporções muito diferentes): cada card ocupa N linhas de 4px conforme a própria altura, sem buracos
+    const MOSAIC = ['Cultura'];
+    const mosaicFit = () => {
+      if (!grid.classList.contains('is-mosaic')) return;
+      const g = innerWidth < 640 ? 24 : 32, cs = [...grid.children];
+      cs.forEach(c => { c.style.gridRowEnd = ''; });
+      cs.forEach(c => { c.style.gridRowEnd = 'span ' + Math.ceil((c.getBoundingClientRect().height + g) / 4); });
+    };
+    let mosaicT = 0; addEventListener('resize', () => { clearTimeout(mosaicT); mosaicT = setTimeout(mosaicFit, 120); });
     const catEntries = (k) => {
       const s = CATS[k] || {};
       const arts = (s.u || []).map(u => data.find(x => x.u === u)).filter(Boolean).map(x => ({ kind: 'text', item: x, d: x.d }));
@@ -744,6 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
       const COL = window.HM_COL, isCat = !COL && !!CATS[k];
+      if (!isCat) grid.classList.remove('is-mosaic');
       grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || POST_ONLY.includes(k)));
       grid.classList.toggle('is-mixed', !COL && k === 'fav');
       if (k === 'fav' && !COL) {
@@ -774,7 +784,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isCat) { // Cabines, Mostra SP, Carrosséis, Premiações: só os itens da categoria, sem acumular
         const ents = catEntries(k).filter(e => artMode !== 'ig' || e.kind === 'post' || PBA[e.item.u]);
         grid.classList.toggle('is-mixed', !POST_ONLY.includes(k) && ents.some(e => e.kind === 'post'));
+        grid.classList.toggle('is-mosaic', MOSAIC.includes(k));
         grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, postTitle(e.item)) : artCard(e.item, { showTag: false, ig: artMode === 'ig' || k === 'carrosseis' })).join('');
+        mosaicFit(); if (document.fonts) document.fonts.ready.then(mosaicFit);
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
       }

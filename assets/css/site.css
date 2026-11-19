@@ -817,6 +817,9 @@ body.pv-open .mobile-top-button { opacity: 0 !important; pointer-events: none !i
 /* Artigos no modo Instagram: proporção de cada post (sem cortar o topo) */
 .art-grid.is-ig .art-card-media { aspect-ratio: var(--ar, 4/5); }
 .art-grid.is-ig { align-items: start; }
+/* mosaico (Cultura): linhas de 4px; o span de cada card vem do JS (mosaicFit) */
+.art-grid.is-mosaic { grid-auto-rows: 4px; row-gap: 0; }
+.art-grid.is-mosaic .art-card { align-self: start; }
 .art-grid.is-mixed {
   display: block;
   column-count: 3;
