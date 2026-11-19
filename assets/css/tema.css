@@ -173,8 +173,8 @@ html.theme-swap *, html.theme-swap *::before, html.theme-swap *::after { transit
     box-shadow: 0 0 0 .5px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.9);
   }
   html[data-theme="dark"] .art-float { background: rgba(30,30,30,.78); border-color: rgba(255,255,255,.08); box-shadow: 0 4px 16px rgba(0,0,0,.35); }
-  .art-float .art-filter.art-ico { width: 38px !important; height: 30px !important; }
-  .art-float .art-ico > svg { width: 16px !important; height: 16px !important; }
+  .art-float .art-filter.art-ico { width: 32px !important; height: 30px !important; } /* 6 categorias: mais estreita que a barra principal */
+  .art-float .art-ico > svg { width: 15px !important; height: 15px !important; }
   html .mobile-top-button { width: 40px; height: 40px; }
   .credit-bar { padding-bottom: calc(100px + env(safe-area-inset-bottom)) !important; }
   body.project-page { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }

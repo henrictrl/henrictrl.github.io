@@ -15,9 +15,9 @@ const I18N = {
     'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and <em>branding</em> and <em>design</em> strategies. I develop visual identities, <em>landing pages</em> and graphic assets for brands. I am also a cultural writer for independent news outlets.',
     'work.label': 'Projects', 'work.seeall': 'See all',
     'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
-    'art.title': '<span class="dim">Cultural content</span><br>on film, music,<br>TV and literature.',
+    'art.title': '<span class="dim">Content</span><br>on culture, film, music,<br>TV, literature and technology.',
     'f.all': 'All', 'am.fav': 'Highlights', 'f.cabine': 'Screenings', 'f.carrosseis': 'Carousels', 'f.premiacoes': 'Awards',
-    'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
+    'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Cultura': 'Culture', 'tag.Tecnologia': 'Technology', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
     'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
     'am.open': 'Open on site', 'am.book': 'Open book', 'am.share': 'Share', 'am.copied': 'Link copied', 'am.copy': 'Copy article link:', 'am.link.Repositório Unesp': 'Unesp repository',
     'am.loading': 'Loading…', 'am.translating': 'Translating…',
@@ -41,9 +41,9 @@ const I18N = {
     'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
     'work.label': 'Proyectos', 'work.seeall': 'Ver todos',
     'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
-    'art.title': '<span class="dim">Contenidos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
+    'art.title': '<span class="dim">Contenidos</span><br>sobre cultura, cine, música,<br>televisión, literatura y tecnología.',
     'f.all': 'Todos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa', 'f.carrosseis': 'Carruseles', 'f.premiacoes': 'Premios',
-    'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
+    'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Cultura': 'Cultura', 'tag.Tecnologia': 'Tecnología', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
     'art.various': 'Varios autores', 'art.with': 'Con', 'art.and': ' y ',
     'am.open': 'Abrir en el sitio', 'am.book': 'Abrir libro', 'am.link.Repositório Unesp': 'Repositorio Unesp',
     'am.loading': 'Cargando…', 'am.translating': 'Traduciendo…',
@@ -645,13 +645,15 @@ document.addEventListener('DOMContentLoaded', () => {
       'Cinema': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="10.5" width="17" height="9.5" rx="2.5"/><g transform="rotate(-11 3.5 9)"><rect x="3.5" y="5" width="17" height="3.8" rx="1.5"/><path d="M9.3 5.4 8.1 8.4M14.8 5.4l-1.2 3"/></g></svg>',
       'Música': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17.5V7.2a1 1 0 0 1 .8-1l8-1.6a1 1 0 0 1 1.2 1v9.9"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/></svg>',
       'Televisão': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12" rx="3.5"/><path d="M9 3.8 12 7l3-3.2"/></svg>',
+      'Cultura': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(1.4 3.8) rotate(-12)"><path d="M.2 1.2C3.1-.1 6.4-.1 9.3 1.2c.4 4.6-.6 8.1-2.6 9.6a3.3 3.3 0 0 1-3.9 0C.8 9.3-.2 5.8.2 1.2z"/><path d="M2.1 4.4c.6-.6 1.4-.6 2 0M5.4 4.4c.6-.6 1.4-.6 2 0M2.9 7.1c1 1 2.7 1 3.7 0"/></g><g transform="translate(12.9 6.2) rotate(10)"><path d="M.2 1.2C3.1-.1 6.4-.1 9.3 1.2c.4 4.6-.6 8.1-2.6 9.6a3.3 3.3 0 0 1-3.9 0C.8 9.3-.2 5.8.2 1.2z"/><path d="M2.1 4.6c.6.5 1.4.5 2 0M5.4 4.6c.6.5 1.4.5 2 0M2.9 8.4c1-1 2.7-1 3.7 0"/></g></svg>',
+      'Tecnologia': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2.6"/><rect x="9.6" y="9.6" width="4.8" height="4.8" rx="1.2"/><path d="M10 3.8v2.7M14 3.8v2.7M10 17.5v2.7M14 17.5v2.7M3.8 10h2.7M3.8 14h2.7M17.5 10h2.7M17.5 14h2.7"/></svg>',
       'Literatura': '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7C10.1 5.5 7.4 4.9 4.5 5.2a1 1 0 0 0-.9 1V18c0 .6.5 1 1.1 1 2.6-.2 5.1.4 7.3 1.8 2.2-1.4 4.7-2 7.3-1.8.6 0 1.1-.4 1.1-1V6.2a1 1 0 0 0-.9-1C16.6 4.9 13.9 5.5 12 7zM12 7v13.5"/></svg>',
     };
     // linha 1: seletor Texto | Instagram (modo de leitura) · Todos · Destaques (+ grade no celular)
     // linha 2: linguagens | coberturas. No celular as categorias quebram em linhas, sem rolagem lateral.
     const MODOS = () => [['m:texto', TXT_ICO + i18n('am.text', 'Texto')], ['m:ig', IG_ICO + 'Instagram']];
     const TOPO = () => [['all', FI.all + i18n('f.all', 'Todos')], ['fav', PVFAV + i18n('am.fav', 'Destaques')]];
-    const LING = () => ['Cinema', 'Música', 'Televisão', 'Literatura'].map(k => [k, FI[k] + tagName(k)]);
+    const LING = () => ['Cultura', 'Cinema', 'Música', 'Televisão', 'Literatura', 'Tecnologia'].map(k => [k, FI[k] + tagName(k)]);
     const COB = () => [['cabines', FI.cabines + i18n('f.cabine', 'Cabines')], ['mostra', FI.mostra + 'Mostra SP'], ['premiacoes', FI.premiacoes + i18n('f.premiacoes', 'Premiações')], ['carrosseis', FI.carrosseis + i18n('f.carrosseis', 'Carrosséis')]];
     const btnOf = (keep) => ([k, html]) => {
       const on = k.startsWith('m:') ? (artFilter !== 'fav' && k === 'm:' + artMode) : k === keep;
@@ -659,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     // linguagens: só ícone, num grupo separado (no celular o mesmo grupo vira menu flutuante)
     const icoGroup = (keep) => '<div class="art-ico-grp" role="group" aria-label="' + ({ pt: 'Linguagens', en: 'Media', es: 'Lenguajes' })[LANG] + '">'
-      + ['Cinema', 'Música', 'Televisão', 'Literatura'].map(k => `<button class="art-filter art-ico" data-k="${k}" aria-pressed="${k === keep}" aria-label="${tagName(k)}" title="${tagName(k)}">${FI[k]}</button>`).join('') + '</div>';
+      + ['Cultura', 'Cinema', 'Música', 'Televisão', 'Literatura', 'Tecnologia'].map(k => `<button class="art-filter art-ico" data-k="${k}" aria-pressed="${k === keep}" aria-label="${tagName(k)}" title="${tagName(k)}">${FI[k]}</button>`).join('') + '</div>';
     const rowsHtml = (keep) => {
       const btn = btnOf(keep), sep = '<span class="art-sep" aria-hidden="true"></span>';
       const view = '<button class="art-view" type="button" aria-pressed="' + artGrid + '" aria-label="' + i18n('art.grid', 'Ver em grade') + '" title="' + i18n('art.grid', 'Ver em grade') + '">' + GRID_ICO + '</button>';
@@ -682,12 +684,18 @@ document.addEventListener('DOMContentLoaded', () => {
     new MutationObserver(fltQ).observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: false });
     setInterval(fltQ, 800); // rotas trocam sem scroll: confere de tempos em tempos (barato)
     // categorias com lista própria (assets/data/colecoes.js → CATEGORIAS); membros = textos (u) e posts (p)
-    const CATS = window.CATEGORIAS || {};
+    const CATS = Object.assign({}, window.CATEGORIAS || {});
+    const POST_CATS = { Cultura: ['rdcultural', 'congresso-extensao', 'educacao-politica', 'mostra-cancao', 'interserv', 'ocupacao-unesp-negra'], Tecnologia: ['basement'] };
+    Object.entries(POST_CATS).forEach(([k, gs]) => { CATS[k] = { p: (window.POSTS || []).filter(x => gs.includes(x.g)).map(x => x.c) }; });
+    const POST_ONLY = ['carrosseis', 'Cultura', 'Tecnologia']; // grades só de posts
     const catEntries = (k) => {
       const s = CATS[k] || {};
       const arts = (s.u || []).map(u => data.find(x => x.u === u)).filter(Boolean).map(x => ({ kind: 'text', item: x, d: x.d }));
       const posts = (s.p || []).map(c => { const x = (window.POSTS || []).find(z => z.c === c); return x ? { kind: 'post', item: x, d: x.d } : null; }).filter(Boolean);
-      return [...arts, ...posts].sort((p, q) => String(q.d).localeCompare(String(p.d)));
+      const out = [...arts, ...posts].sort((p, q) => String(q.d).localeCompare(String(p.d)));
+      // pinG: o post abre a lista do próprio projeto (sem mudar a ordem dos demais)
+      out.filter(e => e.kind === 'post' && e.item.pinG).forEach(e => { out.splice(out.indexOf(e), 1); out.splice(out.findIndex(o => o.kind === 'post' && o.item.g === e.item.g), 0, e); });
+      return out;
     };
     const postTitle = (x) => { const t = (window.POST_TITULOS || {})[x.c]; return t ? (t[LANG] || t.pt) : esc(capTitle(x)); };
     const postCard = (x, title) => `<a class="art-card" href="https://www.instagram.com/p/${x.c}/" target="_blank" rel="noopener" data-ig="${x.c}">
@@ -736,7 +744,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
     const draw = (k) => {
       const COL = window.HM_COL, isCat = !COL && !!CATS[k];
-      grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || k === 'carrosseis'));
+      grid.classList.toggle('is-ig', !COL && ((artMode === 'ig' && k !== 'fav') || POST_ONLY.includes(k)));
       grid.classList.toggle('is-mixed', !COL && k === 'fav');
       if (k === 'fav' && !COL) {
         let items = FAV_SELECTION;
@@ -765,7 +773,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (isCat) { // Cabines, Mostra SP, Carrosséis, Premiações: só os itens da categoria, sem acumular
         const ents = catEntries(k).filter(e => artMode !== 'ig' || e.kind === 'post' || PBA[e.item.u]);
-        grid.classList.toggle('is-mixed', k !== 'carrosseis' && ents.some(e => e.kind === 'post'));
+        grid.classList.toggle('is-mixed', !POST_ONLY.includes(k) && ents.some(e => e.kind === 'post'));
         grid.innerHTML = ents.map(e => e.kind === 'post' ? postCard(e.item, postTitle(e.item)) : artCard(e.item, { showTag: false, ig: artMode === 'ig' || k === 'carrosseis' })).join('');
         [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
         return;
@@ -777,7 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML = lista.map(a => artCard(a, { showTag, ig: !COL && artMode === 'ig' })).join('');
       [...grid.children].forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.06 + 's'; io.observe(c); });
     };
-    const pre = (e) => { const c = e.target.closest && e.target.closest('.art-card'); if (c && !data[+c.dataset.i]?.project) prefetchArticle(data[+c.dataset.i]); };
+    const pre = (e) => { const c = e.target.closest && e.target.closest('.art-card'), it = c && data[+c.dataset.i]; if (it && !it.project) prefetchArticle(it); };
     grid.addEventListener('pointerover', pre); grid.addEventListener('touchstart', pre, { passive: true }); grid.addEventListener('focusin', pre);
     grid.addEventListener('click', (e) => {
       const c = e.target.closest('.art-card'); if (!c || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
@@ -785,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // posts: abre no visualizador com todos os posts visíveis na grade (setas laterais passam de um para outro)
       if (c.dataset.ig || c.dataset.igart) {
         const lista = [], cards = [...grid.querySelectorAll('.art-card[data-ig], .art-card[data-igart]')]; let start = 0;
-        cards.forEach(k => { if (k === c) start = lista.length; if (k.dataset.ig) lista.push(CARR.find(z => z.c === k.dataset.ig)); else lista.push(...(PBA[data[+k.dataset.i].u] || [])); });
+        cards.forEach(k => { if (k === c) start = lista.length; if (k.dataset.ig) lista.push(CARR.find(z => z.c === k.dataset.ig) || (window.POSTS || []).find(z => z.c === k.dataset.ig)); else lista.push(...(PBA[data[+k.dataset.i].u] || [])); });
         window.HM_POSTS.openPosts(lista, start); return;
       }
       const item = data[+c.dataset.i];
