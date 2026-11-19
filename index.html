@@ -163,17 +163,13 @@
     <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
     <script>if (HMI.initial() === 'pt' && 'IntersectionObserver' in window) { var fsIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); fsIO.unobserve(e.target); } }); }, { threshold: 0.15 }); document.querySelectorAll('.first-screen .reveal').forEach(function (e) { fsIO.observe(e); }); }</script> <!-- só o que está na tela; o resto entra ao rolar -->
 
-    <!-- Projeto recente em destaque: páginas do carrossel lado a lado (dados: assets/data/posts.js; montagem em site.js, HOME_REC) -->
+    <!-- Destaque: estreia do Desvendados (páginas do carrossel lado a lado; montagem em site.js, HOME_REC) -->
     <section class="section-block" id="home-recente" aria-labelledby="home-rec-label">
       <div class="max-w">
-        <h2 class="section-label" id="home-rec-label">Recente</h2>
-        <div class="rec-head">
-          <p class="rec-meta" id="home-rec-meta"></p>
-          <h3 class="rec-title" id="home-rec-title"></h3>
-          <p class="rec-sub" id="home-rec-sub"></p><!-- PLACEHOLDER: subtítulo escrito pelo Henrique (editar em site.js, REC_SUB) -->
-        </div>
+        <h2 class="section-label" id="home-rec-label">Destaque</h2>
+        <div class="rec-text" id="home-rec-text"></div>
       </div>
-      <div class="rec-strip" id="home-rec-strip" role="list" aria-label="Páginas do carrossel"></div><!-- sangra até a borda da tela; o 1º slide alinha com a coluna de 1024 px -->
+      <div class="rec-strip" id="home-rec-strip" role="list" aria-label="Páginas do carrossel"></div>
     </section>
 
     <section class="section-block" id="trabalhos">

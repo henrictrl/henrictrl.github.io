@@ -1558,10 +1558,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const HOME_PROJECTS = [
     ...HOME_FEATURED.map(slug => PJ.find(p => p.slug === slug)).filter(Boolean)
   ];
-  /* Home: projeto recente em destaque (Desvendados). REC_SUB é PLACEHOLDER: o subtítulo é escrito pelo Henrique */
+  /* Home: Destaque (Desvendados). REC_PAGES = slides mostrados, na ordem: capa, Hemlocke, Peixevoador (no meio), Paula, chamada final */
   const HOME_REC = (window.POSTS || []).find(p => p.c === 'Df2Mgq8Fqi0');
-  const REC_TITLE = 'Desvendados';
-  const REC_SUB = { pt: '[Subtítulo do projeto]', en: '[Project subtitle]', es: '[Subtítulo del proyecto]' };
+  const REC_PAGES = [0, 1, 4, 3, 6];
   /* Home: artigos em destaque, faixa de títulos e números */
   const HOME_ARTS_ALL = (window.ARTIGOS || []).filter(x => !x.project);
   const HOME_ARTS = ['https://tesouracomponta.com/o-sentido-da-vida/', 'https://online.visual-paradigm.com/pt/share/book/livro-persona-e-book-2faf3yvpm', 'https://personaunesp.com.br/pearl-critica/'].map(u => HOME_ARTS_ALL.find(x => x.u === u)).filter(Boolean);
@@ -1688,16 +1687,18 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse' || tm) return; tm = setInterval(() => show((k + 1) % n), 850); });
         card.addEventListener('pointerleave', () => { clearInterval(tm); tm = null; show(0); }); });
     }
-    // projeto recente: páginas do carrossel lado a lado; clique abre o visualizador de posts
+    // destaque: páginas do carrossel lado a lado; clique abre o visualizador de posts
     const rs = document.getElementById('home-rec-strip'), rx = HOME_REC;
     if (rs && rx) {
       const $ = (id) => document.getElementById(id);
-      $('home-rec-label').textContent = lx({ pt: 'Recente', en: 'Latest', es: 'Reciente' });
-      $('home-rec-meta').textContent = `${rx.v} — ${fmtData(rx.d)}`;
-      $('home-rec-title').textContent = REC_TITLE;
-      $('home-rec-sub').textContent = lx(REC_SUB);
+      $('home-rec-label').textContent = lx({ pt: 'Destaque', en: 'Featured', es: 'Destacado' });
+      const ig = '<a href="https://www.instagram.com/desvendandopop/" target="_blank" rel="noopener">@desvendandopop</a>';
+      $('home-rec-text').innerHTML = lx({
+        pt: `<p>Estreia do Desvendados no ${ig}</p><p>Projeto dedicado a apresentar artistas independentes ou que ainda não chegaram ao mainstream. Apoiem novos artistas.</p>`,
+        en: `<p>Debut of Desvendados on ${ig}</p><p>A project dedicated to introducing independent artists or those who haven’t reached the mainstream yet. Support new artists.</p>`,
+        es: `<p>Estreno de Desvendados en ${ig}</p><p>Proyecto dedicado a presentar artistas independientes o que aún no llegaron al mainstream. Apoyen a nuevos artistas.</p>` });
       rs.setAttribute('aria-label', lx({ pt: 'Páginas do carrossel', en: 'Carousel pages', es: 'Páginas del carrusel' }));
-      rs.innerHTML = Array.from({ length: rx.n || 1 }, (_, i) => `<button type="button" class="rec-pg" role="listitem" data-pg="${i}" aria-label="${lx({ pt: 'Abrir carrossel', en: 'Open carousel', es: 'Abrir carrusel' })} — ${i + 1}/${rx.n}"><img src="${postSrc(rx, i)}" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"></button>`).join('');
+      rs.innerHTML = REC_PAGES.map((i, k) => `<button type="button" class="rec-pg" role="listitem" data-pg="${i}" aria-label="${lx({ pt: 'Abrir carrossel', en: 'Open carousel', es: 'Abrir carrusel' })} — ${k + 1}/${REC_PAGES.length}"><img src="${postSrc(rx, i)}" alt="" width="1080" height="1350" loading="lazy" decoding="async" draggable="false"></button>`).join('');
       if (!rs._drag) { rs._drag = 1; let down = null, moved = false;
         rs.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, l: rs.scrollLeft }; moved = false; });
         window.addEventListener('pointermove', (e) => { if (!down) return; const dx = e.clientX - down.x; if (Math.abs(dx) > 4) { moved = true; rs.classList.add('dragging'); } rs.scrollLeft = down.l - dx; });
