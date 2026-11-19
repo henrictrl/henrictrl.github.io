@@ -1589,3 +1589,16 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
   #view-home section.has-aside { transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
   html:not(.hm-rolou) #view-home section.has-aside { opacity: 0; transform: translateY(14px); }
 }
+
+/* Home: projeto recente em destaque (páginas do carrossel lado a lado) */
+#home-recente .rec-head { display: grid; gap: 8px; margin-top: 24px; }
+#home-recente .rec-meta { margin: 0; font-size: 14px; color: var(--gray-500); }
+#home-recente .rec-title { margin: 0; font-size: clamp(30px, 4.4vw, 48px); line-height: 1.04; letter-spacing: -0.025em; font-weight: 600; color: var(--ink); }
+#home-recente .rec-sub { margin: 0; font-size: 18px; line-height: 1.4; color: var(--gray-500); max-width: 46ch; text-wrap: balance; }
+.rec-strip { display: flex; gap: 10px; margin: 28px calc(var(--gutter) * -1) 0; padding: 0 max(var(--gutter), calc((100vw - 1024px) / 2)) 4px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: max(var(--gutter), calc((100vw - 1024px) / 2)); scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
+.rec-strip::-webkit-scrollbar { display: none; }
+.rec-strip.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.rec-pg { flex: 0 0 clamp(200px, 22vw, 232px); min-width: 0; aspect-ratio: 4 / 5; padding: 0; border: 0; background: none; border-radius: var(--r); overflow: hidden; scroll-snap-align: start; cursor: inherit; }
+.rec-pg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rec-pg:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 767px) { .rec-pg { flex-basis: 62%; } #home-recente .rec-sub { font-size: 16px; } }
