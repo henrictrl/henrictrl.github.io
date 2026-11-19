@@ -1591,8 +1591,8 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
 }
 
 /* Home: Destaque (páginas do carrossel lado a lado) */
-#home-recente .rec-text { margin-top: 16px; display: grid; gap: 12px; }
-#home-recente .rec-text p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--ink); max-width: 520px; text-wrap: pretty; }
+#home-recente .rec-text { margin-top: 10px; display: grid; gap: 4px; }
+#home-recente .rec-text p { margin: 0; font-size: 12.5px; line-height: 1.35; color: #767676; max-width: 520px; text-wrap: pretty; } /* mesmo estilo da descrição dos cards de projeto */
 #home-recente .rec-text a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .rec-strip { display: flex; justify-content: center; gap: 12px; max-width: 1024px; margin: 28px auto 0; }
 .rec-pg { flex: 1 1 0; min-width: 0; aspect-ratio: 4 / 5; padding: 0; border: 0; background: none; border-radius: var(--r); overflow: hidden; cursor: pointer; }
@@ -1602,5 +1602,5 @@ div.floating-header { will-change: transform; backface-visibility: hidden; -webk
   .rec-strip { justify-content: flex-start; gap: 10px; max-width: none; margin: 28px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter) 4px; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: var(--gutter); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .rec-strip::-webkit-scrollbar { display: none; }
   .rec-pg { flex: 0 0 62%; scroll-snap-align: start; }
-  #home-recente .rec-text p { font-size: 16px; }
+  #home-recente .rec-text p { font-size: 12px; }
 }

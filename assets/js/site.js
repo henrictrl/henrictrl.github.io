@@ -1691,7 +1691,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rs = document.getElementById('home-rec-strip'), rx = HOME_REC;
     if (rs && rx && document.getElementById('home-rec-text') && document.getElementById('home-rec-label')) { // HTML em cache antigo não derruba a home
       const $ = (id) => document.getElementById(id);
-      $('home-rec-label').textContent = lx({ pt: 'Destaque', en: 'Featured', es: 'Destacado' });
+      $('home-rec-label').textContent = lx({ pt: 'Recente', en: 'Latest', es: 'Reciente' });
       const ig = '<a href="https://www.instagram.com/desvendandopop/" target="_blank" rel="noopener">@desvendandopop</a>';
       $('home-rec-text').innerHTML = lx({
         pt: `<p>Estreia do Desvendados no ${ig}</p><p>Projeto dedicado a apresentar artistas independentes ou que ainda não chegaram ao mainstream. Apoiem novos artistas.</p>`,
