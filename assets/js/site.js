@@ -1689,7 +1689,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // destaque: páginas do carrossel lado a lado; clique abre o visualizador de posts
     const rs = document.getElementById('home-rec-strip'), rx = HOME_REC;
-    if (rs && rx) {
+    if (rs && rx && document.getElementById('home-rec-text') && document.getElementById('home-rec-label')) { // HTML em cache antigo não derruba a home
       const $ = (id) => document.getElementById(id);
       $('home-rec-label').textContent = lx({ pt: 'Destaque', en: 'Featured', es: 'Destacado' });
       const ig = '<a href="https://www.instagram.com/desvendandopop/" target="_blank" rel="noopener">@desvendandopop</a>';
