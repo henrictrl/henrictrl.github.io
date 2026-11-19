@@ -4,7 +4,7 @@
    data-i18n-about="larguraEm" → texto alinhado à esquerda; as quebras são calculadas para a largura indicada */
 const I18N = {
   en: {
-    'about.h1': 'About Henrique Marinhos', 'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Articles', 'nav.contact': 'Contact',
+    'about.h1': 'About Henrique Marinhos', 'nav.home': 'Home', 'nav.about': 'About', 'nav.work': 'Projects', 'nav.articles': 'Content', 'nav.contact': 'Contact',
     'menu.open': 'Open menu', 'menu.close': 'Close menu',
     'hero': '<span class="dim">Designer and<br>PR specialist.</span><br>Critical, functional<br>communication<br>strategies for brands.',
     'hint.mouse': 'hover - click to see the photo', 'hint.touch': 'drag your finger - tap to see the photo',
@@ -15,7 +15,7 @@ const I18N = {
     'about.text.m': 'With a bachelor\'s degree in Public Relations from Unesp, I develop brands and <em>branding</em> and <em>design</em> strategies. I develop visual identities, <em>landing pages</em> and graphic assets for brands. I am also a cultural writer for independent news outlets.',
     'work.label': 'Projects', 'work.seeall': 'See all',
     'work.title': '<span class="dim">Graphic design,</span><br>brands and interfaces',
-    'art.title': '<span class="dim">Cultural criticism</span><br>on film, music,<br>TV and literature.',
+    'art.title': '<span class="dim">Cultural content</span><br>on film, music,<br>TV and literature.',
     'f.all': 'All', 'am.fav': 'Highlights', 'f.cabine': 'Screenings', 'f.carrosseis': 'Carousels', 'f.premiacoes': 'Awards',
     'tag.Cinema': 'Film', 'tag.Cabine': 'Screening', 'tag.Música': 'Music', 'tag.Televisão': 'Television', 'tag.Literatura': 'Literature', 'tag.Livro': 'Book', 'tag.Artes visuais': 'Visual arts',
     'art.various': 'Various authors', 'art.with': 'With', 'art.and': ' and ',
@@ -31,7 +31,7 @@ const I18N = {
     'doc.desc': 'Portfolio of Henrique Marinhos, designer focused on brand creation, editorial design, web design and B2B communication strategies.'
   },
   es: {
-    'about.h1': 'Sobre Henrique Marinhos', 'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Artículos', 'nav.contact': 'Contacto',
+    'about.h1': 'Sobre Henrique Marinhos', 'nav.home': 'Inicio', 'nav.about': 'Sobre mí', 'nav.work': 'Proyectos', 'nav.articles': 'Contenidos', 'nav.contact': 'Contacto',
     'menu.open': 'Abrir menú', 'menu.close': 'Cerrar menú',
     'hero': '<span class="dim">Diseñador y<br>relacionista público.</span><br>Estrategias de<br>comunicación críticas y<br>funcionales para marcas.',
     'hint.mouse': 'pasa el mouse - haz clic para ver la foto', 'hint.touch': 'arrastra el dedo - toca para ver la foto',
@@ -41,7 +41,7 @@ const I18N = {
     'about.text.m': 'Soy bachiller en Relaciones Públicas por la Unesp y desarrollo marcas y estrategias de <em>branding</em> y diseño. Desarrollo identidades visuales, <em>landing pages</em> y piezas gráficas para marcas. También soy redactor cultural en portales periodísticos independientes.',
     'work.label': 'Proyectos', 'work.seeall': 'Ver todos',
     'work.title': '<span class="dim">Diseño gráfico,</span><br>marcas e interfaces',
-    'art.title': '<span class="dim">Artículos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
+    'art.title': '<span class="dim">Contenidos culturales</span><br>sobre cine, música,<br>televisión y literatura.',
     'f.all': 'Todos', 'am.fav': 'Destacados', 'f.cabine': 'Pases de prensa', 'f.carrosseis': 'Carruseles', 'f.premiacoes': 'Premios',
     'tag.Cinema': 'Cine', 'tag.Cabine': 'Pase de prensa', 'tag.Música': 'Música', 'tag.Televisão': 'Televisión', 'tag.Literatura': 'Literatura', 'tag.Livro': 'Libro', 'tag.Artes visuais': 'Artes visuales',
     'art.various': 'Varios autores', 'art.with': 'Con', 'art.and': ' y ',
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Rotas --- */
   const showRoute = (route, navId) => {
     document.body.classList.toggle('home-route', route === 'home');
-    document.title = route === 'home' ? 'Henrique Marinhos' : ({ work: i18n('nav.work', 'Projetos'), articles: i18n('nav.articles', 'Artigos'), about: i18n('nav.about', 'Sobre') })[route] + ' — Henrique Marinhos';
+    document.title = route === 'home' ? 'Henrique Marinhos' : ({ work: i18n('nav.work', 'Projetos'), articles: i18n('nav.articles', 'Conteúdos'), about: i18n('nav.about', 'Sobre') })[route] + ' — Henrique Marinhos';
     ROUTES.forEach(r => document.getElementById('view-' + r).style.display = (r === route) ? 'block' : 'none');
     if (navId) {
       document.querySelectorAll('[data-nav-id]').forEach(a => a.classList.toggle('current', a.dataset.navId === navId));
@@ -813,7 +813,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const c = C.c, base = '/artigos/' + c.s + '/', n = data.filter(a => window.colMatch(c, a, C.ano)).length;
         const anos = c.mostra ? [...new Set(data.filter(a => a.mostra).map(a => String(a.mostra)))].sort().reverse() : [];
         const outras = (window.COLECOES || []).filter(x => x.s !== c.s);
-        colHead.innerHTML = `<p class="col-kicker"><a href="/artigos/">Artigos</a> · ${n} ${n === 1 ? 'texto' : 'textos'}</p>
+        colHead.innerHTML = `<p class="col-kicker"><a href="/artigos/">Conteúdos</a> · ${n} ${n === 1 ? 'texto' : 'textos'}</p>
           <h1 class="col-title">${c.t}${C.ano ? ` <span class="dim">${C.ano}</span>` : ''}</h1>
           <p class="col-desc">${c.d}</p>
           ${anos.length ? `<div class="col-bar" role="navigation" aria-label="Edições"><a class="art-filter" href="${base}"${!C.ano ? ' aria-current="page"' : ''}>Todas</a>${anos.map(y => `<a class="art-filter" href="${base}${y}/"${C.ano === y ? ' aria-current="page"' : ''}>${y}</a>`).join('')}</div>` : ''}

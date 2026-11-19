@@ -47,7 +47,7 @@ const W = { // textos das páginas leves
           en: 'Critical, functional communication strategies for brands. Graphic design, social media, copywriting and landing pages.',
           es: 'Estrategias de comunicación críticas y funcionales para marcas. Diseño gráfico, redes sociales, redacción y landing pages.' },
   home: { pt: 'Início', en: 'Home', es: 'Inicio' }, sobre: { pt: 'Sobre', en: 'About', es: 'Sobre mí' },
-  projetos: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, artigos: { pt: 'Artigos', en: 'Articles', es: 'Artículos' },
+  projetos: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' }, artigos: { pt: 'Conteúdos', en: 'Content', es: 'Contenidos' },
   todosP: { pt: 'Todos os projetos', en: 'All projects', es: 'Todos los proyectos' }, todosA: { pt: 'Todos os artigos', en: 'All articles', es: 'Todos los artículos' },
   ler: { pt: 'Ler no', en: 'Read on', es: 'Leer en' }, job: { pt: 'Designer e relações-públicas', en: 'Designer and PR specialist', es: 'Diseñador y relacionista público' },
 };
