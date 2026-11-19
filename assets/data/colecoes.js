@@ -67,6 +67,7 @@ window.CATEGORIAS = {
    "https://tesouracomponta.com/ir-tambem-e-ficar-critica/"
   ],
   "p": [
+   "Df2Mgq8Fqi0",
    "DfXT4e8oXpD",
    "DeKDr7dFgRW",
    "Dd6mzTmFpUe"
@@ -89,6 +90,11 @@ window.CATEGORIAS = {
 };
 /* títulos dos posts do Instagram sem texto ligado (PT/EN/ES) */
 window.POST_TITULOS = {
+ "Df2Mgq8Fqi0": {
+  "pt": "Desvendados: estreia do quadro de artistas independentes",
+  "en": "Desvendados: debut of the independent artists section",
+  "es": "Desvendados: estreno de la sección de artistas independientes"
+ },
  "DfXT4e8oXpD": {
   "pt": "Desvendando o Pop: lançamentos de outubro de 2026",
   "en": "Desvendando o Pop: October 2026 releases",
