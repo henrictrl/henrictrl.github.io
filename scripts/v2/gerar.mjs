@@ -604,10 +604,10 @@ function aboutPage(l) {
   <div class="duo__c"><h2 class="section-label" data-scr>${u('extra', l)}</h2><div class="cv-list">${CV.extra.map((e) => `<div data-reveal>${cvItem(e, l)}</div>`).join('')}</div></div>
 </div></section>
 <section class="sec"><div class="wrap duo">
-  <div class="duo__c"><h2 class="section-label" data-scr>${u('skills', l)}</h2><div class="cv-list">${CV.skills.map((e) => `<div data-reveal>${cvItem(e, l)}</div>`).join('')}</div></div>
+  <div class="duo__c"><h2 class="section-label" data-scr>${u('skills', l)}</h2><div class="cv-list">${CV.skills.map((e) => `<div data-reveal>${cvItem(e, l)}</div>`).join('')}</div>${certs.length ? `<details class="certs-box"><summary class="certs-sum"><span>${u('certs', l)}</span><small>${certs.length}</small><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg></summary><div class="certs">${certs.map((c) => `<button class="cert" type="button" data-zoom data-lb-g="certs" data-src="/${c.src}" data-cap="${esc(c.titulo)} · ${esc(c.org)}"><img src="/${c.t}" alt="" loading="lazy" decoding="async"${wh(c.t)}><span><b>${esc(c.titulo)}</b>${esc(c.org)}</span></button>`).join('')}</div></details>` : ''}</div>
   <div class="duo__c"><h2 class="section-label" data-scr>${u('langs', l)}</h2><div class="cv-list">${CV.idiomas.map((x, i) => `<div data-reveal>${cvItem({ name: x.n, roles: [{ r: '', d: x.lv }] }, l, { flag: FLAGS[flagOf[i]]() })}</div>`).join('')}</div></div>
 </div></section>
-${certs.length ? `<section class="sec"><div class="wrap">${secHead(u('certs', l))}<div class="certs">${certs.map((c) => `<button class="cert" type="button" data-zoom data-lb-g="certs" data-src="/${c.src}" data-cap="${esc(c.titulo)} · ${esc(c.org)}" data-reveal><img src="/${c.t}" alt="" loading="lazy" decoding="async"${wh(c.t)}><span><b>${esc(c.titulo)}</b>${esc(c.org)}</span></button>`).join('')}</div></div></section>` : ''}`;
+`;
   return shell(l, { path: '/sobre/', cur: 'sobre', title: `${u('nav_about', l)} — Henrique Marinhos`, desc: u('desc', l) }, body);
 }
 
