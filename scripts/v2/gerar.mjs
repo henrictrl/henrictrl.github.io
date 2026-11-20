@@ -1,6 +1,6 @@
 /* Gerador do portfólio v2: lê assets/data/*.js e escreve páginas estáticas em PT, EN e ES.
    Uso: node scripts/v2/gerar.mjs            (na raiz do site)
-   Páginas: / · /projetos/ · /projetos/<slug>/ · /artigos/ (+ coleções) · /artigos/<slug>/ · /sobre/ · /404.html
+   Páginas: / · /projetos/ · /projetos/<slug>/ · /conteudos/ (+ coleções) · /conteudos/<slug>/ · /sobre/ · /404.html
    Cases com conteúdo próprio em HTML: scripts/v2/cases/<slug>.mjs (os demais usam o modelo automático). */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -230,7 +230,7 @@ const capaHTML = (p) => { try { return (capasCtx.window.capaAnimHTML(p) || '').r
 const artSlug = (a) => decodeURIComponent(new URL(a.u, SITE).pathname.split('/').filter(Boolean).pop() || '');
 const artImg = (a) => a.img ? (a.img.startsWith('../') ? '/assets/' + a.img.slice(3) : '/assets/artigos/' + a.img) : (a.imgPath || '');
 const artTitle = (a, l) => (l !== 'pt' && a['t_' + l]) || a.t;
-const artHref = (a, l) => a.project ? `${PRE[l]}/projetos/${ALIAS[a.project] || a.project}/` : `${PRE[l]}/artigos/${encodeURIComponent(artSlug(a))}/`;
+const artHref = (a, l) => a.project ? `${PRE[l]}/projetos/${ALIAS[a.project] || a.project}/` : `${PRE[l]}/conteudos/${encodeURIComponent(artSlug(a))}/`;
 const TAGS = { 'Cinema': { en: 'Film', es: 'Cine' }, 'Música': { en: 'Music', es: 'Música' }, 'Televisão': { en: 'TV', es: 'Televisión' }, 'Literatura': { en: 'Literature', es: 'Literatura' }, 'Cabine': { en: 'Press screening', es: 'Preestreno' }, 'Livro': { en: 'Book', es: 'Libro' }, 'Artes visuais': { en: 'Visual arts', es: 'Artes visuales' } };
 const tagL = (t, l) => l === 'pt' ? t : ((TAGS[t] || {})[l] || t);
 
@@ -270,7 +270,7 @@ function langSwitch(l, p) {
 }
 
 function header(l, cur, pth) {
-  const nav = [['home', 'nav_home', `${PRE[l]}/`, 'inicio'], ['artigos', 'nav_art', `${PRE[l]}/artigos/`, 'artigos'], ['sobre', 'nav_about', `${PRE[l]}/sobre/`, 'sobre']];
+  const nav = [['home', 'nav_home', `${PRE[l]}/`, 'inicio'], ['artigos', 'nav_art', `${PRE[l]}/conteudos/`, 'artigos'], ['sobre', 'nav_about', `${PRE[l]}/sobre/`, 'sobre']];
   return `<a class="skip" href="#conteudo">${u('skip', l)}</a>
 <header class="top-header"><div class="header-inner">
   <div class="header-left"><a class="brand-collapse-inner" href="${PRE[l]}/" data-tr="Henrique Marinhos"><p class="brand-name">Henrique Marinhos</p><p class="brand-location">${u('loc', l)}</p></a></div>
@@ -417,7 +417,7 @@ function home(l) {
     ${heroPortrait(l)}
   </div></section>
   <section class="wrap sec" style="padding-top:0"><div class="about-row">
-    <div><h2 class="section-label" data-scr>${u('about_label', l)}</h2><ul class="home-stats"><li><a href="${PRE[l]}/artigos/#projetos" data-tr="${u('nav_proj', l)}"><b data-count="${visible.length}">${visible.length}</b><span>${u('st_proj', l)}</span></a></li><li><a href="${PRE[l]}/artigos/" data-tr="${u('nav_art', l)}"><b data-count="${nArt}">${nArt}</b><span>${u('st_art', l)}</span></a></li><li><a href="#destaques"><b data-count="${POSTS.length}">${POSTS.length}</b><span>${u('st_posts', l)}</span></a></li></ul></div>
+    <div><h2 class="section-label" data-scr>${u('about_label', l)}</h2><ul class="home-stats"><li><a href="${PRE[l]}/conteudos/#projetos" data-tr="${u('nav_proj', l)}"><b data-count="${visible.length}">${visible.length}</b><span>${u('st_proj', l)}</span></a></li><li><a href="${PRE[l]}/conteudos/" data-tr="${u('nav_art', l)}"><b data-count="${nArt}">${nArt}</b><span>${u('st_art', l)}</span></a></li><li><a href="#destaques"><b data-count="${POSTS.length}">${POSTS.length}</b><span>${u('st_posts', l)}</span></a></li></ul></div>
     <div><p class="about-text" data-scr>${u('bio', l)}</p><a class="section-link" href="${PRE[l]}/sobre/" data-tr="${u('nav_about', l)}" style="margin-top:16px">${u('more', l)} ${I.arrow}</a></div>
   </div></section>
 </div>
@@ -433,7 +433,7 @@ ${rec && recSet.length ? `<section class="sec" id="recente"><div class="wrap">
 ${logosMarquee(l)}
 
 <section class="sec" id="trabalhos"><div class="wrap">${secHead(u('work', l), u('pieces_n', l))}${mosaic(l)}
-  <div class="sec-foot"><a class="section-link" href="${PRE[l]}/artigos/#projetos" data-tr="${u('nav_proj', l)}">${u('see_all', l)} (${visible.length}) ${I.arrow}</a></div>
+  <div class="sec-foot"><a class="section-link" href="${PRE[l]}/conteudos/#projetos" data-tr="${u('nav_proj', l)}">${u('see_all', l)} (${visible.length}) ${I.arrow}</a></div>
 </div></section>
 
 <section class="sec" id="experiencia"><div class="wrap">${secHead(u('exp', l), u('exp_n', l), `<a class="section-link" href="${PRE[l]}/sobre/" data-tr="${u('nav_about', l)}">${u('more', l)} ${I.arrow}</a>`)}${timeline(l)}</div></section>
@@ -448,7 +448,7 @@ ${logosMarquee(l)}
 <section class="sec" id="artigos"><div class="wrap">
   ${secHead(u('arts', l))}
   <div class="art-grid">${arts.map((a) => acard(a, l)).join('')}</div>
-  <div class="sec-foot"><a class="section-link" href="${PRE[l]}/artigos/" data-tr="${u('nav_art', l)}">${u('see_all', l)} (${nArt}) ${I.arrow}</a></div>
+  <div class="sec-foot"><a class="section-link" href="${PRE[l]}/conteudos/" data-tr="${u('nav_art', l)}">${u('see_all', l)} (${nArt}) ${I.arrow}</a></div>
 </div></section>`;
   return shell(l, {
     path: '/', cur: 'home', title: `Henrique Marinhos — ${u('role', l)}`, desc: u('desc', l), capas: true,
@@ -559,7 +559,7 @@ function casePage(p, l, i, list) {
   const e = p.etiquetas || {};
   const body = `
 <section class="chero"><div class="wrap chero__in">
-  <nav class="crumbs" aria-label="breadcrumb"><a href="${PRE[l]}/artigos/#projetos" data-tr="${u('nav_art', l)}" data-c="${p._c}" data-ct="${p._ct}">${u('nav_art', l)}</a><span aria-hidden="true">/</span><span aria-current="page">${esc(p.titulo)}</span></nav>
+  <nav class="crumbs" aria-label="breadcrumb"><a href="${PRE[l]}/conteudos/#projetos" data-tr="${u('nav_art', l)}" data-c="${p._c}" data-ct="${p._ct}">${u('nav_art', l)}</a><span aria-hidden="true">/</span><span aria-current="page">${esc(p.titulo)}</span></nav>
   <h1 class="chero__title" aria-label="${esc(p.titulo)}"><span aria-hidden="true">${words(p.titulo)}</span></h1>
   <p class="chero__lead">${esc(T(p.resumo, l))}</p>
   ${ent.length ? `<ul class="chips">${ent.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
@@ -625,7 +625,7 @@ for (const l of LANGS) {
   const pre = PRE[l].replace(/^\//, '');
   const P = (x) => path.posix.join(pre, x);
   if (want('home')) out(P('index.html'), home(l));
-  if (want('projetos')) { const to = `${PRE[l]}/artigos/#projetos`; out(P('projetos/index.html'), `<!doctype html><html lang="${HTML_LANG[l]}"><meta charset="utf-8"><title>${u('nav_proj', l)} — Henrique Marinhos</title><meta name="robots" content="noindex"><link rel="canonical" href="${SITE}${PRE[l]}/artigos/"><meta http-equiv="refresh" content="0; url=${to}"><script>location.replace('${to}')</script><a href="${to}">${u('nav_art', l)}</a></html>`); } // Projetos agora é uma aba de Conteúdos
+  if (want('projetos')) { const to = `${PRE[l]}/conteudos/#projetos`; out(P('projetos/index.html'), `<!doctype html><html lang="${HTML_LANG[l]}"><meta charset="utf-8"><title>${u('nav_proj', l)} — Henrique Marinhos</title><meta name="robots" content="noindex"><link rel="canonical" href="${SITE}${PRE[l]}/conteudos/"><meta http-equiv="refresh" content="0; url=${to}"><script>location.replace('${to}')</script><a href="${to}">${u('nav_art', l)}</a></html>`); } // Projetos agora é uma aba de Conteúdos
   if (want('sobre')) out(P('sobre/index.html'), aboutPage(l));
   PROJ.forEach((p) => {
     if (!(want('cases') || want(p.slug))) return;
@@ -644,7 +644,7 @@ for (const l of LANGS) {
 /* sitemap */
 if (!only) {
   const urls = [];
-  for (const l of LANGS) { ['/', '/artigos/', '/sobre/'].forEach((x) => urls.push(PRE[l] + x)); visible.forEach((p) => urls.push(projHref(p, l))); ART.filter((a) => !a.project).forEach((a) => urls.push(artHref(a, l))); }
+  for (const l of LANGS) { ['/', '/conteudos/', '/sobre/'].forEach((x) => urls.push(PRE[l] + x)); visible.forEach((p) => urls.push(projHref(p, l))); ART.filter((a) => !a.project).forEach((a) => urls.push(artHref(a, l))); }
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((x) => `<url><loc>${SITE}${x}</loc></url>`).join('\n')}\n</urlset>\n`);
 }
 console.log(`ok: ${n} páginas`);

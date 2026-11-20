@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatchEvent(new CustomEvent('portfolio:route-enter', { detail: { route } }));
   };
 
-  const ROUTE_PATHS = { home: '/', about: '/sobre/', work: '/projetos/', articles: '/artigos/' };
+  const ROUTE_PATHS = { home: '/', about: '/sobre/', work: '/projetos/', articles: '/conteudos/' };
   const routeTo = (route, navId, replace = false) => {
     if (amOverlay.classList.contains('open')) closeArticle(true);
     const path = ROUTE_PATHS[route] || '/';
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try { return decodeURIComponent(new URL(a.u, location.origin).pathname.split('/').filter(Boolean).pop() || ''); }
     catch (e) { return String(a.t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
   };
-  const articleRoute = (a) => '/artigos/' + encodeURIComponent(articleSlug(a)) + '/';
+  const articleRoute = (a) => '/conteudos/' + encodeURIComponent(articleSlug(a)) + '/';
   let amPrevTitle = ''; // título da aba com o nome do artigo
   let amFrom = null;
   const openArticle = (a) => {
@@ -593,9 +593,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(() => { if (tok === amToken) showFrame(a.u); });
   };
   const closeArticle = (fromHistory = false) => {
-    if (!fromHistory && /^\/artigos\/[^/]+\/?$/.test(HMI.path())) {
+    if (!fromHistory && /^\/(?:artigos|conteudos)\/[^/]+\/?$/.test(HMI.path())) {
       if (history.state && history.state.portfolioArticle) { history.back(); return; }
-      history.replaceState({ portfolioRoute: 'articles' }, '', '/artigos/');
+      history.replaceState({ portfolioRoute: 'articles' }, '', '/conteudos/');
       showRoute('articles', 'artigos');
     }
     amOverlay.classList.remove('open'); document.body.style.overflow = '';
@@ -830,15 +830,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const C = window.HM_COL, on = !!C;
       colHead.hidden = !on; bar.hidden = on; if (hero) hero.hidden = on;
       if (on) {
-        const c = C.c, base = '/artigos/' + c.s + '/', n = data.filter(a => window.colMatch(c, a, C.ano)).length;
+        const c = C.c, base = '/conteudos/' + c.s + '/', n = data.filter(a => window.colMatch(c, a, C.ano)).length;
         const anos = c.mostra ? [...new Set(data.filter(a => a.mostra).map(a => String(a.mostra)))].sort().reverse() : [];
         const outras = (window.COLECOES || []).filter(x => x.s !== c.s);
-        colHead.innerHTML = `<p class="col-kicker"><a href="/artigos/">Conteúdos</a> · ${n} ${n === 1 ? 'texto' : 'textos'}</p>
+        colHead.innerHTML = `<p class="col-kicker"><a href="/conteudos/">Conteúdos</a> · ${n} ${n === 1 ? 'texto' : 'textos'}</p>
           <h1 class="col-title">${c.t}${C.ano ? ` <span class="dim">${C.ano}</span>` : ''}</h1>
           <p class="col-desc">${c.d}</p>
           ${anos.length ? `<div class="col-bar" role="navigation" aria-label="Edições"><a class="art-filter" href="${base}"${!C.ano ? ' aria-current="page"' : ''}>Todas</a>${anos.map(y => `<a class="art-filter" href="${base}${y}/"${C.ano === y ? ' aria-current="page"' : ''}>${y}</a>`).join('')}</div>` : ''}
           <div class="col-bar"><button type="button" class="art-filter col-copy">${LINK_ICO}<span>Copiar link</span></button></div>
-          <div class="col-bar col-others" role="navigation" aria-label="Outras coleções">${outras.map(x => `<a class="art-filter" href="/artigos/${x.s}/">${x.t}</a>`).join('')}</div>`;
+          <div class="col-bar col-others" role="navigation" aria-label="Outras coleções">${outras.map(x => `<a class="art-filter" href="/conteudos/${x.s}/">${x.t}</a>`).join('')}</div>`;
         document.title = `${c.t}${C.ano ? ' ' + C.ano : ''} — Artigos de Henrique Marinhos`;
         const btn = colHead.querySelector('.col-copy'), lbl = btn.querySelector('span');
         btn.onclick = async () => {
@@ -2121,11 +2121,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('am-ig').addEventListener('scroll', updateMobileTopButton, { passive: true });
     updateMobileTopButton();
   }
-  const routeByPath = { '/': ['home', 'inicio'], '/sobre': ['about', 'sobre'], '/projetos': ['work', 'trabalhos'], '/artigos': ['articles', 'artigos'] };
+  const routeByPath = { '/': ['home', 'inicio'], '/sobre': ['about', 'sobre'], '/projetos': ['work', 'trabalhos'], '/artigos': ['articles', 'artigos'], '/conteudos': ['articles', 'artigos'] };
   const routeFromLocation = () => {
     const path = HMI.path().replace(/\/$/, '') || '/';
     const baseRoute = routeByPath[path];
-    const colM = path.match(/^\/artigos\/([^/]+)(?:\/(\d{4}))?$/);
+    const colM = path.match(/^\/(?:artigos|conteudos)\/([^/]+)(?:\/(\d{4}))?$/);
     const col = colM && (window.COLECOES || []).find(c => c.s === colM[1]);
     window.HM_COL = col ? { c: col, ano: colM[2] || '' } : null; // coleção de artigos com endereço próprio
     if (col) { showRoute('articles', 'artigos'); window.HM_applyCol && window.HM_applyCol(); return; }
@@ -2135,16 +2135,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (location.hash === '#contato') requestAnimationFrame(() => document.getElementById('contato')?.scrollIntoView());
       return;
     }
-    const match = path.match(/^\/artigos\/([^/]+)$/);
+    const match = path.match(/^\/(?:artigos|conteudos)\/([^/]+)$/);
     if (match) {
       showRoute('articles', 'artigos');
       const slug = decodeURIComponent(match[1]);
       const article = (window.ARTIGOS || []).find(a => !a.project && articleSlug(a) === slug);
       if (article) openArticle(article);
-      else history.replaceState({ portfolioRoute: 'articles' }, '', '/artigos/');
+      else history.replaceState({ portfolioRoute: 'articles' }, '', '/conteudos/');
       return;
     }
-    const legacy = { '#home': ['home', 'inicio', '/'], '#sobre': ['about', 'sobre', '/sobre/'], '#trabalhos': ['work', 'trabalhos', '/projetos/'], '#artigos': ['articles', 'artigos', '/artigos/'] }[location.hash];
+    const legacy = { '#home': ['home', 'inicio', '/'], '#sobre': ['about', 'sobre', '/sobre/'], '#trabalhos': ['work', 'trabalhos', '/projetos/'], '#artigos': ['articles', 'artigos', '/conteudos/'] }[location.hash];
     if (legacy) {
       history.replaceState({ portfolioRoute: legacy[0] }, '', legacy[2]);
       showRoute(legacy[0], legacy[1]);
