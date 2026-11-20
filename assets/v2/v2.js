@@ -12,6 +12,8 @@
   var LANG = (html.lang || 'pt').slice(0, 2);
   var TX = { copied: { pt: 'E-mail copiado', en: 'Email copied', es: 'Correo copiado' }, of: { pt: 'de', en: 'of', es: 'de' }, open: { pt: 'clique para abrir', en: 'click to open', es: 'clic para abrir' } };
   var tx = function (k) { return (TX[k] && (TX[k][LANG] || TX[k].pt)) || k; };
+  var ORIG = new WeakSet();
+  Array.prototype.forEach.call(document.body.querySelectorAll('*'), function (el) { if (!el.closest('.theme-switch,.ts-menu')) ORIG.add(el); });
   var ss = { get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }, del: function (k) { try { sessionStorage.removeItem(k); } catch (e) {} } };
   var lock = function (on) { document.body.style.overflow = on ? 'hidden' : ''; };
 
@@ -78,7 +80,61 @@
       })(t0);
     };
   })();
-  $$('a.lang-btn').forEach(function (a) { a.addEventListener('click', function () { if (a.getAttribute('aria-pressed') !== 'true') { ss.set('hm-scr', '1'); a.classList.add('is-pop'); } }); });
+  /* ---------- Troca de idioma sem recarregar a página: a mesma página no outro idioma é buscada e só textos,
+     links, rótulos e imagens que têm texto mudam (fotos não piscam). Se a estrutura não bater, navega normalmente. ---------- */
+  var ATTRS = ['href', 'alt', 'title', 'aria-label', 'placeholder', 'content', 'data-cap', 'data-tr', 'data-open', 'data-close', 'hreflang', 'datetime', 'src', 'poster', 'aria-current', 'aria-pressed'];
+  var HEAVY = 'img,video,canvas,iframe,button,input,select,textarea,[data-swap],[data-zoom]';
+  var texts = function (el) { return Array.prototype.filter.call(el.childNodes, function (n) { return n.nodeType === 3; }); };
+  var syncAttrs = function (L, N) {
+    ATTRS.forEach(function (k) {
+      if (k === 'aria-pressed' && !L.classList.contains('lang-btn')) return; // estado de JS (mosaico etc.) fica
+      var a = L.getAttribute(k), b = N.getAttribute(k);
+      if (b === null) { if (a !== null && (k === 'aria-current' || L.classList.contains('lang-btn'))) L.removeAttribute(k); return; }
+      if (a !== b) L.setAttribute(k, b);
+    });
+    if (L.matches('.lang-btn, .main-nav > a') && L.getAttribute('class') !== N.getAttribute('class')) L.setAttribute('class', N.getAttribute('class') || '');
+  };
+  var walk = function (L, N) {
+    syncAttrs(L, N);
+    if (L.hasAttribute('data-split')) { if (L.getAttribute('aria-label') !== N.textContent.trim()) { L.textContent = N.textContent; splitEl(L); } return; }
+    if (L.hasAttribute('data-rise') || L.hasAttribute('data-scr') && !L.querySelector(HEAVY)) { if (L.innerHTML !== N.innerHTML) { L.innerHTML = N.innerHTML; Array.prototype.forEach.call(L.querySelectorAll('*'), function (x) { ORIG.add(x); }); } return; }
+    var EXCL = '#mx-loader,script,noscript,template,style'; // o carregamento some depois de entrar; scripts não contam
+    var lk = Array.prototype.filter.call(L.children, function (c) { return ORIG.has(c) && !c.matches(EXCL); }), nk = Array.prototype.filter.call(N.children, function (c) { return !c.matches(EXCL); });
+    var same = lk.length === nk.length && lk.every(function (c, i) { return c.tagName === nk[i].tagName; });
+    var lt = texts(L), nt = texts(N);
+    if (same && lt.length === nt.length) {
+      lt.forEach(function (t, i) { if (t.nodeValue !== nt[i].nodeValue) t.nodeValue = nt[i].nodeValue; });
+      lk.forEach(function (c, i) { walk(c, nk[i]); });
+    } else if (!L.querySelector(HEAVY) && !N.querySelector(HEAVY)) {
+      L.innerHTML = N.innerHTML; Array.prototype.forEach.call(L.querySelectorAll('*'), function (x) { ORIG.add(x); });
+    } else { var p = [], e = L; while (e && e !== document.body) { p.unshift(e.tagName.toLowerCase() + (e.className && typeof e.className === 'string' ? '.' + e.className.split(' ')[0] : '')); e = e.parentElement; } throw new Error('estrutura diferente: ' + p.slice(-4).join('>') + ' ' + lk.length + '/' + nk.length + ' ' + lt.length + '/' + nt.length); }
+  };
+  var swapping = false;
+  var swapLang = function (url, push) {
+    if (swapping) return; swapping = true;
+    fetch(url, { credentials: 'same-origin' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (txt) {
+      var doc = new DOMParser().parseFromString(txt, 'text/html');
+      walk(document.body, doc.body);
+      document.title = doc.title;
+      html.lang = doc.documentElement.lang;
+      ['meta[name="description"]', 'meta[property="og:title"]', 'meta[property="og:description"]', 'meta[property="og:url"]', 'meta[property="og:locale"]', 'link[rel="canonical"]'].forEach(function (q) {
+        var a = document.head.querySelector(q), b = doc.head.querySelector(q); if (a && b) { if (b.hasAttribute('content')) a.setAttribute('content', b.getAttribute('content')); if (b.hasAttribute('href')) a.setAttribute('href', b.getAttribute('href')); }
+      });
+      if (push) history.pushState({ hmLang: 1 }, '', url);
+      LANG = (html.lang || 'pt').slice(0, 2);
+      $$('[data-scr]').forEach(Scramble);
+      swapping = false;
+    }).catch(function (err) { ss.set('hm-swap-err', String(err && err.message)); location.href = url; }); // registra o motivo e navega normalmente
+  };
+  history.replaceState(Object.assign({}, history.state || {}, { hmLang: 1 }), '');
+  addEventListener('popstate', function (e) { if (e.state && e.state.hmLang) swapLang(location.href, false); });
+  $$('a.lang-btn').forEach(function (a) { a.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    e.preventDefault();
+    if (a.getAttribute('aria-pressed') === 'true' || a.getAttribute('aria-current')) return;
+    a.classList.add('is-pop');
+    swapLang(a.href, true);
+  }); });
   if (ss.get('hm-scr') || (!ss.get('hm-intro') && LANG === 'pt')) {
     ss.del('hm-scr'); ss.set('hm-intro', '1');
     var runScr = function () { $$('[data-scr]').forEach(Scramble); };
@@ -86,11 +142,12 @@
   }
 
   /* ---------- Títulos quebrados em palavras ---------- */
-  $$('[data-split]').forEach(function (el) {
+  var splitEl = function (el) {
     var t = el.textContent.trim(); el.setAttribute('aria-label', t);
     el.innerHTML = t.split(/\s+/).map(function (w, i) { return '<span class="w" aria-hidden="true"><span style="--i:' + i + '">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span></span>'; }).join(' ');
     el.classList.add('split'); if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', '');
-  });
+  };
+  $$('[data-split]').forEach(splitEl);
 
   /* ---------- Revelar ao rolar ---------- */
   if (!reduce && 'IntersectionObserver' in window) {
@@ -138,6 +195,14 @@
 
   /* ---------- Mosaico: cada peça passa pelas suas imagens (sozinha, no hover e no clique).
      data-seq define a ordem; sem ele, alterna entre as imagens em sequência ---------- */
+  $$('.piece__i').forEach(function (im) { // aparece suave quando termina de carregar (sem pedaço desenhado pela metade)
+    if (im.tagName !== 'IMG' || (im.complete && im.naturalWidth)) { im.classList.add('is-ready'); return; }
+    var ok = function () { im.classList.add('is-ready'); }; im.addEventListener('load', ok); im.addEventListener('error', ok);
+  });
+  if ('IntersectionObserver' in window) { // perto da seção: todas as camadas do mosaico já baixam
+    var mos = $$('.mos'); var mio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; mio.unobserve(e.target); $$('img.piece__i', e.target).forEach(function (im) { im.loading = 'eager'; if (im.decode) im.decode().catch(function () {}); }); }); }, { rootMargin: '1500px 0px' });
+    mos.forEach(function (m) { mio.observe(m); });
+  }
   $$('[data-swap]').forEach(function (pc, i) {
     var layers = $$('.piece__i', pc), seq = pc.dataset.seq ? pc.dataset.seq.split(',').map(Number) : layers.map(function (_, k) { return k; });
     var pos = 0, hold = false, t = null;
@@ -145,6 +210,11 @@
     var show = function (p) {
       var prev = layers[seq[pos]]; pos = (p + seq.length) % seq.length; var next = layers[seq[pos]];
       if (prev === next) return;
+      if (next.tagName === 'IMG' && !(next.complete && next.naturalWidth)) { // ainda carregando: espera ficar pronta
+        next.loading = 'eager'; pos = (pos - 1 + seq.length) % seq.length;
+        (next.decode ? next.decode() : Promise.reject()).then(function () { show(pos + 1); }, function () {});
+        return;
+      }
       layers.forEach(function (el) { el.classList.remove('is-prev'); });
       prev.classList.remove('is-on'); prev.classList.add('is-prev'); next.classList.add('is-on');
       clearTimeout(pt); pt = setTimeout(function () { prev.classList.remove('is-prev'); }, 850); // a anterior sai só depois da nova cobrir

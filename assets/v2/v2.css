@@ -476,3 +476,4 @@ html[data-theme="dark"] { --small-ink: #a6a6a6; }
 .piece__cap span, .pj-line, .pj-cols span, .work-card-tag { color: var(--small-ink); }
 /* tablets: o título encolhe um pouco para a foto começar exatamente na metade (junto do texto "Bacharel…") */
 @media (min-width: 768px) and (max-width: 1060px) { .hero-grid .headline { font-size: clamp(30px, 3.9vw, 38px); } }
+html.js .piece img.piece__i:not(.is-ready) { opacity: 0 !important; } /* mosaico: a imagem só entra inteira */
