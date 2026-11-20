@@ -4,6 +4,9 @@
 # Depois reaplica o desvio de cliques e o nome "Conteúdos" (artigos-oficiais.sh) e regera as páginas novas.
 # Uso (no Mac, com internet): bash scripts/v2/oficial-ao-vivo.sh
 set -e
+# Desde 20/11/2026 o site no ar JÁ É este. Este script servia para puxar o antigo; não rode mais.
+# Artigos e posts novos: atualize assets/data/*.js (e as imagens) e rode node scripts/v2/gerar.mjs.
+echo "O site no ar já é o novo: nada a puxar. Atualize assets/data/*.js e rode: node scripts/v2/gerar.mjs"; exit 0
 cd "$(dirname "$0")/../.."
 LIVE=https://henrictrl.github.io
 TMP=$(mktemp -d)
