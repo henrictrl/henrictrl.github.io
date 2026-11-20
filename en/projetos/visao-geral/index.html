@@ -41,7 +41,7 @@
 <script>
 (async function () {
   try {
-    var response = await fetch('/projeto.html', { cache: 'no-cache' });
+    var response = await fetch('/assets/v2/projeto-oficial.html', { cache: 'no-cache' });
     if (!response.ok) throw new Error('Não foi possível carregar a página do projeto.');
     var html = await response.text();
     html = html.replace('<head>', '<head><base href="/">');

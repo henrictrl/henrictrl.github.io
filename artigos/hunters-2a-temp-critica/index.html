@@ -7,7 +7,7 @@
 <script>
 (async function () {
   try {
-    var response = await fetch('/index.html', { cache: 'no-cache' });
+    var response = await fetch('/assets/v2/oficial.html', { cache: 'no-cache' });
     if (!response.ok) throw new Error('Falha ao carregar o portfólio.');
     var html = await response.text();
     html = html.replace('<head>', '<head><base href="/">');

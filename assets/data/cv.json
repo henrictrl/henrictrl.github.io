@@ -1,0 +1,484 @@
+{
+ "exp": [
+  {
+   "logo": "basement.webp",
+   "pad": 1,
+   "url": "https://basement.io",
+   "name": "Basement",
+   "roles": [
+    {
+     "r": {
+      "pt": "Designer · Freelancer",
+      "en": "Designer · Freelancer",
+      "es": "Diseñador · Freelancer"
+     },
+     "d": {
+      "pt": "Março 2026 - Atual",
+      "en": "March 2026 - Present",
+      "es": "Marzo 2026 - Actualidad"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Criação de peças para Instagram, LinkedIn e estilização de documentos, flyers e outros materiais de venda B2B.",
+    "en": "Design of pieces for Instagram and LinkedIn, and styling of documents, flyers and other B2B sales materials.",
+    "es": "Creación de piezas para Instagram y LinkedIn, y estilización de documentos, flyers y otros materiales de venta B2B."
+   }
+  },
+  {
+   "logo": "novariobranco.webp",
+   "pad": 1,
+   "url": "https://papelariariobranco.com.br",
+   "name": "Papelaria Nova Rio Branco",
+   "roles": [
+    {
+     "r": {
+      "pt": "Web Designer · Freelancer",
+      "en": "Web Designer · Freelancer",
+      "es": "Diseñador web · Freelancer"
+     },
+     "d": {
+      "pt": "Set 2025 - Fevereiro 2026",
+      "en": "Sep 2025 - February 2026",
+      "es": "Sep 2025 - Febrero 2026"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Desenvolvimento de site, catálogo B2B e automatização de orçamentos para apoiar o reposicionamento da marca.",
+    "en": "Development of the website, B2B catalog and quote automation to support the brand repositioning.",
+    "es": "Desarrollo del sitio web, catálogo B2B y automatización de presupuestos para apoyar el reposicionamiento de la marca."
+   }
+  },
+  {
+   "logo": "rankmyapp.webp",
+   "url": "https://rankmyapp.com",
+   "name": "Rank My App",
+   "roles": [
+    {
+     "r": {
+      "pt": "Customer Care · Freelancer",
+      "en": "Customer Care · Freelancer",
+      "es": "Customer Care · Freelancer"
+     },
+     "d": {
+      "pt": "Maio 2025 – Set 2025",
+      "en": "May 2025 – Sep 2025",
+      "es": "Mayo 2025 – Sep 2025"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Atendimento de contas focado na resolução de problemas e retenção de usuários em plataformas de aplicativos (App Store e Play Store).<span class=\"cv-apps\"><img src=\"assets/exp/apps/c6-bank.webp\" alt=\"C6 Bank\" title=\"C6 Bank\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/sem-parar.webp\" alt=\"Sem Parar\" title=\"Sem Parar\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/pao-de-acucar.webp\" alt=\"Pão de Açúcar Mais · Grupo GPA\" title=\"Pão de Açúcar Mais · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/extra.webp\" alt=\"Extra Mercado · Grupo GPA\" title=\"Extra Mercado · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"></span>",
+    "en": "Account support focused on problem solving and user retention on app platforms (App Store and Play Store).<span class=\"cv-apps\"><img src=\"assets/exp/apps/c6-bank.webp\" alt=\"C6 Bank\" title=\"C6 Bank\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/sem-parar.webp\" alt=\"Sem Parar\" title=\"Sem Parar\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/pao-de-acucar.webp\" alt=\"Pão de Açúcar Mais · Grupo GPA\" title=\"Pão de Açúcar Mais · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/extra.webp\" alt=\"Extra Mercado · Grupo GPA\" title=\"Extra Mercado · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"></span>",
+    "es": "Atención de cuentas enfocada en la resolución de problemas y la retención de usuarios en plataformas de aplicaciones (App Store y Play Store).<span class=\"cv-apps\"><img src=\"assets/exp/apps/c6-bank.webp\" alt=\"C6 Bank\" title=\"C6 Bank\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/sem-parar.webp\" alt=\"Sem Parar\" title=\"Sem Parar\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/pao-de-acucar.webp\" alt=\"Pão de Açúcar Mais · Grupo GPA\" title=\"Pão de Açúcar Mais · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"><img src=\"assets/exp/apps/extra.webp\" alt=\"Extra Mercado · Grupo GPA\" title=\"Extra Mercado · Grupo GPA\" width=\"30\" height=\"30\" loading=\"lazy\" decoding=\"async\"></span>"
+   }
+  },
+  {
+   "txt": "t.pr",
+   "name": "t.pr consulting",
+   "roles": [
+    {
+     "r": {
+      "pt": "Brand Designer · Freelancer",
+      "en": "Brand Designer · Freelancer",
+      "es": "Brand Designer · Freelancer"
+     },
+     "d": {
+      "pt": "Dez 2024 - Maio 2025",
+      "en": "Dec 2024 - May 2025",
+      "es": "Dic 2024 - Mayo 2025"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Design de marca e produtos para o estúdio Classic Tattoo PCH (Califórnia, EUA).",
+    "en": "Brand and product design for the Classic Tattoo PCH studio (California, USA).",
+    "es": "Diseño de marca y productos para el estudio Classic Tattoo PCH (California, EE. UU.)."
+   }
+  },
+  {
+   "logo": "unesp.svg",
+   "pad": 1,
+   "url": "https://www2.unesp.br",
+   "name": "Unesp",
+   "roles": [
+    {
+     "r": {
+      "pt": "Estagiário de Comunicação",
+      "en": "Communications Intern",
+      "es": "Pasante de Comunicación"
+     },
+     "d": {
+      "pt": "2022-2024",
+      "en": "2022-2024",
+      "es": "2022-2024"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Desenvolvimento de projetos de comunicação para a Pró-Reitoria de Extensão e Cultura e criação de marca, diretrizes e eventos para a Coordenadoria de Saúde da Unesp em nova extensão estudantil.",
+    "en": "Development of communication projects for the Office of Extension and Culture, and creation of the brand, guidelines and events for the Unesp Health Coordination in a new student extension program.",
+    "es": "Desarrollo de proyectos de comunicación para la Prorrectoría de Extensión y Cultura, y creación de marca, directrices y eventos para la Coordinación de Salud de la Unesp en una nueva extensión estudiantil."
+   }
+  },
+  {
+   "logo": "rdcultural.webp",
+   "round": 1,
+   "url": "https://rdcultural.com.br",
+   "name": "Rd Cultural",
+   "roles": [
+    {
+     "r": {
+      "pt": "Estagiário de Comunicação",
+      "en": "Communications Intern",
+      "es": "Pasante de Comunicación"
+     },
+     "d": {
+      "pt": "Fev 2023 – Jul 2023",
+      "en": "Feb 2023 – Jul 2023",
+      "es": "Feb 2023 – Jul 2023"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Criação de conteúdo e design (Instagram e e-mail marketing), assessoria de imprensa, suporte em eventos e atualização de produtos no site com otimização de SEO.",
+    "en": "Content creation and design (Instagram and email marketing), press relations, event support and product updates on the website with SEO optimization.",
+    "es": "Creación de contenido y diseño (Instagram y e-mail marketing), relaciones con la prensa, apoyo en eventos y actualización de productos en el sitio web con optimización SEO."
+   }
+  },
+  {
+   "logo": "servimed.webp",
+   "pad": 1,
+   "url": "https://servimed.com.br",
+   "name": "Servimed Comercial Ltda",
+   "roles": [
+    {
+     "r": {
+      "pt": "Assistente de Compras",
+      "en": "Purchasing Assistant",
+      "es": "Asistente de Compras"
+     },
+     "d": {
+      "pt": "Dez 2021 – Mai 2022",
+      "en": "Dec 2021 – May 2022",
+      "es": "Dic 2021 – May 2022"
+     }
+    },
+    {
+     "r": {
+      "pt": "Jovem Aprendiz",
+      "en": "Young Apprentice",
+      "es": "Joven Aprendiz"
+     },
+     "d": {
+      "pt": "Set 2020 – Nov 2021",
+      "en": "Sep 2020 – Nov 2021",
+      "es": "Sep 2020 – Nov 2021"
+     }
+    }
+   ]
+  }
+ ],
+ "edu": [
+  {
+   "logo": "unesp.svg",
+   "pad": 1,
+   "url": "https://www2.unesp.br",
+   "name": "UNESP | Universidade Estadual Paulista “Julio de Mesquita Filho”",
+   "roles": [
+    {
+     "r": {
+      "pt": "Bacharel em Relações Públicas",
+      "en": "Bachelor's degree in Public Relations",
+      "es": "Licenciatura en Relaciones Públicas"
+     },
+     "d": {
+      "pt": "Jul 2021 - Dez 2024",
+      "en": "Jul 2021 - Dec 2024",
+      "es": "Jul 2021 - Dic 2024"
+     }
+    }
+   ]
+  },
+  {
+   "logo": "senai.svg",
+   "pad": 1,
+   "url": "https://www.sp.senai.br",
+   "name": "SENAI",
+   "roles": [
+    {
+     "r": {
+      "pt": "Desenvolvimento em JavaScript",
+      "en": "JavaScript Development",
+      "es": "Desarrollo en JavaScript"
+     },
+     "d": "2025"
+    },
+    {
+     "r": "Microsoft Power BI",
+     "d": "2025"
+    }
+   ]
+  },
+  {
+   "logo": "cna.webp",
+   "url": "https://cna.com.br",
+   "name": "CNA Idiomas",
+   "roles": [
+    {
+     "r": {
+      "pt": "Inglês Avançado",
+      "en": "Advanced English",
+      "es": "Inglés Avanzado"
+     },
+     "d": "2016 - 2021"
+    }
+   ],
+   "desc": {
+    "pt": "Certificado CEFR Nível B2 – Cambridge Assessment",
+    "en": "CEFR Level B2 Certificate – Cambridge Assessment",
+    "es": "Certificado MCER Nivel B2 – Cambridge Assessment"
+   }
+  }
+ ],
+ "extra": [
+  {
+   "logo": "persona.svg",
+   "pad": 1,
+   "url": "https://personaunesp.com.br",
+   "name": {
+    "pt": "Grupo de Pesquisa em Estética e Crítica Cultural Persona",
+    "en": "Persona Research Group on Aesthetics and Cultural Criticism",
+    "es": "Grupo de Investigación en Estética y Crítica Cultural Persona"
+   },
+   "roles": [
+    {
+     "r": "",
+     "d": "2021 - 2024"
+    }
+   ],
+   "desc": {
+    "pt": "Coordenação. Publicação em livro do Trabalho de Conclusão de Curso, intitulado “Persona: Estética, Crítica e Jornalismo Cultural” em co-autoria com os professores Eli Vagner e Roseane Andrelo.",
+    "en": "Coordination. Publication of my undergraduate thesis as a book, titled “Persona: Estética, Crítica e Jornalismo Cultural”, co-authored with professors Eli Vagner and Roseane Andrelo.",
+    "es": "Coordinación. Publicación en libro del Trabajo de Fin de Grado, titulado “Persona: Estética, Crítica e Jornalismo Cultural”, en coautoría con los profesores Eli Vagner y Roseane Andrelo."
+   }
+  },
+  {
+   "logo": "tesoura.webp",
+   "url": "https://tesouracomponta.com",
+   "name": {
+    "pt": "Portal de Jornalismo Tesoura com Ponta",
+    "en": "Tesoura com Ponta Journalism Portal",
+    "es": "Portal de Periodismo Tesoura com Ponta"
+   },
+   "roles": [
+    {
+     "r": "",
+     "d": {
+      "pt": "2025 – Atual",
+      "en": "2025 – Present",
+      "es": "2025 – Actualidad"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Produção de conteúdo, redação e participação em cabines e coberturas de festivais. 48ª e 49ª Mostra SP, 15º Olhar de Cinema, coletiva de imprensa de “O Agente Secreto” com elenco e direção.",
+    "en": "Content production, writing, and attendance at press screenings and festival coverage. 48th and 49th São Paulo International Film Festival, 15th Olhar de Cinema, press conference for “O Agente Secreto” with cast and director.",
+    "es": "Producción de contenido, redacción y participación en preestrenos para prensa y coberturas de festivales. 48ª y 49ª Mostra SP, 15º Olhar de Cinema, rueda de prensa de “O Agente Secreto” con elenco y dirección."
+   }
+  }
+ ],
+ "skills": [
+  {
+   "name": {
+    "pt": "Design Gráfico e Editorial",
+    "en": "Graphic and Editorial Design",
+    "es": "Diseño Gráfico y Editorial"
+   },
+   "lvl": 1,
+   "roles": [
+    {
+     "r": "",
+     "d": {
+      "pt": "Avançado",
+      "en": "Advanced",
+      "es": "Avanzado"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Pacote Adobe (Photoshop, InDesign e Illustrator), Figma, Affinity e Canva.",
+    "en": "Adobe Suite (Photoshop, InDesign and Illustrator), Figma, Affinity and Canva.",
+    "es": "Paquete Adobe (Photoshop, InDesign e Illustrator), Figma, Affinity y Canva."
+   }
+  },
+  {
+   "name": {
+    "pt": "Desenvolvimento Web",
+    "en": "Web Development",
+    "es": "Desarrollo Web"
+   },
+   "lvl": 1,
+   "roles": [
+    {
+     "r": "",
+     "d": {
+      "pt": "Intermediário",
+      "en": "Intermediate",
+      "es": "Intermedio"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "HTML, CSS e JavaScript.",
+    "en": "HTML, CSS and JavaScript.",
+    "es": "HTML, CSS y JavaScript."
+   }
+  },
+  {
+   "name": {
+    "pt": "Edição de Vídeo",
+    "en": "Video Editing",
+    "es": "Edición de Video"
+   },
+   "lvl": 1,
+   "roles": [
+    {
+     "r": "",
+     "d": {
+      "pt": "Básico",
+      "en": "Basic",
+      "es": "Básico"
+     }
+    }
+   ],
+   "desc": {
+    "pt": "Adobe Premiere, DaVinci Resolve, Final Cut Pro/iMovie e CapCut.",
+    "en": "Adobe Premiere, DaVinci Resolve, Final Cut Pro/iMovie and CapCut.",
+    "es": "Adobe Premiere, DaVinci Resolve, Final Cut Pro/iMovie y CapCut."
+   }
+  },
+  {
+   "name": {
+    "pt": "Gestão e Colaboração",
+    "en": "Management and Collaboration",
+    "es": "Gestión y Colaboración"
+   },
+   "desc": {
+    "pt": "Google Workspace e Microsoft Office (Word, Excel e PowerPoint).<br>Trello, Notion, Monday, Miro, Obsidian, SAP ERP, RR Jurídico, WordPress e Meta Business Suit.",
+    "en": "Google Workspace and Microsoft Office (Word, Excel and PowerPoint).<br>Trello, Notion, Monday, Miro, Obsidian, SAP ERP, RR Jurídico, WordPress and Meta Business Suit.",
+    "es": "Google Workspace y Microsoft Office (Word, Excel y PowerPoint).<br>Trello, Notion, Monday, Miro, Obsidian, SAP ERP, RR Jurídico, WordPress y Meta Business Suit."
+   }
+  }
+ ],
+ "certs": [
+  {
+   "titulo": "Desenvolvimento em JavaScript",
+   "org": "SENAI · 2025 · 60 h",
+   "src": "assets/certificados/01-senai-javascript.webp",
+   "t": "assets/certificados/01-senai-javascript-t.webp"
+  },
+  {
+   "titulo": "Branding Essencial",
+   "org": "Ana Couto · 2023",
+   "src": "assets/certificados/03-branding-essencial.webp",
+   "t": "assets/certificados/03-branding-essencial-t.webp"
+  },
+  {
+   "titulo": "Direção de Arte: da concepção à realização",
+   "org": "EBAC · 2024",
+   "src": "assets/certificados/04-direcao-de-arte-ebac.webp",
+   "t": "assets/certificados/04-direcao-de-arte-ebac-t.webp"
+  },
+  {
+   "titulo": "Grupo de Pesquisa Persona",
+   "org": "Unesp · 2021–2024",
+   "src": "assets/certificados/07-persona-unesp.webp",
+   "t": "assets/certificados/07-persona-unesp-t.webp"
+  },
+  {
+   "titulo": "Microsoft Power BI",
+   "org": "SENAI · 2025 · 32 h",
+   "src": "assets/certificados/02-senai-power-bi.webp",
+   "t": "assets/certificados/02-senai-power-bi-t.webp"
+  },
+  {
+   "titulo": "Marketing digital humanizado para redes sociais",
+   "org": "Domestika · 2023",
+   "src": "assets/certificados/05-domestika.webp",
+   "t": "assets/certificados/05-domestika-t.webp"
+  },
+  {
+   "titulo": "Comitê de Comunicação · Congresso de Extensão",
+   "org": "Unesp · 2024 · 40 h",
+   "src": "assets/certificados/08-congresso-extensao.webp",
+   "t": "assets/certificados/08-congresso-extensao-t.webp"
+  },
+  {
+   "titulo": "Comissão Organizadora · Mostra de Saúde Mental",
+   "org": "Unesp · 2023",
+   "src": "assets/certificados/09-mostra-saude-mental.webp",
+   "t": "assets/certificados/09-mostra-saude-mental-t.webp"
+  },
+  {
+   "titulo": "Fundamentos do Design Gráfico",
+   "org": "Fundação Bradesco · 2021",
+   "src": "assets/certificados/06-design-grafico-bradesco.webp",
+   "t": "assets/certificados/06-design-grafico-bradesco-t.webp"
+  },
+  {
+   "titulo": "Organização · Setembro Amarelo",
+   "org": "NTAPS Unesp · 2022 · 40 h",
+   "src": "assets/certificados/10-setembro-amarelo.webp",
+   "t": "assets/certificados/10-setembro-amarelo-t.webp"
+  },
+  {
+   "titulo": "Voluntariado em Comunicação",
+   "org": "NTAPS Unesp · 2021 · 40 h",
+   "src": "assets/certificados/11-voluntariado-ntaps.webp",
+   "t": "assets/certificados/11-voluntariado-ntaps-t.webp"
+  }
+ ],
+ "idiomas": [
+  {
+   "n": {
+    "pt": "Português",
+    "en": "Portuguese",
+    "es": "Portugués"
+   },
+   "lv": {
+    "pt": "Nativo",
+    "en": "Native",
+    "es": "Nativo"
+   },
+   "k": 3
+  },
+  {
+   "n": {
+    "pt": "Inglês",
+    "en": "English",
+    "es": "Inglés"
+   },
+   "lv": {
+    "pt": "B2 First · nível C1",
+    "en": "B2 First · C1 level",
+    "es": "B2 First · nivel C1"
+   },
+   "k": 3
+  },
+  {
+   "n": {
+    "pt": "Espanhol",
+    "en": "Spanish",
+    "es": "Español"
+   },
+   "lv": {
+    "pt": "Intermediário",
+    "en": "Intermediate",
+    "es": "Intermedio"
+   },
+   "k": 2
+  }
+ ]
+}
