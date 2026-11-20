@@ -146,7 +146,8 @@ const UI = {
   next: { pt: 'Próximo projeto', en: 'Next project', es: 'Siguiente proyecto' }, zoom: { pt: 'Ampliar', en: 'Zoom', es: 'Ampliar' },
   prev_i: { pt: 'Anterior', en: 'Previous', es: 'Anterior' }, next_i: { pt: 'Próxima', en: 'Next', es: 'Siguiente' },
   nf: { pt: '<span class="dim">Página</span><br>não encontrada.', en: '<span class="dim">Page</span><br>not found.', es: '<span class="dim">Página</span><br>no encontrada.' }, back_home: { pt: 'Voltar ao início', en: 'Back home', es: 'Volver al inicio' },
-  cols: { pt: 'Colunas', en: 'Columns', es: 'Columnas' }, dash: { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' }, n_proj: { pt: 'projetos', en: 'projects', es: 'proyectos' }, portrait: { pt: 'Retrato de Henrique Marinhos', en: 'Portrait of Henrique Marinhos', es: 'Retrato de Henrique Marinhos' }, swap: { pt: 'Alternar imagem', en: 'Switch image', es: 'Alternar imagen' },
+  cols: { pt: 'Colunas', en: 'Columns', es: 'Columnas' }, dash: { pt: 'Veja os números', en: 'See the numbers', es: 'Ver las cifras' }, n_proj: { pt: 'projetos', en: 'projects', es: 'proyectos' }, portrait: { pt: 'Retrato de Henrique Marinhos', en: 'Portrait of Henrique Marinhos', es: 'Retrato de Henrique Marinhos' }, a_nav: { pt: 'Navegação principal', en: 'Main navigation', es: 'Navegación principal' }, a_social: { pt: 'Redes e contatos', en: 'Social and contact', es: 'Redes y contacto' }, a_logos: { pt: 'Clientes e projetos', en: 'Clients and projects', es: 'Clientes y proyectos' }, a_filter: { pt: 'Filtrar projetos', en: 'Filter projects', es: 'Filtrar proyectos' }, a_crumb: { pt: 'Caminho da página', en: 'Breadcrumb', es: 'Ruta de navegación' }, a_lang: { pt: 'Idioma', en: 'Language', es: 'Idioma' },
+  swap: { pt: 'Alternar imagem', en: 'Switch image', es: 'Alternar imagen' },
   by: { pt: 'Por', en: 'By', es: 'Por' }, published: { pt: 'Publicado em', en: 'Published on', es: 'Publicado en' }, outlet: { pt: 'Veículo', en: 'Outlet', es: 'Medio' }, flip: { pt: 'Virar', en: 'Flip', es: 'Girar' }
 };
 const u = (k, l) => T(UI[k], l);
@@ -266,7 +267,7 @@ ${o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld)}</sc
 
 function langSwitch(l, p) {
   if (p === '/404.html') p = '/';
-  return `<div class="lang-switch" role="group" aria-label="Idioma / Language">${LANGS.map((x) => `<a class="lang-btn" href="${PRE[x]}${p}" hreflang="${HTML_LANG[x]}" lang="${HTML_LANG[x]}" aria-pressed="${x === l}" aria-label="${LANG_NAMES[x]}" title="${LANG_NAMES[x]}">${FLAGS[x]()}</a>`).join('')}</div>`;
+  return `<div class="lang-switch" role="group" aria-label="${u('a_lang', l)}">${LANGS.map((x) => `<a class="lang-btn" href="${PRE[x]}${p}" hreflang="${HTML_LANG[x]}" lang="${HTML_LANG[x]}" aria-pressed="${x === l}" aria-label="${LANG_NAMES[x]}" title="${LANG_NAMES[x]}">${FLAGS[x]()}</a>`).join('')}</div>`;
 }
 
 function header(l, cur, pth) {
@@ -276,7 +277,7 @@ function header(l, cur, pth) {
   <div class="header-left"><a class="brand-collapse-inner" href="${PRE[l]}/" data-tr="Henrique Marinhos"><p class="brand-name">Henrique Marinhos</p><p class="brand-location">${u('loc', l)}</p></a></div>
   <button class="nav-toggle" id="nav-toggle" type="button" aria-label="${u('menu_open', l)}" data-open="${u('menu_open', l)}" data-close="${u('menu_close', l)}" aria-expanded="false" aria-controls="nav-panel"><span></span><span></span></button>
   <div class="nav-row" id="nav-panel">
-    <nav class="main-nav" aria-label="Navegação principal">${nav.map(([k, t, h, id]) => `<a href="${h}" data-nav-id="${id}" data-tr="${esc(u(t, l))}"${cur === k || (k === 'artigos' && cur === 'projetos') ? ' class="current" aria-current="page"' : ''}>${NAVI[k]}<span>${u(t, l)}</span></a>`).join('')}<a href="#contato" data-nav-id="contato">${NAVI.contato}<span>${u('nav_contact', l)}</span></a></nav>
+    <nav class="main-nav" aria-label="${u('a_nav', l)}">${nav.map(([k, t, h, id]) => `<a href="${h}" data-nav-id="${id}" data-tr="${esc(u(t, l))}"${cur === k || (k === 'artigos' && cur === 'projetos') ? ' class="current" aria-current="page"' : ''}>${NAVI[k]}<span>${u(t, l)}</span></a>`).join('')}<a href="#contato" data-nav-id="contato">${NAVI.contato}<span>${u('nav_contact', l)}</span></a></nav>
     ${langSwitch(l, pth)}
   </div>
 </div></header>`;
@@ -288,7 +289,7 @@ function footer(l) {
   <div class="tools-float" id="tools-float"></div>
   <div class="footer-inner">
     <div class="footer-heading-group"><h2 class="footer-headline" data-scr>${u('footer_h', l)}</h2></div>
-    <nav class="footer-socials" aria-label="Redes e contatos">${SOCIAL.map(([n, h]) => `<a href="${h}" class="footer-social"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${n}</a>`).join('')}</nav>
+    <nav class="footer-socials" aria-label="${u('a_social', l)}">${SOCIAL.map(([n, h]) => `<a href="${h}" class="footer-social"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${n}</a>`).join('')}</nav>
   </div>
   <div class="credit-bar"><span><span>${u('credit', l)}</span> <a href="${PRE[l]}/projetos/portfolio/" data-tr="${esc(T(PROJ.find((p) => p.slug === 'metaprojeto').tituloI18n || 'Este portfólio', l))}">${u('credit_l', l)}</a></span></div>
 </footer>`;
@@ -381,7 +382,7 @@ function mosaic(l) {
 
 function logosMarquee(l) {
   setLang(l);
-  return `<section class="marquee-section"><div class="marquee-mask"><div class="marquee-track" id="marquee-track"><ul class="marquee-list" aria-label="Clientes e projetos">${LOGOS.map(([s, f, n, h, z, w, hh]) => { const p = PROJ.find((x) => x.slug === s); return `<li class="marquee-logo" style="--h:${h}px;--z:${z}"><a class="marquee-link" href="${PRE[l]}/projetos/${p ? pslug(p) : s}/" draggable="false"><img src="/assets/logos/${f}" alt="${esc(n)}" width="${w}" height="${hh}" decoding="async"></a></li>`; }).join('')}</ul></div></div></section>`;
+  return `<section class="marquee-section"><div class="marquee-mask"><div class="marquee-track" id="marquee-track"><ul class="marquee-list" aria-label="${u('a_logos', l)}">${LOGOS.map(([s, f, n, h, z, w, hh]) => { const p = PROJ.find((x) => x.slug === s); return `<li class="marquee-logo" style="--h:${h}px;--z:${z}"><a class="marquee-link" href="${PRE[l]}/projetos/${p ? pslug(p) : s}/" draggable="false"><img src="/assets/logos/${f}" alt="${esc(n)}" width="${w}" height="${hh}" decoding="async"></a></li>`; }).join('')}</ul></div></div></section>`;
 }
 
 function cvItem(e, l, opts = {}) {
@@ -464,7 +465,7 @@ function projectsPage(l) {
   const body = `<section class="phead"><div class="wrap"><h1 class="headline" data-rise data-scr>${riseHTML(u('work_title', l))}</h1>${dash ? `<div class="pj-dash"><a class="art-filter" href="${projHref(dash, l)}">${u('dash', l)}</a></div>` : ''}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap">
   <div class="pj-bar" data-filters="#grid-p">
-    <div class="pj-main" role="group" aria-label="Filtrar projetos"><button class="art-filter" type="button" data-f="*" aria-pressed="true">${u('allF', l)}</button>${fs_.map((f) => `<button class="art-filter" type="button" data-f="${f}" aria-pressed="false">${T(FILTROS[f], l)}</button>`).join('')}</div>
+    <div class="pj-main" role="group" aria-label="${u('a_filter', l)}"><button class="art-filter" type="button" data-f="*" aria-pressed="true">${u('allF', l)}</button>${fs_.map((f) => `<button class="art-filter" type="button" data-f="${f}" aria-pressed="false">${T(FILTROS[f], l)}</button>`).join('')}</div>
     <div class="pj-cols" role="group" aria-label="${u('cols', l)}" data-cols-for="#grid-p"><span>${u('cols', l)}</span>${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="art-filter" data-cols="${n}" aria-pressed="false" aria-label="${n} ${u('cols', l).toLowerCase()}">${n}</button>`).join('')}</div>
     <p class="pj-line"><span data-count-out>${visible.length}</span> ${u('n_proj', l)}</p>
   </div>
@@ -559,7 +560,7 @@ function casePage(p, l, i, list) {
   const e = p.etiquetas || {};
   const body = `
 <section class="chero"><div class="wrap chero__in">
-  <nav class="crumbs" aria-label="breadcrumb"><a href="${PRE[l]}/conteudos/#projetos" data-tr="${u('nav_art', l)}" data-c="${p._c}" data-ct="${p._ct}">${u('nav_art', l)}</a><span aria-hidden="true">/</span><span aria-current="page">${esc(p.titulo)}</span></nav>
+  <nav class="crumbs" aria-label="${u('a_crumb', l)}"><a href="${PRE[l]}/conteudos/#projetos" data-tr="${u('nav_art', l)}" data-c="${p._c}" data-ct="${p._ct}">${u('nav_art', l)}</a><span aria-hidden="true">/</span><span aria-current="page">${esc(p.titulo)}</span></nav>
   <h1 class="chero__title" aria-label="${esc(p.titulo)}"><span aria-hidden="true">${words(p.titulo)}</span></h1>
   <p class="chero__lead">${esc(T(p.resumo, l))}</p>
   ${ent.length ? `<ul class="chips">${ent.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
