@@ -2430,7 +2430,7 @@ window.PROJETOS = [
  },
  {
   "slug": "pixelar",
-  "titulo": "Pixelar Studio",
+  "titulo": "Pixelar",
   "ano": "2026",
   "cat": {
    "pt": "Programação",
@@ -2456,7 +2456,7 @@ window.PROJETOS = [
     "processamento-grafico"
    ]
   },
-  "capa": "assets/projetos/pixelar/capa.webp",
+  "capa": "assets/projetos/pixelar/capa.webp?v=v20261123h",
   "resumo": {
    "pt": "Estúdio analógico, lab criativo e geometria em GPU",
    "en": "Analog film studio, creative lab and GPU geometry",
@@ -2472,9 +2472,9 @@ window.PROJETOS = [
    {
     "img": "01",
     "t": {
-     "pt": "Pixelar Studio",
-     "en": "Pixelar Studio",
-     "es": "Pixelar Studio"
+     "pt": "Pixelar",
+     "en": "Pixelar",
+     "es": "Pixelar"
     },
     "d": {
      "pt": "",

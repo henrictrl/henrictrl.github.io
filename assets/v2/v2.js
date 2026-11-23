@@ -448,6 +448,18 @@
   var toastEl = $('[data-toast]'), toastT;
   var toast = function (m) { if (!toastEl) return; toastEl.textContent = m; toastEl.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2200); };
 
+  /* ---------- Preserva idioma ativo ao navegar entre páginas ---------- */
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.classList.contains('lang-btn') || a.hasAttribute('hreflang')) return;
+    if (LANG !== 'en' && LANG !== 'es') return;
+    var raw = a.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) !== '/' || raw.indexOf('//') === 0) return;
+    if (/^\/(en|es|assets|favicon|apple-touch)(\/|$|\.)/.test(raw)) return;
+    a.setAttribute('href', '/' + LANG + (raw === '/' ? '/' : raw));
+  }, true);
+
   /* ---------- Cortina entre páginas: cor dominante do projeto de destino ---------- */
   var curtain = $('[data-curtain]'), cLabel = $('[data-curtain-label]');
   var paint = function (c, ct) { if (!curtain) return; curtain.style.setProperty('--cc', c || ''); curtain.style.setProperty('--cct', ct || ''); };

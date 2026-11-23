@@ -1,8 +1,8 @@
-/* Conteúdos + Todos (mosaico cronológico com filtros nativos e colunas) + Projetos no app oficial:
-   - aba "Todos" em primeiro (padrão em /conteudos/ sem âncora), misturando projetos, textos e Instagram
-     em formato mosaico, mantendo a barra nativa de categorias sempre visível + seletor de colunas;
-   - sem MutationObserver pesado no body (troca de idioma instantânea, sem travar nem piscar categorias);
-   - intercala origens e proporções (horizontal/vertical) mantendo ordem do mais recente ao mais antigo. */
+/* Conteúdos + Todos (mosaico em colunas reais sem reflow/travamento, intercalado por projeto e proporção):
+   - inicia imediatamente no DOMContentLoaded (sem flash de Texto -> Todos no window.load);
+   - usa N colunas reais (.hm-all-col) em vez de grid-auto-rows/fitMosaic: zero travamento e zero salto de rolagem;
+   - alterna projetos/identidades visuais (round-robin por origem) e proporções (3:2 vs 4:5);
+   - transição suave na barra de categorias sem MutationObserver no document.body. */
 (function () {
   var LAB_ALL = { pt: 'Todos', en: 'All', es: 'Todos' };
   var LAB_PROJ = { pt: 'Projetos', en: 'Projects', es: 'Proyectos' };
@@ -63,7 +63,9 @@
     'Artes visuais': { en: 'Visual arts', es: 'Artes visuales' }
   };
 
-  var mode = null; // 'all' | 'proj' | null (Texto / Instagram nativos)
+  var wantAllInitially = ROOT.test(location.pathname) && !location.search && !location.hash;
+  var wantProjInitially = location.hash === '#projetos';
+  var mode = wantProjInitially ? 'proj' : (wantAllInitially ? 'all' : null);
   var allFilter = 'all';
   var lastLangRendered = '';
   var inEnsure = false;
@@ -129,20 +131,27 @@
     try { localStorage.setItem('hm-allcols', JSON.stringify(o)); } catch (e) {}
   };
 
+  // Aplica a classe inicial ANTES da primeira pintura para nunca mostrar Texto antes de Todos
+  var preView = document.getElementById('view-articles');
+  if (preView) {
+    if (wantAllInitially) preView.classList.add('hm-all');
+    else if (wantProjInitially) preView.classList.add('hm-proj');
+  }
+
   var st = document.createElement('style');
   st.textContent = '#hm-proj,#hm-all{display:none}'
     + '#view-articles.hm-proj #hm-proj,#view-articles.hm-all #hm-all{display:block}'
-    + '#view-articles .art-filters>.art-row:not(.art-row-top){max-height:110px;opacity:1;transform:translateY(0);overflow:hidden;transition:max-height .34s cubic-bezier(.22,1,.36,1),opacity .24s ease,transform .3s cubic-bezier(.22,1,.36,1),margin .34s cubic-bezier(.22,1,.36,1)}'
+    + '#view-articles .art-filters>.art-row:not(.art-row-top){max-height:110px;opacity:1;transform:translateY(0);overflow:hidden;transition:max-height .32s cubic-bezier(.22,1,.36,1),opacity .22s ease,transform .28s cubic-bezier(.22,1,.36,1),margin .32s cubic-bezier(.22,1,.36,1)}'
     + '#view-articles.hm-proj .art-filters>.art-row:not(.art-row-top){max-height:0;opacity:0;transform:translateY(-6px);margin-top:-8px;pointer-events:none}'
-    + '@media(min-width:640px){#view-articles .art-row-top>:not(.art-seg){max-width:180px;opacity:1;overflow:hidden;transition:max-width .34s cubic-bezier(.22,1,.36,1),opacity .22s ease,margin .34s cubic-bezier(.22,1,.36,1),padding .34s cubic-bezier(.22,1,.36,1),border-color .22s ease}'
+    + '@media(min-width:640px){#view-articles .art-row-top>:not(.art-seg){max-width:180px;opacity:1;overflow:hidden;transition:max-width .32s cubic-bezier(.22,1,.36,1),opacity .2s ease,margin .32s cubic-bezier(.22,1,.36,1),padding .32s cubic-bezier(.22,1,.36,1),border-color .2s ease}'
     + '#view-articles.hm-proj .art-row-top>:not(.art-seg){max-width:0;opacity:0;padding-left:0;padding-right:0;margin-left:-6px;margin-right:0;border-color:transparent;pointer-events:none}}'
-    + '@media(max-width:639px){#view-articles .art-filters>.art-row>.art-filter,#view-articles .art-row-top>.art-filter,#view-articles .art-row-top>.art-view{transition:max-height .3s cubic-bezier(.22,1,.36,1),max-width .3s cubic-bezier(.22,1,.36,1),opacity .22s ease,padding .3s,margin .3s}'
+    + '@media(max-width:639px){#view-articles .art-filters>.art-row>.art-filter,#view-articles .art-row-top>.art-filter,#view-articles .art-row-top>.art-view{transition:max-height .28s cubic-bezier(.22,1,.36,1),max-width .28s cubic-bezier(.22,1,.36,1),opacity .2s ease,padding .28s,margin .28s}'
     + '#view-articles.hm-proj .art-filters>.art-row>.art-filter,#view-articles.hm-proj .art-row-top>.art-filter,#view-articles.hm-proj .art-row-top>.art-view{max-height:0;max-width:0;opacity:0;padding:0;border-width:0;margin:-4px -3px;overflow:hidden;pointer-events:none}}'
     + '#view-articles.hm-all .art-row-top .art-view{max-width:0;opacity:0;padding:0;margin:0;overflow:hidden;pointer-events:none}'
     + '#view-articles.hm-proj .section-block .max-w>:not(.art-filters):not(#hm-proj),'
     + '#view-articles.hm-all .section-block .max-w>:not(.art-filters):not(#hm-all){display:none!important}'
     + '@keyframes hmViewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}'
-    + '.hm-view-in{animation:hmViewIn .28s cubic-bezier(.22,1,.36,1) both}'
+    + '.hm-view-in{animation:hmViewIn .26s cubic-bezier(.22,1,.36,1) both}'
     + '@media(prefers-reduced-motion:reduce){#view-articles .art-filters *,.hm-view-in{transition:none!important;animation:none!important}}'
     + '.hm-proj-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin:-18px 0 28px}'
     + '@media(max-width:767px){.hm-proj-row{margin:-8px 0 22px}}'
@@ -158,10 +167,12 @@
     + '@media(max-width:767px){.hm-all-cols [data-all-cols="4"],.hm-all-cols [data-all-cols="5"]{display:none}}'
     + '@media(min-width:768px){.hm-all-cols [data-all-cols="1"]{display:none}}'
     + '.hm-all-meta{text-align:center;font-size:12px;color:var(--gray-500);margin:0}'
-    + '.hm-all-grid{display:grid;grid-template-columns:repeat(var(--all-cols,2),minmax(0,1fr));column-gap:14px;row-gap:0;grid-auto-rows:4px;align-items:start}'
-    + '@media(min-width:768px){.hm-all-grid{column-gap:22px}.hm-all-grid[data-cols="4"],.hm-all-grid[data-cols="5"]{column-gap:16px}}'
-    + '.hm-all-card{display:block;color:inherit;text-decoration:none;align-self:start;padding-bottom:6px}'
-    + '.hm-all-card .art-card-media,.hm-all-card .work-card-media{margin-bottom:10px;border-radius:var(--r);overflow:hidden;position:relative}'
+    /* Colunas reais em flex: zero reflow no load de imagens, zero travamento, zero salto de rolagem */
+    + '.hm-all-grid{display:grid;grid-template-columns:repeat(var(--all-cols,3),minmax(0,1fr));column-gap:14px;align-items:start}'
+    + '.hm-all-col{display:flex;flex-direction:column;gap:24px;min-width:0}'
+    + '@media(min-width:768px){.hm-all-grid{column-gap:22px}.hm-all-col{gap:30px}.hm-all-grid[data-cols="4"],.hm-all-grid[data-cols="5"]{column-gap:16px}.hm-all-grid[data-cols="4"] .hm-all-col,.hm-all-grid[data-cols="5"] .hm-all-col{gap:22px}}'
+    + '.hm-all-card{display:block;color:inherit;text-decoration:none;min-width:0}'
+    + '.hm-all-card .art-card-media,.hm-all-card .work-card-media{margin-bottom:10px;border-radius:var(--r);overflow:hidden;position:relative;background:var(--gray-100)}'
     + '.hm-all-card .art-card-media img,.hm-all-card .work-card-media>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}'
     + '.hm-all-card:hover .art-card-media img,.hm-all-card:hover .work-card-media>img{transform:scale(1.03)}'
     + '.hm-all-card .art-card-title{font-size:15px;font-weight:500;line-height:1.35;margin:0}'
@@ -170,7 +181,7 @@
     + '.hm-all-grid[data-cols="4"] .art-card-title,.hm-all-grid[data-cols="5"] .art-card-title{font-size:13.5px}'
     + '.hm-all-grid[data-cols="4"] .art-card-meta,.hm-all-grid[data-cols="5"] .art-card-meta,.hm-all-grid[data-cols="4"] .art-card-by,.hm-all-grid[data-cols="5"] .art-card-by{font-size:11px}'
     + '.hm-all-empty{grid-column:1/-1;text-align:center;padding:40px 0;font-size:14px;color:var(--gray-500)}'
-    + '@media(max-width:639px){.hm-all-card .art-card-title{font-size:13px}.hm-all-card .art-card-meta,.hm-all-card .art-card-by{font-size:11px}.hm-all-grid[data-cols="3"] .art-card-title{font-size:12px}.hm-all-grid[data-cols="3"] .art-card-meta,.hm-all-grid[data-cols="3"] .art-card-by{font-size:10px}}'
+    + '@media(max-width:639px){.hm-all-col{gap:20px}.hm-all-card .art-card-title{font-size:13px}.hm-all-card .art-card-meta,.hm-all-card .art-card-by{font-size:11px}.hm-all-grid[data-cols="3"] .art-card-title{font-size:12px}.hm-all-grid[data-cols="3"] .art-card-meta,.hm-all-grid[data-cols="3"] .art-card-by{font-size:10px}}'
     + '.art-seg .art-filter{transition:background-color .22s cubic-bezier(.22,1,.36,1),color .22s cubic-bezier(.22,1,.36,1),border-color .22s cubic-bezier(.22,1,.36,1)}'
     + '@media(max-width:767px){#view-articles .art-title{font-size:min(24px,calc((100vw - 2 * var(--gutter)) / 18.4))}html[lang="es"] #view-articles .art-title{font-size:min(24px,calc((100vw - 2 * var(--gutter)) / 19.2))}}';
   document.head.appendChild(st);
@@ -198,39 +209,6 @@
       f.parentNode.insertBefore(h, f.nextSibling);
     }
     return h;
-  };
-
-  var fitRaf = 0;
-  var fitMosaic = function () {
-    if (mode !== 'all') return;
-    var g = document.getElementById('hm-all-grid');
-    if (!g || !g.offsetParent) return;
-    var cols = getAllCols();
-    var gap = window.innerWidth < 640 ? (cols >= 3 ? 18 : 22) : (cols >= 4 ? 22 : 28);
-    var kids = g.children;
-    for (var i = 0; i < kids.length; i++) kids[i].style.gridRowEnd = '';
-    for (var j = 0; j < kids.length; j++) {
-      if (kids[j].classList.contains('hm-all-empty')) continue;
-      var h = kids[j].getBoundingClientRect().height;
-      kids[j].style.gridRowEnd = 'span ' + Math.max(1, Math.ceil((h + gap) / 4));
-    }
-  };
-  var queueFit = function () {
-    if (fitRaf) return;
-    fitRaf = requestAnimationFrame(function () { fitRaf = 0; fitMosaic(); });
-  };
-
-  var applyAllCols = function () {
-    var g = document.getElementById('hm-all-grid');
-    var n = getAllCols();
-    if (g) {
-      g.style.setProperty('--all-cols', n);
-      g.dataset.cols = n;
-    }
-    document.querySelectorAll('#hm-all-sub [data-all-cols]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(+b.dataset.allCols === n));
-    });
-    queueFit();
   };
 
   var syncNativeFilterButtons = function () {
@@ -297,58 +275,55 @@
     return site || 'text';
   };
 
-  var shapeOf = function (entry) {
-    if (entry.kind === 'post') {
-      var ar = 1 / (Number(entry.item.r) || 1.25);
-      return ar > 1.1 ? 'wide' : 'tall';
-    }
-    return 'wide';
+  var aspectRatioOf = function (entry) {
+    if (entry.kind === 'post') return 1 / (Number(entry.item.r) || 1.25);
+    return 1.5;
   };
 
-  var interleaveMosaic = function (list, cols) {
-    var pool = list.slice();
-    var out = [];
-    while (pool.length) {
-      var idx = out.length;
-      var hasLeft = cols > 1 ? (idx % cols !== 0) : (idx > 0);
-      var leftSrc = hasLeft ? sourceKey(out[idx - 1]) : '';
-      var leftShape = hasLeft ? shapeOf(out[idx - 1]) : '';
-      var aboveSrc = cols > 1 && idx >= cols ? sourceKey(out[idx - cols]) : '';
-      var aboveShape = cols > 1 && idx >= cols ? shapeOf(out[idx - cols]) : '';
+  var shapeOf = function (entry) {
+    return aspectRatioOf(entry) > 1.1 ? 'wide' : 'tall';
+  };
 
-      var pick = -1;
-      var win = Math.min(pool.length, 24);
-      for (var i = 0; i < win; i++) {
-        var k = sourceKey(pool[i]), sh = shapeOf(pool[i]);
-        if (k !== leftSrc && k !== aboveSrc && (!leftShape || sh !== leftShape) && (!aboveShape || sh !== aboveShape)) { pick = i; break; }
+  /* Intercala por projeto/origem (round-robin entre buckets) para evitar monotonia visual
+     de vários posts recentes com a mesma identidade, mantendo mais recentes primeiro dentro de cada projeto
+     e alternando proporções (horizontal 3:2 vs vertical 4:5). */
+  var buildBalancedOrder = function (filtered) {
+    var map = {};
+    var order = [];
+    filtered.forEach(function (entry) {
+      var k = sourceKey(entry);
+      if (!map[k]) {
+        map[k] = [];
+        order.push(k);
       }
-      if (pick < 0) {
-        for (var i2 = 0; i2 < win; i2++) {
-          var k2 = sourceKey(pool[i2]), sh2 = shapeOf(pool[i2]);
-          if (k2 !== leftSrc && k2 !== aboveSrc && (!aboveShape || sh2 !== aboveShape)) { pick = i2; break; }
+      map[k].push(entry);
+    });
+    // Dentro de cada projeto: mais recente primeiro; empates: projeto -> texto -> post
+    var prio = { proj: 0, text: 1, post: 2 };
+    order.forEach(function (k) {
+      map[k].sort(function (a, b) {
+        var cmp = b.d.localeCompare(a.d);
+        return cmp !== 0 ? cmp : (prio[a.kind] - prio[b.kind]);
+      });
+    });
+    // Ordena os projetos pela data do item mais recente de cada projeto
+    order.sort(function (ka, kb) {
+      return map[kb][0].d.localeCompare(map[ka][0].d);
+    });
+    // Round-robin entre todos os projetos ativos
+    var seq = [];
+    var remaining = true;
+    while (remaining) {
+      remaining = false;
+      for (var i = 0; i < order.length; i++) {
+        var bucket = map[order[i]];
+        if (bucket.length) {
+          seq.push(bucket.shift());
+          if (bucket.length) remaining = true;
         }
       }
-      if (pick < 0) {
-        for (var i3 = 0; i3 < win; i3++) {
-          var k3 = sourceKey(pool[i3]), sh3 = shapeOf(pool[i3]);
-          if (k3 !== leftSrc && k3 !== aboveSrc && (!leftShape || sh3 !== leftShape)) { pick = i3; break; }
-        }
-      }
-      if (pick < 0) {
-        for (var j = 0; j < pool.length; j++) {
-          var kj = sourceKey(pool[j]);
-          if (kj !== leftSrc && kj !== aboveSrc) { pick = j; break; }
-        }
-      }
-      if (pick < 0) {
-        for (var j2 = 0; j2 < pool.length; j2++) {
-          if (sourceKey(pool[j2]) !== leftSrc) { pick = j2; break; }
-        }
-      }
-      if (pick < 0) pick = 0;
-      out.push(pool.splice(pick, 1)[0]);
     }
-    return out;
+    return seq;
   };
 
   var buildAllItems = function () {
@@ -370,20 +345,13 @@
       items.push({ kind: 'post', d: String(x.d || '2021-01-01'), item: x });
     });
     var filtered = items.filter(function (e) { return matchesFilter(e, allFilter, artByUrl); });
-    filtered.sort(function (a, b) {
-      var cmp = b.d.localeCompare(a.d);
-      if (cmp !== 0) return cmp;
-      var prio = { proj: 0, text: 1, post: 2 };
-      return prio[a.kind] - prio[b.kind];
-    });
-    filtered = interleaveMosaic(filtered, getAllCols());
     var nP = 0, nA = 0, nI = 0;
     filtered.forEach(function (e) {
       if (e.kind === 'proj') nP++;
       else if (e.kind === 'text') nA++;
       else nI++;
     });
-    return { items: filtered, nP: nP, nA: nA, nI: nI };
+    return { items: buildBalancedOrder(filtered), nP: nP, nA: nA, nI: nI };
   };
 
   var metaText = function (data, lg) {
@@ -424,6 +392,7 @@
           if (n !== getAllCols()) {
             setAllCols(n);
             renderAll();
+            pulseView(document.getElementById('hm-all-grid'));
           }
         }
       });
@@ -432,6 +401,54 @@
     if (lbl && lbl.textContent !== COLS_L[lg]) lbl.textContent = COLS_L[lg];
     var meta = document.getElementById('hm-all-meta');
     if (meta) meta.textContent = metaText(data, lg);
+    sub.querySelectorAll('[data-all-cols]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(+b.dataset.allCols === curCols));
+    });
+  };
+
+  var cardHtml = function (entry, lg) {
+    if (entry.kind === 'proj') {
+      var p = entry.item;
+      var slug = ALIAS[p.slug] || p.slug;
+      var href = pre(lg) + '/projetos/' + slug + '/';
+      var media = (p.capaAnim && window.capaAnimHTML)
+        ? window.capaAnimHTML(p)
+        : '<img src="' + esc(p.capa) + '" alt="" loading="lazy" decoding="async" width="1200" height="800"' + (p.capaPosicao ? ' style="object-position:' + esc(p.capaPosicao) + '"' : '') + '>';
+      var desc = tx(p.entrega || p.resumo, lg);
+      return '<a class="hm-all-card" href="' + href + '" data-all-pj="' + esc(p.slug) + '">'
+        + '<div class="work-card-media" style="aspect-ratio:3/2">' + media + '</div>'
+        + '<p class="art-card-meta">' + KIND_PROJ[lg] + ' — ' + esc(p.ano) + '</p>'
+        + '<h2 class="art-card-title">' + esc(tx(p.titulo, lg)) + '</h2>'
+        + (desc ? '<p class="art-card-by">' + esc(desc) + '</p>' : '')
+        + '</a>';
+    }
+    if (entry.kind === 'text') {
+      var a = entry.item;
+      var title = (lg !== 'pt' && a['t_' + lg]) || a.t;
+      var slugA = artSlug(a);
+      var hrefA = pre(lg) + '/conteudos/' + encodeURIComponent(slugA) + '/';
+      var img = artImgSrc(a, lg);
+      var imgStyle = (a.fit ? 'object-fit:' + a.fit + ';' : '') + (a.pos ? 'object-position:' + a.pos + ';' : (a.cropTop ? 'object-position:50% 0%;' : ''));
+      var badge = (lg !== 'pt' && a['badge_' + lg]) || a.badge;
+      var tags = (a.tags || []).map(function (t) { return tagName(t, lg); }).join(' · ');
+      return '<a class="hm-all-card" href="' + hrefA + '" data-all-art="' + entry.idx + '">'
+        + '<div class="art-card-media" style="aspect-ratio:3/2' + (a.bg ? ';background:' + esc(a.bg) : '') + '">'
+        + (badge ? '<span class="art-badge">' + esc(badge) + '</span>' : '')
+        + '<img src="' + esc(img) + '" alt="" loading="lazy" decoding="async"' + (imgStyle ? ' style="' + imgStyle + '"' : '') + '>'
+        + '</div>'
+        + '<p class="art-card-meta">' + esc(tags) + ' — ' + esc(fmtDate(a.d, lg)) + '</p>'
+        + '<h2 class="art-card-title">' + esc(title) + '</h2>'
+        + '<p class="art-card-by">' + esc(a.site || '') + '</p>'
+        + '</a>';
+    }
+    var x = entry.item;
+    var ar = (1 / (Number(x.r) || 1.25)).toFixed(4);
+    var count = x.n > 1 ? '<span class="art-ig-count">' + SLIDES_ICO + x.n + '</span>' : '';
+    return '<a class="hm-all-card" href="https://www.instagram.com/' + (x.reel ? 'reel' : 'p') + '/' + esc(x.c) + '/" target="_blank" rel="noopener" data-all-ig="' + esc(x.c) + '">'
+      + '<div class="art-card-media" style="aspect-ratio:' + ar + '">' + count + '<img src="' + esc(postSrc(x, lg)) + '" alt="" loading="lazy" decoding="async"></div>'
+      + '<p class="art-card-meta">Instagram · ' + esc(x.v) + ' — ' + esc(fmtDate(x.d, lg)) + '</p>'
+      + '<h2 class="art-card-title">' + postTitle(x, lg) + '</h2>'
+      + '</a>';
   };
 
   var renderAll = function () {
@@ -439,60 +456,69 @@
     var lg = lang();
     var grid = document.getElementById('hm-all-grid');
     var data = buildAllItems();
+    var cols = getAllCols();
     lastLangRendered = lg;
     ensureSubBar(data, lg);
 
-    var html = data.items.length ? data.items.map(function (entry) {
-      if (entry.kind === 'proj') {
-        var p = entry.item;
-        var slug = ALIAS[p.slug] || p.slug;
-        var href = pre(lg) + '/projetos/' + slug + '/';
-        var media = (p.capaAnim && window.capaAnimHTML)
-          ? window.capaAnimHTML(p)
-          : '<img src="' + esc(p.capa) + '" alt="" loading="lazy" decoding="async" width="1200" height="800"' + (p.capaPosicao ? ' style="object-position:' + esc(p.capaPosicao) + '"' : '') + '>';
-        var desc = tx(p.entrega || p.resumo, lg);
-        return '<a class="hm-all-card" href="' + href + '" data-all-pj="' + esc(p.slug) + '">'
-          + '<div class="work-card-media" style="aspect-ratio:3/2">' + media + '</div>'
-          + '<p class="art-card-meta">' + KIND_PROJ[lg] + ' — ' + esc(p.ano) + '</p>'
-          + '<h2 class="art-card-title">' + esc(tx(p.titulo, lg)) + '</h2>'
-          + (desc ? '<p class="art-card-by">' + esc(desc) + '</p>' : '')
-          + '</a>';
-      }
-      if (entry.kind === 'text') {
-        var a = entry.item;
-        var title = (lg !== 'pt' && a['t_' + lg]) || a.t;
-        var slugA = artSlug(a);
-        var hrefA = pre(lg) + '/conteudos/' + encodeURIComponent(slugA) + '/';
-        var img = artImgSrc(a, lg);
-        var imgStyle = (a.fit ? 'object-fit:' + a.fit + ';' : '') + (a.pos ? 'object-position:' + a.pos + ';' : (a.cropTop ? 'object-position:50% 0%;' : ''));
-        var badge = (lg !== 'pt' && a['badge_' + lg]) || a.badge;
-        var tags = (a.tags || []).map(function (t) { return tagName(t, lg); }).join(' · ');
-        return '<a class="hm-all-card" href="' + hrefA + '" data-all-art="' + entry.idx + '">'
-          + '<div class="art-card-media" style="aspect-ratio:3/2' + (a.bg ? ';background:' + esc(a.bg) : '') + '">'
-          + (badge ? '<span class="art-badge">' + esc(badge) + '</span>' : '')
-          + '<img src="' + esc(img) + '" alt="" loading="lazy" decoding="async"' + (imgStyle ? ' style="' + imgStyle + '"' : '') + '>'
-          + '</div>'
-          + '<p class="art-card-meta">' + esc(tags) + ' — ' + esc(fmtDate(a.d, lg)) + '</p>'
-          + '<h2 class="art-card-title">' + esc(title) + '</h2>'
-          + '<p class="art-card-by">' + esc(a.site || '') + '</p>'
-          + '</a>';
-      }
-      var x = entry.item;
-      var ar = (1 / (Number(x.r) || 1.25)).toFixed(4);
-      var count = x.n > 1 ? '<span class="art-ig-count">' + SLIDES_ICO + x.n + '</span>' : '';
-      return '<a class="hm-all-card" href="https://www.instagram.com/' + (x.reel ? 'reel' : 'p') + '/' + esc(x.c) + '/" target="_blank" rel="noopener" data-all-ig="' + esc(x.c) + '">'
-        + '<div class="art-card-media" style="aspect-ratio:' + ar + '">' + count + '<img src="' + esc(postSrc(x, lg)) + '" alt="" loading="lazy" decoding="async"></div>'
-        + '<p class="art-card-meta">Instagram · ' + esc(x.v) + ' — ' + esc(fmtDate(x.d, lg)) + '</p>'
-        + '<h2 class="art-card-title">' + postTitle(x, lg) + '</h2>'
-        + '</a>';
-    }).join('') : '<p class="hm-all-empty">' + esc(EMPTY_L[lg]) + '</p>';
+    grid.style.setProperty('--all-cols', cols);
+    grid.dataset.cols = cols;
 
-    grid.innerHTML = html;
-    applyAllCols();
+    if (!data.items.length) {
+      grid.innerHTML = '<p class="hm-all-empty">' + esc(EMPTY_L[lg]) + '</p>';
+      syncNativeFilterButtons();
+      return;
+    }
+
+    // Distribui em N colunas reais balanceando altura estimada + alternância de origem e proporção
+    var colItems = Array.from({ length: cols }, function () { return []; });
+    var colHeights = new Array(cols).fill(0);
+    var colLastSrc = new Array(cols).fill('');
+    var colLastShape = new Array(cols).fill('');
+    var pool = data.items.slice();
+
+    while (pool.length) {
+      // Escolhe a coluna mais curta no momento
+      var cIdx = 0;
+      for (var c = 1; c < cols; c++) {
+        if (colHeights[c] < colHeights[cIdx]) cIdx = c;
+      }
+      var aboveSrc = colLastSrc[cIdx];
+      var aboveShape = colLastShape[cIdx];
+      var leftSrc = cIdx > 0 ? colLastSrc[cIdx - 1] : '';
+      var rightSrc = cIdx + 1 < cols ? colLastSrc[cIdx + 1] : '';
+
+      var pick = -1;
+      var win = Math.min(pool.length, 18);
+      for (var i = 0; i < win; i++) {
+        var k = sourceKey(pool[i]), sh = shapeOf(pool[i]);
+        if (k !== aboveSrc && k !== leftSrc && k !== rightSrc && (!aboveShape || sh !== aboveShape)) { pick = i; break; }
+      }
+      if (pick < 0) {
+        for (var i2 = 0; i2 < win; i2++) {
+          var k2 = sourceKey(pool[i2]);
+          if (k2 !== aboveSrc && k2 !== leftSrc && k2 !== rightSrc) { pick = i2; break; }
+        }
+      }
+      if (pick < 0) {
+        for (var i3 = 0; i3 < win; i3++) {
+          if (sourceKey(pool[i3]) !== aboveSrc) { pick = i3; break; }
+        }
+      }
+      if (pick < 0) pick = 0;
+
+      var chosen = pool.splice(pick, 1)[0];
+      colItems[cIdx].push(chosen);
+      colLastSrc[cIdx] = sourceKey(chosen);
+      colLastShape[cIdx] = shapeOf(chosen);
+      // Altura relativa aproximada = 1/aspectRatio + texto (~0.36)
+      colHeights[cIdx] += (1 / aspectRatioOf(chosen)) + (chosen.kind === 'post' ? 0.28 : 0.38);
+    }
+
+    grid.innerHTML = colItems.map(function (list) {
+      return '<div class="hm-all-col">' + list.map(function (entry) { return cardHtml(entry, lg); }).join('') + '</div>';
+    }).join('');
+
     syncNativeFilterButtons();
-    grid.querySelectorAll('img').forEach(function (im) {
-      if (!im.complete) im.addEventListener('load', queueFit, { once: true });
-    });
     if (!grid.dataset.bound) {
       grid.dataset.bound = '1';
       grid.addEventListener('click', function (e) {
@@ -511,8 +537,6 @@
         }
       });
     }
-    queueFit();
-    setTimeout(fitMosaic, 120);
   };
 
   var ensure = function () {
@@ -555,7 +579,7 @@
     }
   };
 
-  var setMode = function (next) {
+  var setMode = function (next, silent) {
     var prev = mode;
     mode = next;
     var view = document.getElementById('view-articles'); if (!view) return;
@@ -563,7 +587,7 @@
     view.classList.toggle('hm-proj', next === 'proj');
     if (next === 'all') {
       renderAll();
-      if (prev !== 'all') pulseView(document.getElementById('hm-all'));
+      if (!silent && prev !== 'all') pulseView(document.getElementById('hm-all'));
       if (location.hash === '#projetos') history.replaceState(history.state, '', location.pathname + location.search);
     } else if (next === 'proj') {
       var h = hostProj(), row = h && h.querySelector('.hm-proj-row');
@@ -572,14 +596,13 @@
       if (row && bar && bar.parentNode !== row) { bar.hidden = false; row.appendChild(bar); }
       if (h && grid && grid.parentNode !== h) h.appendChild(grid);
       if (grid) grid.querySelectorAll('.reveal, .mx-wait, .mx-fade').forEach(function (e) { e.classList.add('in', 'visible'); e.classList.remove('mx-wait'); e.style.opacity = ''; });
-      if (prev !== 'proj') pulseView(h);
+      if (!silent && prev !== 'proj') pulseView(h);
       if (location.hash !== '#projetos' && !ROOT.test(location.pathname)) history.replaceState(history.state, '', location.pathname + location.search + '#projetos');
     } else {
-      if (prev !== null) pulseView(document.getElementById('art-grid'));
+      if (!silent && prev !== null) pulseView(document.getElementById('art-grid'));
       if (location.hash === '#projetos') history.replaceState(history.state, '', location.pathname + location.search);
     }
     ensure();
-    if (next === 'all') queueFit();
   };
 
   document.addEventListener('click', function (e) {
@@ -612,28 +635,22 @@
 
   var boot = function () {
     ensure();
-    // Observa APENAS #art-filters (childList direto), nunca document.body inteiro!
     var bar = document.getElementById('art-filters');
     if (bar) {
       new MutationObserver(function () { ensure(); }).observe(bar, { childList: true });
     }
     new MutationObserver(function () { ensure(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    if (location.hash === '#projetos') {
-      setMode('proj');
-    } else if (ROOT.test(location.pathname) && !location.search && !location.hash) {
-      setMode('all');
-      setTimeout(fitMosaic, 350);
+    if (wantProjInitially || location.hash === '#projetos') {
+      setMode('proj', true);
+    } else if (wantAllInitially) {
+      setMode('all', true);
     }
-    var rt;
-    addEventListener('resize', function () {
-      clearTimeout(rt);
-      rt = setTimeout(function () { if (mode === 'all') applyAllCols(); }, 150);
-    });
     mqMob.addEventListener('change', function () { if (mode === 'all') renderAll(); });
     addEventListener('hashchange', function () {
       if (location.hash === '#projetos') setMode('proj');
     });
   };
-  if (document.readyState === 'complete') setTimeout(boot, 50);
-  else addEventListener('load', function () { setTimeout(boot, 50); });
+  // Executa logo após site.js no DOMContentLoaded (sem esperar window.load!)
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();

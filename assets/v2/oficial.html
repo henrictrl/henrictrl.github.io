@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta name="robots" content="noindex"><script>(function(){var ok=/^\/(en\/|es\/)?((?:artigos|conteudos)(\/|$)|projetos\/(visao-geral|dash-geral)(\/|$))/;addEventListener("click",function(e){if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;var a=e.target.closest&&e.target.closest("a[href]");if(!a||a.target==="_blank")return;var u=new URL(a.href,location.href);if(u.origin!==location.origin||ok.test(u.pathname))return;e.preventDefault();e.stopImmediatePropagation();location.href=u.href;},true);})();</script>
+<head><meta name="robots" content="noindex"><script>(function(){var ok=/^\/(en\/|es\/)?((?:artigos|conteudos)(\/|$)|projetos\/(visao-geral|dash-geral)(\/|$))/;addEventListener("click",function(e){if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;var a=e.target.closest&&e.target.closest("a[href]");if(!a||a.target==="_blank"||a.classList.contains("lang-btn"))return;var u=new URL(a.href,location.href);if(u.origin!==location.origin||ok.test(u.pathname))return;var lg=(document.documentElement.lang||"").slice(0,2);if((lg==="en"||lg==="es")&&!/^\/(en|es|assets)(\/|$)/.test(u.pathname)){u.pathname="/"+lg+(u.pathname==="/"?"/":u.pathname);}e.preventDefault();e.stopImmediatePropagation();location.href=u.href;},true);})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/"> <!-- caminhos relativos sempre a partir da raiz, mesmo depois de pushState -->
@@ -406,7 +406,7 @@
 
 <script src="assets/data/artigos.js?v=20261115"></script>
 <script src="assets/data/colecoes.js?v=20261119"></script>
-<script src="assets/data/projetos.js?v=v20261123g"></script>
+<script src="assets/data/projetos.js?v=v20261123h"></script>
 <script src="assets/js/capas.js?v=20261115"></script>
 <script src="assets/js/obras.js?v=20261115"></script>
 <script src="assets/data/posts.js?v=20261119b"></script>
@@ -420,6 +420,6 @@
 <script src="assets/js/barra.js?v=20261116b" defer></script> <!-- celular: barra inferior e menu de tema/idioma -->
 <script src="assets/js/motion.js?v=20261115" defer></script>
 <script src="assets/js/estatisticas.js?v=20261115" defer></script> <!-- estatísticas privadas -->
-<script src="/assets/v2/conteudos.js?v=17" defer></script>
+<script src="/assets/v2/conteudos.js?v=18"></script>
 </body>
 </html>
