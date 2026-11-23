@@ -167,11 +167,13 @@
     + '@media(max-width:767px){.hm-all-cols [data-all-cols="4"],.hm-all-cols [data-all-cols="5"]{display:none}}'
     + '@media(min-width:768px){.hm-all-cols [data-all-cols="1"]{display:none}}'
     + '.hm-all-meta{text-align:center;font-size:12px;color:var(--gray-500);margin:0}'
-    /* Colunas reais em flex: zero reflow no load de imagens, zero travamento, zero salto de rolagem */
+    /* Colunas reais em flex com lote progressivo: zero reflow, zero travamento, zero salto de rolagem */
+    + '#hm-all,#hm-all-grid,.hm-all-col{overflow-anchor:none}'
     + '.hm-all-grid{display:grid;grid-template-columns:repeat(var(--all-cols,3),minmax(0,1fr));column-gap:14px;align-items:start}'
     + '.hm-all-col{display:flex;flex-direction:column;gap:24px;min-width:0}'
+    + '.hm-all-sentinel{height:1px;width:100%;pointer-events:none}'
     + '@media(min-width:768px){.hm-all-grid{column-gap:22px}.hm-all-col{gap:30px}.hm-all-grid[data-cols="4"],.hm-all-grid[data-cols="5"]{column-gap:16px}.hm-all-grid[data-cols="4"] .hm-all-col,.hm-all-grid[data-cols="5"] .hm-all-col{gap:22px}}'
-    + '.hm-all-card{display:block;color:inherit;text-decoration:none;min-width:0}'
+    + '.hm-all-card{display:block;color:inherit;text-decoration:none;min-width:0;contain:layout style}'
     + '.hm-all-card .art-card-media,.hm-all-card .work-card-media{margin-bottom:10px;border-radius:var(--r);overflow:hidden;position:relative;background:var(--gray-100)}'
     + '.hm-all-card .art-card-media img,.hm-all-card .work-card-media>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}'
     + '.hm-all-card:hover .art-card-media img,.hm-all-card:hover .work-card-media>img{transform:scale(1.03)}'
@@ -205,7 +207,7 @@
     if (!h) {
       h = document.createElement('div');
       h.id = 'hm-all';
-      h.innerHTML = '<div class="hm-all-sub" id="hm-all-sub"></div><div class="hm-all-grid" id="hm-all-grid"></div>';
+      h.innerHTML = '<div class="hm-all-sub" id="hm-all-sub"></div><div class="hm-all-grid" id="hm-all-grid"></div><div class="hm-all-sentinel" id="hm-all-sentinel" aria-hidden="true"></div>';
       f.parentNode.insertBefore(h, f.nextSibling);
     }
     return h;
@@ -434,7 +436,7 @@
       return '<a class="hm-all-card" href="' + hrefA + '" data-all-art="' + entry.idx + '">'
         + '<div class="art-card-media" style="aspect-ratio:3/2' + (a.bg ? ';background:' + esc(a.bg) : '') + '">'
         + (badge ? '<span class="art-badge">' + esc(badge) + '</span>' : '')
-        + '<img src="' + esc(img) + '" alt="" loading="lazy" decoding="async"' + (imgStyle ? ' style="' + imgStyle + '"' : '') + '>'
+        + '<img src="' + esc(img) + '" alt="" width="1200" height="800" loading="lazy" decoding="async"' + (imgStyle ? ' style="' + imgStyle + '"' : '') + '>'
         + '</div>'
         + '<p class="art-card-meta">' + esc(tags) + ' — ' + esc(fmtDate(a.d, lg)) + '</p>'
         + '<h2 class="art-card-title">' + esc(title) + '</h2>'
@@ -442,19 +444,24 @@
         + '</a>';
     }
     var x = entry.item;
-    var ar = (1 / (Number(x.r) || 1.25)).toFixed(4);
+    var rVal = Number(x.r) || 1.25;
+    var ar = (1 / rVal).toFixed(4);
+    var hPx = Math.round(1080 * rVal);
     var count = x.n > 1 ? '<span class="art-ig-count">' + SLIDES_ICO + x.n + '</span>' : '';
     return '<a class="hm-all-card" href="https://www.instagram.com/' + (x.reel ? 'reel' : 'p') + '/' + esc(x.c) + '/" target="_blank" rel="noopener" data-all-ig="' + esc(x.c) + '">'
-      + '<div class="art-card-media" style="aspect-ratio:' + ar + '">' + count + '<img src="' + esc(postSrc(x, lg)) + '" alt="" loading="lazy" decoding="async"></div>'
+      + '<div class="art-card-media" style="aspect-ratio:' + ar + '">' + count + '<img src="' + esc(postSrc(x, lg)) + '" alt="" width="1080" height="' + hPx + '" loading="lazy" decoding="async"></div>'
       + '<p class="art-card-meta">Instagram · ' + esc(x.v) + ' — ' + esc(fmtDate(x.d, lg)) + '</p>'
       + '<h2 class="art-card-title">' + postTitle(x, lg) + '</h2>'
       + '</a>';
   };
 
+  var batchIO = null;
   var renderAll = function () {
     var h = hostAll(); if (!h) return;
+    if (batchIO) { batchIO.disconnect(); batchIO = null; }
     var lg = lang();
     var grid = document.getElementById('hm-all-grid');
+    var sentinel = document.getElementById('hm-all-sentinel');
     var data = buildAllItems();
     var cols = getAllCols();
     lastLangRendered = lg;
@@ -465,6 +472,7 @@
 
     if (!data.items.length) {
       grid.innerHTML = '<p class="hm-all-empty">' + esc(EMPTY_L[lg]) + '</p>';
+      if (sentinel) sentinel.hidden = true;
       syncNativeFilterButtons();
       return;
     }
@@ -477,7 +485,6 @@
     var pool = data.items.slice();
 
     while (pool.length) {
-      // Escolhe a coluna mais curta no momento
       var cIdx = 0;
       for (var c = 1; c < cols; c++) {
         if (colHeights[c] < colHeights[cIdx]) cIdx = c;
@@ -510,13 +517,45 @@
       colItems[cIdx].push(chosen);
       colLastSrc[cIdx] = sourceKey(chosen);
       colLastShape[cIdx] = shapeOf(chosen);
-      // Altura relativa aproximada = 1/aspectRatio + texto (~0.36)
       colHeights[cIdx] += (1 / aspectRatioOf(chosen)) + (chosen.kind === 'post' ? 0.28 : 0.38);
     }
 
-    grid.innerHTML = colItems.map(function (list) {
-      return '<div class="hm-all-col">' + list.map(function (entry) { return cardHtml(entry, lg); }).join('') + '</div>';
-    }).join('');
+    // Renderização progressiva: 36 cards por lote para abrir instantâneo e rolar liso
+    grid.innerHTML = Array.from({ length: cols }, function () { return '<div class="hm-all-col"></div>'; }).join('');
+    var colEls = grid.querySelectorAll('.hm-all-col');
+    var cursors = new Array(cols).fill(0);
+    var perColBatch = Math.max(4, Math.ceil(36 / cols));
+    var hasMore = function () {
+      for (var ci = 0; ci < cols; ci++) if (cursors[ci] < colItems[ci].length) return true;
+      return false;
+    };
+    var appendBatch = function () {
+      for (var ci = 0; ci < cols; ci++) {
+        var start = cursors[ci];
+        if (start >= colItems[ci].length) continue;
+        var end = Math.min(colItems[ci].length, start + perColBatch);
+        var chunk = '';
+        for (var j = start; j < end; j++) chunk += cardHtml(colItems[ci][j], lg);
+        colEls[ci].insertAdjacentHTML('beforeend', chunk);
+        cursors[ci] = end;
+      }
+      if (!hasMore()) {
+        if (batchIO) { batchIO.disconnect(); batchIO = null; }
+        if (sentinel) sentinel.hidden = true;
+      }
+    };
+    appendBatch();
+    if (sentinel) {
+      sentinel.hidden = !hasMore();
+      if (!sentinel.hidden && 'IntersectionObserver' in window) {
+        batchIO = new IntersectionObserver(function (es) {
+          if (es.some(function (e) { return e.isIntersecting; })) appendBatch();
+        }, { rootMargin: '900px 0px' });
+        batchIO.observe(sentinel);
+      } else if (!sentinel.hidden) {
+        while (hasMore()) appendBatch();
+      }
+    }
 
     syncNativeFilterButtons();
     if (!grid.dataset.bound) {
@@ -645,6 +684,19 @@
     } else if (wantAllInitially) {
       setMode('all', true);
     }
+    var finishBoot = function () {
+      document.documentElement.classList.remove('hm-boot-loading');
+      var ld = document.getElementById('mx-loader');
+      if (ld && !ld.classList.contains('out')) {
+        ld.classList.add('out');
+        setTimeout(function () { if (ld.parentNode) ld.remove(); }, 520);
+      }
+    };
+    if (document.fonts && document.fonts.ready) {
+      Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 700); })]).then(function () {
+        requestAnimationFrame(finishBoot);
+      });
+    } else { requestAnimationFrame(finishBoot); }
     mqMob.addEventListener('change', function () { if (mode === 'all') renderAll(); });
     addEventListener('hashchange', function () {
       if (location.hash === '#projetos') setMode('proj');

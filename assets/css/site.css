@@ -19,7 +19,8 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-anchor: none; }
+body { overflow-anchor: none; }
 body {
   background: var(--white);
   color: var(--ink);
@@ -334,7 +335,7 @@ html[lang="es"] .hero-headline { font-size: min(28px, calc((100vw - 2 * var(--gu
   overflow: hidden; padding: 36px 0; margin: -36px 0; /* folga vertical p/ o zoom não cortar */
 }
 .marquee-track { display: flex; width: max-content; align-items: center; will-change: transform; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
-@media (hover: none) { .marquee-track { touch-action: none; } }
+@media (hover: none) { .marquee-track { touch-action: pan-y; } }
 .marquee-track *, .marquee-track img, .marquee-track a { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
 .marquee-track.is-dragging { cursor: grabbing; }
 .marquee-track.is-dragging, .marquee-track.is-dragging * { cursor: grabbing; }

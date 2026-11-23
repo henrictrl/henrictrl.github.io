@@ -12,31 +12,13 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/retrato-cor.webp" fetchpriority="high"> <!-- LCP -->
 <script src="assets/js/tema.js?v=20261115"></script> <!-- modo noturno: antes da primeira pintura -->
 <script src="assets/js/idioma.js?v=20261115"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
-<!-- animações: ?nomotion desliga; tela de carregamento só na 1ª visita da sessão -->
-<script>(function(h){h.classList.add('js');try{if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
-<script>
-/* Retrato no celular em tamanho real de foto 3x4 (3 cm × 4 cm).
-   Nenhuma API dá a densidade física da tela: iPhones vêm de tabela (CSS px × DPR → ppi);
-   demais aparelhos usam ~160 CSS px por polegada (base do "dp" no Android). */
-(function () {
-  var w = Math.min(screen.width, screen.height), h = Math.max(screen.width, screen.height), d = window.devicePixelRatio || 1;
-  var ios = /iP(hone|od)/.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform) && w < 500);
-  var PPI = { // "largura x altura @dpr": ppi físico
-    '320x568@2': 326, '375x667@2': 326, '414x736@3': 401, '375x812@3': 458, '360x780@3': 476,
-    '414x896@2': 326, '414x896@3': 458, '390x844@3': 460, '428x926@3': 458, '393x852@3': 460,
-    '430x932@3': 460, '402x874@3': 460, '440x956@3': 460, '420x912@3': 460
-  };
-  var ppi = ios && PPI[w + 'x' + h + '@' + d];
-  var pxPorPol = ppi ? ppi / d : 160;
-  var larg = 3 / 2.54 * pxPorPol; // 3 cm em CSS px
-  document.documentElement.style.setProperty('--foto-3x4-w', larg.toFixed(2) + 'px');
-})();
-</script>
+<!-- animações: ?nomotion desliga; em /conteudos/ oculta #view-home antes da 1ª pintura -->
+<script>(function(h){h.classList.add('js');try{var isArt=/^\/(en\/|es\/)?(artigos|conteudos)(\/|$)/.test(location.pathname);if(isArt)h.classList.add('hm-boot-articles');if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(isArt)h.classList.add('hm-boot-loading');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
+<style>html,body{overflow-anchor:none}html.hm-boot-articles #view-home{display:none!important}html.hm-boot-articles #view-articles{display:block!important}html.hm-boot-loading #mx-loader{display:grid!important;opacity:1;visibility:visible}</style>
 <link rel="stylesheet" href="assets/css/motion.css?v=20261115">
-<link rel="stylesheet" href="assets/css/site.css?v=20261119">
+<link rel="stylesheet" href="assets/css/site.css?v=20261123i">
 <link rel="stylesheet" href="assets/css/tema.css?v=20261119">
 
 <!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
@@ -413,13 +395,13 @@
 <script src="assets/data/engajamento.js?v=20261115"></script>
 <script src="assets/data/ferramentas.js?v=20261115" defer></script>
 <script src="assets/data/glossario.js?v=20261115" defer></script>
-<script src="assets/js/site.js?v=20261119c-hm"></script>
+<script src="assets/js/site.js?v=20261123i"></script>
 
 
 <script src="assets/js/contato.js?v=20261115" defer></script>
 <script src="assets/js/barra.js?v=20261116b" defer></script> <!-- celular: barra inferior e menu de tema/idioma -->
 <script src="assets/js/motion.js?v=20261115" defer></script>
 <script src="assets/js/estatisticas.js?v=20261115" defer></script> <!-- estatísticas privadas -->
-<script src="/assets/v2/conteudos.js?v=18"></script>
+<script src="/assets/v2/conteudos.js?v=19"></script>
 </body>
 </html>

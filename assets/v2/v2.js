@@ -26,13 +26,40 @@
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
 
-  /* ---------- Carregamento (3x3 pontos do site), só na 1ª página da sessão ---------- */
+  /* ---------- Carregamento (3x3 pontos): aguarda fontes + imagens da dobra antes de abrir ---------- */
   var loader = $('#mx-loader');
   if (loader) {
-    var out = function () { loader.classList.add('out'); ss.set('mx-seen', '1'); setTimeout(function () { loader.remove(); }, 600); };
-    if (document.readyState === 'complete') setTimeout(out, 250); else addEventListener('load', function () { setTimeout(out, 250); }, { once: true });
-    setTimeout(out, 2200);
-  }
+    var doneLoader = false, loaderT0 = performance.now();
+    var out = function () {
+      if (doneLoader) return; doneLoader = true;
+      var wait = Math.max(0, 160 - (performance.now() - loaderT0));
+      setTimeout(function () {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            html.classList.remove('is-loading');
+            loader.classList.add('out');
+            ss.set('mx-seen', '1');
+            setTimeout(function () { loader.remove(); }, 550);
+          });
+        });
+      }, wait);
+    };
+    if (reduce) { html.classList.remove('is-loading'); loader.remove(); }
+    else {
+      var heroImgs = $$('.hport img, .chero__cover > img').filter(function (im) { return im.offsetParent !== null; });
+      var waitImg = function (im) {
+        if (im.complete && im.naturalWidth) return im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+        return new Promise(function (res) {
+          var ok = function () { (im.decode ? im.decode().catch(function () {}) : Promise.resolve()).then(res); };
+          im.addEventListener('load', ok, { once: true });
+          im.addEventListener('error', res, { once: true });
+        });
+      };
+      var fontsP = (document.fonts && document.fonts.ready) ? document.fonts.ready.catch(function () {}) : Promise.resolve();
+      Promise.all([fontsP].concat(heroImgs.map(waitImg))).then(out);
+      setTimeout(out, 1800);
+    }
+  } else { html.classList.remove('is-loading'); }
 
   /* ---------- Cabeçalho: fixo, some ao descer, volta ao subir ---------- */
   var hd = $('header.top-header'), toggle = $('#nav-toggle');
@@ -178,13 +205,21 @@
     }).observe(el);
   });
 
-  /* ---------- Imagens: baixam e decodificam bem antes de chegar na tela (o Safari só busca 'lazy' muito em cima),
-     então nada engasga ao rolar ---------- */
+  /* ---------- Imagens: pré-carregamento moderado só para imagens visíveis (sem tempestade de decode) ---------- */
   if ('IntersectionObserver' in window) {
-    var pre = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (!e.isIntersecting) return; var im = e.target; pre.unobserve(im); im.loading = 'eager'; if (im.decode) im.decode().catch(function () {}); });
-    }, { rootMargin: '1800px 0px' });
-    $$('img[loading="lazy"]').forEach(function (im) { pre.observe(im); });
+    var imgPre = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var im = e.target;
+        if (im.offsetParent === null) return;
+        imgPre.unobserve(im);
+        im.loading = 'eager';
+      });
+    }, { rootMargin: '450px 0px' });
+    $$('img[loading="lazy"]').forEach(function (im) {
+      if (im.classList.contains('piece__i') && !im.classList.contains('is-on')) return;
+      imgPre.observe(im);
+    });
   }
 
   /* ---------- Retrato em vídeo: garante o loop (iOS) e pausa fora da tela ---------- */
@@ -193,34 +228,49 @@
     new IntersectionObserver(function (e) { if (e[0].isIntersecting) play(); else v.pause(); }).observe(v);
   });
 
-  /* ---------- Mosaico: cada peça passa pelas suas imagens (sozinha, no hover e no clique).
-     data-seq define a ordem; sem ele, alterna entre as imagens em sequência ---------- */
-  $$('.piece__i').forEach(function (im) { // aparece suave quando termina de carregar (sem pedaço desenhado pela metade)
+  /* ---------- Mosaico: cada peça alterna imagens só enquanto visível na tela ---------- */
+  $$('.piece__i').forEach(function (im) {
     if (im.tagName !== 'IMG' || (im.complete && im.naturalWidth)) { im.classList.add('is-ready'); return; }
-    var ok = function () { im.classList.add('is-ready'); }; im.addEventListener('load', ok); im.addEventListener('error', ok);
+    var ok = function () { im.classList.add('is-ready'); }; im.addEventListener('load', ok, { once: true }); im.addEventListener('error', ok, { once: true });
   });
-  if ('IntersectionObserver' in window) { // perto da seção: todas as camadas do mosaico já baixam
-    var mos = $$('.mos'); var mio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; mio.unobserve(e.target); $$('img.piece__i', e.target).forEach(function (im) { im.loading = 'eager'; if (im.decode) im.decode().catch(function () {}); }); }); }, { rootMargin: '1500px 0px' });
-    mos.forEach(function (m) { mio.observe(m); });
-  }
+  var swapIO = (!reduce && 'IntersectionObserver' in window) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var fn = e.target._hmSwapVis;
+      if (fn) fn(e.isIntersecting);
+    });
+  }, { rootMargin: '120px 0px' }) : null;
   $$('[data-swap]').forEach(function (pc, i) {
     var layers = $$('.piece__i', pc), seq = pc.dataset.seq ? pc.dataset.seq.split(',').map(Number) : layers.map(function (_, k) { return k; });
-    var pos = 0, hold = false, t = null;
-    var pt = null;
+    var pos = 0, hold = false, vis = false, t = null, delayT = null, pt = null;
+    var warmNext = function () {
+      var nxt = layers[seq[(pos + 1) % seq.length]];
+      if (nxt && nxt.tagName === 'IMG' && !(nxt.complete && nxt.naturalWidth)) nxt.loading = 'eager';
+    };
     var show = function (p) {
       var prev = layers[seq[pos]]; pos = (p + seq.length) % seq.length; var next = layers[seq[pos]];
       if (prev === next) return;
-      if (next.tagName === 'IMG' && !(next.complete && next.naturalWidth)) { // ainda carregando: espera ficar pronta
+      if (next.tagName === 'IMG' && !(next.complete && next.naturalWidth)) {
         next.loading = 'eager'; pos = (pos - 1 + seq.length) % seq.length;
-        (next.decode ? next.decode() : Promise.reject()).then(function () { show(pos + 1); }, function () {});
+        (next.decode ? next.decode() : Promise.reject()).then(function () { next.classList.add('is-ready'); show(pos + 1); }, function () {});
         return;
       }
       layers.forEach(function (el) { el.classList.remove('is-prev'); });
       prev.classList.remove('is-on'); prev.classList.add('is-prev'); next.classList.add('is-on');
-      clearTimeout(pt); pt = setTimeout(function () { prev.classList.remove('is-prev'); }, 850); // a anterior sai só depois da nova cobrir
+      clearTimeout(pt); pt = setTimeout(function () { prev.classList.remove('is-prev'); }, 850);
+      warmNext();
     };
-    var auto = function () { clearInterval(t); if (reduce) return; t = setInterval(function () { if (!hold && !document.hidden) show(pos + 1); }, 4200); };
-    setTimeout(auto, (i % 5) * 900);
+    var stopAuto = function () { clearTimeout(delayT); delayT = null; clearInterval(t); t = null; };
+    var auto = function () {
+      stopAuto();
+      if (reduce || !vis || pc.offsetParent === null) return;
+      warmNext();
+      delayT = setTimeout(function () {
+        if (!vis || pc.offsetParent === null) return;
+        t = setInterval(function () { if (!hold && !document.hidden && vis && pc.offsetParent !== null) show(pos + 1); }, 4200);
+      }, (i % 5) * 650);
+    };
+    pc._hmSwapVis = function (on) { vis = on && pc.offsetParent !== null; if (vis) auto(); else stopAuto(); };
+    if (swapIO) swapIO.observe(pc);
     pc.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'mouse') return; hold = true; show(pos + 1); });
     pc.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'mouse') return; hold = false; auto(); });
     pc.addEventListener('click', function () { show(pos + 1); auto(); });
@@ -250,9 +300,12 @@
     var fill = $('[data-timeline-fill]', tl), layers = $$('[data-layer]', tl);
     if (reduce) { layers.forEach(function (l) { l.classList.add('is-on'); }); return; }
     tl.classList.add('is-live');
+    var lastP = '';
     scrollFns.push(function () {
       var r = tl.getBoundingClientRect(), vh = innerHeight;
-      fill.style.setProperty('--p', clamp((vh * .62 - r.top) / r.height, 0, 1).toFixed(4));
+      if (r.bottom < -120 || r.top > vh + 120) return;
+      var p = clamp((vh * .62 - r.top) / r.height, 0, 1).toFixed(4);
+      if (p !== lastP) { lastP = p; fill.style.setProperty('--p', p); }
       layers.forEach(function (l) { l.classList.toggle('is-on', l.getBoundingClientRect().top + 30 < vh * .62); });
     });
   });
@@ -338,7 +391,7 @@
       if (!drag || e.pointerId !== drag.id) return;
       var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
       if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) drag.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
-      if (mobile && drag.axis === 'y') { var dyStep = e.clientY - drag.lastY; if (dyStep) scrollBy(0, -dyStep); drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now(); return; }
+      if (mobile && drag.axis === 'y') { var dyStep = e.clientY - drag.lastY; if (dyStep) scrollBy({ top: -dyStep, behavior: 'instant' }); drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now(); return; }
       if (drag.axis === 'y') return;
       var now = performance.now(), el = Math.max(1, now - drag.lastT);
       drag.fingerV = (e.clientX - drag.lastX) / el * 1000; drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = now;

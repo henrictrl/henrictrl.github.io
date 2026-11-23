@@ -225,14 +225,21 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshReveal();
 
   /* --- Rotas --- */
-  const showRoute = (route, navId) => {
+  let homeBooted = false;
+  const showRoute = (route, navId, skipScroll = false) => {
     document.body.classList.toggle('home-route', route === 'home');
     document.title = route === 'home' ? 'Henrique Marinhos' : ({ work: i18n('nav.work', 'Projetos'), articles: i18n('nav.articles', 'Conteúdos'), about: i18n('nav.about', 'Sobre') })[route] + ' — Henrique Marinhos';
     ROUTES.forEach(r => document.getElementById('view-' + r).style.display = (r === route) ? 'block' : 'none');
     if (navId) {
       document.querySelectorAll('[data-nav-id]').forEach(a => a.classList.toggle('current', a.dataset.navId === navId));
     }
-    window.scrollTo(0, 0);
+    if (!skipScroll) window.scrollTo({ top: 0, behavior: 'instant' });
+    if (route === 'home' && !homeBooted) {
+      homeBooted = true;
+      initMarquee();
+      initPortrait();
+      renderHomeRows();
+    }
     if (route === 'work') renderWorkPage();
     if (route === 'about') renderAboutPage();
     if (route === 'articles') renderArticlesPage();
@@ -1370,7 +1377,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!drag.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 7) drag.axis = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
       if (mobile && drag.axis === 'y') {
         const dyStep = e.clientY - drag.lastY; // gesto vertical: rola a página, não a faixa
-        if (dyStep) window.scrollBy(0, -dyStep);
+        if (dyStep) window.scrollBy({ top: -dyStep, behavior: 'instant' });
         drag.lastX = e.clientX; drag.lastY = e.clientY; drag.lastT = performance.now();
         return;
       }
@@ -1517,7 +1524,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const renderPJ = () => {
-    renderHomeRows();
+    if (homeBooted) renderHomeRows();
     const grid = document.getElementById('work-case-grid'), bar = document.getElementById('pj-filters');
     const dashboardCTA = document.getElementById('work-dashboard-cta');
     if (!grid || !bar) return;
@@ -2083,8 +2090,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
     setTimeout(Scramble.release, 1800); // carregamento lento: não espera as imagens
   })();
-  initMarquee();
-  initPortrait();
   renderPJ();
   // rodapé: a física dos ícones só começa quando o contato se aproxima da tela (tira ~50 ms do carregamento)
   { const ft = document.getElementById('contato'); if (ft && 'IntersectionObserver' in window) { const io = new IntersectionObserver((es) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); initTools(); } }, { rootMargin: '600px 0px' }); io.observe(ft); } else initTools(); }
@@ -2122,22 +2127,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateMobileTopButton();
   }
   const routeByPath = { '/': ['home', 'inicio'], '/sobre': ['about', 'sobre'], '/projetos': ['work', 'trabalhos'], '/artigos': ['articles', 'artigos'], '/conteudos': ['articles', 'artigos'] };
-  const routeFromLocation = () => {
+  const routeFromLocation = (isInitial = false) => {
     const path = HMI.path().replace(/\/$/, '') || '/';
     const baseRoute = routeByPath[path];
     const colM = path.match(/^\/(?:artigos|conteudos)\/([^/]+)(?:\/(\d{4}))?$/);
     const col = colM && (window.COLECOES || []).find(c => c.s === colM[1]);
     window.HM_COL = col ? { c: col, ano: colM[2] || '' } : null; // coleção de artigos com endereço próprio
-    if (col) { showRoute('articles', 'artigos'); window.HM_applyCol && window.HM_applyCol(); return; }
+    if (col) { showRoute('articles', 'artigos', isInitial); window.HM_applyCol && window.HM_applyCol(); return; }
     if (baseRoute) {
-      showRoute(baseRoute[0], baseRoute[1]);
+      showRoute(baseRoute[0], baseRoute[1], isInitial);
       if (baseRoute[0] === 'articles' && window.HM_applyCol) window.HM_applyCol();
       if (location.hash === '#contato') requestAnimationFrame(() => document.getElementById('contato')?.scrollIntoView());
       return;
     }
     const match = path.match(/^\/(?:artigos|conteudos)\/([^/]+)$/);
     if (match) {
-      showRoute('articles', 'artigos');
+      showRoute('articles', 'artigos', isInitial);
       const slug = decodeURIComponent(match[1]);
       const article = (window.ARTIGOS || []).find(a => !a.project && articleSlug(a) === slug);
       if (article) openArticle(article);
@@ -2147,7 +2152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const legacy = { '#home': ['home', 'inicio', '/'], '#sobre': ['about', 'sobre', '/sobre/'], '#trabalhos': ['work', 'trabalhos', '/projetos/'], '#artigos': ['articles', 'artigos', '/conteudos/'] }[location.hash];
     if (legacy) {
       history.replaceState({ portfolioRoute: legacy[0] }, '', legacy[2]);
-      showRoute(legacy[0], legacy[1]);
+      showRoute(legacy[0], legacy[1], isInitial);
     }
   };
   window.addEventListener('popstate', () => {
@@ -2156,9 +2161,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // voltou para a página de onde o artigo abriu: só fecha o modal, sem recarregar a rota (que rolava ao topo)
       if (from && location.pathname + location.search + location.hash === from.url) { window.scrollTo({ top: from.y, behavior: 'instant' }); return; }
     }
-    routeFromLocation();
+    routeFromLocation(false);
   });
-  routeFromLocation();
+  routeFromLocation(true);
   fromHash(); // compatibilidade com links antigos; encaminha o case para projeto.html
 });
 
