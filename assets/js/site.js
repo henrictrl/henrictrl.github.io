@@ -1545,7 +1545,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const matches = displayedPJ.filter(p => !p.oculto).filter(p => pjSelectedCategory === 'all' || [].concat(p.filtro || []).includes(pjSelectedCategory));
     const summary = `<div class="pj-results-line"><span>${matches.length} ${lx({pt:matches.length===1?'projeto':'projetos',en:matches.length===1?'project':'projects',es:matches.length===1?'proyecto':'proyectos'})}</span></div>`;
     applyCols(grid);
-    grid.innerHTML = summary + (matches.length ? (window.capaSpread ? capaSpread(matches, getCols()) : matches).map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
+    grid.innerHTML = summary + (matches.length ? matches.map(pjCard).join('') : `<p class="pj-empty">${lx({pt:'Nenhum projeto nesta categoria.',en:'No projects in this category.',es:'No hay proyectos en esta categoría.'})}</p>`);
   };
   document.getElementById('pj-filters').addEventListener('click', (e) => {
     const cb = e.target.closest('[data-cols]'); if (cb) { setCols(+cb.dataset.cols); renderPJ(); return; } // recria os cards: reordena as capas e reinicia as animações

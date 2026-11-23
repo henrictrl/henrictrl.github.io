@@ -68,6 +68,7 @@ window.ETIQUETAS = {
   "illustrator": {pt: "Illustrator", en: "Illustrator", es: "Illustrator"},
   "ilustracao": {pt: "Ilustração", en: "Illustration", es: "Ilustración"},
   "ilustracao-vetorial": {pt: "Ilustração vetorial", en: "Vector illustration", es: "Ilustración vectorial"},
+  "impressos": {pt: "Impressos", en: "Print", es: "Impresos"},
   "institucional": {pt: "Institucional", en: "Institutional", es: "Institucional"},
   "internacional": {pt: "Internacional", en: "International", es: "Internacional"},
   "javascript": {pt: "JavaScript", en: "JavaScript", es: "JavaScript"},

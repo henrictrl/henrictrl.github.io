@@ -57,11 +57,13 @@ a.lang-btn { line-height: 0; }
 .hero-grid .headline { white-space: nowrap; }
 .hport { --w: min(270px, 66vw); display: flex; flex-direction: column; align-items: center; flex: none; }
 .hport__fig.about-photo { width: var(--w); aspect-ratio: 5 / 6; margin: 0; box-shadow: 0 0 0 1px var(--gray-200); }
-.hport__fig.about-photo img { object-position: 40% 50%; }
+.hport__fig.about-photo img { object-position: 50% 50%; }
+.hport__fig.about-photo .ap-cor { opacity: 1; }
 @media (min-width: 768px) {
   .hero-grid .hport { flex: 0 0 50%; align-items: stretch; }
   .hero-grid .hport__fig.about-photo { width: 100%; height: calc(var(--w) * 6 / 5); aspect-ratio: auto; }
-} /* mais do lado esquerdo da foto, mesmo fora do centro */
+  .hero-grid .hport__fig.about-photo img { object-position: 40% 50%; }
+} /* mobile centralizado; desktop mostra mais do lado esquerdo da foto */
 
 /* Sobre mim (abaixo da abertura) */
 .about-row { display: flex; flex-direction: column; gap: 24px; }
@@ -286,9 +288,10 @@ html[data-theme="dark"] .credit-bar { background: rgba(28,28,28,.96); }
 .about-photo:hover .ap-cor, .about-photo:focus-visible .ap-cor, .about-photo.is-color .ap-cor { opacity: 1; }
 .about-photo:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .certs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding-top: 16px; }
-@media (min-width: 768px) { .certs { gap: 14px; } }
-/* Certificados: fechados por padrão, abrem no subtítulo dentro de Habilidades técnicas */
-.certs-box { margin-top: 8px; border-top: 1px solid var(--gray-200); padding-top: 16px; }
+@media (min-width: 640px) { .certs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+@media (min-width: 900px) { .certs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
+/* Certificados: fechados por padrão, ocupam largura dupla (as duas colunas de .duo) no desktop */
+.certs-box { grid-column: 1 / -1; margin-top: 0; border-top: 1px solid var(--gray-200); padding-top: 24px; }
 .certs-sum { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; list-style: none; font-size: 15px; font-weight: 500; color: var(--ink); -webkit-tap-highlight-color: transparent; }
 .certs-sum::-webkit-details-marker { display: none; }
 .certs-sum small { font-size: 12px; font-weight: 400; color: var(--small-ink, var(--gray-500)); }
