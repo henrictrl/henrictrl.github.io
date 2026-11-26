@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta name="robots" content="noindex, nofollow"><script>(function(){var AREA="/redacao";var ok=new RegExp("^"+AREA+"/(en/|es/)?(artigos|conteudos)(/|$)");addEventListener("click",function(e){if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;var a=e.target.closest&&e.target.closest("a[href]");if(!a||a.target==="_blank"||a.classList.contains("lang-btn"))return;var u=new URL(a.href,location.href);if(u.origin!==location.origin||ok.test(u.pathname))return;if(/^\/(assets|scripts)\//.test(u.pathname))return;var p=u.pathname;if(p!==AREA&&p.indexOf(AREA+"/")!==0)p=AREA+p;var lg=(document.documentElement.lang||"").slice(0,2);if((lg==="en"||lg==="es")&&p.indexOf(AREA+"/en/")!==0&&p.indexOf(AREA+"/es/")!==0&&p!==AREA+"/en"&&p!==AREA+"/es"){var rest=p.slice(AREA.length)||"/";p=AREA+"/"+lg+(rest==="/"?"/":rest);}u.pathname=p;e.preventDefault();e.stopImmediatePropagation();location.href=u.href;},true);})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/"> <!-- caminhos relativos sempre a partir da raiz, mesmo depois de pushState -->
+<title>Henrique Marinhos</title>
+<meta name="description" content="Portfólio de Henrique Marinhos, redator, copywriter e relações-públicas focado em textos editoriais, crítica cultural, redes sociais e comunicação B2B.">
+<meta name="google-site-verification" content="h6bAkOayPHnAIpK4OAyF0fBiJ_whJN_DQ7ZdN8cxKNc">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/js/tema.js?v=20261115"></script> <!-- modo noturno: antes da primeira pintura -->
+<script src="/redacao/assets/js/idioma.js?v=20261125"></script> <!-- idioma no endereço (/en/, /es/), canonical e hreflang -->
+<!-- animações: ?nomotion desliga; em /conteudos/ oculta #view-home antes da 1ª pintura -->
+<script>(function(h){h.classList.add('js');try{var isArt=/^\/redacao\/(en\/|es\/)?(artigos|conteudos)(\/|$)/.test(location.pathname);if(isArt)h.classList.add('hm-boot-articles');if(/[?&]nomotion/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('mx-off');else if(isArt)h.classList.add('hm-boot-loading');else if(sessionStorage.getItem('mx-seen'))h.classList.add('mx-seen');}catch(e){}})(document.documentElement)</script>
+<style>html,body{overflow-anchor:none}html.hm-boot-articles #view-home{display:none!important}html.hm-boot-articles #view-articles{display:block!important}html.hm-boot-loading #mx-loader{display:grid!important;opacity:1;visibility:visible}</style>
+<link rel="stylesheet" href="assets/css/motion.css?v=20261115">
+<link rel="stylesheet" href="assets/css/site.css?v=20261123i">
+<link rel="stylesheet" href="assets/css/tema.css?v=20261119">
+
+<!-- compartilhamento (gerado por scripts/miniaturas.mjs) -->
+<link rel="canonical" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="pt-BR" href="https://henrictrl.github.io/">
+<link rel="alternate" hreflang="en" href="https://henrictrl.github.io/en/">
+<link rel="alternate" hreflang="es" href="https://henrictrl.github.io/es/">
+<link rel="alternate" hreflang="x-default" href="https://henrictrl.github.io/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Henrique Marinhos","url":"https://henrictrl.github.io/","jobTitle":"Designer e relações-públicas","image":"https://henrictrl.github.io/assets/img/retrato-cor.webp","address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Unesp"},"sameAs":["https://www.linkedin.com/in/henrique-marinhos/","https://www.behance.net/henriquemarinhos","http://lattes.cnpq.br/8181966688647381"]}</script>
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henrique Marinhos">
+<meta property="og:title" content="Henrique Marinhos — Designer e relações-públicas">
+<meta property="og:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta property="og:url" content="https://henrictrl.github.io/">
+<meta property="og:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:secure_url" content="https://henrictrl.github.io/assets/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Henrique Marinhos — Designer e relações-públicas">
+<meta name="twitter:description" content="Estratégias de comunicação críticas e funcionais para marcas. Design gráfico, social media, redação e landing pages.">
+<meta name="twitter:image" content="https://henrictrl.github.io/assets/img/og.jpg">
+<!-- /compartilhamento -->
+</head>
+<body class="home-route">
+<!-- tela de carregamento (motion.js anima e remove) -->
+<div id="mx-loader" aria-hidden="true"><div class="mx-mark"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
+
+<header class="top-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="brand-collapse-inner">
+        <p class="brand-name">Henrique Marinhos</p>
+        <p class="brand-location">— São Paulo, Brasil</p>
+      </div>
+    </div>
+    
+    <!-- botão do menu (só no mobile) -->
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" data-i18n-aria="menu.open" aria-controls="nav-panel"><span></span><span></span></button>
+    <!-- nav-row: no mobile é o painel do menu; no desktop "some" (display:contents): links no centro, bandeiras à direita -->
+    <div class="nav-row" id="nav-panel">
+            <nav class="main-nav" aria-label="Navegação principal">
+        <a href="/redacao/" data-route="home" data-nav-id="inicio" class="current"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.3a2 2 0 0 1 .7-1.5l5-4.3a2 2 0 0 1 2.6 0l5 4.3a2 2 0 0 1 .7 1.5v6.2a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 17.5z"/></svg><span data-i18n="nav.home">Início</span></a>
+        <a href="/redacao/projetos/" data-route="work" data-nav-id="trabalhos"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c-4.8 0-8.5 3.7-8.5 8.5s3.7 8.5 8.5 8.5c1.2 0 1.9-.8 1.9-1.8 0-.5-.2-.9-.5-1.3-.3-.3-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8h2.1c2.1 0 3.7-1.7 3.7-3.8 0-3.9-3.8-7-8.5-7z"/><circle cx="7.6" cy="11.6" r="1.15" fill="currentColor" stroke="none"/><circle cx="9.4" cy="7.8" r="1.15" fill="currentColor" stroke="none"/><circle cx="13.9" cy="7.1" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.9" cy="10" r="1.15" fill="currentColor" stroke="none"/></svg><span data-i18n="nav.work">Projetos</span></a>
+        <a href="/redacao/conteudos/" data-route="articles" data-nav-id="artigos"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.8" y="5" width="4.2" height="15" rx="1.6"/><rect x="9.2" y="7.5" width="4.2" height="12.5" rx="1.6"/><rect x="14.4" y="6.8" width="4.2" height="13.2" rx="1.6" transform="rotate(15 14.4 20)"/><circle cx="5.9" cy="9" r="0.95" fill="currentColor" stroke="none"/><circle cx="11.3" cy="11.3" r="0.95" fill="currentColor" stroke="none"/></svg><span data-i18n="nav.articles">Conteúdos</span></a>
+        <a href="/redacao/sobre/" data-route="about" data-nav-id="sobre"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.3" r="3.6"/><path d="M5.5 19.5c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/></svg><span data-i18n="nav.about">Sobre</span></a>
+        <a href="/redacao/#contato" data-nav-id="contato"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.5h8A4.5 4.5 0 0 1 20.5 9v3.5A4.5 4.5 0 0 1 16 17h-3.4l-3.6 2.8c-.5.4-1.2 0-1.2-.6V17H8a4.5 4.5 0 0 1-4.5-4.5V9A4.5 4.5 0 0 1 8 4.5z"/></svg><span data-i18n="nav.contact">Contato</span></a>
+      </nav>
+      <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
+      <div class="lang-switch" role="group" aria-label="Idioma / Language"></div>
+    </div>
+  </div>
+</header>
+
+<div class="floating-header" id="floating-header" role="region" aria-label="Menu fixo">
+  <div class="header-inner">
+    <div class="header-left"></div>
+    <div class="nav-row">
+            <nav class="main-nav" aria-label="Navegação principal (fixa)">
+        <a href="/redacao/" data-route="home" data-nav-id="inicio" class="current"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.3a2 2 0 0 1 .7-1.5l5-4.3a2 2 0 0 1 2.6 0l5 4.3a2 2 0 0 1 .7 1.5v6.2a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 17.5z"/></svg><span data-i18n="nav.home">Início</span></a>
+        <a href="/redacao/projetos/" data-route="work" data-nav-id="trabalhos"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c-4.8 0-8.5 3.7-8.5 8.5s3.7 8.5 8.5 8.5c1.2 0 1.9-.8 1.9-1.8 0-.5-.2-.9-.5-1.3-.3-.3-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8h2.1c2.1 0 3.7-1.7 3.7-3.8 0-3.9-3.8-7-8.5-7z"/><circle cx="7.6" cy="11.6" r="1.15" fill="currentColor" stroke="none"/><circle cx="9.4" cy="7.8" r="1.15" fill="currentColor" stroke="none"/><circle cx="13.9" cy="7.1" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.9" cy="10" r="1.15" fill="currentColor" stroke="none"/></svg><span data-i18n="nav.work">Projetos</span></a>
+        <a href="/redacao/conteudos/" data-route="articles" data-nav-id="artigos"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.8" y="5" width="4.2" height="15" rx="1.6"/><rect x="9.2" y="7.5" width="4.2" height="12.5" rx="1.6"/><rect x="14.4" y="6.8" width="4.2" height="13.2" rx="1.6" transform="rotate(15 14.4 20)"/><circle cx="5.9" cy="9" r="0.95" fill="currentColor" stroke="none"/><circle cx="11.3" cy="11.3" r="0.95" fill="currentColor" stroke="none"/></svg><span data-i18n="nav.articles">Conteúdos</span></a>
+        <a href="/redacao/sobre/" data-route="about" data-nav-id="sobre"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.3" r="3.6"/><path d="M5.5 19.5c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/></svg><span data-i18n="nav.about">Sobre</span></a>
+        <a href="/redacao/#contato" data-nav-id="contato"><svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.5h8A4.5 4.5 0 0 1 20.5 9v3.5A4.5 4.5 0 0 1 16 17h-3.4l-3.6 2.8c-.5.4-1.2 0-1.2-.6V17H8a4.5 4.5 0 0 1-4.5-4.5V9A4.5 4.5 0 0 1 8 4.5z"/></svg><span data-i18n="nav.contact">Contato</span></a>
+      </nav>
+      <!-- idiomas: as bandeiras são desenhadas pelo JS (initLang) -->
+      <div class="lang-switch" role="group" aria-label="Idioma / Language"></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div id="view-home">
+    <div class="first-screen"> <!-- desktop: abertura e Sobre ocupam a 1ª tela -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1 class="hero-headline reveal" id="hero-title" data-i18n="hero"><span class="dim">Designer e<br>relações-públicas.</span><br>Estratégias de<br>comunicação críticas e<br>funcionais para marcas.</h1>
+        </div>
+        <!-- Retrato interativo: vídeo em loop; hover/arraste revela a foto; clique/toque = foto inteira -->
+        <div class="portrait-wrap reveal">
+        <figure class="hero-portrait" id="hero-portrait" tabindex="0" role="button"
+                aria-pressed="false" aria-label="Retrato de Henrique Marinhos. Ative para ver a foto." data-i18n-aria="portrait.aria">
+          <img class="portrait-layer portrait-base" src="assets/img/retrato-cor.webp"
+               width="480" height="640" alt="Retrato de Henrique Marinhos"
+               fetchpriority="high" decoding="async">
+          <video class="portrait-layer portrait-video" muted loop playsinline preload="none"
+                 aria-hidden="true" data-src="assets/video/retrato-loop.mp4"></video>
+          <canvas class="portrait-layer portrait-reveal" aria-hidden="true"></canvas>
+        </figure>
+        <span class="portrait-hint" aria-live="polite">
+          <span class="hint-mouse" data-i18n="hint.mouse">passe o mouse - clique para ver a foto</span>
+          <span class="hint-touch" data-i18n="hint.touch">arraste o dedo - toque para ver a foto</span>
+        </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block has-aside">
+      <div class="section-grid">
+        <div class="home-aside">
+          <h2 class="section-label" data-i18n="about.label">Sobre mim</h2>
+          <ul class="home-stats" id="home-stats">
+            <li><a href="/redacao/projetos/" data-route="work" data-nav-id="trabalhos"><b data-count="pj">0</b><span data-i18n="nav.work">Projetos</span></a></li>
+            <li><a href="/redacao/conteudos/" data-route="articles" data-nav-id="artigos"><b data-count="art">0</b><span data-i18n="nav.articles">Conteúdos</span></a></li>
+            <li><a href="/redacao/projetos/" data-route="work" data-nav-id="trabalhos"><b data-count="post">0</b><span>Posts</span></a></li>
+          </ul>
+        </div>
+        <div class="reveal section-body">
+          <!-- mesmo texto, quebras calculadas para cada largura (só um aparece por vez) -->
+          <p class="about-text about-desk" data-i18n-about="31.6">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Desenvolvo identidades visuais, <em>landing pages</em> e peças gráficas para marcas. Também sou redator cultural em portais jornalísticos independentes.</p>
+          <p class="about-text about-mob" data-i18n-about="19.7">Bacharel em Relações Públicas pela Unesp, desenvolvo marcas e estratégias de <em>branding</em> e <em>design</em>. Desenvolvo identidades visuais, <em>landing pages</em> e peças gráficas para marcas. Também sou redator cultural em portais jornalísticos independentes.</p>
+          <a href="/redacao/sobre/" data-route="about" data-nav-id="sobre" class="section-link about-more-link" data-i18n="about.more">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    </div>
+    <!-- 1ª tela em PT: aparece já, sem esperar as listas de projetos/artigos/posts no fim da página -->
+    <script>if (HMI.initial() === 'pt' && 'IntersectionObserver' in window) { var fsIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); fsIO.unobserve(e.target); } }); }, { threshold: 0.15 }); document.querySelectorAll('.first-screen .reveal').forEach(function (e) { fsIO.observe(e); }); }</script> <!-- só o que está na tela; o resto entra ao rolar -->
+
+    <!-- Destaque: estreia do Desvendados (páginas do carrossel lado a lado; montagem em site.js, HOME_REC) -->
+    <section class="section-block" id="home-recente" aria-labelledby="home-rec-label">
+      <div class="max-w">
+        <h2 class="section-label" id="home-rec-label">Recente</h2>
+        <div class="rec-text" id="home-rec-text"></div>
+      </div>
+      <div class="rec-strip" id="home-rec-strip" role="list" aria-label="Páginas do carrossel"></div>
+    </section>
+
+    <section class="section-block" id="trabalhos">
+      <div class="max-w">
+        <div class="work-intro reveal">
+          <h2 class="section-label" style="margin-bottom:8px;" data-i18n="work.label">Projetos</h2>
+        </div>
+        <div class="home-projects-viewport">
+          <div class="work-grid home-featured-grid" id="work-grid"></div>
+        </div>
+        <div class="home-pagination-row">
+          <nav class="home-pagination" id="home-pagination" aria-label="Páginas de projetos"></nav>
+          <div class="home-work-more"><a href="/redacao/projetos/" data-route="work" data-nav-id="trabalhos" class="section-link"><span data-i18n="work.seeall">Ver todos</span> (<span id="home-work-count"></span>)</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- faixa de logos de clientes -->
+    <section class="marquee-section">
+      <div class="marquee-mask">
+        <!-- Logos: cinza por padrão, cor no hover/toque. A faixa vai e volta (vaivém), sem fim -->
+        <div class="marquee-track" id="marquee-track">
+        <ul class="marquee-list" aria-label="Clientes e projetos">
+          <li class="marquee-logo" style="--h:44px;--z:1.25"><a class="marquee-link" href="/redacao/projetos/optica-leopoldina/" draggable="false"><img src="assets/logos/optica-leopoldina.webp" alt="Óptica Leopoldina" width="435" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Óptica Leopoldina</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/redacao/projetos/mostra-saude-mental/" draggable="false"><img src="assets/logos/mostra-saude-mental.svg" alt="Mostra de Saúde Mental da Unesp" width="401" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Mostra de Saúde Mental da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:60px;--z:1.8"><a class="marquee-link" href="/redacao/projetos/sollaris/" draggable="false"><img src="assets/logos/sollaris.svg" alt="Sollaris" width="168" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Sollaris</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.35"><a class="marquee-link" href="/redacao/projetos/ntaps/" draggable="false"><img src="assets/logos/ntaps.webp" alt="NTAPS — Núcleo Técnico de Atenção Psicossocial" width="356" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">NTAPS</span></a></li>
+          <li class="marquee-logo" style="--h:24px;--z:1.15"><a class="marquee-link" href="/redacao/projetos/rino/" draggable="false"><img src="assets/logos/rino-logo.webp" alt="Rino" width="536" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Rino</span></a></li>
+          <li class="marquee-logo" style="--h:46px;--z:1.3"><a class="marquee-link" href="/redacao/projetos/classic-tattoo/" draggable="false"><img src="assets/logos/classic-tattoo.webp" alt="Classic Tattoo" width="444" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Classic Tattoo</span></a></li>
+          <li class="marquee-logo" style="--h:46px;--z:1.7"><a class="marquee-link" href="/redacao/projetos/encantos-do-brasil/" draggable="false"><img src="assets/logos/encantos-do-brasil.svg" alt="Encantos do Brasil" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Encantos do Brasil</span></a></li>
+          <li class="marquee-logo" style="--h:56px;--z:1.5"><a class="marquee-link" href="/redacao/projetos/congresso-extensao/" draggable="false"><img src="assets/logos/congresso-extensao.webp" alt="Congresso de Extensão Universitária" width="347" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Congresso de Extensão Universitária</span></a></li>
+          <li class="marquee-logo" style="--h:30px;--z:1.2"><a class="marquee-link" href="/redacao/projetos/equity360/" draggable="false"><img src="assets/logos/equity360.webp" alt="Equity 360" width="640" height="151" decoding="async"><span class="marquee-name" aria-hidden="true">Equity 360</span></a></li>
+          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/redacao/projetos/prisma-brandbook/" draggable="false"><img src="assets/logos/prisma.webp" alt="Prisma Consultoria" width="160" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Prisma Consultoria</span></a></li>
+          <li class="marquee-logo" style="--h:48px;--z:1.3"><a class="marquee-link" href="/redacao/projetos/csunesp/" draggable="false"><img src="assets/logos/csunesp.webp" alt="CSUNESP — Coordenadoria de Saúde da Unesp" width="488" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">CSUNESP — Coordenadoria de Saúde da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:32px;--z:1.4"><a class="marquee-link" href="/redacao/projetos/nupe/" draggable="false"><img src="assets/logos/nupe.webp" alt="Nupe — Núcleo Negro da Unesp" width="550" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Nupe — Núcleo Negro da Unesp</span></a></li>
+          <li class="marquee-logo" style="--h:34px;--z:1.25"><a class="marquee-link" href="/redacao/projetos/interserv/" draggable="false"><img src="assets/logos/interserv.webp" alt="Interserv" width="598" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Interserv</span></a></li>
+          <li class="marquee-logo" style="--h:50px;--z:1.25"><a class="marquee-link" href="/redacao/projetos/cminds/" draggable="false"><img src="assets/logos/cminds.webp" alt="C Minds" width="250" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">C Minds</span></a></li>
+          <li class="marquee-logo" style="--h:42px;--z:1.25"><a class="marquee-link" href="/redacao/projetos/ocupacao-unesp-negra/" draggable="false"><img src="assets/logos/ocupacao-unesp-negra.webp" alt="Ocupação Unesp Negra" width="571" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Ocupação Unesp Negra</span></a></li>
+          <li class="marquee-logo" style="--h:40px;--z:1.3"><a class="marquee-link" href="/redacao/projetos/persona/" draggable="false"><img src="assets/logos/persona.svg" alt="Persona — Crítica Cultural" width="254" height="160" decoding="async"><span class="marquee-name" aria-hidden="true">Persona</span></a></li>
+          <li class="marquee-logo" style="--h:38px;--z:1.3"><a class="marquee-link" href="/redacao/projetos/rp-40-anos/" draggable="false"><img src="assets/logos/rp-unesp-40.webp" alt="Relações Públicas Unesp Bauru — 40 anos" width="640" height="148" decoding="async"><span class="marquee-name" aria-hidden="true">Relações Públicas Unesp Bauru — 40 anos</span></a></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+    <!-- Destaques: posts escolhidos -->
+    <section class="section-block" id="home-destaques">
+      <div class="max-w">
+        <h2 class="section-label" id="home-dest-title">Destaques</h2>
+        <div class="home-dest-grid" id="home-dest-grid"></div>
+      </div>
+    </section>
+    <div class="home-ticker" id="home-ticker"></div><!-- faixa com os títulos dos artigos -->
+    <!-- artigos em destaque (assets/data/artigos.js) -->
+    <section class="section-block" id="home-artigos">
+      <div class="max-w">
+        <h2 class="section-label" data-i18n="nav.articles">Conteúdos</h2>
+        <div class="home-art-grid" id="home-art-grid"></div>
+      </div>
+      <div class="max-w">
+        <div class="home-pagination-row">
+          <div class="home-work-more"><a href="/redacao/conteudos/" data-route="articles" data-nav-id="artigos" class="section-link"><span data-i18n="work.seeall">Ver todos</span> (<span id="home-art-count"></span>)</a></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="view-work" style="display:none;">
+    <section class="work-page-hero">
+      <div class="max-w">
+        <!-- mesma formatação do título da home: cinza = .dim -->
+        <h1 class="work-page-title hero-like reveal" id="work-title" data-i18n="work.title"><span class="dim">Projetos gráficos,</span><br>marcas e interfaces</h1>
+        <div class="work-dashboard-cta" id="work-dashboard-cta"></div>
+      </div>
+    </section>
+    <section class="section-block" style="padding-top:0;">
+      <div class="max-w">
+        <div class="pj-filters" id="pj-filters" hidden></div>
+        <div class="work-grid" id="work-case-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="view-articles" style="display:none;">
+    <section class="work-page-hero art-hero">
+      <div class="max-w">
+        <h1 class="art-title reveal" data-i18n="art.title"><span class="dim">Redação, copywriting e conteúdo</span><br>em cultura, cinema, música, televisão,<br>literatura e tecnologia.</h1>
+      </div>
+    </section>
+    <section class="section-block" style="padding-top:0;">
+      <div class="max-w">
+        <div class="art-filters reveal" id="art-filters" role="toolbar" aria-label="Filtrar artigos"></div>
+        <div class="art-grid" id="art-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="view-about" style="display:none;">
+    <h1 class="mx-sr" data-i18n="about.h1">Sobre Henrique Marinhos</h1> <!-- título principal para leitores de tela e buscadores -->
+    <section class="section-block about-photo-block">
+      <div class="max-w">
+        <figure class="about-photo" id="about-photo" tabindex="0" role="button" aria-pressed="false" aria-label="Retrato de Henrique Marinhos. Ative para ver em cores.">
+          <img class="ap-bw" src="assets/img/sobre.webp" width="1800" height="1012" alt="Henrique Marinhos em um jardim" decoding="async">
+          <img class="ap-cor" src="assets/img/sobre-recorte.webp" width="1800" height="1012" alt="" aria-hidden="true" decoding="async">
+        </figure>
+      </div>
+    </section>
+    <section class="cv-actions section-block" aria-label="Currículo">
+      <div class="cv-actions-inner">
+        <a class="art-filter" id="cv-download-btn" href="assets/docs/Curriculo-Henrique-Marinhos.pdf" download="Curriculo - Henrique Marinhos.pdf" data-i18n="cv.download">Baixar currículo</a>
+      </div>
+    </section>
+    <!-- conteúdo = currículo (dados em CV, no script) -->
+    <section class="section-block cv-first">
+      <div class="section-grid">
+        <h2 class="section-label" data-i18n="aboutp.exp">Experiência</h2>
+        <div class="cv-list" id="cv-exp"></div>
+      </div>
+    </section>
+    <section class="section-block">
+      <div class="section-grid">
+        <div class="section-heading">
+          <h2 class="section-label" data-i18n="aboutp.edu">Formação</h2>
+          <div class="resource-inline cert-inline">
+            <button type="button" class="resource-action" id="certificates-btn">Certificados</button>
+          </div>
+        </div>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-edu"></div>
+        </div>
+      </div>
+    </section>
+    <section class="section-block">
+      <div class="section-grid">
+        <h2 class="section-label" data-i18n="aboutp.extra">Atividades complementares</h2>
+        <div class="cv-list" id="cv-extra"></div>
+      </div>
+    </section>
+    <section class="section-block">
+      <div class="section-grid">
+        <div class="section-heading">
+          <h2 class="section-label" data-i18n="aboutp.skills">Habilidades técnicas</h2>
+        </div>
+        <div class="cv-side">
+          <div class="cv-list" id="cv-skills"></div>
+        </div>
+      </div>
+    </section>
+    <!-- IDIOMAS: bandeiras em SVG (as mesmas do seletor de idioma; emoji de bandeira não aparece no Windows) -->
+    <section class="section-block">
+      <div class="section-grid">
+        <h2 class="section-label" data-i18n="aboutp.lang">Idiomas</h2>
+        <div class="cv-list" id="cv-lang"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="top-before-contact"><button class="to-top" type="button" data-top data-i18n="top">Voltar ao topo ↑</button></div>
+<footer class="contact-footer" id="contato">
+  <!-- ícones das ferramentas: flutuam, reagem à rolagem e fogem do cursor/dedo (assets/data/ferramentas.js) -->
+  <div class="tools-float" id="tools-float"></div>
+  <div class="footer-inner">
+    <div class="footer-heading-group">
+      <h2 class="footer-headline" data-i18n="footer.headline">Vamos trabalhar juntos?</h2>
+    </div>
+    <nav class="footer-socials" aria-label="Redes e contatos">
+      <a href="https://wa.me/5514991394590" class="footer-social" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="mailto:henriquemarinhos@icloud.com" class="footer-social">E-mail</a>
+      <a href="https://www.linkedin.com/in/henrique-marinhos/" class="footer-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.behance.net/henriquemarinhos" class="footer-social" target="_blank" rel="noopener noreferrer">Behance</a>
+      <a href="http://lattes.cnpq.br/8181966688647381" class="footer-social" target="_blank" rel="noopener noreferrer">Lattes</a>
+    </nav>
+  </div>
+  <!-- créditos -->
+  <div class="credit-bar"><span><span data-i18n="credit.text">Site desenhado e desenvolvido por Henrique Marinhos.</span></span>
+  </div>
+</footer>
+
+<button type="button" class="mobile-top-button" id="mobile-top-button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<!-- certificados -->
+<div class="resource-modal-overlay" id="resource-modal-overlay" hidden>
+  <section class="resource-modal" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
+    <header class="resource-modal-head">
+      <div><p class="resource-modal-eyebrow" data-i18n="aboutp.edu">Formação</p><h2 id="resource-modal-title" data-i18n="cert.title">Certificados</h2></div>
+      <button type="button" class="resource-modal-close" data-close-resource aria-label="Fechar">×</button>
+    </header>
+    <div class="resource-gallery" id="resource-gallery"></div>
+    <p class="resource-empty" id="resource-empty"></p>
+  </section>
+</div>
+
+<div class="lightbox-overlay" id="lightbox-overlay">
+  <button class="lightbox-close" id="lightbox-close-btn" aria-label="Fechar visualização">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="lightbox-zoom-hint" id="lightbox-zoom-hint" data-i18n="lightbox.hint">Role para dar zoom · arraste para mover</div>
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img class="lightbox-img" id="lightbox-img" alt="">
+  </div>
+</div>
+
+<div class="project-modal-overlay" id="art-modal-overlay">
+  <div class="project-modal art-modal" role="dialog" aria-modal="true" aria-labelledby="am-title">
+    <div class="am-bar">
+      <div class="am-info"><p class="am-site" id="am-site"></p><p class="am-title" id="am-title"></p></div>
+      <div class="am-actions">
+      <div class="am-links" id="am-links"></div>
+      <button class="am-swap" id="am-swap" type="button" hidden></button>
+      <a class="am-ext" id="am-ext" href="#" target="_blank" rel="noopener" aria-label="Abrir no site" title="Abrir no site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3z"/></svg><span id="am-ext-l">Abrir no site</span></a>
+      <button class="am-share" id="am-share" type="button" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.3M8.2 13.2l7.5 4.3"/></svg><span id="am-share-label" aria-live="polite">Compartilhar</span></button>
+      </div>
+      <button class="pm-close" id="am-close" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="am-stage">
+      <div class="am-loading" id="am-loading"><img id="am-cover" alt=""><span id="am-loading-l">Carregando texto…</span></div>
+      <div class="am-reader" id="am-reader" hidden></div>
+      <div class="am-ig" id="am-ig" hidden></div>
+      <iframe id="am-frame" title="Texto" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Post do Instagram (artigos no modo Instagram e carrosséis soltos) -->
+<div class="pv-ov" id="pv-ov" role="dialog" aria-modal="true" aria-label="Post do Instagram">
+  <button class="dk-x pv-x" id="pv-x" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <button class="pv-pnav pv-pprev" id="pv-prev" type="button" aria-label="Post anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <div class="pv-box" id="pv-box"></div>
+  <button class="pv-pnav pv-pnext" id="pv-next" type="button" aria-label="Próximo post"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  <span class="pv-pos" id="pv-pos" aria-live="polite"></span>
+</div>
+
+<script src="assets/data/artigos.js?v=20261115"></script>
+<script src="assets/data/colecoes.js?v=20261119"></script>
+<script src="/redacao/assets/data/projetos.js?v=20261125"></script>
+<script src="assets/js/capas.js?v=20261115"></script>
+<script src="assets/js/obras.js?v=20261115"></script>
+<script src="assets/data/posts.js?v=20261119b"></script>
+<script src="assets/data/engajamento.js?v=20261115"></script>
+<script src="assets/data/ferramentas.js?v=20261115" defer></script>
+<script src="assets/data/glossario.js?v=20261115" defer></script>
+<script src="assets/js/site.js?v=20261123i"></script>
+
+
+<script src="assets/js/contato.js?v=20261115" defer></script>
+<script src="assets/js/barra.js?v=20261116b" defer></script> <!-- celular: barra inferior e menu de tema/idioma -->
+<script src="assets/js/motion.js?v=20261115" defer></script>
+<script src="assets/js/estatisticas.js?v=20261115" defer></script> <!-- estatísticas privadas -->
+<script src="/redacao/assets/v2/conteudos.js?v=20261125"></script>
+</body>
+</html>
